@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class Inscription extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'eleve_id',
+        'classe_id',
+        'annee_scolaire_id',
+        'date_inscription',
+        'statut',
+        'observation',
+    ];
+
+    // 🔹 Ajout du cast pour que date_inscription soit un objet Carbon
+    protected $casts = [
+        'date_inscription' => 'datetime',
+    ];
+
+    public function eleve(): BelongsTo
+    {
+        return $this->belongsTo(Eleve::class);
+    }
+
+    public function classe(): BelongsTo
+    {
+        return $this->belongsTo(Classe::class);
+    }
+
+    public function anneeScolaire(): BelongsTo
+    {
+        return $this->belongsTo(AnneeScolaire::class);
+    }
+}
