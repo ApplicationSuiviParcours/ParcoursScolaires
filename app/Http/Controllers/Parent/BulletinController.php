@@ -173,11 +173,15 @@ class BulletinController extends Controller
             $dateEvaluation = null;
             $appreciation = '';
             
-            // Cas 1: Note avec relations Eloquent chargées
+            // Cas 1: Note avec relations Eloquent chargées (NULL SAFE)
             if (isset($note->evaluation) && $note->evaluation) {
-                if (isset($note->evaluation->matiere)) {
-                    $matiereId = $note->evaluation->matiere->id;
-                    $matiereNom = $note->evaluation->matiere->nom;
+                $matiere = $note->evaluation->matiere;
+                if ($matiere) {
+                    $matiereId = $matiere->id;
+                    $matiereNom = $matiere->nom;
+                } else {
+                    $matiereId = null;
+                    $matiereNom = 'Matière inconnue';
                 }
                 $coefficient = $note->evaluation->coefficient ?? 1;
                 $evaluationNom = $note->evaluation->nom ?? 'Évaluation';
@@ -210,7 +214,7 @@ class BulletinController extends Controller
             
             // Ajouter la note (utiliser 'note' au lieu de 'valeur')
             $notesParMatiere[$matiereId]['notes'][] = [
-                'valeur' => $note->note,  // Changé de 'note' à 'valeur' pour correspondre à la vue
+                'valeur' => $note->note ?? 0,
                 'evaluation' => $evaluationNom,
                 'date' => $dateEvaluation,
                 'coefficient' => $coefficient,

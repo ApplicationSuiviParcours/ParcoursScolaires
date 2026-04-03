@@ -37,7 +37,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
                         <!-- Recherche -->
                         <div class="md:col-span-5">
-                            <label for="search" class="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
+                            <label for="search" class="text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
                                 <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                 </svg>
@@ -63,7 +63,7 @@
 
                         <!-- Filtre spécialité -->
                         <div class="md:col-span-3">
-                            <label for="specialite" class="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
+                            <label for="specialite" class="text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
                                 <svg class="w-4 h-4 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
                                 </svg>
@@ -89,7 +89,7 @@
 
                         <!-- Filtre statut -->
                         <div class="md:col-span-2">
-                            <label for="statut" class="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
+                            <label for="statut" class="text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
                                 <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                                 </svg>
@@ -410,39 +410,26 @@
                                         {{ $enseignant->age ?? 'N/A' }} ans
                                     </div>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right">
-                                    <!-- ACTIONS TOUJOURS VISIBLES -->
-                                    <div class="flex items-center justify-end space-x-2">
-                                        <!-- Voir -->
-                                        <a href="{{ route('admin.enseignants.show', $enseignant) }}" 
-                                           class="p-2.5 text-blue-600 bg-blue-50 rounded-xl hover:bg-blue-100 transition-all duration-200 transform hover:scale-110 hover:shadow-lg border border-blue-200/50"
-                                           title="Voir les détails">
-                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                                            </svg>
+                                <td class="px-3 md:px-4 py-3 text-right">
+                                    <!-- ACTIONS -->
+                                    <div class="flex items-center justify-end gap-2 whitespace-nowrap">
+                                        <a href="{{ route('admin.enseignants.show', $enseignant) }}"
+                                           class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-blue-100 text-blue-600 hover:bg-blue-200 transition-all duration-200 hover:scale-110 flex-shrink-0"
+                                           title="Voir">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                                         </a>
-                                        
-                                        <!-- Modifier -->
-                                        <a href="{{ route('admin.enseignants.edit', $enseignant) }}" 
-                                           class="p-2.5 text-amber-600 bg-amber-50 rounded-xl hover:bg-amber-100 transition-all duration-200 transform hover:scale-110 hover:shadow-lg border border-amber-200/50"
+                                        <a href="{{ route('admin.enseignants.edit', $enseignant) }}"
+                                           class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-amber-100 text-amber-600 hover:bg-amber-200 transition-all duration-200 hover:scale-110 flex-shrink-0"
                                            title="Modifier">
-                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                                            </svg>
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                                         </a>
-                                        
-                                        <!-- Supprimer -->
-                                        <form action="{{ route('admin.enseignants.destroy', $enseignant) }}" method="POST" class="inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" 
-                                                    class="p-2.5 text-red-600 bg-red-50 rounded-xl hover:bg-red-100 transition-all duration-200 transform hover:scale-110 hover:shadow-lg border border-red-200/50"
+                                        <form action="{{ route('admin.enseignants.destroy', $enseignant) }}" method="POST" class="inline m-0 p-0 delete-form flex-shrink-0">
+                                            @csrf @method('DELETE')
+                                            <button type="submit"
+                                                    class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-red-100 text-red-600 hover:bg-red-200 transition-all duration-200 hover:scale-110 border-none cursor-pointer"
                                                     title="Supprimer"
-                                                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet enseignant ? Cette action est irréversible.')">
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                                </svg>
+                                                    onclick="return confirm('Supprimer cet enseignant ?')">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                             </button>
                                         </form>
                                     </div>

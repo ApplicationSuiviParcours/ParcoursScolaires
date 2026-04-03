@@ -201,7 +201,7 @@ class EleveParentSeeder extends Seeder
      */
     private function afficherResume(int $relationsCrees, int $totalEleves, int $elevesSansParent): void
     {
-        $stats = EleveParent::getStats();
+// $stats = EleveParent::getStats(); // TODO: Implement getStats() or remove
 
         $this->command->info('====================================');
         $this->command->info('📊 RÉSUMÉ DES RELATIONS ÉLÈVES-PARENTS');
@@ -210,18 +210,10 @@ class EleveParentSeeder extends Seeder
         $this->command->info("Élèves sans parent : {$elevesSansParent}");
         $this->command->info("Élèves avec au moins un parent : " . ($totalEleves - $elevesSansParent));
         $this->command->info('------------------------------------');
-        $this->command->info('📈 Statistiques globales :');
-        $this->command->info("  • Total relations : {$stats['total_relations']}");
-        $this->command->info("  • Élèves concernés : {$stats['total_eleves_concernes']}");
-        $this->command->info("  • Parents concernés : {$stats['total_parents_concernes']}");
+        // Stats section removed due to missing getStats() method
+        $this->command->info('📈 Statistiques simplifiées :');
+        $this->command->info("  • Total relations créées : {$relationsCrees}");
         $this->command->info('------------------------------------');
-        $this->command->info('🔗 Répartition par lien parental :');
-        
-        foreach ($stats['repartition_liens'] as $lien) {
-            $libelle = (new EleveParent())->getLienParentalLibelleAttribute($lien->lien_parental);
-            $pourcentage = round(($lien->total / $stats['total_relations']) * 100, 1);
-            $this->command->line("  • {$libelle} : {$lien->total} ({$pourcentage}%)");
-        }
         
         $this->command->info('====================================');
         $this->command->info('✅ Seeder EleveParent exécuté avec succès !');

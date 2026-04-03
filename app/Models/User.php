@@ -32,6 +32,7 @@ class User extends Authenticatable
         'password',
         'is_active', // On garde is_active pour le statut du compte
         'photo', // Ajout du champ photo
+        'role', // Garder la synchronisation avec la colonne en base de données
     ];
 
     /**

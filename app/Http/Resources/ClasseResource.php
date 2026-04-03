@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Http\Resources;
+
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class ClasseResource extends JsonResource
+{
+    public function toArray($request): array
+    {
+        return [
+            'id' => $this->id,
+            'nom_complet' => $this->nom_complet,
+            'niveau' => $this->niveau,
+            'filiere' => $this->filiere,
+        ];
+    }
+}

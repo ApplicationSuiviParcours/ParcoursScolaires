@@ -1,3 +1,58 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .sidebar-bg {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+  
+  .dark .sidebar-bg {
+    background: linear-gradient(135deg, #3b4a6b 0%, #4a2d6b 100%);
+  }
+  
+  /* Enhanced responsive table */
+  .table-responsive {
+    @apply overflow-x-auto -mx-4 sm:mx-0;
+  }
+  
+  .table-responsive table {
+    @apply min-w-full w-full;
+  }
+  
+  /* Mobile safe areas */
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Mobile-first responsive scrollbar */
+@media (hover: none) and (pointer: coarse) {
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+  }
+}
+
+/* Touch-friendly minimum sizes */
+@layer components {
+  .btn-touch {
+    @apply min-h-[48px] min-w-[48px] flex items-center justify-center;
+  }
+  
+  /* Responsive tables */
+  .table-responsive {
+    @apply overflow-x-auto;
+  }
+  
+  /* Safe area insets for mobile */
+  .safe-padding {
+    padding-bottom: env(safe-area-inset-bottom, 1rem);
+  }
+}

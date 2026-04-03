@@ -3,15 +3,15 @@
 @section('title', 'Modifier l\'assignation')
 
 @section('header')
-<div class="relative overflow-hidden bg-gradient-to-br from-amber-600 via-amber-700 to-orange-800 py-12">
+<div class="relative overflow-hidden bg-gradient-to-br from-amber-600 via-amber-700 to-orange-800 py-8 md:py-12">
     <!-- Éléments décoratifs animés -->
     <div class="absolute inset-0 opacity-10">
         <div class="absolute -top-24 -right-24 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-pulse"></div>
         <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-orange-300 rounded-full mix-blend-overlay filter blur-3xl animate-pulse delay-1000"></div>
     </div>
     
-    <!-- Particules flottantes -->
-    <div class="absolute inset-0 overflow-hidden">
+    <!-- Particules flottantes (masquées sur petits écrans) -->
+    <div class="absolute inset-0 overflow-hidden hidden sm:block">
         @for($i = 1; $i <= 4; $i++)
             <div class="absolute w-1 h-1 bg-white rounded-full opacity-30 animate-float-{{ $i }}"
                  style="left: {{ rand(0, 100) }}%; top: {{ rand(0, 100) }}%; animation-delay: {{ rand(0, 5) }}s;"></div>
@@ -21,47 +21,48 @@
     <div class="container mx-auto px-4 relative z-10">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between">
             <div class="text-center md:text-left">
-                <nav class="flex mb-4" aria-label="Breadcrumb">
+                <nav class="flex mb-4 justify-center md:justify-start" aria-label="Breadcrumb">
                     <ol class="inline-flex items-center space-x-1 md:space-x-3">
                         <li class="inline-flex items-center">
-                            <a href="{{ route('admin.classe_matieres.index') }}" class="inline-flex items-center text-sm font-medium text-amber-200 hover:text-white transition-colors duration-300">
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <a href="{{ route('admin.classe_matieres.index') }}" class="inline-flex items-center text-xs sm:text-sm font-medium text-amber-200 hover:text-white transition-colors duration-300">
+                                <svg class="w-4 h-4 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                                 </svg>
-                                Matières par classe
+                                <span class="hidden sm:inline">Matières par classe</span>
+                                <span class="sm:hidden">Liste</span>
                             </a>
                         </li>
                         <li>
                             <div class="flex items-center">
-                                <svg class="w-6 h-6 text-amber-300" fill="currentColor" viewBox="0 0 20 20">
+                                <svg class="w-4 h-4 sm:w-6 sm:h-6 text-amber-300" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                                 </svg>
-                                <a href="{{ route('admin.classe_matieres.manage', ['classe_id' => $classeMatiere->classe_id]) }}" class="ml-1 text-sm font-medium text-amber-200 hover:text-white md:ml-2 transition-colors duration-300">
+                                <a href="{{ route('admin.classe_matieres.manage', ['classe_id' => $classeMatiere->classe_id]) }}" class="ml-1 text-xs sm:text-sm font-medium text-amber-200 hover:text-white md:ml-2 transition-colors duration-300 truncate max-w-[100px] sm:max-w-none">
                                     {{ $classeMatiere->classe->nom }}
                                 </a>
                             </div>
                         </li>
                         <li aria-current="page">
                             <div class="flex items-center">
-                                <svg class="w-6 h-6 text-amber-300" fill="currentColor" viewBox="0 0 20 20">
+                                <svg class="w-4 h-4 sm:w-6 sm:h-6 text-amber-300" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                                 </svg>
-                                <span class="ml-1 text-sm font-medium text-white md:ml-2">Modifier</span>
+                                <span class="ml-1 text-xs sm:text-sm font-medium text-white md:ml-2">Modifier</span>
                             </div>
                         </li>
                     </ol>
                 </nav>
-                <h1 class="text-3xl md:text-4xl font-bold text-white mb-2 animate-fade-in-up">
+                <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 animate-fade-in-up">
                     Modifier l'assignation
                 </h1>
-                <p class="text-amber-200 text-base md:text-lg animate-fade-in-up animation-delay-200">
+                <p class="text-amber-200 text-sm sm:text-base md:text-lg animate-fade-in-up animation-delay-200 truncate">
                     {{ $classeMatiere->classe->nom }} - {{ $classeMatiere->matiere->nom }}
                 </p>
             </div>
             <div class="mt-6 md:mt-0 flex justify-center md:justify-end space-x-3 animate-fade-in-right">
                 <a href="{{ route('admin.classe_matieres.manage', ['classe_id' => $classeMatiere->classe_id]) }}" 
-                   class="group relative inline-flex items-center px-5 py-2.5 bg-white/10 backdrop-blur-lg hover:bg-white/20 text-white font-medium rounded-xl transition-all duration-300 transform hover:scale-105 border border-white/20">
-                    <svg class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                   class="group relative inline-flex items-center px-3 sm:px-5 py-2 sm:py-2.5 bg-white/10 backdrop-blur-lg hover:bg-white/20 text-white text-sm font-medium rounded-xl transition-all duration-300 transform hover:scale-105 border border-white/20">
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 transform group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                     </svg>
                     Retour
@@ -72,7 +73,7 @@
 
     <!-- Vague décorative -->
     <div class="absolute bottom-0 left-0 right-0">
-        <svg class="fill-current text-gray-50" viewBox="0 0 1440 120">
+        <svg class="fill-current text-gray-50" viewBox="0 0 1440 120" preserveAspectRatio="none">
             <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"></path>
         </svg>
     </div>
@@ -80,35 +81,35 @@
 @endsection
 
 @section('content')
-<div class="container mx-auto px-4 py-10 bg-gray-50">
+<div class="container mx-auto px-4 py-6 sm:py-10 bg-gray-50">
     <div class="max-w-3xl mx-auto">
         <!-- Formulaire -->
-        <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
-            <div class="bg-gradient-to-r from-amber-500 to-orange-600 px-8 py-6">
-                <div class="flex items-center">
-                    <div class="w-14 h-14 bg-white/20 backdrop-blur-lg rounded-2xl flex items-center justify-center mr-5">
-                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden">
+            <div class="bg-gradient-to-r from-amber-500 to-orange-600 px-4 sm:px-8 py-4 sm:py-6">
+                <div class="flex flex-col sm:flex-row items-center sm:items-center">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 bg-white/20 backdrop-blur-lg rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-0 sm:mr-5">
+                        <svg class="w-6 h-6 sm:w-7 sm:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                         </svg>
                     </div>
-                    <div>
-                        <h2 class="text-2xl font-bold text-white mb-1">Modifier le coefficient</h2>
-                        <p class="text-amber-100 text-sm">Modifiez le coefficient de la matière pour cette classe</p>
+                    <div class="text-center sm:text-left">
+                        <h2 class="text-xl sm:text-2xl font-bold text-white mb-1">Modifier le coefficient</h2>
+                        <p class="text-amber-100 text-xs sm:text-sm">Modifiez le coefficient de la matière pour cette classe</p>
                     </div>
                 </div>
             </div>
 
-            <div class="p-8">
+            <div class="p-4 sm:p-8">
                 <!-- Aperçu rapide -->
-                <div class="mb-8 p-4 bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl border border-amber-200">
-                    <div class="flex items-center">
-                        <div class="w-16 h-16 bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl flex items-center justify-center text-white font-bold text-2xl mr-4">
+                <div class="mb-6 sm:mb-8 p-3 sm:p-4 bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl sm:rounded-2xl border border-amber-200">
+                    <div class="flex flex-col sm:flex-row items-center">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl sm:rounded-2xl flex items-center justify-center text-white font-bold text-xl sm:text-2xl mb-3 sm:mb-0 sm:mr-4">
                             {{ substr($classeMatiere->matiere->nom, 0, 2) }}
                         </div>
-                        <div>
-                            <p class="text-sm text-amber-700">Modification du coefficient pour</p>
-                            <p class="text-lg font-bold text-gray-800">{{ $classeMatiere->matiere->nom }}</p>
-                            <p class="text-sm text-gray-600">{{ $classeMatiere->classe->nom }}</p>
+                        <div class="text-center sm:text-left">
+                            <p class="text-xs sm:text-sm text-amber-700">Modification du coefficient pour</p>
+                            <p class="text-base sm:text-lg font-bold text-gray-800">{{ $classeMatiere->matiere->nom }}</p>
+                            <p class="text-xs sm:text-sm text-gray-600">{{ $classeMatiere->classe->nom }}</p>
                         </div>
                     </div>
                 </div>
@@ -117,36 +118,36 @@
                     @csrf
                     @method('PUT')
 
-                    <div class="space-y-6">
+                    <div class="space-y-4 sm:space-y-6">
                         <!-- Informations en lecture seule -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                             <div class="group">
-                                <label class="block text-sm font-semibold text-gray-700 mb-2">Classe</label>
+                                <label class="block text-xs sm:text-sm font-semibold text-gray-700 mb-2">Classe</label>
                                 <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div class="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
+                                        <svg class="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z"></path>
                                         </svg>
                                     </div>
                                     <input type="text" 
                                            value="{{ $classeMatiere->classe->nom }}"
-                                           class="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gray-200 bg-gray-50 text-gray-700"
+                                           class="w-full pl-10 sm:pl-12 pr-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border-2 border-gray-200 bg-gray-50 text-gray-700 text-sm"
                                            readonly
                                            disabled>
                                 </div>
                             </div>
 
                             <div class="group">
-                                <label class="block text-sm font-semibold text-gray-700 mb-2">Matière</label>
+                                <label class="block text-xs sm:text-sm font-semibold text-gray-700 mb-2">Matière</label>
                                 <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div class="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
+                                        <svg class="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                                         </svg>
                                     </div>
                                     <input type="text" 
                                            value="{{ $classeMatiere->matiere->nom }} ({{ $classeMatiere->matiere->code }})"
-                                           class="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gray-200 bg-gray-50 text-gray-700"
+                                           class="w-full pl-10 sm:pl-12 pr-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border-2 border-gray-200 bg-gray-50 text-gray-700 text-sm"
                                            readonly
                                            disabled>
                                 </div>
@@ -155,13 +156,13 @@
 
                         <!-- Coefficient (modifiable) -->
                         <div class="group">
-                            <label for="coefficient" class="block text-sm font-semibold text-gray-700 mb-2 group-hover:text-amber-600 transition-colors duration-300">
+                            <label for="coefficient" class="block text-xs sm:text-sm font-semibold text-gray-700 mb-2 group-hover:text-amber-600 transition-colors duration-300">
                                 Coefficient <span class="text-red-500">*</span>
-                                <span class="text-xs text-gray-500 ml-2">(entre 0.5 et 10)</span>
+                                <span class="hidden sm:inline text-xs text-gray-500 ml-2">(entre 0.5 et 10)</span>
                             </label>
                             <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                    <svg class="h-5 w-5 text-gray-400 group-hover:text-amber-500 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
+                                    <svg class="h-4 w-4 sm:h-5 sm:w-5 text-gray-400 group-hover:text-amber-500 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                                     </svg>
                                 </div>
@@ -172,32 +173,32 @@
                                        step="0.5"
                                        min="0.5"
                                        max="10"
-                                       class="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition-all duration-300 @error('coefficient') border-red-500 @enderror"
+                                       class="w-full pl-10 sm:pl-12 pr-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border-2 border-gray-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition-all duration-300 text-sm sm:text-base @error('coefficient') border-red-500 @enderror"
                                        required>
                             </div>
-                            <div class="mt-2 flex items-center space-x-2">
+                            <div class="mt-2 flex flex-wrap items-center gap-2">
                                 <span class="text-xs text-gray-500">Valeurs rapides :</span>
-                                <button type="button" onclick="setCoefficient(1)" class="px-2 py-1 bg-gray-100 rounded-lg text-xs hover:bg-gray-200">1</button>
-                                <button type="button" onclick="setCoefficient(2)" class="px-2 py-1 bg-gray-100 rounded-lg text-xs hover:bg-gray-200">2</button>
-                                <button type="button" onclick="setCoefficient(3)" class="px-2 py-1 bg-gray-100 rounded-lg text-xs hover:bg-gray-200">3</button>
-                                <button type="button" onclick="setCoefficient(4)" class="px-2 py-1 bg-gray-100 rounded-lg text-xs hover:bg-gray-200">4</button>
-                                <button type="button" onclick="setCoefficient(5)" class="px-2 py-1 bg-gray-100 rounded-lg text-xs hover:bg-gray-200">5</button>
+                                <button type="button" onclick="setCoefficient(1)" class="px-2 py-1 bg-gray-100 rounded text-xs hover:bg-gray-200">1</button>
+                                <button type="button" onclick="setCoefficient(2)" class="px-2 py-1 bg-gray-100 rounded text-xs hover:bg-gray-200">2</button>
+                                <button type="button" onclick="setCoefficient(3)" class="px-2 py-1 bg-gray-100 rounded text-xs hover:bg-gray-200">3</button>
+                                <button type="button" onclick="setCoefficient(4)" class="px-2 py-1 bg-gray-100 rounded text-xs hover:bg-gray-200">4</button>
+                                <button type="button" onclick="setCoefficient(5)" class="px-2 py-1 bg-gray-100 rounded text-xs hover:bg-gray-200">5</button>
                             </div>
                             @error('coefficient')
-                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                <p class="mt-2 text-xs sm:text-sm text-red-600">{{ $message }}</p>
                             @enderror
                         </div>
 
                         <!-- Informations système -->
-                        <div class="mt-6 p-4 bg-gray-50 rounded-xl border border-gray-200">
-                            <h4 class="text-sm font-medium text-gray-700 mb-3 flex items-center">
+                        <div class="mt-4 sm:mt-6 p-3 sm:p-4 bg-gray-50 rounded-lg sm:rounded-xl border border-gray-200">
+                            <h4 class="text-xs sm:text-sm font-medium text-gray-700 mb-3 flex items-center">
                                 <svg class="w-4 h-4 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg>
                                 Informations système
                             </h4>
-                            <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div class="grid grid-cols-2 gap-3 sm:gap-4 text-xs sm:text-sm">
                                 <div>
                                     <span class="text-gray-500">Créé le</span>
                                     <p class="font-medium text-gray-800">{{ $classeMatiere->created_at->format('d/m/Y à H:i') }}</p>
@@ -210,14 +211,14 @@
                         </div>
 
                         <!-- Boutons d'action -->
-                        <div class="flex justify-end space-x-4 pt-6 border-t-2 border-gray-100">
+                        <div class="flex flex-col-reverse sm:flex-row justify-end gap-3 sm:gap-0 sm:space-x-4 pt-4 sm:pt-6 border-t-2 border-gray-100">
                             <a href="{{ route('admin.classe_matieres.manage', ['classe_id' => $classeMatiere->classe_id]) }}" 
-                               class="px-8 py-3 bg-white border-2 border-gray-300 rounded-xl text-gray-700 font-semibold hover:bg-gray-50 transition-all duration-300 transform hover:scale-105">
+                               class="w-full sm:w-auto text-center px-6 sm:px-8 py-2.5 sm:py-3 bg-white border-2 border-gray-300 rounded-lg sm:rounded-xl text-gray-700 font-semibold text-sm hover:bg-gray-50 transition-all duration-300 transform hover:scale-105">
                                 Annuler
                             </a>
                             <button type="submit" 
-                                    class="px-8 py-3 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
-                                <svg class="w-5 h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    class="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-semibold text-sm rounded-lg sm:rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
                                 </svg>
                                 Mettre à jour
@@ -229,30 +230,29 @@
         </div>
 
         <!-- Zone de danger (suppression) -->
-        <div class="mt-8 bg-white rounded-3xl shadow-xl overflow-hidden border-l-8 border-red-500">
-            <div class="bg-gradient-to-r from-red-50 to-red-100 px-8 py-6">
-                <div class="flex items-center">
-                    <div class="w-14 h-14 bg-red-500 rounded-2xl flex items-center justify-center mr-5 animate-pulse">
-                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="mt-6 sm:mt-8 bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden border-l-4 sm:border-l-8 border-red-500">
+            <div class="bg-gradient-to-r from-red-50 to-red-100 px-4 sm:px-8 py-4 sm:py-6">
+                <div class="flex flex-col sm:flex-row items-center">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 bg-red-500 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-0 sm:mr-5 animate-pulse">
+                        <svg class="w-6 h-6 sm:w-7 sm:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                         </svg>
                     </div>
-                    <div>
-                        <h3 class="text-xl font-bold text-red-800 mb-1">Zone de danger</h3>
-                        <p class="text-red-600 text-sm">Actions irréversibles - Manipuler avec précaution</p>
+                    <div class="text-center sm:text-left">
+                        <h3 class="text-lg sm:text-xl font-bold text-red-800 mb-1">Zone de danger</h3>
+                        <p class="text-red-600 text-xs sm:text-sm">Actions irréversibles - Manipuler avec précaution</p>
                     </div>
                 </div>
             </div>
             
-            <div class="p-8">
-                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-                    <div class="flex-1">
-                        <h4 class="text-lg font-semibold text-gray-800 mb-2">Retirer cette matière</h4>
-                        <p class="text-gray-600 text-sm leading-relaxed">
+            <div class="p-4 sm:p-8">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 sm:gap-6">
+                    <div class="flex-1 text-center md:text-left">
+                        <h4 class="text-base sm:text-lg font-semibold text-gray-800 mb-2">Retirer cette matière</h4>
+                        <p class="text-gray-600 text-xs sm:text-sm leading-relaxed">
                             Cette action retirera la matière <span class="font-bold">{{ $classeMatiere->matiere->nom }}</span> de la classe <span class="font-bold">{{ $classeMatiere->classe->nom }}</span>.
-                            Cette action est irréversible.
                         </p>
-                        <div class="mt-3 flex items-center text-xs text-gray-500">
+                        <div class="mt-3 flex items-center justify-center md:justify-start text-xs text-gray-500">
                             <svg class="w-4 h-4 mr-1 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
                             </svg>
@@ -260,15 +260,15 @@
                         </div>
                     </div>
                     
-                    <div class="md:text-right">
+                    <div class="w-full md:w-auto">
                         <form action="{{ route('admin.classe_matieres.destroy', $classeMatiere) }}" 
                               method="POST" 
                               onsubmit="return confirm('Êtes-vous absolument sûr de vouloir retirer cette matière ?');">
                             @csrf
                             @method('DELETE')
                             <button type="submit" 
-                                    class="px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
-                                <svg class="w-5 h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    class="w-full px-6 sm:px-8 py-2.5 sm:py-3 bg-red-600 hover:bg-red-700 text-white font-semibold text-sm rounded-lg sm:rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                                 </svg>
                                 Retirer définitivement

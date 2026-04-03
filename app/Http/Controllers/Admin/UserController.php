@@ -127,6 +127,15 @@ class UserController extends Controller
                 'is_active' => $request->boolean('is_active', true),
             ];
 
+            // Déterminer le rôle principal pour la colonne 'role' (fallback BD)
+            if ($request->has('roles') && is_array($request->roles) && count($request->roles) > 0) {
+                // On prend le premier rôle sélectionné et on récupère son nom
+                $roleNameForDb = Role::where('id', $request->roles[0])->value('name');
+                if ($roleNameForDb) {
+                    $data['role'] = $roleNameForDb;
+                }
+            }
+
             Log::info('Tentative de création utilisateur', $data);
 
             if ($request->hasFile('photo')) {
@@ -374,6 +383,14 @@ class UserController extends Controller
             'email' => $request->email,
             'is_active' => $request->boolean('is_active', true),
         ];
+
+        // Déterminer le rôle principal pour la colonne 'role' (fallback BD)
+        if ($request->has('roles') && is_array($request->roles) && count($request->roles) > 0) {
+            $roleNameForDb = Role::where('id', $request->roles[0])->value('name');
+            if ($roleNameForDb) {
+                $data['role'] = $roleNameForDb;
+            }
+        }
 
         if ($request->filled('password')) {
             $data['password'] = Hash::make($request->password);

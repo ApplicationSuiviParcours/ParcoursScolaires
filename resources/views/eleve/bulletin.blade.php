@@ -67,7 +67,7 @@
                             </svg>
                             Période
                         </label>
-                        <select name="periode" class="w-full transition-all duration-300 border-gray-300 rounded-xl focus:border-purple-500 focus:ring-purple-500 hover:border-purple-400 hover:shadow-lg">
+                        <select name="periode" class="w-full transition-all p-2 duration-300 border-gray-300 rounded-xl focus:border-purple-500 focus:ring-purple-500 hover:border-purple-400 hover:shadow-lg">
                             <option value="">Toutes les périodes</option>
                             @foreach($periodes as $key => $periode)
                                 <option value="{{ $key }}" {{ request('periode') == $key ? 'selected' : '' }}>
@@ -83,7 +83,7 @@
                             </svg>
                             Année scolaire
                         </label>
-                        <select name="annee_scolaire_id" class="w-full transition-all duration-300 border-gray-300 rounded-xl focus:border-purple-500 focus:ring-purple-500 hover:border-purple-400 hover:shadow-lg">
+                        <select name="annee_scolaire_id" class="w-full transition-all p-2 duration-300 border-gray-300 rounded-xl focus:border-purple-500 focus:ring-purple-500 hover:border-purple-400 hover:shadow-lg">
                             <option value="">Toutes les années</option>
                             @foreach($anneesScolaires as $annee)
                                 <option value="{{ $annee->id }}" {{ request('annee_scolaire_id') == $annee->id ? 'selected' : '' }}>

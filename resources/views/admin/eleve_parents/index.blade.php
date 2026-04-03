@@ -4,24 +4,25 @@
 @section('title', 'Gestion des relations Élèves-Parents')
 
 @section('header')
-    <div class="relative bg-gradient-to-r from-indigo-600 to-indigo-800 py-6">
+    {{-- Header Responsive --}}
+    <div class="relative bg-gradient-to-r from-indigo-600 to-indigo-800 py-3 sm:py-4 md:py-6 overflow-x-hidden">
         <div class="absolute inset-0 bg-black opacity-10"></div>
-        <div class="container mx-auto px-6 relative">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-                <div class="flex items-center space-x-4">
-                    <div class="p-3 bg-white bg-opacity-20 rounded-2xl backdrop-filter backdrop-blur-lg">
-                        <i class="fas fa-handshake fa-2x text-white"></i>
+        <div class="container mx-auto px-3 sm:px-4 md:px-6 relative">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-1.5 sm:gap-2">
+                <div class="flex items-center space-x-2 sm:space-x-3 md:space-x-4">
+                    <div class="p-1.5 sm:p-2 md:p-3 bg-white bg-opacity-20 rounded-lg sm:rounded-xl md:rounded-2xl backdrop-filter backdrop-blur-lg">
+                        <i class="fas fa-handshake text-sm sm:text-base md:text-lg lg:text-2xl text-white"></i>
                     </div>
                     <div>
-                        <h1 class="text-2xl font-bold text-white">Relations Élèves-Parents</h1>
-                        <p class="text-indigo-100 text-sm mt-1">Gérez les liens entre élèves et parents</p>
+                        <h1 class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white">Relations Élèves-Parents</h1>
+                        <p class="text-indigo-100 text-[9px] sm:text-[10px] md:text-xs lg:text-sm mt-0.5">Gérez les liens entre élèves et parents</p>
                     </div>
                 </div>
-                <nav class="mt-4 md:mt-0">
-                    <ol class="flex items-center space-x-2 text-sm">
+                <nav class="mt-1 md:mt-0">
+                    <ol class="flex items-center space-x-1 sm:space-x-2 text-[8px] sm:text-[9px] md:text-xs lg:text-sm">
                         <li>
                             <a href="{{ route('dashboard') }}" class="text-indigo-200 hover:text-white transition-colors duration-200">
-                                <i class="fas fa-home mr-1"></i>Dashboard
+                                <i class="fas fa-home mr-0.5 sm:mr-1"></i>Dashboard
                             </a>
                         </li>
                         <li class="text-indigo-300">/</li>
@@ -34,166 +35,118 @@
 @endsection
 
 @section('content')
-    <div class="container mx-auto px-6 py-8">
-        <!-- Statistiques rapides avec icônes VISIBLES -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div class="container mx-auto px-3 sm:px-4 md:px-6 py-3 sm:py-4 md:py-6 lg:py-8 overflow-x-hidden">
+        
+        <!-- Statistiques rapides - Responsive Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-5 lg:gap-6 mb-4 sm:mb-6 md:mb-8">
             <!-- Total relations -->
-            <div class="bg-white rounded-2xl shadow-lg p-6 transform hover:scale-105 transition-transform duration-300 border-l-4 border-indigo-500">
+            <div class="bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow p-3 sm:p-4 md:p-5 lg:p-6 border-l-4 border-indigo-500 hover:shadow-lg transition-shadow">
                 <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-sm font-medium text-gray-500 uppercase tracking-wider">Total relations</p>
-                        <p class="text-3xl font-bold text-gray-800 mt-2">{{ $relations->total() }}</p>
-                        <p class="text-xs text-gray-400 mt-1 flex items-center">
-                            <i class="fas fa-arrow-up text-green-500 mr-1"></i>
-                            <span>+2.5% ce mois</span>
-                        </p>
+                    <div class="min-w-0">
+                        <p class="text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-medium text-gray-500 uppercase">Total relations</p>
+                        <p class="text-base sm:text-lg md:text-xl lg:text-3xl font-bold text-gray-800 mt-0.5 sm:mt-1">{{ $relations->total() }}</p>
+                        <p class="text-[7px] sm:text-[8px] md:text-[9px] lg:text-xs text-gray-400 mt-0.5 hidden sm:block">+2.5% ce mois</p>
                     </div>
-                    <div class="p-4 bg-indigo-600 rounded-2xl shadow-lg">
-                        <i class="fas fa-users fa-2x text-white"></i>
+                    <div class="p-1.5 sm:p-2 md:p-3 lg:p-4 bg-indigo-600 rounded-lg md:rounded-xl lg:rounded-2xl shadow-inner flex-shrink-0 ml-2">
+                        <i class="fas fa-users text-sm sm:text-base md:text-lg lg:text-2xl text-white"></i>
                     </div>
-                </div>
-                <div class="mt-4 h-2 w-full bg-gray-100 rounded-full overflow-hidden">
-                    <div class="h-full w-3/4 bg-indigo-600 rounded-full"></div>
                 </div>
             </div>
 
             <!-- Élèves concernés -->
-            <div class="bg-white rounded-2xl shadow-lg p-6 transform hover:scale-105 transition-transform duration-300 border-l-4 border-green-500">
+            <div class="bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow p-3 sm:p-4 md:p-5 lg:p-6 border-l-4 border-green-500 hover:shadow-lg transition-shadow">
                 <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-sm font-medium text-gray-500 uppercase tracking-wider">Élèves concernés</p>
-                        <p class="text-3xl font-bold text-gray-800 mt-2">{{ \App\Models\Eleve::has('parents')->count() }}</p>
-                        <p class="text-xs text-gray-400 mt-1 flex items-center">
-                            <i class="fas fa-user-graduate text-green-500 mr-1"></i>
-                            {{ \App\Models\Eleve::count() }} inscrits
-                        </p>
+                    <div class="min-w-0">
+                        <p class="text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-medium text-gray-500 uppercase">Élèves concernés</p>
+                        <p class="text-base sm:text-lg md:text-xl lg:text-3xl font-bold text-gray-800 mt-0.5 sm:mt-1">{{ \App\Models\Eleve::has('parents')->count() }}</p>
+                        <p class="text-[7px] sm:text-[8px] md:text-[9px] lg:text-xs text-gray-400 mt-0.5 hidden sm:block">{{ \App\Models\Eleve::count() }} inscrits</p>
                     </div>
-                    <div class="p-4 bg-green-600 rounded-2xl shadow-lg">
-                        <i class="fas fa-child fa-2x text-white"></i>
+                    <div class="p-1.5 sm:p-2 md:p-3 lg:p-4 bg-green-600 rounded-lg md:rounded-xl lg:rounded-2xl shadow-inner flex-shrink-0 ml-2">
+                        <i class="fas fa-child text-sm sm:text-base md:text-lg lg:text-2xl text-white"></i>
                     </div>
-                </div>
-                <div class="mt-4 h-2 w-full bg-gray-100 rounded-full overflow-hidden">
-                    <div class="h-full w-2/3 bg-green-600 rounded-full"></div>
                 </div>
             </div>
 
             <!-- Parents actifs -->
-            <div class="bg-white rounded-2xl shadow-lg p-6 transform hover:scale-105 transition-transform duration-300 border-l-4 border-blue-500">
+            <div class="bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow p-3 sm:p-4 md:p-5 lg:p-6 border-l-4 border-blue-500 hover:shadow-lg transition-shadow sm:col-span-2 lg:col-span-1">
                 <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-sm font-medium text-gray-500 uppercase tracking-wider">Parents actifs</p>
-                        <p class="text-3xl font-bold text-gray-800 mt-2">{{ \App\Models\ParentEleve::has('eleves')->count() }}</p>
-                        <p class="text-xs text-gray-400 mt-1 flex items-center">
-                            <i class="fas fa-user-plus text-blue-500 mr-1"></i>
-                            {{ \App\Models\ParentEleve::count() }} inscrits
-                        </p>
+                    <div class="min-w-0">
+                        <p class="text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-medium text-gray-500 uppercase">Parents actifs</p>
+                        <p class="text-base sm:text-lg md:text-xl lg:text-3xl font-bold text-gray-800 mt-0.5 sm:mt-1">{{ \App\Models\ParentEleve::has('eleves')->count() }}</p>
+                        <p class="text-[7px] sm:text-[8px] md:text-[9px] lg:text-xs text-gray-400 mt-0.5 hidden sm:block">{{ \App\Models\ParentEleve::count() }} inscrits</p>
                     </div>
-                    <div class="p-4 bg-blue-600 rounded-2xl shadow-lg">
-                        <i class="fas fa-user-tie fa-2x text-white"></i>
+                    <div class="p-1.5 sm:p-2 md:p-3 lg:p-4 bg-blue-600 rounded-lg md:rounded-xl lg:rounded-2xl shadow-inner flex-shrink-0 ml-2">
+                        <i class="fas fa-user-tie text-sm sm:text-base md:text-lg lg:text-2xl text-white"></i>
                     </div>
-                </div>
-                <div class="mt-4 h-2 w-full bg-gray-100 rounded-full overflow-hidden">
-                    <div class="h-full w-4/5 bg-blue-600 rounded-full"></div>
                 </div>
             </div>
         </div>
 
-        <!-- Filtres avancés -->
-        <div class="bg-white rounded-2xl shadow-lg mb-8">
-            <div class="p-6 border-b border-gray-100">
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-lg font-semibold text-gray-800">
-                        <i class="fas fa-filter text-indigo-600 mr-2"></i>
-                        Filtres avancés
+        <!-- Filtres avancés - Responsive -->
+        <div class="bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow mb-4 sm:mb-6 md:mb-8 overflow-hidden">
+            <div class="p-3 sm:p-4 md:p-5 lg:p-6 border-b border-gray-100">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3 mb-2 sm:mb-3 md:mb-4">
+                    <h2 class="text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-gray-800">
+                        <i class="fas fa-filter text-indigo-600 mr-1 text-[10px] sm:text-xs"></i>
+                        Filtres
                     </h2>
-                    <button id="resetFilters" class="text-sm text-gray-500 hover:text-indigo-600 transition-colors duration-200">
-                        <i class="fas fa-undo mr-1"></i>Réinitialiser
+                    <button id="resetFilters" class="text-[8px] sm:text-[9px] md:text-xs lg:text-sm text-gray-500 hover:text-indigo-600">
+                        <i class="fas fa-undo mr-0.5"></i>Réinitialiser
                     </button>
                 </div>
                 
-                <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
                     <!-- Recherche -->
-                    <div class="lg:col-span-2">
+                    <div class="sm:col-span-2 lg:col-span-2">
                         <div class="relative">
-                            <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <i class="fas fa-search text-gray-400"></i>
+                            <span class="absolute inset-y-0 left-0 pl-2 sm:pl-3 md:pl-4 flex items-center pointer-events-none">
+                                <i class="fas fa-search text-gray-400 text-[10px] sm:text-xs"></i>
                             </span>
                             <input type="text" 
-                                   class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-200 focus:border-indigo-400 transition-all duration-200"
-                                   placeholder="Rechercher par élève, parent, email..." 
+                                   class="w-full pl-7 sm:pl-8 md:pl-10 lg:pl-11 pr-2 sm:pr-3 md:pr-4 py-1.5 sm:py-2 md:py-2.5 lg:py-3 border border-gray-200 rounded-lg md:rounded-xl text-[10px] sm:text-xs focus:ring-1 focus:ring-indigo-200"
+                                   placeholder="Rechercher..." 
                                    id="searchInput">
-                            <span class="absolute inset-y-0 right-0 pr-4 flex items-center">
-                                <kbd class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-md">⌘K</kbd>
-                            </span>
                         </div>
                     </div>
 
-                    <!-- Filtre lien parental -->
+                    <!-- Filtre lien -->
                     <div>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <i class="fas fa-link text-gray-400"></i>
-                            </span>
-                            <select class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-200 focus:border-indigo-400 appearance-none bg-white transition-all duration-200" 
-                                    id="lienFilter">
-                                <option value="">Tous les liens</option>
-                                <option value="Père">👨 Père</option>
-                                <option value="Mère">👩 Mère</option>
-                                <option value="Tuteur">👤 Tuteur</option>
-                                <option value="Grand-parent">👴 Grand-parent</option>
-                                <option value="Autre">🤝 Autre</option>
-                            </select>
-                            <span class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
-                                <i class="fas fa-chevron-down text-gray-400 text-sm"></i>
-                            </span>
-                        </div>
+                        <select class="w-full px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 md:py-2.5 lg:py-3 border border-gray-200 rounded-lg md:rounded-xl text-[10px] sm:text-xs appearance-none" id="lienFilter">
+                            <option value="">Tous les liens</option>
+                            <option value="Père">Père</option>
+                            <option value="Mère">Mère</option>
+                            <option value="Tuteur">Tuteur</option>
+                        </select>
                     </div>
 
                     <!-- Filtre date -->
                     <div>
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <i class="fas fa-calendar text-gray-400"></i>
-                            </span>
-                            <input type="date" 
-                                   class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-200 focus:border-indigo-400 transition-all duration-200"
-                                   id="dateFilter">
-                        </div>
+                        <input type="date" class="w-full px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 md:py-2.5 lg:py-3 border border-gray-200 rounded-lg md:rounded-xl text-[10px] sm:text-xs" id="dateFilter">
                     </div>
                 </div>
-
-                <!-- Filtres actifs -->
-                <div class="flex flex-wrap gap-2 mt-4" id="activeFilters"></div>
             </div>
 
             <!-- Actions -->
-            <div class="px-6 py-4 bg-gray-50 rounded-b-2xl">
-                <div class="flex flex-wrap items-center justify-between gap-4">
-                    <div class="flex items-center space-x-3">
-                        <i class="fas fa-check-circle text-indigo-500 mr-1"></i>
-                        <span class="text-sm text-gray-600">
-                            <span id="selectedCount" class="font-semibold text-indigo-600">0</span> élément(s) sélectionné(s)
-                        </span>
-                        <div class="h-4 w-px bg-gray-300"></div>
-                        <button class="text-sm text-gray-600 hover:text-indigo-600 transition-colors duration-200">
-                            <i class="fas fa-download mr-1"></i>Exporter la sélection
-                        </button>
+            <div class="px-3 sm:px-4 md:px-5 lg:px-6 py-2 sm:py-3 md:py-4 bg-gray-50 border-t">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3">
+                    <div class="text-[8px] sm:text-[9px] md:text-xs lg:text-sm text-gray-600">
+                        <span id="selectedCount" class="font-semibold text-indigo-600">0</span> sélectionné(s)
                     </div>
                     
-                    <div class="flex items-center space-x-3">
+                    <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 w-full sm:w-auto justify-start sm:justify-end">
                         <a href="{{ route('admin.eleve-parents.export.pdf') }}" 
-                           class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-xl text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 hover:border-red-400 hover:text-red-600 transition-all duration-200 group">
-                            <i class="fas fa-file-pdf mr-2 text-red-500 group-hover:text-red-600"></i>
-                            PDF
+                           class="flex-1 sm:flex-none inline-flex items-center justify-center px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 border rounded-lg md:rounded-xl text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 shadow-sm">
+                            <i class="fas fa-file-pdf mr-0.5 sm:mr-1 text-red-500 text-[8px] sm:text-[9px]"></i>
+                            <span class="hidden sm:inline">PDF</span>
                         </a>
                         <a href="{{ route('admin.eleve-parents.export.excel') }}" 
-                           class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-xl text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 hover:border-green-400 hover:text-green-600 transition-all duration-200 group">
-                            <i class="fas fa-file-excel mr-2 text-green-500 group-hover:text-green-600"></i>
-                            Excel
+                           class="flex-1 sm:flex-none inline-flex items-center justify-center px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 border rounded-lg md:rounded-xl text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 shadow-sm">
+                            <i class="fas fa-file-excel mr-0.5 sm:mr-1 text-green-500 text-[8px] sm:text-[9px]"></i>
+                            <span class="hidden sm:inline">Excel</span>
                         </a>
                         <a href="{{ route('admin.eleve-parents.create') }}" 
-                           class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white text-sm font-medium rounded-xl hover:from-indigo-700 hover:to-indigo-800 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200 shadow-lg shadow-indigo-200">
-                            <i class="fas fa-plus-circle mr-2"></i>
+                           class="flex-1 sm:flex-none inline-flex items-center justify-center px-3 sm:px-4 md:px-5 lg:px-6 py-1.5 sm:py-2 md:py-2.5 lg:py-3 bg-indigo-600 text-white text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-medium rounded-lg md:rounded-xl shadow hover:bg-indigo-700">
+                            <i class="fas fa-plus-circle mr-0.5 sm:mr-1 text-[8px] sm:text-[9px]"></i>
                             Nouvelle relation
                         </a>
                     </div>
@@ -202,198 +155,111 @@
         </div>
 
         @if(session('success'))
-            <div class="mb-6 bg-green-50 border-l-4 border-green-500 rounded-r-xl p-4 shadow-md animate-slideDown">
+            <div class="mb-3 sm:mb-4 md:mb-5 lg:mb-6 bg-green-50 border-l-4 border-green-500 rounded-r-lg p-2 sm:p-3 md:p-4 shadow animate-slideDown text-[9px] sm:text-[10px] md:text-xs lg:text-sm">
                 <div class="flex items-center">
-                    <div class="flex-shrink-0">
-                        <div class="h-10 w-10 bg-green-100 rounded-full flex items-center justify-center">
-                            <i class="fas fa-check-circle text-green-500 text-xl"></i>
-                        </div>
-                    </div>
-                    <div class="ml-4">
-                        <p class="text-sm font-medium text-green-800">{{ session('success') }}</p>
-                    </div>
-                    <button type="button" class="ml-auto text-green-600 hover:text-green-800" onclick="this.parentElement.parentElement.remove()">
-                        <i class="fas fa-times"></i>
-                    </button>
+                    <i class="fas fa-check-circle text-green-500 mr-1.5 sm:mr-2 text-[10px] sm:text-xs"></i>
+                    <p class="font-medium text-green-800">{{ session('success') }}</p>
                 </div>
             </div>
         @endif
 
-        <!-- Tableau des relations -->
-        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+        <!-- Tableau des relations - Responsive avec défilement horizontal si nécessaire -->
+        <div class="bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow overflow-hidden">
             <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-200" id="relationsTable">
-                    <thead>
-                        <tr class="bg-gradient-to-r from-gray-50 to-gray-100">
-                            <th class="px-6 py-5 text-left">
-                                <div class="flex items-center">
-                                    <input type="checkbox" 
-                                           class="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 transition-all duration-200"
-                                           id="selectAll">
-                                </div>
+                <table class="min-w-[650px] sm:min-w-full w-full" id="relationsTable">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-2.5 md:py-3 lg:py-4 text-left w-8 md:w-auto">
+                                <input type="checkbox" class="w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-4 md:h-4 rounded border-gray-300 text-indigo-600" id="selectAll">
                             </th>
-                            <th class="px-6 py-5 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                <div class="flex items-center space-x-1 cursor-pointer hover:text-indigo-600" onclick="sortTable(1)">
-                                    <span>Élève</span>
-                                    <i class="fas fa-sort text-gray-400 text-xs"></i>
-                                </div>
-                            </th>
-                            <th class="px-6 py-5 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                <div class="flex items-center space-x-1 cursor-pointer hover:text-indigo-600" onclick="sortTable(2)">
-                                    <span>Parent</span>
-                                    <i class="fas fa-sort text-gray-400 text-xs"></i>
-                                </div>
-                            </th>
-                            <th class="px-6 py-5 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Lien</th>
-                            <th class="px-6 py-5 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Contact</th>
-                            <th class="px-6 py-5 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                <div class="flex items-center space-x-1 cursor-pointer hover:text-indigo-600" onclick="sortTable(5)">
-                                    <span>Date</span>
-                                    <i class="fas fa-sort text-gray-400 text-xs"></i>
-                                </div>
-                            </th>
-                            <th class="px-6 py-5 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">Actions</th>
+                            <th class="px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-2.5 md:py-3 lg:py-4 text-left text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-semibold text-gray-600 uppercase">Élève</th>
+                            <th class="px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-2.5 md:py-3 lg:py-4 text-left text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-semibold text-gray-600 uppercase">Parent</th>
+                            <th class="px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-2.5 md:py-3 lg:py-4 text-left text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-semibold text-gray-600 uppercase hidden sm:table-cell">Lien</th>
+                            <th class="px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-2.5 md:py-3 lg:py-4 text-left text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-semibold text-gray-600 uppercase hidden md:table-cell">Contact</th>
+                            <th class="px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-2.5 md:py-3 lg:py-4 text-left text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-semibold text-gray-600 uppercase hidden md:table-cell">Date</th>
+                            <th class="px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-2.5 md:py-3 lg:py-4 text-right text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-semibold text-gray-600 uppercase">Actions</th>
                         </tr>
                     </thead>
-                    <tbody class="bg-white divide-y divide-gray-100">
+                    <tbody class="divide-y divide-gray-100">
                         @forelse($relations as $relation)
-                            <tr class="group hover:bg-indigo-50/50 transition-all duration-200">
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <input type="checkbox" 
-                                           class="row-checkbox w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 transition-all duration-200"
-                                           value="{{ $relation->id }}">
+                            <tr class="group hover:bg-indigo-50/50 transition-colors">
+                                <td class="px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-2.5 md:py-3 lg:py-4 whitespace-nowrap">
+                                    <input type="checkbox" class="row-checkbox w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-4 md:h-4 rounded border-gray-300 text-indigo-600" value="{{ $relation->id }}">
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-2.5 md:py-3 lg:py-4 whitespace-nowrap">
                                     <div class="flex items-center">
-                                        <div class="flex-shrink-0 h-11 w-11">
-                                            <div class="h-11 w-11 rounded-xl bg-gradient-to-br from-indigo-100 to-indigo-200 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
-                                                <span class="text-indigo-700 font-semibold text-sm">
-                                                    {{ strtoupper(substr($relation->eleve->prenom, 0, 1)) }}{{ strtoupper(substr($relation->eleve->nom, 0, 1)) }}
-                                                </span>
-                                            </div>
+                                        <div class="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 lg:h-10 lg:w-10 rounded-lg md:rounded-xl bg-indigo-100 flex items-center justify-center flex-shrink-0">
+                                            <span class="text-indigo-700 font-bold text-[8px] sm:text-[9px] md:text-xs lg:text-sm">
+                                                {{ strtoupper(substr($relation->eleve->prenom, 0, 1)) }}{{ strtoupper(substr($relation->eleve->nom, 0, 1)) }}
+                                            </span>
                                         </div>
-                                        <div class="ml-4">
-                                            <div class="text-sm font-semibold text-gray-900">{{ $relation->eleve->prenom }} {{ $relation->eleve->nom }}</div>
-                                            <div class="flex items-center text-xs text-gray-500 mt-1">
-                                                <i class="fas fa-graduation-cap text-indigo-400 mr-1"></i>
-                                                {{ $relation->eleve->classe->nom ?? 'Non assigné' }}
-                                            </div>
+                                        <div class="ml-1.5 sm:ml-2 md:ml-3 lg:ml-4 overflow-hidden">
+                                            <div class="text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-semibold text-gray-900 truncate max-w-[80px] sm:max-w-[120px] md:max-w-[150px] lg:max-w-[200px]">{{ $relation->eleve->prenom }} {{ $relation->eleve->nom }}</div>
+                                            <div class="text-[7px] sm:text-[8px] md:text-[9px] lg:text-xs text-gray-500 hidden sm:block truncate">{{ $relation->eleve->classe->nom ?? '-' }}</div>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-2.5 md:py-3 lg:py-4 whitespace-nowrap">
                                     <div class="flex items-center">
-                                        <div class="flex-shrink-0 h-11 w-11">
-                                            <div class="h-11 w-11 rounded-xl bg-gradient-to-br from-green-100 to-green-200 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
-                                                <span class="text-green-700 font-semibold text-sm">
-                                                    {{ strtoupper(substr($relation->parentEleve->prenom, 0, 1)) }}{{ strtoupper(substr($relation->parentEleve->nom, 0, 1)) }}
-                                                </span>
-                                            </div>
+                                        <div class="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 lg:h-10 lg:w-10 rounded-lg md:rounded-xl bg-green-100 flex items-center justify-center flex-shrink-0">
+                                            <span class="text-green-700 font-bold text-[8px] sm:text-[9px] md:text-xs lg:text-sm">
+                                                {{ strtoupper(substr($relation->parentEleve->prenom, 0, 1)) }}{{ strtoupper(substr($relation->parentEleve->nom, 0, 1)) }}
+                                            </span>
                                         </div>
-                                        <div class="ml-4">
-                                            <div class="text-sm font-semibold text-gray-900">{{ $relation->parentEleve->prenom }} {{ $relation->parentEleve->nom }}</div>
+                                        <div class="ml-1.5 sm:ml-2 md:ml-3 lg:ml-4 overflow-hidden">
+                                            <div class="text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-semibold text-gray-900 truncate max-w-[80px] sm:max-w-[120px] md:max-w-[150px] lg:max-w-[200px]">{{ $relation->parentEleve->prenom }} {{ $relation->parentEleve->nom }}</div>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-2.5 md:py-3 lg:py-4 whitespace-nowrap hidden sm:table-cell">
                                     @php
                                         $badgeConfig = [
-                                            'Père' => ['bg-blue-600', 'text-white', 'fa-mars'],
-                                            'Mère' => ['bg-pink-600', 'text-white', 'fa-venus'],
-                                            'Tuteur' => ['bg-purple-600', 'text-white', 'fa-user-tie'],
-                                            'Grand-parent' => ['bg-amber-600', 'text-white', 'fa-users'],
-                                            'Autre' => ['bg-gray-600', 'text-white', 'fa-heart']
+                                            'Père' => ['bg-blue-600', 'fa-mars'],
+                                            'Mère' => ['bg-pink-600', 'fa-venus'],
+                                            'Tuteur' => ['bg-purple-600', 'fa-user-tie'],
+                                            'Grand-parent' => ['bg-amber-600', 'fa-users'],
+                                            'Autre' => ['bg-gray-600', 'fa-heart']
                                         ];
                                         $config = $badgeConfig[$relation->lien_parental] ?? $badgeConfig['Autre'];
                                     @endphp
-                                    <span class="inline-flex items-center px-4 py-2 rounded-xl text-xs font-medium {{ $config[0] }} {{ $config[1] }} shadow-md">
-                                        <i class="fas {{ $config[2] }} mr-2 text-white"></i>
+                                    <span class="inline-flex items-center px-1.5 py-0.5 sm:px-2 sm:py-1 md:px-3 md:py-1.5 lg:px-4 lg:py-2 rounded-lg md:rounded-xl text-[7px] sm:text-[8px] md:text-[9px] lg:text-xs font-medium {{ $config[0] }} text-white shadow-sm">
+                                        <i class="fas {{ $config[1] }} mr-0.5 text-[6px] sm:text-[7px]"></i>
                                         {{ $relation->lien_parental }}
                                     </span>
                                 </td>
-                                <td class="px-6 py-4">
-                                    <div class="space-y-1">
-                                        <div class="flex items-center text-sm">
-                                            <i class="fas fa-envelope text-indigo-500 w-4 mr-2"></i>
-                                            <span class="text-gray-600 text-sm">{{ Str::limit($relation->parentEleve->email, 20) }}</span>
-                                        </div>
-                                        @if($relation->parentEleve->telephone)
-                                            <div class="flex items-center text-sm">
-                                                <i class="fas fa-phone-alt text-green-500 w-4 mr-2"></i>
-                                                <span class="text-gray-600 text-sm">{{ $relation->parentEleve->telephone }}</span>
-                                            </div>
-                                        @endif
-                                    </div>
+                                <td class="px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-2.5 md:py-3 lg:py-4 hidden md:table-cell">
+                                    <div class="text-[8px] sm:text-[9px] md:text-xs lg:text-sm text-gray-600 truncate max-w-[100px] sm:max-w-[120px] md:max-w-[150px]">{{ $relation->parentEleve->email ?? '-' }}</div>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="flex items-center space-x-3">
-                                        <div class="text-sm text-gray-600">
-                                            <div class="flex items-center">
-                                                <i class="far fa-calendar-alt text-indigo-500 mr-1"></i>
-                                                {{ $relation->created_at->format('d/m/Y') }}
-                                            </div>
-                                            <div class="flex items-center mt-1 text-xs text-gray-500">
-                                                <i class="far fa-clock text-indigo-400 mr-1"></i>
-                                                {{ $relation->created_at->format('H:i') }}
-                                            </div>
-                                        </div>
-                                    </div>
+                                <td class="px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-2.5 md:py-3 lg:py-4 whitespace-nowrap hidden md:table-cell">
+                                    <div class="text-[8px] sm:text-[9px] md:text-xs lg:text-sm text-gray-600">{{ $relation->created_at->format('d/m/Y') }}</div>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right">
-                                    <div class="flex items-center justify-end gap-2">
-                                        <!-- Voir les détails -->
-                                        <a href="{{ route('admin.eleve-parents.show', $relation) }}" 
-                                           class="relative group p-3 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 hover:scale-110 hover:shadow-lg transition-all duration-200"
-                                           title="Voir les détails">
-                                            <i class="fas fa-eye text-lg"></i>
-                                            <span class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50">
-                                                Voir détails
-                                            </span>
+                                <td class="px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-2.5 md:py-3 lg:py-4 whitespace-nowrap text-right">
+                                    <div class="flex items-center justify-end gap-1 md:gap-2 whitespace-nowrap">
+                                        <!-- Voir -->
+                                        <a href="{{ route('admin.eleve-parents.show', $relation) }}" class="p-1.5 md:p-2 text-blue-600 bg-transparent hover:bg-blue-50 rounded-lg transition-colors border-none" title="Voir">
+                                            <i class="fas fa-eye w-4 h-4 md:w-5 md:h-5 flex items-center justify-center"></i>
                                         </a>
                                         
                                         <!-- Modifier -->
-                                        <a href="{{ route('admin.eleve-parents.edit', $relation) }}" 
-                                           class="relative group p-3 bg-amber-600 text-white rounded-xl hover:bg-amber-700 hover:scale-110 hover:shadow-lg transition-all duration-200"
-                                           title="Modifier">
-                                            <i class="fas fa-edit text-lg"></i>
-                                            <span class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50">
-                                                Modifier
-                                            </span>
+                                        <a href="{{ route('admin.eleve-parents.edit', $relation) }}" class="p-1.5 md:p-2 text-amber-600 bg-transparent hover:bg-amber-50 rounded-lg transition-colors border-none" title="Modifier">
+                                            <i class="fas fa-edit w-4 h-4 md:w-5 md:h-5 flex items-center justify-center"></i>
                                         </a>
                                         
-                                        <!-- Télécharger PDF -->
-                                        <button type="button" 
-                                                onclick="window.location.href='{{ route('admin.eleve-parents.pdf', $relation) }}'"
-                                                class="relative group p-3 bg-red-600 text-white rounded-xl hover:bg-red-700 hover:scale-110 hover:shadow-lg transition-all duration-200"
-                                                title="Télécharger PDF">
-                                            <i class="fas fa-file-pdf text-lg"></i>
-                                            <span class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50">
-                                                Télécharger PDF
-                                            </span>
+                                        <!-- PDF -->
+                                        <button type="button" onclick="window.location.href='{{ route('admin.eleve-parents.pdf', $relation) }}'" class="p-1.5 md:p-2 text-purple-600 bg-transparent hover:bg-purple-50 rounded-lg transition-colors border-none cursor-pointer" title="PDF">
+                                            <i class="fas fa-file-pdf w-4 h-4 md:w-5 md:h-5 flex items-center justify-center"></i>
                                         </button>
                                         
-                                        <!-- Envoyer un message -->
-                                        <button type="button" 
-                                                onclick="openMessageModal({{ $relation->parentEleve->id }}, '{{ $relation->parentEleve->prenom }} {{ $relation->parentEleve->nom }}')"
-                                                class="relative group p-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 hover:scale-110 hover:shadow-lg transition-all duration-200"
-                                                title="Envoyer un message">
-                                            <i class="fas fa-envelope text-lg"></i>
-                                            <span class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50">
-                                                Envoyer message
-                                            </span>
+                                        <!-- Message -->
+                                        <button type="button" onclick="openMessageModal({{ $relation->parentEleve->id }}, '{{ addslashes($relation->parentEleve->prenom) }}')" class="p-1.5 md:p-2 text-emerald-600 bg-transparent hover:bg-emerald-50 rounded-lg transition-colors border-none cursor-pointer" title="Message">
+                                            <i class="fas fa-envelope w-4 h-4 md:w-5 md:h-5 flex items-center justify-center"></i>
                                         </button>
                                         
                                         <!-- Supprimer -->
-                                        <form action="{{ route('admin.eleve-parents.destroy', $relation) }}" method="POST" class="inline delete-form">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" 
-                                                    class="relative group p-3 bg-red-600 text-white rounded-xl hover:bg-red-700 hover:scale-110 hover:shadow-lg transition-all duration-200"
-                                                    title="Supprimer">
-                                                <i class="fas fa-trash text-lg"></i>
-                                                <span class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50">
-                                                    Supprimer
-                                                </span>
+                                        <form action="{{ route('admin.eleve-parents.destroy', $relation) }}" method="POST" class="inline m-0 p-0 delete-form">
+                                            @csrf @method('DELETE')
+                                            <button type="submit" class="p-1.5 md:p-2 text-red-600 bg-transparent hover:bg-red-50 rounded-lg transition-colors border-none flex items-center justify-center cursor-pointer" title="Supprimer">
+                                                <i class="fas fa-trash w-4 h-4 md:w-5 md:h-5 flex items-center justify-center"></i>
                                             </button>
                                         </form>
                                     </div>
@@ -401,19 +267,9 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="px-6 py-16">
-                                    <div class="flex flex-col items-center justify-center">
-                                        <div class="w-20 h-20 bg-gray-200 rounded-2xl flex items-center justify-center mb-4">
-                                            <i class="fas fa-handshake fa-3x text-gray-500"></i>
-                                        </div>
-                                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Aucune relation trouvée</h3>
-                                        <p class="text-gray-500 text-center mb-6">Commencez par créer une nouvelle relation entre un élève et un parent</p>
-                                        <a href="{{ route('admin.eleve-parents.create') }}" 
-                                           class="inline-flex items-center px-6 py-3 bg-indigo-600 text-white text-sm font-medium rounded-xl hover:bg-indigo-700 transition-all duration-200 shadow-lg shadow-indigo-200">
-                                            <i class="fas fa-plus-circle mr-2"></i>
-                                            Créer une relation
-                                        </a>
-                                    </div>
+                                <td colspan="7" class="px-3 sm:px-4 md:px-5 lg:px-6 py-8 sm:py-10 md:py-12 text-center">
+                                    <i class="fas fa-handshake text-2xl sm:text-3xl text-gray-300 mb-1 sm:mb-2"></i>
+                                    <p class="text-[9px] sm:text-xs text-gray-500">Aucune relation</p>
                                 </td>
                             </tr>
                         @endforelse
@@ -421,20 +277,12 @@
                 </table>
             </div>
 
-            <!-- Pagination élégante -->
+            <!-- Pagination - Responsive -->
             @if($relations->hasPages())
-                <div class="bg-gray-50 px-6 py-4 border-t border-gray-100">
-                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                        <div class="text-sm text-gray-600 flex items-center">
-                            <i class="fas fa-list-ul text-indigo-500 mr-2"></i>
-                            <span class="font-medium text-indigo-600">{{ $relations->firstItem() }}</span>
-                            à
-                            <span class="font-medium text-indigo-600">{{ $relations->lastItem() }}</span>
-                            sur
-                            <span class="font-medium text-indigo-600">{{ $relations->total() }}</span>
-                            relations
-                        </div>
-                        <div class="flex items-center space-x-2">
+                <div class="px-3 sm:px-4 md:px-5 lg:px-6 py-2 sm:py-2.5 md:py-3 border-t">
+                    <div class="flex flex-col sm:flex-row justify-between items-center gap-1.5 sm:gap-2 text-[8px] sm:text-[9px] md:text-xs lg:text-sm">
+                        <span class="text-gray-600">{{ $relations->firstItem() }} - {{ $relations->lastItem() }} / {{ $relations->total() }}</span>
+                        <div class="flex gap-0.5 sm:gap-1">
                             {{ $relations->onEachSide(1)->links() }}
                         </div>
                     </div>
@@ -443,165 +291,102 @@
         </div>
     </div>
 
-    <!-- Modal moderne pour l'envoi de message -->
+    <!-- Modal - Responsive -->
     <div class="fixed inset-0 z-50 overflow-y-auto hidden" id="messageModal">
-        <div class="flex min-h-screen items-end justify-center px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-            <div class="fixed inset-0 bg-gray-900 bg-opacity-50 backdrop-blur-sm transition-opacity" id="modalBackdrop"></div>
+        <div class="flex min-h-screen items-center justify-center px-2 sm:px-3 md:px-4">
+            <div class="fixed inset-0 bg-black opacity-50" id="modalBackdrop"></div>
             
-            <span class="hidden sm:inline-block sm:h-screen sm:align-middle">&#8203;</span>
-            
-            <div class="relative inline-block transform overflow-hidden rounded-2xl bg-white text-left align-bottom shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:align-middle">
-                <!-- En-tête du modal -->
-                <div class="bg-gradient-to-r from-indigo-600 to-indigo-700 px-6 py-4">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0">
-                            <div class="h-10 w-10 rounded-xl bg-white bg-opacity-20 flex items-center justify-center">
-                                <i class="fas fa-envelope text-white text-xl"></i>
-                            </div>
-                        </div>
-                        <div class="ml-4">
-                            <h3 class="text-lg font-semibold text-white">Nouveau message</h3>
-                            <p class="text-indigo-100 text-sm">Envoyez un message au parent</p>
-                        </div>
-                        <button type="button" class="ml-auto text-white hover:text-indigo-200 close-modal">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
+            <div class="relative bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow-xl w-full max-w-md sm:max-w-lg mx-auto z-10 overflow-hidden">
+                <div class="bg-indigo-600 px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 flex justify-between items-center">
+                    <h3 class="text-xs sm:text-sm md:text-base font-semibold text-white">Nouveau message</h3>
+                    <button type="button" class="text-white hover:text-indigo-200 close-modal">
+                        <i class="fas fa-times text-[10px] sm:text-xs"></i>
+                    </button>
                 </div>
 
-                <!-- Corps du modal -->
-                <form id="messageForm" method="POST" class="p-6">
+                <form id="messageForm" method="POST" class="p-3 sm:p-4 md:p-5 lg:p-6">
                     @csrf
-                    <div class="space-y-4">
+                    <div class="space-y-2 sm:space-y-2.5 md:space-y-3">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">
-                                <i class="fas fa-user text-indigo-600 mr-2"></i>Destinataire
-                            </label>
-                            <div class="relative">
-                                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <i class="fas fa-user-circle text-gray-400"></i>
-                                </span>
-                                <input type="text" 
-                                       class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-700"
-                                       id="destinataire" 
-                                       readonly>
-                            </div>
+                            <label class="text-[8px] sm:text-[9px] md:text-xs lg:text-sm text-gray-700">Destinataire</label>
+                            <input type="text" id="destinataire" readonly class="mt-0.5 sm:mt-1 w-full px-2 sm:px-3 py-1.5 sm:py-2 border rounded-lg text-[9px] sm:text-xs bg-gray-50">
                         </div>
-
                         <div>
-                            <label for="sujet" class="block text-sm font-medium text-gray-700 mb-2">
-                                <i class="fas fa-heading text-indigo-600 mr-2"></i>Sujet
-                            </label>
-                            <input type="text" 
-                                   class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-200 focus:border-indigo-400 transition-all duration-200"
-                                   id="sujet" 
-                                   name="sujet" 
-                                   placeholder="Objet du message..."
-                                   required>
+                            <label class="text-[8px] sm:text-[9px] md:text-xs lg:text-sm text-gray-700">Sujet</label>
+                            <input type="text" name="sujet" required class="mt-0.5 sm:mt-1 w-full px-2 sm:px-3 py-1.5 sm:py-2 border rounded-lg text-[9px] sm:text-xs">
                         </div>
-
                         <div>
-                            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">
-                                <i class="fas fa-comment text-indigo-600 mr-2"></i>Message
-                            </label>
-                            <textarea class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-200 focus:border-indigo-400 transition-all duration-200" 
-                                      id="message" 
-                                      name="message" 
-                                      rows="5" 
-                                      placeholder="Écrivez votre message..."
-                                      required></textarea>
+                            <label class="text-[8px] sm:text-[9px] md:text-xs lg:text-sm text-gray-700">Message</label>
+                            <textarea name="message" rows="3" required class="mt-0.5 sm:mt-1 w-full px-2 sm:px-3 py-1.5 sm:py-2 border rounded-lg text-[9px] sm:text-xs"></textarea>
                         </div>
                     </div>
                 </form>
-
-                <!-- Pied du modal -->
-                <div class="bg-gray-50 px-6 py-4 flex justify-end space-x-3">
-                    <button type="button" 
-                            class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 transition-all duration-200 close-modal">
-                        Annuler
-                    </button>
-                    <button type="submit" 
-                            form="messageForm"
-                            class="px-6 py-2 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white text-sm font-medium rounded-lg hover:from-indigo-700 hover:to-indigo-800 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200 shadow-lg shadow-indigo-200">
-                        <i class="fas fa-paper-plane mr-2"></i>
-                        Envoyer
-                    </button>
+                <div class="px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 bg-gray-50 flex justify-end gap-1.5 sm:gap-2">
+                    <button type="button" class="px-2 sm:px-2.5 md:px-3 py-1 sm:py-1.5 text-[8px] sm:text-[9px] md:text-xs border rounded-lg close-modal">Annuler</button>
+                    <button type="submit" form="messageForm" class="px-2 sm:px-2.5 md:px-3 py-1 sm:py-1.5 text-[8px] sm:text-[9px] md:text-xs bg-indigo-600 text-white rounded-lg">Envoyer</button>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Ajout de Font Awesome si pas déjà présent -->
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 @endsection
 
 @push('styles')
 <style>
-    /* Animations personnalisées */
-    @keyframes slideDown {
-        from {
-            transform: translateY(-100%);
-            opacity: 0;
+    /* Styles pour éviter le débordement horizontal */
+    * {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    body, html {
+        overflow-x: hidden;
+        width: 100%;
+        position: relative;
+    }
+    
+    .overflow-x-hidden {
+        overflow-x: hidden !important;
+    }
+    
+    @keyframes slideDown { 
+        from { opacity: 0; transform: translateY(-5px); } 
+        to { opacity: 1; transform: translateY(0); } 
+    }
+    .animate-slideDown { animation: slideDown 0.3s ease-out; }
+    
+    /* Ajustement pour les très petits écrans */
+    @media (max-width: 480px) {
+        .container {
+            padding-left: 0.75rem !important;
+            padding-right: 0.75rem !important;
         }
-        to {
-            transform: translateY(0);
-            opacity: 1;
+        
+        .py-8 {
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+        }
+        
+        .text-sm {
+            font-size: 0.65rem;
+        }
+        
+        .text-xs {
+            font-size: 0.55rem;
         }
     }
-
-    .animate-slideDown {
-        animation: slideDown 0.3s ease-out;
-    }
-
-    /* Personnalisation des scrollbars */
-    .overflow-x-auto::-webkit-scrollbar {
-        height: 8px;
-    }
-
-    .overflow-x-auto::-webkit-scrollbar-track {
-        background: #f1f1f1;
-        border-radius: 10px;
-    }
-
-    .overflow-x-auto::-webkit-scrollbar-thumb {
-        background: #cbd5e0;
-        border-radius: 10px;
-    }
-
-    .overflow-x-auto::-webkit-scrollbar-thumb:hover {
-        background: #a0aec0;
-    }
-
-    /* Style pour les tooltips */
-    .group .absolute {
-        pointer-events: none;
-        z-index: 50;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Icônes toujours visibles */
-    .fas, .far {
-        display: inline-block;
-        font-style: normal;
-        font-variant: normal;
-        text-rendering: auto;
-        line-height: 1;
-    }
-
-    /* Assurer que les icônes sont bien blanches sur fond coloré */
-    .bg-indigo-600 .fas,
-    .bg-indigo-600 .far,
-    .bg-green-600 .fas,
-    .bg-green-600 .far,
-    .bg-blue-600 .fas,
-    .bg-blue-600 .far,
-    .bg-amber-600 .fas,
-    .bg-amber-600 .far,
-    .bg-red-600 .fas,
-    .bg-red-600 .far,
-    .bg-purple-600 .fas,
-    .bg-purple-600 .far {
-        color: white !important;
+    
+    /* Tableau responsive */
+    @media (max-width: 640px) {
+        .overflow-x-auto {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        table {
+            min-width: 600px;
+        }
     }
 </style>
 @endpush
@@ -610,208 +395,79 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Vérifier si Font Awesome est chargé
-    if (typeof window.FontAwesome === 'undefined') {
-        console.warn('Font Awesome n\'est pas chargé, ajout du CDN...');
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css';
-        document.head.appendChild(link);
-    }
-
-    // Gestionnaire pour le raccourci clavier (⌘K)
-    document.addEventListener('keydown', function(e) {
-        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-            e.preventDefault();
-            const searchInput = document.getElementById('searchInput');
-            if (searchInput) searchInput.focus();
-        }
-    });
-
-    // Checkbox "Tout sélectionner"
+    // Select All
     const selectAll = document.getElementById('selectAll');
     const rowCheckboxes = document.querySelectorAll('.row-checkbox');
     const selectedCount = document.getElementById('selectedCount');
 
-    function updateSelectedCount() {
-        const checked = document.querySelectorAll('.row-checkbox:checked').length;
-        if (selectedCount) {
-            selectedCount.textContent = checked;
-        }
+    if (selectAll) {
+        selectAll.addEventListener('change', (e) => {
+            rowCheckboxes.forEach(cb => cb.checked = e.target.checked);
+            updateCount();
+        });
+    }
+    rowCheckboxes.forEach(cb => cb.addEventListener('change', updateCount));
+
+    function updateCount() {
+        if (selectedCount) selectedCount.textContent = document.querySelectorAll('.row-checkbox:checked').length;
     }
 
-    if (selectAll) {
-        selectAll.addEventListener('change', function(e) {
-            rowCheckboxes.forEach(checkbox => {
-                checkbox.checked = e.target.checked;
-            });
-            updateSelectedCount();
+    // Filters
+    const searchInput = document.getElementById('searchInput');
+    const lienFilter = document.getElementById('lienFilter');
+    const dateFilter = document.getElementById('dateFilter');
+
+    function applyFilters() {
+        const search = searchInput.value.toLowerCase();
+        const lien = lienFilter.value;
+        const date = dateFilter.value;
+        
+        document.querySelectorAll('#relationsTable tbody tr').forEach(row => {
+            const text = row.textContent.toLowerCase();
+            const lienText = row.querySelector('td:nth-child(4)')?.textContent.trim() || '';
+            const dateText = row.querySelector('td:nth-child(6)')?.textContent.trim().split(' ')[0] || '';
+            
+            const matchSearch = text.includes(search);
+            const matchLien = !lien || lienText.includes(lien);
+            const matchDate = !date || dateText === date.split('-').reverse().join('/');
+            
+            row.style.display = (matchSearch && matchLien && matchDate) ? '' : 'none';
         });
     }
 
-    rowCheckboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', updateSelectedCount);
+    searchInput?.addEventListener('keyup', applyFilters);
+    lienFilter?.addEventListener('change', applyFilters);
+    dateFilter?.addEventListener('change', applyFilters);
+
+    document.getElementById('resetFilters')?.addEventListener('click', () => {
+        searchInput.value = '';
+        lienFilter.value = '';
+        dateFilter.value = '';
+        applyFilters();
     });
 
-    // Filtre de recherche avec debounce
-    let searchTimeout;
-    const searchInput = document.getElementById('searchInput');
-    if (searchInput) {
-        searchInput.addEventListener('keyup', function() {
-            clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(() => {
-                let searchText = this.value.toLowerCase();
-                let tableRows = document.querySelectorAll('#relationsTable tbody tr');
-
-                tableRows.forEach(row => {
-                    if (row.querySelector('.empty-state')) return;
-                    let text = row.textContent.toLowerCase();
-                    row.style.display = text.includes(searchText) ? '' : 'none';
-                });
-            }, 300);
-        });
-    }
-
-    // Filtre par lien parental
-    const lienFilter = document.getElementById('lienFilter');
-    if (lienFilter) {
-        lienFilter.addEventListener('change', function() {
-            let filterValue = this.value;
-            let tableRows = document.querySelectorAll('#relationsTable tbody tr');
-
-            tableRows.forEach(row => {
-                if (row.querySelector('.empty-state')) return;
-                let lienCell = row.querySelector('td:nth-child(4) span');
-                if (lienCell) {
-                    let lienText = lienCell.textContent.trim();
-                    row.style.display = !filterValue || lienText.includes(filterValue) ? '' : 'none';
-                }
-            });
-        });
-    }
-
-    // Filtre par date
-    const dateFilter = document.getElementById('dateFilter');
-    if (dateFilter) {
-        dateFilter.addEventListener('change', function() {
-            let filterDate = this.value;
-            let tableRows = document.querySelectorAll('#relationsTable tbody tr');
-
-            tableRows.forEach(row => {
-                if (row.querySelector('.empty-state')) return;
-                let dateCell = row.querySelector('td:nth-child(6)');
-                if (dateCell) {
-                    let rowDate = dateCell.textContent.trim().split(' ')[0];
-                    row.style.display = !filterDate || rowDate === filterDate.split('-').reverse().join('/') ? '' : 'none';
-                }
-            });
-        });
-    }
-
-    // Réinitialiser les filtres
-    const resetFilters = document.getElementById('resetFilters');
-    if (resetFilters) {
-        resetFilters.addEventListener('click', function() {
-            if (searchInput) searchInput.value = '';
-            if (lienFilter) lienFilter.value = '';
-            if (dateFilter) dateFilter.value = '';
-            
-            document.querySelectorAll('#relationsTable tbody tr').forEach(row => {
-                row.style.display = '';
-            });
-        });
-    }
-
-    // Confirmation de suppression avec SweetAlert2
+    // Delete
     document.querySelectorAll('.delete-form').forEach(form => {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
-
-            Swal.fire({
-                title: 'Êtes-vous sûr ?',
-                text: "Cette action est irréversible !",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#ef4444',
-                cancelButtonColor: '#6b7280',
-                confirmButtonText: 'Oui, supprimer',
-                cancelButtonText: 'Annuler',
-                background: '#ffffff'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    this.submit();
-                }
-            });
+            Swal.fire({ title: 'Supprimer ?', text: "Action irréversible", icon: 'warning', showCancelButton: true, confirmButtonColor: '#ef4444' })
+            .then((result) => { if (result.isConfirmed) this.submit(); });
         });
     });
 
-    // Fermeture du modal
-    const closeButtons = document.querySelectorAll('.close-modal');
-    closeButtons.forEach(btn => {
-        btn.addEventListener('click', closeMessageModal);
-    });
-
-    // Fermeture en cliquant sur le backdrop
-    const modalBackdrop = document.getElementById('modalBackdrop');
-    if (modalBackdrop) {
-        modalBackdrop.addEventListener('click', closeMessageModal);
-    }
-});
-
-// Fonction pour trier le tableau
-function sortTable(columnIndex) {
-    const table = document.getElementById('relationsTable');
-    if (!table) return;
-    
-    const tbody = table.querySelector('tbody');
-    const rows = Array.from(tbody.querySelectorAll('tr:not([style*="display: none"])'));
-    
-    const sortedRows = rows.sort((a, b) => {
-        const aValue = a.querySelector(`td:nth-child(${columnIndex})`)?.textContent.trim() || '';
-        const bValue = b.querySelector(`td:nth-child(${columnIndex})`)?.textContent.trim() || '';
-        
-        return aValue.localeCompare(bValue);
-    });
-    
-    tbody.append(...sortedRows);
-}
-
-// Fonction pour ouvrir le modal de message
-function openMessageModal(parentId, parentName) {
-    const destinataire = document.getElementById('destinataire');
-    if (destinataire) {
-        destinataire.value = parentName;
-    }
-    
+    // Modal
     const modal = document.getElementById('messageModal');
     const backdrop = document.getElementById('modalBackdrop');
     
-    if (modal) modal.classList.remove('hidden');
-    if (backdrop) backdrop.classList.remove('hidden');
-    document.body.classList.add('overflow-hidden');
-}
-
-// Fonction pour fermer le modal
-function closeMessageModal() {
-    const modal = document.getElementById('messageModal');
-    const backdrop = document.getElementById('modalBackdrop');
-    
-    if (modal) modal.classList.add('hidden');
-    if (backdrop) backdrop.classList.add('hidden');
-    document.body.classList.remove('overflow-hidden');
-    
-    const form = document.getElementById('messageForm');
-    if (form) form.reset();
-}
-
-// Gestion des touches clavier pour fermer le modal
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        const modal = document.getElementById('messageModal');
-        if (modal && !modal.classList.contains('hidden')) {
-            closeMessageModal();
-        }
+    window.openMessageModal = function(id, name) {
+        document.getElementById('destinataire').value = name;
+        modal.classList.remove('hidden');
     }
+    
+    function closeModal() { modal.classList.add('hidden'); }
+
+    document.querySelectorAll('.close-modal').forEach(btn => btn.addEventListener('click', closeModal));
+    backdrop?.addEventListener('click', closeModal);
 });
 </script>
 @endpush

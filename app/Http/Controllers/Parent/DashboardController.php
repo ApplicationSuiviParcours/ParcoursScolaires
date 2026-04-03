@@ -77,11 +77,12 @@ class DashboardController extends Controller
             // Statistiques par matière
             $statsParMatiere = [];
             foreach ($notes->groupBy('evaluation.matiere_id') as $matiereId => $notesMatiere) {
-                $matiere = $notesMatiere->first()->evaluation->matiere ?? null;
+                $firstNote = $notesMatiere->first();
+                $matiere = $firstNote && isset($firstNote->evaluation) && $firstNote->evaluation->matiere ? $firstNote->evaluation->matiere : null;
                 if ($matiere) {
-                    $moyenneMatiere = $notesMatiere->avg('note');
+                    $moyenneMatiere = $notesMatiere->avg('note') ?? 0;
                     $statsParMatiere[] = [
-                        'nom' => $matiere->nom,
+                        'nom' => $matiere->nom ?? 'Inconnue',
                         'moyenne' => round($moyenneMatiere, 2),
                         'couleur' => $moyenneMatiere >= 16 ? 'green' : 
                                    ($moyenneMatiere >= 14 ? 'blue' : 

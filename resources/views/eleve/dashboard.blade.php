@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('header')
-    <h2 class="text-xl font-semibold leading-tight text-gray-800">
-        {{ __('Tableau de bord Élève') }}
+    <h2 class="text-xl font-semibold sm:text-sm md:text-sm leading-tight text-gray-800">
+        {{ __('Tableau de bord') }}
     </h2>
 @endsection
 
@@ -25,29 +25,29 @@
                 @endfor
             </div>
             
-            <div class="relative p-8">
-                <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-                    <div class="flex items-center space-x-6">
+            <div class="relative p-4 sm:p-8">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                    <div class="flex flex-col sm:flex-row items-center sm:items-start space-y-3 sm:space-y-0 sm:space-x-6">
                         <!-- Avatar avec effet de halo -->
-                        <div class="relative group">
+                        <div class="relative group flex-shrink-0">
                             <div class="absolute inset-0 transition-opacity duration-500 opacity-75 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl blur-xl group-hover:opacity-100"></div>
-                            <div class="relative flex items-center justify-center w-24 h-24 transition-all duration-500 transform shadow-2xl bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl group-hover:scale-110 group-hover:rotate-3">
-                                <span class="text-4xl font-bold text-white drop-shadow-lg">{{ substr($eleve->prenom ?? 'E', 0, 1) }}{{ substr($eleve->nom ?? 'L', 0, 1) }}</span>
+                            <div class="relative flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 transition-all duration-500 transform shadow-2xl bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl group-hover:scale-110 group-hover:rotate-3">
+                                <span class="text-3xl sm:text-4xl font-bold text-white drop-shadow-lg">{{ substr($eleve->prenom ?? 'E', 0, 1) }}{{ substr($eleve->nom ?? 'L', 0, 1) }}</span>
                             </div>
                             <div class="absolute w-5 h-5 bg-green-400 border-4 border-indigo-600 rounded-full -bottom-1 -right-1 animate-ping"></div>
                             <div class="absolute w-5 h-5 bg-green-400 border-4 border-indigo-600 rounded-full -bottom-1 -right-1"></div>
                         </div>
                         
-                        <div class="transition-all duration-500 transform translate-y-0 opacity-100 animate-slide-up">
-                            <h1 class="text-4xl font-bold text-white drop-shadow-lg">Bonjour, {{ $eleve->prenom ?? Auth::user()->name }} !</h1>
-                            <div class="flex flex-wrap gap-3 mt-3">
-                                <span class="inline-flex items-center px-4 py-2 text-sm text-white transition-all duration-300 bg-white/20 backdrop-blur-sm rounded-xl hover:bg-white/30 hover:scale-105">
+                        <div class="transition-all duration-500 transform translate-y-0 opacity-100 animate-slide-up text-center sm:text-left">
+                            <h1 class="text-2xl sm:text-4xl font-bold text-white drop-shadow-lg">Bonjour, {{ $eleve->prenom ?? Auth::user()->name }} !</h1>
+                            <div class="flex flex-wrap gap-2 sm:gap-3 mt-3 justify-center sm:justify-start">
+                                <span class="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 text-sm text-white transition-all duration-300 bg-white/20 backdrop-blur-sm rounded-xl hover:bg-white/30 hover:scale-105">
                                     <svg class="w-4 h-4 mr-2 animate-bounce-subtle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
                                     </svg>
                                     {{ $inscription->classe->nom ?? 'Non assigné' }}
                                 </span>
-                                <span class="inline-flex items-center px-4 py-2 text-sm text-white transition-all duration-300 bg-white/20 backdrop-blur-sm rounded-xl hover:bg-white/30 hover:scale-105">
+                                <span class="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 text-sm text-white transition-all duration-300 bg-white/20 backdrop-blur-sm rounded-xl hover:bg-white/30 hover:scale-105">
                                     <svg class="w-4 h-4 mr-2 animate-spin-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                     </svg>
@@ -58,18 +58,18 @@
                     </div>
 
                     <!-- Stats rapides avec compteurs animés -->
-                    <div class="flex gap-4 mt-6 md:mt-0">
-                        <div class="px-6 py-4 text-center transition-all duration-500 bg-white/10 backdrop-blur-sm rounded-2xl min-w-[140px] hover:bg-white/20 hover:scale-105 group">
+                    <div class="flex gap-3 sm:gap-4 flex-wrap justify-center md:justify-end">
+                        <div class="px-4 sm:px-6 py-4 text-center transition-all duration-500 bg-white/10 backdrop-blur-sm rounded-2xl min-w-[110px] sm:min-w-[140px] hover:bg-white/20 hover:scale-105 group">
                             <p class="text-sm text-white/80">Moyenne</p>
                             <div class="relative">
-                                <p class="text-3xl font-bold text-white animate-count">{{ $moyenneGenerale ? number_format($moyenneGenerale, 2) : '-' }}</p>
+                                <p class="text-2xl sm:text-3xl font-bold text-white animate-count">{{ $moyenneGenerale ? number_format($moyenneGenerale, 2) : '-' }}</p>
                                 <div class="absolute w-2 h-2 bg-green-400 rounded-full -top-1 -right-2 animate-ping"></div>
                             </div>
                             <p class="text-xs text-white/60">/20</p>
                         </div>
-                        <div class="px-6 py-4 text-center transition-all duration-500 bg-white/10 backdrop-blur-sm rounded-2xl min-w-[140px] hover:bg-white/20 hover:scale-105 group">
+                        <div class="px-4 sm:px-6 py-4 text-center transition-all duration-500 bg-white/10 backdrop-blur-sm rounded-2xl min-w-[110px] sm:min-w-[140px] hover:bg-white/20 hover:scale-105 group">
                             <p class="text-sm text-white/80">Notes</p>
-                            <p class="text-3xl font-bold text-white animate-count">{{ $notes->count() }}</p>
+                            <p class="text-2xl sm:text-3xl font-bold text-white animate-count">{{ $notes->count() }}</p>
                             <p class="text-xs text-white/60">total</p>
                         </div>
                     </div>
@@ -83,14 +83,14 @@
                 <div class="relative transition-all duration-500 cursor-pointer preserve-3d group-hover:rotate-y-180">
                     <!-- Face avant -->
                     <div class="backface-hidden">
-                        <div class="p-5 transition-all duration-300 bg-white border border-gray-100 shadow-lg rounded-xl hover:shadow-2xl hover:-translate-y-1">
+                        <div class="p-4 sm:p-5 transition-all duration-300 bg-white border border-gray-100 shadow-lg rounded-xl hover:shadow-2xl hover:-translate-y-1">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <p class="text-sm text-gray-500">Moyenne</p>
-                                    <p class="text-2xl font-bold text-gray-900">{{ $moyenneGenerale ? number_format($moyenneGenerale, 2) : '-' }}</p>
+                                    <p class="text-xs sm:text-sm text-gray-500">Moyenne</p>
+                                    <p class="text-xl sm:text-2xl font-bold text-gray-900">{{ $moyenneGenerale ? number_format($moyenneGenerale, 2) : '-' }}</p>
                                 </div>
-                                <div class="p-3 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 animate-float">
-                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="p-2 sm:p-3 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 animate-float">
+                                    <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                                     </svg>
                                 </div>
@@ -100,7 +100,7 @@
                     <!-- Face arrière -->
                     <div class="absolute inset-0 backface-hidden rotate-y-180">
                         <div class="flex items-center justify-center h-full p-5 shadow-lg bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl">
-                            <p class="font-semibold text-white">Performance globale</p>
+                            <p class="font-semibold text-white text-sm sm:text-base text-center">Performance globale</p>
                         </div>
                     </div>
                 </div>
@@ -109,14 +109,14 @@
             <div class="group perspective">
                 <div class="relative transition-all duration-500 cursor-pointer preserve-3d group-hover:rotate-y-180">
                     <div class="backface-hidden">
-                        <div class="p-5 transition-all duration-300 bg-white border border-gray-100 shadow-lg rounded-xl hover:shadow-2xl hover:-translate-y-1">
+                        <div class="p-4 sm:p-5 transition-all duration-300 bg-white border border-gray-100 shadow-lg rounded-xl hover:shadow-2xl hover:-translate-y-1">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <p class="text-sm text-gray-500">Notes</p>
-                                    <p class="text-2xl font-bold text-gray-900">{{ $notes->count() }}</p>
+                                    <p class="text-xs sm:text-sm text-gray-500">Notes</p>
+                                    <p class="text-xl sm:text-2xl font-bold text-gray-900">{{ $notes->count() }}</p>
                                 </div>
-                                <div class="p-3 rounded-lg bg-gradient-to-br from-green-500 to-green-600 animate-float animation-delay-200">
-                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="p-2 sm:p-3 rounded-lg bg-gradient-to-br from-green-500 to-green-600 animate-float animation-delay-200">
+                                    <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                     </svg>
                                 </div>
@@ -125,7 +125,7 @@
                     </div>
                     <div class="absolute inset-0 backface-hidden rotate-y-180">
                         <div class="flex items-center justify-center h-full p-5 shadow-lg bg-gradient-to-br from-green-500 to-green-600 rounded-xl">
-                            <p class="font-semibold text-white">{{ $notes->count() }} notes</p>
+                            <p class="font-semibold text-white text-sm sm:text-base text-center">{{ $notes->count() }} notes</p>
                         </div>
                     </div>
                 </div>
@@ -134,14 +134,14 @@
             <div class="group perspective">
                 <div class="relative transition-all duration-500 cursor-pointer preserve-3d group-hover:rotate-y-180">
                     <div class="backface-hidden">
-                        <div class="p-5 transition-all duration-300 bg-white border border-gray-100 shadow-lg rounded-xl hover:shadow-2xl hover:-translate-y-1">
+                        <div class="p-4 sm:p-5 transition-all duration-300 bg-white border border-gray-100 shadow-lg rounded-xl hover:shadow-2xl hover:-translate-y-1">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <p class="text-sm text-gray-500">Absences</p>
-                                    <p class="text-2xl font-bold text-gray-900">{{ $absences->count() }}</p>
+                                    <p class="text-xs sm:text-sm text-gray-500">Absences</p>
+                                    <p class="text-xl sm:text-2xl font-bold text-gray-900">{{ $absences->count() }}</p>
                                 </div>
-                                <div class="p-3 rounded-lg bg-gradient-to-br from-red-500 to-red-600 animate-float animation-delay-400">
-                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="p-2 sm:p-3 rounded-lg bg-gradient-to-br from-red-500 to-red-600 animate-float animation-delay-400">
+                                    <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
                                     </svg>
                                 </div>
@@ -150,7 +150,7 @@
                     </div>
                     <div class="absolute inset-0 backface-hidden rotate-y-180">
                         <div class="flex items-center justify-center h-full p-5 shadow-lg bg-gradient-to-br from-red-500 to-red-600 rounded-xl">
-                            <p class="font-semibold text-white">{{ $absencesNonJustifiees }} non justifiées</p>
+                            <p class="font-semibold text-white text-sm sm:text-base text-center">{{ $absencesNonJustifiees }} non justifiées</p>
                         </div>
                     </div>
                 </div>
@@ -159,14 +159,14 @@
             <div class="group perspective">
                 <div class="relative transition-all duration-500 cursor-pointer preserve-3d group-hover:rotate-y-180">
                     <div class="backface-hidden">
-                        <div class="p-5 transition-all duration-300 bg-white border border-gray-100 shadow-lg rounded-xl hover:shadow-2xl hover:-translate-y-1">
+                        <div class="p-4 sm:p-5 transition-all duration-300 bg-white border border-gray-100 shadow-lg rounded-xl hover:shadow-2xl hover:-translate-y-1">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <p class="text-sm text-gray-500">Bulletins</p>
-                                    <p class="text-2xl font-bold text-gray-900">{{ $bulletins->count() }}</p>
+                                    <p class="text-xs sm:text-sm text-gray-500">Bulletins</p>
+                                    <p class="text-xl sm:text-2xl font-bold text-gray-900">{{ $bulletins->count() }}</p>
                                 </div>
-                                <div class="p-3 rounded-lg bg-gradient-to-br from-purple-500 to-purple-600 animate-float animation-delay-600">
-                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="p-2 sm:p-3 rounded-lg bg-gradient-to-br from-purple-500 to-purple-600 animate-float animation-delay-600">
+                                    <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                     </svg>
                                 </div>
@@ -175,7 +175,7 @@
                     </div>
                     <div class="absolute inset-0 backface-hidden rotate-y-180">
                         <div class="flex items-center justify-center h-full p-5 shadow-lg bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl">
-                            <p class="font-semibold text-white">{{ $bulletins->count() }} bulletins</p>
+                            <p class="font-semibold text-white text-sm sm:text-base text-center">{{ $bulletins->count() }} bulletins</p>
                         </div>
                     </div>
                 </div>
@@ -188,30 +188,30 @@
             <div class="space-y-6">
                 <!-- Dernier bulletin avec effet de carte premium -->
                 <div class="overflow-hidden transition-all duration-500 transform bg-white border border-gray-100 shadow-xl rounded-2xl hover:shadow-2xl hover:-translate-y-1">
-                    <div class="relative px-6 py-4 overflow-hidden bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600">
+                    <div class="relative px-4 sm:px-6 py-4 overflow-hidden bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600">
                         <div class="absolute inset-0 transition-transform duration-700 transform translate-x-full -skew-x-12 bg-white/10 group-hover:translate-x-0"></div>
                         <div class="flex items-center justify-between">
-                            <h3 class="flex items-center text-lg font-semibold text-white">
-                                <svg class="w-5 h-5 mr-2 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <h3 class="flex items-center text-base sm:text-lg font-semibold text-white flex-wrap gap-2">
+                                <svg class="w-5 h-5 mr-2 animate-pulse flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                 </svg>
                                 Dernier bulletin
-                                <span class="px-3 py-1 ml-3 text-xs font-medium text-indigo-600 rounded-full bg-white/20 backdrop-blur-sm animate-pulse">
+                                <span class="px-3 py-1 text-xs font-medium text-indigo-600 rounded-full bg-white/20 backdrop-blur-sm animate-pulse">
                                     {{ $bulletinCourant->periode ?? 'N/A' }}
                                 </span>
                             </h3>
-                            <div class="w-8 h-8 rounded-full bg-white/20 animate-ping-slow"></div>
+                            <div class="w-8 h-8 rounded-full bg-white/20 animate-ping-slow flex-shrink-0"></div>
                         </div>
                     </div>
 
-                    <div class="p-6">
+                    <div class="p-4 sm:p-6">
                         @if($bulletinCourant)
                         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                             <div class="flex items-center space-x-4">
-                                <div class="relative group">
+                                <div class="relative group flex-shrink-0">
                                     <div class="absolute inset-0 transition-opacity opacity-50 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl blur-lg group-hover:opacity-75"></div>
-                                    <div class="relative flex items-center justify-center w-20 h-20 transition-transform transform bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl group-hover:scale-110">
-                                        <span class="text-3xl font-bold text-white animate-count">{{ number_format($bulletinCourant->moyenne_generale, 1) }}</span>
+                                    <div class="relative flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 transition-transform transform bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl group-hover:scale-110">
+                                        <span class="text-2xl sm:text-3xl font-bold text-white animate-count">{{ number_format($bulletinCourant->moyenne_generale, 1) }}</span>
                                     </div>
                                 </div>
                                 <div class="space-y-2">
@@ -234,7 +234,7 @@
                             </div>
                         </div>
                         @if($bulletinCourant->appreciation)
-                        <div class="p-4 mt-4 border-l-4 border-indigo-500 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl animate-slide-right">
+                        <div class="p-3 sm:p-4 mt-4 border-l-4 border-indigo-500 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl animate-slide-right">
                             <p class="text-sm italic text-gray-600">"{{ $bulletinCourant->appreciation }}"</p>
                         </div>
                         @endif
@@ -262,8 +262,8 @@
 
                 <!-- Dernières notes avec animations -->
                 <div class="overflow-hidden transition-all duration-500 transform bg-white border border-gray-100 shadow-xl rounded-2xl hover:shadow-2xl hover:-translate-y-1">
-                    <div class="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-green-600 to-emerald-600">
-                        <h3 class="flex items-center text-lg font-semibold text-white">
+                    <div class="flex items-center justify-between px-4 sm:px-6 py-4 bg-gradient-to-r from-green-600 to-emerald-600">
+                        <h3 class="flex items-center text-base sm:text-lg font-semibold text-white">
                             <svg class="w-5 h-5 mr-2 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                             </svg>
@@ -277,7 +277,7 @@
                         </a>
                     </div>
 
-                    <div class="p-6">
+                    <div class="p-4 sm:p-6">
                         @if($dernieresNotes->count() > 0)
                         <div class="space-y-3">
                             @foreach($dernieresNotes as $index => $note)
@@ -291,21 +291,21 @@
                                 $colorIndex = $index % 3;
                             @endphp
                             <div class="flex items-center justify-between p-3 rounded-xl {{ $colors[$colorIndex]['bg-light'] }} transform transition-all hover:scale-102 hover:shadow-md animate-slide-up" style="animation-delay: {{ $index * 100 }}ms">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br {{ $colors[$colorIndex]['bg'] }} flex items-center justify-center shadow-lg">
-                                        <span class="text-lg font-bold text-white">{{ $noteValue }}</span>
+                                <div class="flex items-center space-x-3 min-w-0">
+                                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br {{ $colors[$colorIndex]['bg'] }} flex items-center justify-center shadow-lg flex-shrink-0">
+                                        <span class="text-base font-bold text-white">{{ $noteValue }}</span>
                                     </div>
-                                    <div>
-                                        <p class="font-medium text-gray-900">{{ $note->evaluation->matiere->nom ?? 'Matière' }}</p>
+                                    <div class="min-w-0">
+                                        <p class="font-medium text-gray-900 truncate">{{ $note->evaluation->matiere->nom ?? 'Matière' }}</p>
                                         <p class="flex items-center text-xs text-gray-500">
-                                            <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <svg class="w-3 h-3 mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                             </svg>
-                                            {{ $note->evaluation->type ?? 'Évaluation' }} • {{ $note->created_at?->format('d/m/Y') }}
+                                            <span class="truncate">{{ $note->evaluation->type ?? 'Évaluation' }} • {{ $note->created_at?->format('d/m/Y') }}</span>
                                         </p>
                                     </div>
                                 </div>
-                                <span class="px-3 py-1 font-bold {{ $colors[$colorIndex]['text'] }} bg-white rounded-full shadow-sm">
+                                <span class="px-2 sm:px-3 py-1 font-bold {{ $colors[$colorIndex]['text'] }} bg-white rounded-full shadow-sm text-sm flex-shrink-0 ml-2">
                                     {{ number_format($noteValue, 1) }}/20
                                 </span>
                             </div>
@@ -330,8 +330,8 @@
             <div class="space-y-6">
                 <!-- Performance par matière avec barres animées -->
                 <div class="overflow-hidden transition-all duration-500 transform bg-white border border-gray-100 shadow-xl rounded-2xl hover:shadow-2xl hover:-translate-y-1">
-                    <div class="px-6 py-4 bg-gradient-to-r from-purple-600 to-pink-600">
-                        <h3 class="flex items-center text-lg font-semibold text-white">
+                    <div class="px-4 sm:px-6 py-4 bg-gradient-to-r from-purple-600 to-pink-600">
+                        <h3 class="flex items-center text-base sm:text-lg font-semibold text-white">
                             <svg class="w-5 h-5 mr-2 animate-spin-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                             </svg>
@@ -339,7 +339,7 @@
                         </h3>
                     </div>
 
-                    <div class="p-6">
+                    <div class="p-4 sm:p-6">
                         @if(count($moyennesParMatiere) > 0)
                         <div class="space-y-5">
                             @foreach($moyennesParMatiere as $index => $matiere)
@@ -351,11 +351,11 @@
                             @endphp
                             <div class="transition-all transform hover:scale-102">
                                 <div class="flex justify-between mb-1 text-sm">
-                                    <span class="flex items-center font-medium text-gray-700">
-                                        <span class="w-2 h-2 rounded-full bg-gradient-to-r {{ $barColor }} mr-2 animate-pulse"></span>
-                                        {{ $matiere['nom'] }}
+                                    <span class="flex items-center font-medium text-gray-700 min-w-0 mr-2">
+                                        <span class="w-2 h-2 rounded-full bg-gradient-to-r {{ $barColor }} mr-2 animate-pulse flex-shrink-0"></span>
+                                        <span class="truncate">{{ $matiere['nom'] }}</span>
                                     </span>
-                                    <span class="font-semibold {{ $textColor }} animate-count">{{ number_format($matiere['moyenne'], 1) }}/20</span>
+                                    <span class="font-semibold {{ $textColor }} animate-count flex-shrink-0">{{ number_format($matiere['moyenne'], 1) }}/20</span>
                                 </div>
                                 <div class="relative w-full h-3 overflow-hidden bg-gray-100 rounded-full">
                                     <div class="absolute top-0 left-0 h-full bg-gradient-to-r {{ $barColor }} rounded-full transition-all duration-1000 ease-out"
@@ -366,7 +366,7 @@
                                     </div>
                                 </div>
                                 <p class="flex items-center mt-1 text-xs text-gray-400">
-                                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-3 h-3 mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                                     </svg>
                                     {{ $matiere['nombreNotes'] }} note(s)
@@ -390,8 +390,8 @@
 
                 <!-- Absences récentes avec timeline -->
                 <div class="overflow-hidden transition-all duration-500 transform bg-white border border-gray-100 shadow-xl rounded-2xl hover:shadow-2xl hover:-translate-y-1">
-                    <div class="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-red-600 to-pink-600">
-                        <h3 class="flex items-center text-lg font-semibold text-white">
+                    <div class="flex items-center justify-between px-4 sm:px-6 py-4 bg-gradient-to-r from-red-600 to-pink-600">
+                        <h3 class="flex items-center text-base sm:text-lg font-semibold text-white">
                             <svg class="w-5 h-5 mr-2 animate-shake" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
                             </svg>
@@ -405,7 +405,7 @@
                         </a>
                     </div>
 
-                    <div class="p-6">
+                    <div class="p-4 sm:p-6">
                         @php $recentAbsences = $absences->take(3); @endphp
                         @if($recentAbsences->count() > 0)
                         <div class="relative">
@@ -415,25 +415,25 @@
                             <div class="space-y-4">
                                 @foreach($recentAbsences as $index => $abs)
                                 <div class="relative flex items-start space-x-4 animate-slide-left" style="animation-delay: {{ $index * 150 }}ms">
-                                    <div class="relative z-10">
+                                    <div class="relative z-10 flex-shrink-0">
                                         <div class="w-10 h-10 rounded-full {{ $abs->justifie ? 'bg-green-500' : 'bg-red-500' }} flex items-center justify-center shadow-lg transform transition-transform hover:scale-110">
                                             <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                             </svg>
                                         </div>
                                     </div>
-                                    <div class="flex-1 p-3 rounded-xl {{ $abs->justifie ? 'bg-green-50' : 'bg-red-50' }} transform transition-all hover:scale-102">
-                                        <div class="flex items-center justify-between">
-                                            <div>
+                                    <div class="flex-1 p-3 rounded-xl {{ $abs->justifie ? 'bg-green-50' : 'bg-red-50' }} transform transition-all hover:scale-102 min-w-0">
+                                        <div class="flex items-center justify-between flex-wrap gap-2">
+                                            <div class="min-w-0">
                                                 <p class="font-medium text-gray-900">{{ \Carbon\Carbon::parse($abs->date_absence)->format('d/m/Y') }}</p>
                                                 <p class="flex items-center mt-1 text-xs text-gray-600">
-                                                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <svg class="w-3 h-3 mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                                                     </svg>
-                                                    {{ $abs->matiere->nom ?? 'Matière' }}
+                                                    <span class="truncate">{{ $abs->matiere->nom ?? 'Matière' }}</span>
                                                 </p>
                                             </div>
-                                            <span class="px-3 py-1 text-xs font-semibold rounded-full {{ $abs->justifie ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800' }}">
+                                            <span class="px-2 sm:px-3 py-1 text-xs font-semibold rounded-full flex-shrink-0 {{ $abs->justifie ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800' }}">
                                                 {{ $abs->justifie ? 'Justifiée' : 'Non justifiée' }}
                                             </span>
                                         </div>
@@ -460,62 +460,62 @@
 
         <!-- Emploi du temps avec design moderne -->
         <div class="overflow-hidden transition-all duration-500 transform bg-white border border-gray-100 shadow-xl rounded-2xl hover:shadow-2xl hover:-translate-y-1">
-            <div class="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-indigo-600 to-blue-600">
-                <h3 class="flex items-center text-lg font-semibold text-white">
+            <div class="flex items-center justify-between px-4 sm:px-6 py-4 bg-gradient-to-r from-indigo-600 to-blue-600">
+                <h3 class="flex items-center text-base sm:text-lg font-semibold text-white">
                     <svg class="w-5 h-5 mr-2 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
                     Emploi du temps
                 </h3>
-                <span class="px-4 py-2 text-sm text-white rounded-full bg-white/20 backdrop-blur-sm animate-pulse">
+                <span class="px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm text-white rounded-full bg-white/20 backdrop-blur-sm animate-pulse">
                     {{ now()->startOfWeek()->format('d/m') }} - {{ now()->endOfWeek()->format('d/m/Y') }}
                 </span>
             </div>
 
-            <div class="p-6">
+            <div class="p-3 sm:p-6">
                 @if($emploiDuTemps->count() > 0)
-                <div class="overflow-x-auto">
+                <div class="w-full">
                     <table class="w-full">
                         <thead>
                             <tr class="bg-gray-50">
-                                <th class="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Jour</th>
-                                <th class="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Horaire</th>
-                                <th class="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Matière</th>
-                                <th class="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Enseignant</th>
-                                <th class="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Salle</th>
+                                <th class="px-2 py-2 sm:px-4 sm:py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Jour</th>
+                                <th class="px-2 py-2 sm:px-4 sm:py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Horaire</th>
+                                <th class="px-2 py-2 sm:px-4 sm:py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Matière</th>
+                                <th class="px-2 py-2 sm:px-4 sm:py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase hidden sm:table-cell">Enseignant</th>
+                                <th class="px-2 py-2 sm:px-4 sm:py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase hidden md:table-cell">Salle</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
                             @foreach($emploiDuTemps as $index => $edt)
                             <tr class="transition-colors hover:bg-gray-50 animate-slide-up" style="animation-delay: {{ $index * 50 }}ms">
-                                <td class="px-4 py-3 whitespace-nowrap">
-                                    <span class="inline-flex items-center px-3 py-1 text-sm font-medium text-indigo-700 bg-indigo-100 rounded-full">
-                                        <span class="w-2 h-2 mr-2 bg-indigo-600 rounded-full animate-pulse"></span>
+                                <td class="px-2 py-2 sm:px-4 sm:py-3">
+                                    <span class="inline-flex items-center px-2 py-1 sm:px-3 text-xs sm:text-sm font-medium text-indigo-700 bg-indigo-100 rounded-full">
+                                        <span class="w-2 h-2 mr-1 sm:mr-2 bg-indigo-600 rounded-full animate-pulse flex-shrink-0"></span>
                                         {{ $edt->jour }}
                                     </span>
                                 </td>
-                                <td class="px-4 py-3 text-sm text-gray-600 whitespace-nowrap">
+                                <td class="px-2 py-2 sm:px-4 sm:py-3 text-xs sm:text-sm text-gray-600">
                                     <span class="flex items-center">
-                                        <svg class="w-4 h-4 mr-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                         </svg>
                                         {{ substr($edt->heure_debut, 0, 5) }} - {{ substr($edt->heure_fin, 0, 5) }}
                                     </span>
                                 </td>
-                                <td class="px-4 py-3 whitespace-nowrap">
-                                    <span class="font-medium text-gray-900">{{ $edt->matiere->nom ?? '-' }}</span>
+                                <td class="px-2 py-2 sm:px-4 sm:py-3">
+                                    <span class="font-medium text-gray-900 text-xs sm:text-sm">{{ $edt->matiere->nom ?? '-' }}</span>
                                 </td>
-                                <td class="px-4 py-3 text-sm text-gray-600 whitespace-nowrap">
+                                <td class="px-2 py-2 sm:px-4 sm:py-3 text-xs sm:text-sm text-gray-600 hidden sm:table-cell">
                                     <span class="flex items-center">
-                                        <svg class="w-4 h-4 mr-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                         </svg>
                                         {{ $edt->enseignant->nom ?? '-' }} {{ $edt->enseignant->prenom ?? '' }}
                                     </span>
                                 </td>
-                                <td class="px-4 py-3 whitespace-nowrap">
-                                    <span class="inline-flex items-center px-3 py-1 text-sm text-blue-700 bg-blue-100 rounded-full">
-                                        <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <td class="px-2 py-2 sm:px-4 sm:py-3 hidden md:table-cell">
+                                    <span class="inline-flex items-center px-2 py-1 sm:px-3 text-xs sm:text-sm text-blue-700 bg-blue-100 rounded-full">
+                                        <svg class="w-3 h-3 mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                                         </svg>
                                         {{ $edt->salle ?? '-' }}
@@ -541,56 +541,56 @@
         </div>
 
         <!-- Actions rapides avec effets -->
-        <div class="grid grid-cols-2 gap-4 mt-8 lg:grid-cols-4">
+        <div class="grid grid-cols-2 gap-3 sm:gap-4 mt-8 lg:grid-cols-4">
             <a href="{{ route('eleve.notes') }}" 
-               class="relative p-6 overflow-hidden text-center text-white transition-all duration-500 transform group bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl hover:shadow-2xl hover:-translate-y-2">
+               class="relative p-4 sm:p-6 overflow-hidden text-center text-white transition-all duration-500 transform group bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl hover:shadow-2xl hover:-translate-y-2">
                 <div class="absolute inset-0 transition-opacity duration-500 bg-white opacity-0 group-hover:opacity-20"></div>
                 <div class="absolute transition-opacity duration-500 opacity-0 -inset-1 bg-gradient-to-r from-blue-400 to-blue-500 rounded-2xl blur group-hover:opacity-50"></div>
                 <div class="relative">
-                    <svg class="w-10 h-10 mx-auto mb-3 transition-all duration-500 group-hover:scale-110 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-8 h-8 sm:w-10 sm:h-10 mx-auto mb-2 sm:mb-3 transition-all duration-500 group-hover:scale-110 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                     </svg>
-                    <span class="block text-lg font-semibold">Mes notes</span>
-                    <span class="text-sm text-blue-200">Consulter mes notes</span>
+                    <span class="block text-sm sm:text-lg font-semibold">Mes notes</span>
+                    <span class="text-xs sm:text-sm text-blue-200 hidden sm:block">Consulter mes notes</span>
                 </div>
             </a>
             
             <a href="{{ route('eleve.absences') }}" 
-               class="relative p-6 overflow-hidden text-center text-white transition-all duration-500 transform group bg-gradient-to-br from-red-500 to-red-600 rounded-2xl hover:shadow-2xl hover:-translate-y-2">
+               class="relative p-4 sm:p-6 overflow-hidden text-center text-white transition-all duration-500 transform group bg-gradient-to-br from-red-500 to-red-600 rounded-2xl hover:shadow-2xl hover:-translate-y-2">
                 <div class="absolute inset-0 transition-opacity duration-500 bg-white opacity-0 group-hover:opacity-20"></div>
                 <div class="absolute transition-opacity duration-500 opacity-0 -inset-1 bg-gradient-to-r from-red-400 to-red-500 rounded-2xl blur group-hover:opacity-50"></div>
                 <div class="relative">
-                    <svg class="w-10 h-10 mx-auto mb-3 transition-all duration-500 group-hover:scale-110 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-8 h-8 sm:w-10 sm:h-10 mx-auto mb-2 sm:mb-3 transition-all duration-500 group-hover:scale-110 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
                     </svg>
-                    <span class="block text-lg font-semibold">Absences</span>
-                    <span class="text-sm text-red-200">Suivre mes absences</span>
+                    <span class="block text-sm sm:text-lg font-semibold">Absences</span>
+                    <span class="text-xs sm:text-sm text-red-200 hidden sm:block">Suivre mes absences</span>
                 </div>
             </a>
             
             <a href="{{ route('eleve.bulletin') }}" 
-               class="relative p-6 overflow-hidden text-center text-white transition-all duration-500 transform group bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl hover:shadow-2xl hover:-translate-y-2">
+               class="relative p-4 sm:p-6 overflow-hidden text-center text-white transition-all duration-500 transform group bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl hover:shadow-2xl hover:-translate-y-2">
                 <div class="absolute inset-0 transition-opacity duration-500 bg-white opacity-0 group-hover:opacity-20"></div>
                 <div class="absolute transition-opacity duration-500 opacity-0 -inset-1 bg-gradient-to-r from-purple-400 to-purple-500 rounded-2xl blur group-hover:opacity-50"></div>
                 <div class="relative">
-                    <svg class="w-10 h-10 mx-auto mb-3 transition-all duration-500 group-hover:scale-110 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-8 h-8 sm:w-10 sm:h-10 mx-auto mb-2 sm:mb-3 transition-all duration-500 group-hover:scale-110 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                     </svg>
-                    <span class="block text-lg font-semibold">Bulletins</span>
-                    <span class="text-sm text-purple-200">Mes bulletins</span>
+                    <span class="block text-sm sm:text-lg font-semibold">Bulletins</span>
+                    <span class="text-xs sm:text-sm text-purple-200 hidden sm:block">Mes bulletins</span>
                 </div>
             </a>
             
             <a href="{{ route('eleve.emploi-du-temps') }}" 
-               class="relative p-6 overflow-hidden text-center text-white transition-all duration-500 transform group bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-2xl hover:shadow-2xl hover:-translate-y-2">
+               class="relative p-4 sm:p-6 overflow-hidden text-center text-white transition-all duration-500 transform group bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-2xl hover:shadow-2xl hover:-translate-y-2">
                 <div class="absolute inset-0 transition-opacity duration-500 bg-white opacity-0 group-hover:opacity-20"></div>
                 <div class="absolute transition-opacity duration-500 opacity-0 -inset-1 bg-gradient-to-r from-indigo-400 to-indigo-500 rounded-2xl blur group-hover:opacity-50"></div>
                 <div class="relative">
-                    <svg class="w-10 h-10 mx-auto mb-3 transition-all duration-500 group-hover:scale-110 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-8 h-8 sm:w-10 sm:h-10 mx-auto mb-2 sm:mb-3 transition-all duration-500 group-hover:scale-110 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
-                    <span class="block text-lg font-semibold">Emploi du temps</span>
-                    <span class="text-sm text-indigo-200">Mon planning</span>
+                    <span class="block text-sm sm:text-lg font-semibold">Emploi du temps</span>
+                    <span class="text-xs sm:text-sm text-indigo-200 hidden sm:block">Mon planning</span>
                 </div>
             </a>
         </div>

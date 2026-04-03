@@ -1,0 +1,372 @@
+{
+  "info": {
+    "name": "ScolairesParcours - Test APIs Exactes",
+    "description": "Collection Postman complète avec toutes les requêtes exactes, variables et scripts pour tester les APIs. Importez directement dans Postman !",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost/ScolairesParcours/scolaire-parcour/public/api"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "eleve_id",
+      "value": "1"
+    },
+    {
+      "key": "bulletin_id",
+      "value": "1"
+    },
+    {
+      "key": "evaluation_id",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "01 - AUTH - Login Admin",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"credential\": \"admin@ecole.com\",\n  \"password\": \"password\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/login",
+          "host": ["{{base_url}}"],
+          "path": ["login"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "if (pm.response.code === 200) {",
+              "  const jsonData = pm.response.json();",
+              "  pm.collectionVariables.set(\"token\", jsonData.token);",
+              "  pm.collectionVariables.set(\"user_id\", jsonData.user.id);",
+              "  pm.collectionVariables.set(\"user_role\", jsonData.user.role);",
+              "  console.log('✅ Token sauvegardé:', jsonData.token);",
+              "} else {",
+              "  console.log('❌ Login échoué');",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "02 - AUTH - Get User",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/user",
+          "host": ["{{base_url}}"],
+          "path": ["user"]
+        }
+      }
+    },
+    {
+      "name": "03 - PARENT - Login Parent",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"credential\": \"jean.martin.parent@parent.com\",\n  \"password\": \"password\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/login",
+          "host": ["{{base_url}}"],
+          "path": ["login"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "if (pm.response.code === 200) {",
+              "  pm.collectionVariables.set(\"parent_token\", pm.response.json().token);",
+              "  console.log('✅ Token parent sauvegardé');",
+              "}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "04 - PARENT - Dashboard",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{parent_token}}"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/parent/dashboard",
+          "host": ["{{base_url}}"],
+          "path": ["parent", "dashboard"]
+        }
+      }
+    },
+    {
+      "name": "05 - PARENT - Liste Enfants",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{parent_token}}"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/parent/enfants",
+          "host": ["{{base_url}}"],
+          "path": ["parent", "enfants"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "if (pm.response.code === 200) {",
+              "  const data = pm.response.json();",
+              "  if (data.data && data.data.length > 0) {",
+              "    pm.collectionVariables.set(\"eleve_id\", data.data[0].id);",
+              "    console.log('✅ Premier élève ID:', data.data[0].id);",
+              "  }",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "06 - PARENT - Notes Enfant",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{parent_token}}"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/parent/eleve/{{eleve_id}}/notes",
+          "host": ["{{base_url}}"],
+          "path": ["parent", "eleve", "{{eleve_id}}", "notes"]
+        }
+      }
+    },
+    {
+      "name": "07 - ELEVE - Login Élève (Matricule)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"credential\": \"2024A0001\",\n  \"password\": \"password\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/login",
+          "host": ["{{base_url}}"],
+          "path": ["login"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "if (pm.response.code === 200) {",
+              "  pm.collectionVariables.set(\"eleve_token\", pm.response.json().token);",
+              "}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "08 - ELEVE - Dashboard",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{eleve_token}}"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/eleve/dashboard",
+          "host": ["{{base_url}}"],
+          "path": ["eleve", "dashboard"]
+        }
+      }
+    },
+    {
+      "name": "09 - ADMIN - Users List",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/admin/users",
+          "host": ["{{base_url}}"],
+          "path": ["admin", "users"]
+        }
+      }
+    },
+    {
+      "name": "10 - ENSEIGNANT - Login Enseignant",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"credential\": \"jean.martin@enseignant.com\",\n  \"password\": \"password\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/login",
+          "host": ["{{base_url}}"],
+          "path": ["login"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "if (pm.response.code === 200) {",
+              "  pm.collectionVariables.set(\"enseignant_token\", pm.response.json().token);",
+              "}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "11 - ENSEIGNANT - Evaluations",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{enseignant_token}}"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/enseignant/evaluations",
+          "host": ["{{base_url}}"],
+          "path": ["enseignant", "evaluations"]
+        }
+      }
+    },
+    {
+      "name": "12 - Logout",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/logout",
+          "host": ["{{base_url}}"],
+          "path": ["logout"]
+        }
+      }
+    }
+  ]
+}

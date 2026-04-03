@@ -113,7 +113,7 @@ class ClasseMatiereController extends Controller
 
             DB::commit();
 
-            return redirect()->route('admin.classe-matieres.manage', ['classe_id' => $validated['classe_id']])
+            return redirect()->route('admin.classe_matieres.manage', ['classe_id' => $validated['classe_id']])
                 ->with('success', 'Matière assignée à la classe avec succès.');
 
         } catch (\Exception $e) {
@@ -176,7 +176,7 @@ class ClasseMatiereController extends Controller
 
             DB::commit();
 
-            return redirect()->route('admin.classe-matieres.manage', ['classe_id' => $validated['classe_id']])
+            return redirect()->route('admin.classe_matieres.manage', ['classe_id' => $validated['classe_id']])
                 ->with('success', 'Matière mise à jour avec succès.');
 
         } catch (\Exception $e) {
@@ -209,7 +209,7 @@ class ClasseMatiereController extends Controller
 
             DB::commit();
 
-            return redirect()->route('admin.classe-matieres.manage', ['classe_id' => $classeId])
+            return redirect()->route('admin.classe_matieres.manage', ['classe_id' => $classeId])
                 ->with('success', 'Matière retirée de la classe avec succès.');
 
         } catch (\Exception $e) {

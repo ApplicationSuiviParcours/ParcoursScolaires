@@ -3,15 +3,15 @@
 @section('title', 'Générer des bulletins')
 
 @section('header')
-<div class="relative overflow-hidden bg-gradient-to-br from-green-600 via-green-700 to-teal-800 py-12">
+<div class="relative overflow-hidden bg-gradient-to-br from-green-600 via-green-700 to-teal-800 py-8 md:py-12">
     <!-- Éléments décoratifs animés -->
     <div class="absolute inset-0 opacity-10">
         <div class="absolute -top-24 -right-24 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-pulse"></div>
         <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-teal-300 rounded-full mix-blend-overlay filter blur-3xl animate-pulse delay-1000"></div>
     </div>
     
-    <!-- Particules flottantes -->
-    <div class="absolute inset-0 overflow-hidden">
+    <!-- Particules flottantes (masquées sur mobile) -->
+    <div class="absolute inset-0 overflow-hidden hidden sm:block">
         @for($i = 1; $i <= 4; $i++)
             <div class="absolute w-1 h-1 bg-white rounded-full opacity-30 animate-float-{{ $i }}"
                  style="left: {{ rand(0, 100) }}%; top: {{ rand(0, 100) }}%; animation-delay: {{ rand(0, 5) }}s;"></div>
@@ -21,30 +21,31 @@
     <div class="container mx-auto px-4 relative z-10">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between">
             <div class="text-center md:text-left">
-                <nav class="flex mb-4" aria-label="Breadcrumb">
+                <nav class="flex mb-4 justify-center md:justify-start" aria-label="Breadcrumb">
                     <ol class="inline-flex items-center space-x-1 md:space-x-3">
                         <li class="inline-flex items-center">
                             <a href="{{ route('admin.bulletins.index') }}" class="inline-flex items-center text-sm font-medium text-green-200 hover:text-white transition-colors duration-300">
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-4 h-4 mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                                 </svg>
-                                Bulletins
+                                <span class="hidden sm:inline">Bulletins</span>
+                                <span class="sm:hidden">Liste</span>
                             </a>
                         </li>
                         <li aria-current="page">
                             <div class="flex items-center">
-                                <svg class="w-6 h-6 text-green-300" fill="currentColor" viewBox="0 0 20 20">
+                                <svg class="w-5 h-5 md:w-6 md:h-6 text-green-300" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                                 </svg>
-                                <span class="ml-1 text-sm font-medium text-white md:ml-2">Générer des bulletins</span>
+                                <span class="ml-1 text-sm font-medium text-white md:ml-2">Générer</span>
                             </div>
                         </li>
                     </ol>
                 </nav>
-                <h1 class="text-3xl md:text-4xl font-bold text-white mb-2 animate-fade-in-up">
+                <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 animate-fade-in-up">
                     Générer des bulletins
                 </h1>
-                <p class="text-green-200 text-base md:text-lg animate-fade-in-up animation-delay-200">
+                <p class="text-green-200 text-sm md:text-base animate-fade-in-up animation-delay-200">
                     Créez des bulletins pour une classe et une période spécifiques
                 </p>
             </div>
@@ -53,7 +54,7 @@
 
     <!-- Vague décorative -->
     <div class="absolute bottom-0 left-0 right-0">
-        <svg class="fill-current text-gray-50" viewBox="0 0 1440 120">
+        <svg class="fill-current text-gray-50" viewBox="0 0 1440 120" preserveAspectRatio="none">
             <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"></path>
         </svg>
     </div>
@@ -61,32 +62,32 @@
 @endsection
 
 @section('content')
-<div class="container mx-auto px-4 py-10 bg-gray-50">
+<div class="container mx-auto px-4 py-6 md:py-10 bg-gray-50">
     <div class="max-w-3xl mx-auto">
         <!-- Formulaire de génération -->
-        <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
-            <div class="bg-gradient-to-r from-green-500 to-teal-600 px-8 py-6">
+        <div class="bg-white rounded-2xl md:rounded-3xl shadow-xl overflow-hidden">
+            <div class="bg-gradient-to-r from-green-500 to-teal-600 px-4 md:px-8 py-4 md:py-6">
                 <div class="flex items-center">
-                    <div class="w-14 h-14 bg-white/20 backdrop-blur-lg rounded-2xl flex items-center justify-center mr-5">
-                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-12 h-12 md:w-14 md:h-14 bg-white/20 backdrop-blur-lg rounded-xl md:rounded-2xl flex items-center justify-center mr-4 md:mr-5 flex-shrink-0">
+                        <svg class="w-6 h-6 md:w-7 md:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
                         </svg>
                     </div>
                     <div>
-                        <h2 class="text-2xl font-bold text-white mb-1">Paramètres de génération</h2>
-                        <p class="text-green-100 text-sm">Sélectionnez la classe, la période et la date du bulletin</p>
+                        <h2 class="text-xl md:text-2xl font-bold text-white mb-1">Paramètres de génération</h2>
+                        <p class="text-green-100 text-xs md:text-sm">Sélectionnez la classe, la période et la date du bulletin</p>
                     </div>
                 </div>
             </div>
 
-            <div class="p-8">
+            <div class="p-4 md:p-8">
                 <form action="{{ route('admin.bulletins.generateStore') }}" method="POST" id="generateForm">
                     @csrf
 
-                    <div class="space-y-6">
+                    <div class="space-y-5 md:space-y-6">
                         <!-- Classe -->
                         <div class="group">
-                            <label for="classe_id" class="block text-sm font-semibold text-gray-700 mb-2 group-hover:text-green-600 transition-colors duration-300">
+                            <label for="classe_id" class="block text-xs md:text-sm font-semibold text-gray-700 mb-2 group-hover:text-green-600 transition-colors duration-300">
                                 Classe <span class="text-red-500">*</span>
                             </label>
                             <div class="relative">
@@ -97,7 +98,7 @@
                                 </div>
                                 <select name="classe_id" 
                                         id="classe_id" 
-                                        class="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all duration-300 @error('classe_id') border-red-500 @enderror appearance-none bg-white"
+                                        class="w-full pl-12 pr-10 py-2.5 md:py-3 rounded-xl border-2 border-gray-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all duration-300 @error('classe_id') border-red-500 @enderror appearance-none bg-white text-sm md:text-base"
                                         required>
                                     <option value="">Sélectionnez une classe</option>
                                     @foreach($classes as $classe)
@@ -119,7 +120,7 @@
 
                         <!-- Année scolaire -->
                         <div class="group">
-                            <label for="annee_scolaire_id" class="block text-sm font-semibold text-gray-700 mb-2 group-hover:text-green-600 transition-colors duration-300">
+                            <label for="annee_scolaire_id" class="block text-xs md:text-sm font-semibold text-gray-700 mb-2 group-hover:text-green-600 transition-colors duration-300">
                                 Année scolaire <span class="text-red-500">*</span>
                             </label>
                             <div class="relative">
@@ -130,9 +131,9 @@
                                 </div>
                                 <select name="annee_scolaire_id" 
                                         id="annee_scolaire_id" 
-                                        class="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all duration-300 @error('annee_scolaire_id') border-red-500 @enderror appearance-none bg-white"
+                                        class="w-full pl-12 pr-10 py-2.5 md:py-3 rounded-xl border-2 border-gray-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all duration-300 @error('annee_scolaire_id') border-red-500 @enderror appearance-none bg-white text-sm md:text-base"
                                         required>
-                                    <option value="">Sélectionnez une année scolaire</option>
+                                    <option value="">Sélectionnez une année</option>
                                     @foreach($anneeScolaires as $annee)
                                         <option value="{{ $annee->id }}" {{ old('annee_scolaire_id') == $annee->id ? 'selected' : '' }}>
                                             {{ $annee->nom }}
@@ -152,7 +153,7 @@
 
                         <!-- Période -->
                         <div class="group">
-                            <label for="periode" class="block text-sm font-semibold text-gray-700 mb-2 group-hover:text-green-600 transition-colors duration-300">
+                            <label for="periode" class="block text-xs md:text-sm font-semibold text-gray-700 mb-2 group-hover:text-green-600 transition-colors duration-300">
                                 Période <span class="text-red-500">*</span>
                             </label>
                             <div class="relative">
@@ -163,7 +164,7 @@
                                 </div>
                                 <select name="periode" 
                                         id="periode" 
-                                        class="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all duration-300 @error('periode') border-red-500 @enderror appearance-none bg-white"
+                                        class="w-full pl-12 pr-10 py-2.5 md:py-3 rounded-xl border-2 border-gray-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all duration-300 @error('periode') border-red-500 @enderror appearance-none bg-white text-sm md:text-base"
                                         required>
                                     <option value="">Sélectionnez une période</option>
                                     <option value="Trimestre 1" {{ old('periode') == 'Trimestre 1' ? 'selected' : '' }}>Trimestre 1</option>
@@ -186,7 +187,7 @@
 
                         <!-- Date du bulletin -->
                         <div class="group">
-                            <label for="date_bulletin" class="block text-sm font-semibold text-gray-700 mb-2 group-hover:text-green-600 transition-colors duration-300">
+                            <label for="date_bulletin" class="block text-xs md:text-sm font-semibold text-gray-700 mb-2 group-hover:text-green-600 transition-colors duration-300">
                                 Date du bulletin <span class="text-red-500">*</span>
                             </label>
                             <div class="relative">
@@ -199,7 +200,7 @@
                                        name="date_bulletin" 
                                        id="date_bulletin" 
                                        value="{{ old('date_bulletin', date('Y-m-d')) }}"
-                                       class="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all duration-300 @error('date_bulletin') border-red-500 @enderror"
+                                       class="w-full pl-12 pr-4 py-2.5 md:py-3 rounded-xl border-2 border-gray-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all duration-300 @error('date_bulletin') border-red-500 @enderror text-sm md:text-base"
                                        required>
                             </div>
                             @error('date_bulletin')
@@ -208,30 +209,30 @@
                         </div>
 
                         <!-- Récapitulatif -->
-                        <div class="mt-8 p-4 bg-gradient-to-r from-green-50 to-teal-50 rounded-2xl border border-green-200" id="recapSection" style="display: none;">
-                            <h4 class="text-sm font-medium text-green-800 mb-3 flex items-center">
+                        <div class="mt-6 md:mt-8 p-4 bg-gradient-to-r from-green-50 to-teal-50 rounded-xl md:rounded-2xl border border-green-200" id="recapSection" style="display: none;">
+                            <h4 class="text-xs md:text-sm font-medium text-green-800 mb-3 flex items-center">
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
                                 Récapitulatif
                             </h4>
-                            <div class="space-y-2 text-sm">
+                            <div class="grid grid-cols-2 gap-2 text-xs md:text-sm">
                                 <p><span class="font-medium">Classe:</span> <span id="recapClasse">-</span></p>
-                                <p><span class="font-medium">Année scolaire:</span> <span id="recapAnnee">-</span></p>
+                                <p><span class="font-medium">Année:</span> <span id="recapAnnee">-</span></p>
                                 <p><span class="font-medium">Période:</span> <span id="recapPeriode">-</span></p>
-                                <p><span class="font-medium">Date du bulletin:</span> <span id="recapDate">-</span></p>
-                                <p><span class="font-medium">Nombre d'élèves:</span> <span id="recapEleves">-</span></p>
+                                <p><span class="font-medium">Date:</span> <span id="recapDate">-</span></p>
+                                <p class="col-span-2"><span class="font-medium">Nombre d'élèves:</span> <span id="recapEleves">-</span></p>
                             </div>
                         </div>
 
                         <!-- Boutons d'action -->
-                        <div class="flex justify-end space-x-4 pt-6 border-t-2 border-gray-100">
+                        <div class="flex flex-col-reverse sm:flex-row justify-end gap-3 sm:gap-4 pt-6 border-t-2 border-gray-100">
                             <a href="{{ route('admin.bulletins.index') }}" 
-                               class="px-8 py-3 bg-white border-2 border-gray-300 rounded-xl text-gray-700 font-semibold hover:bg-gray-50 transition-all duration-300 transform hover:scale-105">
+                               class="w-full sm:w-auto px-6 py-2.5 md:py-3 bg-white border-2 border-gray-300 rounded-xl text-gray-700 font-semibold hover:bg-gray-50 transition-all duration-300 transform hover:scale-105 text-center text-sm md:text-base">
                                 Annuler
                             </a>
                             <button type="submit" 
-                                    class="px-8 py-3 bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+                                    class="w-full sm:w-auto px-6 py-2.5 md:py-3 bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl text-sm md:text-base">
                                 <svg class="w-5 h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
                                 </svg>
@@ -244,7 +245,7 @@
         </div>
 
         <!-- Informations -->
-        <div class="mt-8 bg-blue-50 rounded-2xl p-6 border border-blue-200">
+        <div class="mt-6 md:mt-8 bg-blue-50 rounded-xl md:rounded-2xl p-4 md:p-6 border border-blue-200">
             <div class="flex items-start">
                 <div class="flex-shrink-0">
                     <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -252,28 +253,28 @@
                     </svg>
                 </div>
                 <div class="ml-4">
-                    <h3 class="text-lg font-semibold text-blue-800 mb-2">Comment ça fonctionne ?</h3>
-                    <ul class="text-sm text-blue-700 space-y-2">
+                    <h3 class="text-base md:text-lg font-semibold text-blue-800 mb-2">Comment ça fonctionne ?</h3>
+                    <ul class="text-xs md:text-sm text-blue-700 space-y-2">
                         <li class="flex items-center">
-                            <svg class="w-4 h-4 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 mr-2 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                             </svg>
                             Les bulletins sont générés à partir des notes existantes
                         </li>
                         <li class="flex items-center">
-                            <svg class="w-4 h-4 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 mr-2 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                             </svg>
                             Les moyennes sont calculées avec les coefficients des matières
                         </li>
                         <li class="flex items-center">
-                            <svg class="w-4 h-4 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 mr-2 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                             </svg>
                             Les rangs sont automatiquement calculés
                         </li>
                         <li class="flex items-center">
-                            <svg class="w-4 h-4 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 mr-2 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                             </svg>
                             Les bulletins existants seront mis à jour
@@ -288,64 +289,27 @@
 
 @push('styles')
 <style>
-    @keyframes float-1 {
-        0%, 100% { transform: translate(0, 0); }
-        50% { transform: translate(10px, -10px); }
-    }
-    
-    @keyframes float-2 {
-        0%, 100% { transform: translate(0, 0); }
-        50% { transform: translate(-15px, 5px); }
-    }
-    
-    @keyframes float-3 {
-        0%, 100% { transform: translate(0, 0) scale(1); }
-        50% { transform: translate(8px, 8px) scale(1.1); }
-    }
-    
-    @keyframes float-4 {
-        0%, 100% { transform: translate(0, 0); }
-        50% { transform: translate(-12px, -8px); }
-    }
+    /* Animations */
+    @keyframes float-1 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(10px, -10px); } }
+    @keyframes float-2 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-15px, 5px); } }
+    @keyframes float-3 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(8px, 8px) scale(1.1); } }
+    @keyframes float-4 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-12px, -8px); } }
     
     .animate-float-1 { animation: float-1 8s ease-in-out infinite; }
     .animate-float-2 { animation: float-2 10s ease-in-out infinite; }
     .animate-float-3 { animation: float-3 12s ease-in-out infinite; }
     .animate-float-4 { animation: float-4 9s ease-in-out infinite; }
     
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInRight { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
     
-    @keyframes fadeInRight {
-        from {
-            opacity: 0;
-            transform: translateX(-20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-    
-    .animate-fade-in-up {
-        animation: fadeInUp 0.8s ease-out forwards;
-    }
-    
-    .animate-fade-in-right {
-        animation: fadeInRight 0.8s ease-out forwards;
-    }
-    
-    .animation-delay-200 {
-        animation-delay: 200ms;
-        opacity: 0;
+    .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+    .animate-fade-in-right { animation: fadeInRight 0.8s ease-out forwards; }
+    .animation-delay-200 { animation-delay: 200ms; opacity: 0; }
+
+    /* Prévention du zoom sur les inputs iOS */
+    input[type="date"], select {
+        font-size: 16px;
     }
 </style>
 @endpush
