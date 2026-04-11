@@ -12,9 +12,16 @@ use App\Models\AnneeScolaire;
 use App\Models\Note;
 use App\Models\Matiere;
 use App\Models\Inscription;
+use App\Services\NotificationService;
 
 class BulletinController extends Controller
 {
+    protected NotificationService $notificationService;
+
+    public function __construct(NotificationService $notificationService)
+    {
+        $this->notificationService = $notificationService;
+    }
     /**
      * Affiche la liste des bulletins avec filtres
      */
@@ -217,6 +224,18 @@ class BulletinController extends Controller
 
             DB::commit();
 
+            // ✅ Notifier les parents pour chaque bulletin créé/mis à jour
+            $bulletinsANotifier = Bulletin::where('classe_id', $request->classe_id)
+                ->where('annee_scolaire_id', $request->annee_scolaire_id)
+                ->where('periode', $request->periode)
+                ->with('eleve')
+                ->get();
+
+            $notifsEnvoyees = 0;
+            foreach ($bulletinsANotifier as $bul) {
+                $notifsEnvoyees += $this->notificationService->notifierParentsDeBulletin($bul);
+            }
+
             $message = [];
             if ($bulletinsCreated > 0) {
                 $message[] = "{$bulletinsCreated} bulletin(s) créé(s)";
@@ -224,10 +243,13 @@ class BulletinController extends Controller
             if ($bulletinsUpdated > 0) {
                 $message[] = "{$bulletinsUpdated} bulletin(s) mis à jour";
             }
+            if ($notifsEnvoyees > 0) {
+                $message[] = "{$notifsEnvoyees} parent(s) notifié(s)";
+            }
 
             return redirect()
                 ->route('admin.bulletins.index')
-                ->with('success', implode(' et ', $message) . ' avec succès.');
+                ->with('success', implode(' — ', $message) . ' avec succès.');
 
         } catch (\Exception $e) {
             DB::rollBack();

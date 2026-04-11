@@ -59,6 +59,20 @@
         .overflow-x-hidden {
             overflow-x: hidden !important;
         }
+
+        /* Masquer l'icône "œil" native générée par Edge/IE et Safari/Mobile */
+        input[type="password"]::-ms-reveal,
+        input[type="password"]::-ms-clear {
+            display: none !important;
+        }
+        input[type="password"]::-webkit-contacts-auto-fill-button,
+        input[type="password"]::-webkit-credentials-auto-fill-button {
+            visibility: hidden;
+            display: none !important;
+            pointer-events: none;
+            position: absolute;
+            right: 0;
+        }
     </style>
 </head>
 

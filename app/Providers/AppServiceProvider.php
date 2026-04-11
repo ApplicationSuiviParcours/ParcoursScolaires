@@ -6,6 +6,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\User;
+use App\Models\AnneeScolaire;
 use Illuminate\Support\Facades\Log;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
             $notificationCount = 0;
             $notifications = collect([]);
             $unreadNotifications = collect([]);
+            // Année scolaire par défaut en cas d'absence
+            $anneeScolaireActive = \App\Models\AnneeScolaire::where('active', true)->first();
 
             if (auth()->check()) {
                 /** @var \App\Models\User $user */
@@ -50,10 +53,11 @@ class AppServiceProvider extends ServiceProvider
             $view->with([
                 'userRole' => $userRole,
                 'notificationCount' => $notificationCount,
-                'notifications' => $notifications,
+                'recentNotifications' => $notifications,
                 'unreadNotifications' => $unreadNotifications,
                 'isAuthenticated' => auth()->check(),
                 'currentUser' => auth()->user(),
+                'anneeScolaireActive' => $anneeScolaireActive, // Partagé globalement !
             ]);
         });
     }

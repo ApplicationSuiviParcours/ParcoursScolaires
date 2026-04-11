@@ -525,6 +525,13 @@
                             </div>
                             <span class="flex-1 text-xs sm:text-sm font-medium">Inscriptions</span>
                         </a>
+                        {{-- Lien Messages & Notifications --}}
+                        <a href="{{ route('admin.messages.index') }}" class="nav-link flex items-center space-x-2 sm:space-x-3 px-3 sm:px-4 py-2 sm:py-3 text-white rounded-lg sm:rounded-xl group {{ request()->routeIs('admin.messages*') ? 'active bg-white/20' : 'hover:bg-white/10' }}">
+                            <div class="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-lg {{ request()->routeIs('admin.messages*') ? 'bg-white/30' : 'bg-white/10' }} group-hover:bg-white/20 transition-all relative">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+                            </div>
+                            <span class="flex-1 text-xs sm:text-sm font-medium">Messages & Notifs</span>
+                        </a>
                     @endif
                 </div>
 
@@ -584,7 +591,7 @@
                             <h2 class="text-sm sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-900 dark:text-white font-display truncate">
                                 @yield('header')
                             </h2>
-                            <p class="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 mt-0.5 truncate">Année scolaire 2024-2025</p>
+                            <p class="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 mt-0.5 truncate">Année scolaire {{ $anneeScolaireActive ? $anneeScolaireActive->nom : 'Non définie' }}</p>
                         </div>
                     </div>
 
@@ -609,66 +616,101 @@
                             <svg id="theme-toggle-light-icon" class="hidden w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
                         </button>
 
-                        <!-- Notifications -->
+                        {{-- Notifications clochette --}}
+                        @php
+                            $notificationCount = 0;
+                            $recentNotifications = collect();
+                            if(Auth::check()) {
+                                $notificationCount = Auth::user()->unreadNotifications()->count();
+                                $recentNotifications = Auth::user()->unreadNotifications()->latest()->limit(5)->get();
+                            }
+                        @endphp
                         <div class="relative" x-data="{ open: false }">
-                            <button @click="open = !open" class="relative p-1.5 sm:p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all group">
-                                <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 transition-colors notification-bell group-hover:text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                                </svg>
-                                <span id="notificationBadge" class="absolute top-0 right-0 min-w-[16px] h-4 bg-red-500 rounded-full ring-2 ring-white dark:ring-gray-900 text-white text-[8px] sm:text-[10px] flex items-center justify-center px-0.5 {{ ($notificationCount ?? 0) > 0 ? '' : 'hidden' }}">
-                                    {{ $notificationCount ?? 0 }}
-                                </span>
-                            </button>
+                                <button @click="open = !open" class="relative p-1.5 sm:p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all group">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 transition-colors notification-bell group-hover:text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                                    </svg>
+                                    <span id="notificationBadge" class="absolute top-0 right-0 min-w-[16px] h-4 bg-red-500 rounded-full ring-2 ring-white dark:ring-gray-900 text-white text-[8px] sm:text-[10px] flex items-center justify-center px-0.5 badge-glow {{ $notificationCount > 0 ? '' : 'hidden' }}">
+                                        {{ $notificationCount > 99 ? '99+' : $notificationCount }}
+                                    </span>
+                                </button>
 
-                            <!-- Panneau de notifications -->
-                            <div x-show="open"
-                                 @click.away="open = false"
-                                 x-transition:enter="transition ease-out duration-200"
-                                 x-transition:enter-start="opacity-0 scale-95 -translate-y-1"
-                                 x-transition:enter-end="opacity-100 scale-100 translate-y-0"
-                                 x-transition:leave="transition ease-in duration-150"
-                                 x-transition:leave-start="opacity-100 scale-100 translate-y-0"
-                                 x-transition:leave-end="opacity-0 scale-95 -translate-y-1"
-                                 class="absolute right-0 z-[999] mt-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-2xl overflow-hidden"
-                                 style="transform-origin: top right; width: 320px; max-width: none;">
+                                <!-- Panneau de notifications -->
+                                <div x-show="open"
+                                     @click.away="open = false"
+                                     x-transition:enter="transition ease-out duration-200"
+                                     x-transition:enter-start="opacity-0 scale-95 -translate-y-1"
+                                     x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                                     x-transition:leave="transition ease-in duration-150"
+                                     x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+                                     x-transition:leave-end="opacity-0 scale-95 -translate-y-1"
+                                     class="absolute right-0 z-[999] mt-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-2xl overflow-hidden"
+                                     style="transform-origin: top right; width: 320px; max-width: none;">
 
-                                <!-- En-tête du panneau -->
-                                <div class="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-900/30 dark:to-indigo-900/30 border-b border-gray-100 dark:border-gray-700">
-                                    <div class="flex items-center gap-2">
-                                        <div class="w-7 h-7 rounded-lg bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center">
-                                            <svg class="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                                    <!-- En-tête du panneau -->
+                                    <div class="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-900/30 dark:to-indigo-900/30 border-b border-gray-100 dark:border-gray-700">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-7 h-7 rounded-lg bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center">
+                                                <svg class="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                                            </div>
+                                            <h3 class="text-sm font-semibold text-gray-800 dark:text-white">Notifications</h3>
+                                            @if($notificationCount > 0)
+                                                <span class="px-1.5 py-0.5 text-[10px] font-bold bg-red-100 text-red-600 rounded-full">{{ $notificationCount }}</span>
+                                            @endif
                                         </div>
-                                        <h3 class="text-sm font-semibold text-gray-800 dark:text-white">Notifications</h3>
-                                        @if(($notificationCount ?? 0) > 0)
-                                            <span class="px-1.5 py-0.5 text-[10px] font-bold bg-red-100 text-red-600 rounded-full">{{ $notificationCount }}</span>
+                                        @if($notificationCount > 0)
+                                        <form action="{{ route('notifications.read-all') }}" method="POST" class="inline">
+                                            @csrf
+                                            <button type="submit" class="text-xs text-purple-600 hover:text-purple-800 dark:text-purple-400 font-medium transition-colors">Tout lire</button>
+                                        </form>
                                         @endif
                                     </div>
-                                    <button class="text-xs text-purple-600 hover:text-purple-800 dark:text-purple-400 font-medium transition-colors">Tout lire</button>
-                                </div>
 
-                                <!-- Liste des notifications -->
-                                <div id="notificationsList" class="overflow-y-auto max-h-64 sm:max-h-80 divide-y divide-gray-50 dark:divide-gray-700/50">
-                                    @forelse($notifications ?? [] as $notification)
-                                        <div class="flex items-start gap-3 px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
-                                            <div class="flex-shrink-0 w-8 h-8 bg-blue-100 dark:bg-blue-900/40 rounded-full flex items-center justify-center mt-0.5">
-                                                <svg class="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                    <!-- Liste des notifications -->
+                                    <div class="overflow-y-auto max-h-64 sm:max-h-80 divide-y divide-gray-50 dark:divide-gray-700/50">
+                                        @forelse($recentNotifications as $notification)
+                                            <a href="{{ $notification->link ?? route('notifications.index') }}"
+                                               class="flex items-start gap-3 px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors block">
+                                                <div class="flex-shrink-0 mt-0.5">
+                                                    @if($notification->type === 'success')
+                                                        <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                                            <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                                        </div>
+                                                    @elseif($notification->type === 'warning')
+                                                        <div class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center">
+                                                            <svg class="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                                                        </div>
+                                                    @else
+                                                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                                            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                                <div class="flex-1 min-w-0">
+                                                    <p class="text-xs font-semibold text-gray-800 dark:text-gray-200 leading-snug truncate">{{ $notification->title }}</p>
+                                                    <p class="text-xs text-gray-600 dark:text-gray-400 leading-snug mt-0.5 line-clamp-2">{{ $notification->message }}</p>
+                                                    <p class="mt-1 text-[10px] text-gray-400 dark:text-gray-500">{{ $notification->created_at->diffForHumans() }}</p>
+                                                </div>
+                                            </a>
+                                        @empty
+                                            <div class="flex flex-col items-center justify-center py-8 px-4">
+                                                <div class="w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center mb-3">
+                                                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                                                </div>
+                                                <p class="text-xs font-medium text-gray-500 dark:text-gray-400">Aucune notification</p>
+                                                <p class="text-[10px] text-gray-400 dark:text-gray-500 mt-0.5">Vous êtes à jour !</p>
                                             </div>
-                                            <div class="flex-1 min-w-0">
-                                                <p class="text-xs text-gray-800 dark:text-gray-200 leading-snug">{{ $notification->message }}</p>
-                                                <p class="mt-1 text-[10px] text-gray-400 dark:text-gray-500">{{ $notification->created_at->diffForHumans() }}</p>
-                                            </div>
-                                        </div>
-                                    @empty
-                                        <div class="flex flex-col items-center justify-center py-8 px-4">
-                                            <div class="w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center mb-3">
-                                                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
-                                            </div>
-                                            <p class="text-xs font-medium text-gray-500 dark:text-gray-400">Aucune notification</p>
-                                            <p class="text-[10px] text-gray-400 dark:text-gray-500 mt-0.5">Vous êtes à jour !</p>
-                                        </div>
-                                    @endforelse
+                                        @endforelse
+                                    </div>
+
+                                    <!-- Footer -->
+                                    <div class="px-4 py-2.5 border-t border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-700/50">
+                                        <a href="{{ route('notifications.index') }}" class="text-xs text-purple-600 hover:text-purple-800 font-medium transition-colors flex items-center justify-center gap-1">
+                                            Voir toutes les notifications
+                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
                         </div>
 
                         <!-- Profil utilisateur avec photo -->

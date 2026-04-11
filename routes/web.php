@@ -23,6 +23,8 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\EleveParentController;
 use App\Http\Controllers\Admin\EvaluationAdminController;
 use App\Http\Controllers\Admin\EnseignantMatiereClasseAdminController;
+use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\NotificationController;
 
 use Illuminate\Support\Facades\Auth;  // ← IMPORTANT
 use Illuminate\Support\Facades\Route;
@@ -386,6 +388,27 @@ Route::middleware(['auth', 'role:parent'])->group(function () {
 // Route pour la recherche
 Route::get('/search', [SearchController::class, 'index'])->name('search');
 Route::get('/search/live', [SearchController::class, 'live'])->name('search.live');
+
+// ============================================
+// ROUTES NOTIFICATIONS (tous rôles connectés)
+// ============================================
+Route::middleware('auth')->group(function () {
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::post('/notifications/{notification}/read', [NotificationController::class, 'markAsRead'])->name('notifications.read');
+    Route::post('/notifications/read-all', [NotificationController::class, 'markAllAsRead'])->name('notifications.read-all');
+    Route::delete('/notifications/{notification}', [NotificationController::class, 'destroy'])->name('notifications.destroy');
+    Route::delete('/notifications', [NotificationController::class, 'destroyRead'])->name('notifications.destroy-read');
+    Route::get('/notifications/count', [NotificationController::class, 'unreadCount'])->name('notifications.count');
+});
+
+// ============================================
+// ROUTES MESSAGES ADMIN
+// ============================================
+Route::middleware(['auth', 'role:administrateur'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
+    Route::post('/messages/send', [MessageController::class, 'send'])->name('messages.send');
+    Route::get('/messages/historique', [MessageController::class, 'historique'])->name('messages.historique');
+});
 
 // ============================================
 // ROUTES PROFIL UTILISATEUR

@@ -244,8 +244,8 @@
                     <a href="#events" class="font-medium transition-colors text-secondary hover:text-blue-400 nav-link">Vie Scolaire</a>
                     
                     <button onclick="toggleTheme()" class="theme-toggle" aria-label="Changer le thème">
-                        <svg id="theme-icon-light" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"/></svg>
-                        <svg id="theme-icon-dark" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+                        <svg class="hidden w-5 h-5 theme-icon-light" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"/></svg>
+                        <svg class="w-5 h-5 theme-icon-dark" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
                     </button>
                     
                     <a href="/login" class="font-semibold text-blue-500 transition-colors hover:text-blue-400 btn-press">Connexion</a>
@@ -258,18 +258,30 @@
             </div>
         </div>
         
+        <!-- Overlay sombre du menu mobile -->
+        <div id="mobile-menu-overlay" class="fixed inset-0 z-40 hidden bg-black/50 backdrop-blur-sm transition-opacity opacity-0 md:hidden"></div>
+
         <div id="mobile-menu" class="fixed top-0 right-0 z-50 w-64 h-full shadow-2xl mobile-menu bg-card md:hidden">
-            <div class="p-6">
-                <button id="mobile-menu-close" class="absolute top-4 right-4 text-secondary">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-                </button>
-                <div class="flex flex-col mt-12 space-y-6">
-                    <a href="#features" class="text-lg font-medium text-primary hover:text-blue-400">Fonctionnalités</a>
-                    <a href="#gallery" class="text-lg font-medium text-primary hover:text-blue-400">Galerie</a>
-                    <a href="#events" class="text-lg font-medium text-primary hover:text-blue-400">Vie Scolaire</a>
+            <div class="p-6 h-full flex flex-col">
+                <div class="flex items-center justify-between mb-8">
+                    <!-- Bouton de thème pour mobile -->
+                    <button onclick="toggleTheme()" class="theme-toggle" aria-label="Changer le thème">
+                        <svg class="hidden w-5 h-5 theme-icon-light" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"/></svg>
+                        <svg class="w-5 h-5 theme-icon-dark" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+                    </button>
+                    
+                    <button id="mobile-menu-close" class="text-secondary p-2 -mr-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+                
+                <div class="flex flex-col space-y-6 flex-1">
+                    <a href="#features" class="text-lg font-medium text-primary hover:text-blue-400 mobile-nav-link">Fonctionnalités</a>
+                    <a href="#gallery" class="text-lg font-medium text-primary hover:text-blue-400 mobile-nav-link">Galerie</a>
+                    <a href="#events" class="text-lg font-medium text-primary hover:text-blue-400 mobile-nav-link">Vie Scolaire</a>
                     <hr class="border-custom">
-                    <a href="/login" class="text-lg font-semibold text-blue-500">Connexion</a>
-                    <a href="/register" class="px-6 py-3 font-semibold text-center text-white rounded-full gradient-bg">Inscription</a>
+                    <a href="/login" class="text-lg font-semibold text-blue-500 text-center border-2 border-blue-500 py-2 rounded-full">Connexion</a>
+                    <a href="/register" class="px-6 py-3 font-semibold text-center text-white rounded-full gradient-bg mt-2">Inscription</a>
                 </div>
             </div>
         </div>
@@ -566,10 +578,16 @@
     function setTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
-        const lightIcon = document.getElementById('theme-icon-light');
-        const darkIcon = document.getElementById('theme-icon-dark');
-        if (theme === 'light') { lightIcon.classList.remove('hidden'); darkIcon.classList.add('hidden'); } 
-        else { lightIcon.classList.add('hidden'); darkIcon.classList.remove('hidden'); }
+        const lightIcons = document.querySelectorAll('.theme-icon-light');
+        const darkIcons = document.querySelectorAll('.theme-icon-dark');
+        
+        if (theme === 'light') { 
+            lightIcons.forEach(icon => icon.classList.remove('hidden')); 
+            darkIcons.forEach(icon => icon.classList.add('hidden')); 
+        } else { 
+            lightIcons.forEach(icon => icon.classList.add('hidden')); 
+            darkIcons.forEach(icon => icon.classList.remove('hidden')); 
+        }
     }
     function toggleTheme() {
         const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -582,8 +600,31 @@
     const mobileBtn = document.getElementById('mobile-menu-btn');
     const mobileClose = document.getElementById('mobile-menu-close');
     const mobileMenu = document.getElementById('mobile-menu');
-    mobileBtn.addEventListener('click', () => mobileMenu.classList.add('open'));
-    mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    const mobileOverlay = document.getElementById('mobile-menu-overlay');
+
+    function openMobileMenu() {
+        mobileMenu.classList.add('open');
+        mobileOverlay.classList.remove('hidden');
+        // Un léger délai pour enclencher la transition d'opacité
+        setTimeout(() => mobileOverlay.classList.remove('opacity-0'), 10);
+        document.body.style.overflow = 'hidden'; // Empêche de défiler derrière
+    }
+
+    function closeMobileMenu() {
+        mobileMenu.classList.remove('open');
+        mobileOverlay.classList.add('opacity-0');
+        setTimeout(() => mobileOverlay.classList.add('hidden'), 300);
+        document.body.style.overflow = '';
+    }
+
+    mobileBtn.addEventListener('click', openMobileMenu);
+    mobileClose.addEventListener('click', closeMobileMenu);
+    mobileOverlay.addEventListener('click', closeMobileMenu);
+    
+    // Fermer le menu si on clique sur un lien Mobile
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+    });
 
     // --- Scroll Effects ---
     window.addEventListener('scroll', () => {

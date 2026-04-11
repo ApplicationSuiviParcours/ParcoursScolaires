@@ -13,14 +13,18 @@ use App\Models\Matiere;
 use App\Models\Classe;
 use App\Models\Inscription;
 use App\Models\EnseignantMatiereClasse;
+use App\Services\NotificationService;
 use Carbon\Carbon;
 
 class AbsenceController extends Controller
 {
     protected $enseignant;
+    protected NotificationService $notificationService;
 
-    public function __construct()
+    public function __construct(NotificationService $notificationService)
     {
+        $this->notificationService = $notificationService;
+
         $this->middleware(function ($request, $next) {
             $this->enseignant = Enseignant::where('user_id', Auth::id())->first();
             
@@ -175,19 +179,23 @@ class AbsenceController extends Controller
 
         // Créer l'absence (SANS nombre_heures)
         try {
-            Absence::create([
-                'eleve_id' => $request->eleve_id,
-                'matiere_id' => $request->matiere_id,
-                'date_absence' => $request->date_absence,
-                'heure_debut' => $request->heure_debut,
-                'heure_fin' => $request->heure_fin,
-                'motif' => $request->motif,
-                'justifiee' => $request->has('justifie'), // ← CORRIGÉ: 'justifiee' au lieu de 'justifie'
-                'annee_scolaire_id' => 1, // À adapter selon votre logique
+            $absence = Absence::create([
+                'eleve_id'          => $request->eleve_id,
+                'matiere_id'        => $request->matiere_id,
+                'date_absence'      => $request->date_absence,
+                'heure_debut'       => $request->heure_debut,
+                'heure_fin'         => $request->heure_fin,
+                'motif'             => $request->motif,
+                'justifiee'         => $request->has('justifie'),
+                'annee_scolaire_id' => 1,
             ]);
 
+            // ✅ Notifier les parents de l'élève
+            $absence->load(['eleve', 'matiere']);
+            $this->notificationService->notifierParentsDeAbsence($absence);
+
             return redirect()->route('enseignant.absences.index')
-                ->with('success', 'Absence enregistrée avec succès.');
+                ->with('success', 'Absence enregistrée avec succès. Les parents ont été notifiés.');
         } catch (\Exception $e) {
             return back()->withErrors(['error' => 'Une erreur est survenue lors de l\'enregistrement.'])->withInput();
         }

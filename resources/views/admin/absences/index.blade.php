@@ -269,7 +269,7 @@
                         <th class="hidden lg:table-cell px-6 py-4 text-left text-xs font-semibold text-orange-700 uppercase tracking-wider">Horaire</th>
                         <th class="px-3 md:px-6 py-3 md:py-4 text-left text-[10px] md:text-xs font-semibold text-orange-700 uppercase tracking-wider">Motif</th>
                         <th class="px-3 md:px-6 py-3 md:py-4 text-left text-[10px] md:text-xs font-semibold text-orange-700 uppercase tracking-wider">Statut</th>
-                        <th class="px-3 md:px-6 py-3 md:py-4 text-left text-[10px] md:text-xs font-semibold text-orange-700 uppercase tracking-wider">Actions</th>
+                        <th class="px-3 md:px-6 py-3 md:py-4 text-left text-[10px] md:text-xs font-semibold text-orange-700 uppercase tracking-wider sticky right-0 bg-gradient-to-l from-orange-50 to-red-50 z-10 shadow-[-4px_0_10px_rgba(0,0,0,0.05)] text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
@@ -329,24 +329,24 @@
                                     </span>
                                 @endif
                             </td>
-                            <td class="px-3 md:px-6 py-3 md:py-4 whitespace-nowrap">
-                                <div class="flex items-center justify-end gap-1 md:gap-2 whitespace-nowrap">
-                                    <a href="{{ route('admin.absences.show', $absence) }}" class="p-1.5 md:p-2 text-blue-600 bg-transparent hover:bg-blue-50 rounded-lg transition-colors border-none" title="Voir">
-                                        <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                            <td class="px-3 md:px-6 py-3 md:py-4 whitespace-nowrap sticky right-0 bg-white group-hover:bg-orange-50/50 z-10 shadow-[-4px_0_10px_rgba(0,0,0,0.02)] border-l border-gray-100">
+                                <div class="flex items-center justify-center gap-1 md:gap-2 whitespace-nowrap min-w-[max-content]">
+                                    <a href="{{ route('admin.absences.show', $absence) }}" class="p-1.5 md:p-2 text-blue-600 bg-transparent hover:bg-blue-50 rounded-lg transition-colors border-none inline-flex flex-shrink-0 items-center justify-center" title="Voir">
+                                        <svg class="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                                     </a>
-                                    <a href="{{ route('admin.absences.edit', $absence) }}" class="p-1.5 md:p-2 text-amber-600 bg-transparent hover:bg-amber-50 rounded-lg transition-colors border-none" title="Modifier">
-                                        <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                                    <a href="{{ route('admin.absences.edit', $absence) }}" class="p-1.5 md:p-2 text-amber-600 bg-transparent hover:bg-amber-50 rounded-lg transition-colors border-none inline-flex flex-shrink-0 items-center justify-center" title="Modifier">
+                                        <svg class="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                                     </a>
                                     @if(!$absence->justifiee)
-                                    <button type="button" onclick="showJustifyModal({{ $absence->id }})" class="p-1.5 md:p-2 text-emerald-600 bg-transparent hover:bg-emerald-50 rounded-lg transition-colors border-none cursor-pointer" title="Justifier">
-                                        <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <button type="button" onclick="showJustifyModal({{ $absence->id }})" class="p-1.5 md:p-2 text-emerald-600 bg-transparent hover:bg-emerald-50 rounded-lg transition-colors border-none inline-flex flex-shrink-0 items-center justify-center cursor-pointer" title="Justifier">
+                                        <svg class="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     </button>
                                     @endif
-                                    <form action="{{ route('admin.absences.destroy', $absence) }}" method="POST" class="inline m-0 p-0 delete-form" onsubmit="return confirm('Supprimer ?');">
+                                    <button type="button" class="p-1.5 md:p-2 text-red-600 bg-transparent hover:bg-red-50 rounded-lg transition-colors border-none inline-flex flex-shrink-0 items-center justify-center cursor-pointer" title="Supprimer" onclick="confirmDelete({{ $absence->id }})">
+                                        <svg class="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                    </button>
+                                    <form id="delete-form-{{ $absence->id }}" action="{{ route('admin.absences.destroy', $absence) }}" method="POST" class="hidden">
                                         @csrf @method('DELETE')
-                                        <button type="submit" class="p-1.5 md:p-2 text-red-600 bg-transparent hover:bg-red-50 rounded-lg transition-colors border-none flex items-center justify-center cursor-pointer" title="Supprimer">
-                                            <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                                        </button>
                                     </form>
                                 </div>
                             </td>
@@ -510,6 +510,13 @@
         }, 5000);
     });
 
+    // Confirmation de suppression
+    function confirmDelete(id) {
+        if (confirm('Êtes-vous sûr de vouloir supprimer cette absence ?')) {
+            document.getElementById('delete-form-' + id).submit();
+        }
+    }
+
     // Modal de justification
     function showJustifyModal(absenceId) {
         document.getElementById('absence_id').value = absenceId;
@@ -530,7 +537,6 @@
         }
         
         const form = document.getElementById('justifyForm');
-        // Note: Adjust URL if necessary
         form.action = `/admin/absences/${document.getElementById('absence_id').value}/justify`;
         form.submit();
     }

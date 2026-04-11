@@ -10,10 +10,17 @@ use App\Models\Classe;
 use App\Models\Matiere;
 use App\Models\AnneeScolaire;
 use App\Models\Inscription;
+use App\Services\NotificationService;
 use Illuminate\Support\Facades\DB;
 
 class AbsenceController extends Controller
 {
+    protected NotificationService $notificationService;
+
+    public function __construct(NotificationService $notificationService)
+    {
+        $this->notificationService = $notificationService;
+    }
     /**
      * Affiche la liste des absences avec filtres
      */
@@ -234,11 +241,15 @@ class AbsenceController extends Controller
         $validated['justifiee'] = $validated['justifiee'] ?? false;
 
         try {
-            Absence::create($validated);
+            $absence = Absence::create($validated);
+
+            // ✅ Notifier les parents de l'élève
+            $absence->load(['eleve', 'matiere']);
+            $this->notificationService->notifierParentsDeAbsence($absence);
 
             return redirect()
                 ->route('admin.absences.index')
-                ->with('success', 'Absence enregistrée avec succès.');
+                ->with('success', 'Absence enregistrée avec succès. Les parents ont été notifiés.');
 
         } catch (\Exception $e) {
             return back()
