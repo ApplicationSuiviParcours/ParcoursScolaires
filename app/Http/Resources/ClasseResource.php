@@ -12,7 +12,7 @@ class ClasseResource extends JsonResource
             'id' => $this->id,
             'nom_complet' => $this->nom_complet,
             'niveau' => $this->niveau,
-            'filiere' => $this->filiere,
+            'serie' => $this->serie,
         ];
     }
 }

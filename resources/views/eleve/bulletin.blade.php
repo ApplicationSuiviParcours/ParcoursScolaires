@@ -394,7 +394,20 @@
                                                 </span>
                                             </td>
                                             <td class="max-w-xs px-6 py-4 text-sm text-gray-600">
-                                                {{ $matiereData['notes']->first()->pivot->appreciation ?? $matiereData['notes']->first()->observation ?? '-' }}
+                                                @php
+                                                    $appreciation = $matiereData['notes']->first()->pivot->appreciation ?? $matiereData['notes']->first()->observation ?? null;
+                                                    if (!$appreciation) {
+                                                        if ($moyenneMatiere >= 18) $appreciation = 'Excellent';
+                                                        elseif ($moyenneMatiere >= 16) $appreciation = 'Très bien';
+                                                        elseif ($moyenneMatiere >= 14) $appreciation = 'Bien';
+                                                        elseif ($moyenneMatiere >= 12) $appreciation = 'Assez bien';
+                                                        elseif ($moyenneMatiere >= 10) $appreciation = 'Passable';
+                                                        elseif ($moyenneMatiere >= 8) $appreciation = 'Insuffisant';
+                                                        elseif ($moyenneMatiere >= 5) $appreciation = 'Faible';
+                                                        else $appreciation = 'Très faible';
+                                                    }
+                                                @endphp
+                                                {{ $appreciation }}
                                             </td>
                                         </tr>
                                     @endforeach

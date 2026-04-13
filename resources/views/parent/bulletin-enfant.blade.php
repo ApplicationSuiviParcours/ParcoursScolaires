@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('header')
-    <h2 class="text-xl font-semibold leading-tight text-gray-800">
+    <h2 class="text-sm font-semibold leading-tight text-gray-800">
         {{ __('Bulletins de ') . $eleve->prenom . ' ' . $eleve->nom }}
     </h2>
 @endsection

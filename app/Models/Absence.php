@@ -21,6 +21,8 @@ class Absence extends Model
         'heure_debut',
         'heure_fin',
         'motif',
+        'duree_jours',
+        'observation',
         'justifiee',
         'annee_scolaire_id',
     ];
@@ -30,6 +32,7 @@ class Absence extends Model
         'heure_debut' => 'datetime:H:i',
         'heure_fin' => 'datetime:H:i',
         'justifiee' => 'boolean',
+        'duree_jours' => 'integer',
     ];
 
     public function eleve(): BelongsTo

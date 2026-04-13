@@ -247,7 +247,9 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
                                         </svg>
                                     </div>
+                                    <input type="text" name="matricule" id="matricule" value="{{ $parent->matricule }}" class="bg-gray-100 cursor-not-allowed" readonly>
                                     <input type="text" name="nom" id="nom" value="{{ old('nom', $parent->nom) }}"
+
                                            placeholder="Nom de famille" required
                                            class="w-full pl-10 sm:pl-12 pr-4 py-2.5 sm:py-3 rounded-xl border-2 border-gray-200
                                                   focus:border-amber-500 focus:ring-2 focus:ring-amber-200

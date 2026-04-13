@@ -44,6 +44,7 @@ use App\Http\Controllers\Enseignant\NoteController as EnseignantNoteController;
 */
 
 // ✅ UNE SEULE FOIS - Routes d'authentification avec vérification d'email
+Route::view('/admin/login', 'auth.admin-login')->name('login.admin');
 Auth::routes(['verify' => true]);
 
 Route::get('/', function () {
@@ -362,25 +363,26 @@ Route::middleware(['auth', 'role:eleve'])->group(function () {
 Route::middleware(['auth', 'role:parent'])->group(function () {
     // Dashboard - remplacé par le nouveau contrôleur
     Route::get('/parent/dashboard', [App\Http\Controllers\Parent\DashboardController::class, 'index'])->name('parent.dashboard');
-    
+
     // Mes enfants - gardé avec l'ancien contrôleur
     // Route::get('/parent/mes-enfants', [ParentController::class, 'mesEnfants'])->name('parent.enfants');
     Route::get('parent/mes-enfants', [App\Http\Controllers\Parent\EnfantsController::class, 'mesEnfants'])->name('parent.enfants');
-    
+
     // Notes d'un enfant - remplacé par le nouveau contrôleur
     Route::get('/parent/enfant/{eleve}/notes', [App\Http\Controllers\Parent\NoteController::class, 'index'])->name('parent.enfant.notes');
-    
+
     // Absences d'un enfant - remplacé par le nouveau contrôleur
     Route::get('/parent/enfant/{eleve}/absences', [App\Http\Controllers\Parent\AbsenceController::class, 'index'])->name('parent.enfant.absences');
-    
+
     // Justification d'absence - remplacé par le nouveau contrôleur
     Route::post('/parent/absence/{absence}/justifier', [App\Http\Controllers\Parent\AbsenceController::class, 'justifier'])->name('parent.justifier-absence');
-    
+
     // Bulletins d'un enfant - remplacé par le nouveau contrôleur
     Route::get('/parent/enfant/{eleve}/bulletins', [App\Http\Controllers\Parent\BulletinController::class, 'index'])->name('parent.enfant.bulletin');
     Route::get('/parent/enfant/{eleve}/bulletin/{bulletin}', [App\Http\Controllers\Parent\BulletinController::class, 'show'])->name('parent.enfant.bulletin.detail');
     Route::get('/parent/enfant/{eleve}/bulletin/{bulletin}/telecharger', [App\Http\Controllers\Parent\BulletinController::class, 'telecharger'])->name('parent.telecharger-bulletin');
-    
+    Route::get('/parent/enfant/{eleve}/bulletin/{bulletin}/imprimer', [App\Http\Controllers\Parent\BulletinController::class, 'imprimer'])->name('parent.imprimer-bulletin');
+
     // Emploi du temps - gardé avec l'ancien contrôleur
     Route::get('/parent/enfant/{eleve}/emploi-du-temps', [ParentController::class, 'emploiDuTempsEnfant'])->name('parent.enfant.emploi-du-temps');
 });
@@ -420,6 +422,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/password', [ProfileController::class, 'password'])->name('profile.password');
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
+    // Paramètres de l'application
+    Route::view('/settings', 'settings.index')->name('settings.index');
 });
 
 // ========== FIN DU FICHIER - AUCUNE LIGNE SUPPLÉMENTAIRE ==========

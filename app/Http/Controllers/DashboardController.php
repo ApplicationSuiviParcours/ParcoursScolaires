@@ -6,7 +6,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-
 class DashboardController extends Controller
 {
     public function index()
@@ -20,35 +19,34 @@ class DashboardController extends Controller
 
         // Log pour le débogage
         $roles = $user->roles->pluck('name')->implode(', ');
-        Log::info('DashboardController - User: ' . $user->id . ', Roles: ' . $roles);
+        $dbRole = $user->role;
+        Log::info('DashboardController - User: ' . $user->id . ', Roles: [' . $roles . '], DB role: ' . $dbRole . ', Matricule: ' . ($user->eleve?->matricule ?? $user->enseignant?->matricule ?? $user->parentEleve?->matricule ?? 'N/A'));
 
-        // Vérifier le rôle et rediriger en conséquence
-        // Utiliser les méthodes du modèle User qui utilisent Spatie
-        if ($user->hasRole('administrateur')) {
+        $effectiveRole = $roles ?: $dbRole;
+
+        // Priorité: Spatie > DB column
+        if (in_array('administrateur', explode(',', $roles)) || $effectiveRole === 'administrateur') {
             Log::info('Redirecting to admin.dashboard');
             return redirect()->route('admin.dashboard');
         }
 
-        if ($user->hasRole('enseignant')) {
+        if (in_array('enseignant', explode(',', $roles)) || $effectiveRole === 'enseignant') {
             Log::info('Redirecting to enseignant.dashboard');
             return redirect()->route('enseignant.dashboard');
         }
 
-        if ($user->hasRole('eleve')) {
+        if (in_array('eleve', explode(',', $roles)) || $effectiveRole === 'eleve') {
             Log::info('Redirecting to eleve.dashboard');
             return redirect()->route('eleve.dashboard');
         }
 
-        if ($user->hasRole('parent')) {
+        if (in_array('parent', explode(',', $roles)) || $effectiveRole === 'parent') {
             Log::info('Redirecting to parent.dashboard');
             return redirect()->route('parent.dashboard');
         }
 
-        // Si aucun rôle n'est trouvé, afficher un message d'erreur
-        // ou assigner un rôle par défaut et rediriger
-        Log::warning('No role found for user: ' . $user->id);
-
-        // Par défaut, rediriger vers la page d'accueil avec un message
-        return redirect('/')->with('error', 'Votre compte n\'a pas de rôle assigné. Veuillez contacter l\'administration.');
+        // Debug fallback - show generic dashboard instead of logout
+        Log::warning('No valid role for user: ' . $user->id . ' - Showing generic dashboard');
+        return view('dashboard', ['user' => $user]);
     }
 }

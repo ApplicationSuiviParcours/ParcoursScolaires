@@ -66,7 +66,8 @@
             <div class="flex items-center justify-between">
                 <div class="min-w-0">
                     <p class="text-xs sm:text-sm text-gray-500 font-medium uppercase tracking-wider leading-tight">Total parents</p>
-                    <p class="text-2xl sm:text-3xl font-bold text-gray-800 mt-1">{{ $stats['total'] ?? $parents->total() }}</p>
+                        <p class="text-2xl sm:text-3xl font-bold text-gray-800 mt-1">{{ $stats['total'] ?? $parents->total() }} <span class="text-sm text-gray-500 ml-1">({{ $stats['total_matricules'] ?? $parents->whereNotNull('matricule')->count() }} avec matricule)</span></p>
+
                     <p class="text-xs text-gray-500 mt-1 hidden sm:block">Tous les parents inscrits</p>
                 </div>
                 <div class="bg-purple-100 rounded-xl p-2 sm:p-3 flex-shrink-0 ml-2">
@@ -265,8 +266,9 @@
                                     </div>
                                     <div class="ml-4">
                                         <div class="text-sm font-semibold text-gray-900 group-hover:text-purple-700 transition-colors duration-300">
-                                            {{ $parent->full_name }}
+                                            {{ $parent->matricule }} - {{ $parent->full_name }}
                                         </div>
+
                                         <div class="flex items-center text-xs text-gray-500 mt-1 gap-2">
                                             <span class="bg-gray-100 rounded-full px-2 py-0.5">{{ $parent->genre_text }}</span>
                                             @if($parent->date_naissance)

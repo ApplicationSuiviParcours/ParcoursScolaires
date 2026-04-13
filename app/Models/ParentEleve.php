@@ -19,6 +19,7 @@ class ParentEleve extends Model
 
     protected $fillable = [
         'user_id',
+        'matricule',
         'nom',
         'prenom',
         'genre',
@@ -43,7 +44,8 @@ class ParentEleve extends Model
     protected $appends = [
         'full_name',
         'initiales',
-        'enfants_count', // ← AJOUT: Pour avoir le nombre d'enfants directement
+        'enfants_count',
+        'nom_complet',
     ];
 
     /**
@@ -103,10 +105,11 @@ class ParentEleve extends Model
     public function scopeSearch($query, $search)
     {
         return $query->where(function($q) use ($search) {
-            $q->where('nom', 'like', "%{$search}%")
-              ->orWhere('prenom', 'like', "%{$search}%")
-              ->orWhere('email', 'like', "%{$search}%")
-              ->orWhere('telephone', 'like', "%{$search}%");
+            $q->where('nom', 'like', '%'.$search.'%')
+              ->orWhere('prenom', 'like', '%'.$search.'%')
+              ->orWhere('email', 'like', '%'.$search.'%')
+              ->orWhere('telephone', 'like', '%'.$search.'%')
+              ->orWhere('matricule', 'like', '%'.$search.'%');
         });
     }
 
@@ -152,7 +155,7 @@ class ParentEleve extends Model
             'bg-pink-500',
             'bg-indigo-500',
         ];
-        
+
         return $colors[crc32($this->id ?? $this->nom) % count($colors)];
     }
 
@@ -181,13 +184,53 @@ class ParentEleve extends Model
     }
 
     /**
-     * Boot du modèle
+     * ✅ NOUVEAU: Génère un matricule unique pour le parent
+     * Format: PAR + AAAA + Première lettre du nom + Numéro séquentiel (4 chiffres)
+     */
+    public static function genererMatricule($nom)
+    {
+        $annee = date('Y');
+        $premiereLettre = strtoupper(substr(trim($nom), 0, 1));
+
+        if (!preg_match('/[A-Z]/', $premiereLettre)) {
+            $premiereLettre = 'X';
+        }
+
+        $dernier = self::whereYear('created_at', $annee)
+                       ->where('matricule', 'like', 'PAR' . $annee . '%')
+                       ->orderBy('matricule', 'desc')
+                       ->first();
+
+        if ($dernier && $dernier->matricule) {
+            $dernierNumero = intval(substr($dernier->matricule, -4));
+            $nouveauNumero = str_pad($dernierNumero + 1, 4, '0', STR_PAD_LEFT);
+        } else {
+            $nouveauNumero = '0001';
+        }
+
+        $matricule = 'PAR' . $annee . $premiereLettre . $nouveauNumero;
+
+        $tentatives = 0;
+        while (self::where('matricule', $matricule)->exists() && $tentatives < 100) {
+            $nouveauNumero = str_pad(intval($nouveauNumero) + 1, 4, '0', STR_PAD_LEFT);
+            $matricule = 'PAR' . $annee . $premiereLettre . $nouveauNumero;
+            $tentatives++;
+        }
+
+        return $matricule;
+    }
+
+    /**
+     * ✅ NOUVEAU: Boot du modèle pour auto-générer le matricule
      */
     protected static function boot()
     {
         parent::boot();
 
         static::creating(function ($parent) {
+            if (empty($parent->matricule)) {
+                $parent->matricule = self::genererMatricule($parent->nom);
+            }
             if ($parent->email) {
                 $existing = self::where('email', $parent->email)->exists();
                 if ($existing) {
@@ -201,5 +244,13 @@ class ParentEleve extends Model
                 throw new \Exception('Impossible de supprimer un parent qui a des enfants.');
             }
         });
+    }
+
+    /**
+     * ✅ AJOUT: Accesseur pour le nom complet
+     */
+    public function getNomCompletAttribute(): string
+    {
+        return $this->prenom . ' ' . $this->nom;
     }
 }

@@ -152,10 +152,24 @@
                             <div>
                                 <select name="niveau" class="w-full px-3 py-2 border rounded-lg text-sm focus:ring-indigo-500">
                                     <option value="">Tous niveaux</option>
-                                    <option value="Préscolaire" {{ request('niveau') == 'Préscolaire' ? 'selected' : '' }}>Préscolaire</option>
-                                    <option value="Primaire" {{ request('niveau') == 'Primaire' ? 'selected' : '' }}>Primaire</option>
-                                    <option value="Collège" {{ request('niveau') == 'Collège' ? 'selected' : '' }}>Collège</option>
-                                    <option value="Lycée" {{ request('niveau') == 'Lycée' ? 'selected' : '' }}>Lycée</option>
+                                    <option value="P1" {{ request('niveau') == 'P1' ? 'selected' : '' }}>P1</option>
+                                    <option value="P2" {{ request('niveau') == 'P2' ? 'selected' : '' }}>P2</option>
+                                    <option value="P3" {{ request('niveau') == 'P3' ? 'selected' : '' }}>P3</option>
+                                    <option value="CP" {{ request('niveau') == 'CP' ? 'selected' : '' }}>CP</option>
+                                    <option value="CE1" {{ request('niveau') == 'CE1' ? 'selected' : '' }}>CE1</option>
+                                    <option value="CE2" {{ request('niveau') == 'CE2' ? 'selected' : '' }}>CE2</option>
+                                    <option value="CM1" {{ request('niveau') == 'CM1' ? 'selected' : '' }}>CM1</option>
+                                    <option value="CM2" {{ request('niveau') == 'CM2' ? 'selected' : '' }}>CM2</option>
+                                    <option value="6ème" {{ request('niveau') == '6ème' ? 'selected' : '' }}>6ème</option>
+                                    <option value="5ème" {{ request('niveau') == '5ème' ? 'selected' : '' }}>5ème</option>
+                                    <option value="4ème" {{ request('niveau') == '4ème' ? 'selected' : '' }}>4ème</option>
+                                    <option value="3ème" {{ request('niveau') == '3ème' ? 'selected' : '' }}>3ème</option>
+                                    <option value="SecondeG" {{ request('niveau') == 'SecondeG' ? 'selected' : '' }}>Seconde (Générale)</option>
+                                    <option value="PremièreG" {{ request('niveau') == 'PremièreG' ? 'selected' : '' }}>Première (Générale)</option>
+                                    <option value="TerminaleG" {{ request('niveau') == 'TerminaleG' ? 'selected' : '' }}>Terminale (Générale)</option>
+                                    <option value="SecondeT" {{ request('niveau') == 'SecondeT' ? 'selected' : '' }}>Seconde (Technique)</option>
+                                    <option value="PremièreT" {{ request('niveau') == 'PremièreT' ? 'selected' : '' }}>Première (Technique)</option>
+                                    <option value="TerminaleT" {{ request('niveau') == 'TerminaleT' ? 'selected' : '' }}>Terminale (Technique)</option>
                                 </select>
                             </div>
                             <div>

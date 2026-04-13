@@ -9,6 +9,7 @@ use App\Models\Eleve;
 use App\Models\EleveParent; // IMPORTANT: Ajouter ce modèle
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Builder;
 
 class ParentAdminController extends Controller
@@ -73,6 +74,8 @@ class ParentAdminController extends Controller
     {
         $request->validate([
             'user_id' => 'nullable|exists:users,id',
+            'create_user' => 'nullable|boolean',
+            'password' => 'nullable|required_if:create_user,1|string|min:6|confirmed',
             'nom' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
             'genre' => 'required|in:m,f',
@@ -91,7 +94,7 @@ class ParentAdminController extends Controller
             'liens_parentaux.*' => 'string|in:pere,mere,tuteur,autre',
         ]);
 
-        $data = $request->except(['eleve_ids', 'liens_parentaux', 'photo']);
+        $data = $request->except(['eleve_ids', 'liens_parentaux', 'photo', 'create_user', 'password', 'password_confirmation']);
         
         if ($request->hasFile('photo')) {
             $path = $request->file('photo')->store('parents/photos', 'public');
@@ -103,6 +106,31 @@ class ParentAdminController extends Controller
         }
 
         $parent = ParentEleve::create($data);
+
+        // Création d'un compte utilisateur si demandé
+        if ($request->filled('create_user') && $request->create_user) {
+            $email = $request->email ?? strtolower($request->prenom . '.' . $request->nom . '@parent.cg');
+
+            if (User::where('email', $email)->exists()) {
+                $counter = 1;
+                $baseEmail = strtolower($request->prenom . '.' . $request->nom . '@parent.cg');
+                while (User::where('email', $baseEmail)->exists()) {
+                    $baseEmail = strtolower($request->prenom . '.' . $request->nom . $counter . '@parent.cg');
+                    $counter++;
+                }
+                $email = $baseEmail;
+            }
+
+            $user = User::create([
+                'name' => $request->prenom . ' ' . $request->nom,
+                'email' => $email,
+                'password' => Hash::make($request->password),
+                'role' => 'parent',
+            ]);
+
+            $parent->user_id = $user->id;
+            $parent->save();
+        }
 
         // Création des relations avec les élèves
         if ($request->has('eleve_ids')) {

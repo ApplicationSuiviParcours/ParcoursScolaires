@@ -2,26 +2,32 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
-use App\Models\ParentEleve;
 use Illuminate\Database\Seeder;
+use Database\Seeders\RoleSeeder;
+use Database\Seeders\UserSeeder;
+use Database\Seeders\AnneeScolaireSeeder;
+use Database\Seeders\MatiereSeeder;
+use Database\Seeders\ClasseSeeder;
+use Database\Seeders\ClasseMatiereSeeder;
+use Database\Seeders\EleveSeeder;
+use Database\Seeders\ParentEleveSeeder;
+use Database\Seeders\EleveParentSeeder;
+use Database\Seeders\EnseignantSeeder;
+use Database\Seeders\InscriptionSeeder;
+use Database\Seeders\ReinscriptionSeeder;
+use Database\Seeders\EnseignantMatiereClasseSeeder;
+use Database\Seeders\EvaluationSeeder;
+use Database\Seeders\NoteSeeder;
+use Database\Seeders\AbsenceSeeder;
+use Database\Seeders\BulletinSeeder;
+use Database\Seeders\EmploiDuTempsSeeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
         $this->call([
+            RoleSeeder::class,
             UserSeeder::class,
             AnneeScolaireSeeder::class,
             MatiereSeeder::class,
@@ -40,5 +46,6 @@ class DatabaseSeeder extends Seeder
             BulletinSeeder::class,
             EmploiDuTempsSeeder::class,
         ]);
+        // Supprimé : $this->call(UserSeeder::class) en double
     }
 }

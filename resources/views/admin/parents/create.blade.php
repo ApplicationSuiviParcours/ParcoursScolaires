@@ -127,33 +127,37 @@
                             {{-- Compte utilisateur --}}
                             <div class="group">
                                 <label for="user_id" class="block text-sm font-semibold text-gray-700 mb-2 group-hover:text-emerald-600 transition-colors duration-300">
-                                    Compte utilisateur
+                                    Créer compte utilisateur
                                 </label>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
-                                        <svg class="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                                        </svg>
-                                    </div>
-                                    <select name="user_id" id="user_id"
-                                            class="w-full pl-10 sm:pl-12 pr-9 py-2.5 sm:py-3 rounded-xl border-2 border-gray-200
-                                                   focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200
-                                                   transition-all duration-300 @error('user_id') border-red-500 @enderror
-                                                   appearance-none bg-white text-sm">
-                                        <option value="">Aucun compte (créer plus tard)</option>
-                                        @foreach($users as $user)
-                                            <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>
-                                                {{ $user->name }} ({{ $user->email }})
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    <div class="absolute inset-y-0 right-0 pr-3 sm:pr-4 flex items-center pointer-events-none">
-                                        <svg class="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                                        </svg>
+                                <div class="space-y-3">
+                                    <label class="flex items-center space-x-3 cursor-pointer group">
+                                        <input type="checkbox" name="create_user" id="create_user" value="1" class="w-5 h-5 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500">
+                                        <span class="text-sm font-medium text-gray-700 group-hover:text-emerald-600 transition-colors">Créer un nouveau compte utilisateur automatiquement</span>
+                                    </label>
+                                    
+                                    <div id="user-fields" class="space-y-3 hidden">
+                                        <div class="relative">
+                                            <div class="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
+                                                <svg class="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                                </svg>
+                                            </div>
+                                            <input type="password" name="password" id="password" placeholder="Mot de passe" 
+                                                   class="w-full pl-10 sm:pl-12 pr-4 py-2.5 sm:py-3 rounded-xl border-2 border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition-all duration-300 text-sm">
+                                        </div>
+                                        <div class="relative">
+                                            <div class="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
+                                                <svg class="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                                </svg>
+                                            </div>
+                                            <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirmer le mot de passe" 
+                                                   class="w-full pl-10 sm:pl-12 pr-4 py-2.5 sm:py-3 rounded-xl border-2 border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition-all duration-300 text-sm">
+                                        </div>
                                     </div>
                                 </div>
-                                @error('user_id')<p class="mt-1.5 text-xs sm:text-sm text-red-600">{{ $message }}</p>@enderror
+                                @error('create_user')<p class="mt-1.5 text-xs sm:text-sm text-red-600">{{ $message }}</p>@enderror
+                                @error('password')<p class="mt-1.5 text-xs sm:text-sm text-red-600">{{ $message }}</p>@enderror
                             </div>
 
                             {{-- Genre --}}
@@ -196,8 +200,10 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
                                         </svg>
                                     </div>
+                                    <input type="text" name="matricule" id="matricule" value="{{ old('matricule') }}" class="bg-gray-100 cursor-not-allowed" readonly placeholder="Auto-généré">
                                     <input type="text" name="nom" id="nom" value="{{ old('nom') }}"
                                            placeholder="Nom de famille" required
+
                                            class="w-full pl-10 sm:pl-12 pr-4 py-2.5 sm:py-3 rounded-xl border-2 border-gray-200
                                                   focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200
                                                   transition-all duration-300 @error('nom') border-red-500 @enderror text-sm">

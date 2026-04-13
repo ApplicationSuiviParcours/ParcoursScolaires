@@ -26,7 +26,7 @@ class AuthController extends Controller
 
         if (!Auth::attempt($credentials, $remember)) {
             throw ValidationException::withMessages([
-'email' => ['Email ou mot de passe incorrects.'],
+            'email' => ['Email ou mot de passe incorrects.'],
             ]);
         }
 
@@ -34,7 +34,7 @@ class AuthController extends Controller
         if (!$user->is_active) {
             Auth::logout();
             throw ValidationException::withMessages([
-'email' => ['Compte désactivé. Contactez l\'administrateur.'],
+            'email' => ['Compte désactivé. Contactez l\'administrateur.'],
             ]);
         }
 

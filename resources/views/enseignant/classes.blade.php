@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('header')
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+    <h2 class="font-semibold text-sm text-gray-800 leading-tight">
         {{ __('Mes Classes') }}
     </h2>
 @endsection
@@ -63,7 +63,7 @@
                     <div>
                         <p class="text-xs sm:text-sm font-medium text-gray-500">Année scolaire</p>
                         <p class="text-2xl sm:text-3xl font-bold text-gray-900 mt-1">
-                            {{ $classes->first()->anneeScolaire->annee ?? '-' }}
+                            {{ $classes->first()->classe->anneeScolaire->annee ?? '-' }}
                         </p>
                     </div>
                     <div class="bg-purple-100 rounded-full p-2 sm:p-3">
@@ -111,12 +111,29 @@
                                         {{ $classeMatiere->matiere->nom ?? '-' }}
                                     </td>
                                     <td class="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm text-gray-900 whitespace-nowrap">
-                                        {{ $classeMatiere->anneeScolaire->annee ?? '-' }}
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                                            {{ $classeMatiere->classe->anneeScolaire->annee ?? '-' }}
+                                        </span>
                                     </td>
-                                    <td class="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-medium">
-                                        <div class="flex flex-col sm:flex-row gap-2 sm:gap-0">
-                                            <a href="#" class="text-blue-600 hover:text-blue-900 sm:mr-3 whitespace-nowrap">Voir élèves</a>
-                                            <a href="#" class="text-green-600 hover:text-green-900 whitespace-nowrap">Saisir notes</a>
+                                    <td class="px-3 sm:px-6 py-3 sm:py-4">
+                                        <div class="flex flex-wrap items-center gap-2">
+                                            <!-- Saisir notes -->
+                                            <a href="{{ route('enseignant.notes.create', ['classe_id' => $classeMatiere->classe->id, 'matiere_id' => $classeMatiere->matiere->id]) }}" 
+                                               class="inline-flex items-center px-3 py-1.5 bg-green-50 text-green-700 border border-green-200 hover:bg-green-600 hover:text-white rounded-lg transition-all duration-300 font-medium text-xs shadow-sm hover:shadow-md group">
+                                                <svg class="w-4 h-4 mr-1.5 transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                                                </svg>
+                                                Saisir notes
+                                            </a>
+                                            
+                                            <!-- Absences (Remplace Voir élèves pour une utilité immédiate ou similaire) -->
+                                            <a href="{{ route('enseignant.absences.create', ['classe_id' => $classeMatiere->classe->id, 'matiere_id' => $classeMatiere->matiere->id]) }}" 
+                                               class="inline-flex items-center px-3 py-1.5 bg-red-50 text-red-700 border border-red-200 hover:bg-red-600 hover:text-white rounded-lg transition-all duration-300 font-medium text-xs shadow-sm hover:shadow-md group">
+                                                <svg class="w-4 h-4 mr-1.5 transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                                                </svg>
+                                                Gérer Absences
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>

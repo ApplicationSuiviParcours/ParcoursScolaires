@@ -68,15 +68,34 @@ class BulletinController extends Controller
     public function show(Eleve $eleve, Bulletin $bulletin)
     {
         $user = Auth::user();
-        
-        if (!$user->isParent()) {
-            abort(403, 'Accès non autorisé.');
-        }
+        if (!$user->isParent()) abort(403, 'Accès non autorisé.');
+        if ($bulletin->eleve_id !== $eleve->id) abort(404);
 
-        if ($bulletin->eleve_id !== $eleve->id) {
-            abort(404);
-        }
+        return view('parent.bulletin-detail', $this->getBulletinData($eleve, $bulletin));
+    }
 
+    public function imprimer(Eleve $eleve, Bulletin $bulletin)
+    {
+        $user = Auth::user();
+        if (!$user->isParent()) abort(403, 'Accès non autorisé.');
+        if ($bulletin->eleve_id !== $eleve->id) abort(404);
+
+        return view('admin.bulletins.print', $this->getBulletinData($eleve, $bulletin));
+    }
+
+    public function telecharger(Eleve $eleve, Bulletin $bulletin)
+    {
+        $user = Auth::user();
+        if (!$user->isParent()) abort(403, 'Accès non autorisé.');
+        if ($bulletin->eleve_id !== $eleve->id) abort(404);
+
+        $data = $this->getBulletinData($eleve, $bulletin);
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.bulletins.print', $data);
+        return $pdf->download('bulletin_' . $eleve->nom . '_' . $bulletin->periode . '.pdf');
+    }
+
+    protected function getBulletinData(Eleve $eleve, Bulletin $bulletin)
+    {
         // Charger les relations de base
         $bulletin->load([
             'classe',
@@ -111,11 +130,12 @@ class BulletinController extends Controller
                     ->select(
                         'notes.*',
                         'evaluations.nom as evaluation_nom',
+                        'evaluations.type as type',
                         'evaluations.date_evaluation',
                         'evaluations.coefficient as evaluation_coefficient',
-                        // 'evaluations.appreciation' RETIRÉ - n'existe pas
                         'matieres.id as matiere_id',
                         'matieres.nom as matiere_nom',
+                        'matieres.code as matiere_code',
                         'bulletin_note.coefficient as pivot_coefficient',
                         'bulletin_note.appreciation as pivot_appreciation'
                     )
@@ -168,10 +188,12 @@ class BulletinController extends Controller
             // Déterminer la matière et le coefficient
             $matiereId = null;
             $matiereNom = 'Matière inconnue';
+            $matiereCode = '';
             $coefficient = 1;
             $evaluationNom = 'Évaluation';
             $dateEvaluation = null;
             $appreciation = '';
+            $type = 'devoir';
             
             // Cas 1: Note avec relations Eloquent chargées (NULL SAFE)
             if (isset($note->evaluation) && $note->evaluation) {
@@ -179,6 +201,7 @@ class BulletinController extends Controller
                 if ($matiere) {
                     $matiereId = $matiere->id;
                     $matiereNom = $matiere->nom;
+                    $matiereCode = $matiere->code ?? '';
                 } else {
                     $matiereId = null;
                     $matiereNom = 'Matière inconnue';
@@ -186,16 +209,19 @@ class BulletinController extends Controller
                 $coefficient = $note->evaluation->coefficient ?? 1;
                 $evaluationNom = $note->evaluation->nom ?? 'Évaluation';
                 $dateEvaluation = $note->evaluation->date_evaluation ?? null;
-                $appreciation = $note->appreciation ?? '';
+                $appreciation = $note->observation ?? '';
+                $type = $note->evaluation->type ?? 'devoir';
             }
             // Cas 2: Note avec données de jointure (méthode 2)
             elseif (isset($note->matiere_id)) {
                 $matiereId = $note->matiere_id;
                 $matiereNom = $note->matiere_nom ?? 'Matière';
+                $matiereCode = $note->matiere_code ?? '';
                 $coefficient = $note->pivot_coefficient ?? $note->evaluation_coefficient ?? 1;
                 $evaluationNom = $note->evaluation_nom ?? 'Évaluation';
                 $dateEvaluation = $note->date_evaluation ?? null;
-                $appreciation = $note->pivot_appreciation ?? $note->appreciation ?? '';
+                $appreciation = $note->pivot_appreciation ?? $note->observation ?? '';
+                $type = $note->type ?? 'devoir';
             }
             
             if (!$matiereId) {
@@ -205,7 +231,9 @@ class BulletinController extends Controller
             if (!isset($notesParMatiere[$matiereId])) {
                 $notesParMatiere[$matiereId] = [
                     'matiere_nom' => $matiereNom,
+                    'matiere_code' => $matiereCode,
                     'coefficient' => $coefficient,
+                    'coefficient_total' => 0,
                     'notes' => [],
                     'total_points' => 0,
                     'total_coefficients' => 0
@@ -218,7 +246,8 @@ class BulletinController extends Controller
                 'evaluation' => $evaluationNom,
                 'date' => $dateEvaluation,
                 'coefficient' => $coefficient,
-                'appreciation' => $appreciation
+                'appreciation' => $appreciation,
+                'type' => $type
             ];
             
             $notesParMatiere[$matiereId]['total_points'] += $note->note * $coefficient;
@@ -230,6 +259,7 @@ class BulletinController extends Controller
         
         // Calculer les moyennes par matière
         foreach ($notesParMatiere as &$matiereData) {
+            $matiereData['coefficient_total'] = $matiereData['total_coefficients'];
             if ($matiereData['total_coefficients'] > 0) {
                 $matiereData['moyenne'] = round($matiereData['total_points'] / $matiereData['total_coefficients'], 2);
             } else {
@@ -250,7 +280,6 @@ class BulletinController extends Controller
         $moyenneClasse = Bulletin::where('classe_id', $bulletin->classe_id)
             ->where('periode', $bulletin->periode)
             ->where('annee_scolaire_id', $bulletin->annee_scolaire_id)
-            ->where('id', '!=', $bulletin->id)
             ->avg('moyenne_generale') ?? 0;
 
         // Mention
@@ -263,13 +292,14 @@ class BulletinController extends Controller
 
         // Appréciations (si vous avez une table dédiée)
         $appreciations = collect([]);
+        $totalCoeffs = $totalCoefficients;
 
         // Message de debug pour la vue
         if ($notes->isEmpty()) {
             session()->flash('debug_message', 'Aucune note trouvée pour ce bulletin. Vérifiez que des notes sont associées.');
         }
 
-        return view('parent.bulletin-detail', compact(
+        return compact(
             'eleve', 
             'bulletin', 
             'notesParMatiere', 
@@ -277,24 +307,10 @@ class BulletinController extends Controller
             'moyenneClasse', 
             'totalPoints', 
             'totalCoefficients',
+            'totalCoeffs',
             'mention',
             'estAdmis',
             'appreciations'
-        ));
-    }
-
-    public function telecharger(Eleve $eleve, Bulletin $bulletin)
-    {
-        $user = Auth::user();
-        
-        if (!$user->isParent()) {
-            abort(403, 'Accès non autorisé.');
-        }
-
-        if ($bulletin->eleve_id !== $eleve->id) {
-            abort(404);
-        }
-
-        return redirect()->back()->with('info', 'Téléchargement PDF bientôt disponible');
+        );
     }
 }

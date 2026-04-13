@@ -170,10 +170,24 @@
                                     <select name="niveau" id="niveau" required
                                             class="w-full pl-9 md:pl-10 pr-8 md:pr-10 py-2.5 md:py-3 border-2 border-gray-200 rounded-lg md:rounded-xl focus:border-indigo-400 focus:ring-2 focus:ring-indigo-200 transition-all appearance-none bg-white text-sm @error('niveau') border-red-400 bg-red-50 @enderror">
                                         <option value="" disabled selected>Choisir un niveau</option>
-                                        <option value="Préscolaire" {{ old('niveau') == 'Préscolaire' ? 'selected' : '' }}>Préscolaire</option>
-                                        <option value="Primaire" {{ old('niveau') == 'Primaire' ? 'selected' : '' }}>Primaire</option>
-                                        <option value="Collège" {{ old('niveau') == 'Collège' ? 'selected' : '' }}>Collège</option>
-                                        <option value="Lycée" {{ old('niveau') == 'Lycée' ? 'selected' : '' }}>Lycée</option>
+                                        <option value="P1" {{ old('niveau') == 'P1' ? 'selected' : '' }}>P1</option>
+                                        <option value="P2" {{ old('niveau') == 'P2' ? 'selected' : '' }}>P2</option>
+                                        <option value="P3" {{ old('niveau') == 'P3' ? 'selected' : '' }}>P3</option>
+                                        <option value="CP" {{ old('niveau') == 'CP' ? 'selected' : '' }}>CP</option>
+                                        <option value="CE1" {{ old('niveau') == 'CE1' ? 'selected' : '' }}>CE1</option>
+                                        <option value="CE2" {{ old('niveau') == 'CE2' ? 'selected' : '' }}>CE2</option>
+                                        <option value="CM1" {{ old('niveau') == 'CM1' ? 'selected' : '' }}>CM1</option>
+                                        <option value="CM2" {{ old('niveau') == 'CM2' ? 'selected' : '' }}>CM2</option>
+                                        <option value="6ème" {{ old('niveau') == '6ème' ? 'selected' : '' }}>6ème</option>
+                                        <option value="5ème" {{ old('niveau') == '5ème' ? 'selected' : '' }}>5ème</option>
+                                        <option value="4ème" {{ old('niveau') == '4ème' ? 'selected' : '' }}>4ème</option>
+                                        <option value="3ème" {{ old('niveau') == '3ème' ? 'selected' : '' }}>3ème</option>
+                                        <option value="Seconde Générale" {{ old('niveau') == 'Seconde Générale' ? 'selected' : '' }}>Seconde (Générale)</option>
+                                        <option value="Première Générale" {{ old('niveau') == 'Première Générale' ? 'selected' : '' }}>Première (Générale)</option>
+                                        <option value="Terminale Générale" {{ old('niveau') == 'Terminale Générale' ? 'selected' : '' }}>Terminale (Générale)</option>
+                                        <option value="Seconde Technique" {{ old('niveau') == 'Seconde Technique' ? 'selected' : '' }}>Seconde (Technique)</option>
+                                        <option value="Première Technique" {{ old('niveau') == 'Première Technique' ? 'selected' : '' }}>Première (Technique)</option>
+                                        <option value="Terminale Technique" {{ old('niveau') == 'Terminale Technique' ? 'selected' : '' }}>Terminale (Technique)</option>
                                     </select>
                                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                                         <svg class="h-4 w-4 md:h-5 md:w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -205,10 +219,19 @@
                                     <select name="serie" id="serie"
                                             class="w-full pl-9 md:pl-10 pr-8 md:pr-10 py-2.5 md:py-3 border-2 border-gray-200 rounded-lg md:rounded-xl focus:border-indigo-400 focus:ring-2 focus:ring-indigo-200 transition-all appearance-none bg-white text-sm @error('serie') border-red-400 bg-red-50 @enderror">
                                         <option value="" selected>Aucune série</option>
-                                        <option value="A" {{ old('serie') == 'A' ? 'selected' : '' }}>Série A (Littéraire)</option>
-                                        <option value="B" {{ old('serie') == 'B' ? 'selected' : '' }}>Série B (Économique)</option>
-                                        <option value="C" {{ old('serie') == 'C' ? 'selected' : '' }}>Série C (Maths)</option>
-                                        <option value="D" {{ old('serie') == 'D' ? 'selected' : '' }}>Série D (Sciences)</option>
+                                        <option value="A" {{ old('serie') == 'A' ? 'selected' : '' }}>A (Générale)</option>
+                                        <option value="C" {{ old('serie') == 'C' ? 'selected' : '' }}>C (Générale)</option>
+                                        <option value="D" {{ old('serie') == 'D' ? 'selected' : '' }}>D (Générale)</option>
+                                        <option value="S" {{ old('serie') == 'S' ? 'selected' : '' }}>S (Générale)</option>
+                                        <option value="F1" {{ old('serie') == 'F1' ? 'selected' : '' }}>F1 (Technique)</option>
+                                        <option value="F2" {{ old('serie') == 'F2' ? 'selected' : '' }}>F2 (Technique)</option>
+                                        <option value="F3" {{ old('serie') == 'F3' ? 'selected' : '' }}>F3 (Technique)</option>
+                                        <option value="F4" {{ old('serie') == 'F4' ? 'selected' : '' }}>F4 (Technique)</option>
+                                        <option value="G1" {{ old('serie') == 'G1' ? 'selected' : '' }}>G1 (Technique)</option>
+                                        <option value="G2" {{ old('serie') == 'G2' ? 'selected' : '' }}>G2 (Technique)</option>
+                                        <option value="G3" {{ old('serie') == 'G3' ? 'selected' : '' }}>G3 (Technique)</option>
+                                        <option value="H1" {{ old('serie') == 'H1' ? 'selected' : '' }}>H1 (Technique)</option>
+                                        <option value="H2" {{ old('serie') == 'H2' ? 'selected' : '' }}>H2 (Technique)</option>
                                     </select>
                                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                                         <svg class="h-4 w-4 md:h-5 md:w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">

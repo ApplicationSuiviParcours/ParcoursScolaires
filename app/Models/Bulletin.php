@@ -24,7 +24,7 @@ class Bulletin extends Model
         'moyenne_generale',
         'rang',
         'effectif_classe',
-        'appreciation',
+'appreciation_generale',
         'date_bulletin',
     ];
 
@@ -143,6 +143,8 @@ class Bulletin extends Model
         }
     }
 
+
+
     /**
      * Vérifier si l'élève est admis
      */
@@ -150,6 +152,15 @@ class Bulletin extends Model
     {
         return $this->moyenne_generale >= 10;
     }
+
+    /**
+     * Accessor pour appreciation (mappe appreciation_generale avec default vide)
+     */
+    public function getAppreciationAttribute(): string
+    {
+        return $this->appreciation_generale ?: '';
+    }
+
 
     /**
      * Scope pour filtrer par période

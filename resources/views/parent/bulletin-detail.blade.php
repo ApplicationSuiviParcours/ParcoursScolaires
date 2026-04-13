@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('header')
-    <h2 class="text-xl font-semibold leading-tight text-gray-800">
+    <h2 class="text-sm font-semibold leading-tight text-gray-800">
         {{ __('Bulletin de ') . $eleve->prenom . ' ' . $eleve->nom . ' - ' . ($bulletin->periode ?? 'Bulletin') }}
     </h2>
 @endsection
@@ -141,7 +141,7 @@
                 </a>
 
                 <div class="flex space-x-2">
-                    <button onclick="window.print()"
+                    <a href="{{ route('parent.imprimer-bulletin', [$eleve->id, $bulletin->id]) }}" target="_blank"
                         class="p-2 md:p-3 text-gray-600 transition-all border shadow-md bg-white/80 backdrop-blur-sm hover:bg-white rounded-lg md:rounded-xl hover:shadow-lg border-gray-200/50 group"
                         title="Imprimer">
                         <svg class="w-4 h-4 md:w-5 md:h-5 transition-transform group-hover:scale-110" fill="none"
@@ -150,7 +150,7 @@
                                 d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z">
                             </path>
                         </svg>
-                    </button>
+                    </a>
                     <a href="{{ route('parent.telecharger-bulletin', [$eleve->id, $bulletin->id]) }}"
                         class="inline-flex items-center px-3 md:px-5 py-2 md:py-3 text-xs md:text-sm font-semibold text-white transition-all shadow-lg bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg md:rounded-xl hover:from-purple-700 hover:to-indigo-700 hover:shadow-xl group">
                         <svg class="w-4 h-4 md:w-5 md:h-5 mr-1 md:mr-2 group-hover:animate-bounce" fill="none"
@@ -539,12 +539,22 @@
                                             </td>
                                             <td class="px-3 md:px-6 py-3 md:py-5 max-w-[120px] md:max-w-xs">
                                                 @php
-                                                    $appreciationTrouvee = '-';
+                                                    $appreciationTrouvee = null;
                                                     foreach ($data['notes'] ?? [] as $note) {
                                                         if (!empty($note['appreciation'])) {
                                                             $appreciationTrouvee = $note['appreciation'];
                                                             break;
                                                         }
+                                                    }
+                                                    if (!$appreciationTrouvee) {
+                                                        if ($moyenneMatiere >= 18) $appreciationTrouvee = 'Excellent';
+                                                        elseif ($moyenneMatiere >= 16) $appreciationTrouvee = 'Très bien';
+                                                        elseif ($moyenneMatiere >= 14) $appreciationTrouvee = 'Bien';
+                                                        elseif ($moyenneMatiere >= 12) $appreciationTrouvee = 'Assez bien';
+                                                        elseif ($moyenneMatiere >= 10) $appreciationTrouvee = 'Passable';
+                                                        elseif ($moyenneMatiere >= 8) $appreciationTrouvee = 'Insuffisant';
+                                                        elseif ($moyenneMatiere >= 5) $appreciationTrouvee = 'Faible';
+                                                        else $appreciationTrouvee = 'Très faible';
                                                     }
                                                 @endphp
                                                 @if($appreciationTrouvee != '-')

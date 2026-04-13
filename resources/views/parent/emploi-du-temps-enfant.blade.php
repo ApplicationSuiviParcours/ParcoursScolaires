@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('header')
-    <h2 class="text-xl font-semibold leading-tight text-gray-800">
+    <h2 class="text-sm font-semibold leading-tight text-gray-800">
         {{ __('Emploi du temps de ') . $eleve->prenom . ' ' . $eleve->nom }}
     </h2>
 @endsection
 
 @section('content')
 <div class="py-12">
-    <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
         <!-- Header -->
         <div class="relative mb-8 overflow-hidden group rounded-2xl">
@@ -27,8 +27,8 @@
             </div>
             
             <div class="relative p-8">
-                <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-                    <div class="flex items-center space-x-6">
+                <div class="flex flex-col md:flex-row items-center md:justify-between space-y-6 md:space-y-0 text-center md:text-left">
+                    <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
                         <!-- Avatar élève -->
                         <div class="relative group">
                             <div class="flex items-center justify-center w-20 h-20 transition-all duration-300 transform border-2 shadow-2xl bg-white/20 backdrop-blur-sm rounded-2xl border-white/30 group-hover:scale-110">
@@ -41,7 +41,7 @@
                         
                         <div class="transition-all duration-700 transform animate-slide-in-left">
                             <h3 class="text-3xl font-bold text-white drop-shadow-lg">Emploi du temps de {{ $eleve->prenom }} {{ $eleve->nom }}</h3>
-                            <div class="flex flex-wrap items-center gap-3 mt-2">
+                            <div class="flex flex-wrap items-center justify-center md:justify-start gap-3 mt-2">
                                 <span class="inline-flex items-center px-3 py-1 text-sm text-white rounded-full bg-white/20">
                                     <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
@@ -93,7 +93,7 @@
 
         <!-- Filtres par jour -->
         <div class="mb-8 overflow-hidden transition-all duration-500 transform bg-white border border-gray-100 shadow-xl rounded-2xl hover:shadow-2xl">
-            <div class="p-6 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white">
+            <div class="p-4 md:p-6 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white">
                 <h3 class="flex items-center text-lg font-semibold text-gray-900">
                     <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
@@ -101,7 +101,7 @@
                     Filtrer par jour
                 </h3>
             </div>
-            <div class="p-6">
+            <div class="p-4 md:p-6">
                 <form method="GET" action="{{ route('parent.enfant.emploi-du-temps', $eleve->id) }}" class="flex flex-wrap gap-2">
                     @foreach($jours as $jour)
                         <button type="submit" name="jour" value="{{ $jour }}" 
@@ -120,78 +120,80 @@
 
         <!-- Grille de l'emploi du temps -->
         @if(count($emploiParJour) > 0 && collect($emploiParJour)->flatten()->count() > 0)
-        <div class="overflow-hidden bg-white border border-gray-100 shadow-xl rounded-2xl">
-            <div class="p-6 bg-gradient-to-r from-blue-600 to-indigo-600">
-                <div class="flex items-center justify-between">
-                    <h3 class="text-lg font-semibold text-white">
-                        @if(request('jour'))
-                            Emploi du temps - {{ request('jour') }}
-                        @else
-                            Emploi du temps de la semaine
-                        @endif
-                    </h3>
-                    <span class="px-4 py-2 text-sm text-white bg-white/20 rounded-full">
-                        {{ collect($emploiParJour)->flatten()->count() }} cours
-                    </span>
+        <!-- Header du planning -->
+        <div class="flex flex-col sm:flex-row items-center justify-between p-4 sm:p-6 mb-8 gap-4 sm:gap-0 shadow-lg bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl">
+            <h3 class="flex items-center text-lg sm:text-xl font-bold text-white text-center sm:text-left">
+                <svg class="hidden sm:block w-6 h-6 mr-3 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                @if(request('jour'))
+                    Emploi du temps - {{ request('jour') }}
+                @else
+                    Aperçu de la semaine
+                @endif
+            </h3>
+            <span class="px-4 py-2 font-semibold text-blue-900 bg-white shadow-sm rounded-full whitespace-nowrap">
+                {{ collect($emploiParJour)->flatten()->count() }} cours
+            </span>
+        </div>
+
+        <div class="space-y-8">
+            @foreach($jours as $jour)
+                @if(isset($emploiParJour[$jour]) && $emploiParJour[$jour]->count() > 0)
+                <div class="relative overflow-hidden bg-white border border-gray-100 shadow-sm transition-all duration-300 rounded-2xl hover:shadow-lg group">
+                    <!-- Barre latérale colorée animée -->
+                    <div class="absolute top-0 bottom-0 left-0 w-2 transition-all duration-300 bg-gradient-to-b from-blue-400 to-indigo-600 group-hover:w-3"></div>
+                    
+                    <div class="p-4 pl-6 sm:p-6 sm:pl-8">
+                        <div class="flex items-center mb-6">
+                            <h4 class="text-xl sm:text-2xl font-black tracking-tight text-gray-800">{{ $jour }}</h4>
+                            <div class="flex-1 h-px ml-4 sm:ml-6 bg-gray-100"></div>
+                        </div>
+
+                        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+                            @foreach($emploiParJour[$jour] as $cours)
+                            <div class="relative overflow-hidden transition-all duration-300 border p-5 bg-gray-50/80 rounded-xl hover:bg-blue-50/50 hover:shadow-md border-gray-100/50 group/card hover:-translate-y-1">
+                                <!-- Background accent -->
+                                <div class="absolute w-16 h-16 transition-transform duration-500 bg-blue-100 rounded-full opacity-50 -right-4 -top-4 group-hover/card:scale-150"></div>
+                                
+                                <!-- Horaire -->
+                                <div class="relative z-10 flex items-center mb-3 font-semibold text-indigo-600">
+                                    <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    {{ \Carbon\Carbon::parse($cours->heure_debut)->format('H:i') }} - {{ \Carbon\Carbon::parse($cours->heure_fin)->format('H:i') }}
+                                </div>
+                                
+                                <!-- Matière -->
+                                <h5 class="relative z-10 mb-2 text-lg font-bold text-gray-900 truncate" title="{{ $cours->matiere->nom ?? '-' }}">
+                                    {{ $cours->matiere->nom ?? '-' }}
+                                </h5>
+                                
+                                <!-- Détails -->
+                                <div class="relative z-10 pt-4 mt-4 space-y-2 border-t border-gray-200/60">
+                                    <!-- Professeur -->
+                                    <div class="flex items-center text-sm text-gray-600">
+                                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                        </svg>
+                                        <span class="truncate">{{ $cours->enseignant ? $cours->enseignant->prenom . ' ' . $cours->enseignant->nom : '-' }}</span>
+                                    </div>
+                                    
+                                    <!-- Salle -->
+                                    <div class="flex items-center text-sm text-gray-600">
+                                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                                        </svg>
+                                        <span class="font-medium text-gray-800">{{ $cours->salle ?? 'N/A' }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="overflow-x-auto">
-                <table class="w-full">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th class="px-6 py-4 text-xs font-medium text-left text-gray-500 uppercase">Jour</th>
-                            <th class="px-6 py-4 text-xs font-medium text-left text-gray-500 uppercase">Horaire</th>
-                            <th class="px-6 py-4 text-xs font-medium text-left text-gray-500 uppercase">Matière</th>
-                            <th class="px-6 py-4 text-xs font-medium text-left text-gray-500 uppercase">Enseignant</th>
-                            <th class="px-6 py-4 text-xs font-medium text-left text-gray-500 uppercase">Salle</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        @foreach($jours as $jour)
-                            @if(isset($emploiParJour[$jour]) && $emploiParJour[$jour]->count() > 0)
-                                @foreach($emploiParJour[$jour] as $cours)
-                                <tr class="hover:bg-blue-50">
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-3 py-1 text-sm font-medium text-blue-700 bg-blue-100 rounded-full">
-                                            {{ $jour }}
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex items-center">
-                                            <svg class="w-5 h-5 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            </svg>
-                                            <span class="font-medium text-gray-900">
-                                                {{ substr($cours->heure_debut, 0, 5) }} - {{ substr($cours->heure_fin, 0, 5) }}
-                                            </span>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex items-center">
-                                            <div class="w-8 h-8 mr-3 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center">
-                                                <span class="text-xs font-bold text-white">{{ substr($cours->matiere->nom ?? 'M', 0, 2) }}</span>
-                                            </div>
-                                            <span>{{ $cours->matiere->nom ?? '-' }}</span>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <span class="text-gray-900">
-                                            {{ $cours->enseignant ? $cours->enseignant->prenom . ' ' . $cours->enseignant->nom : '-' }}
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <span class="px-3 py-1 text-sm font-medium text-purple-700 bg-purple-100 rounded-full">
-                                            {{ $cours->salle ?? 'N/A' }}
-                                        </span>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            @endif
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                @endif
+            @endforeach
         </div>
         @else
         <div class="p-12 text-center bg-white border border-gray-100 shadow-xl rounded-2xl">

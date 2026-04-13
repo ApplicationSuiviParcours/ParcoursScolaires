@@ -13,7 +13,7 @@ class BulletinResource extends JsonResource
             'periode'          => $this->periode,
             'date_bulletin'    => $this->date_bulletin,
             'moyenne_generale' => $this->moyenne_generale,
-            'appreciation'     => $this->appreciation ?? null,
+'appreciation'     => $this->appreciation,
             'rang'             => $this->rang ?? null,
             'classe'           => $this->when(
                 $this->relationLoaded('classe'),
