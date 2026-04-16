@@ -19,6 +19,14 @@ class EmploiDuTempsController extends Controller
     {
         $classeId = $request->get('classe_id');
         $anneeScolaireId = $request->get('annee_scolaire_id');
+        
+        if (!$anneeScolaireId) {
+            $activeAnnee = AnneeScolaire::where('active', true)->first();
+            if ($activeAnnee) {
+                $anneeScolaireId = $activeAnnee->id;
+            }
+        }
+        
         $enseignantId = $request->get('enseignant_id');
         $jour = $request->get('jour');
         
@@ -65,6 +73,13 @@ class EmploiDuTempsController extends Controller
         $classeId = $request->get('classe_id');
         $anneeScolaireId = $request->get('annee_scolaire_id');
         
+        if (!$anneeScolaireId) {
+            $activeAnnee = AnneeScolaire::where('active', true)->first();
+            if ($activeAnnee) {
+                $anneeScolaireId = $activeAnnee->id;
+            }
+        }
+        
         $anneeScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
         $classes = Classe::orderBy('nom')->get();
         $enseignants = Enseignant::orderBy('nom')->get(); // AJOUT
@@ -98,6 +113,13 @@ class EmploiDuTempsController extends Controller
     {
         $enseignantId = $request->get('enseignant_id');
         $anneeScolaireId = $request->get('annee_scolaire_id');
+        
+        if (!$anneeScolaireId) {
+            $activeAnnee = AnneeScolaire::where('active', true)->first();
+            if ($activeAnnee) {
+                $anneeScolaireId = $activeAnnee->id;
+            }
+        }
         
         $anneeScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
         $enseignants = Enseignant::orderBy('nom')->get();

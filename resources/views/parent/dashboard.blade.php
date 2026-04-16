@@ -261,8 +261,8 @@
                     <div class="grid grid-cols-3 gap-2 p-3 mb-4 bg-gray-50 rounded-xl">
                         <div class="text-center">
                             <p class="text-xs text-gray-500">Moyenne</p>
-                            <p class="text-lg font-bold {{ $enfantDonnees['moyenne_generale'] >= 10 ? 'text-green-600' : 'text-red-600' }}">
-                                {{ number_format($enfantDonnees['moyenne_generale'], 2) }}
+                            <p class="text-lg font-bold {{ ($enfantDonnees['moyenne_generale'] ?? 0) >= 10 ? 'text-green-600' : 'text-red-600' }}">
+                                {{ number_format($enfantDonnees['moyenne_generale'] ?? 0, 2) }}
                             </p>
                         </div>
                         <div class="text-center">

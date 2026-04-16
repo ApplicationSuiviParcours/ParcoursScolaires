@@ -137,7 +137,13 @@
                                                     </div>
                                                 </div>
                                                 <span class="flex-shrink-0 px-2 py-1 text-xs font-semibold text-green-700 bg-green-100 rounded-full sm:px-3 sm:py-1">
-                                                    {{ $debut }} - {{ $fin }}
+                                                    @if($cours->heure_debut && $cours->heure_fin)
+                                                        {{ \Carbon\Carbon::parse($cours->heure_debut)->format('H:i') }} - {{ \Carbon\Carbon::parse($cours->heure_fin)->format('H:i') }}
+                                                    @elseif($cours->heure_debut)
+                                                        {{ \Carbon\Carbon::parse($cours->heure_debut)->format('H:i') }}
+                                                    @else
+                                                        Heure non définie
+                                                    @endif
                                                 </span>
                                             </div>
                                             

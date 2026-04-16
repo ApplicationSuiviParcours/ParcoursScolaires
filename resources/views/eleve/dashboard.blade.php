@@ -211,7 +211,7 @@
                                 <div class="relative group flex-shrink-0">
                                     <div class="absolute inset-0 transition-opacity opacity-50 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl blur-lg group-hover:opacity-75"></div>
                                     <div class="relative flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 transition-transform transform bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl group-hover:scale-110">
-                                        <span class="text-2xl sm:text-3xl font-bold text-white animate-count">{{ number_format($bulletinCourant->moyenne_generale, 1) }}</span>
+                                        <span class="text-2xl sm:text-3xl font-bold text-white animate-count">{{ number_format($bulletinCourant->moyenne_generale ?? 0, 1) }}</span>
                                     </div>
                                 </div>
                                 <div class="space-y-2">

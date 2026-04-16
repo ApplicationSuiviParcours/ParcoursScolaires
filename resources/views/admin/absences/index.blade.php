@@ -304,9 +304,23 @@
                             </td>
                             <td class="hidden lg:table-cell px-6 py-4 whitespace-nowrap">
                                 @if($absence->heure_debut && $absence->heure_fin)
-                                    <span class="text-sm text-gray-600">{{ $absence->heure_debut->format('H:i') }} - {{ $absence->heure_fin->format('H:i') }}</span>
+                                    <div class="flex items-center gap-1.5">
+                                        <div class="w-6 h-6 bg-blue-100 rounded-md flex items-center justify-center flex-shrink-0">
+                                            <svg class="w-3.5 h-3.5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        </div>
+                                        <span class="text-sm font-medium text-gray-700">{{ $absence->heure_debut->format('H:i') }}</span>
+                                        <span class="text-gray-400">→</span>
+                                        <span class="text-sm font-medium text-gray-700">{{ $absence->heure_fin->format('H:i') }}</span>
+                                    </div>
+                                @elseif($absence->heure_debut)
+                                    <div class="flex items-center gap-1.5">
+                                        <div class="w-6 h-6 bg-orange-100 rounded-md flex items-center justify-center flex-shrink-0">
+                                            <svg class="w-3.5 h-3.5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        </div>
+                                        <span class="text-sm font-medium text-gray-700">{{ $absence->heure_debut->format('H:i') }}</span>
+                                    </div>
                                 @else
-                                    <span class="text-xs text-gray-400">Journée</span>
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-500">Journée entière</span>
                                 @endif
                             </td>
                             <td class="px-3 md:px-6 py-3 md:py-4">

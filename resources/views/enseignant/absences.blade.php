@@ -186,7 +186,13 @@
                                 {{ $absence->matiere->nom ?? '-' }}
                             </td>
                             <td class="px-2 sm:px-3 py-2 sm:py-3 whitespace-nowrap text-xs sm:text-sm text-gray-900">
-                                {{ substr($absence->heure_debut, 0, 5) ?? '-' }} - {{ substr($absence->heure_fin, 0, 5) ?? '-' }}
+                                @if($absence->heure_debut && $absence->heure_fin)
+                                    {{ substr($absence->heure_debut, 0, 5) }} - {{ substr($absence->heure_fin, 0, 5) }}
+                                @elseif($absence->heure_debut)
+                                    {{ substr($absence->heure_debut, 0, 5) }}
+                                @else
+                                    Journée entière
+                                @endif
                             </td>
                             <td class="px-2 sm:px-3 py-2 sm:py-3 whitespace-nowrap text-xs sm:text-sm text-gray-900">
                                 {{ $absence->nombre_heures ?? 1 }}h

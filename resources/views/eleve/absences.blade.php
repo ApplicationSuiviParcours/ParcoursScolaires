@@ -365,8 +365,13 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                     </svg>
-                                    {{ substr($absence->heure_debut, 0, 5) ?? '--:--' }} -
-                                    {{ substr($absence->heure_fin, 0, 5) ?? '--:--' }}
+                                    @if($absence->heure_debut && $absence->heure_fin)
+                                        {{ substr($absence->heure_debut, 0, 5) }} - {{ substr($absence->heure_fin, 0, 5) }}
+                                    @elseif($absence->heure_debut)
+                                        {{ substr($absence->heure_debut, 0, 5) }}
+                                    @else
+                                        Journée entière
+                                    @endif
                                 </span>
                                 <span
                                     class="inline-flex items-center px-2 py-1 text-xs font-medium text-purple-700 bg-purple-100 rounded-full">
@@ -452,8 +457,13 @@
                                     </td>
                                     <td class="px-4 py-3 sm:px-6 sm:py-4">
                                         <span class="text-xs sm:text-sm text-gray-600">
-                                            {{ substr($absence->heure_debut, 0, 5) ?? '--:--' }} -
-                                            {{ substr($absence->heure_fin, 0, 5) ?? '--:--' }}
+                                            @if($absence->heure_debut && $absence->heure_fin)
+                                                {{ substr($absence->heure_debut, 0, 5) }} - {{ substr($absence->heure_fin, 0, 5) }}
+                                            @elseif($absence->heure_debut)
+                                                {{ substr($absence->heure_debut, 0, 5) }}
+                                            @else
+                                                Journée entière
+                                            @endif
                                         </span>
                                     </td>
                                     <td class="px-4 py-3 sm:px-6 sm:py-4">
