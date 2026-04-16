@@ -19,7 +19,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('image_icon/favicon-32x32.png') }}">
 
     <!-- Scripts & Styles -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     
     <!-- Styles pour les animations de fond -->
     <style>

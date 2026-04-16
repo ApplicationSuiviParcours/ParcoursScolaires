@@ -90,8 +90,7 @@ Route::middleware(['auth', 'role:administrateur'])->group(function () {
     Route::post('/admin/classes', [ClasseController::class, 'store'])->name('admin.classes.store');
     Route::get('/admin/classes/{classe}', [ClasseController::class, 'show'])->name('admin.classes.show');
     Route::get('/admin/classes/{classe}/edit', [ClasseController::class, 'edit'])->name('admin.classes.edit');
-    Route::put('/admin/classes/{classe}', [ClasseController::class, 'update'])->name('admin.classes.update');
-    Route::patch('/admin/classes/{classe}', [ClasseController::class, 'update'])->name('admin.classes.update');
+    Route::match(['put', 'patch'], '/admin/classes/{classe}', [ClasseController::class, 'update'])->name('admin.classes.update');
     Route::delete('/admin/classes/{classe}', [ClasseController::class, 'destroy'])->name('admin.classes.destroy');
     Route::get('/admin/classes/{classe}/eleves', [ClasseController::class, 'eleves'])->name('admin.classes.eleves');
     Route::get('/admin/classes/{classe}/emplois', [ClasseController::class, 'emplois'])->name('admin.classes.emplois');
@@ -129,17 +128,16 @@ Route::middleware(['auth', 'role:administrateur'])->group(function () {
     Route::post('/admin/eleves', [EleveAdminController::class, 'store'])->name('admin.eleves.store');
     Route::get('/admin/eleves/{eleve}', [EleveAdminController::class, 'show'])->name('admin.eleves.show');
     Route::get('/admin/eleves/{eleve}/edit', [EleveAdminController::class, 'edit'])->name('admin.eleves.edit');
-    Route::put('/admin/eleves/{eleve}', [EleveAdminController::class, 'update'])->name('admin.eleves.update');
+    Route::match(['put', 'patch'], '/admin/eleves/{eleve}', [EleveAdminController::class, 'update'])->name('admin.eleves.update');
     Route::delete('/admin/eleves/{eleve}', [EleveAdminController::class, 'destroy'])->name('admin.eleves.destroy');
     Route::get('admin/eleves/export', [EleveAdminController::class, 'export'])->name('admin.eleves.export');
     Route::post('admin/eleves/{eleve}/toggle-statut', [EleveAdminController::class, 'toggleStatut'])->name('admin.eleves.toggle-statut');
-    Route::patch('/admin/eleves/{eleve}', [EleveAdminController::class, 'update'])->name('admin.eleves.update');
     Route::post('/admin/eleves/{eleve}/create-user', [EleveAdminController::class, 'createUser'])->name('admin.eleves.create-user');
     Route::post('/admin/eleves/{eleve}/reset-password', [EleveAdminController::class, 'resetPassword'])->name('admin.eleves.reset-password');
     Route::delete('/admin/eleves/{eleve}/delete-user', [EleveAdminController::class, 'deleteUser'])->name('admin.eleves.delete-user');
     Route::get('/admin/eleves/{eleve}/calendrier-absences', [EleveAdminController::class, 'calendrierAbsences'])->name('admin.eleves.calendrier-absences');
     Route::get('/admin/eleves/{eleve}/releve-notes', [EleveAdminController::class, 'releveNotes'])->name('admin.eleves.releve-notes');
-    Route::get('/admin/eleves/export', [EleveAdminController::class, 'export'])->name('admin.eleves.export');
+    // Route export déjà définie plus haut (ligne 134)
     Route::get('/admin/eleves/export/pdf', [EleveAdminController::class, 'exportPdf'])->name('admin.eleves.exports.pdf');
     Route::get('/admin/eleves/export/excel', [EleveAdminController::class, 'exportExcel'])->name('admin.eleves.export.excel');
     Route::get('/admin/eleves/{eleve}/profil-pdf', [EleveAdminController::class, 'exportProfilPdf'])->name('admin.eleves.exports.profil-pdf');
