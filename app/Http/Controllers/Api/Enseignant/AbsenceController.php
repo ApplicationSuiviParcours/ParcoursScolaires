@@ -69,4 +69,47 @@ class AbsenceController extends Controller
             'absence' => new AbsenceResource($absence->load(['eleve', 'matiere'])),
         ], 201);
     }
+
+    /**
+     * Mark multiple absences (bulk).
+     */
+    public function bulkStore(Request $request)
+    {
+        $user = Auth::user();
+        if (!$user->isEnseignant()) abort(403);
+
+        $validator = Validator::make($request->all(), [
+            'matiere_id' => 'required|exists:matieres,id',
+            'date_absence' => 'required|date',
+            'absences' => 'required|array',
+            'absences.*.eleve_id' => 'required|exists:eleves,id',
+            'absences.*.justifiee' => 'boolean',
+            'absences.*.commentaire' => 'nullable|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        // Check if enseignant teaches this matiere
+        if (!EnseignantMatiereClasse::where('enseignant_id', $user->enseignant->id)
+            ->where('matiere_id', $request->matiere_id)->exists()) {
+            abort(403, 'Matière non assignée');
+        }
+
+        $results = [];
+        foreach ($request->absences as $absenceData) {
+            $results[] = Absence::create([
+                'eleve_id' => $absenceData['eleve_id'],
+                'matiere_id' => $request->matiere_id,
+                'date_absence' => $request->date_absence,
+                'justifiee' => $absenceData['justifiee'] ?? false,
+                'commentaire' => $absenceData['commentaire'] ?? null,
+            ]);
+        }
+
+        return response()->json([
+            'message' => count($results) . ' absences enregistrées',
+        ]);
+    }
 }

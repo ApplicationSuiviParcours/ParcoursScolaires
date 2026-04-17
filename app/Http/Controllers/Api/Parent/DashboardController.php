@@ -29,15 +29,34 @@ class DashboardController extends Controller
         }
 
         $enfants = $parent->eleves()
-            ->with(['classe', 'inscriptionActive.classe'])
-            ->paginate(10);
+            ->with(['inscriptionActive.classe.anneeScolaire'])
+            ->get();
 
-        $enfants->getCollection()->transform(function ($enfant) {
-            $notes = Note::where('eleve_id', $enfant->id)
+        $enfants->transform(function ($enfant) {
+            $allNotes = Note::where('eleve_id', $enfant->id)
                 ->with(['evaluation.matiere'])
-                ->latest()
-                ->limit(5)
                 ->get();
+
+            $notesParMatiere = [];
+            foreach ($allNotes as $note) {
+                if ($note->evaluation && $note->evaluation->matiere) {
+                    $mId = $note->evaluation->matiere->id;
+                    if (!isset($notesParMatiere[$mId])) {
+                        $notesParMatiere[$mId] = [
+                            'nom' => $note->evaluation->matiere->nom,
+                            'somme' => 0, 'count' => 0
+                        ];
+                    }
+                    $notesParMatiere[$mId]['somme'] += $note->note;
+                    $notesParMatiere[$mId]['count']++;
+                }
+            }
+
+            $moyennesParMatiere = collect($notesParMatiere)->map(fn($m) => [
+                'nom' => $m['nom'],
+                'moyenne' => round($m['somme'] / $m['count'], 2),
+                'nb_notes' => $m['count']
+            ])->values();
 
             $absences = Absence::where('eleve_id', $enfant->id)
                 ->with(['matiere'])
@@ -45,33 +64,35 @@ class DashboardController extends Controller
                 ->limit(5)
                 ->get();
 
-            $bulletins = Bulletin::where('eleve_id', $enfant->id)
+            $bulletinCourant = Bulletin::where('eleve_id', $enfant->id)
                 ->latest()
-                ->limit(1)
-                ->get();
+                ->first();
 
             $enfant->stats = [
-                'moyenne_generale' => round($notes->avg('note') ?? 0, 2),
-                'total_notes' => $notes->count(),
-                'total_absences' => $absences->count(),
-                'absences_non_justifiees' => $absences->where('justifiee', false)->count(),
-                'dernieres_notes' => $notes,
-                'dernieres_absences' => $absences,
-                'dernier_bulletin' => $bulletins->first(),
+                'moyenne_generale' => $enfant->moyenne_generale ?? ($allNotes->avg('note') ? round($allNotes->avg('note'), 2) : 0),
+                'total_notes' => $allNotes->count(),
+                'total_absences' => $enfant->absences()->count(),
+                'absences_non_justifiees' => $enfant->absences()->where('justifiee', false)->count(),
+                'moyennes_par_matiere' => $moyennesParMatiere,
+                'dernieres_notes' => NoteResource::collection($allNotes->take(5)),
+                'dernieres_absences' => AbsenceResource::collection($absences),
+                'dernier_bulletin' => $bulletinCourant ? [
+                    'periode' => $bulletinCourant->periode,
+                    'moyenne' => $bulletinCourant->moyenne_generale,
+                    'rang' => $bulletinCourant->rang,
+                ] : null,
             ];
 
             return $enfant;
         });
 
-        // Global stats
-        $enfants->additional([
-            'stats_global' => [
-                'total_enfants' => $enfants->total(),
-                'total_notes' => Note::whereHas('eleve.parents', fn($q) => $q->where('parent_eleve_id', $parent->id))->count(),
-                'total_absences' => Absence::whereHas('eleve.parents', fn($q) => $q->where('parent_eleve_id', $parent->id))->count(),
-            ]
-        ]);
+        // Global stats for parent
+        $statsGlobal = [
+            'total_enfants' => $enfants->count(),
+            'total_notes' => Note::whereHas('eleve.parents', fn($q) => $q->where('parent_eleve_id', $parent->id))->count(),
+            'total_absences' => Absence::whereHas('eleve.parents', fn($q) => $q->where('parent_eleve_id', $parent->id))->count(),
+        ];
 
-        return EleveResource::collection($enfants);
+        return EleveResource::collection($enfants)->additional(['stats_global' => $statsGlobal]);
     }
 }

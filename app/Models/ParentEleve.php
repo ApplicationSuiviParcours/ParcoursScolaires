@@ -46,6 +46,7 @@ class ParentEleve extends Model
         'initiales',
         'enfants_count',
         'nom_complet',
+        'photo_url',
     ];
 
     /**
@@ -252,5 +253,19 @@ class ParentEleve extends Model
     public function getNomCompletAttribute(): string
     {
         return $this->prenom . ' ' . $this->nom;
+    }
+
+    /**
+     * ✅ AJOUT: Récupère l'URL complète de la photo
+     */
+    public function getPhotoUrlAttribute(): string
+    {
+        if ($this->photo) {
+            return asset('storage/' . $this->photo);
+        }
+
+        // Avatar par défaut avec les initiales
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->nom_complet) .
+               '&color=7F9CF5&background=EBF4FF&bold=true&size=128&length=2';
     }
 }

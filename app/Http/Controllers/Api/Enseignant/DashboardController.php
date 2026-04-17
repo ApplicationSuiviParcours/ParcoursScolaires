@@ -33,17 +33,19 @@ class DashboardController extends Controller
         $classesUniques = $matiereClasses->pluck('classe')->filter()->unique('id');
         $totalEleves = $classesUniques->sum(fn($c) => $c->eleves()->count());
 
-        // Formater la liste des classes avec le nombre d'élèves et la matière
-        $classesList = $matiereClasses->groupBy('classe_id')->map(function ($items) use ($totalEleves) {
-            $classe = $items->first()->classe;
-            if (!$classe) return null;
+        // Formater la liste des affectations Matière-Classe
+        $assignments = $matiereClasses->map(function ($item) {
+            $classe = $item->classe;
+            $matiere = $item->matiere;
+            if (!$classe || !$matiere) return null;
 
-            $matieres = $items->pluck('matiere.nom')->filter()->implode(', ');
             return [
-                'id'        => $classe->id,
-                'nom'       => $classe->nom ?? $classe->nom_complet,
-                'matiere'   => $matieres,
-                'nb_eleves' => $classe->eleves()->count(),
+                'matiere_classe_id' => $item->id,
+                'classe_id'         => $classe->id,
+                'classe_nom'        => $classe->nom ?? $classe->nom_complet,
+                'matiere_id'        => $matiere->id,
+                'matiere_nom'       => $matiere->nom,
+                'nb_eleves'         => $classe->eleves()->count(),
             ];
         })->filter()->values();
 
@@ -66,7 +68,7 @@ class DashboardController extends Controller
                 'nom'    => $enseignant->nom,
                 'prenom' => $enseignant->prenom,
             ],
-            'classes' => $classesList,
+            'assignments' => $assignments,
             'stats'   => $stats,
         ]);
     }

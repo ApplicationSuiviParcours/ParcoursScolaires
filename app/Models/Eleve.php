@@ -47,6 +47,7 @@ class Eleve extends Model
         'classe_actuelle', // ✅ AJOUT: Pour rendre l'accesseur disponible dans les vues
         'est_inscrit',     // ✅ AJOUT: Pour vérifier rapidement le statut d'inscription
         'nom_complet',      // ✅ AJOUT: Pour obtenir le nom complet facilement
+        'photo_url',       // ✅ AJOUT: Pour obtenir l'URL complète de la photo
     ];
 
     /**
@@ -374,5 +375,19 @@ class Eleve extends Model
                             'observation' => $inscription->observation,
                         ];
                     });
+    }
+
+    /**
+     * ✅ AJOUT: Récupère l'URL complète de la photo
+     */
+    public function getPhotoUrlAttribute(): string
+    {
+        if ($this->photo) {
+            return asset('storage/' . $this->photo);
+        }
+
+        // Avatar par défaut avec les initiales
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->nom_complet) .
+               '&color=7F9CF5&background=EBF4FF&bold=true&size=128&length=2';
     }
 }

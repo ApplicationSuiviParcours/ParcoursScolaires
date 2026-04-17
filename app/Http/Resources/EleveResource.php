@@ -14,7 +14,7 @@ class EleveResource extends JsonResource
             'nom_complet' => $this->nom_complet,
             'prenom' => $this->prenom,
             'nom' => $this->nom,
-            'photo' => $this->photo,
+            'photo' => $this->photo_url,
             'classe_actuelle' => $this->whenLoaded('classe_actuelle', $this->classe_actuelle?->only(['id', 'nom_complet'])),
             'est_inscrit' => $this->est_inscrit,
             'age' => $this->age,

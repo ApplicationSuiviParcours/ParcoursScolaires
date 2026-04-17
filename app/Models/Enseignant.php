@@ -40,6 +40,7 @@ class Enseignant extends Model
     protected $appends = [
         'nom_complet',
         'age',
+        'photo_url',
     ];
 
     /**
@@ -166,5 +167,19 @@ class Enseignant extends Model
         }
         
         return 'ENS' . $annee . $premiereLettre . $nouveauNumero;
+    }
+
+    /**
+     * ✅ AJOUT: Récupère l'URL complète de la photo
+     */
+    public function getPhotoUrlAttribute(): string
+    {
+        if ($this->photo) {
+            return asset('storage/' . $this->photo);
+        }
+
+        // Avatar par défaut avec les initiales
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->nom_complet) .
+               '&color=7F9CF5&background=EBF4FF&bold=true&size=128&length=2';
     }
 }

@@ -70,4 +70,46 @@ class NoteController extends Controller
             'note' => new NoteResource($note->load(['evaluation', 'eleve'])),
         ], 201);
     }
+
+    /**
+     * Store multiple notes for an evaluation (bulk).
+     */
+    public function bulkStore(Request $request)
+    {
+        $user = Auth::user();
+        if (!$user->isEnseignant()) abort(403);
+
+        $validator = Validator::make($request->all(), [
+            'evaluation_id' => 'required|exists:evaluations,id',
+            'notes' => 'required|array',
+            'notes.*.eleve_id' => 'required|exists:eleves,id',
+            'notes.*.note' => 'required|numeric|min:0|max:20',
+            'notes.*.appreciation' => 'nullable|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $evaluation = Evaluation::findOrFail($request->evaluation_id);
+        if ($evaluation->matiereClasse->enseignant->user_id != $user->id) abort(403);
+
+        $results = [];
+        foreach ($request->notes as $noteData) {
+            $results[] = Note::updateOrCreate(
+                [
+                    'evaluation_id' => $request->evaluation_id,
+                    'eleve_id' => $noteData['eleve_id'],
+                ],
+                [
+                    'note' => $noteData['note'],
+                    'appreciation' => $noteData['appreciation'] ?? null,
+                ]
+            );
+        }
+
+        return response()->json([
+            'message' => count($results) . ' notes sauvegardées',
+        ]);
+    }
 }

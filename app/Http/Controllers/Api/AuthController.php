@@ -14,31 +14,46 @@ use Illuminate\Validation\ValidationException;
 class AuthController extends Controller
 {
     /**
-     * Handle login request (email/password or matricule/password).
+     * Handle login request (email/password or matricule).
      */
     public function login(LoginRequest $request): JsonResponse
     {
-    $email = $request->input('email');
+        $credential = $request->input('credential');
         $password = $request->input('password');
+        $role = $request->input('role', 'user');
         $remember = $request->boolean('remember', false);
 
-        $credentials = ['email' => $email, 'password' => $password];
+        // Logic from Web's LoginRequest
+        $user = $this->findUserByRoleAndCredential($role, $credential);
 
-        if (!Auth::attempt($credentials, $remember)) {
+        if (!$user) {
             throw ValidationException::withMessages([
-            'email' => ['Email ou mot de passe incorrects.'],
+                'credential' => ['Identifiant incorrect ou compte introuvable.'],
             ]);
+        }
+
+        if (!$user->is_active) {
+            throw ValidationException::withMessages([
+                'credential' => ['Votre compte est désactivé. Contactez l\'administration.'],
+            ]);
+        }
+
+        // PASSWORDLESS for non-admin roles (matching web logic)
+        if ($role !== 'administrateur' && $user->hasAnyRole(['eleve', 'enseignant', 'parent'])) {
+            // Auto-login / Token creation
+            Auth::login($user);
+        } else {
+            // Admin or explicit password check
+            if (!Auth::attempt(['email' => $user->email, 'password' => $password], $remember)) {
+                throw ValidationException::withMessages([
+                    'credential' => ['Mot de passe incorrect.'],
+                ]);
+            }
         }
 
         $user = Auth::user();
-        if (!$user->is_active) {
-            Auth::logout();
-            throw ValidationException::withMessages([
-            'email' => ['Compte désactivé. Contactez l\'administrateur.'],
-            ]);
-        }
-
         $token = $user->createToken('mobile-app')->plainTextToken;
+        $user->update(['last_login_at' => now()]);
 
         return response()->json([
             'message' => 'Connexion réussie',
@@ -46,6 +61,38 @@ class AuthController extends Controller
             'token' => $token,
             'token_type' => 'Bearer',
         ]);
+    }
+
+    /**
+     * Find user based on role and credential (matricule/email)
+     * Replicated from Web LoginRequest
+     */
+    private function findUserByRoleAndCredential($role, $credential)
+    {
+        if ($role === 'administrateur') {
+            return User::where('email', $credential)
+                ->whereHas('roles', fn($q) => $q->where('name', 'administrateur'))
+                ->first();
+        }
+
+        // Non-admin lookups (Eleve, Enseignant, Parent)
+        $user = \App\Models\Eleve::where('matricule', $credential)
+            ->whereHas('user.roles', fn($q) => $q->where('name', 'eleve'))
+            ->with('user')->first()?->user;
+
+        if (!$user) {
+            $user = \App\Models\Enseignant::where('matricule', $credential)
+                ->whereHas('user.roles', fn($q) => $q->where('name', 'enseignant'))
+                ->with('user')->first()?->user;
+        }
+
+        if (!$user) {
+            $user = \App\Models\ParentEleve::where('matricule', $credential)
+                ->whereHas('user.roles', fn($q) => $q->where('name', 'parent'))
+                ->with('user')->first()?->user;
+        }
+
+        return $user;
     }
 
     /**

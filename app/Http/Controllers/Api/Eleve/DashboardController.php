@@ -28,10 +28,11 @@ class DashboardController extends Controller
         $eleve = $user->eleve;
         if (!$eleve) abort(404, 'Elève non trouvé.');
 
-        $classe = $eleve->classe ?? $eleve->inscriptionActive?->classe;
+        $eleve->load(['inscriptionActive.classe.anneeScolaire']);
+        $classe = $eleve->inscriptionActive?->classe;
         $annee = $eleve->inscriptionActive?->anneeScolaire;
 
-        // Recent data (last 30 days or current periode)
+        // Recent data
         $notes = Note::where('eleve_id', $eleve->id)
             ->with(['evaluation.matiere'])
             ->latest()
@@ -40,27 +41,69 @@ class DashboardController extends Controller
 
         $absences = Absence::where('eleve_id', $eleve->id)
             ->with(['matiere'])
-            ->where('date_absence', '>=', now()->subDays(30))
             ->latest('date_absence')
             ->limit(10)
             ->get();
 
         $bulletins = Bulletin::where('eleve_id', $eleve->id)
+            ->with(['classe', 'anneeScolaire'])
             ->latest()
             ->limit(3)
             ->get();
+
+        $bulletinCourant = $bulletins->first();
+
+        // Calculer les moyennes par matière (comme sur le web)
+        $allNotes = Note::where('eleve_id', $eleve->id)
+            ->with('evaluation.matiere')
+            ->get();
+
+        $notesParMatiere = [];
+        foreach ($allNotes as $note) {
+            if ($note->evaluation && $note->evaluation->matiere) {
+                $matiereId = $note->evaluation->matiere->id;
+                $matiereNom = $note->evaluation->matiere->nom;
+                if (!isset($notesParMatiere[$matiereId])) {
+                    $notesParMatiere[$matiereId] = [
+                        'id' => $matiereId,
+                        'nom' => $matiereNom,
+                        'somme' => 0,
+                        'count' => 0
+                    ];
+                }
+                $notesParMatiere[$matiereId]['somme'] += $note->note;
+                $notesParMatiere[$matiereId]['count']++;
+            }
+        }
+
+        $moyennesParMatiere = collect($notesParMatiere)->map(function ($m) {
+            return [
+                'id' => $m['id'],
+                'nom' => $m['nom'],
+                'moyenne' => round($m['somme'] / $m['count'], 2),
+                'nb_notes' => $m['count'],
+            ];
+        })->values();
 
         return response()->json([
             'eleve' => new \App\Http\Resources\EleveResource($eleve),
             'classe' => $classe ? new ClasseResource($classe) : null,
             'annee' => $annee ? new \App\Http\Resources\AnneeScolaireResource($annee) : null,
             'stats' => [
-                'moyenne_generale' => round($notes->avg('note') ?? 0, 2),
-                'total_notes' => $notes->count(),
-                'total_absences' => $absences->count(),
-                'absences_non_justifiees' => $absences->where('justifiee', false)->count(),
-                'nb_bulletins' => $bulletins->count(),
+                'moyenne_generale' => $eleve->moyenne_generale ?? ($allNotes->avg('note') ? round($allNotes->avg('note'), 2) : 0),
+                'total_notes' => $allNotes->count(),
+                'total_absences' => $eleve->absences()->count(),
+                'absences_non_justifiees' => $eleve->absences()->where('justifiee', false)->count(),
+                'nb_bulletins' => $eleve->bulletins()->count(),
+                'moyennes_par_matiere' => $moyennesParMatiere,
             ],
+            'bulletin_recent' => $bulletinCourant ? [
+                'id' => $bulletinCourant->id,
+                'periode' => $bulletinCourant->periode,
+                'moyenne' => $bulletinCourant->moyenne_generale,
+                'rang' => $bulletinCourant->rang,
+                'appreciation' => $bulletinCourant->appreciation,
+            ] : null,
             'recent' => [
                 'notes' => NoteResource::collection($notes),
                 'absences' => AbsenceResource::collection($absences),

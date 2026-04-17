@@ -20,8 +20,9 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-'email' => ['required', 'email'],
-            'password' => ['required', 'string'],
+            'credential' => ['required', 'string'],
+            'password' => ['sometimes', 'nullable', 'string'],
+            'role' => ['sometimes', 'string', 'in:eleve,enseignant,parent,administrateur,user'],
             'remember' => ['boolean'],
         ];
     }
@@ -32,8 +33,7 @@ class LoginRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.required'    => 'Email requis.',
-            'email.email'       => 'Format email invalide.',
+            'credential.required' => 'Identifiant (Email ou Matricule) requis.',
             'password.required' => 'Mot de passe requis.',
         ];
     }
