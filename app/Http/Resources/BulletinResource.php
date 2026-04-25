@@ -15,6 +15,7 @@ class BulletinResource extends JsonResource
             'moyenne_generale' => $this->moyenne_generale,
             'moyenne_classe'   => $this->moyenne_classe ?? 0,
             'ecart_classe'     => $this->ecart_classe,
+            'effectif_classe'  => $this->effectif_classe,
             'appreciation'     => $this->appreciation,
             'rang'             => $this->rang ?? null,
             'classe'           => $this->when(
