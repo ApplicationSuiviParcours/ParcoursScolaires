@@ -11,7 +11,8 @@ class NoteResource extends JsonResource
         return [
             'id'          => $this->id,
             'note'        => $this->note,
-            'appreciation'=> $this->appreciation,
+            'appreciation'=> !empty($this->observation) ? $this->observation : $this->appreciation_auto,
+            'observation' => $this->observation,
             'evaluation'  => $this->when($this->relationLoaded('evaluation'), function () {
                 return [
                     'id'              => $this->evaluation->id,

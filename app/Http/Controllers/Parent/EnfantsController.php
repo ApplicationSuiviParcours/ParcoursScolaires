@@ -14,9 +14,10 @@ class EnfantsController extends Controller
 {
     public function mesEnfants()
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
         
-        if (!$user->isParent()) {
+        if (!$user || !$user->isParent()) {
             abort(403, 'Accès non autorisé.');
         }
 
@@ -63,7 +64,7 @@ class EnfantsController extends Controller
 
         if (!empty($enfantIds)) {
             // Récupérer les statistiques en une seule requête pour optimiser
-            $notesStats = Note::whereIn('eleve_id', $enfantIds)
+            $notesStats = Note::query()->whereIn('eleve_id', $enfantIds)
                 ->select('eleve_id', 
                     DB::raw('count(*) as count'),
                     DB::raw('avg(note) as moyenne')
@@ -72,7 +73,7 @@ class EnfantsController extends Controller
                 ->get()
                 ->keyBy('eleve_id');
 
-            $absencesStats = Absence::whereIn('eleve_id', $enfantIds)
+            $absencesStats = Absence::query()->whereIn('eleve_id', $enfantIds)
                 ->select('eleve_id', 
                     DB::raw('count(*) as count'),
                     DB::raw('SUM(CASE WHEN justifiee = 0 THEN 1 ELSE 0 END) as non_justifiees')
@@ -81,7 +82,7 @@ class EnfantsController extends Controller
                 ->get()
                 ->keyBy('eleve_id');
 
-            $bulletinsStats = Bulletin::whereIn('eleve_id', $enfantIds)
+            $bulletinsStats = Bulletin::query()->whereIn('eleve_id', $enfantIds)
                 ->select('eleve_id', DB::raw('count(*) as count'))
                 ->groupBy('eleve_id')
                 ->get()

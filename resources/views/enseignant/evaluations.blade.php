@@ -89,11 +89,11 @@
                                 $count = 0;
                                 foreach($evaluations as $evaluation) {
                                     if($evaluation->notes && $evaluation->notes->count() > 0) {
-                                        $moyenne += $evaluation->notes->avg('valeur');
+                                        $moyenne += $evaluation->notes->avg('note');
                                         $count++;
                                     }
                                 }
-                                echo $count > 0 ? round($moyenne/$count, 1) : '-';
+                                echo $count > 0 ? round($moyenne/$count, 1) : '0';
                             @endphp
                         </p>
                     </div>

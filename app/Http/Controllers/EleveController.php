@@ -58,8 +58,8 @@ class EleveController extends Controller
             return null;
         }
         
-        $derniereInscription = Inscription::where('eleve_id', $eleve->id)
-            ->where('statut', true)
+        $derniereInscription = Inscription::query()->where('eleve_id', $eleve->id)
+            ->whereIn('statut', ['inscrit', 'active', '1', 1, true])
             ->with('classe')
             ->latest()
             ->first();
@@ -76,8 +76,8 @@ class EleveController extends Controller
             return null;
         }
         
-        return Inscription::where('eleve_id', $eleve->id)
-            ->where('statut', true)
+        return Inscription::query()->where('eleve_id', $eleve->id)
+            ->whereIn('statut', ['inscrit', 'active', '1', 1, true])
             ->with('classe.anneeScolaire')
             ->latest()
             ->first();
@@ -130,12 +130,12 @@ class EleveController extends Controller
         // MODIFICATION: Ne pas charger 'classe' directement
         $eleve->load(['inscriptions.classe', 'parents']);
         
-        $anneeScolaire = AnneeScolaire::where('active', true)->first();
+        $anneeScolaire = AnneeScolaire::query()->where('active', true)->first();
 
         // Utiliser la méthode pour récupérer l'inscription
         $inscription = $this->getInscriptionActuelle($eleve);
 
-        $notes = Note::where('eleve_id', $eleve->id)
+        $notes = Note::query()->where('eleve_id', $eleve->id)
             ->with(['evaluation.matiere', 'evaluation.classe'])
             ->orderByDesc('created_at')
             ->get();
@@ -143,7 +143,7 @@ class EleveController extends Controller
         $moyenneGenerale = $notes->avg('note');
         $dernieresNotes = $notes->take(5);
 
-        $absences = Absence::where('eleve_id', $eleve->id)
+        $absences = Absence::query()->where('eleve_id', $eleve->id)
             ->with('matiere')
             ->orderBy('date_absence', 'desc')
             ->get();
@@ -151,7 +151,7 @@ class EleveController extends Controller
         $absencesNonJustifiees = $absences->where('justifiee', false)->count();
         $absencesJustifiees = $absences->where('justifiee', true)->count();
 
-        $bulletins = Bulletin::where('eleve_id', $eleve->id)
+        $bulletins = Bulletin::query()->where('eleve_id', $eleve->id)
             ->with('classe')
             ->orderBy('periode', 'desc')
             ->get();
@@ -163,7 +163,7 @@ class EleveController extends Controller
 
         $emploiDuTemps = collect([]);
         if ($classeActuelle) {
-            $emploiDuTemps = EmploiDuTemps::where('classe_id', $classeActuelle->id)
+            $emploiDuTemps = EmploiDuTemps::query()->where('classe_id', $classeActuelle->id)
                 ->with(['matiere', 'enseignant'])
                 ->orderBy('jour')
                 ->orderBy('heure_debut')
@@ -251,7 +251,7 @@ class EleveController extends Controller
         // MODIFICATION: Ne pas charger 'classe' directement
         // $eleve->load(['classe']); // À supprimer
 
-        $query = Note::where('eleve_id', $eleve->id)
+        $query = Note::query()->where('eleve_id', $eleve->id)
             ->with(['evaluation.matiere', 'evaluation.classe']);
 
         if ($request->filled('matiere_id')) {
@@ -293,7 +293,7 @@ class EleveController extends Controller
             'total_notes' => $notes->total(),
         ];
 
-        $matieres = Matiere::orderBy('nom')->get();
+        $matieres = Matiere::query()->orderBy('nom')->get();
         $periodes = ['trimestre1', 'trimestre2', 'trimestre3'];
 
         return view('eleve.notes', compact('notes', 'eleve', 'stats', 'matieres', 'periodes'));
@@ -313,7 +313,7 @@ class EleveController extends Controller
 
         $note->load(['evaluation.matiere', 'evaluation.classe']);
 
-        $autresNotes = Note::where('eleve_id', $eleve->id)
+        $autresNotes = Note::query()->where('eleve_id', $eleve->id)
             ->whereHas('evaluation', function($q) use ($note) {
                 $q->where('matiere_id', $note->evaluation->matiere_id);
             })
@@ -343,7 +343,7 @@ class EleveController extends Controller
         // MODIFICATION: Ne pas charger 'classe' directement
         // $eleve->load(['classe']); // À supprimer
 
-        $query = Absence::where('eleve_id', $eleve->id)
+        $query = Absence::query()->where('eleve_id', $eleve->id)
             ->with('matiere');
 
         if ($request->filled('justifiee')) {
@@ -367,15 +367,15 @@ class EleveController extends Controller
             ->withQueryString();
 
         $stats = [
-            'total' => Absence::where('eleve_id', $eleve->id)->count(),
-            'justifiees' => Absence::where('eleve_id', $eleve->id)->where('justifiee', true)->count(),
-            'non_justifiees' => Absence::where('eleve_id', $eleve->id)->where('justifiee', false)->count(),
-            'mois_courant' => Absence::where('eleve_id', $eleve->id)
+            'total' => Absence::query()->where('eleve_id', $eleve->id)->count(),
+            'justifiees' => Absence::query()->where('eleve_id', $eleve->id)->where('justifiee', true)->count(),
+            'non_justifiees' => Absence::query()->where('eleve_id', $eleve->id)->where('justifiee', false)->count(),
+            'mois_courant' => Absence::query()->where('eleve_id', $eleve->id)
                 ->whereMonth('date_absence', now()->month)
                 ->count(),
         ];
 
-        $matieres = Matiere::orderBy('nom')->get();
+        $matieres = Matiere::query()->orderBy('nom')->get();
 
         return view('eleve.absences', compact('absences', 'eleve', 'stats', 'matieres'));
     }
@@ -393,7 +393,7 @@ class EleveController extends Controller
         }
 
         // Récupérer les bulletins
-        $query = Bulletin::where('eleve_id', $eleve->id)
+        $query = Bulletin::query()->where('eleve_id', $eleve->id)
             ->with(['classe', 'anneeScolaire']);
 
         if ($request->filled('periode')) {
@@ -410,7 +410,7 @@ class EleveController extends Controller
 
         // Pour chaque bulletin, récupérer les notes directement depuis les évaluations
         foreach ($bulletins as $bulletin) {
-            $notes = Note::where('eleve_id', $bulletin->eleve_id)
+            $notes = Note::query()->where('eleve_id', $bulletin->eleve_id)
                 ->whereHas('evaluation', function($q) use ($bulletin) {
                     $q->where('annee_scolaire_id', $bulletin->annee_scolaire_id)
                       ->where('classe_id', $bulletin->classe_id)
@@ -423,7 +423,7 @@ class EleveController extends Controller
             $bulletin->setAttribute('notesDirectes', $notes);
         }
 
-        $anneesScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
+        $anneesScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
         $periodes = ['trimestre1', 'trimestre2', 'trimestre3', 'semestre1', 'semestre2'];
 
         return view('eleve.bulletin', compact('bulletins', 'eleve', 'anneesScolaires', 'periodes'));
@@ -450,7 +450,7 @@ class EleveController extends Controller
 
         // Récupérer les notes de l'élève pour la période du bulletin directement depuis les évaluations
         // On cherche les notes de l'élève pour la même année scolaire, classe et période que le bulletin
-        $notes = Note::where('eleve_id', $bulletin->eleve_id)
+        $notes = Note::query()->where('eleve_id', $bulletin->eleve_id)
             ->whereHas('evaluation', function($q) use ($bulletin) {
                 $q->where('annee_scolaire_id', $bulletin->annee_scolaire_id)
                   ->where('classe_id', $bulletin->classe_id)
@@ -531,7 +531,14 @@ class EleveController extends Controller
         $classeActuelle = $this->getClasseActuelle($eleve);
         $inscription = $this->getInscriptionActuelle($eleve);
 
-        $jours = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+        $joursMap = [
+            1 => 'Lundi',
+            2 => 'Mardi',
+            3 => 'Mercredi',
+            4 => 'Jeudi',
+            5 => 'Vendredi',
+            6 => 'Samedi',
+        ];
 
         if (!$classeActuelle) {
             return view('eleve.emploi-du-temps', [
@@ -540,12 +547,12 @@ class EleveController extends Controller
                 'emploiParJour' => [],
                 'classeActuelle' => null,
                 'inscription' => null,
-                'jours' => $jours,
+                'jours' => array_values($joursMap),
                 'message' => 'Vous n\'êtes pas inscrit dans une classe active.'
             ]);
         }
 
-        $query = EmploiDuTemps::where('classe_id', $classeActuelle->id)
+        $query = EmploiDuTemps::query()->where('classe_id', $classeActuelle->id)
             ->with(['matiere', 'enseignant']);
 
         if ($request->filled('jour')) {
@@ -557,20 +564,20 @@ class EleveController extends Controller
             ->get();
 
         $emploiParJour = [];
-        foreach ($jours as $jour) {
-            $emploiParJour[$jour] = $emploiDuTemps->filter(function($cours) use ($jour) {
-                return $cours->jour == $jour;
+        foreach ($joursMap as $num => $nom) {
+            $emploiParJour[$nom] = $emploiDuTemps->filter(function($cours) use ($num) {
+                return (string)$cours->jour === (string)$num;
             })->values();
         }
 
-        return view('eleve.emploi-du-temps', compact(
-            'emploiDuTemps', 
-            'emploiParJour', 
-            'eleve', 
-            'classeActuelle',
-            'inscription',
-            'jours'
-        ));
+        return view('eleve.emploi-du-temps', [
+            'emploiDuTemps' => $emploiDuTemps,
+            'emploiParJour' => $emploiParJour,
+            'eleve' => $eleve,
+            'classeActuelle' => $classeActuelle,
+            'inscription' => $inscription,
+            'jours' => array_values($joursMap),
+        ]);
     }
 
     /**
@@ -635,7 +642,7 @@ class EleveController extends Controller
         $mois = $request->get('mois', now()->month);
         $annee = $request->get('annee', now()->year);
 
-        $absences = Absence::where('eleve_id', $eleve->id)
+        $absences = Absence::query()->where('eleve_id', $eleve->id)
             ->with('matiere')
             ->whereYear('date_absence', $annee)
             ->whereMonth('date_absence', $mois)
@@ -665,7 +672,7 @@ class EleveController extends Controller
 
         $periode = $request->get('periode', 'trimestre1');
 
-        $notes = Note::where('eleve_id', $eleve->id)
+        $notes = Note::query()->where('eleve_id', $eleve->id)
             ->with(['evaluation.matiere', 'evaluation.classe'])
             ->whereHas('evaluation', function($q) use ($periode) {
                 $q->where('periode', $periode);
@@ -722,7 +729,7 @@ class EleveController extends Controller
         // MODIFICATION: Récupérer la classe actuelle
         $classeActuelle = $this->getClasseActuelle($eleve);
 
-        $query = Note::where('eleve_id', $eleve->id)
+        $query = Note::query()->where('eleve_id', $eleve->id)
             ->with(['evaluation.matiere', 'evaluation.classe']);
 
         if ($request->filled('matiere_id')) {
@@ -770,7 +777,7 @@ class EleveController extends Controller
         // MODIFICATION: Récupérer la classe actuelle
         $classeActuelle = $this->getClasseActuelle($eleve);
 
-        $query = Absence::where('eleve_id', $eleve->id)
+        $query = Absence::query()->where('eleve_id', $eleve->id)
             ->with('matiere');
 
         if ($request->filled('justifiee')) {
@@ -816,7 +823,7 @@ class EleveController extends Controller
         ]);
 
         // Récupérer les notes directement depuis les évaluations
-        $notes = Note::where('eleve_id', $bulletin->eleve_id)
+        $notes = Note::query()->where('eleve_id', $bulletin->eleve_id)
             ->whereHas('evaluation', function($q) use ($bulletin) {
                 $q->where('annee_scolaire_id', $bulletin->annee_scolaire_id)
                   ->where('classe_id', $bulletin->classe_id)
@@ -895,7 +902,7 @@ class EleveController extends Controller
                 ->with('error', 'Vous n\'êtes pas inscrit dans une classe active.');
         }
 
-        $emploiDuTemps = EmploiDuTemps::where('classe_id', $classeActuelle->id)
+        $emploiDuTemps = EmploiDuTemps::query()->where('classe_id', $classeActuelle->id)
             ->with(['matiere', 'enseignant'])
             ->orderBy('jour')
             ->orderBy('heure_debut')
@@ -983,7 +990,7 @@ class EleveController extends Controller
 
         $periode = $request->get('periode', 'trimestre1');
 
-        $notes = Note::where('eleve_id', $eleve->id)
+        $notes = Note::query()->where('eleve_id', $eleve->id)
             ->with(['evaluation.matiere', 'evaluation.classe'])
             ->whereHas('evaluation', function($q) use ($periode) {
                 $q->where('periode', $periode);

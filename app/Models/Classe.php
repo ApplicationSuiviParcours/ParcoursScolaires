@@ -14,7 +14,6 @@ use App\Models\Eleve;
 use App\Models\ClasseMatiere;
 use App\Models\EmploiDuTemps;
 use App\Models\Evaluation;
-use App\Models\EnseignantClasseMatiere;
 use App\Models\Enseignant;
 use App\Models\Matiere;
 
@@ -70,7 +69,7 @@ class Classe extends Model
      */
     public function inscriptionsActives()
     {
-        return $this->inscriptions()->where('statut', true);
+        return $this->inscriptions()->whereIn('statut', ['inscrit', 'active', '1', 1, true]);
     }
 
     /**
@@ -89,7 +88,7 @@ class Classe extends Model
      */
     public function getNombreElevesActuelsAttribute(): int
     {
-        return $this->inscriptions()->where('statut', true)->count();
+        return $this->inscriptions()->whereIn('statut', ['inscrit', 'active', '1', 1, true])->count();
     }
 
     /**
@@ -208,7 +207,7 @@ class Classe extends Model
      */
     public function getStatsAttribute(): array
     {
-        $inscriptionsActives = $this->inscriptions()->where('statut', true)->count();
+        $inscriptionsActives = $this->inscriptions()->whereIn('statut', ['inscrit', 'active', '1', 1, true])->count();
         
         return [
             'total_eleves' => $inscriptionsActives,

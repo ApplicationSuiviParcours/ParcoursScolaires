@@ -18,6 +18,7 @@ class NotificationController extends Controller
      */
     public function index(Request $request)
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
 
         $query = $user->notifications()->latest();
@@ -66,6 +67,7 @@ class NotificationController extends Controller
      */
     public function markAllAsRead()
     {
+        /** @var \App\Models\User $user */
         Auth::user()->unreadNotifications()->update([
             'read'    => true,
             'read_at' => now(),
@@ -101,6 +103,7 @@ class NotificationController extends Controller
      */
     public function destroyRead()
     {
+        /** @var \App\Models\User $user */
         Auth::user()->notifications()->where('read', true)->delete();
 
         if (request()->expectsJson()) {
@@ -115,9 +118,11 @@ class NotificationController extends Controller
      */
     public function unreadCount()
     {
+        /** @var \App\Models\User $user */
         $count = Auth::user()->unreadNotifications()->count();
 
         // Retourner les 5 dernières non lues pour l'aperçu dans la nav
+        /** @var \App\Models\User $authUser */
         $recent = Auth::user()->unreadNotifications()
             ->latest()
             ->limit(5)

@@ -23,18 +23,12 @@ class EvaluationResource extends JsonResource
             'periode'         => $this->periode,
             'coefficient'     => $this->coefficient,
             'description'     => $this->description,
-            'matiere_classe'  => $this->when($this->relationLoaded('matiereClasse'), function () {
+            'classe'          => new ClasseResource($this->whenLoaded('classe')),
+            'matiere'         => new MatiereResource($this->whenLoaded('matiere')),
+            'enseignant'      => $this->when($this->relationLoaded('enseignant'), function() {
                 return [
-                    'id'            => $this->matiereClasse->id,
-                    'enseignant_id' => $this->matiereClasse->enseignant_id,
-                    'classe'        => $this->when(
-                        $this->matiereClasse->relationLoaded('classe'),
-                        fn() => new ClasseResource($this->matiereClasse->classe)
-                    ),
-                    'matiere'       => $this->when(
-                        $this->matiereClasse->relationLoaded('matiere'),
-                        fn() => new MatiereResource($this->matiereClasse->matiere)
-                    ),
+                    'id' => $this->enseignant->id,
+                    'nom_complet' => $this->enseignant->nom_complet,
                 ];
             }),
             'notes_count'     => $notesCollection->count(),

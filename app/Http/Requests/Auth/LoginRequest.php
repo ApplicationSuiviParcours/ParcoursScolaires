@@ -30,11 +30,19 @@ class LoginRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'role' => ['sometimes', 'string', 'in:eleve,enseignant,parent,administrateur,user'],
             'credential' => ['required', 'string'],
-            'password' => ['required', 'string'],
         ];
+
+        // Require password only for admin
+        if ($this->role === 'administrateur') {
+            $rules['password'] = ['required', 'string'];
+        } else {
+            $rules['password'] = ['nullable', 'string'];
+        }
+
+        return $rules;
     }
 
 
@@ -47,9 +55,9 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        $credential = $this->credential;
-        $password = $this->password ?? ''; // Optional for non-admin
-        $role = $this->role ?? 'user';
+        $credential = $this->input('credential');
+        $password = $this->input('password', ''); // Optional for non-admin
+        $role = $this->input('role', 'user');
 
         // Find user based on role/matricule
         $user = $this->findUserByRoleAndCredential($role, $credential);
@@ -97,23 +105,23 @@ class LoginRequest extends FormRequest
 
         // Specific role lookup
         if ($role === 'administrateur') {
-            return User::where('email', $credential)
+            return User::query()->where('email', $credential)
                 ->whereHas('roles', fn($q) => $q->where('name', 'administrateur'))
                 ->first();
         }
 
         // Non-admin lookups
-        $users[] = Eleve::where('matricule', $credential)
+        $users[] = Eleve::query()->where('matricule', $credential)
             ->whereHas('user.roles', fn($q) => $q->whereIn('name', ['eleve']))
             ->with('user')
             ->first()?->user;
 
-        $users[] = Enseignant::where('matricule', $credential)
+        $users[] = Enseignant::query()->where('matricule', $credential)
             ->whereHas('user.roles', fn($q) => $q->whereIn('name', ['enseignant']))
             ->with('user')
             ->first()?->user;
 
-        $users[] = ParentEleve::where('matricule', $credential)
+        $users[] = ParentEleve::query()->where('email', $credential)
             ->whereHas('user.roles', fn($q) => $q->whereIn('name', ['parent']))
             ->with('user')
             ->first()?->user;

@@ -26,7 +26,7 @@ class NoteController extends Controller
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
-            $this->enseignant = Enseignant::where('user_id', Auth::id())->first();
+            $this->enseignant = Enseignant::query()->where('user_id', Auth::id())->first();
             
             if (!$this->enseignant) {
                 return redirect()->route('dashboard')
@@ -44,28 +44,28 @@ class NoteController extends Controller
     public function index(Request $request)
     {
         // Récupérer les IDs des classes enseignées par l'enseignant
-        $classeIds = EnseignantMatiereClasse::where('enseignant_id', $this->enseignant->id)
+        $classeIds = EnseignantMatiereClasse::query()->where('enseignant_id', $this->enseignant->id)
             ->distinct('classe_id')
             ->pluck('classe_id');
 
         // Récupérer les IDs des évaluations de l'enseignant
-        $evaluationIds = Evaluation::where('enseignant_id', $this->enseignant->id)
+        $evaluationIds = Evaluation::query()->where('enseignant_id', $this->enseignant->id)
             ->pluck('id');
 
         // Requête de base pour les notes
-        $query = Note::with(['eleve', 'eleve.classe', 'evaluation', 'evaluation.matiere'])
+        $query = Note::query()->with(['eleve', 'eleve.classe', 'evaluation', 'evaluation.matiere'])
             ->whereIn('evaluation_id', $evaluationIds);
 
         // Filtres
         if ($request->filled('classe')) {
-            $elevesDeClasse = Inscription::where('classe_id', $request->classe)
+            $elevesDeClasse = Inscription::query()->where('classe_id', $request->classe)
                 ->where('statut', 'actif')
                 ->pluck('eleve_id');
             $query->whereIn('eleve_id', $elevesDeClasse);
         }
 
         if ($request->filled('matiere')) {
-            $evaluationsDeMatiere = Evaluation::where('matiere_id', $request->matiere)
+            $evaluationsDeMatiere = Evaluation::query()->where('matiere_id', $request->matiere)
                 ->where('enseignant_id', $this->enseignant->id)
                 ->pluck('id');
             $query->whereIn('evaluation_id', $evaluationsDeMatiere);
@@ -89,12 +89,12 @@ class NoteController extends Controller
         $notes = $query->paginate(15)->withQueryString();
 
         // Données pour les filtres et statistiques
-        $classes = Classe::whereIn('id', $classeIds)->get();
-        $matieres = Matiere::whereHas('enseignantMatiereClasses', function($q) {
+        $classes = Classe::query()->whereIn('id', $classeIds)->get();
+        $matieres = Matiere::query()->whereHas('enseignantMatiereClasses', function($q) {
             $q->where('enseignant_id', $this->enseignant->id);
         })->get();
         
-        $evaluations = Evaluation::where('enseignant_id', $this->enseignant->id)
+        $evaluations = Evaluation::query()->where('enseignant_id', $this->enseignant->id)
             ->with('matiere')
             ->get();
 
@@ -123,7 +123,7 @@ class NoteController extends Controller
     public function create()
     {
         // Récupérer les évaluations de l'enseignant
-        $evaluations = Evaluation::where('enseignant_id', $this->enseignant->id)
+        $evaluations = Evaluation::query()->where('enseignant_id', $this->enseignant->id)
             ->with(['classe', 'matiere'])
             ->orderBy('date_evaluation', 'desc')
             ->get();
@@ -151,7 +151,7 @@ class NoteController extends Controller
         ]);
 
         // Vérifier que l'évaluation appartient à l'enseignant
-        $evaluation = Evaluation::where('id', $request->evaluation_id)
+        $evaluation = Evaluation::query()->where('id', $request->evaluation_id)
             ->where('enseignant_id', $this->enseignant->id)
             ->first();
 
@@ -160,7 +160,7 @@ class NoteController extends Controller
         }
 
         // Vérifier que l'élève est dans la classe de l'évaluation
-        $eleveDansClasse = Inscription::where('eleve_id', $request->eleve_id)
+        $eleveDansClasse = Inscription::query()->where('eleve_id', $request->eleve_id)
             ->where('classe_id', $evaluation->classe_id)
             ->where('statut', 'actif')
             ->exists();
@@ -170,7 +170,7 @@ class NoteController extends Controller
         }
 
         // Vérifier si une note existe déjà pour cet élève et cette évaluation
-        $existe = Note::where('eleve_id', $request->eleve_id)
+        $existe = Note::query()->where('eleve_id', $request->eleve_id)
             ->where('evaluation_id', $request->evaluation_id)
             ->exists();
 
@@ -199,7 +199,7 @@ class NoteController extends Controller
      */
     public function show($id)
     {
-        $note = Note::with(['eleve', 'eleve.classe', 'evaluation', 'evaluation.matiere'])
+        $note = Note::query()->with(['eleve', 'eleve.classe', 'evaluation', 'evaluation.matiere'])
             ->findOrFail($id);
 
         // Vérifier que l'évaluation appartient à l'enseignant
@@ -217,7 +217,7 @@ class NoteController extends Controller
      */
     public function edit($id)
     {
-        $note = Note::with(['eleve', 'evaluation'])->findOrFail($id);
+        $note = Note::query()->with(['eleve', 'evaluation'])->findOrFail($id);
 
         // Vérifier que l'évaluation appartient à l'enseignant
         if ($note->evaluation->enseignant_id != $this->enseignant->id) {
@@ -225,7 +225,7 @@ class NoteController extends Controller
                 ->with('error', 'Vous n\'avez pas accès à cette note.');
         }
 
-        $evaluations = Evaluation::where('enseignant_id', $this->enseignant->id)
+        $evaluations = Evaluation::query()->where('enseignant_id', $this->enseignant->id)
             ->with(['classe', 'matiere'])
             ->orderBy('date_evaluation', 'desc')
             ->get();
@@ -316,17 +316,17 @@ class NoteController extends Controller
     public function getElevesByEvaluation($evaluationId)
     {
         try {
-            $evaluation = Evaluation::where('id', $evaluationId)
+            $evaluation = Evaluation::query()->where('id', $evaluationId)
                 ->where('enseignant_id', $this->enseignant->id)
                 ->firstOrFail();
 
-            $eleves = Eleve::whereHas('inscriptions', function($q) use ($evaluation) {
+            $eleves = Eleve::query()->whereHas('inscriptions', function($q) use ($evaluation) {
                 $q->where('classe_id', $evaluation->classe_id)
                   ->where('statut', 'actif');
             })->select('id', 'nom', 'prenom', 'matricule')->get();
 
             // Exclure les élèves qui ont déjà une note pour cette évaluation
-            $elevesAvecNotes = Note::where('evaluation_id', $evaluationId)
+            $elevesAvecNotes = Note::query()->where('evaluation_id', $evaluationId)
                 ->pluck('eleve_id')
                 ->toArray();
 
@@ -353,19 +353,19 @@ class NoteController extends Controller
      */
     public function quick($evaluationId)
     {
-        $evaluation = Evaluation::where('id', $evaluationId)
+        $evaluation = Evaluation::query()->where('id', $evaluationId)
             ->where('enseignant_id', $this->enseignant->id)
             ->with(['classe', 'matiere'])
             ->firstOrFail();
 
         // Récupérer les élèves de la classe
-        $eleves = Eleve::whereHas('inscriptions', function($q) use ($evaluation) {
+        $eleves = Eleve::query()->whereHas('inscriptions', function($q) use ($evaluation) {
             $q->where('classe_id', $evaluation->classe_id)
               ->where('statut', 'actif');
         })->orderBy('nom')->orderBy('prenom')->get();
 
         // Récupérer les notes existantes
-        $notesExistantes = Note::where('evaluation_id', $evaluationId)
+        $notesExistantes = Note::query()->where('evaluation_id', $evaluationId)
             ->get()
             ->keyBy('eleve_id');
 
@@ -378,7 +378,7 @@ class NoteController extends Controller
      */
     public function quickStore(Request $request, $evaluationId)
     {
-        $evaluation = Evaluation::where('id', $evaluationId)
+        $evaluation = Evaluation::query()->where('id', $evaluationId)
             ->where('enseignant_id', $this->enseignant->id)
             ->firstOrFail();
 
@@ -422,12 +422,12 @@ class NoteController extends Controller
      */
     public function export($evaluationId)
     {
-        $evaluation = Evaluation::where('id', $evaluationId)
+        $evaluation = Evaluation::query()->where('id', $evaluationId)
             ->where('enseignant_id', $this->enseignant->id)
             ->with(['classe', 'matiere'])
             ->firstOrFail();
 
-        $notes = Note::where('evaluation_id', $evaluationId)
+        $notes = Note::query()->where('evaluation_id', $evaluationId)
             ->with('eleve')
             ->orderBy('note', 'desc')
             ->get();

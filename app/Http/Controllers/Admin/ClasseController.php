@@ -21,10 +21,10 @@ class ClasseController extends Controller
     public function index(Request $request)
     {
         // Récupérer l'année scolaire active
-        $anneeScolaire = AnneeScolaire::where('active', true)->first();
+        $anneeScolaire = AnneeScolaire::query()->where('active', true)->first();
         
         // Construire la requête de base
-        $query = Classe::with('anneeScolaire');
+        $query = Classe::query()->with('anneeScolaire');
         
         // Appliquer les filtres de recherche
         if ($request->has('search') && !empty($request->search)) {
@@ -59,10 +59,10 @@ class ClasseController extends Controller
         $totalCapacite = 0;
         
         foreach ($classes as $classe) {
-            $classe->eleves_count = Inscription::where('classe_id', $classe->id)
+            $classe->setAttribute('eleves_count', Inscription::query()->where('classe_id', $classe->id)
                 ->where('annee_scolaire_id', $classe->annee_scolaire_id)
-                ->where('statut', true) // Seulement les inscriptions actives
-                ->count();
+                ->whereIn('statut', ['inscrit', 'active', '1', 1, true]) // Seulement les inscriptions actives
+                ->count());
             
             $totalEleves += $classe->eleves_count;
             $totalCapacite += $classe->capacite;
@@ -72,7 +72,7 @@ class ClasseController extends Controller
         $tauxOccupationGlobal = $totalCapacite > 0 ? round(($totalEleves / $totalCapacite) * 100) : 0;
         
         // Récupérer toutes les années scolaires pour le filtre
-        $anneesScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
+        $anneesScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
 
         return view('admin.classes.index', compact(
             'classes', 
@@ -90,7 +90,7 @@ class ClasseController extends Controller
     public function create()
     {
         // Récupérer l'année scolaire active
-        $anneeScolaire = AnneeScolaire::where('active', true)->first();
+        $anneeScolaire = AnneeScolaire::query()->where('active', true)->first();
         
         if (!$anneeScolaire) {
             return redirect()->route('admin.classes.index')
@@ -117,7 +117,7 @@ class ClasseController extends Controller
             DB::beginTransaction();
 
             // Récupérer l'année scolaire active
-            $anneeScolaire = AnneeScolaire::where('active', true)->first();
+            $anneeScolaire = AnneeScolaire::query()->where('active', true)->first();
             
             if (!$anneeScolaire) {
                 return back()->withInput()
@@ -125,7 +125,7 @@ class ClasseController extends Controller
             }
 
             // Vérifier si une classe avec le même nom existe déjà pour cette année
-            $existingClasse = Classe::where('nom', $validated['nom'])
+            $existingClasse = Classe::query()->where('nom', $validated['nom'])
                 ->where('niveau', $validated['niveau'])
                 ->where('annee_scolaire_id', $anneeScolaire->id)
                 ->first();
@@ -166,9 +166,9 @@ class ClasseController extends Controller
         $classe->load(['anneeScolaire']);
         
         // Récupérer les élèves via les inscriptions
-        $inscriptions = Inscription::where('classe_id', $classe->id)
+        $inscriptions = Inscription::query()->where('classe_id', $classe->id)
             ->where('annee_scolaire_id', $classe->annee_scolaire_id)
-            ->where('statut', true)
+            ->whereIn('statut', ['inscrit', 'active', '1', 1, true])
             ->with('eleve')
             ->get();
 
@@ -198,7 +198,7 @@ class ClasseController extends Controller
     public function edit(Classe $classe)
     {
         // Récupérer toutes les années scolaires pour le sélecteur
-        $anneesScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
+        $anneesScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
         
         return view('admin.classes.edit', compact('classe', 'anneesScolaires'));
     }
@@ -221,7 +221,7 @@ class ClasseController extends Controller
             DB::beginTransaction();
 
             // Vérifier si une autre classe avec le même nom existe (sauf celle-ci)
-            $existingClasse = Classe::where('nom', $validated['nom'])
+            $existingClasse = Classe::query()->where('nom', $validated['nom'])
                 ->where('niveau', $validated['niveau'])
                 ->where('annee_scolaire_id', $validated['annee_scolaire_id'])
                 ->where('id', '!=', $classe->id)
@@ -233,9 +233,9 @@ class ClasseController extends Controller
             }
 
             // Vérifier que la nouvelle capacité est suffisante pour les élèves existants
-            $nbEleves = Inscription::where('classe_id', $classe->id)
+            $nbEleves = Inscription::query()->where('classe_id', $classe->id)
                 ->where('annee_scolaire_id', $classe->annee_scolaire_id)
-                ->where('statut', true)
+                ->whereIn('statut', ['inscrit', 'active', '1', 1, true])
                 ->count();
                 
             if ($validated['capacite'] < $nbEleves) {
@@ -274,9 +274,9 @@ class ClasseController extends Controller
             DB::beginTransaction();
 
             // Vérifier si la classe a des élèves via les inscriptions
-            $nbEleves = Inscription::where('classe_id', $classe->id)
+            $nbEleves = Inscription::query()->where('classe_id', $classe->id)
                 ->where('annee_scolaire_id', $classe->annee_scolaire_id)
-                ->where('statut', true)
+                ->whereIn('statut', ['inscrit', 'active', '1', 1, true])
                 ->count();
                 
             if ($nbEleves > 0) {
@@ -306,9 +306,9 @@ class ClasseController extends Controller
      */
     public function eleves(Classe $classe)
     {
-        $inscriptions = Inscription::where('classe_id', $classe->id)
+        $inscriptions = Inscription::query()->where('classe_id', $classe->id)
             ->where('annee_scolaire_id', $classe->annee_scolaire_id)
-            ->where('statut', true)
+            ->whereIn('statut', ['inscrit', 'active', '1', 1, true])
             ->with('eleve')
             ->paginate(15);
 
@@ -338,14 +338,14 @@ class ClasseController extends Controller
             DB::beginTransaction();
 
             // Récupérer la nouvelle année scolaire active
-            $nouvelleAnnee = AnneeScolaire::where('active', true)->first();
+            $nouvelleAnnee = AnneeScolaire::query()->where('active', true)->first();
             
             if (!$nouvelleAnnee) {
                 return back()->with('error', 'Aucune année scolaire active trouvée.');
             }
 
             // Vérifier si une classe similaire n'existe pas déjà
-            $existingClasse = Classe::where('nom', $classe->nom)
+            $existingClasse = Classe::query()->where('nom', $classe->nom)
                 ->where('niveau', $classe->niveau)
                 ->where('annee_scolaire_id', $nouvelleAnnee->id)
                 ->first();
@@ -383,7 +383,7 @@ class ClasseController extends Controller
     public function exportPdf(Request $request)
     {
         // Construire la requête avec les filtres
-        $query = Classe::with('anneeScolaire');
+        $query = Classe::query()->with('anneeScolaire');
         
         // Appliquer les filtres de recherche
         if ($request->has('search') && !empty($request->search)) {
@@ -405,7 +405,7 @@ class ClasseController extends Controller
             $query->where('annee_scolaire_id', $request->annee_scolaire_id);
         } else {
             // Par défaut, filtrer par année scolaire active
-            $anneeScolaire = AnneeScolaire::where('active', true)->first();
+            $anneeScolaire = AnneeScolaire::query()->where('active', true)->first();
             if ($anneeScolaire) {
                 $query->where('annee_scolaire_id', $anneeScolaire->id);
             }
@@ -418,10 +418,10 @@ class ClasseController extends Controller
         $totalCapacite = 0;
         
         foreach ($classes as $classe) {
-            $classe->eleves_count = Inscription::where('classe_id', $classe->id)
+            $classe->setAttribute('eleves_count', Inscription::query()->where('classe_id', $classe->id)
                 ->where('annee_scolaire_id', $classe->annee_scolaire_id)
-                ->where('statut', true)
-                ->count();
+                ->whereIn('statut', ['inscrit', 'active', '1', 1, true])
+                ->count());
             
             $totalEleves += $classe->eleves_count;
             $totalCapacite += $classe->capacite;
@@ -444,7 +444,7 @@ class ClasseController extends Controller
         if ($request->has('annee_scolaire_id') && !empty($request->annee_scolaire_id)) {
             $anneeScolaire = AnneeScolaire::find($request->annee_scolaire_id);
         } else {
-            $anneeScolaire = AnneeScolaire::where('active', true)->first();
+            $anneeScolaire = AnneeScolaire::query()->where('active', true)->first();
         }
         
         $pdf = Pdf::loadView('admin.classes.exports.pdf', compact('classes', 'stats', 'anneeScolaire'));
@@ -473,7 +473,7 @@ class ClasseController extends Controller
                 $filename .= '_' . str_replace('/', '-', $anneeScolaire->nom);
             }
         } else {
-            $anneeScolaire = AnneeScolaire::where('active', true)->first();
+            $anneeScolaire = AnneeScolaire::query()->where('active', true)->first();
             if ($anneeScolaire) {
                 $filename .= '_' . str_replace('/', '-', $anneeScolaire->nom);
             }
@@ -493,9 +493,9 @@ class ClasseController extends Controller
         $classe->load('anneeScolaire');
         
         // Récupérer les élèves via les inscriptions
-        $inscriptions = Inscription::where('classe_id', $classe->id)
+        $inscriptions = Inscription::query()->where('classe_id', $classe->id)
             ->where('annee_scolaire_id', $classe->annee_scolaire_id)
-            ->where('statut', true)
+            ->whereIn('statut', ['inscrit', 'active', '1', 1, true])
             ->with('eleve')
             ->get();
         
@@ -572,7 +572,7 @@ class ClasseController extends Controller
         if ($request && $request->has('annee_scolaire_id') && !empty($request->annee_scolaire_id)) {
             $query->where('annee_scolaire_id', $request->annee_scolaire_id);
         } else {
-            $anneeScolaire = AnneeScolaire::where('active', true)->first();
+            $anneeScolaire = AnneeScolaire::query()->where('active', true)->first();
             if ($anneeScolaire) {
                 $query->where('annee_scolaire_id', $anneeScolaire->id);
             }
@@ -583,10 +583,10 @@ class ClasseController extends Controller
         // Calculer le nombre d'élèves pour chaque classe via les inscriptions
         $totalEleves = 0;
         foreach ($classes as $classe) {
-            $classe->eleves_count = Inscription::where('classe_id', $classe->id)
+            $classe->setAttribute('eleves_count', Inscription::query()->where('classe_id', $classe->id)
                 ->where('annee_scolaire_id', $classe->annee_scolaire_id)
-                ->where('statut', true)
-                ->count();
+                ->whereIn('statut', ['inscrit', 'active', '1', 1, true])
+                ->count());
             $totalEleves += $classe->eleves_count;
         }
         

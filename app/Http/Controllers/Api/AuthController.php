@@ -51,6 +51,7 @@ class AuthController extends Controller
             }
         }
 
+        /** @var \App\Models\User $user */
         $user = Auth::user();
         $token = $user->createToken('mobile-app')->plainTextToken;
         $user->update(['last_login_at' => now()]);
@@ -70,24 +71,24 @@ class AuthController extends Controller
     private function findUserByRoleAndCredential($role, $credential)
     {
         if ($role === 'administrateur') {
-            return User::where('email', $credential)
+            return User::query()->where('email', $credential)
                 ->whereHas('roles', fn($q) => $q->where('name', 'administrateur'))
                 ->first();
         }
 
         // Non-admin lookups (Eleve, Enseignant, Parent)
-        $user = \App\Models\Eleve::where('matricule', $credential)
+        $user = \App\Models\Eleve::query()->where('matricule', $credential)
             ->whereHas('user.roles', fn($q) => $q->where('name', 'eleve'))
             ->with('user')->first()?->user;
 
         if (!$user) {
-            $user = \App\Models\Enseignant::where('matricule', $credential)
+            $user = \App\Models\Enseignant::query()->where('matricule', $credential)
                 ->whereHas('user.roles', fn($q) => $q->where('name', 'enseignant'))
                 ->with('user')->first()?->user;
         }
 
         if (!$user) {
-            $user = \App\Models\ParentEleve::where('matricule', $credential)
+            $user = \App\Models\ParentEleve::query()->where('matricule', $credential)
                 ->whereHas('user.roles', fn($q) => $q->where('name', 'parent'))
                 ->with('user')->first()?->user;
         }
@@ -110,6 +111,7 @@ class AuthController extends Controller
      */
     public function logout(): JsonResponse
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
         $user->tokens()->delete();
 

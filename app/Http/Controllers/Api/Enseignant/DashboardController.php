@@ -18,14 +18,15 @@ class DashboardController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
-        if (!$user->isEnseignant()) abort(403);
+        if (!$user || !$user->isEnseignant()) abort(403);
 
         $enseignant = $user->enseignant;
         if (!$enseignant) abort(404, 'Profil enseignant non trouvé.');
 
         // Classes enseignées (uniques)
-        $matiereClasses = EnseignantMatiereClasse::where('enseignant_id', $enseignant->id)
+        $matiereClasses = EnseignantMatiereClasse::query()->where('enseignant_id', $enseignant->id)
             ->with(['classe', 'matiere'])
             ->get();
 
@@ -42,7 +43,8 @@ class DashboardController extends Controller
             return [
                 'matiere_classe_id' => $item->id,
                 'classe_id'         => $classe->id,
-                'classe_nom'        => $classe->nom ?? $classe->nom_complet,
+                'classe_nom'        => $classe->nom,
+                'classe_nom_complet' => $classe->nom_complet,
                 'matiere_id'        => $matiere->id,
                 'matiere_nom'       => $matiere->nom,
                 'nb_eleves'         => $classe->eleves()->count(),
@@ -52,14 +54,8 @@ class DashboardController extends Controller
         $stats = [
             'total_classes'      => $classesUniques->count(),
             'total_eleves'       => $totalEleves,
-            'total_evaluations'  => Evaluation::whereHas(
-                'matiereClasse.enseignant',
-                fn($q) => $q->where('id', $enseignant->id)
-            )->count(),
-            'total_absences'     => Absence::whereHas(
-                'matiere.matiereClasses.enseignant',
-                fn($q) => $q->where('id', $enseignant->id)
-            )->count(),
+            'total_evaluations'  => Evaluation::query()->where('enseignant_id', $enseignant->id)->count(),
+            'total_absences'     => Absence::query()->whereIn('matiere_id', $matiereClasses->pluck('matiere_id'))->count(),
         ];
 
         return response()->json([

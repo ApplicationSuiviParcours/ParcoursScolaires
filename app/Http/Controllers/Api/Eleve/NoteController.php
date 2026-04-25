@@ -7,7 +7,7 @@ use App\Http\Resources\NoteResource;
 use App\Models\Note;
 use App\Models\Eleve;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
 class NoteController extends Controller
@@ -15,15 +15,16 @@ class NoteController extends Controller
     /**
      * List own notes with filters.
      */
-    public function index(Request $request): AnonymousResourceCollection
+    public function index(Request $request): JsonResponse
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
-        if (!$user->isEleve()) abort(403);
+        if (!$user || !$user->isEleve()) abort(403);
 
         $eleve = $user->eleve;
         if (!$eleve) abort(404);
 
-        $query = Note::where('eleve_id', $eleve->id)
+        $query = Note::query()->where('eleve_id', $eleve->id)
             ->with(['evaluation.matiere']);
 
         if ($request->filled('matiere_id')) {
@@ -39,15 +40,16 @@ class NoteController extends Controller
             $query->whereHas('evaluation', fn($q) => $q->where('date_evaluation', '<=', $request->date_fin));
         }
 
-        $notes = $query->orderBy('created_at', 'desc')->paginate(20);
-
+        $notes = $query->orderBy('created_at', 'desc')->get();
+        
         $stats = [
-            'total_notes' => Note::where('eleve_id', $eleve->id)->count(),
-            'moyenne_generale' => round(Note::where('eleve_id', $eleve->id)->avg('note') ?? 0, 2),
+            'total_notes' => Note::query()->where('eleve_id', $eleve->id)->count(),
+            'moyenne_generale' => round(Note::query()->where('eleve_id', $eleve->id)->avg('note') ?? 0, 2),
         ];
 
-        $notes->additional(['stats' => $stats]);
-
-        return NoteResource::collection($notes);
+        return response()->json([
+            'notes' => NoteResource::collection($notes),
+            'stats' => $stats,
+        ]);
     }
 }

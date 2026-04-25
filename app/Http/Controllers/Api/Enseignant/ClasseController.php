@@ -16,19 +16,20 @@ class ClasseController extends Controller
      */
     public function eleves($id): JsonResponse
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
-        if (!$user->isEnseignant()) abort(403);
+        if (!$user || !$user->isEnseignant()) abort(403);
 
         $enseignant = $user->enseignant;
         
         // Verify the teacher teaches this class
-        $teaches = EnseignantMatiereClasse::where('enseignant_id', $enseignant->id)
+        $teaches = EnseignantMatiereClasse::query()->where('enseignant_id', $enseignant->id)
             ->where('classe_id', $id)
             ->exists();
             
         if (!$teaches) abort(403, 'Vous n\'enseignez pas dans cette classe.');
 
-        $classe = Classe::with(['eleves' => function ($query) {
+        $classe = Classe::query()->with(['eleves' => function ($query) {
             $query->orderBy('nom')->orderBy('prenom');
         }])->findOrFail($id);
 

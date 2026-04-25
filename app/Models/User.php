@@ -233,6 +233,38 @@ class User extends Authenticatable
     }
 
     /**
+     * Accesseur pour is_admin
+     */
+    public function getIsAdminAttribute(): bool
+    {
+        return $this->isAdmin();
+    }
+
+    /**
+     * Accesseur pour is_enseignant
+     */
+    public function getIsEnseignantAttribute(): bool
+    {
+        return $this->isEnseignant();
+    }
+
+    /**
+     * Accesseur pour is_eleve
+     */
+    public function getIsEleveAttribute(): bool
+    {
+        return $this->isEleve();
+    }
+
+    /**
+     * Accesseur pour is_parent
+     */
+    public function getIsParentAttribute(): bool
+    {
+        return $this->isParent();
+    }
+
+    /**
      * Vérifie si l'utilisateur a plusieurs rôles
      */
     public function hasMultipleRoles(): bool
@@ -364,6 +396,12 @@ class User extends Authenticatable
     {
         if ($this->photo) {
             return asset('storage/' . $this->photo);
+        }
+
+        // Vérifier si le profil associé a une photo
+        $profile = $this->profile;
+        if ($profile && isset($profile->photo) && $profile->photo) {
+            return asset('storage/' . $profile->photo);
         }
 
         // Avatar par défaut avec les initiales via UI Avatars

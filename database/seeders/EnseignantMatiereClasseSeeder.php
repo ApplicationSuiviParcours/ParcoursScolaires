@@ -29,19 +29,23 @@ class EnseignantMatiereClasseSeeder extends Seeder
         $this->command->info('🔄 Creating exactly 10 enseignant-matiere-classe assignments...');
 
         $created = 0;
-        foreach ($enseignants as $index => $enseignant) {
-            $matiere = $matieres[$index % $matieres->count()];
-            $classe = $classes[$index % $classes->count()];
-            
-            EnseignantMatiereClasse::create([
-                'enseignant_id' => $enseignant->id,
-                'matiere_id' => $matiere->id,
-                'classe_id' => $classe->id,
-                'annee_scolaire_id' => $annee->id,
-            ]);
+        foreach ($enseignants as $enseignant) {
+            // Assign 2 distinct random assignments
+            $randomMatieres = $matieres->random(2);
+            $randomClasses = $classes->random(2);
 
-            $created++;
-            $this->command->line("✅ {$enseignant->prenom} {$enseignant->nom} → {$matiere->nom} ({$classe->nom_complet})");
+            foreach ([0, 1] as $i) {
+                EnseignantMatiereClasse::updateOrCreate(
+                    [
+                        'enseignant_id' => $enseignant->id,
+                        'matiere_id' => $randomMatieres[$i]->id,
+                        'classe_id' => $randomClasses[$i]->id,
+                    ],
+                    ['annee_scolaire_id' => $annee->id]
+                );
+                $created++;
+                $this->command->line("✅ {$enseignant->prenom} {$enseignant->nom} → {$randomMatieres[$i]->nom} ({$randomClasses[$i]->nom_complet})");
+            }
         }
 
         $this->command->info("✅ Exactly {$created} assignments created!");

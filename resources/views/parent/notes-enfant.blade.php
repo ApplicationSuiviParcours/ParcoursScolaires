@@ -315,12 +315,12 @@
                                 
                                 // Récupération de l'appréciation
                                 $appreciation = '-';
-                                if (!empty($note->appreciation)) {
+                                if (!empty($note->observation)) {
+                                    $appreciation = $note->observation;
+                                } elseif (!empty($note->appreciation)) {
                                     $appreciation = $note->appreciation;
-                                } elseif (!empty($note->evaluation) && !empty($note->evaluation->appreciation)) {
-                                    $appreciation = $note->evaluation->appreciation;
-                                } elseif (!empty($note->evaluation) && !empty($note->evaluation->commentaire)) {
-                                    $appreciation = $note->evaluation->commentaire;
+                                } elseif (!empty($note->evaluation) && !empty($note->evaluation->description)) {
+                                    $appreciation = $note->evaluation->description;
                                 }
                             @endphp
                             <tr class="transition-all duration-300 cursor-pointer group hover:bg-gradient-to-r hover:from-emerald-50/50 hover:to-teal-50/50">

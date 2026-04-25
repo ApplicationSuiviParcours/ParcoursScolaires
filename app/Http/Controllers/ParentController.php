@@ -33,7 +33,7 @@ class ParentController extends Controller
             return null;
         }
 
-        return ParentEleve::where('user_id', $user->id)->first();
+        return ParentEleve::query()->where('user_id', $user->id)->first();
     }
 
     private function verifierEnfant($parent, $eleve): bool
@@ -42,7 +42,7 @@ class ParentController extends Controller
             abort(403, 'Parent non trouvé.');
         }
 
-        $existe = EleveParent::where('parent_eleve_id', $parent->id)
+        $existe = EleveParent::query()->where('parent_eleve_id', $parent->id)
                             ->where('eleve_id', $eleve->id)
                             ->exists();
 
@@ -55,14 +55,14 @@ class ParentController extends Controller
 
     private function getEnfantsIds($parent): array
     {
-        return EleveParent::where('parent_eleve_id', $parent->id)
+        return EleveParent::query()->where('parent_eleve_id', $parent->id)
                          ->pluck('eleve_id')
                          ->toArray();
     }
 
     private function getEnfantsAvecRelations($parent)
     {
-        return EleveParent::with(['eleve' => function($query) {
+        return EleveParent::query()->with(['eleve' => function($query) {
                 $query->with([
                     'inscriptions.classe',
                     'inscriptions.anneeScolaire',
@@ -89,7 +89,7 @@ class ParentController extends Controller
         }
 
         $enfants = $this->getEnfantsAvecRelations($parent);
-        $relations = EleveParent::with('eleve')
+        $relations = EleveParent::query()->with('eleve')
                                 ->where('parent_eleve_id', $parent->id)
                                 ->get();
 
@@ -110,12 +110,12 @@ class ParentController extends Controller
 
         return [
             'total_enfants' => count($enfantsIds),
-            'total_notes' => Note::whereIn('eleve_id', $enfantsIds)->count(),
-            'total_absences' => Absence::whereIn('eleve_id', $enfantsIds)->count(),
-            'absences_non_justifiees' => Absence::whereIn('eleve_id', $enfantsIds)
+            'total_notes' => Note::query()->whereIn('eleve_id', $enfantsIds)->count(),
+            'total_absences' => Absence::query()->whereIn('eleve_id', $enfantsIds)->count(),
+            'absences_non_justifiees' => Absence::query()->whereIn('eleve_id', $enfantsIds)
                 ->where('justifiee', false)
                 ->count(),
-            'total_bulletins' => Bulletin::whereIn('eleve_id', $enfantsIds)->count(),
+            'total_bulletins' => Bulletin::query()->whereIn('eleve_id', $enfantsIds)->count(),
         ];
     }
 
@@ -125,17 +125,17 @@ class ParentController extends Controller
 
         foreach ($enfants as $enfant) {
             $donnees[$enfant->id] = [
-                'dernieres_notes' => Note::where('eleve_id', $enfant->id)
+                'dernieres_notes' => Note::query()->where('eleve_id', $enfant->id)
                     ->with(['evaluation.matiere'])
                     ->latest()
                     ->limit(5)
                     ->get(),
-                'dernieres_absences' => Absence::where('eleve_id', $enfant->id)
+                'dernieres_absences' => Absence::query()->where('eleve_id', $enfant->id)
                     ->with(['matiere'])
                     ->latest('date_absence')
                     ->limit(5)
                     ->get(),
-                'dernier_bulletin' => Bulletin::where('eleve_id', $enfant->id)
+                'dernier_bulletin' => Bulletin::query()->where('eleve_id', $enfant->id)
                     ->with(['anneeScolaire'])
                     ->latest()
                     ->first(),
@@ -158,7 +158,7 @@ class ParentController extends Controller
                 ->with('error', 'Aucun parent associé à ce compte.');
         }
 
-        $relations = EleveParent::with(['eleve' => function($query) {
+        $relations = EleveParent::query()->with(['eleve' => function($query) {
                 $query->with([
                     'inscriptions' => function($q) {
                         $q->with(['anneeScolaire', 'classe'])->latest();
@@ -183,9 +183,9 @@ class ParentController extends Controller
 
         $statsGlobales = [
             'total' => $enfants->count(),
-            'total_notes' => Note::whereIn('eleve_id', $enfants->pluck('id'))->count(),
-            'total_absences' => Absence::whereIn('eleve_id', $enfants->pluck('id'))->count(),
-            'total_bulletins' => Bulletin::whereIn('eleve_id', $enfants->pluck('id'))->count(),
+            'total_notes' => Note::query()->whereIn('eleve_id', $enfants->pluck('id'))->count(),
+            'total_absences' => Absence::query()->whereIn('eleve_id', $enfants->pluck('id'))->count(),
+            'total_bulletins' => Bulletin::query()->whereIn('eleve_id', $enfants->pluck('id'))->count(),
         ];
 
         return view('parent.enfants', compact('enfants', 'parent', 'statsGlobales'));
@@ -194,19 +194,19 @@ class ParentController extends Controller
     private function calculerStatsEnfant($eleveId): array
     {
         return [
-            'notes_count' => Note::where('eleve_id', $eleveId)->count(),
-            'absences_count' => Absence::where('eleve_id', $eleveId)->count(),
-            'absences_non_justifiees' => Absence::where('eleve_id', $eleveId)
+            'notes_count' => Note::query()->where('eleve_id', $eleveId)->count(),
+            'absences_count' => Absence::query()->where('eleve_id', $eleveId)->count(),
+            'absences_non_justifiees' => Absence::query()->where('eleve_id', $eleveId)
                 ->where('justifiee', false)
                 ->count(),
-            'bulletins_count' => Bulletin::where('eleve_id', $eleveId)->count(),
+            'bulletins_count' => Bulletin::query()->where('eleve_id', $eleveId)->count(),
             'moyenne_generale' => $this->calculerMoyenneEleve($eleveId),
         ];
     }
 
     private function calculerMoyenneEleve($eleveId): float
     {
-        $notes = Note::where('eleve_id', $eleveId)
+        $notes = Note::query()->where('eleve_id', $eleveId)
             ->whereHas('evaluation', function($query) {
                 $query->whereNotNull('matiere_id');
             })
@@ -236,7 +236,7 @@ class ParentController extends Controller
     {
         $parent = $this->verifierAccesParent($eleve);
 
-        $relation = EleveParent::where('parent_eleve_id', $parent->id)
+        $relation = EleveParent::query()->where('parent_eleve_id', $parent->id)
                                ->where('eleve_id', $eleve->id)
                                ->first();
 
@@ -283,7 +283,7 @@ class ParentController extends Controller
 
     private function getInscriptionActuelle(Eleve $eleve)
     {
-        return Inscription::where('eleve_id', $eleve->id)
+        return Inscription::query()->where('eleve_id', $eleve->id)
             ->with(['classe', 'anneeScolaire'])
             ->latest()
             ->first();
@@ -291,7 +291,7 @@ class ParentController extends Controller
 
     private function getNotesFiltrees(Request $request, Eleve $eleve, $inscription)
     {
-        $query = Note::where('eleve_id', $eleve->id)
+        $query = Note::query()->where('eleve_id', $eleve->id)
             ->whereHas('evaluation', function($q) use ($inscription) {
                 $q->where('classe_id', $inscription->classe_id);
             })
@@ -330,17 +330,17 @@ class ParentController extends Controller
     private function calculerStatsNotes(Eleve $eleve, $inscription): array
     {
         return [
-            'total_notes' => Note::where('eleve_id', $eleve->id)->count(),
+            'total_notes' => Note::query()->where('eleve_id', $eleve->id)->count(),
             'moyenne_generale' => $this->calculerMoyenneEleve($eleve->id),
             'moyenne_trimestre' => $this->calculerMoyenneTrimestre($eleve->id, $inscription->classe_id),
-            'note_min' => Note::where('eleve_id', $eleve->id)->min('note') ?? 0,
-            'note_max' => Note::where('eleve_id', $eleve->id)->max('note') ?? 0,
+            'note_min' => Note::query()->where('eleve_id', $eleve->id)->min('note') ?? 0,
+            'note_max' => Note::query()->where('eleve_id', $eleve->id)->max('note') ?? 0,
         ];
     }
 
     private function getMatieresClasse($classeId)
     {
-        return Matiere::whereHas('classeMatieres', function($q) use ($classeId) {
+        return Matiere::query()->whereHas('classeMatieres', function($q) use ($classeId) {
                 $q->where('classe_id', $classeId);
             })
             ->orderBy('nom')
@@ -351,7 +351,7 @@ class ParentController extends Controller
     {
         $trimestreActuel = $this->getTrimestreActuel();
 
-        $notes = Note::where('eleve_id', $eleveId)
+        $notes = Note::query()->where('eleve_id', $eleveId)
             ->whereHas('evaluation', function($query) use ($classeId, $trimestreActuel) {
                 $query->where('classe_id', $classeId)
                       ->where('periode', $trimestreActuel);
@@ -395,7 +395,7 @@ class ParentController extends Controller
     {
         $parent = $this->verifierAccesParent($eleve);
 
-        $relation = EleveParent::where('parent_eleve_id', $parent->id)
+        $relation = EleveParent::query()->where('parent_eleve_id', $parent->id)
                                ->where('eleve_id', $eleve->id)
                                ->first();
 
@@ -403,7 +403,7 @@ class ParentController extends Controller
 
         $absences = $this->getAbsencesFiltrees($request, $eleve);
         $stats = $this->calculerStatsAbsences($eleve);
-        $matieres = Matiere::orderBy('nom')->get();
+        $matieres = Matiere::query()->orderBy('nom')->get();
         $mois = $this->getMoisFrancais();
 
         return view('parent.absences-enfant', compact(
@@ -418,7 +418,7 @@ class ParentController extends Controller
 
     private function getAbsencesFiltrees(Request $request, Eleve $eleve)
     {
-        $query = Absence::where('eleve_id', $eleve->id)
+        $query = Absence::query()->where('eleve_id', $eleve->id)
             ->with(['matiere']);
 
         if ($request->filled('justifiee')) {
@@ -453,14 +453,14 @@ class ParentController extends Controller
     private function calculerStatsAbsences(Eleve $eleve): array
     {
         return [
-            'total' => Absence::where('eleve_id', $eleve->id)->count(),
-            'justifiees' => Absence::where('eleve_id', $eleve->id)->where('justifiee', true)->count(),
-            'non_justifiees' => Absence::where('eleve_id', $eleve->id)->where('justifiee', false)->count(),
-            'mois_courant' => Absence::where('eleve_id', $eleve->id)
+            'total' => Absence::query()->where('eleve_id', $eleve->id)->count(),
+            'justifiees' => Absence::query()->where('eleve_id', $eleve->id)->where('justifiee', true)->count(),
+            'non_justifiees' => Absence::query()->where('eleve_id', $eleve->id)->where('justifiee', false)->count(),
+            'mois_courant' => Absence::query()->where('eleve_id', $eleve->id)
                 ->whereMonth('date_absence', now()->month)
                 ->whereYear('date_absence', now()->year)
                 ->count(),
-            'annee_courante' => Absence::where('eleve_id', $eleve->id)
+            'annee_courante' => Absence::query()->where('eleve_id', $eleve->id)
                 ->whereYear('date_absence', now()->year)
                 ->count(),
         ];
@@ -482,7 +482,7 @@ class ParentController extends Controller
     {
         $parent = $this->verifierAccesParent($eleve);
 
-        $relation = EleveParent::where('parent_eleve_id', $parent->id)
+        $relation = EleveParent::query()->where('parent_eleve_id', $parent->id)
                                ->where('eleve_id', $eleve->id)
                                ->first();
 
@@ -490,7 +490,7 @@ class ParentController extends Controller
 
         $bulletins = $this->getBulletinsFiltres($request, $eleve);
         $stats = $this->calculerStatsBulletins($eleve->id);
-        $anneesScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
+        $anneesScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
         $periodes = ['Trimestre 1', 'Trimestre 2', 'Trimestre 3', 'Semestre 1', 'Semestre 2', 'Annuel'];
 
         return view('parent.bulletin-enfant', compact(
@@ -505,7 +505,7 @@ class ParentController extends Controller
 
     private function getBulletinsFiltres(Request $request, Eleve $eleve)
     {
-        $query = Bulletin::where('eleve_id', $eleve->id)
+        $query = Bulletin::query()->where('eleve_id', $eleve->id)
             ->with([
                 'classe',
                 'anneeScolaire',
@@ -531,15 +531,15 @@ class ParentController extends Controller
     private function calculerStatsBulletins($eleveId): array
     {
         return [
-            'total' => Bulletin::where('eleve_id', $eleveId)->count(),
-            'dernier' => Bulletin::where('eleve_id', $eleveId)->latest()->first(),
+            'total' => Bulletin::query()->where('eleve_id', $eleveId)->count(),
+            'dernier' => Bulletin::query()->where('eleve_id', $eleveId)->latest()->first(),
             'moyenne_globale' => $this->calculerMoyenneGlobaleBulletins($eleveId),
         ];
     }
 
     private function calculerMoyenneGlobaleBulletins($eleveId): float
     {
-        $bulletins = Bulletin::where('eleve_id', $eleveId)->get();
+        $bulletins = Bulletin::query()->where('eleve_id', $eleveId)->get();
 
         if ($bulletins->isEmpty()) {
             return 0;
@@ -564,7 +564,7 @@ class ParentController extends Controller
             abort(404, 'Bulletin non trouvé.');
         }
 
-        $relation = EleveParent::where('parent_eleve_id', $parent->id)
+        $relation = EleveParent::query()->where('parent_eleve_id', $parent->id)
                                ->where('eleve_id', $eleve->id)
                                ->first();
 
@@ -608,7 +608,7 @@ class ParentController extends Controller
     private function calculerMoyenneClasse(Bulletin $bulletin): float
     {
         // Récupérer tous les bulletins de la même classe, période et année scolaire
-        $bulletinsClasse = Bulletin::where('classe_id', $bulletin->classe_id)
+        $bulletinsClasse = Bulletin::query()->where('classe_id', $bulletin->classe_id)
             ->where('annee_scolaire_id', $bulletin->annee_scolaire_id)
             ->where('periode', $bulletin->periode)
             ->whereNotNull('moyenne_generale')
@@ -633,7 +633,7 @@ class ParentController extends Controller
             abort(404, 'Bulletin non trouvé.');
         }
 
-        $relation = EleveParent::where('parent_eleve_id', $parent->id)
+        $relation = EleveParent::query()->where('parent_eleve_id', $parent->id)
                                ->where('eleve_id', $eleve->id)
                                ->first();
 
@@ -761,7 +761,7 @@ class ParentController extends Controller
     {
         $parent = $this->verifierAccesParent($eleve);
 
-        $relation = EleveParent::where('parent_eleve_id', $parent->id)
+        $relation = EleveParent::query()->where('parent_eleve_id', $parent->id)
                                ->where('eleve_id', $eleve->id)
                                ->first();
 
@@ -800,7 +800,7 @@ class ParentController extends Controller
 
     private function getEmploiDuTemps(Request $request, $classe, $inscription)
     {
-        $query = EmploiDuTemps::where('classe_id', $classe->id)
+        $query = EmploiDuTemps::query()->where('classe_id', $classe->id)
             ->where(function($q) use ($inscription) {
                 $q->where('annee_scolaire_id', $inscription->annee_scolaire_id)
                   ->orWhereNull('annee_scolaire_id');
@@ -815,17 +815,28 @@ class ParentController extends Controller
             $query->where('semaine', $request->semaine);
         }
 
-        return $query->orderByRaw("FIELD(jour, 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi')")
+        return $query->orderBy('jour')
             ->orderBy('heure_debut')
             ->get();
     }
 
     private function organiserEmploiParJour($emploiDuTemps, $jours): array
     {
+        $joursMap = [
+            'Lundi' => 1,
+            'Mardi' => 2,
+            'Mercredi' => 3,
+            'Jeudi' => 4,
+            'Vendredi' => 5,
+            'Samedi' => 6,
+            'Dimanche' => 7,
+        ];
+
         $emploiParJour = [];
         foreach ($jours as $jour) {
-            $emploiParJour[$jour] = $emploiDuTemps->filter(function($cours) use ($jour) {
-                return $cours->jour == $jour;
+            $num = $joursMap[$jour] ?? $jour;
+            $emploiParJour[$jour] = $emploiDuTemps->filter(function($cours) use ($num) {
+                return (string)$cours->jour === (string)$num;
             })->values();
         }
         return $emploiParJour;
@@ -868,7 +879,7 @@ class ParentController extends Controller
                 ->with('error', 'Aucun parent associé à ce compte.');
         }
 
-        $existe = EleveParent::where('parent_eleve_id', $parent->id)
+        $existe = EleveParent::query()->where('parent_eleve_id', $parent->id)
                             ->where('eleve_id', $absence->eleve_id)
                             ->exists();
 

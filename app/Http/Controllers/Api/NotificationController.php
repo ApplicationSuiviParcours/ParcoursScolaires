@@ -14,7 +14,7 @@ class NotificationController extends Controller
      */
     public function index(Request $request)
     {
-        $notifications = Notification::where('user_id', Auth::id())
+        $notifications = Notification::query()->where('user_id', Auth::id())
             ->latest()
             ->paginate(20);
 
@@ -26,7 +26,7 @@ class NotificationController extends Controller
      */
     public function markAsRead($id)
     {
-        $notification = Notification::where('user_id', Auth::id())
+        $notification = Notification::query()->where('user_id', Auth::id())
             ->findOrFail($id);
 
         $notification->markAsRead();

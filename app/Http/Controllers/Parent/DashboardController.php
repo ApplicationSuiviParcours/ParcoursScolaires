@@ -15,9 +15,10 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
         
-        if (!$user->isParent()) {
+        if (!$user || !$user->isParent()) {
             abort(403, 'Accès non autorisé.');
         }
 
@@ -47,17 +48,17 @@ class DashboardController extends Controller
 
         foreach ($enfants as $enfant) {
             // Statistiques détaillées pour chaque enfant
-            $notes = Note::where('eleve_id', $enfant->id)
+            $notes = Note::query()->where('eleve_id', $enfant->id)
                 ->with(['evaluation.matiere'])
                 ->latest()
                 ->get();
 
-            $absences = Absence::where('eleve_id', $enfant->id)
+            $absences = Absence::query()->where('eleve_id', $enfant->id)
                 ->with(['matiere'])
                 ->latest('date_absence')
                 ->get();
 
-            $bulletins = Bulletin::where('eleve_id', $enfant->id)
+            $bulletins = Bulletin::query()->where('eleve_id', $enfant->id)
                 ->latest('date_bulletin')
                 ->get();
 
@@ -178,7 +179,7 @@ class DashboardController extends Controller
         ];
 
         foreach ($enfants as $enfant) {
-            $notes = Note::where('eleve_id', $enfant->id)
+            $notes = Note::query()->where('eleve_id', $enfant->id)
                 ->with('evaluation')
                 ->latest()
                 ->take(10)

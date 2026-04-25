@@ -49,39 +49,46 @@ class EleveSeeder extends Seeder
             $classe = $classes->random();
             $user = User::where('email', $data['email'])->first();
 
-$eleve = Eleve::create([
-                'user_id' => $user?->id,
-                'nom' => $data['nom'],
-                'prenom' => $data['prenom'],
-// Auto-generate proper matricule via model (ELE-2024-P0001 format)
-                'matricule' => Eleve::genererMatricule($data['nom']),
-                'date_naissance' => Carbon::now()->subYears(rand(10, 18)),
-                'lieu_naissance' => $this->villes[array_rand($this->villes)],
-                'genre' => $data['genre'],
-                'adresse' => rand(1, 100) . ' Rue du 13 Août, ' . $this->villes[array_rand($this->villes)],
-                'telephone' => '+24206' . rand(1000000, 9999999),
-                'email' => $data['email'],
-                'photo' => null,
-                'date_inscription' => $anneeScolaire->date_debut,
-                'statut' => true,
-            ]);
-
-            if ($user) {
-                $user->assignRole('eleve');
-                $this->command->line("✅ Assigned 'eleve' role to user {$user->email}");
+            if (!$user) {
+                $this->command->warn("⚠️ No user for {$data['email']}, skipping...");
+                continue;
             }
 
-            // Create inscription
-Inscription::create([
-                'eleve_id' => $eleve->id,
-                'classe_id' => $classe->id,
-                'annee_scolaire_id' => $anneeScolaire->id,
-                'date_inscription' => $anneeScolaire->date_debut,
-                'statut' => true,
-            ]);
+            $eleve = Eleve::updateOrCreate(
+                ['email' => $data['email']],
+                [
+                    'user_id' => $user->id,
+                    'nom' => $data['nom'],
+                    'prenom' => $data['prenom'],
+                    'matricule' => Eleve::genererMatricule($data['nom']),
+                    'date_naissance' => Carbon::now()->subYears(rand(10, 18)),
+                    'lieu_naissance' => $this->villes[array_rand($this->villes)],
+                    'genre' => $data['genre'],
+                    'adresse' => rand(1, 100) . ' Rue du 13 Août, ' . $this->villes[array_rand($this->villes)],
+                    'telephone' => '+24206' . rand(1000000, 9999999),
+                    'photo' => null,
+                    'date_inscription' => $anneeScolaire->date_debut,
+                    'statut' => true,
+                ]
+            );
 
-$created++;
-            $this->command->line("✅ {$data['prenom']} {$data['nom']} in {$classe->nom_complet}" . ($user ? ' [user]' : ''));
+            $user->assignRole('eleve');
+
+            // Create inscription
+            Inscription::updateOrCreate(
+                [
+                    'eleve_id' => $eleve->id,
+                    'annee_scolaire_id' => $anneeScolaire->id,
+                ],
+                [
+                    'classe_id' => $classe->id,
+                    'date_inscription' => $anneeScolaire->date_debut,
+                    'statut' => true,
+                ]
+            );
+
+            $created++;
+            $this->command->line("✅ {$data['prenom']} {$data['nom']} in {$classe->nom_complet} [linked user]");
         }
 
         $this->command->info("✅ Exactly {$created} élèves created!");

@@ -24,7 +24,7 @@ class EnseignantMatiereClasseAdminController extends Controller
         $matiere_id = $request->get('matiere_id');
         $annee_scolaire_id = $request->get('annee_scolaire_id');
 
-        $affectations = EnseignantMatiereClasse::with([
+        $affectations = EnseignantMatiereClasse::query()->with([
                 'enseignant.user', 
                 'matiere', 
                 'classe', 
@@ -84,16 +84,16 @@ class EnseignantMatiereClasseAdminController extends Controller
         ];
 
         // Données pour les filtres
-        $enseignants = Enseignant::with('user')
+        $enseignants = Enseignant::query()->with('user')
             ->orderBy('nom')
             ->orderBy('prenom')
             ->get();
             
-        $classes = Classe::orderBy('nom')->get();
-        $matieres = Matiere::orderBy('nom')->get();
+        $classes = Classe::query()->orderBy('nom')->get();
+        $matieres = Matiere::query()->orderBy('nom')->get();
         
         // ✅ CORRECTION : Remplacer 'annee' par la colonne appropriée
-        $anneeScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
+        $anneeScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
 
         return view('admin.enseignant_matiere_classes.index', compact(
             'affectations', 
@@ -115,15 +115,15 @@ class EnseignantMatiereClasseAdminController extends Controller
      */
     public function create()
     {
-        $enseignants = Enseignant::with('user')
+        $enseignants = Enseignant::query()->with('user')
             ->orderBy('nom')
             ->orderBy('prenom')
             ->get();
             
-        $classes = Classe::orderBy('nom')->get();
-        $matieres = Matiere::orderBy('nom')->get();
+        $classes = Classe::query()->orderBy('nom')->get();
+        $matieres = Matiere::query()->orderBy('nom')->get();
         
-        $anneeScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
+        $anneeScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
 
         return view('admin.enseignant_matiere_classes.create', compact(
             'enseignants', 'classes', 'matieres', 'anneeScolaires'
@@ -143,7 +143,7 @@ class EnseignantMatiereClasseAdminController extends Controller
         ]);
 
         // Vérifier si l'affectation existe déjà
-        $existing = EnseignantMatiereClasse::where('enseignant_id', $validated['enseignant_id'])
+        $existing = EnseignantMatiereClasse::query()->where('enseignant_id', $validated['enseignant_id'])
             ->where('matiere_id', $validated['matiere_id'])
             ->where('classe_id', $validated['classe_id'])
             ->where('annee_scolaire_id', $validated['annee_scolaire_id'])
@@ -181,7 +181,7 @@ class EnseignantMatiereClasseAdminController extends Controller
         ]);
         
         // Vérifier si l'enseignant a d'autres affectations
-        $autresAffectations = EnseignantMatiereClasse::where('enseignant_id', $enseignantMatiereClasse->enseignant_id)
+        $autresAffectations = EnseignantMatiereClasse::query()->where('enseignant_id', $enseignantMatiereClasse->enseignant_id)
             ->where('id', '!=', $enseignantMatiereClasse->id)
             ->with(['matiere', 'classe', 'anneeScolaire'])
             ->limit(5)
@@ -198,15 +198,15 @@ class EnseignantMatiereClasseAdminController extends Controller
      */
     public function edit(EnseignantMatiereClasse $enseignantMatiereClasse)
     {
-        $enseignants = Enseignant::with('user')
+        $enseignants = Enseignant::query()->with('user')
             ->orderBy('nom')
             ->orderBy('prenom')
             ->get();
             
-        $classes = Classe::orderBy('nom')->get();
-        $matieres = Matiere::orderBy('nom')->get();
+        $classes = Classe::query()->orderBy('nom')->get();
+        $matieres = Matiere::query()->orderBy('nom')->get();
         
-        $anneeScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
+        $anneeScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
 
         return view('admin.enseignant_matiere_classes.edit', compact(
             'enseignantMatiereClasse', 
@@ -230,7 +230,7 @@ class EnseignantMatiereClasseAdminController extends Controller
         ]);
 
         // Vérifier si l'affectation existe déjà (en excluant l'enregistrement actuel)
-        $existing = EnseignantMatiereClasse::where('enseignant_id', $validated['enseignant_id'])
+        $existing = EnseignantMatiereClasse::query()->where('enseignant_id', $validated['enseignant_id'])
             ->where('matiere_id', $validated['matiere_id'])
             ->where('classe_id', $validated['classe_id'])
             ->where('annee_scolaire_id', $validated['annee_scolaire_id'])
@@ -283,7 +283,7 @@ class EnseignantMatiereClasseAdminController extends Controller
     {
         $search = $request->get('search', '');
         
-        $affectations = EnseignantMatiereClasse::with(['enseignant', 'matiere', 'classe', 'anneeScolaire'])
+        $affectations = EnseignantMatiereClasse::query()->with(['enseignant', 'matiere', 'classe', 'anneeScolaire'])
             ->when($search, function ($query) use ($search) {
                 $query->whereHas('enseignant', function ($q) use ($search) {
                     $q->where('nom', 'like', "%{$search}%")
@@ -318,7 +318,7 @@ class EnseignantMatiereClasseAdminController extends Controller
             'ignore_id' => 'nullable|exists:enseignant_matiere_classe,id',
         ]);
 
-        $query = EnseignantMatiereClasse::where('enseignant_id', $request->enseignant_id)
+        $query = EnseignantMatiereClasse::query()->where('enseignant_id', $request->enseignant_id)
             ->where('matiere_id', $request->matiere_id)
             ->where('classe_id', $request->classe_id)
             ->where('annee_scolaire_id', $request->annee_scolaire_id);

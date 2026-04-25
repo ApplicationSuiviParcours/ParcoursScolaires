@@ -26,8 +26,11 @@ class EmploiDuTemps extends Model
     ];
 
     protected $casts = [
-        'heure_debut' => 'datetime:H:i',
-        'heure_fin' => 'datetime:H:i',
+        'jour' => 'integer',
+        // On retire les casts datetime car ils ajoutent la date du jour (2026-...) 
+        // ce qui casse les substr(0,5) dans les vues et l'app mobile
+        'heure_debut' => 'string',
+        'heure_fin' => 'string',
     ];
 
     public function classe(): BelongsTo

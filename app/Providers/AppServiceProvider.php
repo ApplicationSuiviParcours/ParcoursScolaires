@@ -3,6 +3,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\User;
@@ -18,6 +19,9 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        // Désactiver l'enveloppement 'data' pour les ressources API
+        JsonResource::withoutWrapping();
+
         // Partage des données avec toutes les vues
         View::composer('*', function ($view) {
             // Valeurs par défaut
@@ -26,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
             $notifications = collect([]);
             $unreadNotifications = collect([]);
             // Année scolaire par défaut en cas d'absence
-            $anneeScolaireActive = \App\Models\AnneeScolaire::where('active', true)->first();
+            $anneeScolaireActive = \App\Models\AnneeScolaire::query()->where('active', true)->first();
 
             if (auth()->check()) {
                 /** @var \App\Models\User $user */

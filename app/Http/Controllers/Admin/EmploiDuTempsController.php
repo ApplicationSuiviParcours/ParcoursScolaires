@@ -21,7 +21,7 @@ class EmploiDuTempsController extends Controller
         $anneeScolaireId = $request->get('annee_scolaire_id');
         
         if (!$anneeScolaireId) {
-            $activeAnnee = AnneeScolaire::where('active', true)->first();
+            $activeAnnee = AnneeScolaire::query()->where('active', true)->first();
             if ($activeAnnee) {
                 $anneeScolaireId = $activeAnnee->id;
             }
@@ -30,12 +30,12 @@ class EmploiDuTempsController extends Controller
         $enseignantId = $request->get('enseignant_id');
         $jour = $request->get('jour');
         
-        $anneeScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
-        $classes = Classe::orderBy('nom')->get();
-        $enseignants = Enseignant::orderBy('nom')->get(); // AJOUT IMPORTANT
-        $matieres = Matiere::orderBy('nom')->get();
+        $anneeScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
+        $classes = Classe::query()->orderBy('nom')->get();
+        $enseignants = Enseignant::query()->orderBy('nom')->get(); // AJOUT IMPORTANT
+        $matieres = Matiere::query()->orderBy('nom')->get();
         
-        $emplois = EmploiDuTemps::with(['classe', 'matiere', 'enseignant'])
+        $emplois = EmploiDuTemps::query()->with(['classe', 'matiere', 'enseignant'])
             ->when($classeId, function ($query) use ($classeId) {
                 return $query->where('classe_id', $classeId);
             })
@@ -74,20 +74,20 @@ class EmploiDuTempsController extends Controller
         $anneeScolaireId = $request->get('annee_scolaire_id');
         
         if (!$anneeScolaireId) {
-            $activeAnnee = AnneeScolaire::where('active', true)->first();
+            $activeAnnee = AnneeScolaire::query()->where('active', true)->first();
             if ($activeAnnee) {
                 $anneeScolaireId = $activeAnnee->id;
             }
         }
         
-        $anneeScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
-        $classes = Classe::orderBy('nom')->get();
-        $enseignants = Enseignant::orderBy('nom')->get(); // AJOUT
+        $anneeScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
+        $classes = Classe::query()->orderBy('nom')->get();
+        $enseignants = Enseignant::query()->orderBy('nom')->get(); // AJOUT
         
         $emplois = [];
         
         if ($classeId && $anneeScolaireId) {
-            $emplois = EmploiDuTemps::where('classe_id', $classeId)
+            $emplois = EmploiDuTemps::query()->where('classe_id', $classeId)
                 ->where('annee_scolaire_id', $anneeScolaireId)
                 ->with(['matiere', 'enseignant'])
                 ->orderBy('jour')
@@ -115,20 +115,20 @@ class EmploiDuTempsController extends Controller
         $anneeScolaireId = $request->get('annee_scolaire_id');
         
         if (!$anneeScolaireId) {
-            $activeAnnee = AnneeScolaire::where('active', true)->first();
+            $activeAnnee = AnneeScolaire::query()->where('active', true)->first();
             if ($activeAnnee) {
                 $anneeScolaireId = $activeAnnee->id;
             }
         }
         
-        $anneeScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
-        $enseignants = Enseignant::orderBy('nom')->get();
-        $classes = Classe::orderBy('nom')->get(); // AJOUT
+        $anneeScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
+        $enseignants = Enseignant::query()->orderBy('nom')->get();
+        $classes = Classe::query()->orderBy('nom')->get(); // AJOUT
         
         $emplois = [];
         
         if ($enseignantId && $anneeScolaireId) {
-            $emplois = EmploiDuTemps::where('enseignant_id', $enseignantId)
+            $emplois = EmploiDuTemps::query()->where('enseignant_id', $enseignantId)
                 ->where('annee_scolaire_id', $anneeScolaireId)
                 ->with(['matiere', 'classe'])
                 ->orderBy('jour')
@@ -152,10 +152,10 @@ class EmploiDuTempsController extends Controller
      */
     public function create()
     {
-        $classes = Classe::orderBy('nom')->get();
-        $matieres = Matiere::orderBy('nom')->get();
-        $enseignants = Enseignant::orderBy('nom')->get();
-        $anneeScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
+        $classes = Classe::query()->orderBy('nom')->get();
+        $matieres = Matiere::query()->orderBy('nom')->get();
+        $enseignants = Enseignant::query()->orderBy('nom')->get();
+        $anneeScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
         
         return view('admin.emploi_du_temps.create', compact('classes', 'matieres', 'enseignants', 'anneeScolaires'));
     }
@@ -178,7 +178,7 @@ class EmploiDuTempsController extends Controller
 
         EmploiDuTemps::create($validated);
 
-        return redirect()->route('admin.emploi-du-temps.index')
+        return redirect()->route('admin.emploi_du_temps.index')
             ->with('success', 'Cours ajouté à l\'emploi du temps avec succès.');
     }
 
@@ -197,10 +197,10 @@ class EmploiDuTempsController extends Controller
      */
     public function edit(EmploiDuTemps $emploiDuTemps)
     {
-        $classes = Classe::orderBy('nom')->get();
-        $matieres = Matiere::orderBy('nom')->get();
-        $enseignants = Enseignant::orderBy('nom')->get();
-        $anneeScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
+        $classes = Classe::query()->orderBy('nom')->get();
+        $matieres = Matiere::query()->orderBy('nom')->get();
+        $enseignants = Enseignant::query()->orderBy('nom')->get();
+        $anneeScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
         
         return view('admin.emploi_du_temps.edit', compact('emploiDuTemps', 'classes', 'matieres', 'enseignants', 'anneeScolaires'));
     }

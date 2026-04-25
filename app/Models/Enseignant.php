@@ -136,7 +136,7 @@ class Enseignant extends Model
      */
     public function scopeActifs($query)
     {
-        return $query->where('statut', true);
+        return $query->whereIn('statut', ['inscrit', 'active', '1', 1, true]);
     }
 
     /**

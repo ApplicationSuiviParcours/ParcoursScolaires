@@ -19,10 +19,11 @@ class UserController extends Controller
      */
     public function index(Request $request): AnonymousResourceCollection
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
-        if (!$user->isAdmin()) abort(403);
+        if (!$user || !$user->isAdmin()) abort(403);
 
-        $query = User::with('roles');
+        $query = User::query()->with('roles');
 
         if ($request->filled('role')) {
             $query->role($request->role);
@@ -38,8 +39,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
-        if (!$user->isAdmin()) abort(403);
+        if (!$user || !$user->isAdmin()) abort(403);
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
@@ -70,8 +72,9 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
-        if (!$user->isAdmin()) abort(403);
+        if (!$user || !$user->isAdmin()) abort(403);
 
         $targetUser = User::findOrFail($id);
 
@@ -109,8 +112,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
-        if (!$user->isAdmin()) abort(403);
+        if (!$user || !$user->isAdmin()) abort(403);
 
         $targetUser = User::findOrFail($id);
         if ($targetUser->isAdmin() && User::role('administrateur')->count() === 1) {

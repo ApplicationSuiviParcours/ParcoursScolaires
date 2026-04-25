@@ -16,14 +16,15 @@ class BulletinController extends Controller
 {
     public function index(Request $request, Eleve $eleve)
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
         
-        if (!$user->isParent()) {
+        if (!$user || !$user->isParent()) {
             abort(403, 'Accès non autorisé.');
         }
 
         // Récupérer les bulletins de l'élève
-        $query = Bulletin::where('eleve_id', $eleve->id)
+        $query = Bulletin::query()->where('eleve_id', $eleve->id)
             ->with(['classe', 'anneeScolaire']);
 
         // Appliquer les filtres
@@ -37,27 +38,27 @@ class BulletinController extends Controller
         $bulletins = $query->orderBy('date_bulletin', 'desc')->paginate(12);
 
         // Récupérer les périodes distinctes pour les filtres
-        $periodes = Bulletin::where('eleve_id', $eleve->id)
+        $periodes = Bulletin::query()->where('eleve_id', $eleve->id)
             ->distinct('periode')
             ->pluck('periode')
             ->filter()
             ->values();
 
         // Récupérer les années scolaires qui ont des bulletins
-        $anneeScolaireIds = Bulletin::where('eleve_id', $eleve->id)
+        $anneeScolaireIds = Bulletin::query()->where('eleve_id', $eleve->id)
             ->whereNotNull('annee_scolaire_id')
             ->distinct('annee_scolaire_id')
             ->pluck('annee_scolaire_id');
 
-        $anneesScolaires = AnneeScolaire::whereIn('id', $anneeScolaireIds)
+        $anneesScolaires = AnneeScolaire::query()->whereIn('id', $anneeScolaireIds)
             ->orderBy('date_debut', 'desc')
             ->get();
 
         // Statistiques
         $stats = [
-            'total' => Bulletin::where('eleve_id', $eleve->id)->count(),
-            'moyenne_globale' => round(Bulletin::where('eleve_id', $eleve->id)->avg('moyenne_generale') ?? 0, 2),
-            'dernier' => Bulletin::where('eleve_id', $eleve->id)
+            'total' => Bulletin::query()->where('eleve_id', $eleve->id)->count(),
+            'moyenne_globale' => round(Bulletin::query()->where('eleve_id', $eleve->id)->avg('moyenne_generale') ?? 0, 2),
+            'dernier' => Bulletin::query()->where('eleve_id', $eleve->id)
                 ->latest('date_bulletin')
                 ->first(),
         ];
@@ -67,8 +68,9 @@ class BulletinController extends Controller
 
     public function show(Eleve $eleve, Bulletin $bulletin)
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
-        if (!$user->isParent()) abort(403, 'Accès non autorisé.');
+        if (!$user || !$user->isParent()) abort(403, 'Accès non autorisé.');
         if ($bulletin->eleve_id !== $eleve->id) abort(404);
 
         return view('parent.bulletin-detail', $this->getBulletinData($eleve, $bulletin));
@@ -76,8 +78,9 @@ class BulletinController extends Controller
 
     public function imprimer(Eleve $eleve, Bulletin $bulletin)
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
-        if (!$user->isParent()) abort(403, 'Accès non autorisé.');
+        if (!$user || !$user->isParent()) abort(403, 'Accès non autorisé.');
         if ($bulletin->eleve_id !== $eleve->id) abort(404);
 
         return view('admin.bulletins.print', $this->getBulletinData($eleve, $bulletin));
@@ -85,8 +88,9 @@ class BulletinController extends Controller
 
     public function telecharger(Eleve $eleve, Bulletin $bulletin)
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
-        if (!$user->isParent()) abort(403, 'Accès non autorisé.');
+        if (!$user || !$user->isParent()) abort(403, 'Accès non autorisé.');
         if ($bulletin->eleve_id !== $eleve->id) abort(404);
 
         $data = $this->getBulletinData($eleve, $bulletin);
@@ -150,7 +154,7 @@ class BulletinController extends Controller
         // MÉTHODE 3: Récupérer toutes les notes de l'élève pour cette période
         if ($notes->isEmpty()) {
             try {
-                $notes = Note::where('eleve_id', $eleve->id)
+                $notes = Note::query()->where('eleve_id', $eleve->id)
                     ->whereHas('evaluation', function($q) use ($bulletin) {
                         $q->where('annee_scolaire_id', $bulletin->annee_scolaire_id)
                           ->where('periode', $bulletin->periode);
@@ -167,7 +171,7 @@ class BulletinController extends Controller
         // MÉTHODE 4: Récupérer toutes les notes de l'élève sans filtre
         if ($notes->isEmpty()) {
             try {
-                $notes = Note::where('eleve_id', $eleve->id)
+                $notes = Note::query()->where('eleve_id', $eleve->id)
                     ->with(['evaluation.matiere'])
                     ->get();
                 Log::info('Méthode 4 - notes trouvées: ' . $notes->count());
@@ -277,7 +281,7 @@ class BulletinController extends Controller
             ($totalCoefficients > 0 ? round($totalPoints / $totalCoefficients, 2) : 0);
 
         // Calculer la moyenne de la classe
-        $moyenneClasse = Bulletin::where('classe_id', $bulletin->classe_id)
+        $moyenneClasse = Bulletin::query()->where('classe_id', $bulletin->classe_id)
             ->where('periode', $bulletin->periode)
             ->where('annee_scolaire_id', $bulletin->annee_scolaire_id)
             ->avg('moyenne_generale') ?? 0;

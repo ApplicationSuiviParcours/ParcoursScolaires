@@ -13,13 +13,14 @@ class AbsenceController extends Controller
 {
     public function index(Request $request, Eleve $eleve)
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
         
-        if (!$user->isParent()) {
+        if (!$user || !$user->isParent()) {
             abort(403, 'Accès non autorisé.');
         }
 
-        $query = Absence::where('eleve_id', $eleve->id)
+        $query = Absence::query()->where('eleve_id', $eleve->id)
             ->with(['matiere']);
 
         // Filtres
@@ -45,16 +46,16 @@ class AbsenceController extends Controller
         $absences = $query->orderBy('date_absence', 'desc')->paginate(15);
 
         $stats = [
-            'total' => Absence::where('eleve_id', $eleve->id)->count(),
-            'justifiees' => Absence::where('eleve_id', $eleve->id)->where('justifiee', true)->count(),
-            'non_justifiees' => Absence::where('eleve_id', $eleve->id)->where('justifiee', false)->count(),
-            'mois_courant' => Absence::where('eleve_id', $eleve->id)
+            'total' => Absence::query()->where('eleve_id', $eleve->id)->count(),
+            'justifiees' => Absence::query()->where('eleve_id', $eleve->id)->where('justifiee', true)->count(),
+            'non_justifiees' => Absence::query()->where('eleve_id', $eleve->id)->where('justifiee', false)->count(),
+            'mois_courant' => Absence::query()->where('eleve_id', $eleve->id)
                 ->whereMonth('date_absence', now()->month)
                 ->whereYear('date_absence', now()->year)
                 ->count(),
         ];
 
-        $matieres = Matiere::whereHas('absences', function($q) use ($eleve) {
+        $matieres = Matiere::query()->whereHas('absences', function($q) use ($eleve) {
             $q->where('eleve_id', $eleve->id);
         })->get();
 
@@ -73,9 +74,10 @@ class AbsenceController extends Controller
 
     public function justifier(Request $request, Absence $absence)
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
         
-        if (!$user->isParent()) {
+        if (!$user || !$user->isParent()) {
             abort(403, 'Accès non autorisé.');
         }
 

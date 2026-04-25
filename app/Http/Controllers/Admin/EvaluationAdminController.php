@@ -22,7 +22,7 @@ class EvaluationAdminController extends Controller
         $matiere_id = $request->get('matiere_id');
         $periode = $request->get('periode');
         
-        $evaluations = Evaluation::with(['classe', 'matiere', 'anneeScolaire', 'enseignant'])
+        $evaluations = Evaluation::query()->with(['classe', 'matiere', 'anneeScolaire', 'enseignant'])
             ->when($search, function ($query) use ($search) {
                 return $query->where('nom', 'like', "%{$search}%")
                              ->orWhere('description', 'like', "%{$search}%");
@@ -39,8 +39,8 @@ class EvaluationAdminController extends Controller
             ->orderBy('date_evaluation', 'desc')
             ->paginate(15);
 
-        $classes = Classe::orderBy('nom')->get();
-        $matieres = Matiere::orderBy('nom')->get();
+        $classes = Classe::query()->orderBy('nom')->get();
+        $matieres = Matiere::query()->orderBy('nom')->get();
         
         return view('admin.evaluations.index', compact(
             'evaluations', 'search', 'classe_id', 'matiere_id', 'periode',
@@ -53,11 +53,11 @@ class EvaluationAdminController extends Controller
      */
     public function create()
     {
-        $classes = Classe::orderBy('nom')->get();
-        $matieres = Matiere::orderBy('nom')->get();
+        $classes = Classe::query()->orderBy('nom')->get();
+        $matieres = Matiere::query()->orderBy('nom')->get();
         
         // CORRECTION: Utiliser 'nom' au lieu de 'annee'
-        $anneeScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
+        $anneeScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
 
         return view('admin.evaluations.create', compact('classes', 'matieres', 'anneeScolaires'));
     }
@@ -119,11 +119,11 @@ class EvaluationAdminController extends Controller
                 ->with('error', 'Vous n\'êtes pas autorisé à modifier cette évaluation.');
         }
 
-        $classes = Classe::orderBy('nom')->get();
-        $matieres = Matiere::orderBy('nom')->get();
+        $classes = Classe::query()->orderBy('nom')->get();
+        $matieres = Matiere::query()->orderBy('nom')->get();
         
         // CORRECTION: Utiliser 'nom' au lieu de 'annee'
-        $anneeScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
+        $anneeScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
         
         return view('admin.evaluations.edit', compact('evaluation', 'classes', 'matieres', 'anneeScolaires'));
     }
@@ -186,7 +186,7 @@ class EvaluationAdminController extends Controller
      */
     public function upcoming()
     {
-        $evaluations = Evaluation::with(['classe', 'matiere'])
+        $evaluations = Evaluation::query()->with(['classe', 'matiere'])
             ->upcoming()
             ->orderBy('date_evaluation')
             ->paginate(15);
@@ -199,7 +199,7 @@ class EvaluationAdminController extends Controller
      */
     public function past()
     {
-        $evaluations = Evaluation::with(['classe', 'matiere'])
+        $evaluations = Evaluation::query()->with(['classe', 'matiere'])
             ->past()
             ->orderBy('date_evaluation', 'desc')
             ->paginate(15);

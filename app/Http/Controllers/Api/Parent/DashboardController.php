@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\Parent;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\EleveResource;
+use App\Http\Resources\NoteResource;
+use App\Http\Resources\AbsenceResource;
 use App\Models\Note;
 use App\Models\Absence;
 use App\Models\Bulletin;
@@ -17,9 +19,10 @@ class DashboardController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
         
-        if (!$user->isParent()) {
+        if (!$user || !$user->isParent()) {
             abort(403, 'Accès non autorisé.');
         }
 
@@ -33,7 +36,7 @@ class DashboardController extends Controller
             ->get();
 
         $enfants->transform(function ($enfant) {
-            $allNotes = Note::where('eleve_id', $enfant->id)
+            $allNotes = Note::query()->where('eleve_id', $enfant->id)
                 ->with(['evaluation.matiere'])
                 ->get();
 
@@ -58,13 +61,13 @@ class DashboardController extends Controller
                 'nb_notes' => $m['count']
             ])->values();
 
-            $absences = Absence::where('eleve_id', $enfant->id)
+            $absences = Absence::query()->where('eleve_id', $enfant->id)
                 ->with(['matiere'])
                 ->latest('date_absence')
                 ->limit(5)
                 ->get();
 
-            $bulletinCourant = Bulletin::where('eleve_id', $enfant->id)
+            $bulletinCourant = Bulletin::query()->where('eleve_id', $enfant->id)
                 ->latest()
                 ->first();
 
@@ -89,8 +92,8 @@ class DashboardController extends Controller
         // Global stats for parent
         $statsGlobal = [
             'total_enfants' => $enfants->count(),
-            'total_notes' => Note::whereHas('eleve.parents', fn($q) => $q->where('parent_eleve_id', $parent->id))->count(),
-            'total_absences' => Absence::whereHas('eleve.parents', fn($q) => $q->where('parent_eleve_id', $parent->id))->count(),
+            'total_notes' => Note::query()->whereHas('eleve.parents', fn($q) => $q->where('parent_eleve_id', $parent->id))->count(),
+            'total_absences' => Absence::query()->whereHas('eleve.parents', fn($q) => $q->where('parent_eleve_id', $parent->id))->count(),
         ];
 
         return EleveResource::collection($enfants)->additional(['stats_global' => $statsGlobal]);

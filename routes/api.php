@@ -48,6 +48,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/bulletins', [\App\Http\Controllers\Api\Eleve\BulletinController::class, 'index']);
         Route::get('/bulletins/{bulletin_id}', [\App\Http\Controllers\Api\Eleve\BulletinController::class, 'show']);
         Route::get('/emploi-du-temps', [\App\Http\Controllers\Api\Eleve\EmploiController::class, 'index']);
+        Route::get('/agenda', [\App\Http\Controllers\Api\Eleve\AgendaController::class, 'index']);
     });
 
     // -------------------------------------------------------
@@ -67,11 +68,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::prefix('notes')->group(function () {
             Route::get('/', [\App\Http\Controllers\Api\Enseignant\NoteController::class, 'index']);
             Route::post('/', [\App\Http\Controllers\Api\Enseignant\NoteController::class, 'store']);
+            Route::post('/bulk', [\App\Http\Controllers\Api\Enseignant\NoteController::class, 'bulkStore']);
         });
 
         Route::prefix('absences')->group(function () {
             Route::get('/', [\App\Http\Controllers\Api\Enseignant\AbsenceController::class, 'index']);
             Route::post('/', [\App\Http\Controllers\Api\Enseignant\AbsenceController::class, 'store']);
+            Route::post('/bulk', [\App\Http\Controllers\Api\Enseignant\AbsenceController::class, 'bulkStore']);
         });
 
         Route::prefix('classes')->group(function () {

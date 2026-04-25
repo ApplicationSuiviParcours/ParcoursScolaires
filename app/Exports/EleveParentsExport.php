@@ -26,7 +26,7 @@ class EleveParentsExport implements FromCollection, WithHeadings, WithMapping, W
     */
     public function collection()
     {
-        $query = EleveParent::with(['eleve.inscriptions.classe', 'parentEleve']);
+        $query = EleveParent::query()->with(['eleve.inscriptions.classe', 'parentEleve']);
         
         // Appliquer les filtres si nécessaire
         if (!empty($this->filters)) {
@@ -34,7 +34,7 @@ class EleveParentsExport implements FromCollection, WithHeadings, WithMapping, W
                 $query->whereHas('eleve', function($q) {
                     $q->whereHas('inscriptions', function($inscriptionQuery) {
                         $inscriptionQuery->where('classe_id', $this->filters['classe_id'])
-                                        ->where('statut', true);
+                                        ->whereIn('statut', ['inscrit', 'active', '1', 1, true]);
                     });
                 });
             }

@@ -27,7 +27,7 @@ class BulletinController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Bulletin::with(['eleve', 'classe', 'anneeScolaire']);
+        $query = Bulletin::query()->with(['eleve', 'classe', 'anneeScolaire']);
 
         // Filtre par année scolaire
         if ($request->filled('annee_scolaire_id')) {
@@ -67,7 +67,7 @@ class BulletinController extends Controller
                 ->pluck('total', 'periode')
                 ->toArray(),
             'moyenne_generale' => round(Bulletin::avg('moyenne_generale') ?? 0, 2),
-            'admis' => Bulletin::where('moyenne_generale', '>=', 10)->count(),
+            'admis' => Bulletin::query()->where('moyenne_generale', '>=', 10)->count(),
         ];
 
         $bulletins = $query->orderBy('date_bulletin', 'desc')
@@ -76,8 +76,8 @@ class BulletinController extends Controller
                           ->withQueryString();
 
         // Données pour les filtres
-        $anneeScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
-        $classes = Classe::orderBy('nom')->get();
+        $anneeScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
+        $classes = Classe::query()->orderBy('nom')->get();
         $periodes = ['Trimestre 1', 'Trimestre 2', 'Trimestre 3', 'Semestre 1', 'Semestre 2', 'Annuel'];
 
         return view('admin.bulletins.index', compact(
@@ -94,9 +94,9 @@ class BulletinController extends Controller
      */
     public function generate()
     {
-        $anneeScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
-        $classes = Classe::with(['inscriptions' => function($q) {
-            $q->where('statut', true);
+        $anneeScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
+        $classes = Classe::query()->with(['inscriptions' => function($q) {
+            $q->whereIn('statut', ['inscrit', 'active', '1', 1, true]);
         }])->get();
         
         return view('admin.bulletins.generate', compact('anneeScolaires', 'classes'));
@@ -121,9 +121,9 @@ class BulletinController extends Controller
             $anneeScolaire = AnneeScolaire::findOrFail($request->annee_scolaire_id);
             
             // Récupérer tous les élèves de la classe pour cette année
-            $inscriptions = Inscription::where('classe_id', $request->classe_id)
+            $inscriptions = Inscription::query()->where('classe_id', $request->classe_id)
                 ->where('annee_scolaire_id', $request->annee_scolaire_id)
-                ->where('statut', true)
+                ->whereIn('statut', ['inscrit', 'active', '1', 1, true])
                 ->with('eleve')
                 ->get();
 
@@ -142,7 +142,7 @@ class BulletinController extends Controller
                 $eleve = $inscription->eleve;
                 
                 // Récupérer toutes les notes de l'élève pour la période
-                $notes = Note::where('eleve_id', $eleve->id)
+                $notes = Note::query()->where('eleve_id', $eleve->id)
                     ->whereHas('evaluation', function($q) use ($request) {
                         $q->where('periode', $request->periode)
                           ->where('classe_id', $request->classe_id);
@@ -179,7 +179,7 @@ class BulletinController extends Controller
                 $moyenneGenerale = $totalCoefficients > 0 ? round($totalPoints / $totalCoefficients, 2) : 0;
 
                 // Vérifier si le bulletin existe déjà
-                $bulletin = Bulletin::where('eleve_id', $eleve->id)
+                $bulletin = Bulletin::query()->where('eleve_id', $eleve->id)
                     ->where('classe_id', $request->classe_id)
                     ->where('annee_scolaire_id', $request->annee_scolaire_id)
                     ->where('periode', $request->periode)
@@ -225,7 +225,7 @@ class BulletinController extends Controller
             DB::commit();
 
             // ✅ Notifier les parents pour chaque bulletin créé/mis à jour
-            $bulletinsANotifier = Bulletin::where('classe_id', $request->classe_id)
+            $bulletinsANotifier = Bulletin::query()->where('classe_id', $request->classe_id)
                 ->where('annee_scolaire_id', $request->annee_scolaire_id)
                 ->where('periode', $request->periode)
                 ->with('eleve')
@@ -265,7 +265,7 @@ class BulletinController extends Controller
      */
     private function calculerRangs($classeId, $anneeScolaireId, $periode)
     {
-        $bulletins = Bulletin::where('classe_id', $classeId)
+        $bulletins = Bulletin::query()->where('classe_id', $classeId)
             ->where('annee_scolaire_id', $anneeScolaireId)
             ->where('periode', $periode)
             ->orderBy('moyenne_generale', 'desc')
@@ -311,7 +311,7 @@ class BulletinController extends Controller
         ];
 
         // Récupérer les notes avec debug
-        $notes = Note::where('eleve_id', $bulletin->eleve_id)
+        $notes = Note::query()->where('eleve_id', $bulletin->eleve_id)
             ->whereHas('evaluation', function($q) use ($bulletin) {
                 $q->where('annee_scolaire_id', $bulletin->annee_scolaire_id)
                   ->where('classe_id', $bulletin->classe_id)
@@ -354,7 +354,7 @@ class BulletinController extends Controller
 
         // Récupérer les notes de l'élève pour la période du bulletin directement depuis les évaluations
         // On cherche les notes de l'élève pour la même année scolaire, classe et période que le bulletin
-        $notes = Note::where('eleve_id', $bulletin->eleve_id)
+        $notes = Note::query()->where('eleve_id', $bulletin->eleve_id)
             ->whereHas('evaluation', function($q) use ($bulletin) {
                 $q->where('annee_scolaire_id', $bulletin->annee_scolaire_id)
                   ->where('classe_id', $bulletin->classe_id)
@@ -503,7 +503,7 @@ class BulletinController extends Controller
         $stats = [
             'total' => Bulletin::count(),
             'moyenne_generale' => round(Bulletin::avg('moyenne_generale') ?? 0, 2),
-            'admis' => Bulletin::where('moyenne_generale', '>=', 10)->count(),
+            'admis' => Bulletin::query()->where('moyenne_generale', '>=', 10)->count(),
             'par_periode' => Bulletin::select('periode', DB::raw('count(*) as total'))
                 ->groupBy('periode')
                 ->get(),

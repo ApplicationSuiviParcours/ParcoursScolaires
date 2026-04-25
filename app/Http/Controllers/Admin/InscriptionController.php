@@ -17,7 +17,7 @@ class InscriptionController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Inscription::with(['eleve', 'classe', 'anneeScolaire']);
+        $query = Inscription::query()->with(['eleve', 'classe', 'anneeScolaire']);
         
         // Filtres
         if ($request->filled('classe_id')) {
@@ -34,8 +34,8 @@ class InscriptionController extends Controller
         
         $inscriptions = $query->orderBy('created_at', 'desc')->paginate(15);
         
-        $classes = Classe::orderBy('nom')->get();
-        $anneesScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
+        $classes = Classe::query()->orderBy('nom')->get();
+        $anneesScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
         
         return view('admin.inscriptions.index', compact(
             'inscriptions', 
@@ -52,10 +52,10 @@ class InscriptionController extends Controller
         $classe_id = $request->get('classe_id');
         $eleve_id = $request->get('eleve_id');
         
-        $classes = Classe::orderBy('nom')->get();
-        $eleves = Eleve::orderBy('nom')->orderBy('prenom')->get();
-        $anneeScolaireActive = AnneeScolaire::where('statut', true)->first();
-        $anneesScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
+        $classes = Classe::query()->orderBy('nom')->get();
+        $eleves = Eleve::query()->orderBy('nom')->orderBy('prenom')->get();
+        $anneeScolaireActive = AnneeScolaire::query()->where('statut', true)->first();
+        $anneesScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
         
         return view('admin.inscriptions.create', compact(
             'classes', 
@@ -86,7 +86,7 @@ class InscriptionController extends Controller
         }
 
         // Vérifier si l'élève est déjà inscrit
-        $exists = Inscription::where('eleve_id', $validated['eleve_id'])
+        $exists = Inscription::query()->where('eleve_id', $validated['eleve_id'])
             ->where('classe_id', $validated['classe_id'])
             ->where('annee_scolaire_id', $validated['annee_scolaire_id'])
             ->exists();
@@ -99,7 +99,7 @@ class InscriptionController extends Controller
 
         // Vérifier la capacité de la classe
         $classe = Classe::find($validated['classe_id']);
-        $nbInscriptions = Inscription::where('classe_id', $validated['classe_id'])
+        $nbInscriptions = Inscription::query()->where('classe_id', $validated['classe_id'])
             ->where('annee_scolaire_id', $validated['annee_scolaire_id'])
             ->count();
 
@@ -130,9 +130,9 @@ class InscriptionController extends Controller
      */
     public function edit(Inscription $inscription)
     {
-        $classes = Classe::orderBy('nom')->get();
-        $eleves = Eleve::orderBy('nom')->orderBy('prenom')->get();
-        $anneesScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
+        $classes = Classe::query()->orderBy('nom')->get();
+        $eleves = Eleve::query()->orderBy('nom')->orderBy('prenom')->get();
+        $anneesScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
         
         return view('admin.inscriptions.edit', compact('inscription', 'classes', 'eleves', 'anneesScolaires'));
     }
@@ -156,7 +156,7 @@ class InscriptionController extends Controller
         }
 
         // Vérifier si une autre inscription existe déjà (sauf celle-ci)
-        $exists = Inscription::where('eleve_id', $validated['eleve_id'])
+        $exists = Inscription::query()->where('eleve_id', $validated['eleve_id'])
             ->where('classe_id', $validated['classe_id'])
             ->where('annee_scolaire_id', $validated['annee_scolaire_id'])
             ->where('id', '!=', $inscription->id)
@@ -170,7 +170,7 @@ class InscriptionController extends Controller
 
         // Vérifier la capacité de la classe (en excluant cette inscription)
         $classe = Classe::find($validated['classe_id']);
-        $nbInscriptions = Inscription::where('classe_id', $validated['classe_id'])
+        $nbInscriptions = Inscription::query()->where('classe_id', $validated['classe_id'])
             ->where('annee_scolaire_id', $validated['annee_scolaire_id'])
             ->where('id', '!=', $inscription->id)
             ->count();
@@ -227,14 +227,14 @@ public function checkEligibility(Request $request)
     }
 
     // Vérifier si l'élève est déjà inscrit
-    $dejaInscrit = Inscription::where('eleve_id', $eleve_id)
+    $dejaInscrit = Inscription::query()->where('eleve_id', $eleve_id)
         ->where('classe_id', $classe_id)
         ->where('annee_scolaire_id', $annee_scolaire_id)
         ->exists();
 
     // Vérifier les places disponibles
     $classe = Classe::find($classe_id);
-    $nbInscriptions = Inscription::where('classe_id', $classe_id)
+    $nbInscriptions = Inscription::query()->where('classe_id', $classe_id)
         ->where('annee_scolaire_id', $annee_scolaire_id)
         ->count();
     

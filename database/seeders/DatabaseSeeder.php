@@ -21,6 +21,7 @@ use Database\Seeders\NoteSeeder;
 use Database\Seeders\AbsenceSeeder;
 use Database\Seeders\BulletinSeeder;
 use Database\Seeders\EmploiDuTempsSeeder;
+use Database\Seeders\EnsureUserDataSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -45,6 +46,7 @@ class DatabaseSeeder extends Seeder
             AbsenceSeeder::class,
             BulletinSeeder::class,
             EmploiDuTempsSeeder::class,
+            EnsureUserDataSeeder::class,
         ]);
         // Supprimé : $this->call(UserSeeder::class) en double
     }

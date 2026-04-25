@@ -26,7 +26,7 @@ class AbsenceController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Absence::with(['eleve', 'matiere', 'anneeScolaire']);
+        $query = Absence::query()->with(['eleve', 'matiere', 'anneeScolaire']);
 
         // Filtre par année scolaire
         if ($request->filled('annee_scolaire_id')) {
@@ -35,8 +35,8 @@ class AbsenceController extends Controller
 
         // Filtre par classe
         if ($request->filled('classe_id')) {
-            $eleveIds = Inscription::where('classe_id', $request->classe_id)
-                ->where('statut', true)
+            $eleveIds = Inscription::query()->where('classe_id', $request->classe_id)
+                ->whereIn('statut', ['inscrit', 'active', '1', 1, true])
                 ->pluck('eleve_id');
             $query->whereIn('eleve_id', $eleveIds);
         }
@@ -67,9 +67,9 @@ class AbsenceController extends Controller
         // Statistiques
         $stats = [
             'total' => Absence::count(),
-            'justifiees' => Absence::where('justifiee', true)->count(),
-            'non_justifiees' => Absence::where('justifiee', false)->count(),
-            'aujourd_hui' => Absence::whereDate('date_absence', now()->toDateString())->count(),
+            'justifiees' => Absence::query()->where('justifiee', true)->count(),
+            'non_justifiees' => Absence::query()->where('justifiee', false)->count(),
+            'aujourd_hui' => Absence::query()->whereDate('date_absence', now()->toDateString())->count(),
             'ce_mois' => Absence::whereMonth('date_absence', now()->month)
                 ->whereYear('date_absence', now()->year)
                 ->count(),
@@ -81,9 +81,9 @@ class AbsenceController extends Controller
                          ->withQueryString();
 
         // Données pour les filtres
-        $anneeScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
-        $classes = Classe::orderBy('nom')->get();
-        $matieres = Matiere::orderBy('nom')->get();
+        $anneeScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
+        $classes = Classe::query()->orderBy('nom')->get();
+        $matieres = Matiere::query()->orderBy('nom')->get();
 
         return view('admin.absences.index', compact(
             'absences', 
@@ -102,8 +102,8 @@ class AbsenceController extends Controller
         $classeId = $request->get('classe_id');
         $anneeScolaireId = $request->get('annee_scolaire_id');
         
-        $anneeScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
-        $classes = Classe::orderBy('nom')->get();
+        $anneeScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
+        $classes = Classe::query()->orderBy('nom')->get();
         
         $eleves = [];
         $absencesParEleve = [];
@@ -111,22 +111,22 @@ class AbsenceController extends Controller
         
         if ($classeId && $anneeScolaireId) {
             // Récupérer les élèves de la classe
-            $eleveIds = Inscription::where('classe_id', $classeId)
+            $eleveIds = Inscription::query()->where('classe_id', $classeId)
                 ->where('annee_scolaire_id', $anneeScolaireId)
-                ->where('statut', true)
+                ->whereIn('statut', ['inscrit', 'active', '1', 1, true])
                 ->pluck('eleve_id');
             
-            $eleves = Eleve::whereIn('id', $eleveIds)
+            $eleves = Eleve::query()->whereIn('id', $eleveIds)
                 ->orderBy('nom')
                 ->orderBy('prenom')
                 ->get();
             
             // Statistiques globales pour la classe
-            $totalAbsences = Absence::whereIn('eleve_id', $eleveIds)
+            $totalAbsences = Absence::query()->whereIn('eleve_id', $eleveIds)
                 ->where('annee_scolaire_id', $anneeScolaireId)
                 ->count();
             
-            $absencesJustifiees = Absence::whereIn('eleve_id', $eleveIds)
+            $absencesJustifiees = Absence::query()->whereIn('eleve_id', $eleveIds)
                 ->where('annee_scolaire_id', $anneeScolaireId)
                 ->where('justifiee', true)
                 ->count();
@@ -134,14 +134,14 @@ class AbsenceController extends Controller
             // Compter les absences par élève
             foreach ($eleves as $eleve) {
                 $absencesParEleve[$eleve->id] = [
-                    'total' => Absence::where('eleve_id', $eleve->id)
+                    'total' => Absence::query()->where('eleve_id', $eleve->id)
                         ->where('annee_scolaire_id', $anneeScolaireId)
                         ->count(),
-                    'justifiees' => Absence::where('eleve_id', $eleve->id)
+                    'justifiees' => Absence::query()->where('eleve_id', $eleve->id)
                         ->where('annee_scolaire_id', $anneeScolaireId)
                         ->where('justifiee', true)
                         ->count(),
-                    'non_justifiees' => Absence::where('eleve_id', $eleve->id)
+                    'non_justifiees' => Absence::query()->where('eleve_id', $eleve->id)
                         ->where('annee_scolaire_id', $anneeScolaireId)
                         ->where('justifiee', false)
                         ->count(),
@@ -174,9 +174,9 @@ class AbsenceController extends Controller
     {
         $anneeScolaireId = $request->get('annee_scolaire_id');
         
-        $anneeScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
+        $anneeScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
         
-        $query = Absence::where('eleve_id', $eleve->id)
+        $query = Absence::query()->where('eleve_id', $eleve->id)
             ->with(['matiere', 'anneeScolaire']);
         
         if ($anneeScolaireId) {
@@ -214,9 +214,9 @@ class AbsenceController extends Controller
      */
     public function create()
     {
-        $eleves = Eleve::orderBy('nom')->orderBy('prenom')->get();
-        $matieres = Matiere::orderBy('nom')->get();
-        $anneeScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
+        $eleves = Eleve::query()->orderBy('nom')->orderBy('prenom')->get();
+        $matieres = Matiere::query()->orderBy('nom')->get();
+        $anneeScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
         
         return view('admin.absences.create', compact('eleves', 'matieres', 'anneeScolaires'));
     }
@@ -273,9 +273,9 @@ class AbsenceController extends Controller
      */
     public function edit(Absence $absence)
     {
-        $eleves = Eleve::orderBy('nom')->orderBy('prenom')->get();
-        $matieres = Matiere::orderBy('nom')->get();
-        $anneeScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
+        $eleves = Eleve::query()->orderBy('nom')->orderBy('prenom')->get();
+        $matieres = Matiere::query()->orderBy('nom')->get();
+        $anneeScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
         
         return view('admin.absences.edit', compact('absence', 'eleves', 'matieres', 'anneeScolaires'));
     }
@@ -360,9 +360,9 @@ class AbsenceController extends Controller
     {
         $stats = [
             'total' => Absence::count(),
-            'justifiees' => Absence::where('justifiee', true)->count(),
-            'non_justifiees' => Absence::where('justifiee', false)->count(),
-            'aujourd_hui' => Absence::whereDate('date_absence', now()->toDateString())->count(),
+            'justifiees' => Absence::query()->where('justifiee', true)->count(),
+            'non_justifiees' => Absence::query()->where('justifiee', false)->count(),
+            'aujourd_hui' => Absence::query()->whereDate('date_absence', now()->toDateString())->count(),
             'ce_mois' => Absence::whereMonth('date_absence', now()->month)
                 ->whereYear('date_absence', now()->year)
                 ->count(),
@@ -382,7 +382,7 @@ class AbsenceController extends Controller
             return 0;
         }
         
-        $justifiees = Absence::where('justifiee', true)->count();
+        $justifiees = Absence::query()->where('justifiee', true)->count();
         return round(($justifiees / $total) * 100, 2);
     }
 
@@ -391,7 +391,7 @@ class AbsenceController extends Controller
      */
     public function getAbsencesEleve(Eleve $eleve, Request $request)
     {
-        $query = Absence::where('eleve_id', $eleve->id)
+        $query = Absence::query()->where('eleve_id', $eleve->id)
             ->with(['matiere']);
 
         if ($request->filled('annee_scolaire_id')) {

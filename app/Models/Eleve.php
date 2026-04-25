@@ -22,7 +22,7 @@ class Eleve extends Model
 
     protected $fillable = [
         'user_id',
-        // 'classe_id', // Commenté car utilisation du système d'inscriptions
+        'classe_id',
         'matricule',
         'nom',
         'prenom',
@@ -80,7 +80,7 @@ class Eleve extends Model
     public function getClasseActuelleAttribute()
     {
         $inscriptionActive = $this->inscriptions()
-            ->where('statut', true)
+            ->whereIn('statut', ['inscrit', 'active', '1', 1, true])
             ->with('classe')
             ->latest()
             ->first();
@@ -104,7 +104,7 @@ class Eleve extends Model
     public function inscriptionActive()
     {
         return $this->hasOne(Inscription::class)
-                    ->where('statut', true)
+                    ->whereIn('statut', ['inscrit', 'active', '1', 1, true])
                     ->with('classe', 'anneeScolaire')
                     ->latest();
     }
@@ -114,7 +114,7 @@ class Eleve extends Model
      */
     public function inscriptionsActives()
     {
-        return $this->inscriptions()->where('statut', true);
+        return $this->inscriptions()->whereIn('statut', ['inscrit', 'active', '1', 1, true]);
     }
 
     public function reinscriptions(): HasMany
@@ -171,7 +171,7 @@ class Eleve extends Model
     public function getEstInscritAttribute(): bool
     {
         return $this->inscriptions()
-                    ->where('statut', true)
+                    ->whereIn('statut', ['inscrit', 'active', '1', 1, true])
                     ->exists();
     }
 
@@ -199,7 +199,7 @@ class Eleve extends Model
     {
         return $query->whereHas('inscriptions', function($q) use ($classeId) {
             $q->where('classe_id', $classeId)
-              ->where('statut', true);
+              ->whereIn('statut', ['inscrit', 'active', '1', 1, true]);
         });
     }
 
@@ -218,7 +218,7 @@ class Eleve extends Model
      */
     public function scopeActifs($query)
     {
-        return $query->where('statut', true);
+        return $query->whereIn('statut', ['inscrit', 'active', '1', 1, true]);
     }
 
     /**
@@ -240,7 +240,7 @@ class Eleve extends Model
             $query->where('annee_scolaire_id', $anneeScolaireId);
         }
         
-        return $query->where('statut', true)
+        return $query->whereIn('statut', ['inscrit', 'active', '1', 1, true])
                     ->selectRaw('classe_id, count(*) as total')
                     ->groupBy('classe_id')
                     ->with('classe')

@@ -20,8 +20,9 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
-        if (!$user->isAdmin()) abort(403);
+        if (!$user || !$user->isAdmin()) abort(403);
 
         return response()->json([
             'stats' => [
@@ -30,9 +31,9 @@ class DashboardController extends Controller
                 'total_enseignants' => Enseignant::count(),
                 'total_classes' => Classe::count(),
                 'total_annees' => AnneeScolaire::count(),
-                'latest_annee' => AnneeScolaire::latest()->first(),
+                'latest_annee' => AnneeScolaire::query()->latest()->first(),
             ],
-            'recent_eleves' => Eleve::with('classe')->latest()->limit(5)->get(),
+            'recent_eleves' => Eleve::query()->with('classe')->latest()->limit(5)->get(),
             'recent_classes' => Classe::withCount('eleves')->latest()->limit(5)->get(),
         ]);
     }

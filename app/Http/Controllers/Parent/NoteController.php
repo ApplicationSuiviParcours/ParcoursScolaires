@@ -15,14 +15,15 @@ class NoteController extends Controller
 {
     public function index(Request $request, Eleve $eleve)
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
         
-        if (!$user->isParent()) {
+        if (!$user || !$user->isParent()) {
             abort(403, 'Accès non autorisé.');
         }
 
         // Récupérer les notes avec toutes les relations nécessaires
-        $query = Note::where('eleve_id', $eleve->id)
+        $query = Note::query()->where('eleve_id', $eleve->id)
             ->with([
                 'evaluation' => function($q) {
                     $q->with(['matiere']);
@@ -58,17 +59,17 @@ class NoteController extends Controller
 
         // Statistiques
         $stats = [
-            'total_notes' => Note::where('eleve_id', $eleve->id)->count(),
-            'moyenne_generale' => round(Note::where('eleve_id', $eleve->id)->avg('note') ?? 0, 2),
-            'note_max' => Note::where('eleve_id', $eleve->id)->max('note') ?? 0,
-            'note_min' => Note::where('eleve_id', $eleve->id)->min('note') ?? 0,
+            'total_notes' => Note::query()->where('eleve_id', $eleve->id)->count(),
+            'moyenne_generale' => round(Note::query()->where('eleve_id', $eleve->id)->avg('note') ?? 0, 2),
+            'note_max' => Note::query()->where('eleve_id', $eleve->id)->max('note') ?? 0,
+            'note_min' => Note::query()->where('eleve_id', $eleve->id)->min('note') ?? 0,
         ];
 
         // Matières pour les filtres
         $matieres = Matiere::all();
 
         // Périodes disponibles
-        $periodes = Note::where('eleve_id', $eleve->id)
+        $periodes = Note::query()->where('eleve_id', $eleve->id)
             ->whereHas('evaluation')
             ->get()
             ->pluck('evaluation.periode')

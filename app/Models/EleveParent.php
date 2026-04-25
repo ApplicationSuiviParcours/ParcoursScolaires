@@ -122,7 +122,7 @@ class EleveParent extends Pivot // ← CORRECTION: extends Pivot au lieu de Mode
     public function scopeAvecEleveActif($query)
     {
         return $query->whereHas('eleve', function($q) {
-            $q->where('statut', true);
+            $q->whereIn('statut', ['inscrit', 'active', '1', 1, true]);
         });
     }
 

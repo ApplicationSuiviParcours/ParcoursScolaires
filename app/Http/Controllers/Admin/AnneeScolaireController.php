@@ -37,11 +37,11 @@ class AnneeScolaireController extends Controller
         // Statistiques
         $stats = [
             'total' => AnneeScolaire::count(),
-            'active' => AnneeScolaire::where('active', true)->count(),
-            'inactive' => AnneeScolaire::where('active', false)->count(),
+            'active' => AnneeScolaire::query()->where('active', true)->count(),
+            'inactive' => AnneeScolaire::query()->where('active', false)->count(),
             'avec_inscriptions' => AnneeScolaire::has('inscriptions')->count(),
             'avec_evaluations' => AnneeScolaire::has('evaluations')->count(),
-            'annee_en_cours' => AnneeScolaire::where('active', true)->first(),
+            'annee_en_cours' => AnneeScolaire::query()->where('active', true)->first(),
         ];
 
         $anneeScolaires = $query->withCount(['inscriptions', 'evaluations', 'emploiDuTemps'])
@@ -77,7 +77,7 @@ class AnneeScolaireController extends Controller
 
             // Si on veut activer cette année, on désactive d'abord toutes les autres
             if ($request->boolean('active')) {
-                AnneeScolaire::where('active', true)->update(['active' => false]);
+                AnneeScolaire::query()->where('active', true)->update(['active' => false]);
                 $validated['active'] = true;
             } else {
                 $validated['active'] = false;
@@ -159,13 +159,13 @@ class AnneeScolaireController extends Controller
             // Gestion de l'activation
             if ($request->boolean('active') && !$anneeScolaire->active) {
                 // Si on veut activer cette année, on désactive toutes les autres
-                AnneeScolaire::where('active', true)
+                AnneeScolaire::query()->where('active', true)
                     ->where('id', '!=', $anneeScolaire->id)
                     ->update(['active' => false]);
                 $validated['active'] = true;
             } elseif (!$request->boolean('active') && $anneeScolaire->active) {
                 // Si on désactive l'année active, on vérifie qu'il y a une autre année active
-                $autreActive = AnneeScolaire::where('active', true)
+                $autreActive = AnneeScolaire::query()->where('active', true)
                     ->where('id', '!=', $anneeScolaire->id)
                     ->exists();
                 
@@ -210,7 +210,7 @@ class AnneeScolaireController extends Controller
             }
 
             // Désactiver toutes les autres années
-            AnneeScolaire::where('active', true)->update(['active' => false]);
+            AnneeScolaire::query()->where('active', true)->update(['active' => false]);
             
             // Activer l'année sélectionnée
             $anneeScolaire->update(['active' => true]);
@@ -238,7 +238,7 @@ class AnneeScolaireController extends Controller
             DB::beginTransaction();
 
             // Vérifier si c'est la seule année active
-            $activeCount = AnneeScolaire::where('active', true)->count();
+            $activeCount = AnneeScolaire::query()->where('active', true)->count();
             
             if ($activeCount <= 1 && $anneeScolaire->active) {
                 return redirect()
@@ -327,7 +327,7 @@ class AnneeScolaireController extends Controller
             'ignore_id' => 'nullable|exists:annee_scolaires,id',
         ]);
 
-        $query = AnneeScolaire::where(function ($q) use ($request) {
+        $query = AnneeScolaire::query()->where(function ($q) use ($request) {
             $q->whereBetween('date_debut', [$request->date_debut, $request->date_fin])
               ->orWhereBetween('date_fin', [$request->date_debut, $request->date_fin])
               ->orWhere(function ($q2) use ($request) {
@@ -355,8 +355,8 @@ class AnneeScolaireController extends Controller
     {
         $stats = [
             'total' => AnneeScolaire::count(),
-            'active' => AnneeScolaire::where('active', true)->count(),
-            'inactive' => AnneeScolaire::where('active', false)->count(),
+            'active' => AnneeScolaire::query()->where('active', true)->count(),
+            'inactive' => AnneeScolaire::query()->where('active', false)->count(),
             'avec_inscriptions' => AnneeScolaire::has('inscriptions')->count(),
             'total_inscriptions' => \App\Models\Inscription::count(),
             'total_evaluations' => \App\Models\Evaluation::count(),
@@ -370,7 +370,7 @@ class AnneeScolaireController extends Controller
      */
     public function getActive()
     {
-        $active = AnneeScolaire::where('active', true)->first();
+        $active = AnneeScolaire::query()->where('active', true)->first();
         
         return response()->json($active);
     }

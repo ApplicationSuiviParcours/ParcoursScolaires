@@ -7,6 +7,7 @@ use App\Http\Resources\NoteResource;
 use App\Models\Note;
 use App\Models\Evaluation;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -16,16 +17,17 @@ class NoteController extends Controller
     /**
      * List notes for enseignant's evaluations.
      */
-    public function index(Request $request)
+    public function index(Request $request): AnonymousResourceCollection
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
-        if (!$user->isEnseignant()) abort(403);
+        if (!$user || !$user->isEnseignant()) abort(403);
 
         $evaluationId = $request->get('evaluation_id');
         $eleveId = $request->get('eleve_id');
 
-        $query = Note::whereHas('evaluation.matiereClasse.enseignant.user', fn($q) => $q->where('id', $user->id))
-            ->with(['evaluation.matiereClasse', 'eleve']);
+        $query = Note::query()->whereHas('evaluation', fn($q) => $q->where('enseignant_id', $user->enseignant->id))
+            ->with(['evaluation.matiere', 'eleve']);
 
         if ($evaluationId) $query->where('evaluation_id', $evaluationId);
         if ($eleveId) $query->where('eleve_id', $eleveId);
@@ -38,16 +40,17 @@ class NoteController extends Controller
     /**
      * Store note for specific evaluation/eleve.
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
-        if (!$user->isEnseignant()) abort(403);
+        if (!$user || !$user->isEnseignant()) abort(403);
 
         $validator = Validator::make($request->all(), [
             'evaluation_id' => 'required|exists:evaluations,id',
             'eleve_id' => 'required|exists:eleves,id',
             'note' => 'required|numeric|min:0|max:20',
-            'appreciation' => 'nullable|string',
+            'observation' => 'nullable|string',
         ]);
 
         if ($validator->fails()) {
@@ -55,7 +58,7 @@ class NoteController extends Controller
         }
 
         $evaluation = Evaluation::findOrFail($request->evaluation_id);
-        if ($evaluation->matiereClasse->enseignant->user_id != $user->id) abort(403);
+        if ($evaluation->enseignant_id != $user->enseignant->id) abort(403);
 
         $note = Note::updateOrCreate(
             [
@@ -74,17 +77,18 @@ class NoteController extends Controller
     /**
      * Store multiple notes for an evaluation (bulk).
      */
-    public function bulkStore(Request $request)
+    public function bulkStore(Request $request): JsonResponse
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
-        if (!$user->isEnseignant()) abort(403);
+        if (!$user || !$user->isEnseignant()) abort(403);
 
         $validator = Validator::make($request->all(), [
             'evaluation_id' => 'required|exists:evaluations,id',
             'notes' => 'required|array',
             'notes.*.eleve_id' => 'required|exists:eleves,id',
             'notes.*.note' => 'required|numeric|min:0|max:20',
-            'notes.*.appreciation' => 'nullable|string',
+            'notes.*.observation' => 'nullable|string',
         ]);
 
         if ($validator->fails()) {
@@ -92,7 +96,7 @@ class NoteController extends Controller
         }
 
         $evaluation = Evaluation::findOrFail($request->evaluation_id);
-        if ($evaluation->matiereClasse->enseignant->user_id != $user->id) abort(403);
+        if ($evaluation->enseignant_id != $user->enseignant->id) abort(403);
 
         $results = [];
         foreach ($request->notes as $noteData) {
@@ -103,7 +107,7 @@ class NoteController extends Controller
                 ],
                 [
                     'note' => $noteData['note'],
-                    'appreciation' => $noteData['appreciation'] ?? null,
+                    'observation' => $noteData['observation'] ?? $noteData['appreciation'] ?? null,
                 ]
             );
         }

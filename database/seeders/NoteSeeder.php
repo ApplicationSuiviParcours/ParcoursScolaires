@@ -7,13 +7,13 @@ use App\Models\Note;
 use App\Models\Eleve;
 use App\Models\Evaluation;
 use App\Models\Bulletin;
-use App\Models\Inscription;
+use Illuminate\Support\Facades\DB;
 
 class NoteSeeder extends Seeder
 {
     public function run()
     {
-        $evaluations = Evaluation::with('classe')->get();
+        $evaluations = Evaluation::with(['classe', 'matiere'])->get();
         $eleves = Eleve::all();
         $bulletins = Bulletin::all();
 
@@ -32,7 +32,7 @@ class NoteSeeder extends Seeder
 
         $created = 0;
         foreach ($evaluations as $evaluation) {
-$elevesInClass = Eleve::whereHas('inscriptions', function ($q) use ($evaluation) {
+            $elevesInClass = Eleve::whereHas('inscriptions', function ($q) use ($evaluation) {
                 $q->where('classe_id', $evaluation->classe_id);
             })->get();
 
@@ -40,27 +40,43 @@ $elevesInClass = Eleve::whereHas('inscriptions', function ($q) use ($evaluation)
             $notesToCreate = min($numNotes, $elevesInClass->count());
 
             foreach ($elevesInClass->take($notesToCreate) as $eleve) {
+                // Trouver le bulletin correspondant pour lier la note (via période)
                 $bulletin = $bulletins->first(function($b) use ($eleve, $evaluation) {
                     return $b->eleve_id == $eleve->id && $b->periode == $evaluation->periode;
                 });
-                $bulletinId = $bulletin ? $bulletin->id : null;
 
-                $noteValue = $this->generateRealisticNote(($evaluation->matiere->nom ?? 'General'), ($evaluation->classe->niveau ?? 'Moyen'), ($eleve->genre ?? 'M'));
+                $noteValue = $this->generateRealisticNote(
+                    ($evaluation->matiere->nom ?? 'General'), 
+                    ($evaluation->classe->niveau ?? 'Moyen'), 
+                    ($eleve->genre ?? 'M')
+                );
 
-                Note::firstOrCreate(
+                $note = Note::firstOrCreate(
                     ['eleve_id' => $eleve->id, 'evaluation_id' => $evaluation->id],
                     [
                         'note' => $noteValue,
                         'observation' => $observations[mt_rand(0, count($observations)-1)],
-
                     ]
                 );
+
+                // Lier la note au bulletin correspondant via la table pivot
+                if ($bulletin) {
+                    DB::table('bulletin_note')->updateOrInsert(
+                        ['bulletin_id' => $bulletin->id, 'note_id' => $note->id],
+                        [
+                            'coefficient' => $evaluation->coefficient ?? 1,
+                            'appreciation' => $note->observation,
+                            'created_at' => now(),
+                            'updated_at' => now(),
+                        ]
+                    );
+                }
 
                 $created++;
             }
         }
 
-        $this->command->info("\n✅ $created notes créées sans erreur!");
+        $this->command->info("\n✅ $created notes créées et liées aux bulletins !");
         $this->command->info('📊 ~' . round($created / max(1, $evaluations->count()), 1) . ' notes/eval');
     }
 

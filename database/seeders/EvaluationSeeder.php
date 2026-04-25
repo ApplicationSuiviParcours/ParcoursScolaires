@@ -48,43 +48,41 @@ class EvaluationSeeder extends Seeder
         $created = 0;
         $skipped = 0;
 
-        foreach ($classes as $classe) {
+        $assignments = \App\Models\EnseignantMatiereClasse::all();
+        if ($assignments->isEmpty()) {
+            $this->command->error('❌ No assignments found. Run EnseignantMatiereClasseSeeder first.');
+            return;
+        }
+
+        foreach ($assignments as $assignment) {
             foreach ($periodes as $periode) {
                 foreach ($types as $type) {
-                    if ($created >= 50) break 3; // Limit to 50 total
+                    if ($created >= 100) break 3; // Increase limit to 100 total
 
-                    $matiere = $matieres->random();
-$enseignant = $enseignants->random();
-                    
                     $dateStart = Carbon::parse($annee->date_debut);
-                    $dateEnd = Carbon::parse($annee->date_fin);
-                    $dateEval = $dateStart->copy()->addMonths($periodes === 'Trimestre 1' ? 1 : ($periodes === 'Trimestre 2' ? 4 : 7))->addDays(rand(0, 60));
+                    $dateEval = $dateStart->copy()->addMonths($periode === 'Trimestre 1' ? 1 : ($periode === 'Trimestre 2' ? 4 : 7))->addDays(rand(0, 60));
 
-                    $uniqueKey = "classe_{$classe->id}_matiere_{$matiere->id}_type_{$type}_periode_{$periode}";
-                    
-                    $evaluation = Evaluation::firstOrCreate(
+                    $evaluation = Evaluation::updateOrCreate(
                         [
-                            'enseignant_id' => $enseignant->id,
-                            'classe_id' => $classe->id,
-                            'matiere_id' => $matiere->id,
+                            'enseignant_id' => $assignment->enseignant_id,
+                            'classe_id' => $assignment->classe_id,
+                            'matiere_id' => $assignment->matiere_id,
                             'annee_scolaire_id' => $annee->id,
                             'type' => $type,
                             'periode' => $periode,
                         ],
                         [
-                            'nom' => "{$type} de {$matiere->nom} ({$periode})",
+                            'nom' => "{$type} de {$assignment->matiere->nom} ({$periode})",
                             'description' => $descriptions[array_rand($descriptions)],
                             'date_evaluation' => $dateEval->format('Y-m-d'),
-                            'coefficient' => $type === 'Examen' ? rand(2,4) : rand(1,2),
+                            'coefficient' => $type === 'Examen' ? rand(3,5) : rand(1,2),
                             'bareme' => 20,
-                            'created_at' => now(),
-                            'updated_at' => now(),
                         ]
                     );
 
                     if ($evaluation->wasRecentlyCreated) {
                         $created++;
-                        $this->command->line("✅ {$evaluation->nom} | {$classe->nom_complet} | {$enseignant->prenom} {$enseignant->nom}");
+                        $this->command->line("✅ {$evaluation->nom} | {$assignment->classe->nom} | {$assignment->enseignant->nom}");
                     } else {
                         $skipped++;
                     }

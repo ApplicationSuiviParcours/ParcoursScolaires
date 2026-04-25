@@ -26,7 +26,7 @@ class AbsenceController extends Controller
         $this->notificationService = $notificationService;
 
         $this->middleware(function ($request, $next) {
-            $this->enseignant = Enseignant::where('user_id', Auth::id())->first();
+            $this->enseignant = Enseignant::query()->where('user_id', Auth::id())->first();
             
             if (!$this->enseignant) {
                 return redirect()->route('dashboard')
@@ -43,17 +43,17 @@ class AbsenceController extends Controller
     public function index(Request $request)
     {
         // Récupérer les IDs des classes enseignées par l'enseignant
-        $classeIds = EnseignantMatiereClasse::where('enseignant_id', $this->enseignant->id)
+        $classeIds = EnseignantMatiereClasse::query()->where('enseignant_id', $this->enseignant->id)
             ->distinct('classe_id')
             ->pluck('classe_id');
 
         // Récupérer les IDs des élèves dans ces classes
-        $eleveIds = Inscription::whereIn('classe_id', $classeIds)
+        $eleveIds = Inscription::query()->whereIn('classe_id', $classeIds)
             ->where('statut', 'actif')
             ->pluck('eleve_id');
 
         // Requête de base pour les absences
-        $query = Absence::with(['eleve', 'eleve.classe', 'matiere'])
+        $query = Absence::query()->with(['eleve', 'eleve.classe', 'matiere'])
             ->whereIn('eleve_id', $eleveIds);
 
         // Filtres
@@ -66,7 +66,7 @@ class AbsenceController extends Controller
         }
 
         if ($request->filled('classe_id')) {
-            $elevesDeClasse = Inscription::where('classe_id', $request->classe_id)
+            $elevesDeClasse = Inscription::query()->where('classe_id', $request->classe_id)
                 ->where('statut', 'actif')
                 ->pluck('eleve_id');
             $query->whereIn('eleve_id', $elevesDeClasse);
@@ -92,8 +92,8 @@ class AbsenceController extends Controller
         $absences = $query->paginate(15)->withQueryString();
 
         // Données pour les filtres
-        $classes = Classe::whereIn('id', $classeIds)->get();
-        $matieres = Matiere::whereHas('enseignantMatiereClasses', function($q) {
+        $classes = Classe::query()->whereIn('id', $classeIds)->get();
+        $matieres = Matiere::query()->whereHas('enseignantMatiereClasses', function($q) {
             $q->where('enseignant_id', $this->enseignant->id);
         })->get();
 
@@ -114,14 +114,14 @@ class AbsenceController extends Controller
     public function create()
     {
         // Récupérer les classes de l'enseignant
-        $classes = Classe::whereHas('enseignantMatiereClasses', function($q) {
+        $classes = Classe::query()->whereHas('enseignantMatiereClasses', function($q) {
             $q->where('enseignant_id', $this->enseignant->id);
         })->with(['eleves' => function($q) {
             $q->wherePivot('statut', 'actif');
         }])->get();
 
         // Récupérer les matières de l'enseignant
-        $matieres = Matiere::whereHas('enseignantMatiereClasses', function($q) {
+        $matieres = Matiere::query()->whereHas('enseignantMatiereClasses', function($q) {
             $q->where('enseignant_id', $this->enseignant->id);
         })->get();
 
@@ -147,10 +147,10 @@ class AbsenceController extends Controller
         ]);
 
         // Vérifier si l'élève est dans une classe de l'enseignant
-        $classeIds = EnseignantMatiereClasse::where('enseignant_id', $this->enseignant->id)
+        $classeIds = EnseignantMatiereClasse::query()->where('enseignant_id', $this->enseignant->id)
             ->pluck('classe_id');
 
-        $eleveDansClasse = Inscription::where('eleve_id', $request->eleve_id)
+        $eleveDansClasse = Inscription::query()->where('eleve_id', $request->eleve_id)
             ->whereIn('classe_id', $classeIds)
             ->where('statut', 'actif')
             ->exists();
@@ -160,7 +160,7 @@ class AbsenceController extends Controller
         }
 
         // Vérifier si une absence existe déjà pour cette période
-        $existe = Absence::where('eleve_id', $request->eleve_id)
+        $existe = Absence::query()->where('eleve_id', $request->eleve_id)
             ->where('date_absence', $request->date_absence)
             ->where(function($q) use ($request) {
                 $q->where(function($q) use ($request) {
@@ -206,14 +206,14 @@ class AbsenceController extends Controller
      */
     public function show($id)
     {
-        $absence = Absence::with(['eleve', 'eleve.classe', 'matiere'])
+        $absence = Absence::query()->with(['eleve', 'eleve.classe', 'matiere'])
             ->findOrFail($id);
 
         // Vérifier que l'élève est dans une classe de l'enseignant
-        $classeIds = EnseignantMatiereClasse::where('enseignant_id', $this->enseignant->id)
+        $classeIds = EnseignantMatiereClasse::query()->where('enseignant_id', $this->enseignant->id)
             ->pluck('classe_id');
 
-        $eleveDansClasse = Inscription::where('eleve_id', $absence->eleve_id)
+        $eleveDansClasse = Inscription::query()->where('eleve_id', $absence->eleve_id)
             ->whereIn('classe_id', $classeIds)
             ->exists();
 
@@ -233,10 +233,10 @@ class AbsenceController extends Controller
         $absence = Absence::findOrFail($id);
 
         // Vérifier que l'élève est dans une classe de l'enseignant
-        $classeIds = EnseignantMatiereClasse::where('enseignant_id', $this->enseignant->id)
+        $classeIds = EnseignantMatiereClasse::query()->where('enseignant_id', $this->enseignant->id)
             ->pluck('classe_id');
 
-        $eleveDansClasse = Inscription::where('eleve_id', $absence->eleve_id)
+        $eleveDansClasse = Inscription::query()->where('eleve_id', $absence->eleve_id)
             ->whereIn('classe_id', $classeIds)
             ->exists();
 
@@ -245,13 +245,13 @@ class AbsenceController extends Controller
                 ->with('error', 'Vous n\'avez pas accès à cette absence.');
         }
 
-        $classes = Classe::whereHas('enseignantMatiereClasses', function($q) {
+        $classes = Classe::query()->whereHas('enseignantMatiereClasses', function($q) {
             $q->where('enseignant_id', $this->enseignant->id);
         })->with(['eleves' => function($q) {
             $q->wherePivot('statut', 'actif');
         }])->get();
 
-        $matieres = Matiere::whereHas('enseignantMatiereClasses', function($q) {
+        $matieres = Matiere::query()->whereHas('enseignantMatiereClasses', function($q) {
             $q->where('enseignant_id', $this->enseignant->id);
         })->get();
 
@@ -298,10 +298,10 @@ class AbsenceController extends Controller
             $absence = Absence::findOrFail($id);
             
             // Vérifier que l'élève est dans une classe de l'enseignant
-            $classeIds = EnseignantMatiereClasse::where('enseignant_id', $this->enseignant->id)
+            $classeIds = EnseignantMatiereClasse::query()->where('enseignant_id', $this->enseignant->id)
                 ->pluck('classe_id');
 
-            $eleveDansClasse = Inscription::where('eleve_id', $absence->eleve_id)
+            $eleveDansClasse = Inscription::query()->where('eleve_id', $absence->eleve_id)
                 ->whereIn('classe_id', $classeIds)
                 ->exists();
 
@@ -382,7 +382,7 @@ class AbsenceController extends Controller
             'heure_debut' => 'required',
         ]);
 
-        $absence = Absence::where('eleve_id', $eleveId)
+        $absence = Absence::query()->where('eleve_id', $eleveId)
             ->where('date_absence', $request->date_absence)
             ->where('heure_debut', $request->heure_debut)
             ->first();
@@ -401,7 +401,7 @@ class AbsenceController extends Controller
     public function getElevesByClasse($classeId)
     {
         try {
-            $eleves = Eleve::whereHas('inscriptions', function($q) use ($classeId) {
+            $eleves = Eleve::query()->whereHas('inscriptions', function($q) use ($classeId) {
                 $q->where('classe_id', $classeId)
                   ->where('statut', 'actif');
             })->select('id', 'nom', 'prenom', 'matricule')->get();
@@ -423,12 +423,12 @@ class AbsenceController extends Controller
      */
     private function getStatistiques($eleveIds)
     {
-        $totalAbsences = Absence::whereIn('eleve_id', $eleveIds)->count();
+        $totalAbsences = Absence::query()->whereIn('eleve_id', $eleveIds)->count();
         
         // Comme il n'y a pas de colonne nombre_heures, on utilise le nombre d'absences
         $totalHeures = $totalAbsences; // Ou 1 heure par absence par défaut
         
-        $nonJustifiees = Absence::whereIn('eleve_id', $eleveIds)->where('justifiee', false)->count(); // ← CORRIGÉ: 'justifiee'
+        $nonJustifiees = Absence::query()->whereIn('eleve_id', $eleveIds)->where('justifiee', false)->count(); // ← CORRIGÉ: 'justifiee'
         $justifiees = $totalAbsences - $nonJustifiees;
 
         return [
@@ -447,11 +447,11 @@ class AbsenceController extends Controller
      */
     public function statistiques(Request $request)
     {
-        $classeIds = EnseignantMatiereClasse::where('enseignant_id', $this->enseignant->id)
+        $classeIds = EnseignantMatiereClasse::query()->where('enseignant_id', $this->enseignant->id)
             ->distinct('classe_id')
             ->pluck('classe_id');
 
-        $eleveIds = Inscription::whereIn('classe_id', $classeIds)
+        $eleveIds = Inscription::query()->whereIn('classe_id', $classeIds)
             ->where('statut', 'actif')
             ->pluck('eleve_id');
 
@@ -459,12 +459,12 @@ class AbsenceController extends Controller
         $statsParClasse = [];
         foreach ($classeIds as $classeId) {
             $classe = Classe::find($classeId);
-            $elevesDeClasse = Inscription::where('classe_id', $classeId)
+            $elevesDeClasse = Inscription::query()->where('classe_id', $classeId)
                 ->where('statut', 'actif')
                 ->pluck('eleve_id');
 
-            $totalAbsences = Absence::whereIn('eleve_id', $elevesDeClasse)->count();
-            $absencesJustifiees = Absence::whereIn('eleve_id', $elevesDeClasse)
+            $totalAbsences = Absence::query()->whereIn('eleve_id', $elevesDeClasse)->count();
+            $absencesJustifiees = Absence::query()->whereIn('eleve_id', $elevesDeClasse)
                 ->where('justifiee', true) // ← CORRIGÉ: 'justifiee'
                 ->count();
             $totalHeures = $totalAbsences; // Pas de colonne nombre_heures
@@ -479,7 +479,7 @@ class AbsenceController extends Controller
         }
 
         // Statistiques par mois
-        $statsParMois = Absence::whereIn('eleve_id', $eleveIds)
+        $statsParMois = Absence::query()->whereIn('eleve_id', $eleveIds)
             ->select(
                 DB::raw('YEAR(date_absence) as annee'),
                 DB::raw('MONTH(date_absence) as mois'),
@@ -494,7 +494,7 @@ class AbsenceController extends Controller
             ->get();
 
         // Top 5 des élèves les plus absents
-        $topElevesAbsents = Absence::whereIn('eleve_id', $eleveIds)
+        $topElevesAbsents = Absence::query()->whereIn('eleve_id', $eleveIds)
             ->select(
                 'eleve_id',
                 DB::raw('COUNT(*) as total_absences'),
@@ -521,15 +521,15 @@ class AbsenceController extends Controller
         $mois = $request->get('mois', now()->month);
         $annee = $request->get('annee', now()->year);
 
-        $classeIds = EnseignantMatiereClasse::where('enseignant_id', $this->enseignant->id)
+        $classeIds = EnseignantMatiereClasse::query()->where('enseignant_id', $this->enseignant->id)
             ->distinct('classe_id')
             ->pluck('classe_id');
 
-        $eleveIds = Inscription::whereIn('classe_id', $classeIds)
+        $eleveIds = Inscription::query()->whereIn('classe_id', $classeIds)
             ->where('statut', 'actif')
             ->pluck('eleve_id');
 
-        $absences = Absence::whereIn('eleve_id', $eleveIds)
+        $absences = Absence::query()->whereIn('eleve_id', $eleveIds)
             ->whereYear('date_absence', $annee)
             ->whereMonth('date_absence', $mois)
             ->with(['eleve', 'matiere'])

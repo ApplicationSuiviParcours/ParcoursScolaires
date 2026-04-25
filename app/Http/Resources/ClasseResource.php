@@ -10,6 +10,7 @@ class ClasseResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'nom' => $this->nom,
             'nom_complet' => $this->nom_complet,
             'niveau' => $this->niveau,
             'serie' => $this->serie,

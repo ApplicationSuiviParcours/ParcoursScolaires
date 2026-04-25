@@ -22,7 +22,7 @@ class ClassesExport implements FromCollection, WithHeadings, WithMapping, WithSt
 
     public function collection()
     {
-        $query = Classe::with('anneeScolaire')->withCount('eleves');
+        $query = Classe::query()->with('anneeScolaire')->withCount('eleves');
         
         if ($this->request->filled('search')) {
             $search = $this->request->search;

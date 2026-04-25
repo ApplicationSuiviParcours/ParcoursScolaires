@@ -34,7 +34,7 @@ class BulletinSeeder extends Seeder
                 'eleve_id' => $eleve->id,
                 'classe_id' => $classe->id,
                 'annee_scolaire_id' => $annee->id,
-                'periode' => ['T1', 'T2', 'T3'][$index % 3],
+                'periode' => ['Trimestre 1', 'Trimestre 2', 'Trimestre 3'][$index % 3],
                 'moyenne_generale' => rand(100, 160) / 10,
                 'appreciation_generale' => 'Bon travail global',
                 'rang' => rand(1, 10),

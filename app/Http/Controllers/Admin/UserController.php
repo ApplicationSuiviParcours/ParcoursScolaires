@@ -25,7 +25,7 @@ class UserController extends Controller
         $roleFilter = $request->get('role');
         $statusFilter = $request->get('status');
 
-        $query = User::with(['roles', 'enseignant', 'eleve', 'parentEleve']);
+        $query = User::query()->with(['roles', 'enseignant', 'eleve', 'parentEleve']);
 
         if ($search) {
             $query->where(function($q) use ($search) {
@@ -48,8 +48,8 @@ class UserController extends Controller
 
         // Statistiques
         $totalUsers = User::count();
-        $activeUsers = User::where('is_active', true)->count();
-        $inactiveUsers = User::where('is_active', false)->count();
+        $activeUsers = User::query()->where('is_active', true)->count();
+        $inactiveUsers = User::query()->where('is_active', false)->count();
 
         // Statistiques par rôle
         $adminUsers = User::role('administrateur')->count();
@@ -58,12 +58,12 @@ class UserController extends Controller
         $parentUsers = User::role('parent')->count();
 
         $stats = [
-            'with_photo' => User::whereNotNull('photo')->count(),
-            'without_photo' => User::whereNull('photo')->count(),
-            'never_logged_in' => User::whereNull('last_login_at')->count(),
-            'verified_emails' => User::whereNotNull('email_verified_at')->count(),
-            'unverified_emails' => User::whereNull('email_verified_at')->count(),
-            'recently_joined' => User::where('created_at', '>=', now()->subDays(7))->count(),
+            'with_photo' => User::query()->whereNotNull('photo')->count(),
+            'without_photo' => User::query()->whereNull('photo')->count(),
+            'never_logged_in' => User::query()->whereNull('last_login_at')->count(),
+            'verified_emails' => User::query()->whereNotNull('email_verified_at')->count(),
+            'unverified_emails' => User::query()->whereNull('email_verified_at')->count(),
+            'recently_joined' => User::query()->where('created_at', '>=', now()->subDays(7))->count(),
         ];
 
         // Liste des rôles pour le filtre
@@ -130,7 +130,7 @@ class UserController extends Controller
             // Déterminer le rôle principal pour la colonne 'role' (fallback BD)
             if ($request->has('roles') && is_array($request->roles) && count($request->roles) > 0) {
                 // On prend le premier rôle sélectionné et on récupère son nom
-                $roleNameForDb = Role::where('id', $request->roles[0])->value('name');
+                $roleNameForDb = Role::query()->where('id', $request->roles[0])->value('name');
                 if ($roleNameForDb) {
                     $data['role'] = $roleNameForDb;
                 }
@@ -159,7 +159,7 @@ class UserController extends Controller
             $user->roles()->sync($roleIds);
             
             // Récupérer les noms des rôles pour faciliter les vérifications
-            $roleNames = Role::whereIn('id', $roleIds)->pluck('name')->toArray();
+            $roleNames = Role::query()->whereIn('id', $roleIds)->pluck('name')->toArray();
             
             Log::info('Rôles synchronisés', $roleNames);
 
@@ -386,7 +386,7 @@ class UserController extends Controller
 
         // Déterminer le rôle principal pour la colonne 'role' (fallback BD)
         if ($request->has('roles') && is_array($request->roles) && count($request->roles) > 0) {
-            $roleNameForDb = Role::where('id', $request->roles[0])->value('name');
+            $roleNameForDb = Role::query()->where('id', $request->roles[0])->value('name');
             if ($roleNameForDb) {
                 $data['role'] = $roleNameForDb;
             }
@@ -418,7 +418,7 @@ class UserController extends Controller
         $user->roles()->sync($request->roles);
         
         // Récupérer les nouveaux rôles
-        $newRoles = Role::whereIn('id', $request->roles)->pluck('name')->toArray();
+        $newRoles = Role::query()->whereIn('id', $request->roles)->pluck('name')->toArray();
         
         // Vérifier si des profils doivent être créés pour les nouveaux rôles
         $this->syncProfilesForUser($user, $oldRoles, $newRoles, $request);
@@ -608,7 +608,7 @@ class UserController extends Controller
             return response()->json([]);
         }
 
-        $users = User::with('roles')
+        $users = User::query()->with('roles')
             ->where('name', 'like', "%{$query}%")
             ->orWhere('email', 'like', "%{$query}%")
             ->limit(10)
@@ -654,10 +654,10 @@ class UserController extends Controller
     {
         return response()->json([
             'total' => User::count(),
-            'active' => User::where('is_active', true)->count(),
-            'inactive' => User::where('is_active', false)->count(),
-            'with_photo' => User::whereNotNull('photo')->count(),
-            'verified_emails' => User::whereNotNull('email_verified_at')->count(),
+            'active' => User::query()->where('is_active', true)->count(),
+            'inactive' => User::query()->where('is_active', false)->count(),
+            'with_photo' => User::query()->whereNotNull('photo')->count(),
+            'verified_emails' => User::query()->whereNotNull('email_verified_at')->count(),
             'with_eleve_profile' => User::has('eleve')->count(),
             'with_enseignant_profile' => User::has('enseignant')->count(),
             'with_parent_profile' => User::has('parentEleve')->count(),
@@ -669,7 +669,7 @@ class UserController extends Controller
      */
     public function export()
     {
-        $users = User::with('roles', 'eleve', 'enseignant', 'parentEleve')
+        $users = User::query()->with('roles', 'eleve', 'enseignant', 'parentEleve')
             ->orderBy('name')
             ->get()
             ->map(function ($user) {

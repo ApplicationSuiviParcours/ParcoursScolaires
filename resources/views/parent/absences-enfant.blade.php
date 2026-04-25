@@ -472,7 +472,7 @@
 function showJustificationModal(absenceId) {
     const modal = document.getElementById('justificationModal');
     const form = document.getElementById('justificationForm');
-    form.action = "{{ route('parent.justifier-absence', '') }}/" + absenceId;
+    form.action = "{{ route('parent.justifier-absence', ':id') }}".replace(':id', absenceId);
     modal.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
 }

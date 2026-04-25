@@ -37,7 +37,7 @@
                     required
                     autofocus
                     autocomplete="email"
-                    class="pl-10 w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all outline-none bg-gray-50 hover:bg-white text-sm"
+                    class="pl-11 pr-4 w-full py-3 border-2 border-gray-200 rounded-xl text-gray-800 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all outline-none bg-gray-50 hover:bg-white text-base"
                     placeholder="Entrez votre email"
                 >
             </div>
@@ -62,7 +62,7 @@
                     name="password"
                     required
                     autocomplete="current-password"
-                    class="pl-10 pr-12 w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all outline-none bg-gray-50 hover:bg-white text-sm"
+                    class="pl-11 pr-12 w-full py-3 border-2 border-gray-200 rounded-xl text-gray-800 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all outline-none bg-gray-50 hover:bg-white text-base"
                     placeholder="Entrez votre mot de passe"
                 >
                 <button type="button" @click="showPassword = !showPassword"

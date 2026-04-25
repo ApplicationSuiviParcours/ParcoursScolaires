@@ -19,7 +19,7 @@ class EnseignantAdminController extends Controller
         $specialite = $request->get('specialite');
         $statut = $request->get('statut');
         
-        $enseignants = Enseignant::with('user')
+        $enseignants = Enseignant::query()->with('user')
             ->when($search, function ($query) use ($search) {
                 return $query->where(function ($q) use ($search) {
                     $q->where('nom', 'like', "%{$search}%")
@@ -37,13 +37,13 @@ class EnseignantAdminController extends Controller
             ->orderBy('prenom')
             ->paginate(15);
 
-        $specialites = Enseignant::whereNotNull('specialite')
+        $specialites = Enseignant::query()->whereNotNull('specialite')
                                  ->distinct()
                                  ->orderBy('specialite')
                                  ->pluck('specialite')
                                  ->toArray();
 
-        $enseignantsAvecSpecialite = Enseignant::whereNotNull('specialite')->count();
+        $enseignantsAvecSpecialite = Enseignant::query()->whereNotNull('specialite')->count();
 
         return view('admin.enseignants.index', compact(
             'enseignants', 

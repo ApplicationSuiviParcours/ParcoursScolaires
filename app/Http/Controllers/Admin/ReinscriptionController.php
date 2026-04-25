@@ -16,7 +16,7 @@ class ReinscriptionController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Reinscription::with(['eleve', 'classe', 'anneeScolaire']);
+        $query = Reinscription::query()->with(['eleve', 'classe', 'anneeScolaire']);
 
         // Filtres
         if ($request->filled('annee_scolaire_id')) {
@@ -46,8 +46,8 @@ class ReinscriptionController extends Controller
         $reinscriptions = $query->paginate(15);
 
         // Données pour les filtres
-        $anneesScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
-        $classes = Classe::orderBy('nom')->get();
+        $anneesScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
+        $classes = Classe::query()->orderBy('nom')->get();
         $statuts = Reinscription::STATUTS;
 
         return view('admin.reinscriptions.index', compact(
@@ -63,9 +63,9 @@ class ReinscriptionController extends Controller
      */
     public function create()
     {
-        $eleves = Eleve::orderBy('nom')->orderBy('prenom')->get();
-        $classes = Classe::orderBy('nom')->get();
-        $anneesScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
+        $eleves = Eleve::query()->orderBy('nom')->orderBy('prenom')->get();
+        $classes = Classe::query()->orderBy('nom')->get();
+        $anneesScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
         $statuts = Reinscription::STATUTS;
 
         return view('admin.reinscriptions.create', compact('eleves', 'classes', 'anneesScolaires', 'statuts'));
@@ -86,7 +86,7 @@ class ReinscriptionController extends Controller
         ]);
 
         // Vérifier si l'élève a déjà une réinscription pour cette année
-        $existing = Reinscription::where('eleve_id', $validated['eleve_id'])
+        $existing = Reinscription::query()->where('eleve_id', $validated['eleve_id'])
             ->where('annee_scolaire_id', $validated['annee_scolaire_id'])
             ->first();
 
@@ -118,8 +118,8 @@ class ReinscriptionController extends Controller
      */
     public function edit(Reinscription $reinscription)
     {
-        $classes = Classe::orderBy('nom')->get();
-        $anneesScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
+        $classes = Classe::query()->orderBy('nom')->get();
+        $anneesScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
         $statuts = Reinscription::STATUTS;
 
         return view('admin.reinscriptions.edit', compact('reinscription', 'classes', 'anneesScolaires', 'statuts'));

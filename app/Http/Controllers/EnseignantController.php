@@ -32,7 +32,7 @@ class EnseignantController extends Controller
             return null;
         }
 
-        return Enseignant::where('user_id', $user->id)->first();
+        return Enseignant::query()->where('user_id', $user->id)->first();
     }
 
     /**
@@ -47,29 +47,29 @@ class EnseignantController extends Controller
                 ->with('error', 'Aucun profil enseignant associé à votre compte. Veuillez contacter l\'administrateur.');
         }
 
-        $classesCount = EnseignantMatiereClasse::where('enseignant_id', $enseignant->id)
+        $classesCount = EnseignantMatiereClasse::query()->where('enseignant_id', $enseignant->id)
             ->distinct('classe_id')
             ->count('classe_id');
 
-        $evaluationsCount = Evaluation::where('enseignant_id', $enseignant->id)->count();
+        $evaluationsCount = Evaluation::query()->where('enseignant_id', $enseignant->id)->count();
 
-        $evaluationsAVenir = Evaluation::where('enseignant_id', $enseignant->id)
+        $evaluationsAVenir = Evaluation::query()->where('enseignant_id', $enseignant->id)
             ->where('date_evaluation', '>=', now())
             ->count();
 
-        $classeIds = EnseignantMatiereClasse::where('enseignant_id', $enseignant->id)
+        $classeIds = EnseignantMatiereClasse::query()->where('enseignant_id', $enseignant->id)
             ->distinct('classe_id')
             ->pluck('classe_id');
 
-        $eleveIds = Inscription::whereIn('classe_id', $classeIds)
-            ->where('statut', true)
+        $eleveIds = Inscription::query()->whereIn('classe_id', $classeIds)
+            ->whereIn('statut', ['inscrit', 'active', '1', 1, true])
             ->pluck('eleve_id');
 
-        $absencesCount = Absence::whereIn('eleve_id', $eleveIds)
+        $absencesCount = Absence::query()->whereIn('eleve_id', $eleveIds)
             ->whereDate('date_absence', now()->toDateString())
             ->count();
 
-        $dernieresEvaluations = Evaluation::where('enseignant_id', $enseignant->id)
+        $dernieresEvaluations = Evaluation::query()->where('enseignant_id', $enseignant->id)
             ->with(['classe', 'matiere'])
             ->orderBy('date_evaluation', 'desc')
             ->limit(5)
@@ -97,7 +97,7 @@ class EnseignantController extends Controller
                 ->with('error', 'Aucun profil enseignant associé à votre compte.');
         }
 
-        $classes = EnseignantMatiereClasse::where('enseignant_id', $enseignant->id)
+        $classes = EnseignantMatiereClasse::query()->where('enseignant_id', $enseignant->id)
             ->with(['classe', 'matiere', 'anneeScolaire'])
             ->get();
 
@@ -116,7 +116,7 @@ class EnseignantController extends Controller
                 ->with('error', 'Aucun profil enseignant associé à votre compte.');
         }
 
-        $evaluations = Evaluation::where('enseignant_id', $enseignant->id)
+        $evaluations = Evaluation::query()->where('enseignant_id', $enseignant->id)
             ->with(['classe', 'matiere', 'anneeScolaire'])
             ->orderBy('date_evaluation', 'desc')
             ->get();
@@ -136,7 +136,7 @@ class EnseignantController extends Controller
                 ->with('error', 'Aucun profil enseignant associé à votre compte.');
         }
 
-        $classes = EnseignantMatiereClasse::where('enseignant_id', $enseignant->id)
+        $classes = EnseignantMatiereClasse::query()->where('enseignant_id', $enseignant->id)
             ->with(['classe', 'matiere'])
             ->get();
 
@@ -155,7 +155,7 @@ class EnseignantController extends Controller
                 ->with('error', 'Aucun profil enseignant associé à votre compte.');
         }
 
-        $absences = Absence::whereHas('matiere.enseignantMatiereClasses', function ($query) use ($enseignant) {
+        $absences = Absence::query()->whereHas('matiere.enseignantMatiereClasses', function ($query) use ($enseignant) {
                 $query->where('enseignant_id', $enseignant->id);
             })
             ->with(['eleve', 'matiere'])

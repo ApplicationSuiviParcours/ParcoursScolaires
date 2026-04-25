@@ -29,7 +29,7 @@ class FixMatricules extends Command
                 
                 // Vérifier l'unicité
                 $tentatives = 0;
-                while (Eleve::where('matricule', $nouveauMatricule)->where('id', '!=', $eleve->id)->exists() && $tentatives < 26) {
+                while (Eleve::query()->where('matricule', $nouveauMatricule)->where('id', '!=', $eleve->id)->exists() && $tentatives < 26) {
                     // Si le matricule existe déjà, essayer une autre lettre
                     $lettres = range('A', 'Z');
                     $lettreIndex = array_search($premiereLettre, $lettres) + $tentatives + 1;

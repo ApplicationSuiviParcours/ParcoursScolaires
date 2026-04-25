@@ -22,14 +22,16 @@ class Bulletin extends Model
         'annee_scolaire_id',
         'periode',
         'moyenne_generale',
+        'moyenne_classe',
         'rang',
         'effectif_classe',
-'appreciation_generale',
+        'appreciation_generale',
         'date_bulletin',
     ];
 
     protected $casts = [
         'moyenne_generale' => 'float',
+        'moyenne_classe' => 'float',
         'rang' => 'integer',
         'effectif_classe' => 'integer',
         'date_bulletin' => 'date',
@@ -126,6 +128,22 @@ class Bulletin extends Model
     }
 
     /**
+     * ✅ AJOUT: Récupérer les notes directement sans passer par la table pivot
+     * Utile si la migration/synchronisation de la table pivot n'a pas été faite
+     */
+    public function getNotesDirectesAttribute()
+    {
+        return Note::query()->where('eleve_id', $this->eleve_id)
+            ->whereHas('evaluation', function($q) {
+                $q->where('classe_id', $this->classe_id)
+                  ->where('annee_scolaire_id', $this->annee_scolaire_id)
+                  ->where('periode', $this->periode);
+            })
+            ->with(['evaluation.matiere'])
+            ->get();
+    }
+
+    /**
      * Déterminer la mention en fonction de la moyenne
      */
     public function getMentionAttribute(): string
@@ -159,6 +177,15 @@ class Bulletin extends Model
     public function getAppreciationAttribute(): string
     {
         return $this->appreciation_generale ?: '';
+    }
+
+    /**
+     * ✅ AJOUT: Calcul de l'écart avec la moyenne de la classe
+     */
+    public function getEcartClasseAttribute(): float
+    {
+        if (!$this->moyenne_classe) return 0;
+        return round($this->moyenne_generale - $this->moyenne_classe, 2);
     }
 
 

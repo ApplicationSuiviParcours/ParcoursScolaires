@@ -21,6 +21,7 @@ class Absence extends Model
         'heure_debut',
         'heure_fin',
         'motif',
+        'nombre_heures',
         'duree_jours',
         'observation',
         'justifiee',
@@ -29,8 +30,8 @@ class Absence extends Model
 
     protected $casts = [
         'date_absence' => 'date',
-        'heure_debut' => 'datetime:H:i',
-        'heure_fin' => 'datetime:H:i',
+        'heure_debut' => 'string',
+        'heure_fin' => 'string',
         'justifiee' => 'boolean',
         'duree_jours' => 'integer',
     ];

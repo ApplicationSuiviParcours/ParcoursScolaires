@@ -35,35 +35,35 @@ class EnseignantSeeder extends Seeder
 
         $created = 0;
         foreach ($this->enseignants as $data) {
-            // Link to user if exists
+            // Find existing user by email
             $user = User::where('email', $data['email'])->first();
-            $userId = $user?->id;
-
-            $enseignant = Enseignant::create([
-                'user_id' => $userId,
-                // Auto-generate proper matricule via model (ENS-2024-N0001 format)
-                'matricule' => Enseignant::genererMatricule($data['nom']),
-                'nom' => $data['nom'],
-                'prenom' => $data['prenom'],
-                'genre' => $data['genre'],
-                'date_naissance' => Carbon::now()->subYears(rand(30, 55)),
-                'lieu_naissance' => $this->villes[array_rand($this->villes)],
-                'telephone' => '+24206' . rand(1000000, 9999999),
-                'email' => $data['email'],
-                'adresse' => rand(1, 200) . ' Av. du Congo, ' . $this->villes[array_rand($this->villes)],
-                'specialite' => $data['specialite'],
-                'photo' => null,
-                'statut' => true,
-            ]);
-
-            if ($userId) {
-                $user = User::find($userId);
-                $user->assignRole('enseignant');
-                $this->command->line("✅ Assigned 'enseignant' role to user");
+            
+            if (!$user) {
+                $this->command->warn("⚠️ No user for {$data['email']}, skipping...");
+                continue;
             }
 
+            $enseignant = Enseignant::updateOrCreate(
+                ['email' => $data['email']],
+                [
+                    'user_id' => $user->id,
+                    'matricule' => Enseignant::genererMatricule($data['nom']),
+                    'nom' => $data['nom'],
+                    'prenom' => $data['prenom'],
+                    'genre' => $data['genre'],
+                    'date_naissance' => Carbon::now()->subYears(rand(30, 55)),
+                    'lieu_naissance' => $this->villes[array_rand($this->villes)],
+                    'telephone' => '+24206' . rand(1000000, 9999999),
+                    'adresse' => rand(1, 200) . ' Av. du Congo, ' . $this->villes[array_rand($this->villes)],
+                    'specialite' => $data['specialite'],
+                    'photo' => null,
+                    'statut' => true,
+                ]
+            );
+
+            $user->assignRole('enseignant');
             $created++;
-            $this->command->line("✅ {$data['prenom']} {$data['nom']} ({$data['specialite']})" . ($userId ? ' [linked user]' : ''));
+            $this->command->line("✅ {$data['prenom']} {$data['nom']} ({$data['specialite']}) [linked user]");
         }
 
         $this->command->info("✅ Exactly {$created} enseignants created!");

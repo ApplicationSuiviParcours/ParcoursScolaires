@@ -7,12 +7,14 @@ use App\Http\Resources\NoteResource;
 use App\Http\Resources\AbsenceResource;
 use App\Http\Resources\BulletinResource;
 use App\Http\Resources\ClasseResource;
+use App\Http\Resources\AnneeScolaireResource;
+use App\Http\Resources\EleveResource;
 use App\Models\Note;
 use App\Models\Absence;
 use App\Models\Bulletin;
 use App\Models\Eleve;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -20,32 +22,33 @@ class DashboardController extends Controller
     /**
      * Get eleve dashboard: own stats, recent notes/absences/bulletins/classe.
      */
-    public function index(Request $request)
+    public function index(Request $request): JsonResponse
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
-        if (!$user->isEleve()) abort(403);
+        if (!$user || !$user->isEleve()) abort(403);
 
         $eleve = $user->eleve;
         if (!$eleve) abort(404, 'Elève non trouvé.');
 
-        $eleve->load(['inscriptionActive.classe.anneeScolaire']);
-        $classe = $eleve->inscriptionActive?->classe;
-        $annee = $eleve->inscriptionActive?->anneeScolaire;
+        $eleve->load(['inscriptionActive.classe.anneeScolaire', 'classe']);
+        $classe = $eleve->inscriptionActive?->classe ?? $eleve->classe;
+        $annee = $eleve->inscriptionActive?->anneeScolaire ?? ($classe?->anneeScolaire);
 
         // Recent data
-        $notes = Note::where('eleve_id', $eleve->id)
+        $notes = Note::query()->where('eleve_id', $eleve->id)
             ->with(['evaluation.matiere'])
             ->latest()
             ->limit(10)
             ->get();
 
-        $absences = Absence::where('eleve_id', $eleve->id)
+        $absences = Absence::query()->where('eleve_id', $eleve->id)
             ->with(['matiere'])
             ->latest('date_absence')
             ->limit(10)
             ->get();
 
-        $bulletins = Bulletin::where('eleve_id', $eleve->id)
+        $bulletins = Bulletin::query()->where('eleve_id', $eleve->id)
             ->with(['classe', 'anneeScolaire'])
             ->latest()
             ->limit(3)
@@ -54,7 +57,7 @@ class DashboardController extends Controller
         $bulletinCourant = $bulletins->first();
 
         // Calculer les moyennes par matière (comme sur le web)
-        $allNotes = Note::where('eleve_id', $eleve->id)
+        $allNotes = Note::query()->where('eleve_id', $eleve->id)
             ->with('evaluation.matiere')
             ->get();
 
@@ -86,9 +89,9 @@ class DashboardController extends Controller
         })->values();
 
         return response()->json([
-            'eleve' => new \App\Http\Resources\EleveResource($eleve),
+            'eleve' => new EleveResource($eleve),
             'classe' => $classe ? new ClasseResource($classe) : null,
-            'annee' => $annee ? new \App\Http\Resources\AnneeScolaireResource($annee) : null,
+            'annee' => $annee ? new AnneeScolaireResource($annee) : null,
             'stats' => [
                 'moyenne_generale' => $eleve->moyenne_generale ?? ($allNotes->avg('note') ? round($allNotes->avg('note'), 2) : 0),
                 'total_notes' => $allNotes->count(),

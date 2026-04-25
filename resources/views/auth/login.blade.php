@@ -37,9 +37,9 @@
                         value="{{ old('credential') }}"
                         required
                         autofocus
-                        autocomplete="matricule"
-                        class="pl-10 w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:ring-4 focus:ring-green-100 transition-all outline-none bg-gray-50 hover:bg-white text-sm uppercase tracking-wider font-mono"
-                        placeholder="PAR-2024-001 ou ELE-2024-001"
+                        autocomplete="username"
+                        class="pl-11 pr-4 w-full py-3 border-2 border-gray-200 rounded-xl text-gray-800 focus:border-green-500 focus:ring-4 focus:ring-green-100 transition-all outline-none bg-gray-50 hover:bg-white text-base font-semibold tracking-wide"
+                        placeholder="Ex: PAR-2024-001"
                     >
                 </div>
                 <x-input-error :messages="$errors->get('credential')" class="mt-1" />
@@ -65,8 +65,8 @@
             </button>
 
             <div class="pt-2 border-t border-gray-100 text-center">
-                <a href="{{ route('login.admin') }}" class="inline-flex items-center gap-1 text-sm font-medium text-green-600 hover:text-green-700 hover:underline">
-                    Accès Administrateur →
+                <a href="{{ route('login.admin') }}" class="inline-flex items-center gap-1 text-sm font-medium text-green-600 hover:text-green-700 hover:underline transition-colors">
+                    Accès Administrateur
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                     </svg>
@@ -104,13 +104,13 @@
                         </svg>
                     </div>
                     <input
-                        id="credential"
+                        id="credential_admin"
                         type="email"
                         name="credential"
                         value="{{ old('credential') }}"
                         required
                         autocomplete="email"
-                        class="pl-10 w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all outline-none bg-gray-50 hover:bg-white text-sm"
+                        class="pl-11 pr-4 w-full py-3 border-2 border-gray-200 rounded-xl text-gray-800 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all outline-none bg-gray-50 hover:bg-white text-base"
                         placeholder="Entrez votre email"
                     >
                 </div>
@@ -133,7 +133,7 @@
                         name="password"
                         required
                         autocomplete="current-password"
-                        class="pl-10 pr-12 w-full px-4 py-2.5 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all outline-none bg-gray-50 hover:bg-white text-sm"
+                        class="pl-11 pr-12 w-full py-3 border-2 border-gray-200 rounded-xl text-gray-800 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all outline-none bg-gray-50 hover:bg-white text-base"
                         placeholder="Entrez votre mot de passe"
                     >
                     <button type="button" @click="showPassword = !showPassword" class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-blue-600 focus:outline-none">

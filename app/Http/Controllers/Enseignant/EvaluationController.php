@@ -23,7 +23,7 @@ class EvaluationController extends Controller
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
-            $this->enseignant = Enseignant::where('user_id', Auth::id())->first();
+            $this->enseignant = Enseignant::query()->where('user_id', Auth::id())->first();
             
             if (!$this->enseignant) {
                 return redirect()->route('dashboard')
@@ -39,27 +39,27 @@ class EvaluationController extends Controller
      */
     public function index()
     {
-        $evaluations = Evaluation::where('enseignant_id', $this->enseignant->id)
+        $evaluations = Evaluation::query()->where('enseignant_id', $this->enseignant->id)
             ->with(['classe', 'matiere', 'notes'])
             ->orderBy('date_evaluation', 'desc')
             ->get();
 
         // Récupérer les classes via EnseignantMatiereClasse
-        $classeIds = EnseignantMatiereClasse::where('enseignant_id', $this->enseignant->id)
+        $classeIds = EnseignantMatiereClasse::query()->where('enseignant_id', $this->enseignant->id)
             ->distinct('classe_id')
             ->pluck('classe_id');
             
-        $classes = Classe::whereIn('id', $classeIds)->get();
+        $classes = Classe::query()->whereIn('id', $classeIds)->get();
 
         // Récupérer les matières via EnseignantMatiereClasse
-        $matiereIds = EnseignantMatiereClasse::where('enseignant_id', $this->enseignant->id)
+        $matiereIds = EnseignantMatiereClasse::query()->where('enseignant_id', $this->enseignant->id)
             ->distinct('matiere_id')
             ->pluck('matiere_id');
             
-        $matieres = Matiere::whereIn('id', $matiereIds)->get();
+        $matieres = Matiere::query()->whereIn('id', $matiereIds)->get();
 
         $anneesScolaires = AnneeScolaire::all();
-        $anneeScolaireActive = AnneeScolaire::where('active', true)->first();
+        $anneeScolaireActive = AnneeScolaire::query()->where('active', true)->first();
 
         return view('enseignant.evaluations', compact(
             'evaluations',
@@ -76,21 +76,21 @@ class EvaluationController extends Controller
     public function create()
     {
         // Récupérer les classes de l'enseignant
-        $classeIds = EnseignantMatiereClasse::where('enseignant_id', $this->enseignant->id)
+        $classeIds = EnseignantMatiereClasse::query()->where('enseignant_id', $this->enseignant->id)
             ->distinct('classe_id')
             ->pluck('classe_id');
             
-        $classes = Classe::whereIn('id', $classeIds)->get();
+        $classes = Classe::query()->whereIn('id', $classeIds)->get();
 
         // Récupérer les matières de l'enseignant
-        $matiereIds = EnseignantMatiereClasse::where('enseignant_id', $this->enseignant->id)
+        $matiereIds = EnseignantMatiereClasse::query()->where('enseignant_id', $this->enseignant->id)
             ->distinct('matiere_id')
             ->pluck('matiere_id');
             
-        $matieres = Matiere::whereIn('id', $matiereIds)->get();
+        $matieres = Matiere::query()->whereIn('id', $matiereIds)->get();
 
         $anneesScolaires = AnneeScolaire::all();
-        $anneeScolaireActive = AnneeScolaire::where('active', true)->first();
+        $anneeScolaireActive = AnneeScolaire::query()->where('active', true)->first();
 
         // IMPORTANT: Initialiser $evaluations comme une collection vide pour éviter l'erreur
         $evaluations = collect([]);
@@ -123,7 +123,7 @@ class EvaluationController extends Controller
         ]);
 
         // Vérifier que l'enseignant a bien accès à cette classe et matière
-        $acces = EnseignantMatiereClasse::where('enseignant_id', $this->enseignant->id)
+        $acces = EnseignantMatiereClasse::query()->where('enseignant_id', $this->enseignant->id)
             ->where('classe_id', $request->classe_id)
             ->where('matiere_id', $request->matiere_id)
             ->exists();
@@ -155,7 +155,7 @@ class EvaluationController extends Controller
      */
     public function show($id)
     {
-        $evaluation = Evaluation::where('enseignant_id', $this->enseignant->id)
+        $evaluation = Evaluation::query()->where('enseignant_id', $this->enseignant->id)
             ->with(['classe', 'matiere', 'notes.eleve'])
             ->findOrFail($id);
 
@@ -177,19 +177,19 @@ class EvaluationController extends Controller
      */
     public function edit($id)
     {
-        $evaluation = Evaluation::where('enseignant_id', $this->enseignant->id)->findOrFail($id);
+        $evaluation = Evaluation::query()->where('enseignant_id', $this->enseignant->id)->findOrFail($id);
         
-        $classeIds = EnseignantMatiereClasse::where('enseignant_id', $this->enseignant->id)
+        $classeIds = EnseignantMatiereClasse::query()->where('enseignant_id', $this->enseignant->id)
             ->distinct('classe_id')
             ->pluck('classe_id');
             
-        $classes = Classe::whereIn('id', $classeIds)->get();
+        $classes = Classe::query()->whereIn('id', $classeIds)->get();
 
-        $matiereIds = EnseignantMatiereClasse::where('enseignant_id', $this->enseignant->id)
+        $matiereIds = EnseignantMatiereClasse::query()->where('enseignant_id', $this->enseignant->id)
             ->distinct('matiere_id')
             ->pluck('matiere_id');
             
-        $matieres = Matiere::whereIn('id', $matiereIds)->get();
+        $matieres = Matiere::query()->whereIn('id', $matiereIds)->get();
 
         $anneesScolaires = AnneeScolaire::all();
 
@@ -201,7 +201,7 @@ class EvaluationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $evaluation = Evaluation::where('enseignant_id', $this->enseignant->id)->findOrFail($id);
+        $evaluation = Evaluation::query()->where('enseignant_id', $this->enseignant->id)->findOrFail($id);
 
         $request->validate([
             'nom' => 'required|string|max:255',
@@ -226,7 +226,7 @@ class EvaluationController extends Controller
      */
     public function destroy($id)
     {
-        $evaluation = Evaluation::where('enseignant_id', $this->enseignant->id)->findOrFail($id);
+        $evaluation = Evaluation::query()->where('enseignant_id', $this->enseignant->id)->findOrFail($id);
         
         // Vérifier s'il y a des notes associées
         if ($evaluation->notes()->count() > 0) {
@@ -245,7 +245,7 @@ class EvaluationController extends Controller
      */
     public function duplicate($id)
     {
-        $evaluation = Evaluation::where('enseignant_id', $this->enseignant->id)->findOrFail($id);
+        $evaluation = Evaluation::query()->where('enseignant_id', $this->enseignant->id)->findOrFail($id);
         
         $nouvelleEvaluation = $evaluation->replicate();
         $nouvelleEvaluation->nom = $nouvelleEvaluation->nom . ' (copie)';
@@ -261,7 +261,7 @@ class EvaluationController extends Controller
      */
     public function statistiques($id)
     {
-        $evaluation = Evaluation::where('enseignant_id', $this->enseignant->id)
+        $evaluation = Evaluation::query()->where('enseignant_id', $this->enseignant->id)
             ->with(['notes', 'classe', 'matiere'])
             ->findOrFail($id);
 

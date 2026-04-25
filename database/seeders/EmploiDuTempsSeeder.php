@@ -47,7 +47,7 @@ class EmploiDuTempsSeeder extends Seeder
                     'classe_id' => $classe->id,
                     'matiere_id' => $matieres->random()->id,
                     'enseignant_id' => $enseignants->random()->id,
-                    'jour' => $jours[array_rand($jours)],
+                    'jour' => rand(1, 5),
                     'heure_debut' => $horaire[0],
                     'heure_fin' => $horaire[1],
                     'salle' => 'A' . rand(1, 5),

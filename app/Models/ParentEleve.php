@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\User;
 use App\Models\Eleve;
 use Illuminate\Support\Str;
@@ -89,7 +88,7 @@ class ParentEleve extends Model
      */
     public function scopeActif($query)
     {
-        return $query->where('statut', true);
+        return $query->whereIn('statut', ['inscrit', 'active', '1', 1, true]);
     }
 
     /**

@@ -63,7 +63,7 @@
                     <div>
                         <p class="text-xs sm:text-sm font-medium text-gray-500">Année scolaire</p>
                         <p class="text-2xl sm:text-3xl font-bold text-gray-900 mt-1">
-                            {{ $classes->first()->classe->anneeScolaire->annee ?? '-' }}
+                            {{ $classes->first()->anneeScolaire->nom ?? '-' }}
                         </p>
                     </div>
                     <div class="bg-purple-100 rounded-full p-2 sm:p-3">
@@ -112,7 +112,7 @@
                                     </td>
                                     <td class="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm text-gray-900 whitespace-nowrap">
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
-                                            {{ $classeMatiere->classe->anneeScolaire->annee ?? '-' }}
+                                            {{ $classeMatiere->anneeScolaire->nom ?? '-' }}
                                         </span>
                                     </td>
                                     <td class="px-3 sm:px-6 py-3 sm:py-4">

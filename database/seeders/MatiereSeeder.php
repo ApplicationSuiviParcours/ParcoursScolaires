@@ -38,12 +38,14 @@ class MatiereSeeder extends Seeder
         $created = 0;
         foreach ($this->matieres as $data) {
             $code = $this->generateCode($data['nom']);
-            Matiere::create([
-                'nom' => $data['nom'],
-                'code' => $code,
-                'description' => $data['description'],
-                'coefficient' => $data['coefficient'],
-            ]);
+            Matiere::firstOrCreate(
+                ['code' => $code],
+                [
+                    'nom' => $data['nom'],
+                    'description' => $data['description'],
+                    'coefficient' => $data['coefficient'],
+                ]
+            );
             $this->command->line("  {$code} - {$data['nom']} (coeff {$data['coefficient']})");
             $created++;
         }

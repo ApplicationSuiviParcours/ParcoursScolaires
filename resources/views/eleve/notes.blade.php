@@ -265,6 +265,7 @@
                                 <th class="px-2 py-2 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap sm:px-3 sm:py-3 md:px-4 md:py-4">Note</th>
                                 <th class="px-2 py-2 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap sm:px-3 sm:py-3 md:px-4 md:py-4">Sur</th>
                                 <th class="px-2 py-2 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap sm:px-3 sm:py-3 md:px-4 md:py-4">Coef.</th>
+                                <th class="px-2 py-2 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap sm:px-3 sm:py-3 md:px-4 md:py-4">Appréciation</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
@@ -276,6 +277,13 @@
                                                 ($noteValue >= 14 ? 'from-blue-500 to-blue-600 text-blue-800 bg-blue-100' : 
                                                 ($noteValue >= 10 ? 'from-yellow-500 to-yellow-600 text-yellow-800 bg-yellow-100' : 
                                                 'from-red-500 to-red-600 text-red-800 bg-red-100'));
+                                    
+                                    $appreciation = '-';
+                                    if (!empty($note->observation)) {
+                                        $appreciation = $note->observation;
+                                    } elseif (!empty($note->evaluation) && !empty($note->evaluation->description)) {
+                                        $appreciation = $note->evaluation->description;
+                                    }
                                 @endphp
                                 <tr class="{{ $bgColor }} hover:bg-blue-50/50 transition-all duration-300 transform hover:scale-102 hover:shadow-md animate-slide-up" style="animation-delay: {{ $index * 50 }}ms">
                                     <td class="px-2 py-2 whitespace-nowrap sm:px-3 sm:py-3 md:px-4 md:py-4">
@@ -320,10 +328,21 @@
                                             {{ optional($note->evaluation->matiere)->coefficient ?? 1 }}
                                         </span>
                                     </td>
+                                    <td class="px-2 py-2 text-xs sm:text-sm text-gray-700 max-w-[150px] sm:max-w-xs md:max-w-sm truncate">
+                                        @if($appreciation != '-')
+                                            <div class="relative group/appreciation inline-block w-full">
+                                                <span class="truncate block italic text-gray-600 cursor-help" title="{{ $appreciation }}">
+                                                    "{{ Str::limit($appreciation, 25) }}"
+                                                </span>
+                                            </div>
+                                        @else
+                                            <span class="text-gray-400 italic">Pas d'appréciation</span>
+                                        @endif
+                                    </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="6" class="px-2 py-6 text-center sm:px-3 sm:py-8 md:px-4 md:py-12">
+                                    <td colspan="7" class="px-2 py-6 text-center sm:px-3 sm:py-8 md:px-4 md:py-12">
                                         <div class="relative inline-block animate-float">
                                             <div class="absolute inset-0 bg-blue-300 rounded-full opacity-50 blur-xl"></div>
                                             <svg class="relative w-12 h-12 text-blue-400 sm:w-16 sm:h-16 md:w-20 md:h-20" fill="none" stroke="currentColor" viewBox="0 0 24 24">

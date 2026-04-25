@@ -20,15 +20,19 @@ class EmploiDuTempsResource extends JsonResource
                 'id' => $this->enseignant_id,
                 'nom' => $this->enseignant?->nom ?? '',
                 'prenom' => $this->enseignant?->prenom ?? '',
-                'user' => $this->whenLoaded('enseignant.user', new UserResource($this->enseignant->user)),
+                'nom_complet' => $this->enseignant
+                    ? trim(($this->enseignant->prenom ?? '') . ' ' . ($this->enseignant->nom ?? ''))
+                    : '',
             ],
             'annee_scolaire' => new AnneeScolaireResource($this->whenLoaded('anneeScolaire')),
             'jour' => $this->jour, // 1=Lundi...7=Dimanche
             'jour_libelle' => $this->jour_libelle ?? $this->getJourLibelle(),
-            'heure_debut' => $this->heure_debut,
-            'heure_fin' => $this->heure_fin,
+            'heure_debut' => $this->heure_debut instanceof \Carbon\Carbon ? $this->heure_debut->format('H:i') : substr($this->heure_debut, 0, 5),
+            'heure_fin' => $this->heure_fin instanceof \Carbon\Carbon ? $this->heure_fin->format('H:i') : substr($this->heure_fin, 0, 5),
             'salle' => $this->salle,
-            'duree' => $this->heure_fin->diffInMinutes($this->heure_debut),
+            'duree' => $this->heure_fin instanceof \Carbon\Carbon && $this->heure_debut instanceof \Carbon\Carbon 
+                ? $this->heure_fin->diffInMinutes($this->heure_debut) 
+                : 0,
         ];
     }
 

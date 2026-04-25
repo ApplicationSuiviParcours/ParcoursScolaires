@@ -59,7 +59,7 @@ class NotificationService
         if (!$eleve) return 0;
 
         // Récupérer tous les parents de l'élève qui ont un compte utilisateur
-        $parents = EleveParent::where('eleve_id', $eleve->id)
+        $parents = EleveParent::query()->where('eleve_id', $eleve->id)
             ->with(['parentEleve.user'])
             ->get();
 
@@ -97,7 +97,7 @@ class NotificationService
         if (!$eleve) return 0;
 
         // Récupérer tous les parents de l'élève qui ont un compte utilisateur
-        $parents = EleveParent::where('eleve_id', $eleve->id)
+        $parents = EleveParent::query()->where('eleve_id', $eleve->id)
             ->with(['parentEleve.user'])
             ->get();
 
@@ -176,12 +176,12 @@ class NotificationService
     public function notifierParentsDeClasse(int $classeId, string $titre, string $message, string $type = 'info', ?string $lien = null): int
     {
         // Récupérer les élèves de la classe
-        $eleveIds = \App\Models\Inscription::where('classe_id', $classeId)
-            ->where('statut', true)
+        $eleveIds = \App\Models\Inscription::query()->where('classe_id', $classeId)
+            ->whereIn('statut', ['inscrit', 'active', '1', 1, true])
             ->pluck('eleve_id');
 
         // Récupérer les parents de ces élèves
-        $parentIds = EleveParent::whereIn('eleve_id', $eleveIds)
+        $parentIds = EleveParent::query()->whereIn('eleve_id', $eleveIds)
             ->with('parentEleve.user')
             ->get()
             ->map(fn($ep) => $ep->parentEleve?->user)

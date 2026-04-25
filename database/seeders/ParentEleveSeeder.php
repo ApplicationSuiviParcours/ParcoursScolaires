@@ -42,26 +42,31 @@ class ParentEleveSeeder extends Seeder
         $created = 0;
         foreach ($this->parents as $data) {
             $user = User::where('email', $data['email'])->first();
-
-            $parent = ParentEleve::create([
-                'user_id' => $user?->id,
-                'nom' => $data['nom'],
-                'prenom' => $data['prenom'],
-                'genre' => $data['genre'],
-                'profession' => $data['profession'],
-                'telephone' => '+24206' . rand(1000000, 9999999),
-                'email' => $data['email'],
-                'adresse' => rand(1, 150) . ' Bd du 15 Août, ' . $this->villes[array_rand($this->villes)],
-                'date_naissance' => Carbon::now()->subYears(rand(35, 55)),
-                'lieu_naissance' => $this->villes[array_rand($this->villes)],
-                'statut' => true,
-                'notes' => 'Parent très impliqué',
-            ]);
-
-            if ($user) {
-                $user->assignRole('parent');
-                $this->command->line("✅ Assigned 'parent' role to user {$user->email}");
+            
+            if (!$user) {
+                $this->command->warn("⚠️ No user for {$data['email']}, skipping...");
+                continue;
             }
+
+            $parent = ParentEleve::updateOrCreate(
+                ['email' => $data['email']],
+                [
+                    'user_id' => $user->id,
+                    'nom' => $data['nom'],
+                    'prenom' => $data['prenom'],
+                    'matricule' => ParentEleve::genererMatricule($data['nom']),
+                    'genre' => $data['genre'],
+                    'profession' => $data['profession'],
+                    'telephone' => '+24206' . rand(1000000, 9999999),
+                    'adresse' => rand(1, 150) . ' Bd du 15 Août, ' . $this->villes[array_rand($this->villes)],
+                    'date_naissance' => Carbon::now()->subYears(rand(35, 55)),
+                    'lieu_naissance' => $this->villes[array_rand($this->villes)],
+                    'statut' => true,
+                    'notes' => 'Parent très impliqué',
+                ]
+            );
+
+            $user->assignRole('parent');
 
             // Associate to 1-2 eleves
             if ($eleves->isNotEmpty()) {
@@ -83,7 +88,7 @@ class ParentEleveSeeder extends Seeder
             }
 
             $created++;
-            $this->command->line("✅ {$data['prenom']} {$data['nom']} ({$data['profession']})" . ($user ? ' [user]' : ''));
+            $this->command->line("✅ {$data['prenom']} {$data['nom']} ({$data['profession']}) [linked user]");
         }
 
         $this->command->info("✅ Exactly {$created} parents created!");

@@ -48,7 +48,7 @@ class ElevesExport implements FromCollection, WithHeadings, WithMapping, WithSty
         if ($this->request->filled('classe_id')) {
             $query->whereHas('inscriptions', function($q) {
                 $q->where('classe_id', $this->request->classe_id)
-                  ->where('statut', true);
+                  ->whereIn('statut', ['inscrit', 'active', '1', 1, true]);
             });
         }
 

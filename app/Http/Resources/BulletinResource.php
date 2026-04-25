@@ -13,7 +13,9 @@ class BulletinResource extends JsonResource
             'periode'          => $this->periode,
             'date_bulletin'    => $this->date_bulletin,
             'moyenne_generale' => $this->moyenne_generale,
-'appreciation'     => $this->appreciation,
+            'moyenne_classe'   => $this->moyenne_classe ?? 0,
+            'ecart_classe'     => $this->ecart_classe,
+            'appreciation'     => $this->appreciation,
             'rang'             => $this->rang ?? null,
             'classe'           => $this->when(
                 $this->relationLoaded('classe'),
@@ -24,7 +26,7 @@ class BulletinResource extends JsonResource
                 fn() => new AnneeScolaireResource($this->anneeScolaire)
             ),
             // Notes chargées manuellement via DB::table (pas une relation Eloquent)
-            'notes'            => $this->notes ?? null,
+            'notes'            => $this->notes_manuelles ?? $this->whenLoaded('notesBulletin'),
         ];
     }
 }

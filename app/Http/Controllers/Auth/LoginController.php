@@ -44,7 +44,7 @@ class LoginController extends Controller
             }
 
             // Check if user exists but is inactive
-            $user = User::where('email', $request->credential)->first();
+            $user = User::query()->where('email', $request->credential)->first();
             if ($user && !$user->is_active && Hash::check($request->password, $user->password)) {
                  return back()->withErrors([
                     'credential' => 'Votre compte a été désactivé. Veuillez contacter l\'administration.',
@@ -67,14 +67,14 @@ class LoginController extends Controller
         $user = null;
 
         // Rechercher dans Eleve
-        $eleve = Eleve::where('matricule', $matricule)->first();
+        $eleve = Eleve::query()->where('matricule', $matricule)->first();
         if ($eleve) {
             $user = $eleve->user;
         }
 
         // Rechercher dans Enseignant si pas trouvé
         if (!$user) {
-            $enseignant = Enseignant::where('matricule', $matricule)->first();
+            $enseignant = Enseignant::query()->where('matricule', $matricule)->first();
             if ($enseignant) {
                 $user = $enseignant->user;
             }
@@ -82,7 +82,7 @@ class LoginController extends Controller
 
         // Rechercher dans Parent si pas trouvé
         if (!$user) {
-            $parent = ParentEleve::where('matricule', $matricule)->first();
+            $parent = ParentEleve::query()->where('matricule', $matricule)->first();
             if ($parent) {
                 $user = $parent->user;
             }

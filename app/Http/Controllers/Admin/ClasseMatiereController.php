@@ -20,7 +20,7 @@ class ClasseMatiereController extends Controller
         $search = $request->get('search');
         $classeId = $request->get('classe_id');
         
-        $classes = Classe::with(['matieres' => function($query) {
+        $classes = Classe::query()->with(['matieres' => function($query) {
                 $query->with(['matiere']);
             }])
             ->when($search, function ($query) use ($search) {
@@ -50,15 +50,15 @@ class ClasseMatiereController extends Controller
     {
         $classeId = $request->get('classe_id');
         
-        $classes = Classe::orderBy('nom')->get();
-        $matieres = Matiere::orderBy('nom')->get();
+        $classes = Classe::query()->orderBy('nom')->get();
+        $matieres = Matiere::query()->orderBy('nom')->get();
         
         $classeMatieres = [];
         $classe = null;
         
         if ($classeId) {
             $classe = Classe::find($classeId);
-            $classeMatieres = ClasseMatiere::where('classe_id', $classeId)
+            $classeMatieres = ClasseMatiere::query()->where('classe_id', $classeId)
                 ->with(['matiere'])
                 ->orderBy('created_at', 'desc')
                 ->get();
@@ -99,7 +99,7 @@ class ClasseMatiereController extends Controller
             DB::beginTransaction();
 
             // Vérifier si l'association existe déjà
-            $exists = ClasseMatiere::where('classe_id', $validated['classe_id'])
+            $exists = ClasseMatiere::query()->where('classe_id', $validated['classe_id'])
                 ->where('matiere_id', $validated['matiere_id'])
                 ->exists();
 
@@ -140,8 +140,8 @@ class ClasseMatiereController extends Controller
      */
     public function edit(ClasseMatiere $classeMatiere)
     {
-        $classes = Classe::orderBy('nom')->get();
-        $matieres = Matiere::orderBy('nom')->get();
+        $classes = Classe::query()->orderBy('nom')->get();
+        $matieres = Matiere::query()->orderBy('nom')->get();
         
         return view('admin.classe_matieres.edit', compact('classeMatiere', 'classes', 'matieres'));
     }
@@ -161,7 +161,7 @@ class ClasseMatiereController extends Controller
             DB::beginTransaction();
 
             // Vérifier si l'association existe déjà (sauf pour l'enregistrement actuel)
-            $exists = ClasseMatiere::where('classe_id', $validated['classe_id'])
+            $exists = ClasseMatiere::query()->where('classe_id', $validated['classe_id'])
                 ->where('matiere_id', $validated['matiere_id'])
                 ->where('id', '!=', $classeMatiere->id)
                 ->exists();
@@ -252,7 +252,7 @@ class ClasseMatiereController extends Controller
             'ignore_id' => 'nullable|exists:classe_matieres,id',
         ]);
 
-        $query = ClasseMatiere::where('classe_id', $request->classe_id)
+        $query = ClasseMatiere::query()->where('classe_id', $request->classe_id)
             ->where('matiere_id', $request->matiere_id);
 
         if ($request->filled('ignore_id')) {

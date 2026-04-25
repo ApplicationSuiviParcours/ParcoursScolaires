@@ -24,8 +24,8 @@ class MessageController extends Controller
      */
     public function index()
     {
-        $classes = Classe::orderBy('nom')->get();
-        $users   = User::with('roles')
+        $classes = Classe::query()->orderBy('nom')->get();
+        $users   = User::query()->with('roles')
             ->where('is_active', true)
             ->whereHas('roles', fn($q) => $q->whereIn('name', ['parent', 'enseignant']))
             ->orderBy('name')
@@ -36,7 +36,7 @@ class MessageController extends Controller
             'parents'      => User::role('parent')->where('is_active', true)->count(),
             'enseignants'  => User::role('enseignant')->where('is_active', true)->count(),
             'total_notifs' => \App\Models\Notification::count(),
-            'non_lues'     => \App\Models\Notification::where('read', false)->count(),
+            'non_lues'     => \App\Models\Notification::query()->where('read', false)->count(),
         ];
 
         return view('admin.messages.index', compact('classes', 'users', 'stats'));
@@ -107,7 +107,7 @@ class MessageController extends Controller
      */
     public function historique(Request $request)
     {
-        $query = \App\Models\Notification::with('user')->latest();
+        $query = \App\Models\Notification::query()->with('user')->latest();
 
         if ($request->filled('type')) {
             $query->where('type', $request->type);

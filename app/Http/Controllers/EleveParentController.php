@@ -19,14 +19,14 @@ class EleveParentController extends Controller
      */
     public function index(Request $request)
     {
-        $query = EleveParent::with(['eleve', 'parentEleve']); // Retiré 'eleve.classe'
+        $query = EleveParent::query()->with(['eleve', 'parentEleve']); // Retiré 'eleve.classe'
         
         // Filtres optionnels
         if ($request->has('classe_id') && $request->classe_id) {
             $query->whereHas('eleve', function($q) use ($request) {
                 $q->whereHas('inscriptions', function($inscriptionQuery) use ($request) {
                     $inscriptionQuery->where('classe_id', $request->classe_id)
-                                    ->where('statut', true);
+                                    ->whereIn('statut', ['inscrit', 'active', '1', 1, true]);
                 });
             });
         }
@@ -56,9 +56,9 @@ class EleveParentController extends Controller
      */
     public function create()
     {
-        // Remplacer Eleve::with('classe') par Eleve::with('inscriptions.classe')
-        $eleves = Eleve::with(['inscriptions' => function($query) {
-            $query->where('statut', true)->with('classe');
+        // Remplacer Eleve::query()->with('classe') par Eleve::query()->with('inscriptions.classe')
+        $eleves = Eleve::query()->with(['inscriptions' => function($query) {
+            $query->whereIn('statut', ['inscrit', 'active', '1', 1, true])->with('classe');
         }])->get();
         
         $parents = ParentEleve::all();
@@ -79,7 +79,7 @@ class EleveParentController extends Controller
         ]);
 
         // Vérifier si la relation existe déjà
-        $existingRelation = EleveParent::where('eleve_id', $validated['eleve_id'])
+        $existingRelation = EleveParent::query()->where('eleve_id', $validated['eleve_id'])
             ->where('parent_eleve_id', $validated['parent_eleve_id'])
             ->first();
 
@@ -110,9 +110,9 @@ class EleveParentController extends Controller
      */
     public function edit(EleveParent $eleveParent)
     {
-        // Remplacer Eleve::with('classe') par Eleve::with('inscriptions.classe')
-        $eleves = Eleve::with(['inscriptions' => function($query) {
-            $query->where('statut', true)->with('classe');
+        // Remplacer Eleve::query()->with('classe') par Eleve::query()->with('inscriptions.classe')
+        $eleves = Eleve::query()->with(['inscriptions' => function($query) {
+            $query->whereIn('statut', ['inscrit', 'active', '1', 1, true])->with('classe');
         }])->get();
         
         $parents = ParentEleve::all();
@@ -132,7 +132,7 @@ class EleveParentController extends Controller
         ]);
 
         // Vérifier les doublons
-        $existingRelation = EleveParent::where('eleve_id', $validated['eleve_id'])
+        $existingRelation = EleveParent::query()->where('eleve_id', $validated['eleve_id'])
             ->where('parent_eleve_id', $validated['parent_eleve_id'])
             ->where('id', '!=', $eleveParent->id)
             ->first();
@@ -213,7 +213,7 @@ class EleveParentController extends Controller
      */
     public function deleteByEleve(Eleve $eleve)
     {
-        $count = EleveParent::where('eleve_id', $eleve->id)->delete();
+        $count = EleveParent::query()->where('eleve_id', $eleve->id)->delete();
         
         return redirect()->route('admin.eleve-parents.index')
             ->with('success', "{$count} relation(s) supprimée(s) pour l'élève {$eleve->nom_complet}.");
@@ -224,7 +224,7 @@ class EleveParentController extends Controller
      */
     public function deleteByParent(ParentEleve $parent)
     {
-        $count = EleveParent::where('parent_eleve_id', $parent->id)->delete();
+        $count = EleveParent::query()->where('parent_eleve_id', $parent->id)->delete();
         
         return redirect()->route('admin.eleve-parents.index')
             ->with('success', "{$count} relation(s) supprimée(s) pour le parent {$parent->nom_complet}.");
@@ -237,7 +237,7 @@ class EleveParentController extends Controller
      */
     public function exportPdf()
     {
-        $relations = EleveParent::with(['eleve.inscriptions.classe', 'parentEleve'])
+        $relations = EleveParent::query()->with(['eleve.inscriptions.classe', 'parentEleve'])
             ->orderBy('created_at', 'desc')
             ->get()
             ->map(function($relation) {
@@ -278,7 +278,7 @@ class EleveParentController extends Controller
      */
     public function exportByElevePdf(Eleve $eleve)
     {
-        $relations = EleveParent::with(['parentEleve'])
+        $relations = EleveParent::query()->with(['parentEleve'])
             ->where('eleve_id', $eleve->id)
             ->get()
             ->map(function($relation) use ($eleve) {
@@ -296,7 +296,7 @@ class EleveParentController extends Controller
      */
     public function exportByParentPdf(ParentEleve $parent)
     {
-        $relations = EleveParent::with(['eleve.inscriptions.classe'])
+        $relations = EleveParent::query()->with(['eleve.inscriptions.classe'])
             ->where('parent_eleve_id', $parent->id)
             ->get()
             ->map(function($relation) {
@@ -314,7 +314,7 @@ class EleveParentController extends Controller
      */
     public function previewPdf()
     {
-        $relations = EleveParent::with(['eleve.inscriptions.classe', 'parentEleve'])
+        $relations = EleveParent::query()->with(['eleve.inscriptions.classe', 'parentEleve'])
             ->orderBy('created_at', 'desc')
             ->get()
             ->map(function($relation) {

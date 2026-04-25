@@ -17,12 +17,13 @@ class NoteController extends Controller
      */
     public function index(Request $request, $eleve_id): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
-        if (!$user->isParent()) abort(403);
+        if (!$user || !$user->isParent()) abort(403);
 
         $eleve = Eleve::findOrFail($eleve_id);
 
-        $query = Note::where('eleve_id', $eleve_id)
+        $query = Note::query()->where('eleve_id', $eleve_id)
             ->with(['evaluation.matiere']);
 
         if ($request->filled('matiere_id')) {
@@ -41,8 +42,8 @@ class NoteController extends Controller
         $notes = $query->orderBy('created_at', 'desc')->paginate(20);
 
         $stats = [
-            'total_notes' => Note::where('eleve_id', $eleve_id)->count(),
-            'moyenne_generale' => round(Note::where('eleve_id', $eleve_id)->avg('note') ?? 0, 2),
+            'total_notes' => Note::query()->where('eleve_id', $eleve_id)->count(),
+            'moyenne_generale' => round(Note::query()->where('eleve_id', $eleve_id)->avg('note') ?? 0, 2),
         ];
 
         $notes->additional(['stats' => $stats]);

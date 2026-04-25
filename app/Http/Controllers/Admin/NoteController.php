@@ -20,7 +20,7 @@ class NoteController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Note::with(['eleve', 'evaluation.matiere', 'evaluation.classe', 'evaluation.anneeScolaire']);
+        $query = Note::query()->with(['eleve', 'evaluation.matiere', 'evaluation.classe', 'evaluation.anneeScolaire']);
 
         // Filtre par année scolaire (via l'évaluation)
         if ($request->filled('annee_scolaire_id')) {
@@ -81,8 +81,8 @@ class NoteController extends Controller
             'moyenne_generale' => round(Note::avg('note') ?? 0, 2),
             'note_max' => Note::max('note') ?? 0,
             'note_min' => Note::min('note') ?? 0,
-            'reussites' => Note::where('note', '>=', 10)->count(),
-            'echecs' => Note::where('note', '<', 10)->count(),
+            'reussites' => Note::query()->where('note', '>=', 10)->count(),
+            'echecs' => Note::query()->where('note', '<', 10)->count(),
         ];
 
         $notes = $query->orderBy('created_at', 'desc')
@@ -90,9 +90,9 @@ class NoteController extends Controller
                       ->withQueryString();
 
         // Données pour les filtres
-        $anneeScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
-        $classes = Classe::orderBy('nom')->get();
-        $matieres = Matiere::orderBy('nom')->get();
+        $anneeScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
+        $classes = Classe::query()->orderBy('nom')->get();
+        $matieres = Matiere::query()->orderBy('nom')->get();
         $typesEvaluation = ['devoir', 'examen', 'composition', 'interrogation'];
 
         return view('admin.notes.index', compact(
@@ -115,8 +115,8 @@ class NoteController extends Controller
         $periode = $request->get('periode', 'Trimestre 1');
         $typeEvaluation = $request->get('type_evaluation');
         
-        $anneeScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
-        $classes = Classe::orderBy('nom')->get();
+        $anneeScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
+        $classes = Classe::query()->orderBy('nom')->get();
         $typesEvaluation = ['devoir', 'examen', 'composition', 'interrogation'];
         
         $eleves = [];
@@ -126,18 +126,18 @@ class NoteController extends Controller
         
         if ($classeId && $anneeScolaireId) {
             // Récupérer les élèves de la classe
-            $eleveIds = Inscription::where('classe_id', $classeId)
+            $eleveIds = Inscription::query()->where('classe_id', $classeId)
                 ->where('annee_scolaire_id', $anneeScolaireId)
-                ->where('statut', true)
+                ->whereIn('statut', ['inscrit', 'active', '1', 1, true])
                 ->pluck('eleve_id');
             
-            $eleves = Eleve::whereIn('id', $eleveIds)
+            $eleves = Eleve::query()->whereIn('id', $eleveIds)
                 ->orderBy('nom')
                 ->orderBy('prenom')
                 ->get();
             
             // Récupérer les évaluations pour cette classe/période
-            $evaluationsQuery = Evaluation::where('classe_id', $classeId)
+            $evaluationsQuery = Evaluation::query()->where('classe_id', $classeId)
                 ->where('annee_scolaire_id', $anneeScolaireId)
                 ->where('periode', $periode)
                 ->with(['matiere']);
@@ -151,7 +151,7 @@ class NoteController extends Controller
             // Construire la matrice des notes
             foreach ($eleves as $eleve) {
                 foreach ($evaluations as $evaluation) {
-                    $note = Note::where('eleve_id', $eleve->id)
+                    $note = Note::query()->where('eleve_id', $eleve->id)
                         ->where('evaluation_id', $evaluation->id)
                         ->first();
                     
@@ -162,7 +162,7 @@ class NoteController extends Controller
             // Statistiques par matière
             foreach ($evaluations->groupBy('matiere_id') as $matiereId => $evaluationsMatiere) {
                 $matiere = $evaluationsMatiere->first()->matiere;
-                $notesMatiere = Note::whereIn('evaluation_id', $evaluationsMatiere->pluck('id'))
+                $notesMatiere = Note::query()->whereIn('evaluation_id', $evaluationsMatiere->pluck('id'))
                     ->get();
                 
                 $stats[$matiereId] = [
@@ -200,11 +200,11 @@ class NoteController extends Controller
         $periode = $request->get('periode');
         $matiereId = $request->get('matiere_id');
         
-        $anneeScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
+        $anneeScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
         $periodes = ['Trimestre 1', 'Trimestre 2', 'Trimestre 3', 'Semestre 1', 'Semestre 2'];
-        $matieres = Matiere::orderBy('nom')->get();
+        $matieres = Matiere::query()->orderBy('nom')->get();
         
-        $query = Note::where('eleve_id', $eleve->id)
+        $query = Note::query()->where('eleve_id', $eleve->id)
             ->with(['evaluation.matiere', 'evaluation.classe']);
         
         if ($anneeScolaireId) {
@@ -259,8 +259,8 @@ class NoteController extends Controller
      */
     public function create()
     {
-        $eleves = Eleve::orderBy('nom')->orderBy('prenom')->get();
-        $evaluations = Evaluation::with(['classe', 'matiere'])->orderBy('date_evaluation', 'desc')->get();
+        $eleves = Eleve::query()->orderBy('nom')->orderBy('prenom')->get();
+        $evaluations = Evaluation::query()->with(['classe', 'matiere'])->orderBy('date_evaluation', 'desc')->get();
         
         return view('admin.notes.create', compact('eleves', 'evaluations'));
     }
@@ -278,7 +278,7 @@ class NoteController extends Controller
         ]);
 
         // Vérifier si une note existe déjà pour cet élève et cette évaluation
-        $existingNote = Note::where('eleve_id', $request->eleve_id)
+        $existingNote = Note::query()->where('eleve_id', $request->eleve_id)
             ->where('evaluation_id', $request->evaluation_id)
             ->first();
 
@@ -382,7 +382,7 @@ class NoteController extends Controller
      */
     public function import()
     {
-        $evaluations = Evaluation::with(['matiere', 'classe'])
+        $evaluations = Evaluation::query()->with(['matiere', 'classe'])
             ->orderBy('date_evaluation', 'desc')
             ->get();
         
@@ -443,7 +443,7 @@ class NoteController extends Controller
      */
     public function getNotesEleve(Eleve $eleve, Request $request)
     {
-        $query = Note::where('eleve_id', $eleve->id)
+        $query = Note::query()->where('eleve_id', $eleve->id)
             ->with(['evaluation.matiere']);
 
         if ($request->filled('annee_scolaire_id')) {
@@ -473,8 +473,8 @@ class NoteController extends Controller
             'moyenne_generale' => round(Note::avg('note') ?? 0, 2),
             'note_max' => Note::max('note') ?? 0,
             'note_min' => Note::min('note') ?? 0,
-            'reussites' => Note::where('note', '>=', 10)->count(),
-            'echecs' => Note::where('note', '<', 10)->count(),
+            'reussites' => Note::query()->where('note', '>=', 10)->count(),
+            'echecs' => Note::query()->where('note', '<', 10)->count(),
         ];
 
         return response()->json($stats);

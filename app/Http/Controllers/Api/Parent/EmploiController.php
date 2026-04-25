@@ -21,8 +21,9 @@ class EmploiController extends Controller
      */
     public function show(Request $request, $eleve_id): AnonymousResourceCollection
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
-        if (!$user->isParent()) abort(403);
+        if (!$user || !$user->isParent()) abort(403);
 
         $eleve = Eleve::findOrFail($eleve_id);
         $annee_id = $request->get('annee_scolaire_id') ?? $eleve->inscriptionActive?->annee_scolaire_id;
@@ -32,7 +33,7 @@ class EmploiController extends Controller
             return EmploiDuTempsResource::collection(collect([]));
         }
 
-        $query = EmploiDuTemps::where('classe_id', $classe_id)
+        $query = EmploiDuTemps::query()->where('classe_id', $classe_id)
             ->where('annee_scolaire_id', $annee_id)
             ->with(['matiere', 'enseignant.user', 'classe', 'anneeScolaire']);
 

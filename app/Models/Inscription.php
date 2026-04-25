@@ -38,4 +38,33 @@ class Inscription extends Model
     {
         return $this->belongsTo(AnneeScolaire::class);
     }
+
+    /**
+     * ✅ AJOUT: Synchronise la classe_id dans la table eleves 
+     * pour assurer la compatibilité et la performance.
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saved(function ($inscription) {
+            // Liste des statuts considérés comme "actifs"
+            $statutsActifs = ['inscrit', 'active', '1', 1, true];
+            
+            if ($inscription->eleve && in_array($inscription->statut, $statutsActifs, false)) {
+                $inscription->eleve->update(['classe_id' => $inscription->classe_id]);
+            }
+        });
+
+        static::deleted(function ($inscription) {
+            $eleve = $inscription->eleve;
+            if ($eleve) {
+                $latest = $eleve->inscriptions()
+                                ->whereIn('statut', ['inscrit', 'active', '1'])
+                                ->latest()
+                                ->first();
+                $eleve->update(['classe_id' => $latest?->classe_id]);
+            }
+        });
+    }
 }

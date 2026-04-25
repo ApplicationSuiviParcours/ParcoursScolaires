@@ -20,17 +20,17 @@ class SearchController extends Controller
         ];
         
         if ($query && strlen($query) >= 2) {
-            $results['eleves'] = Eleve::where('nom', 'like', "%{$query}%")
+            $results['eleves'] = Eleve::query()->where('nom', 'like', "%{$query}%")
                 ->orWhere('prenom', 'like', "%{$query}%")
                 ->orWhere('matricule', 'like', "%{$query}%")
                 ->limit(5)
                 ->get();
                 
-            $results['classes'] = Classe::where('nom', 'like', "%{$query}%")
+            $results['classes'] = Classe::query()->where('nom', 'like', "%{$query}%")
                 ->limit(5)
                 ->get();
                 
-            $results['enseignants'] = Enseignant::where('nom', 'like', "%{$query}%")
+            $results['enseignants'] = Enseignant::query()->where('nom', 'like', "%{$query}%")
                 ->orWhere('prenom', 'like', "%{$query}%")
                 ->limit(5)
                 ->get();
@@ -45,12 +45,12 @@ class SearchController extends Controller
         
         // Version simplifiée pour AJAX
         $results = [
-            'eleves' => Eleve::where('nom', 'like', "%{$query}%")
+            'eleves' => Eleve::query()->where('nom', 'like', "%{$query}%")
                 ->orWhere('prenom', 'like', "%{$query}%")
                 ->limit(3)
                 ->get(['id', 'nom', 'prenom', 'matricule']),
                 
-            'classes' => Classe::where('nom', 'like', "%{$query}%")
+            'classes' => Classe::query()->where('nom', 'like', "%{$query}%")
                 ->limit(3)
                 ->get(['id', 'nom']),
         ];

@@ -18,14 +18,17 @@ class AbsenceController extends Controller
      */
     public function index(Request $request)
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
-        if (!$user->isEnseignant()) abort(403);
+        if (!$user || !$user->isEnseignant()) abort(403);
 
         $enseignant = $user->enseignant;
         $classeId = $request->get('classe_id');
         $matiereId = $request->get('matiere_id');
 
-        $query = Absence::whereHas('matiere.matiereClasses.enseignant', fn($q) => $q->where('id', $enseignant->id))
+        $matieresIds = EnseignantMatiereClasse::query()->where('enseignant_id', $enseignant->id)->pluck('matiere_id');
+
+        $query = Absence::query()->whereIn('matiere_id', $matieresIds)
             ->with(['eleve', 'matiere']);
 
         if ($classeId) $query->whereHas('eleve.classe', fn($q) => $q->where('id', $classeId));
@@ -41,8 +44,9 @@ class AbsenceController extends Controller
      */
     public function store(Request $request)
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
-        if (!$user->isEnseignant()) abort(403);
+        if (!$user || !$user->isEnseignant()) abort(403);
 
         $validator = Validator::make($request->all(), [
             'eleve_id' => 'required|exists:eleves,id',
@@ -57,7 +61,7 @@ class AbsenceController extends Controller
         }
 
         // Check if enseignant teaches this matiere
-        if (!EnseignantMatiereClasse::where('enseignant_id', $user->enseignant->id)
+        if (!EnseignantMatiereClasse::query()->where('enseignant_id', $user->enseignant->id)
             ->where('matiere_id', $request->matiere_id)->exists()) {
             abort(403, 'Matière non assignée');
         }
@@ -75,8 +79,9 @@ class AbsenceController extends Controller
      */
     public function bulkStore(Request $request)
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
-        if (!$user->isEnseignant()) abort(403);
+        if (!$user || !$user->isEnseignant()) abort(403);
 
         $validator = Validator::make($request->all(), [
             'matiere_id' => 'required|exists:matieres,id',
@@ -92,7 +97,7 @@ class AbsenceController extends Controller
         }
 
         // Check if enseignant teaches this matiere
-        if (!EnseignantMatiereClasse::where('enseignant_id', $user->enseignant->id)
+        if (!EnseignantMatiereClasse::query()->where('enseignant_id', $user->enseignant->id)
             ->where('matiere_id', $request->matiere_id)->exists()) {
             abort(403, 'Matière non assignée');
         }

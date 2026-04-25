@@ -42,16 +42,16 @@ class MatiereController extends Controller
 
         $matieres = $query->withCount(['evaluations', 'absences', 'classeMatieres'])
                          ->paginate(15)
-                         ->withQueryString();
+                         ->appends($request->query());
 
         // Statistiques
         $stats = [
-            'total' => Matiere::count(),
-            'coefficient_moyen' => round(Matiere::avg('coefficient') ?? 0, 1),
-            'coefficient_max' => Matiere::max('coefficient') ?? 0,
-            'coefficient_min' => Matiere::min('coefficient') ?? 0,
-            'avec_evaluations' => Matiere::has('evaluations')->count(),
-            'avec_absences' => Matiere::has('absences')->count(),
+            'total' => Matiere::query()->count(),
+            'coefficient_moyen' => round(Matiere::query()->avg('coefficient') ?? 0, 1),
+            'coefficient_max' => Matiere::query()->max('coefficient') ?? 0,
+            'coefficient_min' => Matiere::query()->min('coefficient') ?? 0,
+            'avec_evaluations' => Matiere::query()->has('evaluations')->count(),
+            'avec_absences' => Matiere::query()->has('absences')->count(),
         ];
 
         return view('admin.matieres.index', compact('matieres', 'stats'));
@@ -120,7 +120,7 @@ class MatiereController extends Controller
                     'eleve' => function($query) {
                         $query->with(['inscriptions' => function($q) {
                             $q->with(['classe'])
-                              ->where('statut', true)
+                              ->whereIn('statut', ['inscrit', 'active', '1', 1, true])
                               ->latest();
                         }]);
                     }
@@ -340,7 +340,7 @@ class MatiereController extends Controller
     public function export(Request $request)
     {
         try {
-            $matieres = Matiere::orderBy('nom')->get();
+            $matieres = Matiere::query()->orderBy('nom')->get();
 
             // Logique d'export (CSV, Excel, PDF)
             // À implémenter selon les besoins
