@@ -46,8 +46,6 @@ class NoteController extends Controller
             'moyenne_generale' => round(Note::query()->where('eleve_id', $eleve_id)->avg('note') ?? 0, 2),
         ];
 
-        $notes->additional(['stats' => $stats]);
-
-        return NoteResource::collection($notes);
+        return NoteResource::collection($notes)->additional(['stats' => $stats]);
     }
 }

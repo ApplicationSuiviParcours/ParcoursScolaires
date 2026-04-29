@@ -39,8 +39,6 @@ class AbsenceController extends Controller
             'non_justifiees' => Absence::query()->where('eleve_id', $eleve_id)->where('justifiee', false)->count(),
         ];
 
-        $absences->additional(['stats' => $stats]);
-
-        return AbsenceResource::collection($absences);
+        return AbsenceResource::collection($absences)->additional(['stats' => $stats]);
     }
 }

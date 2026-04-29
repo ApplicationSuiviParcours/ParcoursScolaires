@@ -75,6 +75,7 @@ class DashboardController extends Controller
                 'moyenne_generale' => $enfant->moyenne_generale ?? ($allNotes->avg('note') ? round($allNotes->avg('note'), 2) : 0),
                 'total_notes' => $allNotes->count(),
                 'total_absences' => $enfant->absences()->count(),
+                'total_bulletins' => $enfant->bulletins()->count(),
                 'absences_non_justifiees' => $enfant->absences()->where('justifiee', false)->count(),
                 'moyennes_par_matiere' => $moyennesParMatiere,
                 'dernieres_notes' => NoteResource::collection($allNotes->take(5)),

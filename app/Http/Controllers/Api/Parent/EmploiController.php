@@ -39,13 +39,14 @@ class EmploiController extends Controller
 
         $emplois = $query->orderBy('jour')->orderBy('heure_debut')->paginate(20);
 
-        $emplois->additional([
+        $classe = $classe_id ? Classe::find($classe_id) : null;
+        $annee = $annee_id ? AnneeScolaire::find($annee_id) : null;
+
+        return EmploiDuTempsResource::collection($emplois)->additional([
             'filters' => [
-                'classe' => Classe::find($classe_id) ? new ClasseResource(Classe::find($classe_id)) : null,
-                'annee' => AnneeScolaire::find($annee_id) ? new AnneeScolaireResource(AnneeScolaire::find($annee_id)) : null,
+                'classe' => $classe ? new ClasseResource($classe) : null,
+                'annee' => $annee ? new AnneeScolaireResource($annee) : null,
             ]
         ]);
-
-        return EmploiDuTempsResource::collection($emplois);
     }
 }

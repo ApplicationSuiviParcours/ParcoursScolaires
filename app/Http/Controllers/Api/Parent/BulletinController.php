@@ -35,17 +35,15 @@ class BulletinController extends Controller
         $bulletins = $query->orderBy('date_bulletin', 'desc')->paginate(12);
 
         $periodes = Bulletin::query()->where('eleve_id', $eleve_id)->distinct('periode')->pluck('periode');
-        $annees = AnneeScolaire::query()->whereIn('id', Bulletin::query()->where('eleve_id', $eleve_id)->distinct('annee_scolaire_id')->pluck('annee_scolaire_id'))->get(['id', 'libelle']);
+        $annees = AnneeScolaire::query()->whereIn('id', Bulletin::query()->where('eleve_id', $eleve_id)->distinct('annee_scolaire_id')->pluck('annee_scolaire_id'))->get(['id', 'nom']);
 
-        $bulletins->additional([
+        return BulletinResource::collection($bulletins)->additional([
             'stats' => [
                 'total' => Bulletin::query()->where('eleve_id', $eleve_id)->count(),
                 'moyenne_globale' => round(Bulletin::query()->where('eleve_id', $eleve_id)->avg('moyenne_generale') ?? 0, 2),
             ],
             'filters' => ['periodes' => $periodes, 'annees' => $annees]
         ]);
-
-        return BulletinResource::collection($bulletins);
     }
 
     /**
