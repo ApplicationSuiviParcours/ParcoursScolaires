@@ -12,6 +12,39 @@ use App\Models\Classe;
 use App\Models\AnneeScolaire;
 use App\Models\Note;
 
+/**
+ * @property int $id
+ * @property int $eleve_id
+ * @property int $classe_id
+ * @property int $annee_scolaire_id
+ * @property string $periode
+ * @property float|null $moyenne_generale
+ * @property float|null $moyenne_classe
+ * @property int|null $rang
+ * @property int|null $effectif_classe
+ * @property string|null $appreciation_generale
+ * @property \Carbon\Carbon $date_bulletin
+ * 
+ * @property-read string $mention
+ * @property-read bool $est_admis
+ * @property-read string $appreciation
+ * @property-read float $ecart_classe
+ * @property-read array $moyennes_par_matiere
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Note[] $notes_directes
+ * 
+ * @property-read \App\Models\Eleve $eleve
+ * @property-read \App\Models\Classe $classe
+ * @property-read \App\Models\AnneeScolaire $anneeScolaire
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Note[] $notesBulletin
+ * 
+ * @method static \Illuminate\Database\Eloquent\Builder|Bulletin query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Bulletin where($column, $operator = null, $value = null, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|Bulletin whereIn(string $column, $values, string $boolean = 'and', bool $not = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bulletin create(array $attributes = [])
+ * 
+ * @mixin \Illuminate\Database\Eloquent\Builder
+ * @mixin \Eloquent
+ */
 class Bulletin extends Model
 {
     use HasFactory;

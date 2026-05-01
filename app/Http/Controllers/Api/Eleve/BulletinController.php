@@ -112,7 +112,7 @@ class BulletinController extends Controller
             'data' => [
                 'id' => $bulletin->id,
                 'periode' => $bulletin->periode,
-                'date_bulletin' => $bulletin->date_bulletin->format('Y-m-d'),
+                'date_bulletin' => $bulletin->date_bulletin ? $bulletin->date_bulletin->format('Y-m-d') : null,
                 'moyenne_generale' => round((float)$bulletin->moyenne_generale, 2),
                 'moyenne_classe' => round((float)$moyenneClasse, 2),
                 'ecart_classe' => round((float)$bulletin->moyenne_generale - (float)$moyenneClasse, 2),

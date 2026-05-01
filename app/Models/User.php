@@ -15,6 +15,50 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\Notification;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property string|null $password
+ * @property bool $is_active
+ * @property string|null $photo
+ * @property string|null $role
+ * @property \Carbon\Carbon|null $email_verified_at
+ * @property \Carbon\Carbon|null $last_login_at
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * 
+ * @property-read string $role_names
+ * @property-read bool $is_admin
+ * @property-read bool $is_enseignant
+ * @property-read bool $is_eleve
+ * @property-read bool $is_parent
+ * @property-read string $photo_url
+ * @property-read string $initials
+ * @property-read string|null $primary_role
+ * @property-read string|null $profile_type
+ * @property-read mixed $profile
+ * @property-read string $formatted_name
+ * 
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Notification[] $notifications
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Notification[] $unreadNotifications
+ * @property-read \App\Models\Eleve|null $eleve
+ * @property-read \App\Models\Enseignant|null $enseignant
+ * @property-read \App\Models\ParentEleve|null $parentEleve
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Permission\Models\Role[] $roles
+ * 
+ * @method static \Illuminate\Database\Eloquent\Builder|User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|User where($column, $operator = null, $value = null, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereIn(string $column, $values, string $boolean = 'and', bool $not = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|User create(array $attributes = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|User role($role)
+ * @method static \Illuminate\Database\Eloquent\Builder|User active()
+ * @method static \Illuminate\Database\Eloquent\Builder|User inactive()
+ * @method static \Illuminate\Database\Eloquent\Builder|User search($search)
+ * 
+ * @mixin \Illuminate\Database\Eloquent\Builder
+ * @mixin \Eloquent
+ */
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -352,7 +396,7 @@ class User extends Authenticatable
     public function canBeDeactivated(): bool
     {
         // Empêcher la désactivation du dernier administrateur
-        if ($this->isAdmin() && User::role('administrateur')->count() === 1) {
+        if ($this->isAdmin() && static::whereHas('roles', fn($q) => $q->where('name', 'administrateur'))->count() === 1) {
             return false;
         }
         return $this->is_active;
@@ -368,7 +412,7 @@ class User extends Authenticatable
         // Événement avant la suppression
         static::deleting(function ($user) {
             // Empêcher la suppression du dernier administrateur
-            if ($user->isAdmin() && User::role('administrateur')->count() === 1) {
+            if ($user->isAdmin() && static::whereHas('roles', fn($q) => $q->where('name', 'administrateur'))->count() === 1) {
                 throw new \Exception('Impossible de supprimer le dernier administrateur.');
             }
 

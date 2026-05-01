@@ -8,6 +8,30 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\Eleve;
 use App\Models\ParentEleve;
 
+/**
+ * @property int $eleve_id
+ * @property int $parent_eleve_id
+ * @property string $lien_parental
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * 
+ * @property-read string $lien_parental_libelle
+ * 
+ * @property-read \App\Models\Eleve $eleve
+ * @property-read \App\Models\ParentEleve $parentEleve
+ * 
+ * @method static \Illuminate\Database\Eloquent\Builder|EleveParent query()
+ * @method static \Illuminate\Database\Eloquent\Builder|EleveParent where($column, $operator = null, $value = null, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|EleveParent whereIn(string $column, $values, string $boolean = 'and', bool $not = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|EleveParent create(array $attributes = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|EleveParent pourEleve($eleveId)
+ * @method static \Illuminate\Database\Eloquent\Builder|EleveParent pourParent($parentId)
+ * @method static \Illuminate\Database\Eloquent\Builder|EleveParent avecLien($lien)
+ * @method static \Illuminate\Database\Eloquent\Builder|EleveParent avecEleveActif()
+ * 
+ * @mixin \Illuminate\Database\Eloquent\Builder
+ * @mixin \Eloquent
+ */
 class EleveParent extends Pivot // ← CORRECTION: extends Pivot au lieu de Model
 {
     use HasFactory;

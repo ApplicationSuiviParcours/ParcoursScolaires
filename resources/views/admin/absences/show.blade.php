@@ -58,7 +58,7 @@
                     <p
                         class="text-blue-200 text-sm md:text-base animate-fade-in-up animation-delay-200 truncate px-4 md:px-0">
                         {{ $absence->eleve->nom }} {{ $absence->eleve->prenom }} -
-                        {{ $absence->date_absence->format('d/m/Y') }}
+                        {{ \Carbon\Carbon::parse($absence->date_absence)->format('d/m/Y') }}
                     </p>
                 </div>
                 <div
@@ -197,11 +197,11 @@
                                     Date et heure
                                 </h3>
                                 <div class="space-y-2 text-center md:text-left text-xs md:text-sm">
-                                    <p><span class="font-medium">Date:</span> {{ $absence->date_absence->format('d/m/Y') }}
+                                    <p><span class="font-medium">Date:</span> {{ \Carbon\Carbon::parse($absence->date_absence)->format('d/m/Y') }}
                                     </p>
                                     @if($absence->heure_debut && $absence->heure_fin)
-                                        <p><span class="font-medium">Horaire:</span> {{ $absence->heure_debut->format('H:i') }}
-                                            - {{ $absence->heure_fin->format('H:i') }}</p>
+                                        <p><span class="font-medium">Horaire:</span> {{ \Carbon\Carbon::parse($absence->heure_debut)->format('H:i') }}
+                                            - {{ \Carbon\Carbon::parse($absence->heure_fin)->format('H:i') }}</p>
                                     @else
                                         <p><span class="font-medium">Horaire:</span> Journée complète</p>
                                     @endif

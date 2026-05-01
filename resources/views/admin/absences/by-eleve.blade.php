@@ -213,7 +213,7 @@
                     @forelse($absences as $absence)
                         <tr class="hover:bg-gray-50 transition-colors duration-200">
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="text-sm font-medium text-gray-900">{{ $absence->date_absence->format('d/m/Y') }}</span>
+                                <span class="text-sm font-medium text-gray-900">{{ \Carbon\Carbon::parse($absence->date_absence)->format('d/m/Y') }}</span>
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex items-center">
@@ -225,7 +225,7 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 @if($absence->heure_debut && $absence->heure_fin)
-                                    <span class="text-sm text-gray-600">{{ $absence->heure_debut->format('H:i') }} - {{ $absence->heure_fin->format('H:i') }}</span>
+                                    <span class="text-sm text-gray-600">{{ \Carbon\Carbon::parse($absence->heure_debut)->format('H:i') }} - {{ \Carbon\Carbon::parse($absence->heure_fin)->format('H:i') }}</span>
                                 @else
                                     <span class="text-xs text-gray-400">Journée</span>
                                 @endif

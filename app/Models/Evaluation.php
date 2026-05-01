@@ -12,6 +12,41 @@ use App\Models\AnneeScolaire;
 use App\Models\Note;
 use App\Models\Enseignant;
 
+/**
+ * @property int $id
+ * @property int $enseignant_id
+ * @property int $classe_id
+ * @property int $matiere_id
+ * @property int $annee_scolaire_id
+ * @property string $type
+ * @property string $nom
+ * @property string|null $description
+ * @property \Carbon\Carbon $date_evaluation
+ * @property float $coefficient
+ * @property float $bareme
+ * @property string $periode
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * 
+ * @property-read string $date_formatted
+ * 
+ * @property-read \App\Models\Enseignant $enseignant
+ * @property-read \App\Models\Classe $classe
+ * @property-read \App\Models\Matiere $matiere
+ * @property-read \App\Models\AnneeScolaire $anneeScolaire
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Note[] $notes
+ * 
+ * @method static \Illuminate\Database\Eloquent\Builder|Evaluation query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Evaluation forEnseignant($enseignantId)
+ * @method static \Illuminate\Database\Eloquent\Builder|Evaluation forPeriode($periode)
+ * @method static \Illuminate\Database\Eloquent\Builder|Evaluation forClasse($classeId)
+ * @method static \Illuminate\Database\Eloquent\Builder|Evaluation forMatiere($matiereId)
+ * @method static \Illuminate\Database\Eloquent\Builder|Evaluation upcoming()
+ * @method static \Illuminate\Database\Eloquent\Builder|Evaluation past()
+ * 
+ * @mixin \Illuminate\Database\Eloquent\Builder
+ * @mixin \Eloquent
+ */
 class Evaluation extends Model
 {
     use HasFactory;
@@ -33,6 +68,7 @@ class Evaluation extends Model
     protected $casts = [
         'date_evaluation' => 'date',
         'bareme' => 'float',
+        'coefficient' => 'float',
     ];
 
     /**
@@ -65,9 +101,9 @@ class Evaluation extends Model
 
 
     public function getDateFormattedAttribute()
-{
-    return $this->date ? $this->date->format('d/m/Y') : 'Date non définie';
-}
+    {
+        return $this->date_evaluation ? $this->date_evaluation->format('d/m/Y') : 'Date non définie';
+    }
 
     /**
      * Scope pour filtrer les évaluations par enseignant

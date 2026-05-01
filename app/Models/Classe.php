@@ -17,6 +17,42 @@ use App\Models\Evaluation;
 use App\Models\Enseignant;
 use App\Models\Matiere;
 
+/**
+ * @property int $id
+ * @property string $nom
+ * @property string $niveau
+ * @property string|null $serie
+ * @property int $capacite
+ * @property int $annee_scolaire_id
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * 
+ * @property-read string $nom_complet
+ * @property-read int $nombre_eleves_actuels
+ * @property-read bool $est_pleine
+ * @property-read int $places_disponibles
+ * @property-read float $taux_occupation
+ * @property-read array $stats
+ * 
+ * @property-read \App\Models\AnneeScolaire $anneeScolaire
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Eleve[] $eleves
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Eleve[] $elevesDirects
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Inscription[] $inscriptions
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Reinscription[] $reinscriptions
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ClasseMatiere[] $matieres
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\EmploiDuTemps[] $emploisDuTemps
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Evaluation[] $evaluations
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\EnseignantMatiereClasse[] $enseignantMatiereClasses
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Enseignant[] $enseignants
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Matiere[] $matieresEnseignees
+ * 
+ * @method static \Illuminate\Database\Eloquent\Builder|Classe query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Classe pourAnneeScolaire($anneeScolaireId)
+ * @method static \Illuminate\Database\Eloquent\Builder|Classe deNiveau($niveau)
+ * 
+ * @mixin \Illuminate\Database\Eloquent\Builder
+ * @mixin \Eloquent
+ */
 class Classe extends Model
 {
     use HasFactory;

@@ -119,7 +119,7 @@
                         <div>
                             <p class="text-xs md:text-sm text-amber-700">Modification en cours pour</p>
                             <p class="text-base md:text-lg font-bold text-gray-800">{{ $absence->eleve->nom }} {{ $absence->eleve->prenom }}</p>
-                            <p class="text-xs md:text-sm text-gray-600 truncate">{{ $absence->matiere->nom }} - {{ $absence->date_absence->format('d/m/Y') }}</p>
+                            <p class="text-xs md:text-sm text-gray-600 truncate">{{ $absence->matiere->nom }} - {{ \Carbon\Carbon::parse($absence->date_absence)->format('d/m/Y') }}</p>
                         </div>
                     </div>
                 </div>
@@ -227,7 +227,7 @@
                                 <input type="date" 
                                        name="date_absence" 
                                        id="date_absence" 
-                                       value="{{ old('date_absence', $absence->date_absence->format('Y-m-d')) }}"
+                                       value="{{ old('date_absence', \Carbon\Carbon::parse($absence->date_absence)->format('Y-m-d')) }}"
                                        class="w-full pl-12 pr-4 py-2.5 md:py-3 rounded-xl border-2 border-gray-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition-all duration-300 @error('date_absence') border-red-500 @enderror text-sm md:text-base"
                                        required>
                             </div>
@@ -251,7 +251,7 @@
                                     <input type="time" 
                                            name="heure_debut" 
                                            id="heure_debut" 
-                                           value="{{ old('heure_debut', $absence->heure_debut ? $absence->heure_debut->format('H:i') : '') }}"
+                                           value="{{ old('heure_debut', $absence->heure_debut ? \Carbon\Carbon::parse($absence->heure_debut)->format('H:i') : '') }}"
                                            class="w-full pl-12 pr-4 py-2.5 md:py-3 rounded-xl border-2 border-gray-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition-all duration-300 @error('heure_debut') border-red-500 @enderror text-sm md:text-base">
                                 </div>
                                 @error('heure_debut')
@@ -272,7 +272,7 @@
                                     <input type="time" 
                                            name="heure_fin" 
                                            id="heure_fin" 
-                                           value="{{ old('heure_fin', $absence->heure_fin ? $absence->heure_fin->format('H:i') : '') }}"
+                                           value="{{ old('heure_fin', $absence->heure_fin ? \Carbon\Carbon::parse($absence->heure_fin)->format('H:i') : '') }}"
                                            class="w-full pl-12 pr-4 py-2.5 md:py-3 rounded-xl border-2 border-gray-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition-all duration-300 @error('heure_fin') border-red-500 @enderror text-sm md:text-base">
                                 </div>
                                 @error('heure_fin')

@@ -90,24 +90,24 @@
         </div>
 
         <!-- Conteneur principal - Responsive -->
-        <div class="relative z-10 w-full max-w-[95%] sm:max-w-md px-2 sm:px-0 py-4 sm:py-6 md:py-8">
+        <div class="relative z-10 w-full max-w-[95%] sm:max-w-md px-2 sm:px-0 py-3 sm:py-4 md:py-6">
             
             <!-- Logo et en-tête (Compacté et responsive) -->
-            <div class="mb-3 sm:mb-4 md:mb-6 text-center">
+            <div class="mb-2 sm:mb-3 md:mb-4 text-center">
                 <a href="/" class="inline-flex items-center justify-center group">
-                    <div class="p-2 sm:p-2.5 md:p-3 transition-transform duration-300 rounded-full shadow-lg bg-white/10 backdrop-blur-sm group-hover:scale-105">
+                    <div class="p-1.5 sm:p-2 md:p-2.5 transition-transform duration-300 rounded-full shadow-lg bg-white/10 backdrop-blur-sm group-hover:scale-105">
                         <!-- Logo Image adapté -->
                         <img 
                             src="{{ asset('image_icon/android-icon-144x144.png') }}" 
                             alt="Logo GEST'PARC" 
-                            class="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full object-contain drop-shadow-lg" 
+                            class="w-9 h-9 sm:w-11 sm:h-11 md:w-14 md:h-14 rounded-full object-contain drop-shadow-lg" 
                         />
                     </div>
                 </a>
-                <h1 class="mt-2 sm:mt-2.5 md:mt-3 text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-white drop-shadow-lg">
+                <h1 class="mt-1.5 sm:mt-2 text-lg sm:text-xl md:text-2xl font-extrabold tracking-tight text-white drop-shadow-lg">
                     GEST'PARC
                 </h1>
-                <p class="mt-0.5 sm:mt-1 text-[11px] sm:text-sm font-medium text-center text-blue-100 drop-shadow px-2">
+                <p class="mt-0.5 text-[10px] sm:text-xs font-medium text-center text-blue-100 drop-shadow px-2">
                     Votre plateforme de gestion
                 </p>
             </div>
@@ -119,7 +119,7 @@
                 <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 via-blue-600 to-blue-800 sm:h-1.5"></div>
 
                 <!-- Contenu avec paddings adaptatifs -->
-                <div class="p-4 sm:p-5 md:p-6 lg:p-8">
+                <div class="p-4 sm:p-5 md:p-6">
                     {{ $slot }}
                 </div>
             </div>
@@ -130,6 +130,34 @@
             </div>
         </div>
     </div>
+
+    {{-- Script : accès admin secret via triple-clic sur le logo --}}
+    <script>
+        (function() {
+            var clickCount = 0;
+            var clickTimer = null;
+            var logoEl = document.querySelector('a[href="/"] img, a[href="/"] div');
+            if (logoEl) {
+                var logoLink = logoEl.closest('a');
+                if (logoLink) {
+                    logoLink.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        clickCount++;
+                        if (clickCount === 1) {
+                            clickTimer = setTimeout(function() { clickCount = 0; }, 800);
+                        }
+                        if (clickCount >= 3) {
+                            clearTimeout(clickTimer);
+                            clickCount = 0;
+                            window.location.href = '{{ route("login.admin") }}';
+                        }
+                    });
+                }
+            }
+        })();
+    </script>
+
+    @stack('scripts')
 </body>
 
 </html>

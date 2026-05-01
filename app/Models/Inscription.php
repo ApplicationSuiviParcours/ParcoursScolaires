@@ -6,6 +6,26 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property int $id
+ * @property int $eleve_id
+ * @property int $classe_id
+ * @property int $annee_scolaire_id
+ * @property \Carbon\Carbon $date_inscription
+ * @property string $statut
+ * @property string|null $observation
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * 
+ * @property-read \App\Models\Eleve $eleve
+ * @property-read \App\Models\Classe $classe
+ * @property-read \App\Models\AnneeScolaire $anneeScolaire
+ * 
+ * @method static \Illuminate\Database\Eloquent\Builder|Inscription query()
+ * 
+ * @mixin \Illuminate\Database\Eloquent\Builder
+ * @mixin \Eloquent
+ */
 class Inscription extends Model
 {
     use HasFactory;
@@ -49,7 +69,7 @@ class Inscription extends Model
 
         static::saved(function ($inscription) {
             // Liste des statuts considérés comme "actifs"
-            $statutsActifs = ['inscrit', 'active', '1', 1, true];
+            $statutsActifs = ['inscrit', 'active', '1'];
             
             if ($inscription->eleve && in_array($inscription->statut, $statutsActifs, false)) {
                 $inscription->eleve->update(['classe_id' => $inscription->classe_id]);

@@ -570,7 +570,9 @@ class BulletinController extends Controller
                     'id' => $note->id,
                     'valeur' => $note->note,
                     'evaluation' => $note->evaluation->nom,
-                    'date' => $note->evaluation->date_evaluation->format('d/m/Y'),
+                    'date' => ($note->evaluation && $note->evaluation->date_evaluation) 
+                        ? $note->evaluation->date_evaluation->format('d/m/Y') 
+                        : 'N/A',
                     'coefficient' => $coefficient,
                     'appreciation' => $note->pivot->appreciation ?? null,
                 ];

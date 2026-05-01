@@ -58,13 +58,15 @@ class LoginRequest extends FormRequest
         $credential = $this->input('credential');
         $password = $this->input('password', ''); // Optional for non-admin
         $role = $this->input('role', 'user');
+        $isAdmin = ($role === 'administrateur');
+        $lockoutDuration = $isAdmin ? 300 : 60; // 5 min for admin, 1 min for users
 
         // Find user based on role/matricule
         $user = $this->findUserByRoleAndCredential($role, $credential);
 
         if (!$user) {
             $errorMsg = $this->getNoUserErrorMessage($role);
-            RateLimiter::hit($this->throttleKey(), 60);
+            RateLimiter::hit($this->throttleKey(), $lockoutDuration);
             throw ValidationException::withMessages([
                 'credential' => $errorMsg,
             ]);
@@ -72,22 +74,29 @@ class LoginRequest extends FormRequest
 
         // Check if user is active
         if (!$user->is_active) {
-            RateLimiter::hit($this->throttleKey(), 60);
+            RateLimiter::hit($this->throttleKey(), $lockoutDuration);
             throw ValidationException::withMessages([
                 'credential' => 'Votre compte est désactivé. Contactez l\'administration.',
             ]);
         }
 
         // PASSWORDLESS for non-admin roles (eleve, enseignant, parent, user)
-        if (!in_array($role, ['administrateur'])) {
+        if (!$isAdmin) {
             // Auto-login for matricule users
             Auth::login($user);
         } else {
-            // Admin: require password
+            // Admin: require password + progressive delay
             if (!Auth::attempt(['email' => $user->email, 'password' => $password])) {
-                RateLimiter::hit($this->throttleKey(), 60);
+                RateLimiter::hit($this->throttleKey(), $lockoutDuration);
+
+                // Progressive delay: add 2s per failed attempt to slow down brute-force
+                $attempts = RateLimiter::attempts($this->throttleKey());
+                if ($attempts > 1) {
+                    usleep(min($attempts * 2000000, 10000000)); // Max 10s delay
+                }
+
                 throw ValidationException::withMessages([
-                    'credential' => 'Mot de passe incorrect.',
+                    'credential' => 'Identifiants incorrects.',
                 ]);
             }
         }
@@ -154,7 +163,10 @@ class LoginRequest extends FormRequest
      */
     protected function ensureIsNotRateLimited(): void
     {
-        if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
+        // Admin: stricter limit (3 attempts), Users: 5 attempts
+        $maxAttempts = ($this->input('role') === 'administrateur') ? 3 : 5;
+
+        if (! RateLimiter::tooManyAttempts($this->throttleKey(), $maxAttempts)) {
             return;
         }
 

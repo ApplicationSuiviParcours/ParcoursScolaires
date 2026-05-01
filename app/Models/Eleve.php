@@ -16,6 +16,48 @@ use App\Models\ParentEleve;
 use App\Models\User;
 use App\Models\Classe;
 
+/**
+ * @property int $id
+ * @property int|null $user_id
+ * @property int|null $classe_id
+ * @property string $matricule
+ * @property string $nom
+ * @property string $prenom
+ * @property \Carbon\Carbon $date_naissance
+ * @property string $lieu_naissance
+ * @property string $genre
+ * @property string $adresse
+ * @property string|null $telephone
+ * @property string|null $email
+ * @property string|null $photo
+ * @property \Carbon\Carbon $date_inscription
+ * @property bool $statut
+ * 
+ * @property-read string $nom_complet
+ * @property-read string|null $photo_url
+ * @property-read float|null $moyenne_generale
+ * @property-read int $age
+ * @property-read bool $est_inscrit
+ * @property-read \App\Models\Classe|null $classe_actuelle
+ * @property string|null $lien_parental
+ * @property int|null $relation_id
+ * @property \App\Models\Inscription|null $derniere_inscription
+ * 
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Note[] $notes
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Absence[] $absences
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Bulletin[] $bulletins
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Inscription[] $inscriptions
+ * @property-read \App\Models\User|null $user
+ * 
+ * @method static \Illuminate\Database\Eloquent\Builder|Eleve query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Eleve where($column, $operator = null, $value = null, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|Eleve whereIn(string $column, $values, string $boolean = 'and', bool $not = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|Eleve whereYear(string $column, $value, string $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|Eleve create(array $attributes = [])
+ * 
+ * @mixin \Illuminate\Database\Eloquent\Builder
+ * @mixin \Eloquent
+ */
 class Eleve extends Model
 {
     use HasFactory;
@@ -79,8 +121,10 @@ class Eleve extends Model
      */
     public function getClasseActuelleAttribute()
     {
-        $inscriptionActive = $this->inscriptions()
-            ->whereIn('statut', ['inscrit', 'active', '1', 1, true])
+        /** @var \Illuminate\Database\Eloquent\Builder $query */
+        $query = $this->inscriptions();
+        $inscriptionActive = $query
+            ->whereIn('statut', ['inscrit', 'active', '1'])
             ->with('classe')
             ->latest()
             ->first();
@@ -101,10 +145,10 @@ class Eleve extends Model
     /**
      * ✅ AJOUT: Récupère l'inscription active de l'élève
      */
-    public function inscriptionActive()
+    public function inscriptionActive(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(Inscription::class)
-                    ->whereIn('statut', ['inscrit', 'active', '1', 1, true])
+                    ->whereIn('statut', ['inscrit', 'active', '1'])
                     ->with('classe', 'anneeScolaire')
                     ->latest();
     }
@@ -112,9 +156,9 @@ class Eleve extends Model
     /**
      * ✅ AJOUT: Récupère toutes les inscriptions actives (normalement une seule)
      */
-    public function inscriptionsActives()
+    public function inscriptionsActives(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->inscriptions()->whereIn('statut', ['inscrit', 'active', '1', 1, true]);
+        return $this->inscriptions()->whereIn('statut', ['inscrit', 'active', '1']);
     }
 
     public function reinscriptions(): HasMany
@@ -170,8 +214,10 @@ class Eleve extends Model
      */
     public function getEstInscritAttribute(): bool
     {
-        return $this->inscriptions()
-                    ->whereIn('statut', ['inscrit', 'active', '1', 1, true])
+        /** @var \Illuminate\Database\Eloquent\Builder $query */
+        $query = $this->inscriptions();
+        return $query
+                    ->whereIn('statut', ['inscrit', 'active', '1'])
                     ->exists();
     }
 
@@ -184,12 +230,47 @@ class Eleve extends Model
     }
 
     /**
-     * ✅ AJOUT: Récupère la moyenne générale de l'élève
+     * ✅ AMÉLIORATION: Récupère la moyenne générale de l'élève (pondérée par coefficients)
      */
     public function getMoyenneGeneraleAttribute(): ?float
     {
-        $moyenne = $this->notes()->avg('note');
-        return $moyenne ? round($moyenne, 2) : null;
+        $notes = $this->notes()->with(['evaluation.matiere'])->get();
+        
+        if ($notes->isEmpty()) {
+            return null;
+        }
+
+        // Group notes by subject
+        $notesByMatiere = $notes->groupBy(function ($note) {
+            return $note->evaluation->matiere_id;
+        });
+
+        $totalPoints = 0;
+        $totalCoefficients = 0;
+
+        foreach ($notesByMatiere as $matiereId => $matiereNotes) {
+            $matiere = $matiereNotes->first()->evaluation->matiere;
+            if (!$matiere) continue;
+
+            $sumNoteCoeff = 0;
+            $sumEvalCoeff = 0;
+
+            foreach ($matiereNotes as $note) {
+                $evalCoeff = $note->evaluation->coefficient ?? 1;
+                $sumNoteCoeff += ($note->note * $evalCoeff);
+                $sumEvalCoeff += $evalCoeff;
+            }
+
+            if ($sumEvalCoeff > 0) {
+                $moyenneMatiere = $sumNoteCoeff / $sumEvalCoeff;
+                $matiereCoeff = $matiere->coefficient ?? 1;
+                
+                $totalPoints += ($moyenneMatiere * $matiereCoeff);
+                $totalCoefficients += $matiereCoeff;
+            }
+        }
+
+        return $totalCoefficients > 0 ? round($totalPoints / $totalCoefficients, 2) : null;
     }
 
     /**
@@ -199,7 +280,7 @@ class Eleve extends Model
     {
         return $query->whereHas('inscriptions', function($q) use ($classeId) {
             $q->where('classe_id', $classeId)
-              ->whereIn('statut', ['inscrit', 'active', '1', 1, true]);
+              ->whereIn('statut', ['inscrit', 'active', '1']);
         });
     }
 
@@ -218,7 +299,7 @@ class Eleve extends Model
      */
     public function scopeActifs($query)
     {
-        return $query->whereIn('statut', ['inscrit', 'active', '1', 1, true]);
+        return $query->whereIn('statut', [1, true]);
     }
 
     /**
@@ -240,7 +321,8 @@ class Eleve extends Model
             $query->where('annee_scolaire_id', $anneeScolaireId);
         }
         
-        return $query->whereIn('statut', ['inscrit', 'active', '1', 1, true])
+        /** @var \Illuminate\Database\Eloquent\Builder $query */
+        return $query->whereIn('statut', ['inscrit', 'active', '1'])
                     ->selectRaw('classe_id, count(*) as total')
                     ->groupBy('classe_id')
                     ->with('classe')
@@ -261,7 +343,7 @@ class Eleve extends Model
             $premiereLettre = 'X';
         }
         
-        $dernier = self::whereYear('created_at', $annee)
+        $dernier = self::query()->whereYear('created_at', $annee)
                        ->where('matricule', 'like', $annee . '%')
                        ->orderBy('matricule', 'desc')
                        ->first();
@@ -277,7 +359,7 @@ class Eleve extends Model
         
         // Vérifier l'unicité
         $tentatives = 0;
-        while (self::where('matricule', $matricule)->exists() && $tentatives < 100) {
+        while (self::query()->where('matricule', $matricule)->exists() && $tentatives < 100) {
             $nouveauNumero = str_pad(intval($nouveauNumero) + 1, 4, '0', STR_PAD_LEFT);
             $matricule = $annee . $premiereLettre . $nouveauNumero;
             $tentatives++;
@@ -291,7 +373,7 @@ class Eleve extends Model
      */
     public static function isEmailUnique($email, $excludeId = null)
     {
-        $query = self::where('email', $email);
+        $query = self::query()->where('email', $email);
         
         if ($excludeId) {
             $query->where('id', '!=', $excludeId);

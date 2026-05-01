@@ -260,11 +260,11 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
                                     </svg>
                                 </div>
-                                <textarea name="appreciation" 
+                                <textarea name="appreciation_generale" 
                                           id="appreciation" 
                                           rows="4"
                                           placeholder="Appréciation du professeur principal..."
-                                          class="w-full pl-12 pr-4 py-2.5 md:py-3 rounded-xl border-2 border-gray-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition-all duration-300 @error('appreciation') border-red-500 @enderror text-sm md:text-base">{{ old('appreciation', $bulletin->appreciation) }}</textarea>
+                                          class="w-full pl-12 pr-4 py-2.5 md:py-3 rounded-xl border-2 border-gray-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition-all duration-300 @error('appreciation_generale') border-red-500 @enderror text-sm md:text-base">{{ old('appreciation_generale', $bulletin->appreciation_generale) }}</textarea>
                             </div>
                             <p class="mt-2 text-xs text-gray-500">Maximum 500 caractères</p>
                             @error('appreciation')

@@ -203,6 +203,7 @@
             }
         }
     </script>
+    @stack('styles')
 </head>
 
 <body class="min-h-screen antialiased transition-colors duration-300 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-slate-900 dark:to-indigo-950 overflow-x-hidden">
@@ -244,7 +245,7 @@
                 <div class="flex items-center space-x-2 sm:space-x-3">
                     <div class="relative">
                         <div class="transition-transform duration-300 hover:scale-105">
-                            <img src="{{ asset('image_icon/logo.png') }}" alt="Logo" class="w-10 h-10 sm:w-12 md:w-14 object-contain drop-shadow-xl">
+                            <img src="{{ asset('image_icon/android-icon-144x144.png') }}" alt="Logo" class="w-10 h-10 sm:w-12 md:w-14 object-contain drop-shadow-xl">
                         </div>
                         <div class="absolute w-2.5 h-2.5 bg-green-400 border-2 border-purple-700 rounded-full -top-0.5 -right-0.5 status-indicator"></div>
                     </div>
@@ -271,11 +272,11 @@
             @php
                 $user = Auth::user();
                 $infoRole = 'Utilisateur';
-                $anneeScolaire = \App\Models\AnneeScolaire::where('active', true)->first();
+                $anneeScolaireActive = \App\Models\AnneeScolaire::where('active', true)->first();
                 if ($user) {
                     $role = $user->getRoleNames()->first() ?? 'eleve';
                     if ($user->isEleve() && $user->eleve) {
-                        $inscription = $user->eleve->inscriptions()->where('annee_scolaire_id', $anneeScolaire?->id)->first();
+                        $inscription = $user->eleve->inscriptions()->where('annee_scolaire_id', $anneeScolaireActive?->id)->first();
                         $infoRole = $inscription?->classe?->nom ?? 'Élève';
                     } elseif ($user->isEnseignant() && $user->enseignant) {
                         $infoRole = $user->enseignant->specialite ?? 'Enseignant';

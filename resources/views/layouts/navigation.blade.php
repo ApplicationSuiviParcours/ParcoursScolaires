@@ -24,7 +24,7 @@
                     </x-nav-link>
 
                     <!-- Ajout d'autres liens de navigation -->
-                    @if(Auth::user()->role === 'admin')
+                    @if(Auth::user()->isAdmin())
                     <x-nav-link :href="route('admin.eleves.index')" :active="request()->routeIs('admin.eleves*')" class="relative px-2 md:px-3 lg:px-4 py-2 rounded-lg transition-all duration-200">
                         <div class="flex items-center space-x-1 sm:space-x-2">
                             <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -44,7 +44,7 @@
                     </x-nav-link>
                     @endif
 
-                    @if(Auth::user()->role === 'eleve')
+                    @if(Auth::user()->isEleve())
                     <x-nav-link :href="route('eleve.notes')" :active="request()->routeIs('eleve.notes*')" class="relative px-2 md:px-3 lg:px-4 py-2 rounded-lg transition-all duration-200">
                         <div class="flex items-center space-x-1 sm:space-x-2">
                             <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -60,6 +60,17 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                             <span class="text-xs sm:text-sm md:text-base">{{ __('Absences') }}</span>
+                        </div>
+                    </x-nav-link>
+                    @endif
+
+                    @if(Auth::user()->isParent())
+                    <x-nav-link :href="route('parent.enfants')" :active="request()->routeIs('parent.enfants*') || request()->routeIs('parent.enfant.*')" class="relative px-2 md:px-3 lg:px-4 py-2 rounded-lg transition-all duration-200">
+                        <div class="flex items-center space-x-1 sm:space-x-2">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                            <span class="text-xs sm:text-sm md:text-base">{{ __('Mes Enfants') }}</span>
                         </div>
                     </x-nav-link>
                     @endif
@@ -85,7 +96,7 @@
                                         {{ Auth::user()->name }}
                                     </div>
                                     <div class="text-[10px] sm:text-xs text-gray-500">
-                                        {{ Auth::user()->role === 'admin' ? 'Administrateur' : (Auth::user()->role === 'eleve' ? 'Élève' : 'Utilisateur') }}
+                                        {{ Auth::user()->isAdmin() ? 'Administrateur' : (Auth::user()->isEleve() ? 'Élève' : (Auth::user()->isParent() ? 'Parent' : 'Utilisateur')) }}
                                     </div>
                                 </div>
 
@@ -165,7 +176,7 @@
                 <span class="text-xs sm:text-sm">{{ __('Tableau de bord') }}</span>
             </x-responsive-nav-link>
 
-            @if(Auth::user()->role === 'admin')
+            @if(Auth::user()->isAdmin())
             <x-responsive-nav-link :href="route('admin.eleves.index')" :active="request()->routeIs('admin.eleves*')" class="flex items-center space-x-2 px-3 sm:px-4 py-2 sm:py-2.5">
                 <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
@@ -181,7 +192,7 @@
             </x-responsive-nav-link>
             @endif
 
-            @if(Auth::user()->role === 'eleve')
+            @if(Auth::user()->isEleve())
             <x-responsive-nav-link :href="route('eleve.notes')" :active="request()->routeIs('eleve.notes*')" class="flex items-center space-x-2 px-3 sm:px-4 py-2 sm:py-2.5">
                 <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
@@ -194,6 +205,15 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
                 <span class="text-xs sm:text-sm">{{ __('Absences') }}</span>
+            </x-responsive-nav-link>
+            @endif
+
+            @if(Auth::user()->isParent())
+            <x-responsive-nav-link :href="route('parent.enfants')" :active="request()->routeIs('parent.enfants*')" class="flex items-center space-x-2 px-3 sm:px-4 py-2 sm:py-2.5">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+                <span class="text-xs sm:text-sm">{{ __('Mes Enfants') }}</span>
             </x-responsive-nav-link>
             @endif
         </div>

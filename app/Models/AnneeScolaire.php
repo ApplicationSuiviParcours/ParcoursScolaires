@@ -10,6 +10,28 @@ use App\Models\Inscription;
 use App\Models\Evaluation;
 use App\Models\EmploiDuTemps;
 
+/**
+ * @property int $id
+ * @property string $nom
+ * @property \Carbon\Carbon $date_debut
+ * @property \Carbon\Carbon $date_fin
+ * @property bool $active
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * 
+ * @property-read string $display_name
+ * 
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Classe[] $classes
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Inscription[] $inscriptions
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Evaluation[] $evaluations
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\EmploiDuTemps[] $emploiDuTemps
+ * 
+ * @method static \Illuminate\Database\Eloquent\Builder|AnneeScolaire query()
+ * @method static \Illuminate\Database\Eloquent\Builder|AnneeScolaire active()
+ * 
+ * @mixin \Illuminate\Database\Eloquent\Builder
+ * @mixin \Eloquent
+ */
 class AnneeScolaire extends Model
 {
     use HasFactory;

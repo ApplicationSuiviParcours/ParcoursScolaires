@@ -10,6 +10,51 @@ use App\Models\User;
 use App\Models\Eleve;
 use Illuminate\Support\Str;
 
+/**
+ * @property int $id
+ * @property int|null $user_id
+ * @property string $matricule
+ * @property string $nom
+ * @property string $prenom
+ * @property string $genre
+ * @property string|null $profession
+ * @property string|null $telephone
+ * @property string|null $email
+ * @property string|null $adresse
+ * @property string|null $photo
+ * @property \Carbon\Carbon|null $date_naissance
+ * @property string|null $lieu_naissance
+ * @property bool $statut
+ * @property string|null $notes
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * 
+ * @property-read string $full_name
+ * @property-read string $initiales
+ * @property-read int $enfants_count
+ * @property-read string $nom_complet
+ * @property-read string $photo_url
+ * @property-read string $genre_text
+ * @property-read string $avatar_color
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Eleve[] $enfants_avec_classe
+ * 
+ * @property-read \App\Models\User|null $user
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Eleve[] $eleves
+ * 
+ * @method static \Illuminate\Database\Eloquent\Builder|ParentEleve query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ParentEleve actif()
+ * @method static \Illuminate\Database\Eloquent\Builder|ParentEleve inactif()
+ * @method static \Illuminate\Database\Eloquent\Builder|ParentEleve search($search)
+ * 
+ * @method static \Illuminate\Database\Eloquent\Builder|ParentEleve query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ParentEleve where($column, $operator = null, $value = null, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|ParentEleve whereIn(string $column, $values, string $boolean = 'and', bool $not = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|ParentEleve whereYear(string $column, $value, string $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|ParentEleve create(array $attributes = [])
+ * 
+ * @mixin \Illuminate\Database\Eloquent\Builder
+ * @mixin \Eloquent
+ */
 class ParentEleve extends Model
 {
     use HasFactory;
@@ -88,7 +133,7 @@ class ParentEleve extends Model
      */
     public function scopeActif($query)
     {
-        return $query->whereIn('statut', ['inscrit', 'active', '1', 1, true]);
+        return $query->whereIn('statut', [1, true]);
     }
 
     /**

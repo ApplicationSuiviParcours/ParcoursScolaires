@@ -12,6 +12,47 @@ use App\Models\Evaluation;
 use App\Models\Classe;
 use App\Models\Matiere;
 
+/**
+ * @property int $id
+ * @property int|null $user_id
+ * @property string $matricule
+ * @property string $nom
+ * @property string $prenom
+ * @property string $genre
+ * @property \Carbon\Carbon|null $date_naissance
+ * @property string|null $lieu_naissance
+ * @property string|null $telephone
+ * @property string|null $email
+ * @property string|null $adresse
+ * @property string|null $specialite
+ * @property string|null $photo
+ * @property bool $statut
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * 
+ * @property-read string $nom_complet
+ * @property-read int|null $age
+ * @property-read string $photo_url
+ * @property-read int $nombre_classes
+ * @property-read int $nombre_matieres
+ * 
+ * @property-read \App\Models\User|null $user
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\EnseignantMatiereClasse[] $enseignantMatiereClasses
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Classe[] $classes
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Matiere[] $matieres
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Evaluation[] $evaluations
+ * 
+ * @method static \Illuminate\Database\Eloquent\Builder|Enseignant query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Enseignant where($column, $operator = null, $value = null, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|Enseignant whereIn(string $column, $values, string $boolean = 'and', bool $not = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|Enseignant whereYear(string $column, $value, string $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|Enseignant create(array $attributes = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Enseignant actifs()
+ * @method static \Illuminate\Database\Eloquent\Builder|Enseignant deSpecialite($specialite)
+ * 
+ * @mixin \Illuminate\Database\Eloquent\Builder
+ * @mixin \Eloquent
+ */
 class Enseignant extends Model
 {
     use HasFactory;

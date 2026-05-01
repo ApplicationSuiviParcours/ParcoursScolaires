@@ -566,14 +566,14 @@ class EleveAdminController extends Controller
                 $eleve->prenom,
                 $eleve->email ?? 'Non renseigné',
                 $eleve->telephone ?? 'Non renseigné',
-                $eleve->date_naissance->format('d/m/Y'),
+                $eleve->date_naissance ? $eleve->date_naissance->format('d/m/Y') : 'N/A',
                 $eleve->lieu_naissance,
                 $age,
                 $eleve->genre === 'm' ? 'Masculin' : 'Féminin',
                 $eleve->adresse,
                 $classeActuelle,
                 $anneeScolaire,
-                $eleve->date_inscription->format('d/m/Y'),
+                $eleve->date_inscription ? $eleve->date_inscription->format('d/m/Y') : 'N/A',
                 $eleve->statut ? 'Actif' : 'Inactif',
                 $eleve->user ? 'Oui' : 'Non',
                 $eleve->parents()->count(),
@@ -582,8 +582,8 @@ class EleveAdminController extends Controller
                 $eleve->absences()->count(),
                 $eleve->absences()->where('justifiee', true)->count(),
                 $eleve->absences()->where('justifiee', false)->count(),
-                $eleve->created_at->format('d/m/Y H:i'),
-                $eleve->updated_at->format('d/m/Y H:i')
+                $eleve->created_at ? $eleve->created_at->format('d/m/Y H:i') : 'N/A',
+                $eleve->updated_at ? $eleve->updated_at->format('d/m/Y H:i') : 'N/A'
             ]);
         }
 

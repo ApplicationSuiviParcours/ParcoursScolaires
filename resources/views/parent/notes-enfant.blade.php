@@ -381,7 +381,7 @@
                                             Pas d'appréciation
                                         </span>
                                     @endif
-                                
+                                </td>
                             </tr>
                         @empty
                             <tr>
@@ -393,7 +393,7 @@
                                         <p class="mb-1 md:mb-2 text-base md:text-xl font-medium text-gray-500">Aucune note trouvée</p>
                                         <p class="text-xs md:text-sm text-gray-400">Essayez de modifier vos filtres ou de revenir plus tard</p>
                                     </div>
-                                
+                                </td>
                             </tr>
                         @endforelse
                     </tbody>

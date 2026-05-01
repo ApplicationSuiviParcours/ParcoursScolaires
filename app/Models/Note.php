@@ -10,6 +10,45 @@ use App\Models\Eleve;
 use App\Models\Evaluation;
 use App\Models\Bulletin;
 
+/**
+ * @property int $id
+ * @property int $eleve_id
+ * @property int $evaluation_id
+ * @property float $note
+ * @property string|null $observation
+ * @property int|null $bulletin_id
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * 
+ * @property-read bool $est_reussite
+ * @property-read string $couleur
+ * @property-read string $appreciation_auto
+ * @property-read \App\Models\Matiere|null $matiere
+ * @property-read string $matiere_nom
+ * @property-read float $coefficient
+ * @property-read \Carbon\Carbon|null $date_evaluation
+ * @property-read string $type_evaluation
+ * @property-read bool $est_dans_bulletin
+ * 
+ * @property-read \App\Models\Eleve $eleve
+ * @property-read \App\Models\Evaluation $evaluation
+ * @property-read \App\Models\Bulletin|null $bulletin
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Bulletin[] $bulletins
+ * 
+ * @method static \Illuminate\Database\Eloquent\Builder|Note query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Note where($column, $operator = null, $value = null, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|Note whereIn(string $column, $values, string $boolean = 'and', bool $not = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|Note create(array $attributes = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Note forEleve($eleveId)
+ * @method static \Illuminate\Database\Eloquent\Builder|Note forMatiere($matiereId)
+ * @method static \Illuminate\Database\Eloquent\Builder|Note forPeriode($periode)
+ * @method static \Illuminate\Database\Eloquent\Builder|Note recentes($limit = 10)
+ * @method static \Illuminate\Database\Eloquent\Builder|Note reussites()
+ * @method static \Illuminate\Database\Eloquent\Builder|Note echecs()
+ * 
+ * @mixin \Illuminate\Database\Eloquent\Builder
+ * @mixin \Eloquent
+ */
 class Note extends Model
 {
     use HasFactory;
