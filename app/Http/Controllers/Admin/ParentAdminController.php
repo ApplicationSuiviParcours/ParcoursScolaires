@@ -42,8 +42,8 @@ class ParentAdminController extends Controller
         // Statistiques pour l'en-tête
         $stats = [
             'total' => ParentEleve::count(),
-            'actifs' => ParentEleve::query()->where('statut', true)->count(),
-            'inactifs' => ParentEleve::query()->where('statut', false)->count(),
+            'actifs' => ParentEleve::where('statut', true)->count(),
+            'inactifs' => ParentEleve::where('statut', false)->count(),
             'avec_compte' => ParentEleve::query()->whereNotNull('user_id')->count(),
             'avec_enfants' => EleveParent::distinct('parent_eleve_id')->count('parent_eleve_id'),
         ];
@@ -111,10 +111,10 @@ class ParentAdminController extends Controller
         if ($request->filled('create_user') && $request->create_user) {
             $email = $request->email ?? strtolower($request->prenom . '.' . $request->nom . '@parent.cg');
 
-            if (User::query()->where('email', $email)->exists()) {
+            if (User::where('email', $email)->exists()) {
                 $counter = 1;
                 $baseEmail = strtolower($request->prenom . '.' . $request->nom . '@parent.cg');
-                while (User::query()->where('email', $baseEmail)->exists()) {
+                while (User::where('email', $baseEmail)->exists()) {
                     $baseEmail = strtolower($request->prenom . '.' . $request->nom . $counter . '@parent.cg');
                     $counter++;
                 }
@@ -185,7 +185,7 @@ class ParentAdminController extends Controller
                        ->get();
         
         // Récupérer les relations via EleveParent
-        $relations = EleveParent::query()->where('parent_eleve_id', $parent->id)->get();
+        $relations = EleveParent::where('parent_eleve_id', $parent->id)->get();
         
         $elevesIds = $relations->pluck('eleve_id')->toArray();
         
@@ -235,7 +235,7 @@ class ParentAdminController extends Controller
         // Mise à jour des relations avec les élèves
         if ($request->has('eleve_ids')) {
             // Supprimer les anciennes relations
-            EleveParent::query()->where('parent_eleve_id', $parent->id)->delete();
+            EleveParent::where('parent_eleve_id', $parent->id)->delete();
             
             // Créer les nouvelles relations
             foreach ($request->eleve_ids as $index => $eleveId) {
@@ -249,7 +249,7 @@ class ParentAdminController extends Controller
             }
         } else {
             // Si aucun élève sélectionné, supprimer toutes les relations
-            EleveParent::query()->where('parent_eleve_id', $parent->id)->delete();
+            EleveParent::where('parent_eleve_id', $parent->id)->delete();
         }
 
         return redirect()
@@ -268,7 +268,7 @@ class ParentAdminController extends Controller
             }
             
             // Supprimer d'abord les relations dans la table pivot
-            EleveParent::query()->where('parent_eleve_id', $parent->id)->delete();
+            EleveParent::where('parent_eleve_id', $parent->id)->delete();
             
             $parent->delete();
             
@@ -320,7 +320,7 @@ class ParentAdminController extends Controller
             ->orderBy('prenom')
             ->get()
             ->map(function($parent) {
-                $enfantsCount = EleveParent::query()->where('parent_eleve_id', $parent->id)->count();
+                $enfantsCount = EleveParent::where('parent_eleve_id', $parent->id)->count();
                 $parent->enfants_count = $enfantsCount;
                 return $parent;
             });

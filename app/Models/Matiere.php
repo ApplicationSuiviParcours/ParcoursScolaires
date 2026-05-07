@@ -29,7 +29,22 @@ use App\Models\EnseignantMatiereClasse;
  * @method static \Illuminate\Database\Eloquent\Builder|Matiere query()
  * @method static \Illuminate\Database\Eloquent\Builder|Matiere where($column, $operator = null, $value = null, $boolean = 'and')
  * @method static \Illuminate\Database\Eloquent\Builder|Matiere whereIn(string $column, $values, string $boolean = 'and', bool $not = false)
- * @method static \Illuminate\Database\Eloquent\Builder|Matiere create(array $attributes = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Matiere whereNotIn(string $column, $values, string $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|Matiere whereNull($column, $boolean = 'and', $not = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|Matiere whereNotNull($column, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|Matiere orderBy($column, $direction = 'asc')
+ * @method static \Illuminate\Pagination\LengthAwarePaginator paginate($perPage = null, $columns = ['*'], $pageName = 'page', $page = null)
+ * @method static \App\Models\Matiere|null find($id, $columns = ['*'])
+ * @method static \App\Models\Matiere findOrFail($id, $columns = ['*'])
+ * @method static \App\Models\Matiere|null first($columns = ['*'])
+ * @method static \App\Models\Matiere firstOrFail($columns = ['*'])
+ * @method static \App\Models\Matiere create(array $attributes = [])
+ * @method bool delete()
+ * @method bool update(array $attributes = [], array $options = [])
+ * @method int count()
+ * @method bool exists()
+ * @method \Illuminate\Support\Collection pluck($column, $key = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Matiere has($relation, $operator = '>=', $count = 1, $boolean = 'and', \Closure $callback = null)
  * 
  * @mixin \Illuminate\Database\Eloquent\Builder
  * @mixin \Eloquent

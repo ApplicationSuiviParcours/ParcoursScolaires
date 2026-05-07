@@ -782,7 +782,7 @@
                         </a>
 
                         <!-- Emploi du temps -->
-                        <a href="{{ route('admin.emploi_du_tempe.index') }}"
+                        <a href="{{ route('admin.emploi_du_temps.index') }}"
                             class="group relative bg-gradient-to-br from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                             <div
                                 class="absolute top-1 right-1 sm:top-2 sm:right-2 opacity-0 group-hover:opacity-100 transition-opacity">

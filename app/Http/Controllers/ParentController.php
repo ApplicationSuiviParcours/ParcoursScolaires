@@ -171,12 +171,14 @@ class ParentController extends Controller
         $enfants = collect();
 
         foreach ($relations as $relation) {
+            /** @var \App\Models\EleveParent $relation */
             $eleve = $relation->eleve;
+            /** @var \App\Models\Eleve $eleve */
             if ($eleve) {
-                $eleve->lien_parental = $relation->lien_parental_libelle;
-                $eleve->relation_id = $relation->id;
-                $eleve->derniere_inscription = $eleve->inscriptions->first();
-                $eleve->stats = $this->calculerStatsEnfant($eleve->id);
+                $eleve->setAttribute('lien_parental', $relation->lien_parental_libelle);
+                $eleve->setAttribute('relation_id', $relation->id);
+                $eleve->setAttribute('derniere_inscription', $eleve->inscriptions->first());
+                $eleve->setAttribute('stats', $this->calculerStatsEnfant($eleve->id));
                 $enfants->push($eleve);
             }
         }

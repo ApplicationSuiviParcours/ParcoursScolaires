@@ -81,8 +81,8 @@ class NoteController extends Controller
             'moyenne_generale' => round(Note::avg('note') ?? 0, 2),
             'note_max' => Note::max('note') ?? 0,
             'note_min' => Note::min('note') ?? 0,
-            'reussites' => Note::query()->where('note', '>=', 10)->count(),
-            'echecs' => Note::query()->where('note', '<', 10)->count(),
+            'reussites' => Note::where('note', '>=', 10)->count(),
+            'echecs' => Note::where('note', '<', 10)->count(),
         ];
 
         $notes = $query->orderBy('created_at', 'desc')
@@ -126,12 +126,12 @@ class NoteController extends Controller
         
         if ($classeId && $anneeScolaireId) {
             // Récupérer les élèves de la classe
-            $eleveIds = Inscription::query()->where('classe_id', $classeId)
+            $eleveIds = Inscription::where('classe_id', $classeId)
                 ->where('annee_scolaire_id', $anneeScolaireId)
                 ->whereIn('statut', ['inscrit', 'active', '1', 1, true])
                 ->pluck('eleve_id');
             
-            $eleves = Eleve::query()->whereIn('id', $eleveIds)
+            $eleves = Eleve::whereIn('id', $eleveIds)
                 ->orderBy('nom')
                 ->orderBy('prenom')
                 ->get();
@@ -473,8 +473,8 @@ class NoteController extends Controller
             'moyenne_generale' => round(Note::avg('note') ?? 0, 2),
             'note_max' => Note::max('note') ?? 0,
             'note_min' => Note::min('note') ?? 0,
-            'reussites' => Note::query()->where('note', '>=', 10)->count(),
-            'echecs' => Note::query()->where('note', '<', 10)->count(),
+            'reussites' => Note::where('note', '>=', 10)->count(),
+            'echecs' => Note::where('note', '<', 10)->count(),
         ];
 
         return response()->json($stats);

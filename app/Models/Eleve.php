@@ -42,6 +42,7 @@ use App\Models\Classe;
  * @property string|null $lien_parental
  * @property int|null $relation_id
  * @property \App\Models\Inscription|null $derniere_inscription
+ * @property array|null $stats
  * 
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Note[] $notes
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Absence[] $absences
@@ -52,8 +53,28 @@ use App\Models\Classe;
  * @method static \Illuminate\Database\Eloquent\Builder|Eleve query()
  * @method static \Illuminate\Database\Eloquent\Builder|Eleve where($column, $operator = null, $value = null, $boolean = 'and')
  * @method static \Illuminate\Database\Eloquent\Builder|Eleve whereIn(string $column, $values, string $boolean = 'and', bool $not = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|Eleve whereNotIn(string $column, $values, string $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|Eleve whereNull($column, $boolean = 'and', $not = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|Eleve whereNotNull($column, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|Eleve whereDate(string $column, $value, string $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|Eleve whereMonth(string $column, $value, string $boolean = 'and')
  * @method static \Illuminate\Database\Eloquent\Builder|Eleve whereYear(string $column, $value, string $boolean = 'and')
- * @method static \Illuminate\Database\Eloquent\Builder|Eleve create(array $attributes = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Eleve join($table, $first, $operator = null, $second = null, $type = 'inner', $where = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|Eleve with($relations)
+ * @method static \Illuminate\Database\Eloquent\Builder|Eleve orderBy($column, $direction = 'asc')
+ * @method static \Illuminate\Database\Eloquent\Builder|Eleve latest($column = null)
+ * @method static \Illuminate\Pagination\LengthAwarePaginator paginate($perPage = null, $columns = ['*'], $pageName = 'page', $page = null)
+ * @method static \App\Models\Eleve|null find($id, $columns = ['*'])
+ * @method static \App\Models\Eleve findOrFail($id, $columns = ['*'])
+ * @method static \App\Models\Eleve|null first($columns = ['*'])
+ * @method static \App\Models\Eleve firstOrFail($columns = ['*'])
+ * @method static \App\Models\Eleve create(array $attributes = [])
+ * @method bool delete()
+ * @method bool update(array $attributes = [], array $options = [])
+ * @method int count()
+ * @method bool exists()
+ * @method \App\Models\Eleve|null first($columns = ['*'])
+ * @method static \Illuminate\Database\Eloquent\Builder|Eleve has($relation, $operator = '>=', $count = 1, $boolean = 'and', \Closure $callback = null)
  * 
  * @mixin \Illuminate\Database\Eloquent\Builder
  * @mixin \Eloquent
@@ -61,6 +82,8 @@ use App\Models\Classe;
 class Eleve extends Model
 {
     use HasFactory;
+
+
 
     protected $fillable = [
         'user_id',

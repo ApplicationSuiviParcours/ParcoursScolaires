@@ -22,6 +22,28 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read \App\Models\AnneeScolaire $anneeScolaire
  * 
  * @method static \Illuminate\Database\Eloquent\Builder|Inscription query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Inscription where($column, $operator = null, $value = null, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|Inscription whereIn(string $column, $values, string $boolean = 'and', bool $not = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|Inscription whereDate(string $column, $value, string $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|Inscription whereMonth(string $column, $value, string $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|Inscription whereYear(string $column, $value, string $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|Inscription orderBy($column, $direction = 'asc')
+ * @method static \Illuminate\Database\Eloquent\Builder|Inscription latest($column = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Inscription with($relations)
+ * @method static \Illuminate\Pagination\LengthAwarePaginator paginate($perPage = null, $columns = ['*'], $pageName = 'page', $page = null)
+ * @method static \App\Models\Inscription|null find($id, $columns = ['*'])
+ * @method static \App\Models\Inscription findOrFail($id, $columns = ['*'])
+ * @method static \App\Models\Inscription|null first($columns = ['*'])
+ * @method static \App\Models\Inscription firstOrFail($columns = ['*'])
+ * @method static \App\Models\Inscription create(array $attributes = [])
+ * @method bool delete()
+ * @method bool update(array $attributes = [], array $options = [])
+ * @method int count()
+ * @method static \Illuminate\Database\Eloquent\Builder|Inscription whereNull($column, $boolean = 'and', $not = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|Inscription whereNotNull($column, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|Inscription has($relation, $operator = '>=', $count = 1, $boolean = 'and', \Closure $callback = null)
+ * @method bool exists()
+ * @method \App\Models\Inscription|null first($columns = ['*'])
  * 
  * @mixin \Illuminate\Database\Eloquent\Builder
  * @mixin \Eloquent

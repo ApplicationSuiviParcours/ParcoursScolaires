@@ -7,6 +7,32 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\User;
 
+/**
+ * @property int $id
+ * @property int $user_id
+ * @property string $type
+ * @property string $title
+ * @property string $message
+ * @property string|null $icon
+ * @property string|null $link
+ * @property bool $read
+ * @property \Carbon\Carbon|null $read_at
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * 
+ * @property-read \App\Models\User $user
+ * 
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification where($column, $operator = null, $value = null, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification orderBy($column, $direction = 'asc')
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification latest($column = null)
+ * @method static \App\Models\Notification create(array $attributes = [])
+ * @method bool delete()
+ * @method bool update(array $attributes = [], array $options = [])
+ * @method int count()
+ * @method bool exists()
+ * @mixin \Eloquent
+ */
 class Notification extends Model
 {
     use HasFactory;

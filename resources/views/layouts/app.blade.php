@@ -451,7 +451,7 @@
                             </div>
                             <span class="flex-1 text-xs sm:text-sm font-medium">Gestion Evaluations</span>
                         </a>
-                        <a href="{{ route('admin.emploi_du_temps.index') }}" class="nav-link flex items-center space-x-2 sm:space-x-3 px-3 sm:px-4 py-2 sm:py-3 text-white rounded-lg sm:rounded-xl group {{ request()->routeIs('admin.emploi_du_tempo*') ? 'active bg-white/20' : 'hover:bg-white/10' }}">
+                        <a href="{{ route('admin.emploi_du_temps.index') }}" class="nav-link flex items-center space-x-2 sm:space-x-3 px-3 sm:px-4 py-2 sm:py-3 text-white rounded-lg sm:rounded-xl group {{ request()->routeIs('admin.emploi_du_temps*') ? 'active bg-white/20' : 'hover:bg-white/10' }}">
                             <div class="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-lg {{ request()->routeIs('admin.emploi_du_temps*') ? 'bg-white/30' : 'bg-white/10' }} group-hover:bg-white/20 transition-all">
                                 <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                             </div>

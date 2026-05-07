@@ -23,11 +23,17 @@ use App\Models\ParentEleve;
  * @method static \Illuminate\Database\Eloquent\Builder|EleveParent query()
  * @method static \Illuminate\Database\Eloquent\Builder|EleveParent where($column, $operator = null, $value = null, $boolean = 'and')
  * @method static \Illuminate\Database\Eloquent\Builder|EleveParent whereIn(string $column, $values, string $boolean = 'and', bool $not = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|EleveParent with($relations)
+ * @method static \Illuminate\Database\Eloquent\Collection|static[] get($columns = ['*'])
  * @method static \Illuminate\Database\Eloquent\Builder|EleveParent create(array $attributes = [])
  * @method static \Illuminate\Database\Eloquent\Builder|EleveParent pourEleve($eleveId)
  * @method static \Illuminate\Database\Eloquent\Builder|EleveParent pourParent($parentId)
  * @method static \Illuminate\Database\Eloquent\Builder|EleveParent avecLien($lien)
  * @method static \Illuminate\Database\Eloquent\Builder|EleveParent avecEleveActif()
+ * @method int count()
+ * @method bool exists()
+ * @method bool delete()
+ * @method static \App\Models\EleveParent|null find($id, $columns = ['*'])
  * 
  * @mixin \Illuminate\Database\Eloquent\Builder
  * @mixin \Eloquent

@@ -17,7 +17,7 @@ class InscriptionController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Inscription::query()->with(['eleve', 'classe', 'anneeScolaire']);
+        $query = Inscription::with(['eleve', 'classe', 'anneeScolaire']);
         
         // Filtres
         if ($request->filled('classe_id')) {
@@ -34,8 +34,8 @@ class InscriptionController extends Controller
         
         $inscriptions = $query->orderBy('created_at', 'desc')->paginate(15);
         
-        $classes = Classe::query()->orderBy('nom')->get();
-        $anneesScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
+        $classes = Classe::orderBy('nom')->get();
+        $anneesScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
         
         return view('admin.inscriptions.index', compact(
             'inscriptions', 
@@ -52,10 +52,10 @@ class InscriptionController extends Controller
         $classe_id = $request->get('classe_id');
         $eleve_id = $request->get('eleve_id');
         
-        $classes = Classe::query()->orderBy('nom')->get();
-        $eleves = Eleve::query()->orderBy('nom')->orderBy('prenom')->get();
-        $anneeScolaireActive = AnneeScolaire::query()->where('statut', true)->first();
-        $anneesScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
+        $classes = Classe::orderBy('nom')->get();
+        $eleves = Eleve::orderBy('nom')->orderBy('prenom')->get();
+        $anneeScolaireActive = AnneeScolaire::where('statut', true)->first();
+        $anneesScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
         
         return view('admin.inscriptions.create', compact(
             'classes', 
@@ -72,48 +72,109 @@ class InscriptionController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'eleve_id' => 'required|exists:eleves,id',
+        $isNewEleve = $request->boolean('is_new_eleve');
+
+        $rules = [
             'classe_id' => 'required|exists:classes,id',
             'annee_scolaire_id' => 'required|exists:annees_scolaires,id',
             'date_inscription' => 'required|date',
             'statut' => 'sometimes|boolean',
             'observation' => 'nullable|string|max:500',
-        ]);
+        ];
+
+        if ($isNewEleve) {
+            $rules += [
+                'nom' => 'required|string|max:255',
+                'prenom' => 'required|string|max:255',
+                'date_naissance' => 'required|date',
+                'lieu_naissance' => 'required|string|max:255',
+                'genre' => 'required|in:M,F,Masculin,Féminin',
+                'adresse' => 'required|string|max:255',
+                'email' => 'nullable|email|unique:users,email|unique:eleves,email',
+            ];
+        } else {
+            $rules['eleve_id'] = 'required|exists:eleves,id';
+        }
+
+        $validated = $request->validate($rules);
 
         if (!isset($validated['statut'])) {
             $validated['statut'] = true;
         }
 
-        // Vérifier si l'élève est déjà inscrit
-        $exists = Inscription::query()->where('eleve_id', $validated['eleve_id'])
-            ->where('classe_id', $validated['classe_id'])
-            ->where('annee_scolaire_id', $validated['annee_scolaire_id'])
-            ->exists();
+        try {
+            return DB::transaction(function () use ($validated, $isNewEleve) {
+                if ($isNewEleve) {
+                    // Générer le matricule à l'avance pour l'utiliser comme login si besoin
+                    $matricule = Eleve::genererMatricule($validated['nom']);
+                    
+                    // Création du compte utilisateur automatique
+                    $email = $validated['email'] ?? strtolower($matricule) . '@scolaireparcours.com';
+                    
+                    $user = \App\Models\User::create([
+                        'name' => $validated['prenom'] . ' ' . $validated['nom'],
+                        'email' => $email,
+                        'password' => \Illuminate\Support\Facades\Hash::make('password'), // Mot de passe par défaut
+                        'statut' => true,
+                    ]);
 
-        if ($exists) {
-            return back()->withInput()->withErrors([
-                'eleve_id' => 'Cet élève est déjà inscrit dans cette classe pour cette année scolaire.'
-            ]);
+                    // Attribuer le rôle élève
+                    $user->assignRole('eleve');
+
+                    // Création de l'élève
+                    $eleve = Eleve::create([
+                        'user_id' => $user->id,
+                        'nom' => $validated['nom'],
+                        'prenom' => $validated['prenom'],
+                        'matricule' => $matricule,
+                        'date_naissance' => $validated['date_naissance'],
+                        'lieu_naissance' => $validated['lieu_naissance'],
+                        'genre' => in_array($validated['genre'], ['M', 'Masculin']) ? 'M' : 'F',
+                        'adresse' => $validated['adresse'],
+                        'email' => $email,
+                        'date_inscription' => $validated['date_inscription'],
+                        'statut' => true,
+                    ]);
+                    $eleve_id = $eleve->id;
+                } else {
+                    $eleve_id = $validated['eleve_id'];
+                }
+
+                // Vérifier si l'élève est déjà inscrit pour cette année
+                $exists = Inscription::query()->where('eleve_id', $eleve_id)
+                    ->where('annee_scolaire_id', $validated['annee_scolaire_id'])
+                    ->exists();
+
+                if ($exists) {
+                    throw new \Exception('Cet élève est déjà inscrit pour cette année scolaire.');
+                }
+
+                // Vérifier la capacité de la classe
+                $classe = Classe::findOrFail($validated['classe_id']);
+                $nbInscriptions = Inscription::query()->where('classe_id', $validated['classe_id'])
+                    ->where('annee_scolaire_id', $validated['annee_scolaire_id'])
+                    ->count();
+
+                if ($nbInscriptions >= $classe->capacite) {
+                    throw new \Exception('Cette classe a atteint sa capacité maximale (' . $classe->capacite . ' élèves).');
+                }
+
+                $inscription = Inscription::create([
+                    'eleve_id' => $eleve_id,
+                    'classe_id' => $validated['classe_id'],
+                    'annee_scolaire_id' => $validated['annee_scolaire_id'],
+                    'date_inscription' => $validated['date_inscription'],
+                    'statut' => $validated['statut'],
+                    'observation' => $validated['observation'] ?? null,
+                ]);
+
+                return redirect()
+                    ->route('admin.inscriptions.show', $inscription)
+                    ->with('success', 'Inscription et création du compte réussies.');
+            });
+        } catch (\Exception $e) {
+            return back()->withInput()->withErrors(['error' => $e->getMessage()]);
         }
-
-        // Vérifier la capacité de la classe
-        $classe = Classe::find($validated['classe_id']);
-        $nbInscriptions = Inscription::query()->where('classe_id', $validated['classe_id'])
-            ->where('annee_scolaire_id', $validated['annee_scolaire_id'])
-            ->count();
-
-        if ($nbInscriptions >= $classe->capacite) {
-            return back()->withInput()->withErrors([
-                'classe_id' => 'Cette classe a atteint sa capacité maximale (' . $classe->capacite . ' élèves).'
-            ]);
-        }
-
-        $inscription = Inscription::create($validated);
-
-        return redirect()
-            ->route('admin.inscriptions.show', $inscription)
-            ->with('success', 'Inscription créée avec succès.');
     }
 
     /**
@@ -130,9 +191,9 @@ class InscriptionController extends Controller
      */
     public function edit(Inscription $inscription)
     {
-        $classes = Classe::query()->orderBy('nom')->get();
-        $eleves = Eleve::query()->orderBy('nom')->orderBy('prenom')->get();
-        $anneesScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
+        $classes = Classe::orderBy('nom')->get();
+        $eleves = Eleve::orderBy('nom')->orderBy('prenom')->get();
+        $anneesScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
         
         return view('admin.inscriptions.edit', compact('inscription', 'classes', 'eleves', 'anneesScolaires'));
     }
@@ -169,7 +230,7 @@ class InscriptionController extends Controller
         }
 
         // Vérifier la capacité de la classe (en excluant cette inscription)
-        $classe = Classe::find($validated['classe_id']);
+        $classe = Classe::findOrFail($validated['classe_id']);
         $nbInscriptions = Inscription::query()->where('classe_id', $validated['classe_id'])
             ->where('annee_scolaire_id', $validated['annee_scolaire_id'])
             ->where('id', '!=', $inscription->id)
@@ -193,6 +254,7 @@ class InscriptionController extends Controller
      */
     public function destroy(Inscription $inscription)
     {
+        /** @var Inscription $inscription */
         $inscription->delete();
 
         return redirect()
@@ -233,7 +295,7 @@ public function checkEligibility(Request $request)
         ->exists();
 
     // Vérifier les places disponibles
-    $classe = Classe::find($classe_id);
+    $classe = Classe::findOrFail($classe_id);
     $nbInscriptions = Inscription::query()->where('classe_id', $classe_id)
         ->where('annee_scolaire_id', $annee_scolaire_id)
         ->count();

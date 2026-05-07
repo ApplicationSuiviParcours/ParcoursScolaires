@@ -9,6 +9,40 @@ use App\Models\Eleve;
 use App\Models\Classe;
 use App\Models\AnneeScolaire;
 
+/**
+ * @property int $id
+ * @property int $eleve_id
+ * @property int $classe_id
+ * @property int $annee_scolaire_id
+ * @property \Carbon\Carbon $date_reinscription
+ * @property string $statut
+ * @property string|null $observation
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * 
+ * @property-read \App\Models\Eleve $eleve
+ * @property-read \App\Models\Classe $classe
+ * @property-read \App\Models\AnneeScolaire $anneeScolaire
+ * 
+ * @method static \Illuminate\Database\Eloquent\Builder|Reinscription query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Reinscription where($column, $operator = null, $value = null, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|Reinscription whereIn(string $column, $values, string $boolean = 'and', bool $not = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|Reinscription orderBy($column, $direction = 'asc')
+ * @method static \Illuminate\Database\Eloquent\Builder|Reinscription with($relations)
+ * @method static \App\Models\Reinscription|null find($id, $columns = ['*'])
+ * @method static \App\Models\Reinscription findOrFail($id, $columns = ['*'])
+ * @method static \App\Models\Reinscription create(array $attributes = [])
+ * @method bool delete()
+ * @method bool update(array $attributes = [], array $options = [])
+ * @method int count()
+ * @method static \Illuminate\Database\Eloquent\Builder|Reinscription whereNull($column, $boolean = 'and', $not = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|Reinscription whereNotNull($column, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|Reinscription has($relation, $operator = '>=', $count = 1, $boolean = 'and', \Closure $callback = null)
+ * @method bool exists()
+ * 
+ * @mixin \Illuminate\Database\Eloquent\Builder
+ * @mixin \Eloquent
+ */
 class Reinscription extends Model
 {
     use HasFactory;

@@ -42,15 +42,26 @@ use Illuminate\Support\Str;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Eleve[] $eleves
  * 
  * @method static \Illuminate\Database\Eloquent\Builder|ParentEleve query()
- * @method static \Illuminate\Database\Eloquent\Builder|ParentEleve actif()
- * @method static \Illuminate\Database\Eloquent\Builder|ParentEleve inactif()
- * @method static \Illuminate\Database\Eloquent\Builder|ParentEleve search($search)
- * 
- * @method static \Illuminate\Database\Eloquent\Builder|ParentEleve query()
  * @method static \Illuminate\Database\Eloquent\Builder|ParentEleve where($column, $operator = null, $value = null, $boolean = 'and')
  * @method static \Illuminate\Database\Eloquent\Builder|ParentEleve whereIn(string $column, $values, string $boolean = 'and', bool $not = false)
  * @method static \Illuminate\Database\Eloquent\Builder|ParentEleve whereYear(string $column, $value, string $boolean = 'and')
- * @method static \Illuminate\Database\Eloquent\Builder|ParentEleve create(array $attributes = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|ParentEleve orderBy($column, $direction = 'asc')
+ * @method static \Illuminate\Pagination\LengthAwarePaginator paginate($perPage = null, $columns = ['*'], $pageName = 'page', $page = null)
+ * @method static \App\Models\ParentEleve|null find($id, $columns = ['*'])
+ * @method static \App\Models\ParentEleve findOrFail($id, $columns = ['*'])
+ * @method static \App\Models\ParentEleve|null first($columns = ['*'])
+ * @method static \App\Models\ParentEleve firstOrFail($columns = ['*'])
+ * @method static \App\Models\ParentEleve create(array $attributes = [])
+ * @method bool delete()
+ * @method bool update(array $attributes = [], array $options = [])
+ * @method int count()
+ * @method static \Illuminate\Database\Eloquent\Builder|ParentEleve whereNull($column, $boolean = 'and', $not = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|ParentEleve whereNotNull($column, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|ParentEleve has($relation, $operator = '>=', $count = 1, $boolean = 'and', \Closure $callback = null)
+ * @method bool exists()
+ * @method static \Illuminate\Database\Eloquent\Builder|ParentEleve actif()
+ * @method static \Illuminate\Database\Eloquent\Builder|ParentEleve inactif()
+ * @method static \Illuminate\Database\Eloquent\Builder|ParentEleve search($search)
  * 
  * @mixin \Illuminate\Database\Eloquent\Builder
  * @mixin \Eloquent

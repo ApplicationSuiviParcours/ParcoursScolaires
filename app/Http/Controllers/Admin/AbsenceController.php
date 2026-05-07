@@ -36,7 +36,7 @@ class AbsenceController extends Controller
 
         // Filtre par classe
         if ($request->filled('classe_id')) {
-            $eleveIds = Inscription::query()->where('classe_id', $request->classe_id)
+            $eleveIds = Inscription::where('classe_id', $request->classe_id)
                 ->whereIn('statut', ['inscrit', 'active', '1', 1, true])
                 ->pluck('eleve_id');
             $query->whereIn('eleve_id', $eleveIds);

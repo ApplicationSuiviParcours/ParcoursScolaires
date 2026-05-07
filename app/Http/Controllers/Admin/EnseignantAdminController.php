@@ -37,13 +37,13 @@ class EnseignantAdminController extends Controller
             ->orderBy('prenom')
             ->paginate(15);
 
-        $specialites = Enseignant::query()->whereNotNull('specialite')
+        $specialites = Enseignant::whereNotNull('specialite')
                                  ->distinct()
                                  ->orderBy('specialite')
                                  ->pluck('specialite')
                                  ->toArray();
 
-        $enseignantsAvecSpecialite = Enseignant::query()->whereNotNull('specialite')->count();
+        $enseignantsAvecSpecialite = Enseignant::whereNotNull('specialite')->count();
 
         return view('admin.enseignants.index', compact(
             'enseignants', 

@@ -40,7 +40,22 @@ use App\Models\Note;
  * @method static \Illuminate\Database\Eloquent\Builder|Bulletin query()
  * @method static \Illuminate\Database\Eloquent\Builder|Bulletin where($column, $operator = null, $value = null, $boolean = 'and')
  * @method static \Illuminate\Database\Eloquent\Builder|Bulletin whereIn(string $column, $values, string $boolean = 'and', bool $not = false)
- * @method static \Illuminate\Database\Eloquent\Builder|Bulletin create(array $attributes = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Bulletin orderBy($column, $direction = 'asc')
+ * @method static \Illuminate\Database\Eloquent\Builder|Bulletin with($relations)
+ * @method static \Illuminate\Database\Eloquent\Collection|static[] get($columns = ['*'])
+ * @method static \Illuminate\Pagination\LengthAwarePaginator paginate($perPage = null, $columns = ['*'], $pageName = 'page', $page = null)
+ * @method static \App\Models\Bulletin|null find($id, $columns = ['*'])
+ * @method static \App\Models\Bulletin findOrFail($id, $columns = ['*'])
+ * @method static \App\Models\Bulletin|null first($columns = ['*'])
+ * @method static \App\Models\Bulletin firstOrFail($columns = ['*'])
+ * @method static \App\Models\Bulletin create(array $attributes = [])
+ * @method bool delete()
+ * @method bool update(array $attributes = [], array $options = [])
+ * @method int count()
+ * @method static \Illuminate\Database\Eloquent\Builder|Bulletin whereNull($column, $boolean = 'and', $not = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|Bulletin whereNotNull($column, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|Bulletin has($relation, $operator = '>=', $count = 1, $boolean = 'and', \Closure $callback = null)
+ * @method bool exists()
  * 
  * @mixin \Illuminate\Database\Eloquent\Builder
  * @mixin \Eloquent

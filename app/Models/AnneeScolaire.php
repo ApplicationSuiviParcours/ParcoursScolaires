@@ -27,6 +27,27 @@ use App\Models\EmploiDuTemps;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\EmploiDuTemps[] $emploiDuTemps
  * 
  * @method static \Illuminate\Database\Eloquent\Builder|AnneeScolaire query()
+ * @method static \Illuminate\Database\Eloquent\Builder|AnneeScolaire where($column, $operator = null, $value = null, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|AnneeScolaire whereIn(string $column, $values, string $boolean = 'and', bool $not = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|AnneeScolaire whereDate(string $column, $value, string $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|AnneeScolaire whereMonth(string $column, $value, string $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|AnneeScolaire whereYear(string $column, $value, string $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|AnneeScolaire orderBy($column, $direction = 'asc')
+ * @method static \Illuminate\Database\Eloquent\Builder|AnneeScolaire latest($column = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|AnneeScolaire with($relations)
+ * @method static \Illuminate\Pagination\LengthAwarePaginator paginate($perPage = null, $columns = ['*'], $pageName = 'page', $page = null)
+ * @method static \App\Models\AnneeScolaire|null find($id, $columns = ['*'])
+ * @method static \App\Models\AnneeScolaire findOrFail($id, $columns = ['*'])
+ * @method static \App\Models\AnneeScolaire|null first($columns = ['*'])
+ * @method static \App\Models\AnneeScolaire firstOrFail($columns = ['*'])
+ * @method static \App\Models\AnneeScolaire create(array $attributes = [])
+ * @method bool delete()
+ * @method bool update(array $attributes = [], array $options = [])
+ * @method int count()
+ * @method static \Illuminate\Database\Eloquent\Builder|AnneeScolaire whereNull($column, $boolean = 'and', $not = false)
+ * @method static \Illuminate\Database\Eloquent\Builder|AnneeScolaire whereNotNull($column, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|AnneeScolaire has($relation, $operator = '>=', $count = 1, $boolean = 'and', \Closure $callback = null)
+ * @method bool exists()
  * @method static \Illuminate\Database\Eloquent\Builder|AnneeScolaire active()
  * 
  * @mixin \Illuminate\Database\Eloquent\Builder

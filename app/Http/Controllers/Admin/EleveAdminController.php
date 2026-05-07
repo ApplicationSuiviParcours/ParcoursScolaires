@@ -74,10 +74,10 @@ class EleveAdminController extends Controller
         // Statistiques
         $stats = [
             'total' => Eleve::count(),
-            'actifs' => Eleve::query()->where('statut', true)->count(),
-            'inactifs' => Eleve::query()->where('statut', false)->count(),
-            'garcons' => Eleve::query()->where('genre', 'm')->count(),
-            'filles' => Eleve::query()->where('genre', 'f')->count(),
+            'actifs' => Eleve::where('statut', true)->count(),
+            'inactifs' => Eleve::where('statut', false)->count(),
+            'garcons' => Eleve::where('genre', 'm')->count(),
+            'filles' => Eleve::where('genre', 'f')->count(),
             'avec_compte' => Eleve::query()->whereNotNull('user_id')->count(),
             'sans_compte' => Eleve::query()->whereNull('user_id')->count(),
         ];
@@ -121,7 +121,7 @@ class EleveAdminController extends Controller
         $classes = Classe::query()->with('anneeScolaire')->get();
 
         // Récupérer l'année scolaire active
-        $anneeScolaireActive = AnneeScolaire::query()->where('active', true)->first();
+        $anneeScolaireActive = AnneeScolaire::where('active', true)->first();
         if (!$anneeScolaireActive) {
             $anneeScolaireActive = AnneeScolaire::first();
         }
@@ -200,7 +200,7 @@ class EleveAdminController extends Controller
 
             // Vérifier l'unicité du matricule
             $tentatives = 0;
-            while (Eleve::query()->where('matricule', $data['matricule'])->exists() && $tentatives < 100) {
+            while (Eleve::where('matricule', $data['matricule'])->exists() && $tentatives < 100) {
                 $nouveauNumero = str_pad(intval($nouveauNumero) + 1, 4, '0', STR_PAD_LEFT);
                 $data['matricule'] = $anneeActuelle . $premiereLettreNom . $nouveauNumero;
                 $tentatives++;
@@ -217,7 +217,7 @@ class EleveAdminController extends Controller
 
             // ✅ AJOUT: Création d'une inscription si une classe est sélectionnée
             if ($request->filled('classe_inscription_id')) {
-                $anneeScolaire = AnneeScolaire::query()->where('active', true)->first();
+                $anneeScolaire = AnneeScolaire::where('active', true)->first();
                 if (!$anneeScolaire) {
                     $anneeScolaire = AnneeScolaire::first();
                 }
@@ -240,11 +240,11 @@ class EleveAdminController extends Controller
                 $email = $eleve->email ?? $eleve->matricule . '@eleve.local';
 
                 // Vérifier si l'email existe déjà dans la table users
-                if (User::query()->where('email', $email)->exists()) {
+                if (User::where('email', $email)->exists()) {
                     // Utiliser un email alternatif avec un suffixe numérique
                     $counter = 1;
                     $baseEmail = $eleve->matricule . '@eleve.local';
-                    while (User::query()->where('email', $baseEmail)->exists()) {
+                    while (User::where('email', $baseEmail)->exists()) {
                         $baseEmail = $eleve->matricule . $counter . '@eleve.local';
                         $counter++;
                     }
@@ -326,7 +326,7 @@ class EleveAdminController extends Controller
         }]);
 
         $classes = Classe::query()->with('anneeScolaire')->get();
-        $anneeScolaireActive = AnneeScolaire::query()->where('active', true)->first();
+        $anneeScolaireActive = AnneeScolaire::where('active', true)->first();
         if (!$anneeScolaireActive) {
             $anneeScolaireActive = AnneeScolaire::first();
         }
@@ -377,12 +377,12 @@ class EleveAdminController extends Controller
             // ✅ AJOUT: Création d'une nouvelle inscription si demandé
             if ($request->filled('nouvelle_classe_id')) {
                 // Désactiver l'ancienne inscription active
-                Inscription::query()->where('eleve_id', $eleve->id)
+                Inscription::where('eleve_id', $eleve->id)
                     ->whereIn('statut', ['inscrit', 'active', '1', 1, true])
                     ->update(['statut' => false]);
 
                 // Créer la nouvelle inscription
-                $anneeScolaire = AnneeScolaire::query()->where('active', true)->first();
+                $anneeScolaire = AnneeScolaire::where('active', true)->first();
                 if (!$anneeScolaire) {
                     $anneeScolaire = AnneeScolaire::first();
                 }
@@ -404,7 +404,7 @@ class EleveAdminController extends Controller
                 }
                 if ($eleve->email && $eleve->email !== $eleve->user->email) {
                     // Check if email already exists for another user
-                    $existingUser = User::query()->where('email', $eleve->email)
+                    $existingUser = User::where('email', $eleve->email)
                         ->where('id', '!=', $eleve->user->id)
                         ->first();
 
@@ -622,11 +622,11 @@ class EleveAdminController extends Controller
             $email = $eleve->email ?? $eleve->matricule . '@eleve.local';
 
             // Vérifier si l'email existe déjà dans la table users
-            if (User::query()->where('email', $email)->exists()) {
+            if (User::where('email', $email)->exists()) {
                 // Utiliser un email alternatif avec un suffixe numérique
                 $counter = 1;
                 $baseEmail = $eleve->matricule . '@eleve.local';
-                while (User::query()->where('email', $baseEmail)->exists()) {
+                while (User::where('email', $baseEmail)->exists()) {
                     $baseEmail = $eleve->matricule . $counter . '@eleve.local';
                     $counter++;
                 }
