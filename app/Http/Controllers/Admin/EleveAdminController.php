@@ -234,33 +234,25 @@ class EleveAdminController extends Controller
                 }
             }
 
-            // Création d'un compte utilisateur si demandé
-            if ($request->filled('create_user') && $request->create_user) {
-                // Générer l'email ou utiliser celui de l'élève
-                $email = $eleve->email ?? $eleve->matricule . '@eleve.local';
+            // ✅ AUTOMATIQUE: Création d'un compte utilisateur pour l'élève
+            $email = $eleve->email ?? $eleve->matricule . '@scolaireparcours.com';
 
-                // Vérifier si l'email existe déjà dans la table users
-                if (User::where('email', $email)->exists()) {
-                    // Utiliser un email alternatif avec un suffixe numérique
-                    $counter = 1;
-                    $baseEmail = $eleve->matricule . '@eleve.local';
-                    while (User::where('email', $baseEmail)->exists()) {
-                        $baseEmail = $eleve->matricule . $counter . '@eleve.local';
-                        $counter++;
-                    }
-                    $email = $baseEmail;
-                }
-
-                $user = User::create([
-                    'name' => $eleve->prenom . ' ' . $eleve->nom,
-                    'email' => $email,
-                    'password' => Hash::make($request->password),
-                    'role' => 'eleve',
-                ]);
-
-                $eleve->user_id = $user->id;
-                $eleve->save();
+            // Vérifier si l'email existe déjà dans la table users
+            if (User::where('email', $email)->exists()) {
+                $email = $eleve->matricule . '_' . rand(100, 999) . '@scolaireparcours.com';
             }
+
+            $user = User::create([
+                'name' => $eleve->prenom . ' ' . $eleve->nom,
+                'email' => $email,
+                'password' => Hash::make('password'), // Mot de passe par défaut
+                'role' => 'eleve',
+                'is_active' => true,
+            ]);
+
+            $user->assignRole('eleve');
+            $eleve->user_id = $user->id;
+            $eleve->save();
 
             DB::commit();
 

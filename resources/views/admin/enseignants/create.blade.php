@@ -120,8 +120,7 @@
                                 </div>
                                 <div class="ml-3 flex-1">
                                     <p class="text-sm text-blue-800">
-                                        Sélectionnez un utilisateur existant. Si l'utilisateur n'existe pas, vous devez d'abord
-                                        <a href="{{ route('admin.users.create') }}" class="font-medium underline hover:text-blue-600 transition-colors">créer un compte utilisateur</a>.
+                                        Si vous ne sélectionnez pas d'utilisateur, un compte sera <strong>automatiquement créé</strong> pour cet enseignant avec le mot de passe par défaut : <code>password</code>.
                                     </p>
                                 </div>
                             </div>
@@ -131,7 +130,7 @@
                             <!-- Utilisateur -->
                             <div class="md:col-span-2">
                                 <label for="user_id" class="block text-sm font-medium text-gray-700 mb-1">
-                                    Utilisateur <span class="text-red-500">*</span>
+                                    Utilisateur (Optionnel)
                                 </label>
                                 <div class="relative group">
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -139,7 +138,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                         </svg>
                                     </div>
-                                    <select name="user_id" id="user_id" required
+                                    <select name="user_id" id="user_id"
                                             class="block w-full pl-10 pr-10 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition-all duration-200 appearance-none bg-white @error('user_id') border-red-400 @enderror">
                                         <option value="">Sélectionner un utilisateur</option>
                                         @forelse($users as $user)

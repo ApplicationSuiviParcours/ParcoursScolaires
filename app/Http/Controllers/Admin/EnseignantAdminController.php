@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Enseignant;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+
 
 class EnseignantAdminController extends Controller
 {
@@ -64,7 +67,7 @@ class EnseignantAdminController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'user_id' => 'required|exists:users,id',
+            'user_id' => 'nullable|exists:users,id',
             'nom' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
             'genre' => 'required|in:m,f',
@@ -81,12 +84,40 @@ class EnseignantAdminController extends Controller
         $validated['matricule'] = Enseignant::genererMatricule($validated['nom']);
         $validated['statut'] = $validated['statut'] ?? true;
 
-        if ($request->hasFile('photo')) {
-            $path = $request->file('photo')->store('enseignants', 'public');
-            $validated['photo'] = $path;
-        }
+        DB::beginTransaction();
+        try {
+            if ($request->hasFile('photo')) {
+                $path = $request->file('photo')->store('enseignants', 'public');
+                $validated['photo'] = $path;
+            }
 
-        Enseignant::create($validated);
+            // ✅ AUTOMATIQUE: Création d'un compte utilisateur pour l'enseignant si non fourni
+            if (!$request->filled('user_id')) {
+                $email = $request->email ?? strtolower($request->prenom . '.' . $request->nom . '@enseignant.scolaireparcours.com');
+                
+                if (User::where('email', $email)->exists()) {
+                    $email = strtolower($request->prenom . '.' . $request->nom . '_' . rand(100, 999) . '@enseignant.scolaireparcours.com');
+                }
+
+                $user = User::create([
+                    'name' => $request->prenom . ' ' . $request->nom,
+                    'email' => $email,
+                    'password' => Hash::make('password'), // Mot de passe par défaut
+                    'role' => 'enseignant',
+                    'is_active' => true,
+                ]);
+
+                $user->assignRole('enseignant');
+                $validated['user_id'] = $user->id;
+            }
+
+            Enseignant::create($validated);
+            
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withInput()->with('error', 'Erreur: ' . $e->getMessage());
+        }
 
         return redirect()->route('admin.enseignants.index')
             ->with('success', 'Enseignant créé avec succès.');

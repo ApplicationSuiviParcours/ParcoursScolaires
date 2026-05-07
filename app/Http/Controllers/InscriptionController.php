@@ -7,6 +7,7 @@ use App\Models\Inscription;
 use App\Models\Eleve;
 use App\Models\Classe;
 use App\Models\AnneeScolaire;
+use App\Models\User;
 
 class InscriptionController extends Controller
 {
@@ -73,61 +74,118 @@ class InscriptionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'eleve_id' => 'required|exists:eleves,id',
+            'is_new_eleve' => 'required|boolean',
+            'eleve_id' => 'required_if:is_new_eleve,0|nullable|exists:eleves,id',
             'classe_id' => 'required|exists:classes,id',
-            // ✅ CORRECTION ICI : 'annees_scolaires' -> 'annee_scolaires'
             'annee_scolaire_id' => 'required|exists:annee_scolaires,id',
             'date_inscription' => 'required|date',
             'statut' => 'sometimes|boolean',
             'observation' => 'nullable|string',
+            // Validation pour le nouvel élève
+            'nom' => 'required_if:is_new_eleve,1|nullable|string|max:255',
+            'prenom' => 'required_if:is_new_eleve,1|nullable|string|max:255',
+            'date_naissance' => 'required_if:is_new_eleve,1|nullable|date',
+            'lieu_naissance' => 'required_if:is_new_eleve,1|nullable|string|max:255',
+            'genre' => 'required_if:is_new_eleve,1|nullable|in:M,F',
+            'adresse' => 'required_if:is_new_eleve,1|nullable|string|max:255',
+            'email' => 'nullable|email|max:255',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        // ✅ VÉRIFICATION D'UNICITÉ : L'élève est-il déjà inscrit cette année ?
-        $existingInscription = Inscription::query()->where('eleve_id', $request->eleve_id)
-            ->where('annee_scolaire_id', $request->annee_scolaire_id)
-            ->first();
+        try {
+            return \Illuminate\Support\Facades\DB::transaction(function () use ($request) {
+                $eleveId = $request->eleve_id;
 
-        if ($existingInscription) {
-            $classeExistante = Classe::find($existingInscription->classe_id);
-            $anneeExistante = AnneeScolaire::find($existingInscription->annee_scolaire_id);
-            
+                // Si c'est un nouvel élève, on le crée d'abord
+                if ($request->is_new_eleve == '1') {
+                    $eleveData = [
+                        'nom' => $request->nom,
+                        'prenom' => $request->prenom,
+                        'date_naissance' => $request->date_naissance,
+                        'lieu_naissance' => $request->lieu_naissance,
+                        'genre' => $request->genre,
+                        'adresse' => $request->adresse,
+                        'email' => $request->email,
+                        'statut' => true,
+                        'date_inscription' => $request->date_inscription,
+                    ];
+
+                    // Gérer la photo
+                    if ($request->hasFile('photo')) {
+                        $path = $request->file('photo')->store('eleves/photos', 'public');
+                        $eleveData['photo'] = $path;
+                    }
+
+                    $eleve = Eleve::create($eleveData);
+                    $eleveId = $eleve->id;
+                }
+
+                // ✅ VÉRIFICATION D'UNICITÉ : L'élève est-il déjà inscrit cette année ?
+                $existingInscription = Inscription::query()->where('eleve_id', $eleveId)
+                    ->where('annee_scolaire_id', $request->annee_scolaire_id)
+                    ->first();
+
+                if ($existingInscription) {
+                    $classeExistante = Classe::find($existingInscription->classe_id);
+                    $anneeExistante = AnneeScolaire::find($existingInscription->annee_scolaire_id);
+                    
+                    throw new \Exception('Cet élève est déjà inscrit pour l\'année scolaire ' . 
+                                          $anneeExistante->nom . 
+                                          ' dans la classe ' . 
+                                          $classeExistante->nom);
+                }
+
+                // Vérifier la capacité de la classe
+                $classe = Classe::find($request->classe_id);
+                $nbInscriptions = Inscription::query()->where('classe_id', $request->classe_id)
+                    ->where('annee_scolaire_id', $request->annee_scolaire_id)
+                    ->count();
+
+                if ($nbInscriptions >= $classe->capacite) {
+                    throw new \Exception('Cette classe a atteint sa capacité maximale (' . $classe->capacite . ' élèves).');
+                }
+
+                // Créer l'inscription
+                $inscription = Inscription::create([
+                    'eleve_id' => $eleveId,
+                    'classe_id' => $request->classe_id,
+                    'annee_scolaire_id' => $request->annee_scolaire_id,
+                    'date_inscription' => $request->date_inscription,
+                    'statut' => $request->statut ?? true,
+                    'observation' => $request->observation,
+                ]);
+
+                // ✅ AUTOMATIQUE: Créer un compte utilisateur pour le nouvel élève s'il n'en a pas
+                $eleve = Eleve::find($eleveId);
+                if (!$eleve->user_id) {
+                    $email = $eleve->email ?? $eleve->matricule . '@scolaireparcours.com';
+                    
+                    // Vérifier l'unicité de l'email
+                    if (User::where('email', $email)->exists()) {
+                        $email = $eleve->matricule . '_' . rand(100, 999) . '@scolaireparcours.com';
+                    }
+
+                    $user = User::create([
+                        'name' => $eleve->prenom . ' ' . $eleve->nom,
+                        'email' => $email,
+                        'password' => \Illuminate\Support\Facades\Hash::make('password'), // Mot de passe par défaut
+                        'role' => 'eleve',
+                        'is_active' => true,
+                    ]);
+
+                    $user->assignRole('eleve');
+                    $eleve->update(['user_id' => $user->id]);
+                }
+
+                return redirect()
+                    ->route('admin.inscriptions.index')
+                    ->with('success', 'Inscription créée avec succès. Compte utilisateur généré automatiquement.');
+            });
+        } catch (\Exception $e) {
             return back()
                 ->withInput()
-                ->withErrors([
-                    'eleve_id' => 'Cet élève est déjà inscrit pour l\'année scolaire ' . 
-                                  $anneeExistante->nom . 
-                                  ' dans la classe ' . 
-                                  $classeExistante->nom
-                ]);
+                ->withErrors(['error' => $e->getMessage()]);
         }
-
-        // Vérifier la capacité de la classe
-        $classe = Classe::find($request->classe_id);
-        $nbInscriptions = Inscription::query()->where('classe_id', $request->classe_id)
-            ->where('annee_scolaire_id', $request->annee_scolaire_id)
-            ->count();
-
-        if ($nbInscriptions >= $classe->capacite) {
-            return back()
-                ->withInput()
-                ->withErrors([
-                    'classe_id' => 'Cette classe a atteint sa capacité maximale (' . $classe->capacite . ' élèves).'
-                ]);
-        }
-
-        // Créer l'inscription
-        Inscription::create([
-            'eleve_id' => $request->eleve_id,
-            'classe_id' => $request->classe_id,
-            'annee_scolaire_id' => $request->annee_scolaire_id,
-            'date_inscription' => $request->date_inscription,
-            'statut' => $request->statut ?? true,
-            'observation' => $request->observation,
-        ]);
-
-        return redirect()
-            ->route('admin.inscriptions.index')
-            ->with('success', 'Inscription créée avec succès.');
     }
 
     /**

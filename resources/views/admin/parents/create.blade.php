@@ -124,40 +124,24 @@
                         {{-- 1 col mobile → 2 col md --}}
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
 
-                            {{-- Compte utilisateur --}}
-                            <div class="group">
-                                <label for="user_id" class="block text-sm font-semibold text-gray-700 mb-2 group-hover:text-emerald-600 transition-colors duration-300">
-                                    Créer compte utilisateur
-                                </label>
-                                <div class="space-y-3">
-                                    <label class="flex items-center space-x-3 cursor-pointer group">
-                                        <input type="checkbox" name="create_user" id="create_user" value="1" class="w-5 h-5 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500">
-                                        <span class="text-sm font-medium text-gray-700 group-hover:text-emerald-600 transition-colors">Créer un nouveau compte utilisateur automatiquement</span>
-                                    </label>
-                                    
-                                    <div id="user-fields" class="space-y-3 hidden">
-                                        <div class="relative">
-                                            <div class="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
-                                                <svg class="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                                                </svg>
-                                            </div>
-                                            <input type="password" name="password" id="password" placeholder="Mot de passe" 
-                                                   class="w-full pl-10 sm:pl-12 pr-4 py-2.5 sm:py-3 rounded-xl border-2 border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition-all duration-300 text-sm">
+                            {{-- Information Compte utilisateur --}}
+                            <div class="group md:col-span-2">
+                                <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-xl">
+                                    <div class="flex items-start">
+                                        <div class="bg-emerald-100 p-2 rounded-lg mr-3 mt-0.5">
+                                            <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                            </svg>
                                         </div>
-                                        <div class="relative">
-                                            <div class="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
-                                                <svg class="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                                                </svg>
-                                            </div>
-                                            <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirmer le mot de passe" 
-                                                   class="w-full pl-10 sm:pl-12 pr-4 py-2.5 sm:py-3 rounded-xl border-2 border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition-all duration-300 text-sm">
+                                        <div>
+                                            <h5 class="text-sm font-semibold text-emerald-900 mb-1">Compte utilisateur automatique</h5>
+                                            <p class="text-xs text-emerald-700 leading-relaxed">
+                                                Un compte utilisateur sera <strong>automatiquement créé</strong> pour ce parent. 
+                                                Le mot de passe par défaut est : <code class="bg-white px-1.5 py-0.5 rounded border border-emerald-200 font-bold">password</code>.
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
-                                @error('create_user')<p class="mt-1.5 text-xs sm:text-sm text-red-600">{{ $message }}</p>@enderror
-                                @error('password')<p class="mt-1.5 text-xs sm:text-sm text-red-600">{{ $message }}</p>@enderror
                             </div>
 
                             {{-- Genre --}}

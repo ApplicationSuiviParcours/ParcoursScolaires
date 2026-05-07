@@ -107,30 +107,24 @@ class ParentAdminController extends Controller
 
         $parent = ParentEleve::create($data);
 
-        // Création d'un compte utilisateur si demandé
-        if ($request->filled('create_user') && $request->create_user) {
-            $email = $request->email ?? strtolower($request->prenom . '.' . $request->nom . '@parent.cg');
+        // ✅ AUTOMATIQUE: Création d'un compte utilisateur pour le parent
+        $email = $request->email ?? strtolower($request->prenom . '.' . $request->nom . '@parent.scolaireparcours.com');
 
-            if (User::where('email', $email)->exists()) {
-                $counter = 1;
-                $baseEmail = strtolower($request->prenom . '.' . $request->nom . '@parent.cg');
-                while (User::where('email', $baseEmail)->exists()) {
-                    $baseEmail = strtolower($request->prenom . '.' . $request->nom . $counter . '@parent.cg');
-                    $counter++;
-                }
-                $email = $baseEmail;
-            }
-
-            $user = User::create([
-                'name' => $request->prenom . ' ' . $request->nom,
-                'email' => $email,
-                'password' => Hash::make($request->password),
-                'role' => 'parent',
-            ]);
-
-            $parent->user_id = $user->id;
-            $parent->save();
+        if (User::where('email', $email)->exists()) {
+            $email = strtolower($request->prenom . '.' . $request->nom . '_' . rand(100, 999) . '@parent.scolaireparcours.com');
         }
+
+        $user = User::create([
+            'name' => $request->prenom . ' ' . $request->nom,
+            'email' => $email,
+            'password' => Hash::make('password'), // Mot de passe par défaut
+            'role' => 'parent',
+            'is_active' => true,
+        ]);
+
+        $user->assignRole('parent');
+        $parent->user_id = $user->id;
+        $parent->save();
 
         // Création des relations avec les élèves
         if ($request->has('eleve_ids')) {

@@ -209,24 +209,20 @@
                         </div>
                     </div>
 
-                    <!-- Section Compte utilisateur -->
-                    <div class="p-3 md:p-4 bg-gray-50 border rounded-lg">
+                    <!-- Information Compte utilisateur -->
+                    <div class="p-3 md:p-4 bg-indigo-50 border border-indigo-200 rounded-lg">
                         <div class="flex items-start">
-                            <input type="checkbox" name="create_user" id="create_user" value="1" {{ old('create_user') ? 'checked' : '' }} class="h-4 w-4 text-indigo-600 border-gray-300 rounded mt-0.5">
-                            <label for="create_user" class="ml-2 block text-xs md:text-sm text-gray-900">
-                                Créer un compte utilisateur pour cet élève
-                            </label>
-                        </div>
-
-                        <!-- Password Fields -->
-                        <div id="password_fields" class="{{ old('create_user') ? '' : 'hidden' }} mt-4 space-y-3">
-                            <div>
-                                <label for="password" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Mot de passe <span class="text-red-500">*</span></label>
-                                <input type="password" name="password" id="password" class="block w-full px-3 md:px-4 py-2 md:py-2.5 border rounded-lg text-xs md:text-sm">
+                            <div class="bg-indigo-100 p-1.5 rounded-full mr-3 mt-0.5">
+                                <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
                             </div>
                             <div>
-                                <label for="password_confirmation" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Confirmer <span class="text-red-500">*</span></label>
-                                <input type="password" name="password_confirmation" id="password_confirmation" class="block w-full px-3 md:px-4 py-2 md:py-2.5 border rounded-lg text-xs md:text-sm">
+                                <h5 class="text-xs md:text-sm font-semibold text-indigo-900 mb-1">Compte utilisateur automatique</h5>
+                                <p class="text-[10px] md:text-xs text-indigo-700 leading-relaxed">
+                                    Un compte utilisateur sera <strong>automatiquement créé</strong> pour cet élève. 
+                                    Le mot de passe par défaut est : <code class="bg-white px-1.5 py-0.5 rounded border border-indigo-200 font-bold">password</code>.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -253,8 +249,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const photoInput = document.getElementById('photo');
     const photoPreview = document.getElementById('photo-preview');
-    const createUserCheckbox = document.getElementById('create_user');
-    const passwordFields = document.getElementById('password_fields');
 
     // Photo Preview
     if (photoInput && photoPreview) {
@@ -266,17 +260,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     photoPreview.innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover">`;
                 }
                 reader.readAsDataURL(file);
-            }
-        });
-    }
-
-    // Toggle Password Fields
-    if (createUserCheckbox && passwordFields) {
-        createUserCheckbox.addEventListener('change', function() {
-            if (this.checked) {
-                passwordFields.classList.remove('hidden');
-            } else {
-                passwordFields.classList.add('hidden');
             }
         });
     }

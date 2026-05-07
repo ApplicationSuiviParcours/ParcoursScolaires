@@ -46,7 +46,7 @@
                             </div>
                         </div>
 
-                        <form action="{{ route('admin.inscriptions.store') }}" method="POST" class="p-6"
+                        <form action="{{ route('admin.inscriptions.store') }}" method="POST" enctype="multipart/form-data" class="p-6"
                             id="inscription-form">
                             @csrf
 
@@ -171,6 +171,48 @@
                                             <label for="email" class="block text-sm font-semibold text-gray-700">Email (Optionnel)</label>
                                             <input type="email" name="email" id="email" value="{{ old('email') }}" class="block w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" placeholder="Laissez vide pour générer un email">
                                             <p class="text-xs text-gray-500 mt-1">Si vide, l'email sera : matricule@scolaireparcours.com</p>
+                                            <!-- Information Compte utilisateur -->
+                            <div class="mt-4 p-4 bg-indigo-50 border border-indigo-200 rounded-xl">
+                                <div class="flex items-start">
+                                    <div class="bg-indigo-100 p-2 rounded-lg mr-3 mt-0.5">
+                                        <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h5 class="text-sm font-semibold text-indigo-900 mb-1">Compte utilisateur automatique</h5>
+                                        <p class="text-xs text-indigo-700 leading-relaxed">
+                                            Un compte utilisateur sera <strong>automatiquement créé</strong> pour ce nouvel élève. 
+                                            Le mot de passe par défaut est : <code class="bg-white px-1.5 py-0.5 rounded border border-indigo-200 font-bold">password</code>.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                        <div class="md:col-span-2 space-y-1">
+                                            <label for="photo" class="block text-sm font-semibold text-gray-700">Photo de l'élève (Optionnel)</label>
+                                            <div class="mt-1 flex items-center space-x-5">
+                                                <div class="shrink-0">
+                                                    <img id="photo-preview" class="h-16 w-16 object-cover rounded-full border-2 border-gray-200 hidden" src="" alt="Aperçu">
+                                                    <div id="photo-placeholder" class="h-16 w-16 rounded-full bg-gray-100 flex items-center justify-center border-2 border-dashed border-gray-300">
+                                                        <svg class="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <label class="block cursor-pointer">
+                                                    <span class="sr-only">Choisir une photo</span>
+                                                    <input type="file" name="photo" id="photo-input" accept="image/*" class="block w-full text-sm text-gray-500
+                                                        file:mr-4 file:py-2 file:px-4
+                                                        file:rounded-full file:border-0
+                                                        file:text-sm file:font-semibold
+                                                        file:bg-green-50 file:text-green-700
+                                                        hover:file:bg-green-100
+                                                    " onchange="previewImage(this)">
+                                                </label>
+                                            </div>
+                                            <p class="text-xs text-gray-500 mt-1">Format: JPG, PNG. Taille max: 2MB.</p>
                                         </div>
                                     </div>
 
@@ -653,13 +695,27 @@
                 anneeSelect.addEventListener('change', checkEligibility);
 
                 // Validation du formulaire
-                form.addEventListener('submit', function (e) {
-                    if (submitBtn.disabled) {
-                        e.preventDefault();
-                        alert('Veuillez corriger les erreurs avant de soumettre.');
-                    }
-                });
-            });
+                                form.addEventListener('submit', function (e) {
+                                    if (submitBtn.disabled && document.querySelector('input[name="is_new_eleve"]:checked').value === '0') {
+                                        e.preventDefault();
+                                        alert('Veuillez corriger les erreurs avant de soumettre.');
+                                    }
+                                });
+                            });
+
+                            function previewImage(input) {
+                                const preview = document.getElementById('photo-preview');
+                                const placeholder = document.getElementById('photo-placeholder');
+                                if (input.files && input.files[0]) {
+                                    const reader = new FileReader();
+                                    reader.onload = function(e) {
+                                        preview.src = e.target.result;
+                                        preview.classList.remove('hidden');
+                                        placeholder.classList.add('hidden');
+                                    }
+                                    reader.readAsDataURL(input.files[0]);
+                                }
+                            }
         </script>
     @endpush
 
