@@ -118,4 +118,33 @@ class EnfantsController extends Controller
 
         return view('parent.enfants', compact('enfants', 'statsGlobales'));
     }
+
+    /**
+     * Affiche le parcours complet d'un enfant spécifique pour le parent
+     */
+    public function parcoursEnfant(Eleve $eleve)
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        
+        // Vérifier que c'est bien l'enfant du parent
+        $parent = $user->parentEleve;
+        if (!$parent || !$parent->eleves()->where('eleve_id', $eleve->id)->exists()) {
+            abort(403, 'Vous n\'êtes pas autorisé à consulter le parcours de cet élève.');
+        }
+
+        // Charger l'historique via l'attribut du modèle
+        $historique = $eleve->historique_classes;
+
+        // Calculer quelques statistiques globales pour le parcours
+        $statsParcours = [
+            'nombre_annees' => $historique->count(),
+            'premiere_annee' => $historique->last()['annee_scolaire']->nom ?? 'N/A',
+            'derniere_annee' => $historique->first()['annee_scolaire']->nom ?? 'N/A',
+            'moyenne_globale' => $eleve->moyenne_generale,
+            'total_bulletins' => $eleve->bulletins->count(),
+        ];
+
+        return view('parent.enfant-parcours', compact('eleve', 'historique', 'statsParcours'));
+    }
 }

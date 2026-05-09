@@ -7,6 +7,8 @@ use App\Models\Inscription;
 use App\Models\Classe;
 use App\Models\Eleve;
 use App\Models\AnneeScolaire;
+use App\Models\Reinscription;
+use App\Models\ParentEleve;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -54,12 +56,14 @@ class InscriptionController extends Controller
         
         $classes = Classe::orderBy('nom')->get();
         $eleves = Eleve::orderBy('nom')->orderBy('prenom')->get();
+        $parents = ParentEleve::orderBy('nom')->orderBy('prenom')->get();
         $anneeScolaireActive = AnneeScolaire::where('statut', true)->first();
         $anneesScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
         
         return view('admin.inscriptions.create', compact(
             'classes', 
             'eleves', 
+            'parents',
             'anneeScolaireActive', 
             'anneesScolaires',
             'classe_id',
@@ -91,6 +95,7 @@ class InscriptionController extends Controller
                 'genre' => 'required|in:M,F,Masculin,Féminin',
                 'adresse' => 'required|string|max:255',
                 'email' => 'nullable|email|unique:users,email|unique:eleves,email',
+                'parent_id' => 'nullable|exists:parent_eleves,id',
             ];
         } else {
             $rules['eleve_id'] = 'required|exists:eleves,id';
@@ -136,41 +141,80 @@ class InscriptionController extends Controller
                         'statut' => true,
                     ]);
                     $eleve_id = $eleve->id;
+
+                    // Associer au parent si fourni
+                    if (!empty($validated['parent_id'])) {
+                        $eleve->parents()->attach($validated['parent_id'], ['lien_parental' => 'Parent']);
+                    }
+
+                    // Vérifier si l'élève est déjà inscrit pour cette année
+                    $exists = Inscription::query()->where('eleve_id', $eleve_id)
+                        ->where('annee_scolaire_id', $validated['annee_scolaire_id'])
+                        ->exists();
+
+                    if ($exists) {
+                        throw new \Exception('Cet élève est déjà inscrit pour cette année scolaire.');
+                    }
+
+                    // Vérifier la capacité de la classe
+                    $classe = Classe::findOrFail($validated['classe_id']);
+                    $nbInscriptions = Inscription::query()->where('classe_id', $validated['classe_id'])
+                        ->where('annee_scolaire_id', $validated['annee_scolaire_id'])
+                        ->count();
+
+                    if ($nbInscriptions >= $classe->capacite) {
+                        throw new \Exception('Cette classe a atteint sa capacité maximale (' . $classe->capacite . ' élèves).');
+                    }
+
+                    $inscription = Inscription::create([
+                        'eleve_id' => $eleve_id,
+                        'classe_id' => $validated['classe_id'],
+                        'annee_scolaire_id' => $validated['annee_scolaire_id'],
+                        'date_inscription' => $validated['date_inscription'],
+                        'statut' => $validated['statut'],
+                        'observation' => $validated['observation'] ?? null,
+                    ]);
+
+                    return redirect()
+                        ->route('admin.inscriptions.show', $inscription)
+                        ->with('success', 'Inscription et création du compte réussies.');
+
                 } else {
+                    // Pour un élève existant, c'est une réinscription
                     $eleve_id = $validated['eleve_id'];
+
+                    // Vérifier si la réinscription existe déjà
+                    $exists = Reinscription::query()->where('eleve_id', $eleve_id)
+                        ->where('annee_scolaire_id', $validated['annee_scolaire_id'])
+                        ->exists();
+
+                    if ($exists) {
+                        throw new \Exception('Cet élève a déjà une réinscription pour cette année scolaire.');
+                    }
+
+                    // On peut aussi vérifier la capacité
+                    $classe = Classe::findOrFail($validated['classe_id']);
+                    $nbInscriptions = Reinscription::query()->where('classe_id', $validated['classe_id'])
+                        ->where('annee_scolaire_id', $validated['annee_scolaire_id'])
+                        ->where('statut', 'confirmee')
+                        ->count();
+
+                    // Facultatif : si on veut combiner les inscripts et reinscripts pour la capacité
+                    // ...
+
+                    $reinscription = Reinscription::create([
+                        'eleve_id' => $eleve_id,
+                        'classe_id' => $validated['classe_id'],
+                        'annee_scolaire_id' => $validated['annee_scolaire_id'],
+                        'date_reinscription' => $validated['date_inscription'],
+                        'statut' => $validated['statut'] ? 'confirmee' : 'en_attente',
+                        'observation' => $validated['observation'] ?? null,
+                    ]);
+
+                    return redirect()
+                        ->route('admin.reinscriptions.index')
+                        ->with('success', 'Réinscription effectuée avec succès.');
                 }
-
-                // Vérifier si l'élève est déjà inscrit pour cette année
-                $exists = Inscription::query()->where('eleve_id', $eleve_id)
-                    ->where('annee_scolaire_id', $validated['annee_scolaire_id'])
-                    ->exists();
-
-                if ($exists) {
-                    throw new \Exception('Cet élève est déjà inscrit pour cette année scolaire.');
-                }
-
-                // Vérifier la capacité de la classe
-                $classe = Classe::findOrFail($validated['classe_id']);
-                $nbInscriptions = Inscription::query()->where('classe_id', $validated['classe_id'])
-                    ->where('annee_scolaire_id', $validated['annee_scolaire_id'])
-                    ->count();
-
-                if ($nbInscriptions >= $classe->capacite) {
-                    throw new \Exception('Cette classe a atteint sa capacité maximale (' . $classe->capacite . ' élèves).');
-                }
-
-                $inscription = Inscription::create([
-                    'eleve_id' => $eleve_id,
-                    'classe_id' => $validated['classe_id'],
-                    'annee_scolaire_id' => $validated['annee_scolaire_id'],
-                    'date_inscription' => $validated['date_inscription'],
-                    'statut' => $validated['statut'],
-                    'observation' => $validated['observation'] ?? null,
-                ]);
-
-                return redirect()
-                    ->route('admin.inscriptions.show', $inscription)
-                    ->with('success', 'Inscription et création du compte réussies.');
             });
         } catch (\Exception $e) {
             return back()->withInput()->withErrors(['error' => $e->getMessage()]);

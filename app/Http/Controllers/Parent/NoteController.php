@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Eleve;
 use App\Models\Note;
 use App\Models\Matiere;
+use App\Models\AnneeScolaire;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -55,6 +56,12 @@ class NoteController extends Controller
             });
         }
 
+        if ($request->filled('annee_scolaire_id')) {
+            $query->whereHas('evaluation', function($q) use ($request) {
+                $q->where('annee_scolaire_id', $request->annee_scolaire_id);
+            });
+        }
+
         $notes = $query->orderBy('created_at', 'desc')->paginate(20);
 
         // Statistiques
@@ -87,12 +94,16 @@ class NoteController extends Controller
             ]);
         }
 
+        // Années scolaires pour les filtres
+        $anneesScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
+
         return view('parent.notes-enfant', compact(
             'eleve', 
             'notes', 
             'matieres', 
             'periodes',
-            'stats'
+            'stats',
+            'anneesScolaires'
         ));
     }
 }

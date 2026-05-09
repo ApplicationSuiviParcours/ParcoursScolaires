@@ -365,7 +365,7 @@
 
         {{-- ── BOUTON FLOTTANT ─────────────────────────────────────────── --}}
         <div class="fixed bottom-4 sm:bottom-6 md:bottom-8 right-3 sm:right-4 md:right-6 lg:right-8 z-50">
-            <a href="{{ route('admin.reinscriptions.create') }}"
+            <a href="{{ route('admin.inscriptions.create', ['is_new_eleve' => 0]) }}"
                 class="group relative flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16
                       bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700
                       text-white rounded-full shadow-2xl transition-all duration-500 transform hover:scale-110 hover:rotate-90" x-data="{ tooltip: false }"
@@ -590,7 +590,7 @@
                                                 Commencez par créer une nouvelle réinscription.
                                             @endif
                                         </p>
-                                        <a href="{{ route('admin.reinscriptions.create') }}"
+                                        <a href="{{ route('admin.inscriptions.create', ['is_new_eleve' => 0]) }}"
                                             class="inline-flex items-center px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium rounded-lg sm:rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl text-xs sm:text-sm md:text-base">
                                             <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 mr-1.5" fill="none" stroke="currentColor"
                                                 viewBox="0 0 24 24">
@@ -726,7 +726,7 @@
                                     Commencez par créer une nouvelle réinscription.
                                 @endif
                             </p>
-                            <a href="{{ route('admin.reinscriptions.create') }}"
+                            <a href="{{ route('admin.inscriptions.create', ['is_new_eleve' => 0]) }}"
                                 class="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-medium rounded-lg sm:rounded-xl text-xs sm:text-sm transition-all duration-300 hover:shadow-xl">
                                 <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />

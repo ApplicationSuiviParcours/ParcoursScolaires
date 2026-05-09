@@ -74,7 +74,7 @@ class EnseignantAdminController extends Controller
             'date_naissance' => 'required|date',
             'lieu_naissance' => 'required|string|max:255',
             'telephone' => 'nullable|string|max:20',
-            'email' => 'nullable|email|max:255',
+            'email' => 'nullable|email|max:255|unique:enseignants,email',
             'adresse' => 'required|string',
             'specialite' => 'nullable|string|max:255',
             'photo' => 'nullable|image|max:2048',
@@ -111,7 +111,7 @@ class EnseignantAdminController extends Controller
                 $validated['user_id'] = $user->id;
             }
 
-            Enseignant::create($validated);
+            $enseignant = Enseignant::create($validated);
             
             DB::commit();
         } catch (\Exception $e) {
@@ -119,8 +119,8 @@ class EnseignantAdminController extends Controller
             return back()->withInput()->with('error', 'Erreur: ' . $e->getMessage());
         }
 
-        return redirect()->route('admin.enseignants.index')
-            ->with('success', 'Enseignant créé avec succès.');
+        return redirect()->route('admin.enseignant_matiere_classes.create', ['enseignant_id' => $enseignant->id])
+            ->with('success', 'Enseignant créé avec succès. Vous pouvez maintenant lui assigner des classes et matières.');
     }
 
     public function show(Enseignant $enseignant)
@@ -156,7 +156,7 @@ class EnseignantAdminController extends Controller
             'date_naissance' => 'required|date',
             'lieu_naissance' => 'required|string|max:255',
             'telephone' => 'nullable|string|max:20',
-            'email' => 'nullable|email|max:255',
+            'email' => 'nullable|email|max:255|unique:enseignants,email,' . $enseignant->id,
             'adresse' => 'required|string',
             'specialite' => 'nullable|string|max:255',
             'photo' => 'nullable|image|max:2048',

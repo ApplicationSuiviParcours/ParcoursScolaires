@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     
@@ -104,105 +105,105 @@
             </div>
 
             <!-- Navigation Admin -->
-            <nav class="flex-1 p-4 space-y-1 overflow-y-auto custom-scrollbar relative z-10">
-                <div class="mb-6">
-                    <p class="text-xs font-bold text-purple-200/70 uppercase tracking-wider px-3 mb-3">Menu Principal</p>
-                    
-                    <a href="{{ route('admin.dashboard') }}" class="nav-link flex items-center space-x-3 px-4 py-3 text-white rounded-xl group {{ request()->routeIs('admin.dashboard') ? 'active bg-white/20' : 'hover:bg-white/10' }}">
-                        <div class="flex items-center justify-center w-9 h-9 rounded-lg {{ request()->routeIs('admin.dashboard') ? 'bg-white/30' : 'bg-white/10' }}">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            <nav class="flex-1 p-4 space-y-2 overflow-y-auto custom-scrollbar relative z-10">
+                <a href="{{ route('admin.dashboard') }}" class="nav-link flex items-center space-x-3 px-4 py-3 text-white rounded-xl group {{ request()->routeIs('admin.dashboard') ? 'active bg-white/20' : 'hover:bg-white/10' }}">
+                    <div class="flex items-center justify-center w-9 h-9 rounded-lg {{ request()->routeIs('admin.dashboard') ? 'bg-white/30' : 'bg-white/10' }}">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                    </div>
+                    <span class="font-medium text-sm flex-1">Tableau de bord</span>
+                </a>
+
+                <!-- Gestion Utilisateurs -->
+                <div x-data="{ open: {{ request()->routeIs('admin.eleves.*') || request()->routeIs('admin.enseignants.*') || request()->routeIs('admin.parents.*') ? 'true' : 'false' }} }">
+                    <button @click="open = !open" class="w-full flex items-center justify-between px-4 py-2.5 text-white rounded-xl hover:bg-white/10 transition-colors {{ request()->routeIs('admin.eleves.*') || request()->routeIs('admin.enseignants.*') || request()->routeIs('admin.parents.*') ? 'bg-white/10' : '' }}">
+                        <div class="flex items-center space-x-3">
+                            <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-white/10">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                            </div>
+                            <span class="font-medium text-sm">Gestion des Utilisateurs</span>
                         </div>
-                        <span class="font-medium text-sm flex-1">Tableau de bord</span>
-                    </a>
-
-                    <!-- Gestion Études -->
-                    <div class="mt-4">
-                        <p class="text-xs font-bold text-purple-200/70 uppercase tracking-wider px-3 mb-2">Gestion Études</p>
-                        
-                        <a href="{{ route('admin.eleves.index') }}" class="nav-link flex items-center space-x-3 px-4 py-2.5 text-white rounded-xl group {{ request()->routeIs('admin.eleves.*') ? 'active bg-white/20' : 'hover:bg-white/10' }}">
-                            <div class="flex items-center justify-center w-8 h-8 rounded-lg {{ request()->routeIs('admin.eleves.*') ? 'bg-white/30' : 'bg-white/10' }}"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg></div>
-                            <span class="font-medium text-sm flex-1">Élèves</span>
-                            <span class="bg-white/20 text-white text-xs font-bold px-2 py-0.5 rounded-full">{{ \App\Models\Eleve::count() }}</span>
-                        </a>
-
-                        <a href="{{ route('admin.enseignants.index') }}" class="nav-link flex items-center space-x-3 px-4 py-2.5 text-white rounded-xl group {{ request()->routeIs('admin.enseignants.*') ? 'active bg-white/20' : 'hover:bg-white/10' }}">
-                            <div class="flex items-center justify-center w-8 h-8 rounded-lg {{ request()->routeIs('admin.enseignants.*') ? 'bg-white/30' : 'bg-white/10' }}"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
-                            <span class="font-medium text-sm flex-1">Enseignants</span>
-                            <span class="bg-white/20 text-white text-xs font-bold px-2 py-0.5 rounded-full">{{ \App\Models\Enseignant::count() }}</span>
-                        </a>
-
-                        <a href="{{ route('admin.parents.index') }}" class="nav-link flex items-center space-x-3 px-4 py-2.5 text-white rounded-xl group {{ request()->routeIs('admin.parents.*') ? 'active bg-white/20' : 'hover:bg-white/10' }}">
-                            <div class="flex items-center justify-center w-8 h-8 rounded-lg {{ request()->routeIs('admin.parents.*') ? 'bg-white/30' : 'bg-white/10' }}"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg></div>
-                            <span class="font-medium text-sm flex-1">Parents</span>
-                        </a>
+                        <svg :class="{'rotate-180': open}" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div x-show="open" x-transition class="pl-12 pr-4 py-2 space-y-1">
+                        <a href="{{ route('admin.eleves.index') }}" class="block py-1.5 text-sm {{ request()->routeIs('admin.eleves.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Élèves</a>
+                        <a href="{{ route('admin.enseignants.index') }}" class="block py-1.5 text-sm {{ request()->routeIs('admin.enseignants.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Enseignants</a>
+                        <a href="{{ route('admin.parents.index') }}" class="block py-1.5 text-sm {{ request()->routeIs('admin.parents.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Parents</a>
                     </div>
+                </div>
 
-                    <!-- Gestion Scolaire -->
-                    <div class="mt-4">
-                        <p class="text-xs font-bold text-purple-200/70 uppercase tracking-wider px-3 mb-2">Gestion Scolaire</p>
-                        
-                        <a href="{{ route('admin.classes.index') }}" class="nav-link flex items-center space-x-3 px-4 py-2.5 text-white rounded-xl group {{ request()->routeIs('admin.classes.*') ? 'active bg-white/20' : 'hover:bg-white/10' }}">
-                            <div class="flex items-center justify-center w-8 h-8 rounded-lg {{ request()->routeIs('admin.classes.*') ? 'bg-white/30' : 'bg-white/10' }}"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg></div>
-                            <span class="font-medium text-sm flex-1">Classes</span>
-                            <span class="bg-white/20 text-white text-xs font-bold px-2 py-0.5 rounded-full">{{ \App\Models\Classe::count() }}</span>
-                        </a>
-
-                        <a href="{{ route('admin.matieres.index') }}" class="nav-link flex items-center space-x-3 px-4 py-2.5 text-white rounded-xl group {{ request()->routeIs('admin.matieres.*') ? 'active bg-white/20' : 'hover:bg-white/10' }}">
-                            <div class="flex items-center justify-center w-8 h-8 rounded-lg {{ request()->routeIs('admin.matieres.*') ? 'bg-white/30' : 'bg-white/10' }}"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg></div>
-                            <span class="font-medium text-sm flex-1">Matières</span>
-                            <span class="bg-white/20 text-white text-xs font-bold px-2 py-0.5 rounded-full">{{ \App\Models\Matiere::count() }}</span>
-                        </a>
-
-                        <a href="{{ route('admin.classe_matieres.index') }}" class="nav-link flex items-center space-x-3 px-4 py-2.5 text-white rounded-xl group {{ request()->routeIs('admin.classe_matieres.*') ? 'active bg-white/20' : 'hover:bg-white/10' }}">
-                            <div class="flex items-center justify-center w-8 h-8 rounded-lg {{ request()->routeIs('admin.classe_matieres.*') ? 'bg-white/30' : 'bg-white/10' }}"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg></div>
-                            <span class="font-medium text-sm flex-1">Classe-Matières</span>
-                        </a>
-
-                        <a href="{{ route('admin.annee_scolaires.index') }}" class="nav-link flex items-center space-x-3 px-4 py-2.5 text-white rounded-xl group {{ request()->routeIs('admin.annee_scolaires.*') ? 'active bg-white/20' : 'hover:bg-white/10' }}">
-                            <div class="flex items-center justify-center w-8 h-8 rounded-lg {{ request()->routeIs('admin.annee_scolaires.*') ? 'bg-white/30' : 'bg-white/10' }}"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>
-                            <span class="font-medium text-sm flex-1">Années scolaires</span>
-                        </a>
+                <!-- Configuration Scolaire -->
+                <div x-data="{ open: {{ request()->routeIs('admin.classes.*') || request()->routeIs('admin.matieres.*') || request()->routeIs('admin.classe_matieres.*') || request()->routeIs('admin.annee_scolaires.*') ? 'true' : 'false' }} }">
+                    <button @click="open = !open" class="w-full flex items-center justify-between px-4 py-2.5 text-white rounded-xl hover:bg-white/10 transition-colors {{ request()->routeIs('admin.classes.*') || request()->routeIs('admin.matieres.*') || request()->routeIs('admin.classe_matieres.*') || request()->routeIs('admin.annee_scolaires.*') ? 'bg-white/10' : '' }}">
+                        <div class="flex items-center space-x-3">
+                            <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-white/10">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                            </div>
+                            <span class="font-medium text-sm">Configuration Scolaire</span>
+                        </div>
+                        <svg :class="{'rotate-180': open}" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div x-show="open" x-transition class="pl-12 pr-4 py-2 space-y-1">
+                        <a href="{{ route('admin.annee_scolaires.index') }}" class="block py-1.5 text-sm {{ request()->routeIs('admin.annee_scolaires.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Années scolaires</a>
+                        <a href="{{ route('admin.classes.index') }}" class="block py-1.5 text-sm {{ request()->routeIs('admin.classes.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Classes</a>
+                        <a href="{{ route('admin.matieres.index') }}" class="block py-1.5 text-sm {{ request()->routeIs('admin.matieres.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Matières</a>
+                        <a href="{{ route('admin.classe_matieres.index') }}" class="block py-1.5 text-sm {{ request()->routeIs('admin.classe_matieres.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Classe-Matières</a>
                     </div>
+                </div>
 
-                    <!-- Inscriptions -->
-                    <div class="mt-4">
-                        <p class="text-xs font-bold text-purple-200/70 uppercase tracking-wider px-3 mb-2">Inscriptions</p>
-                        
-                        <a href="{{ route('admin.inscriptions.index') }}" class="nav-link flex items-center space-x-3 px-4 py-2.5 text-white rounded-xl group {{ request()->routeIs('admin.inscriptions.*') ? 'active bg-white/20' : 'hover:bg-white/10' }}">
-                            <div class="flex items-center justify-center w-8 h-8 rounded-lg {{ request()->routeIs('admin.inscriptions.*') ? 'bg-white/30' : 'bg-white/10' }}"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg></div>
-                            <span class="font-medium text-sm flex-1">Inscriptions</span>
-                            <span class="bg-white/20 text-white text-xs font-bold px-2 py-0.5 rounded-full">{{ \App\Models\Inscription::count() }}</span>
-                        </a>
-
-                        <a href="{{ route('admin.reinscriptions.index') }}" class="nav-link flex items-center space-x-3 px-4 py-2.5 text-white rounded-xl group {{ request()->routeIs('admin.reinscriptions.*') ? 'active bg-white/20' : 'hover:bg-white/10' }}">
-                            <div class="flex items-center justify-center w-8 h-8 rounded-lg {{ request()->routeIs('admin.reinscriptions.*') ? 'bg-white/30' : 'bg-white/10' }}"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg></div>
-                            <span class="font-medium text-sm flex-1">Réinscriptions</span>
-                        </a>
+                <!-- Inscriptions & Parcours -->
+                <div x-data="{ open: {{ request()->routeIs('admin.inscriptions.*') || request()->routeIs('admin.reinscriptions.*') ? 'true' : 'false' }} }">
+                    <button @click="open = !open" class="w-full flex items-center justify-between px-4 py-2.5 text-white rounded-xl hover:bg-white/10 transition-colors {{ request()->routeIs('admin.inscriptions.*') || request()->routeIs('admin.reinscriptions.*') ? 'bg-white/10' : '' }}">
+                        <div class="flex items-center space-x-3">
+                            <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-white/10">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>
+                            </div>
+                            <span class="font-medium text-sm">Inscriptions & Parcours</span>
+                        </div>
+                        <svg :class="{'rotate-180': open}" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div x-show="open" x-transition class="pl-12 pr-4 py-2 space-y-1">
+                        <a href="{{ route('admin.inscriptions.index') }}" class="block py-1.5 text-sm {{ request()->routeIs('admin.inscriptions.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Nouvelles Inscriptions</a>
+                        <a href="{{ route('admin.reinscriptions.index') }}" class="block py-1.5 text-sm {{ request()->routeIs('admin.reinscriptions.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Réinscriptions</a>
                     </div>
+                </div>
 
-                    <!-- Suivi & Évaluations -->
-                    <div class="mt-4">
-                        <p class="text-xs font-bold text-purple-200/70 uppercase tracking-wider px-3 mb-2">Suivi & Évaluations</p>
-                        
-                        <a href="{{ route('admin.notes.index') }}" class="nav-link flex items-center space-x-3 px-4 py-2.5 text-white rounded-xl group {{ request()->routeIs('admin.notes.*') ? 'active bg-white/20' : 'hover:bg-white/10' }}">
-                            <div class="flex items-center justify-center w-8 h-8 rounded-lg {{ request()->routeIs('admin.notes.*') ? 'bg-white/30' : 'bg-white/10' }}"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
-                            <span class="font-medium text-sm flex-1">Notes</span>
-                        </a>
+                <!-- Suivi & Évaluations -->
+                <div x-data="{ open: {{ request()->routeIs('admin.notes.*') || request()->routeIs('admin.absences.*') || request()->routeIs('admin.bulletins.*') || request()->routeIs('admin.emploi_du_temps.*') ? 'true' : 'false' }} }">
+                    <button @click="open = !open" class="w-full flex items-center justify-between px-4 py-2.5 text-white rounded-xl hover:bg-white/10 transition-colors {{ request()->routeIs('admin.notes.*') || request()->routeIs('admin.absences.*') || request()->routeIs('admin.bulletins.*') || request()->routeIs('admin.emploi_du_temps.*') ? 'bg-white/10' : '' }}">
+                        <div class="flex items-center space-x-3">
+                            <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-white/10">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            </div>
+                            <span class="font-medium text-sm">Suivi & Évaluations</span>
+                        </div>
+                        <svg :class="{'rotate-180': open}" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div x-show="open" x-transition class="pl-12 pr-4 py-2 space-y-1">
+                        <a href="{{ route('admin.notes.index') }}" class="block py-1.5 text-sm {{ request()->routeIs('admin.notes.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Notes</a>
+                        <a href="{{ route('admin.bulletins.index') }}" class="block py-1.5 text-sm {{ request()->routeIs('admin.bulletins.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Bulletins</a>
+                        <a href="{{ route('admin.absences.index') }}" class="block py-1.5 text-sm {{ request()->routeIs('admin.absences.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Absences</a>
+                        <a href="{{ route('admin.emploi_du_temps.index') }}" class="block py-1.5 text-sm {{ request()->routeIs('admin.emploi_du_temps.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Emploi du temps</a>
+                    </div>
+                </div>
 
-                        <a href="{{ route('admin.absences.index') }}" class="nav-link flex items-center space-x-3 px-4 py-2.5 text-white rounded-xl group {{ request()->routeIs('admin.absences.*') ? 'active bg-white/20' : 'hover:bg-white/10' }}">
-                            <div class="flex items-center justify-center w-8 h-8 rounded-lg {{ request()->routeIs('admin.absences.*') ? 'bg-white/30' : 'bg-white/10' }}"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
-                            <span class="font-medium text-sm flex-1">Absences</span>
-                        </a>
-
-                        <a href="{{ route('admin.bulletins.index') }}" class="nav-link flex items-center space-x-3 px-4 py-2.5 text-white rounded-xl group {{ request()->routeIs('admin.bulletins.*') ? 'active bg-white/20' : 'hover:bg-white/10' }}">
-                            <div class="flex items-center justify-center w-8 h-8 rounded-lg {{ request()->routeIs('admin.bulletins.*') ? 'bg-white/30' : 'bg-white/10' }}"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
-                            <span class="font-medium text-sm flex-1">Bulletins</span>
-                        </a>
-
-                        <a href="{{ route('admin.emploi_du_temps.index') }}" class="nav-link flex items-center space-x-3 px-4 py-2.5 text-white rounded-xl group {{ request()->routeIs('admin.emploi_du_temps.*') ? 'active bg-white/20' : 'hover:bg-white/10' }}">
-                            <div class="flex items-center justify-center w-8 h-8 rounded-lg {{ request()->routeIs('admin.emploi_du_temps.*') ? 'bg-white/30' : 'bg-white/10' }}"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>
-                            <span class="font-medium text-sm flex-1">Emploi du temps</span>
-                        </a>
+                <!-- Administration Système -->
+                <div class="pt-4 mt-4 border-t border-white/20">
+                    <p class="text-[10px] font-bold text-purple-200/50 uppercase tracking-wider px-4 mb-2">Paramètres Avancés</p>
+                    <div x-data="{ open: {{ request()->routeIs('admin.users.*') ? 'true' : 'false' }} }">
+                        <button @click="open = !open" class="w-full flex items-center justify-between px-4 py-2.5 text-white rounded-xl hover:bg-white/10 transition-colors {{ request()->routeIs('admin.users.*') ? 'bg-white/10' : '' }}">
+                            <div class="flex items-center space-x-3">
+                                <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-white/10">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                </div>
+                                <span class="font-medium text-sm">Admin Système</span>
+                            </div>
+                            <svg :class="{'rotate-180': open}" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div x-show="open" x-transition class="pl-12 pr-4 py-2 space-y-1">
+                            <a href="{{ route('admin.users.index') }}" class="block py-1.5 text-sm {{ request()->routeIs('admin.users.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Comptes Utilisateurs</a>
+                            <a href="#" class="block py-1.5 text-sm text-purple-200 hover:text-white">Rôles & Permissions</a>
+                            <a href="#" class="block py-1.5 text-sm text-purple-200 hover:text-white">Historique / Logs</a>
+                        </div>
                     </div>
                 </div>
             </nav>

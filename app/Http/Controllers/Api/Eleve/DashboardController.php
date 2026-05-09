@@ -114,4 +114,49 @@ class DashboardController extends Controller
             ],
         ]);
     }
+
+    /**
+     * Get the student's full academic career (parcours).
+     */
+    public function parcours(Request $request): JsonResponse
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        if (!$user || !$user->isEleve()) abort(403);
+
+        $eleve = $user->eleve;
+        if (!$eleve) abort(404, 'Elève non trouvé.');
+
+        $historique = $eleve->historique_classes;
+
+        return response()->json([
+            'eleve' => [
+                'id' => $eleve->id,
+                'nom_complet' => $eleve->nom_complet,
+                'matricule' => $eleve->matricule,
+                'photo' => $eleve->photo ? asset('storage/' . $eleve->photo) : null,
+            ],
+            'stats' => [
+                'nombre_annees' => $historique->count(),
+                'moyenne_globale' => round($eleve->moyenne_generale ?? 0, 2),
+                'total_bulletins' => $eleve->bulletins->count(),
+            ],
+            'historique' => $historique->map(function ($item) {
+                return [
+                    'annee_scolaire' => [
+                        'id' => $item['annee_scolaire']->id,
+                        'nom' => $item['annee_scolaire']->nom,
+                    ],
+                    'classe' => [
+                        'id' => $item['classe']->id,
+                        'nom' => $item['classe']->nom,
+                        'niveau' => $item['classe']->niveau,
+                    ],
+                    'date_inscription' => $item['date_inscription'],
+                    'statut' => $item['statut'],
+                    'observation' => $item['observation'],
+                ];
+            }),
+        ]);
+    }
 }

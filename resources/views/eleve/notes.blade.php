@@ -185,16 +185,16 @@
                     </div>
                     <div class="transition-all duration-300 transform hover:scale-105">
                         <label class="flex items-center mb-1 text-xs font-medium text-gray-700 sm:text-sm sm:mb-2">
-                            <svg class="w-3 h-3 mr-1 text-green-500 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-3 h-3 mr-1 text-amber-500 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                             </svg>
-                            Période
+                            Année Scolaire
                         </label>
-                        <select name="periode" class="w-full text-sm p-2 transition-all duration-300 border-gray-300 rounded-lg sm:rounded-xl focus:border-blue-500 focus:ring-blue-500 hover:border-blue-400 hover:shadow-lg">
-                            <option value="">Toutes les périodes</option>
-                            @foreach($periodes as $key => $periode)
-                                <option value="{{ $key }}" {{ request('periode') == $key ? 'selected' : '' }}>
-                                    {{ $periode }}
+                        <select name="annee_scolaire_id" class="w-full text-sm p-2 transition-all duration-300 border-gray-300 rounded-lg sm:rounded-xl focus:border-blue-500 focus:ring-blue-500 hover:border-blue-400 hover:shadow-lg">
+                            <option value="">Toutes les années</option>
+                            @foreach($anneesScolaires as $annee)
+                                <option value="{{ $annee->id }}" {{ request('annee_scolaire_id') == $annee->id ? 'selected' : '' }}>
+                                    {{ $annee->nom }}
                                 </option>
                             @endforeach
                         </select>
@@ -219,6 +219,7 @@
                         <input type="date" name="date_fin" value="{{ request('date_fin') }}" 
                                class="w-full text-sm transition-all p-2 duration-300 border-gray-300 rounded-lg sm:rounded-xl focus:border-blue-500 focus:ring-blue-500 hover:border-blue-400 hover:shadow-lg">
                     </div>
+
                     <div class="flex flex-col justify-end space-y-2 sm:flex-row sm:space-y-0 sm:space-x-3 sm:col-span-2 lg:col-span-4">
                         <a href="{{ route('eleve.notes') }}" 
                            class="flex items-center justify-center px-4 py-2 text-sm font-semibold text-gray-700 transition-all duration-300 transform bg-gray-100 rounded-lg sm:px-6 sm:py-3 sm:text-base hover:bg-gray-200 hover:scale-105 hover:shadow-lg group">

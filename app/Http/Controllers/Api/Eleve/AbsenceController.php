@@ -31,13 +31,19 @@ class AbsenceController extends Controller
         if ($request->filled('date_fin')) $query->where('date_absence', '<=', $request->date_fin);
         if ($request->filled('matiere_id')) $query->where('matiere_id', $request->matiere_id);
         if ($request->filled('justifiee')) $query->where('justifiee', $request->justifiee);
+        if ($request->filled('annee_scolaire_id')) $query->where('annee_scolaire_id', $request->annee_scolaire_id);
 
         $absences = $query->orderBy('date_absence', 'desc')->get();
 
+        $statsQuery = Absence::query()->where('eleve_id', $eleve->id);
+        if ($request->filled('annee_scolaire_id')) {
+            $statsQuery->where('annee_scolaire_id', $request->annee_scolaire_id);
+        }
+
         $stats = [
-            'total' => Absence::query()->where('eleve_id', $eleve->id)->count(),
-            'justifiees' => Absence::query()->where('eleve_id', $eleve->id)->where('justifiee', true)->count(),
-            'non_justifiees' => Absence::query()->where('eleve_id', $eleve->id)->where('justifiee', false)->count(),
+            'total' => (clone $statsQuery)->count(),
+            'justifiees' => (clone $statsQuery)->where('justifiee', true)->count(),
+            'non_justifiees' => (clone $statsQuery)->where('justifiee', false)->count(),
         ];
 
         return response()->json([

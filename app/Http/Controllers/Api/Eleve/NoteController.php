@@ -39,12 +39,20 @@ class NoteController extends Controller
         if ($request->filled('date_fin')) {
             $query->whereHas('evaluation', fn($q) => $q->where('date_evaluation', '<=', $request->date_fin));
         }
+        if ($request->filled('annee_scolaire_id')) {
+            $query->whereHas('evaluation', fn($q) => $q->where('annee_scolaire_id', $request->annee_scolaire_id));
+        }
 
         $notes = $query->orderBy('created_at', 'desc')->get();
         
+        $statsQuery = Note::query()->where('eleve_id', $eleve->id);
+        if ($request->filled('annee_scolaire_id')) {
+            $statsQuery->whereHas('evaluation', fn($q) => $q->where('annee_scolaire_id', $request->annee_scolaire_id));
+        }
+
         $stats = [
-            'total_notes' => Note::query()->where('eleve_id', $eleve->id)->count(),
-            'moyenne_generale' => round(Note::query()->where('eleve_id', $eleve->id)->avg('note') ?? 0, 2),
+            'total_notes' => (clone $statsQuery)->count(),
+            'moyenne_generale' => round((clone $statsQuery)->avg('note') ?? 0, 2),
         ];
 
         return response()->json([

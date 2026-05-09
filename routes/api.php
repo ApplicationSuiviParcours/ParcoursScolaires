@@ -35,6 +35,7 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('/notes', [\App\Http\Controllers\Api\Parent\NoteController::class, 'index']);
             Route::get('/absences', [\App\Http\Controllers\Api\Parent\AbsenceController::class, 'index']);
             Route::get('/emploi-du-temps', [\App\Http\Controllers\Api\Parent\EmploiController::class, 'show']);
+            Route::get('/parcours', [\App\Http\Controllers\Api\Parent\EnfantsController::class, 'parcoursEnfant']);
         });
     });
 
@@ -49,6 +50,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/bulletins/{bulletin_id}', [\App\Http\Controllers\Api\Eleve\BulletinController::class, 'show']);
         Route::get('/emploi-du-temps', [\App\Http\Controllers\Api\Eleve\EmploiController::class, 'index']);
         Route::get('/agenda', [\App\Http\Controllers\Api\Eleve\AgendaController::class, 'index']);
+        Route::get('/parcours', [\App\Http\Controllers\Api\Eleve\DashboardController::class, 'parcours']);
     });
 
     // -------------------------------------------------------

@@ -124,9 +124,10 @@ class EnseignantMatiereClasseAdminController extends Controller
         $matieres = Matiere::orderBy('nom')->get();
         
         $anneeScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
+        $preselectedEnseignantId = request('enseignant_id');
 
         return view('admin.enseignant_matiere_classes.create', compact(
-            'enseignants', 'classes', 'matieres', 'anneeScolaires'
+            'enseignants', 'classes', 'matieres', 'anneeScolaires', 'preselectedEnseignantId'
         ));
     }
 
@@ -158,7 +159,7 @@ class EnseignantMatiereClasseAdminController extends Controller
         try {
             EnseignantMatiereClasse::create($validated);
 
-            return redirect()->route('admin.enseignant-matiere-classes.index')
+            return redirect()->route('admin.enseignant_matiere_classes.index')
                 ->with('success', 'Affectation créée avec succès.');
 
         } catch (\Exception $e) {
@@ -246,7 +247,7 @@ class EnseignantMatiereClasseAdminController extends Controller
         try {
             $enseignantMatiereClasse->update($validated);
 
-            return redirect()->route('admin.enseignant-matiere-classes.show', $enseignantMatiereClasse)
+            return redirect()->route('admin.enseignant_matiere_classes.show', $enseignantMatiereClasse)
                 ->with('success', 'Affectation mise à jour avec succès.');
 
         } catch (\Exception $e) {
@@ -267,7 +268,7 @@ class EnseignantMatiereClasseAdminController extends Controller
             
             $enseignantMatiereClasse->delete();
 
-            return redirect()->route('admin.enseignant-matiere-classes.index')
+            return redirect()->route('admin.enseignant_matiere_classes.index')
                 ->with('success', 'Affectation supprimée avec succès.');
 
         } catch (\Exception $e) {

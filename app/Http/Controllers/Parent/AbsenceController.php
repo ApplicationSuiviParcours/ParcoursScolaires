@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Eleve;
 use App\Models\Absence;
 use App\Models\Matiere;
+use App\Models\AnneeScolaire;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,6 +43,9 @@ class AbsenceController extends Controller
         if ($request->filled('annee')) {
             $query->whereYear('date_absence', $request->annee);
         }
+        if ($request->filled('annee_scolaire_id')) {
+            $query->where('annee_scolaire_id', $request->annee_scolaire_id);
+        }
 
         $absences = $query->orderBy('date_absence', 'desc')->paginate(15);
 
@@ -69,7 +73,9 @@ class AbsenceController extends Controller
             9 => 'Septembre', 10 => 'Octobre', 11 => 'Novembre', 12 => 'Décembre'
         ];
 
-        return view('parent.absences-enfant', compact('eleve', 'absences', 'stats', 'matieres', 'mois'));
+        $anneesScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
+
+        return view('parent.absences-enfant', compact('eleve', 'absences', 'stats', 'matieres', 'mois', 'anneesScolaires'));
     }
 
     public function justifier(Request $request, Absence $absence)

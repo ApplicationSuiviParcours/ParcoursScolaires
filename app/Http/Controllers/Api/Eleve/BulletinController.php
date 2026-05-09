@@ -88,7 +88,42 @@ class BulletinController extends Controller
             });
         }
 
-        // 2. Calcul de la moyenne de classe et effectif
+        // 2. Regrouper les notes par matière pour une cohérence scolaire
+        $notesByMatiere = $notes->groupBy('matiere_nom');
+        $finalNotes = [];
+        
+        $totalPointsGlobal = 0;
+        $totalCoeffsMatiere = 0;
+
+        foreach ($notesByMatiere as $matiereNom => $matiereNotes) {
+            $totalPointsEval = 0;
+            $totalCoeffsEval = 0;
+            
+            foreach ($matiereNotes as $n) {
+                $coeffEval = (float)($n->coefficient ?? 1);
+                $totalPointsEval += (float)$n->note * $coeffEval;
+                $totalCoeffsEval += $coeffEval;
+            }
+            
+            $moyenneMatiere = $totalCoeffsEval > 0 ? $totalPointsEval / $totalCoeffsEval : 0;
+            // Note: Si on ne peut pas récupérer le coeff matière ici, on utilise 1 par défaut
+            // ou on améliore la requête SQL initiale.
+            $coeffMatiere = 1; 
+
+            $finalNotes[] = [
+                'note' => round($moyenneMatiere, 2),
+                'matiere_nom' => $matiereNom,
+                'nom' => $matiereNom,
+                'coefficient' => $coeffMatiere,
+                'appreciation' => $this->getAppreciation($moyenneMatiere),
+                'total_evaluations' => $matiereNotes->count(),
+            ];
+
+            $totalPointsGlobal += ($moyenneMatiere * $coeffMatiere);
+            $totalCoeffsMatiere += $coeffMatiere;
+        }
+
+        // 3. Calcul de la moyenne de classe et effectif
         $moyenneClasse = $bulletin->moyenne_classe;
         if (!$moyenneClasse || $moyenneClasse == 0) {
             $moyenneClasse = Bulletin::query()
@@ -107,7 +142,7 @@ class BulletinController extends Controller
                 ->count();
         }
 
-        // 3. Format de réponse plat et complet (pour éviter les soucis de Resource)
+        // 4. Format de réponse plat et complet
         return response()->json([
             'data' => [
                 'id' => $bulletin->id,
@@ -119,19 +154,22 @@ class BulletinController extends Controller
                 'effectif_classe' => (int)$effectifClasse,
                 'rang' => (int)$bulletin->rang,
                 'appreciation' => $bulletin->appreciation_generale ?? $bulletin->appreciation ?? 'Bon travail global',
-                'notes' => $notes->map(function($n) {
-                    return [
-                        'note' => (float)$n->note,
-                        'matiere_nom' => $n->matiere_nom,
-                        'nom' => $n->matiere_nom, // Doublon pour la robustesse
-                        'coefficient' => (int)$n->coefficient,
-                        'appreciation' => $n->appreciation ?? '',
-                        'evaluation_nom' => $n->evaluation_nom,
-                    ];
-                }),
+                'notes' => $finalNotes,
                 'classe' => ['nom' => $bulletin->classe->nom],
                 'annee_scolaire' => ['nom' => $bulletin->anneeScolaire->nom]
             ]
         ]);
+    }
+
+    /**
+     * Helper to get appreciation based on grade.
+     */
+    private function getAppreciation(float $moyenne): string
+    {
+        if ($moyenne >= 16) return 'Excellent';
+        if ($moyenne >= 14) return 'Très Bien';
+        if ($moyenne >= 12) return 'Bien';
+        if ($moyenne >= 10) return 'Passable';
+        return 'Insuffisant';
     }
 }

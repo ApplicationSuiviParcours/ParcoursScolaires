@@ -153,14 +153,14 @@
                         </select>
                     </div>
                     <div class="sm:col-span-2 lg:col-span-1">
-                        <label class="block mb-1 md:mb-2 text-xs md:text-sm font-medium text-gray-700">Année</label>
-                        <select name="annee" class="w-full p-2 text-sm border-gray-300 rounded-lg md:rounded-xl focus:border-red-500 focus:ring-red-500">
+                        <label class="block mb-1 md:mb-2 text-xs md:text-sm font-medium text-gray-700">Année Scolaire</label>
+                        <select name="annee_scolaire_id" class="w-full p-2 text-sm border-gray-300 rounded-lg md:rounded-xl focus:border-red-500 focus:ring-red-500">
                             <option value="">Toutes</option>
-                            @for($i = now()->year; $i >= now()->year - 3; $i--)
-                                <option value="{{ $i }}" {{ request('annee') == $i ? 'selected' : '' }}>
-                                    {{ $i }}
+                            @foreach($anneesScolaires as $annee)
+                                <option value="{{ $annee->id }}" {{ request('annee_scolaire_id') == $annee->id ? 'selected' : '' }}>
+                                    {{ $annee->nom }}
                                 </option>
-                            @endfor
+                            @endforeach
                         </select>
                     </div>
                     <div class="flex items-end justify-end space-x-2 md:space-x-3 lg:col-span-6">

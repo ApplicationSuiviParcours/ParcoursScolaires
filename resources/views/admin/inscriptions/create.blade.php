@@ -66,12 +66,12 @@
                                 <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
                                     <div class="flex items-center space-x-6">
                                         <label class="inline-flex items-center cursor-pointer group">
-                                            <input type="radio" name="is_new_eleve" value="0" class="form-radio h-5 w-5 text-green-600 border-gray-300 focus:ring-green-500" {{ old('is_new_eleve', '0') == '0' ? 'checked' : '' }} onchange="toggleStudentType(false)">
-                                            <span class="ml-2 text-gray-700 font-medium group-hover:text-green-600 transition-colors">Élève existant</span>
+                                            <input type="radio" name="is_new_eleve" value="0" class="form-radio h-5 w-5 text-green-600 border-gray-300 focus:ring-green-500" {{ old('is_new_eleve', request('is_new_eleve', '0')) == '0' ? 'checked' : '' }} onchange="toggleStudentType(false)">
+                                            <span class="ml-2 text-gray-700 font-medium group-hover:text-green-600 transition-colors">Élève existant (Réinscription)</span>
                                         </label>
                                         <label class="inline-flex items-center cursor-pointer group">
-                                            <input type="radio" name="is_new_eleve" value="1" class="form-radio h-5 w-5 text-green-600 border-gray-300 focus:ring-green-500" {{ old('is_new_eleve') == '1' ? 'checked' : '' }} onchange="toggleStudentType(true)">
-                                            <span class="ml-2 text-gray-700 font-medium group-hover:text-green-600 transition-colors">Nouvel élève</span>
+                                            <input type="radio" name="is_new_eleve" value="1" class="form-radio h-5 w-5 text-green-600 border-gray-300 focus:ring-green-500" {{ old('is_new_eleve', request('is_new_eleve', '0')) == '1' ? 'checked' : '' }} onchange="toggleStudentType(true)">
+                                            <span class="ml-2 text-gray-700 font-medium group-hover:text-green-600 transition-colors">Nouvel élève (Inscription)</span>
                                         </label>
                                     </div>
                                 </div>
@@ -79,7 +79,7 @@
                                 <!-- Informations principales -->
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <!-- Élève Existant -->
-                                    <div id="existing-student-field" class="space-y-1 {{ old('is_new_eleve', '0') == '1' ? 'hidden' : '' }}">
+                                    <div id="existing-student-field" class="space-y-1 {{ old('is_new_eleve', request('is_new_eleve', '0')) == '1' ? 'hidden' : '' }}">
                                         <label for="eleve_id" class="block text-sm font-semibold text-gray-700">
                                             <span class="flex items-center">
                                                 <svg class="w-4 h-4 mr-1 text-green-600" fill="none" stroke="currentColor"
@@ -101,9 +101,10 @@
                                                     </path>
                                                 </svg>
                                             </div>
+                                            </div>
                                             <select name="eleve_id" id="eleve_id"
-                                                class="block w-full pl-10 pr-10 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all appearance-none bg-white @error('eleve_id') border-red-500 ring-red-500 @enderror"
-                                                {{ old('is_new_eleve', '0') == '0' ? 'required' : '' }}>
+                                                class="block w-full py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all bg-white @error('eleve_id') border-red-500 ring-red-500 @enderror"
+                                                {{ old('is_new_eleve', request('is_new_eleve', '0')) == '0' ? 'required' : '' }}>
                                                 <option value="" class="text-gray-500">Sélectionnez un élève</option>
                                                 @foreach($eleves as $eleve)
                                                     <option value="{{ $eleve->id }}" {{ old('eleve_id', $eleve_id) == $eleve->id ? 'selected' : '' }} class="py-2">
@@ -112,13 +113,6 @@
                                                     </option>
                                                 @endforeach
                                             </select>
-                                            <div
-                                                class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                                                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M19 9l-7 7-7-7"></path>
-                                                </svg>
                                             </div>
                                         </div>
                                         @error('eleve_id')
@@ -133,7 +127,7 @@
                                     </div>
                                     
                                     <!-- Nouveau Élève -->
-                                    <div id="new-student-fields" class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6 {{ old('is_new_eleve', '0') == '0' ? 'hidden' : '' }} mb-6 p-6 bg-green-50/50 rounded-xl border border-green-100">
+                                    <div id="new-student-fields" class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6 {{ old('is_new_eleve', request('is_new_eleve', '0')) == '0' ? 'hidden' : '' }} mb-6 p-6 bg-green-50/50 rounded-xl border border-green-100">
                                         <div class="md:col-span-2">
                                             <h4 class="text-lg font-bold text-green-800 mb-4 flex items-center">
                                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
@@ -142,38 +136,49 @@
                                         </div>
                                         <div class="space-y-1">
                                             <label for="nom" class="block text-sm font-semibold text-gray-700">Nom <span class="text-red-500">*</span></label>
-                                            <input type="text" name="nom" id="nom" value="{{ old('nom') }}" class="block w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" {{ old('is_new_eleve') == '1' ? 'required' : '' }}>
+                                            <input type="text" name="nom" id="nom" value="{{ old('nom') }}" class="new-student-required block w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" {{ old('is_new_eleve', request('is_new_eleve', '0')) == '1' ? 'required' : '' }}>
                                         </div>
                                         <div class="space-y-1">
                                             <label for="prenom" class="block text-sm font-semibold text-gray-700">Prénom <span class="text-red-500">*</span></label>
-                                            <input type="text" name="prenom" id="prenom" value="{{ old('prenom') }}" class="block w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" {{ old('is_new_eleve') == '1' ? 'required' : '' }}>
+                                            <input type="text" name="prenom" id="prenom" value="{{ old('prenom') }}" class="new-student-required block w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" {{ old('is_new_eleve', request('is_new_eleve', '0')) == '1' ? 'required' : '' }}>
                                         </div>
                                         <div class="space-y-1">
                                             <label for="date_naissance" class="block text-sm font-semibold text-gray-700">Date de naissance <span class="text-red-500">*</span></label>
-                                            <input type="date" name="date_naissance" id="date_naissance_eleve" value="{{ old('date_naissance') }}" class="block w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" {{ old('is_new_eleve') == '1' ? 'required' : '' }}>
+                                            <input type="date" name="date_naissance" id="date_naissance_eleve" value="{{ old('date_naissance') }}" class="new-student-required block w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" {{ old('is_new_eleve', request('is_new_eleve', '0')) == '1' ? 'required' : '' }}>
                                         </div>
                                         <div class="space-y-1">
                                             <label for="lieu_naissance" class="block text-sm font-semibold text-gray-700">Lieu de naissance <span class="text-red-500">*</span></label>
-                                            <input type="text" name="lieu_naissance" id="lieu_naissance" value="{{ old('lieu_naissance') }}" class="block w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" {{ old('is_new_eleve') == '1' ? 'required' : '' }}>
+                                            <input type="text" name="lieu_naissance" id="lieu_naissance" value="{{ old('lieu_naissance') }}" class="new-student-required block w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" {{ old('is_new_eleve', request('is_new_eleve', '0')) == '1' ? 'required' : '' }}>
                                         </div>
                                         <div class="space-y-1">
                                             <label for="genre" class="block text-sm font-semibold text-gray-700">Genre <span class="text-red-500">*</span></label>
-                                            <select name="genre" id="genre" class="block w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" {{ old('is_new_eleve') == '1' ? 'required' : '' }}>
+                                            <select name="genre" id="genre" class="new-student-required block w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" {{ old('is_new_eleve', request('is_new_eleve', '0')) == '1' ? 'required' : '' }}>
                                                 <option value="M" {{ old('genre') == 'M' ? 'selected' : '' }}>Masculin</option>
                                                 <option value="F" {{ old('genre') == 'F' ? 'selected' : '' }}>Féminin</option>
                                             </select>
                                         </div>
                                         <div class="space-y-1">
                                             <label for="adresse" class="block text-sm font-semibold text-gray-700">Adresse <span class="text-red-500">*</span></label>
-                                            <input type="text" name="adresse" id="adresse" value="{{ old('adresse') }}" class="block w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" {{ old('is_new_eleve') == '1' ? 'required' : '' }}>
+                                            <input type="text" name="adresse" id="adresse" value="{{ old('adresse') }}" class="new-student-required block w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" {{ old('is_new_eleve', request('is_new_eleve', '0')) == '1' ? 'required' : '' }}>
                                         </div>
                                         <div class="space-y-1">
                                             <label for="email" class="block text-sm font-semibold text-gray-700">Email (Optionnel)</label>
                                             <input type="email" name="email" id="email" value="{{ old('email') }}" class="block w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" placeholder="Laissez vide pour générer un email">
                                             <p class="text-xs text-gray-500 mt-1">Si vide, l'email sera : matricule@scolaireparcours.com</p>
-                                            <!-- Information Compte utilisateur -->
-                            <div class="mt-4 p-4 bg-indigo-50 border border-indigo-200 rounded-xl">
-                                <div class="flex items-start">
+                                        </div>
+                                        <div class="space-y-1">
+                                            <label for="parent_id" class="block text-sm font-semibold text-gray-700">Associer à un parent (Optionnel)</label>
+                                            <select name="parent_id" id="parent_id" class="block w-full py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                                                <option value="">-- Aucun parent pour le moment --</option>
+                                                @foreach($parents as $parent)
+                                                    <option value="{{ $parent->id }}" {{ old('parent_id') == $parent->id ? 'selected' : '' }}>
+                                                        {{ $parent->nom }} {{ $parent->prenom }} ({{ $parent->matricule ?? 'N/A' }})
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="md:col-span-2 mt-4 p-4 bg-indigo-50 border border-indigo-200 rounded-xl">
+                                            <div class="flex items-start">
                                     <div class="bg-indigo-100 p-2 rounded-lg mr-3 mt-0.5">
                                         <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -567,12 +572,13 @@
     </div>
 
     @push('scripts')
+        <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
         <script>
             function toggleStudentType(isNew) {
                 const existingField = document.getElementById('existing-student-field');
                 const newFields = document.getElementById('new-student-fields');
                 const eleveSelect = document.getElementById('eleve_id');
-                const newInputs = newFields.querySelectorAll('input, select');
+                const newInputs = newFields.querySelectorAll('.new-student-required');
 
                 if (isNew) {
                     existingField.classList.add('hidden');
@@ -591,12 +597,50 @@
             }
 
             document.addEventListener('DOMContentLoaded', function () {
+                // S'assurer que le bon onglet est affiché au chargement initial si le paramètre est présent
+                const isNewEleveChecked = document.querySelector('input[name="is_new_eleve"][value="1"]').checked;
+                if (isNewEleveChecked) {
+                    toggleStudentType(true);
+                } else {
+                    toggleStudentType(false);
+                }
+
                 const eleveSelect = document.getElementById('eleve_id');
                 const classeSelect = document.getElementById('classe_id');
                 const anneeSelect = document.getElementById('annee_scolaire_id');
                 const submitBtn = document.getElementById('submit-btn');
                 const messageDiv = document.getElementById('eligibility-message');
                 const form = document.getElementById('inscription-form');
+
+                let tomSelectEleve = null;
+                let tomSelectParent = null;
+
+                // Initialisation TomSelect pour l'élève
+                if (document.getElementById('eleve_id')) {
+                    tomSelectEleve = new TomSelect('#eleve_id', {
+                        create: false,
+                        sortField: {
+                            field: "text",
+                            direction: "asc"
+                        },
+                        placeholder: 'Rechercher par matricule, nom, prénom...',
+                        onChange: function() {
+                            checkEligibility();
+                        }
+                    });
+                }
+
+                // Initialisation TomSelect pour le parent
+                if (document.getElementById('parent_id')) {
+                    tomSelectParent = new TomSelect('#parent_id', {
+                        create: false,
+                        sortField: {
+                            field: "text",
+                            direction: "asc"
+                        },
+                        placeholder: 'Rechercher un parent...'
+                    });
+                }
 
                 // Animation des champs au focus
                 const inputs = document.querySelectorAll('input, select, textarea');
@@ -720,6 +764,7 @@
     @endpush
 
     @push('styles')
+        <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">
         <style>
             .transition-all {
                 transition: all 0.3s ease-in-out;

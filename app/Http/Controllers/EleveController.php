@@ -278,6 +278,12 @@ class EleveController extends Controller
             });
         }
 
+        if ($request->filled('annee_scolaire_id')) {
+            $query->whereHas('evaluation', function($q) use ($request) {
+                $q->where('annee_scolaire_id', $request->annee_scolaire_id);
+            });
+        }
+
         $notes = $query->orderByDesc(
                 Evaluation::select('date_evaluation')
                     ->whereColumn('evaluations.id', 'notes.evaluation_id')
@@ -295,8 +301,9 @@ class EleveController extends Controller
 
         $matieres = Matiere::query()->orderBy('nom')->get();
         $periodes = ['trimestre1', 'trimestre2', 'trimestre3'];
+        $anneesScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
 
-        return view('eleve.notes', compact('notes', 'eleve', 'stats', 'matieres', 'periodes'));
+        return view('eleve.notes', compact('notes', 'eleve', 'stats', 'matieres', 'periodes', 'anneesScolaires'));
     }
 
     /**
@@ -362,6 +369,12 @@ class EleveController extends Controller
             $query->where('matiere_id', $request->matiere_id);
         }
 
+        if ($request->filled('annee_scolaire_id')) {
+            $query->whereHas('evaluation', function($q) use ($request) {
+                $q->where('annee_scolaire_id', $request->annee_scolaire_id);
+            });
+        }
+
         $absences = $query->orderBy('date_absence', 'desc')
             ->paginate(20)
             ->withQueryString();
@@ -376,8 +389,9 @@ class EleveController extends Controller
         ];
 
         $matieres = Matiere::query()->orderBy('nom')->get();
+        $anneesScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
 
-        return view('eleve.absences', compact('absences', 'eleve', 'stats', 'matieres'));
+        return view('eleve.absences', compact('absences', 'eleve', 'stats', 'matieres', 'anneesScolaires'));
     }
 
     /**
@@ -448,69 +462,61 @@ class EleveController extends Controller
             'anneeScolaire'
         ]);
 
-        // Récupérer les notes de l'élève pour la période du bulletin directement depuis les évaluations
-        // On cherche les notes de l'élève pour la même année scolaire, classe et période que le bulletin
+        // 1. Récupérer les notes de l'élève pour le bulletin
         $notes = Note::query()->where('eleve_id', $bulletin->eleve_id)
             ->whereHas('evaluation', function($q) use ($bulletin) {
                 $q->where('annee_scolaire_id', $bulletin->annee_scolaire_id)
                   ->where('classe_id', $bulletin->classe_id)
-                  ->where('periode', $bulletin->periode);
+                  ->where('periode', trim($bulletin->periode));
             })
             ->with(['evaluation.matiere', 'evaluation.classe'])
             ->get();
 
-        // Calculer les moyennes par matière à partir des notes récupérées
+        // 2. Calculer les moyennes par matière (Regroupement Correct)
         $notesParMatiere = [];
-        
-        // Grouper par matière en utilisant l'ID de la matière depuis l'évaluation
         $groupedNotes = $notes->groupBy(function($note) {
             return $note->evaluation?->matiere?->id ?? 'inconnu';
         });
         
+        $totalPointsGlobal = 0;
+        $totalCoeffsMatiere = 0;
+
         foreach ($groupedNotes as $matiereId => $matiereNotes) {
-            if ($matiereId === 'inconnu' || $matiereId === null) {
-                continue;
-            }
+            if ($matiereId === 'inconnu') continue;
             
             $firstNote = $matiereNotes->first();
             $matiere = $firstNote?->evaluation?->matiere;
+            if (!$matiere) continue;
             
-            if (!$matiere) {
-                continue;
-            }
-            
-            $totalPoints = 0;
-            $totalCoeffs = 0;
+            $totalPointsEval = 0;
+            $totalCoeffsEval = 0;
             
             foreach ($matiereNotes as $note) {
-                $coeff = $note->evaluation?->coefficient ?? 1;
-                $totalPoints += $note->note * $coeff;
-                $totalCoeffs += $coeff;
+                $coeffEval = $note->evaluation?->coefficient ?? 1;
+                $totalPointsEval += $note->note * $coeffEval;
+                $totalCoeffsEval += $coeffEval;
             }
+            
+            $moyenneMatiere = $totalCoeffsEval > 0 ? $totalPointsEval / $totalCoeffsEval : 0;
+            $coeffMatiere = $matiere->coefficient ?? 1;
             
             $notesParMatiere[$matiereId] = [
                 'matiere' => $matiere,
                 'matiere_nom' => $matiere->nom,
                 'matiere_code' => $matiere->code ?? '',
                 'notes' => $matiereNotes,
-                'coefficient' => $totalCoeffs,
-                'coefficient_total' => $totalCoeffs,
-                'moyenne' => $totalCoeffs > 0 ? round($totalPoints / $totalCoeffs, 2) : 0,
-                'moyenne_ponderee' => $totalCoeffs > 0 ? round($totalPoints / $totalCoeffs, 2) : 0,
+                'coefficient' => $coeffMatiere, // Utiliser le coeff de la matière
+                'coefficient_total' => $coeffMatiere,
+                'moyenne' => round($moyenneMatiere, 2),
+                'total_points' => round($totalPointsEval, 2),
             ];
+
+            $totalPointsGlobal += ($moyenneMatiere * $coeffMatiere);
+            $totalCoeffsMatiere += $coeffMatiere;
         }
 
-        // Calculer la moyenne générale pondérée
-        $totalPoints = 0;
-        $totalCoeffs = 0;
-        
-        foreach ($notes as $note) {
-            $coeff = $note->evaluation?->coefficient ?? 1;
-            $totalPoints += $note->note * $coeff;
-            $totalCoeffs += $coeff;
-        }
-        
-        $moyenneGenerale = $totalCoeffs > 0 ? round($totalPoints / $totalCoeffs, 2) : 0;
+        // 3. Calculer la moyenne générale pondérée par les coefficients des matières
+        $moyenneGenerale = $totalCoeffsMatiere > 0 ? round($totalPointsGlobal / $totalCoeffsMatiere, 2) : 0;
 
         return view('eleve.bulletin-detail', compact('bulletin', 'eleve', 'notesParMatiere', 'moyenneGenerale'));
     }
@@ -822,53 +828,57 @@ class EleveController extends Controller
             'anneeScolaire'
         ]);
 
-        // Récupérer les notes directement depuis les évaluations
+        // 1. Récupérer les notes
         $notes = Note::query()->where('eleve_id', $bulletin->eleve_id)
             ->whereHas('evaluation', function($q) use ($bulletin) {
                 $q->where('annee_scolaire_id', $bulletin->annee_scolaire_id)
                   ->where('classe_id', $bulletin->classe_id)
-                  ->where('periode', $bulletin->periode);
+                  ->where('periode', trim($bulletin->periode));
             })
             ->with(['evaluation.matiere', 'evaluation.classe'])
             ->get();
 
-        // Calculer les moyennes par matière
+        // 2. Calculer les moyennes par matière
         $notesParMatiere = [];
         $groupedNotes = $notes->groupBy(function($note) {
             return $note->evaluation?->matiere?->id ?? 'inconnu';
         });
         
+        $totalPointsGlobal = 0;
+        $totalCoeffsMatiere = 0;
+
         foreach ($groupedNotes as $matiereId => $matiereNotes) {
-            if ($matiereId === 'inconnu' || $matiereId === null) {
-                continue;
-            }
+            if ($matiereId === 'inconnu') continue;
             
             $firstNote = $matiereNotes->first();
             $matiere = $firstNote?->evaluation?->matiere;
+            if (!$matiere) continue;
             
-            if (!$matiere) {
-                continue;
-            }
-            
-            $totalPoints = 0;
-            $totalCoeffs = 0;
+            $totalPointsEval = 0;
+            $totalCoeffsEval = 0;
             
             foreach ($matiereNotes as $note) {
-                $coeff = $note->evaluation?->coefficient ?? 1;
-                $totalPoints += $note->note * $coeff;
-                $totalCoeffs += $coeff;
+                $coeffEval = $note->evaluation?->coefficient ?? 1;
+                $totalPointsEval += $note->note * $coeffEval;
+                $totalCoeffsEval += $coeffEval;
             }
+            
+            $moyenneMatiere = $totalCoeffsEval > 0 ? $totalPointsEval / $totalCoeffsEval : 0;
+            $coeffMatiere = $matiere->coefficient ?? 1;
             
             $notesParMatiere[$matiereId] = [
                 'matiere' => $matiere,
                 'notes' => $matiereNotes,
-                'total' => $totalPoints,
-                'coefficient_total' => $totalCoeffs,
-                'moyenne' => $totalCoeffs > 0 ? round($totalPoints / $totalCoeffs, 2) : 0,
+                'total' => round($totalPointsEval, 2),
+                'coefficient_total' => $coeffMatiere, // Coeff matière
+                'moyenne' => round($moyenneMatiere, 2),
             ];
+
+            $totalPointsGlobal += ($moyenneMatiere * $coeffMatiere);
+            $totalCoeffsMatiere += $coeffMatiere;
         }
 
-        $moyenneGenerale = $notes->avg('note');
+        $moyenneGenerale = $totalCoeffsMatiere > 0 ? round($totalPointsGlobal / $totalCoeffsMatiere, 2) : 0;
 
         $pdf = Pdf::loadView('eleve.exports.bulletin-pdf', compact(
             'bulletin', 
@@ -1040,5 +1050,31 @@ class EleveController extends Controller
         $filename = 'releve_notes_' . $eleve->nom . '_' . $eleve->prenom . '_' . $periode . '_' . date('Y-m-d') . '.pdf';
 
         return $pdf->download($filename);
+    }
+    /**
+     * Affiche le parcours complet (historique) de l'élève
+     */
+    public function monParcours()
+    {
+        $eleve = $this->getEleveConnecte();
+
+        if (!$eleve) {
+            return redirect()->route('login')
+                ->with('error', 'Aucun profil élève associé à ce compte.');
+        }
+
+        // Charger l'historique via l'attribut du modèle
+        $historique = $eleve->historique_classes;
+
+        // Calculer quelques statistiques globales pour le parcours
+        $statsParcours = [
+            'nombre_annees' => $historique->count(),
+            'premiere_annee' => $historique->last()['annee_scolaire']->nom ?? 'N/A',
+            'derniere_annee' => $historique->first()['annee_scolaire']->nom ?? 'N/A',
+            'moyenne_globale' => $eleve->moyenne_generale,
+            'total_bulletins' => $eleve->bulletins->count(),
+        ];
+
+        return view('eleve.parcours', compact('eleve', 'historique', 'statsParcours'));
     }
 }

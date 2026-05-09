@@ -241,6 +241,27 @@
                         </div>
                         <div class="transition-all duration-300 transform hover:scale-105">
                             <label class="flex items-center mb-2 text-sm font-medium text-gray-700">
+                                <svg class="w-4 h-4 mr-1 text-amber-500 flex-shrink-0" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                    </path>
+                                </svg>
+                                Année Scolaire
+                            </label>
+                            <select name="annee_scolaire_id"
+                                class="w-full transition-all duration-300 p-2 border-gray-300 rounded-xl focus:border-red-500 focus:ring-red-500 hover:border-red-400 hover:shadow-lg">
+                                <option value="">Toutes les années</option>
+                                @foreach($anneesScolaires as $annee)
+                                    <option value="{{ $annee->id }}" {{ request('annee_scolaire_id') == $annee->id ? 'selected' : '' }}>
+                                        {{ $annee->nom }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="transition-all duration-300 transform hover:scale-105">
+                            <label class="flex items-center mb-2 text-sm font-medium text-gray-700">
                                 <svg class="w-4 h-4 mr-1 text-green-500 flex-shrink-0" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

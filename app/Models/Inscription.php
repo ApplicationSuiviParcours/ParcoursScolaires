@@ -59,6 +59,7 @@ class Inscription extends Model
         'date_inscription',
         'statut',
         'observation',
+        'est_redoublant',
     ];
 
     // 🔹 Ajout du cast pour que date_inscription soit un objet Carbon

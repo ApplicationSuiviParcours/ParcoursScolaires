@@ -93,6 +93,28 @@
                 <form action="{{ route('admin.enseignant_matiere_classes.store') }}" method="POST" id="createForm">
                     @csrf
 
+                    @if(session('error'))
+                        <div class="mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-r-xl animate-fade-in-up">
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <p class="text-sm font-medium">{{ session('error') }}</p>
+                            </div>
+                        </div>
+                    @endif
+
+                    @if(session('success'))
+                        <div class="mb-6 p-4 bg-emerald-50 border-l-4 border-emerald-500 text-emerald-700 rounded-r-xl animate-fade-in-up">
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <p class="text-sm font-medium">{{ session('success') }}</p>
+                            </div>
+                        </div>
+                    @endif
+
                     <div class="space-y-5 md:space-y-6">
                         <!-- Enseignant -->
                         <div class="group">
@@ -111,7 +133,7 @@
                                         required>
                                     <option value="">Sélectionnez...</option>
                                     @foreach($enseignants as $enseignant)
-                                        <option value="{{ $enseignant->id }}" {{ old('enseignant_id') == $enseignant->id ? 'selected' : '' }}>
+                                        <option value="{{ $enseignant->id }}" {{ old('enseignant_id', $preselectedEnseignantId ?? '') == $enseignant->id ? 'selected' : '' }}>
                                             {{ $enseignant->nom }} {{ $enseignant->prenom }} ({{ $enseignant->specialite ?? 'Général' }})
                                         </option>
                                     @endforeach
@@ -305,6 +327,11 @@
 
 @push('scripts')
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        updateProgressBar();
+        updateRecap();
+    });
+
     // Barre de progression
     function updateProgressBar() {
         const requiredFields = document.querySelectorAll('#createForm [required]');

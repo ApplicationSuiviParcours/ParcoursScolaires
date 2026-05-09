@@ -8,6 +8,8 @@ use App\Models\Eleve;
 use App\Models\Classe;
 use App\Models\AnneeScolaire;
 use App\Models\User;
+use App\Models\ParentEleve;
+use App\Models\Reinscription;
 
 class InscriptionController extends Controller
 {
@@ -50,6 +52,7 @@ class InscriptionController extends Controller
         $anneesScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
         $classes = Classe::all();
         $eleves = Eleve::query()->where('statut', true)->orderBy('nom')->get();
+        $parents = ParentEleve::orderBy('nom')->orderBy('prenom')->get();
         
         // Récupérer l'année scolaire active
         $anneeScolaireActive = AnneeScolaire::query()->where('active', true)->first();
@@ -62,6 +65,7 @@ class InscriptionController extends Controller
             'anneesScolaires', 
             'classes', 
             'eleves',
+            'parents',
             'anneeScolaireActive',
             'classe_id',
             'eleve_id'
@@ -90,6 +94,7 @@ class InscriptionController extends Controller
             'adresse' => 'required_if:is_new_eleve,1|nullable|string|max:255',
             'email' => 'nullable|email|max:255',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'parent_id' => 'nullable|exists:parent_eleves,id',
         ]);
 
         try {
@@ -118,68 +123,143 @@ class InscriptionController extends Controller
 
                     $eleve = Eleve::create($eleveData);
                     $eleveId = $eleve->id;
-                }
 
-                // ✅ VÉRIFICATION D'UNICITÉ : L'élève est-il déjà inscrit cette année ?
-                $existingInscription = Inscription::query()->where('eleve_id', $eleveId)
-                    ->where('annee_scolaire_id', $request->annee_scolaire_id)
-                    ->first();
-
-                if ($existingInscription) {
-                    $classeExistante = Classe::find($existingInscription->classe_id);
-                    $anneeExistante = AnneeScolaire::find($existingInscription->annee_scolaire_id);
-                    
-                    throw new \Exception('Cet élève est déjà inscrit pour l\'année scolaire ' . 
-                                          $anneeExistante->nom . 
-                                          ' dans la classe ' . 
-                                          $classeExistante->nom);
-                }
-
-                // Vérifier la capacité de la classe
-                $classe = Classe::find($request->classe_id);
-                $nbInscriptions = Inscription::query()->where('classe_id', $request->classe_id)
-                    ->where('annee_scolaire_id', $request->annee_scolaire_id)
-                    ->count();
-
-                if ($nbInscriptions >= $classe->capacite) {
-                    throw new \Exception('Cette classe a atteint sa capacité maximale (' . $classe->capacite . ' élèves).');
-                }
-
-                // Créer l'inscription
-                $inscription = Inscription::create([
-                    'eleve_id' => $eleveId,
-                    'classe_id' => $request->classe_id,
-                    'annee_scolaire_id' => $request->annee_scolaire_id,
-                    'date_inscription' => $request->date_inscription,
-                    'statut' => $request->statut ?? true,
-                    'observation' => $request->observation,
-                ]);
-
-                // ✅ AUTOMATIQUE: Créer un compte utilisateur pour le nouvel élève s'il n'en a pas
-                $eleve = Eleve::find($eleveId);
-                if (!$eleve->user_id) {
-                    $email = $eleve->email ?? $eleve->matricule . '@scolaireparcours.com';
-                    
-                    // Vérifier l'unicité de l'email
-                    if (User::where('email', $email)->exists()) {
-                        $email = $eleve->matricule . '_' . rand(100, 999) . '@scolaireparcours.com';
+                    // Associer au parent si fourni
+                    if (!empty($request->parent_id)) {
+                        $eleve->parents()->attach($request->parent_id, ['lien_parental' => 'Parent']);
                     }
 
-                    $user = User::create([
-                        'name' => $eleve->prenom . ' ' . $eleve->nom,
-                        'email' => $email,
-                        'password' => \Illuminate\Support\Facades\Hash::make('password'), // Mot de passe par défaut
-                        'role' => 'eleve',
-                        'is_active' => true,
+                    // ✅ AUTOMATIQUE: Créer un compte utilisateur pour le nouvel élève s'il n'en a pas
+                    if (!$eleve->user_id) {
+                        $email = $eleve->email ?? $eleve->matricule . '@scolaireparcours.com';
+                        
+                        // Vérifier l'unicité de l'email
+                        if (User::where('email', $email)->exists()) {
+                            $email = $eleve->matricule . '_' . rand(100, 999) . '@scolaireparcours.com';
+                        }
+
+                        $user = User::create([
+                            'name' => $eleve->prenom . ' ' . $eleve->nom,
+                            'email' => $email,
+                            'password' => \Illuminate\Support\Facades\Hash::make('password'), // Mot de passe par défaut
+                            'role' => 'eleve',
+                            'is_active' => true,
+                        ]);
+
+                        $user->assignRole('eleve');
+                        $eleve->update(['user_id' => $user->id]);
+                    }
+
+                    // ✅ VÉRIFICATION D'UNICITÉ : L'élève est-il déjà inscrit cette année ?
+                    $existingInscription = Inscription::query()->where('eleve_id', $eleveId)
+                        ->where('annee_scolaire_id', $request->annee_scolaire_id)
+                        ->first();
+
+                    if ($existingInscription) {
+                        $classeExistante = Classe::find($existingInscription->classe_id);
+                        $anneeExistante = AnneeScolaire::find($existingInscription->annee_scolaire_id);
+                        
+                        throw new \Exception('Cet élève est déjà inscrit pour l\'année scolaire ' . 
+                                            $anneeExistante->nom . 
+                                            ' dans la classe ' . 
+                                            $classeExistante->nom);
+                    }
+
+                    // Vérifier la capacité de la classe
+                    $classe = Classe::find($request->classe_id);
+                    $nbInscriptions = Inscription::query()->where('classe_id', $request->classe_id)
+                        ->where('annee_scolaire_id', $request->annee_scolaire_id)
+                        ->count();
+
+                    if ($nbInscriptions >= $classe->capacite) {
+                        throw new \Exception('Cette classe a atteint sa capacité maximale (' . $classe->capacite . ' élèves).');
+                    }
+
+                    // Créer l'inscription
+                    $inscription = Inscription::create([
+                        'eleve_id' => $eleveId,
+                        'classe_id' => $request->classe_id,
+                        'annee_scolaire_id' => $request->annee_scolaire_id,
+                        'date_inscription' => $request->date_inscription,
+                        'statut' => $request->statut ?? true,
+                        'observation' => $request->observation,
                     ]);
 
-                    $user->assignRole('eleve');
-                    $eleve->update(['user_id' => $user->id]);
-                }
+                    return redirect()
+                        ->route('admin.inscriptions.index')
+                        ->with('success', 'Inscription créée avec succès. Compte utilisateur généré automatiquement.');
+                } else {
+                    // C'est une réinscription
+                    
+                    $targetAnnee = AnneeScolaire::findOrFail($request->annee_scolaire_id);
 
-                return redirect()
-                    ->route('admin.inscriptions.index')
-                    ->with('success', 'Inscription créée avec succès. Compte utilisateur généré automatiquement.');
+                    // 1. Trouver l'année de la dernière inscription ou réinscription
+                    $inscriptionAnneeIds = Inscription::query()
+                        ->where('eleve_id', $eleveId)
+                        ->pluck('annee_scolaire_id');
+                        
+                    $latestInscription = AnneeScolaire::query()
+                        ->whereIn('id', $inscriptionAnneeIds)
+                        ->orderBy('date_debut', 'desc')
+                        ->first();
+
+                    $reinscriptionAnneeIds = Reinscription::query()
+                        ->where('eleve_id', $eleveId)
+                        ->pluck('annee_scolaire_id');
+                        
+                    $latestReinscription = AnneeScolaire::query()
+                        ->whereIn('id', $reinscriptionAnneeIds)
+                        ->orderBy('date_debut', 'desc')
+                        ->first();
+
+                    $latestYear = null;
+                    if ($latestInscription && $latestReinscription) {
+                        $latestYear = $latestInscription->date_debut > $latestReinscription->date_debut ? $latestInscription : $latestReinscription;
+                    } else {
+                        $latestYear = $latestInscription ?? $latestReinscription;
+                    }
+
+                    // 2. Vérifier si l'année cible est bien APRÈS la dernière année connue
+                    if ($latestYear && $targetAnnee->date_debut <= $latestYear->date_debut) {
+                        throw new \Exception("La réinscription n'est possible que pour une année scolaire ultérieure à sa dernière inscription (" . $latestYear->nom . ").");
+                    }
+
+                    // Vérifier si la réinscription existe déjà
+                    $existingReinscription = Reinscription::query()->where('eleve_id', $eleveId)
+                        ->where('annee_scolaire_id', $request->annee_scolaire_id)
+                        ->first();
+
+                    if ($existingReinscription) {
+                        $classeExistante = Classe::find($existingReinscription->classe_id);
+                        $anneeExistante = AnneeScolaire::find($existingReinscription->annee_scolaire_id);
+                        
+                        throw new \Exception('Cet élève est déjà réinscrit pour l\'année scolaire ' . 
+                                            $anneeExistante->nom . 
+                                            ' dans la classe ' . 
+                                            $classeExistante->nom);
+                    }
+
+                    $classe = Classe::find($request->classe_id);
+                    $nbInscriptions = Reinscription::query()->where('classe_id', $request->classe_id)
+                        ->where('annee_scolaire_id', $request->annee_scolaire_id)
+                        ->where('statut', 'confirmee')
+                        ->count();
+                    
+                    // Optionnel : vérifier si on atteint la capacité
+
+                    $reinscription = Reinscription::create([
+                        'eleve_id' => $eleveId,
+                        'classe_id' => $request->classe_id,
+                        'annee_scolaire_id' => $request->annee_scolaire_id,
+                        'date_reinscription' => $request->date_inscription, // Utiliser la même date
+                        'statut' => $request->statut ? 'confirmee' : 'en_attente',
+                        'observation' => $request->observation,
+                    ]);
+
+                    return redirect()
+                        ->route('admin.reinscriptions.index')
+                        ->with('success', 'Réinscription effectuée avec succès.');
+                }
             });
         } catch (\Exception $e) {
             return back()

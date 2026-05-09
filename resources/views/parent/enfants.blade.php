@@ -364,7 +364,7 @@
                                 </div>
 
                                 <!-- Actions rapides avec tooltips - responsive -->
-                                <div class="grid grid-cols-4 gap-1 md:gap-2 mb-3 md:mb-4">
+                                <div class="grid grid-cols-3 md:grid-cols-5 gap-1 md:gap-2 mb-3 md:mb-4">
                                     <a href="{{ route('parent.enfant.notes', $enfant->id) }}"
                                         class="relative flex flex-col items-center p-2 md:p-3 text-green-700 transition-all duration-300 group/btn bg-green-50 rounded-lg md:rounded-xl hover:bg-green-100 hover:scale-110"
                                         title="Voir les notes">
@@ -427,7 +427,23 @@
                                             Voir l'emploi du temps
                                         </span>
                                     </a>
+
+                                    <a href="{{ route('parent.enfant.parcours', $enfant->id) }}"
+                                        class="relative flex flex-col items-center p-2 md:p-3 text-amber-700 transition-all duration-300 group/btn bg-amber-50 rounded-lg md:rounded-xl hover:bg-amber-100 hover:scale-110"
+                                        title="Voir le parcours scolaire">
+                                        <svg class="w-4 h-4 md:w-5 md:h-5 mb-0.5 md:mb-1" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        <span class="text-[8px] md:text-[10px] font-medium">Parcours</span>
+                                        <span
+                                            class="absolute px-1.5 md:px-2 py-0.5 md:py-1 text-[10px] md:text-xs text-white transition-opacity transform -translate-x-1/2 bg-gray-900 rounded opacity-0 pointer-events-none -top-6 md:-top-8 left-1/2 group-hover/btn:opacity-100 whitespace-nowrap">
+                                            Voir le parcours
+                                        </span>
+                                    </a>
                                 </div>
+
 
                                 <!-- Dernière activité avec indicateurs - responsive -->
                                 <div class="pt-3 md:pt-4 mt-3 md:mt-4 text-[10px] md:text-xs border-t border-gray-100">

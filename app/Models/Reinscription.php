@@ -54,6 +54,7 @@ class Reinscription extends Model
         'date_reinscription',
         'statut',
         'observation',
+        'est_redoublant',
     ];
 
     protected $casts = [

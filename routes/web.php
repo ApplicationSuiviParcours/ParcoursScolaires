@@ -353,6 +353,7 @@ Route::middleware(['auth', 'role:eleve'])->group(function () {
     Route::get('/eleve/mes-absences', [EleveController::class, 'mesAbsences'])->name('eleve.absences');
     Route::get('/eleve/mon-bulletin', [EleveController::class, 'monBulletin'])->name('eleve.bulletin');
     Route::get('/eleve/emploi-du-temps', [EleveController::class, 'emploiDuTemps'])->name('eleve.emploi-du-temps');
+    Route::get('/eleve/mon-parcours', [EleveController::class, 'monParcours'])->name('eleve.parcours');
 });
 
 // ============================================
@@ -383,6 +384,9 @@ Route::middleware(['auth', 'role:parent'])->group(function () {
 
     // Emploi du temps - gardé avec l'ancien contrôleur
     Route::get('/parent/enfant/{eleve}/emploi-du-temps', [ParentController::class, 'emploiDuTempsEnfant'])->name('parent.enfant.emploi-du-temps');
+
+    // Parcours de l'enfant
+    Route::get('/parent/enfant/{eleve}/parcours', [App\Http\Controllers\Parent\EnfantsController::class, 'parcoursEnfant'])->name('parent.enfant.parcours');
 });
 
 // Route pour la recherche
