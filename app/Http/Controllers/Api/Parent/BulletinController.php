@@ -112,7 +112,33 @@ class BulletinController extends Controller
         }
 
         $bulletin->setAttribute('notes_manuelles', $finalNotes);
-        $bulletin->setAttribute('moyenne_generale', $bulletin->moyenne_generale ?? round($notes->avg('note') ?? 0, 2));
+        $moyenneGenerale = $bulletin->moyenne_generale ?? round($notes->avg('note') ?? 0, 2);
+        $bulletin->setAttribute('moyenne_generale', $moyenneGenerale);
+
+        $moyenneClasse = $bulletin->moyenne_classe;
+        if (!$moyenneClasse || $moyenneClasse == 0) {
+            $moyenneClasse = Bulletin::query()
+                ->where('classe_id', $bulletin->classe_id)
+                ->where('annee_scolaire_id', $bulletin->annee_scolaire_id)
+                ->where('periode', $bulletin->periode)
+                ->avg('moyenne_generale') ?? 0;
+            $bulletin->setAttribute('moyenne_classe', round((float)$moyenneClasse, 2));
+        }
+
+        $effectifClasse = $bulletin->effectif_classe;
+        if (!$effectifClasse || $effectifClasse == 0) {
+            $effectifClasse = Bulletin::query()
+                ->where('classe_id', $bulletin->classe_id)
+                ->where('annee_scolaire_id', $bulletin->annee_scolaire_id)
+                ->where('periode', $bulletin->periode)
+                ->count();
+            $bulletin->setAttribute('effectif_classe', $effectifClasse);
+        }
+
+        $ecartClasse = $bulletin->ecart_classe;
+        if (!$ecartClasse || $ecartClasse == 0) {
+            $bulletin->setAttribute('ecart_classe', round((float)$moyenneGenerale - (float)$moyenneClasse, 2));
+        }
 
         return response()->json(new BulletinResource($bulletin));
     }

@@ -36,8 +36,19 @@ class EnfantsController extends Controller
 
         // Add quick stats per enfant
         $enfants->getCollection()->transform(function ($eleve) {
+            $classeId = $eleve->inscriptionActive?->classe_id ?? $eleve->classe_id;
+            $moyenneClasse = 'N/A';
+            if ($classeId) {
+                $avg = \App\Models\Note::whereHas('evaluation', function($q) use ($classeId) {
+                    $q->where('classe_id', $classeId);
+                })->avg('note');
+                if ($avg !== null) {
+                    $moyenneClasse = round($avg, 2);
+                }
+            }
             $eleve->setAttribute('quick_stats', [
                 'moyenne' => round($eleve->notes()->avg('note') ?? 0, 2),
+                'moyenne_classe' => $moyenneClasse,
                 'absences' => $eleve->absences()->count(),
                 'bulletins' => $eleve->bulletins()->count(),
             ]);

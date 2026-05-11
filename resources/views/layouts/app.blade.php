@@ -246,7 +246,7 @@
                             @php
                                 $user = Auth::user();
                                 if ($user) {
-                                    if ($user->isAdmin()) echo 'Admin';
+                                    if ($user->isAdmin()) echo 'Administrateur';
                                     elseif ($user->isEleve()) echo 'Élève';
                                     elseif ($user->isEnseignant()) echo 'Enseignant';
                                     elseif ($user->isParent()) echo 'Parent';

@@ -88,11 +88,20 @@ class DashboardController extends Controller
             ];
         })->values();
 
+        $moyenneClasse = 'N/A';
+        if ($classe) {
+            $avg = Note::whereHas('evaluation', function($q) use ($classe) {
+                $q->where('classe_id', $classe->id);
+            })->avg('note');
+            if ($avg !== null) $moyenneClasse = round($avg, 2);
+        }
+
         return response()->json([
             'eleve' => new EleveResource($eleve),
             'classe' => $classe ? new ClasseResource($classe) : null,
             'annee' => $annee ? new AnneeScolaireResource($annee) : null,
             'stats' => [
+                'moyenne_classe' => $moyenneClasse,
                 'moyenne_generale' => $eleve->moyenne_generale ?? ($allNotes->avg('note') ? round($allNotes->avg('note'), 2) : 0),
                 'total_notes' => $allNotes->count(),
                 'total_absences' => $eleve->absences()->count(),

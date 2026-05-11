@@ -71,7 +71,19 @@ class DashboardController extends Controller
                 ->latest()
                 ->first();
 
+            $classeId = $enfant->inscriptionActive?->classe_id ?? $enfant->classe_id;
+            $moyenneClasse = 'N/A';
+            if ($classeId) {
+                $avg = Note::whereHas('evaluation', function($q) use ($classeId) {
+                    $q->where('classe_id', $classeId);
+                })->avg('note');
+                if ($avg !== null) {
+                    $moyenneClasse = round($avg, 2);
+                }
+            }
+
             $enfant->stats = [
+                'moyenne_classe' => $moyenneClasse,
                 'moyenne_generale' => $enfant->moyenne_generale ?? ($allNotes->avg('note') ? round($allNotes->avg('note'), 2) : 0),
                 'total_notes' => $allNotes->count(),
                 'total_absences' => $enfant->absences()->count(),

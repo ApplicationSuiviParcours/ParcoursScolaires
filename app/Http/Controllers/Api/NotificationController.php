@@ -36,4 +36,61 @@ class NotificationController extends Controller
             'notification' => $notification
         ]);
     }
+
+    /**
+     * Mark all notifications as read.
+     */
+    public function markAllAsRead()
+    {
+        /** @var \App\Models\User $user */
+        Auth::user()->unreadNotifications()->update([
+            'read' => true,
+            'read_at' => now(),
+        ]);
+
+        return response()->json([
+            'message' => 'Toutes les notifications ont été marquées comme lues'
+        ]);
+    }
+
+    /**
+     * Delete a notification.
+     */
+    public function destroy($id)
+    {
+        $notification = Notification::query()->where('user_id', Auth::id())
+            ->findOrFail($id);
+
+        $notification->delete();
+
+        return response()->json([
+            'message' => 'Notification supprimée avec succès'
+        ]);
+    }
+
+    /**
+     * Delete all read notifications.
+     */
+    public function destroyRead()
+    {
+        /** @var \App\Models\User $user */
+        Auth::user()->notifications()->where('read', true)->delete();
+
+        return response()->json([
+            'message' => 'Notifications lues supprimées avec succès'
+        ]);
+    }
+
+    /**
+     * Get unread notifications count.
+     */
+    public function unreadCount()
+    {
+        /** @var \App\Models\User $user */
+        $count = Auth::user()->unreadNotifications()->count();
+
+        return response()->json([
+            'unread_count' => $count
+        ]);
+    }
 }

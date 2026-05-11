@@ -20,7 +20,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Notifications
     Route::get('/notifications', [\App\Http\Controllers\Api\NotificationController::class, 'index']);
+    Route::post('/notifications/read-all', [\App\Http\Controllers\Api\NotificationController::class, 'markAllAsRead']);
+    Route::get('/notifications/count', [\App\Http\Controllers\Api\NotificationController::class, 'unreadCount']);
+    Route::delete('/notifications', [\App\Http\Controllers\Api\NotificationController::class, 'destroyRead']);
     Route::post('/notifications/{id}/read', [\App\Http\Controllers\Api\NotificationController::class, 'markAsRead']);
+    Route::delete('/notifications/{id}', [\App\Http\Controllers\Api\NotificationController::class, 'destroy']);
 
     // -------------------------------------------------------
     // Parent APIs
@@ -34,6 +38,7 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('/bulletins/{bulletin_id}', [\App\Http\Controllers\Api\Parent\BulletinController::class, 'show']);
             Route::get('/notes', [\App\Http\Controllers\Api\Parent\NoteController::class, 'index']);
             Route::get('/absences', [\App\Http\Controllers\Api\Parent\AbsenceController::class, 'index']);
+            Route::post('/absences/{absence_id}/justifier', [\App\Http\Controllers\Api\Parent\AbsenceController::class, 'justifier']);
             Route::get('/emploi-du-temps', [\App\Http\Controllers\Api\Parent\EmploiController::class, 'show']);
             Route::get('/parcours', [\App\Http\Controllers\Api\Parent\EnfantsController::class, 'parcoursEnfant']);
         });

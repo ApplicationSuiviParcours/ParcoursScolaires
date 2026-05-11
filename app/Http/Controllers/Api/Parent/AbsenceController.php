@@ -47,4 +47,33 @@ class AbsenceController extends Controller
 
         return AbsenceResource::collection($absences)->additional(['stats' => $stats]);
     }
+
+    /**
+     * Justify an absence.
+     */
+    public function justifier(Request $request, $eleve_id, $absence_id)
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        if (!$user || !$user->isParent()) abort(403);
+
+        $request->validate([
+            'motif' => 'required|string|max:500',
+        ]);
+
+        $absence = Absence::query()->where('eleve_id', $eleve_id)->findOrFail($absence_id);
+
+        try {
+            $absence->motif = $request->motif;
+            $absence->justifiee = true;
+            $absence->save();
+
+            return response()->json([
+                'message' => 'Absence justifiée avec succès.',
+                'absence' => new AbsenceResource($absence)
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Erreur lors de la justification.'], 500);
+        }
+    }
 }
