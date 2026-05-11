@@ -75,7 +75,24 @@ class Bulletin extends Model
         'effectif_classe',
         'appreciation_generale',
         'date_bulletin',
+        'status',
     ];
+
+    /**
+     * Vérifie si le bulletin est validé
+     */
+    public function isValidated(): bool
+    {
+        return $this->status === 'valide' || $this->status === 'publie';
+    }
+
+    /**
+     * Vérifie si le bulletin est publié
+     */
+    public function isPublished(): bool
+    {
+        return $this->status === 'publie';
+    }
 
     protected $casts = [
         'moyenne_generale' => 'float',

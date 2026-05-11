@@ -201,7 +201,7 @@ class NoteController extends Controller
         $matiereId = $request->get('matiere_id');
         
         $anneeScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
-        $periodes = ['Trimestre 1', 'Trimestre 2', 'Trimestre 3', 'Semestre 1', 'Semestre 2'];
+        $periodes = ['Trimestre 1', 'Trimestre 2', 'Trimestre 3'];
         $matieres = Matiere::query()->orderBy('nom')->get();
         
         $query = Note::query()->where('eleve_id', $eleve->id)

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('title', 'Modifier l\'affectation')
 
@@ -198,7 +198,7 @@
                                         required>
                                     @foreach($classes as $classe)
                                         <option value="{{ $classe->id }}" {{ old('classe_id', $enseignantMatiereClasse->classe_id) == $classe->id ? 'selected' : '' }}>
-                                            {{ $classe->nom }}
+                                            {{ $classe->nom_complet }}
                                         </option>
                                     @endforeach
                                 </select>

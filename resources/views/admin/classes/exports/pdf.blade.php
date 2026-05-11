@@ -1,4 +1,4 @@
-{{-- resources/views/admin/classes/exports/pdf.blade.php --}}
+﻿{{-- resources/views/admin/classes/exports/pdf.blade.php --}}
 <!DOCTYPE html>
 <html>
 <head>
@@ -146,7 +146,7 @@
             @foreach($classes as $classe)
             <tr>
                 <td>{{ $classe->niveau }}</td>
-                <td><strong>{{ $classe->nom }}</strong></td>
+                <td><strong>{{ $classe->nom_complet }}</strong></td>
                 <td>
                     @if($classe->serie)
                         <span class="badge badge-primary">{{ $classe->serie }}</span>

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('title', 'Modifier l\'évaluation')
 
@@ -36,7 +36,7 @@
                             <option value="">Sélectionner une classe</option>
                             @foreach($classes as $classe)
                                 <option value="{{ $classe->id }}" {{ old('classe_id', $evaluation->classe_id) == $classe->id ? 'selected' : '' }}>
-                                    {{ $classe->nom }}
+                                    {{ $classe->nom_complet }}
                                 </option>
                             @endforeach
                         </select>
@@ -144,10 +144,12 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="periode" class="form-label">Période</label>
-                        <input type="text" class="form-control @error('periode') is-invalid @enderror" 
-                               id="periode" name="periode" 
-                               value="{{ old('periode', $evaluation->periode) }}" 
-                               placeholder="Ex: Trimestre 1">
+                        <select class="form-select @error('periode') is-invalid @enderror" id="periode" name="periode">
+                            <option value="">Sélectionner une période</option>
+                            <option value="Trimestre 1" {{ old('periode', $evaluation->periode) == 'Trimestre 1' ? 'selected' : '' }}>Trimestre 1</option>
+                            <option value="Trimestre 2" {{ old('periode', $evaluation->periode) == 'Trimestre 2' ? 'selected' : '' }}>Trimestre 2</option>
+                            <option value="Trimestre 3" {{ old('periode', $evaluation->periode) == 'Trimestre 3' ? 'selected' : '' }}>Trimestre 3</option>
+                        </select>
                         @error('periode')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

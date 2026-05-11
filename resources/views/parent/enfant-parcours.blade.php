@@ -102,7 +102,7 @@
                                     
                                     <!-- Contenu -->
                                     <div class="ml-12 md:ml-0 md:w-1/2 {{ $index % 2 == 0 ? 'md:pr-16 md:text-right' : 'md:pl-16 md:order-last md:text-left' }}">
-                                        <div class="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                                        <a href="{{ route('parent.enfant.bulletin', ['eleve' => $eleve->id, 'annee_scolaire_id' => $item['annee_scolaire']->id]) }}" class="block p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                                             <span class="inline-block px-3 py-1 text-sm font-bold text-teal-600 bg-teal-50 rounded-full mb-3">
                                                 {{ $item['annee_scolaire']->nom }}
                                             </span>
@@ -125,7 +125,12 @@
                                                     "{{ $item['observation'] }}"
                                                 </div>
                                             @endif
-                                        </div>
+                                            
+                                            <div class="mt-4 text-teal-600 text-sm font-semibold flex items-center {{ $index % 2 == 0 ? 'md:justify-end' : 'md:justify-start' }}">
+                                                Voir toutes les informations
+                                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                            </div>
+                                        </a>
                                     </div>
                                     
                                     <!-- Espace vide pour l'autre côté sur desktop -->

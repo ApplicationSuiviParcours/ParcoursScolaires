@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('title', 'Absences par classe')
 
@@ -117,7 +117,7 @@
                             <option value="">Sélectionner</option>
                             @foreach($classes as $classe)
                                 <option value="{{ $classe->id }}" {{ $classeId == $classe->id ? 'selected' : '' }}>
-                                    {{ $classe->nom }}</option>
+                                    {{ $classe->nom_complet }}</option>
                             @endforeach
                         </select>
                     </div>

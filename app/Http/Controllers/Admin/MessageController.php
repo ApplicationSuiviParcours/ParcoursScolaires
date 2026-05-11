@@ -79,7 +79,7 @@ class MessageController extends Controller
                 $count  = $this->notificationService->notifierParentsDeClasse(
                     $classe->id, $titre, $message, $type, $lien
                 );
-                $dest = "les parents de la classe {$classe->nom}";
+                $dest = "les parents de la classe {$classe->nom_complet}";
                 break;
 
             case 'utilisateur':

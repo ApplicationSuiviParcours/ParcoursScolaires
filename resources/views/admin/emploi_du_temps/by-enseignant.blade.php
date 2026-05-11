@@ -20,6 +20,18 @@
                 <h1 class="text-2xl sm:text-3xl font-bold text-gray-800">Emploi du temps par prof</h1>
             </div>
             <div class="flex flex-wrap gap-2 w-full sm:w-auto">
+                @if($enseignantId)
+                    <a href="{{ route('admin.emploi_du_temps.exportPdf', ['enseignant_id' => $enseignantId, 'annee_scolaire_id' => $anneeScolaireId]) }}"
+                       class="inline-flex items-center px-3 py-2 sm:px-4 sm:py-3 bg-red-100 text-red-700 font-medium rounded-xl hover:bg-red-200 hover:shadow-md transform hover:-translate-y-1 transition-all duration-300 text-sm">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                        Exporter PDF
+                    </a>
+                    <a href="{{ route('admin.emploi_du_temps.imprimer', ['enseignant_id' => $enseignantId, 'annee_scolaire_id' => $anneeScolaireId]) }}" target="_blank"
+                       class="inline-flex items-center px-3 py-2 sm:px-4 sm:py-3 bg-blue-100 text-blue-700 font-medium rounded-xl hover:bg-blue-200 hover:shadow-md transform hover:-translate-y-1 transition-all duration-300 text-sm">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                        Imprimer
+                    </a>
+                @endif
                 <a href="{{ route('admin.emploi_du_temps.byClasse') }}"
                    class="inline-flex items-center px-3 py-2 sm:px-4 sm:py-3 bg-green-100 text-green-700 font-medium rounded-xl hover:bg-green-200 hover:shadow-md transform hover:-translate-y-1 transition-all duration-300 text-sm">
                     Voir par classe

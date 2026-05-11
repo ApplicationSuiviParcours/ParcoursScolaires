@@ -78,7 +78,7 @@ class BulletinController extends Controller
         // Données pour les filtres
         $anneeScolaires = AnneeScolaire::orderBy('nom', 'desc')->get();
         $classes = Classe::orderBy('nom')->get();
-        $periodes = ['Trimestre 1', 'Trimestre 2', 'Trimestre 3', 'Semestre 1', 'Semestre 2', 'Annuel'];
+        $periodes = ['Trimestre 1', 'Trimestre 2', 'Trimestre 3'];
 
         return view('admin.bulletins.index', compact(
             'bulletins', 
@@ -110,7 +110,7 @@ class BulletinController extends Controller
         $request->validate([
             'classe_id' => 'required|exists:classes,id',
             'annee_scolaire_id' => 'required|exists:annee_scolaires,id',
-            'periode' => 'required|string|in:Trimestre 1,Trimestre 2,Trimestre 3,Semestre 1,Semestre 2,Annuel',
+            'periode' => 'required|string|in:Trimestre 1,Trimestre 2,Trimestre 3',
             'date_bulletin' => 'required|date',
         ]);
 
@@ -424,7 +424,7 @@ class BulletinController extends Controller
     {
         $bulletin->load(['eleve', 'classe', 'anneeScolaire', 'notesBulletin']);
         
-        $periodes = ['Trimestre 1', 'Trimestre 2', 'Trimestre 3', 'Semestre 1', 'Semestre 2', 'Annuel'];
+        $periodes = ['Trimestre 1', 'Trimestre 2', 'Trimestre 3'];
         
         return view('admin.bulletins.edit', compact('bulletin', 'periodes'));
     }
@@ -528,30 +528,34 @@ class BulletinController extends Controller
     /**
      * Imprimer un bulletin
      */
+    /**
+     * Imprimer un bulletin
+     */
     public function print(Bulletin $bulletin)
     {
-        // Charger toutes les relations nécessaires
-        $bulletin->load([
-            'eleve',
-            'classe',
-            'anneeScolaire',
-            'notesBulletin' => function($query) {
-                $query->with(['evaluation' => function($q) {
-                    $q->with('matiere');
-                }]);
-            }
-        ]);
+        // Charger les relations de base
+        $bulletin->load(['eleve', 'classe', 'anneeScolaire']);
+
+        // Récupérer les notes dynamiquement (comme dans la méthode show)
+        $notes = Note::where('eleve_id', $bulletin->eleve_id)
+            ->whereHas('evaluation', function($q) use ($bulletin) {
+                $q->where('annee_scolaire_id', $bulletin->annee_scolaire_id)
+                  ->where('classe_id', $bulletin->classe_id)
+                  ->where('periode', $bulletin->periode);
+            })
+            ->with(['evaluation.matiere'])
+            ->get();
 
         // Organiser les notes par matière
         $notesParMatiere = [];
         $totalPoints = 0;
         $totalCoeffs = 0;
         
-        foreach ($bulletin->notesBulletin as $note) {
+        foreach ($notes as $note) {
             if ($note->evaluation && $note->evaluation->matiere) {
                 $matiereId = $note->evaluation->matiere->id;
                 $matiereNom = $note->evaluation->matiere->nom;
-                $coefficient = $note->pivot->coefficient ?? $note->evaluation->coefficient ?? 1;
+                $coefficient = $note->evaluation->coefficient ?? 1;
                 
                 if (!isset($notesParMatiere[$matiereId])) {
                     $notesParMatiere[$matiereId] = [
@@ -562,24 +566,26 @@ class BulletinController extends Controller
                         'total' => 0,
                         'count' => 0,
                         'coefficient' => $coefficient,
-                        'total_pondere' => 0
+                        'total_pondere' => 0,
+                        'coefficient_total' => 0
                     ];
                 }
                 
                 $notesParMatiere[$matiereId]['notes'][] = [
                     'id' => $note->id,
+                    'note' => $note->note,
                     'valeur' => $note->note,
+                    'type' => $note->evaluation->type ?? 'devoir',
                     'evaluation' => $note->evaluation->nom,
-                    'date' => ($note->evaluation && $note->evaluation->date_evaluation) 
+                    'date' => ($note->evaluation->date_evaluation) 
                         ? $note->evaluation->date_evaluation->format('d/m/Y') 
                         : 'N/A',
-                    'coefficient' => $coefficient,
-                    'appreciation' => $note->pivot->appreciation ?? null,
                 ];
                 
                 $notesParMatiere[$matiereId]['total'] += $note->note;
                 $notesParMatiere[$matiereId]['total_pondere'] += $note->note * $coefficient;
                 $notesParMatiere[$matiereId]['count']++;
+                $notesParMatiere[$matiereId]['coefficient_total'] += $coefficient;
                 
                 $totalPoints += $note->note * $coefficient;
                 $totalCoeffs += $coefficient;
@@ -588,10 +594,10 @@ class BulletinController extends Controller
 
         // Calculer les moyennes par matière
         foreach ($notesParMatiere as &$data) {
-            if ($data['count'] > 0) {
-                $data['moyenne_simple'] = round($data['total'] / $data['count'], 2);
-                $data['moyenne_ponderee'] = round($data['total_pondere'] / $data['count'], 2);
-                $data['moyenne'] = $data['moyenne_ponderee']; // Utiliser la moyenne pondérée par défaut
+            if ($data['coefficient_total'] > 0) {
+                $data['moyenne'] = round($data['total_pondere'] / $data['coefficient_total'], 2);
+            } else {
+                $data['moyenne'] = 0;
             }
         }
 
@@ -600,7 +606,8 @@ class BulletinController extends Controller
             return strcmp($a['matiere_nom'], $b['matiere_nom']);
         });
 
-        $moyenneGenerale = $totalCoeffs > 0 ? round($totalPoints / $totalCoeffs, 2) : 0;
+        // Utiliser la moyenne du bulletin s'il y a une erreur de calcul ou pas de notes
+        $moyenneGenerale = $totalCoeffs > 0 ? round($totalPoints / $totalCoeffs, 2) : $bulletin->moyenne_generale;
 
         return view('admin.bulletins.print', compact(
             'bulletin', 

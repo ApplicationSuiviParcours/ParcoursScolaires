@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('title', 'Emplois du temps')
 
@@ -63,7 +63,7 @@
                                 <option value="">Toutes les classes</option>
                                 @foreach($classes as $classe)
                                     <option value="{{ $classe->id }}" {{ ($classeId ?? '') == $classe->id ? 'selected' : '' }}>
-                                        {{ $classe->nom }}
+                                        {{ $classe->nom_complet }}
                                     </option>
                                 @endforeach
                             </select>

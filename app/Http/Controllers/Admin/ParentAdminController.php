@@ -302,25 +302,58 @@ class ParentAdminController extends Controller
     }
 
     /**
-     * Export de la liste des parents
+     * Export de la liste des parents en CSV
      */
-    public function export(Request $request)
+    public function exportCsv(Request $request)
     {
         $parents = ParentEleve::query()->with('user')
-            ->when($request->get('statut') !== null, function ($query) use ($request) {
-                return $request->statut ? $query->whereIn('statut', ['inscrit', 'active', '1', 1, true]) : $query->where('statut', false);
-            })
             ->orderBy('nom')
             ->orderBy('prenom')
-            ->get()
-            ->map(function($parent) {
-                $enfantsCount = EleveParent::where('parent_eleve_id', $parent->id)->count();
-                $parent->enfants_count = $enfantsCount;
-                return $parent;
-            });
+            ->get();
 
-        return redirect()
-            ->back()
-            ->with('info', 'Fonctionnalité d\'export à implémenter.');
+        $filename = "parents_export_" . date('Y-m-d_H-i-s') . ".csv";
+        $headers = [
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$filename",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        ];
+
+        $columns = ['Matricule', 'Nom', 'Prenom', 'Genre', 'Telephone', 'Email', 'Profession', 'Adresse', 'Statut'];
+
+        $callback = function() use($parents, $columns) {
+            $file = fopen('php://output', 'w');
+            // UTF-8 BOM for Excel
+            fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
+            fputcsv($file, $columns, ';');
+
+            foreach ($parents as $parent) {
+                fputcsv($file, [
+                    $parent->matricule,
+                    $parent->nom,
+                    $parent->prenom,
+                    $parent->genre == 'm' ? 'Masculin' : 'Féminin',
+                    $parent->telephone,
+                    $parent->email,
+                    $parent->profession,
+                    $parent->adresse,
+                    $parent->statut ? 'Actif' : 'Inactif',
+                ], ';');
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
+
+    /**
+     * Impression de la liste des parents
+     */
+    public function imprimer(Request $request)
+    {
+        $parents = ParentEleve::query()->with(['user', 'eleves'])->orderBy('nom')->get();
+        return view('admin.parents.print', compact('parents'));
     }
 }

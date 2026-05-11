@@ -53,7 +53,7 @@
                             <option value="">Sélectionner une classe</option>
                             @foreach($classes as $classe)
                                 <option value="{{ $classe->id }}" data-eleves='@json($classe->eleves)'>
-                                    {{ $classe->nom }} - {{ $classe->niveau ?? '' }}
+                                    {{ $classe->nom_complet }}
                                 </option>
                             @endforeach
                         </select>

@@ -1,4 +1,4 @@
-{{-- resources/views/admin/classes/show.blade.php --}}
+﻿{{-- resources/views/admin/classes/show.blade.php --}}
 @extends('layouts.app')
 
 @section('header')
@@ -52,7 +52,7 @@
                             </div>
                             <div class="min-w-0">
                                 <div class="flex flex-wrap items-center gap-2 mb-1">
-                                    <h3 class="text-xl md:text-3xl font-bold text-white truncate">{{ $classe->nom }}</h3>
+                                    <h3 class="text-xl md:text-3xl font-bold text-white truncate">{{ $classe->nom_complet }}</h3>
                                     <span class="px-2 py-0.5 bg-white/20 backdrop-blur-sm rounded-full text-white text-[10px] md:text-xs font-semibold">
                                         ID: {{ $classe->id }}
                                     </span>

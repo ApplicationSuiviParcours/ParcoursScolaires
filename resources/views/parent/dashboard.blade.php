@@ -258,89 +258,32 @@
 
                 <div class="p-6">
                     <!-- Mini statistiques -->
-                    <div class="grid grid-cols-3 gap-2 p-3 mb-4 bg-gray-50 rounded-xl">
-                        <div class="text-center">
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 p-3 mb-4 bg-gray-50 rounded-xl">
+                        <div class="text-center p-2 border-r border-gray-200">
                             <p class="text-xs text-gray-500">Moyenne</p>
                             <p class="text-lg font-bold {{ ($enfantDonnees['moyenne_generale'] ?? 0) >= 10 ? 'text-green-600' : 'text-red-600' }}">
                                 {{ number_format($enfantDonnees['moyenne_generale'] ?? 0, 2) }}
                             </p>
                         </div>
-                        <div class="text-center">
+                        <div class="text-center p-2 border-r border-gray-200">
                             <p class="text-xs text-gray-500">Notes</p>
                             <p class="text-lg font-bold text-blue-600">
                                 {{ $enfantDonnees['dernieres_notes']->count() }}
                             </p>
                         </div>
-                        <div class="text-center">
+                        <div class="text-center p-2 sm:border-r border-gray-200">
                             <p class="text-xs text-gray-500">Absences</p>
                             <p class="text-lg font-bold text-red-600">
                                 {{ $enfantDonnees['dernieres_absences']->count() }}
                             </p>
                         </div>
-                    </div>
-
-                    <!-- Dernières notes -->
-                    @if($enfantDonnees['dernieres_notes']->count() > 0)
-                    <div class="mb-4">
-                        <h5 class="flex items-center mb-2 text-sm font-semibold text-gray-700">
-                            <svg class="w-4 h-4 mr-1 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            Dernières notes
-                        </h5>
-                        <div class="space-y-2">
-                            @foreach($enfantDonnees['dernieres_notes'] as $note)
-                            <div class="flex items-center justify-between p-2 text-sm rounded-lg bg-gray-50">
-                                <div class="flex items-center">
-                                    <span class="inline-block w-2 h-2 mr-2 bg-green-500 rounded-full"></span>
-                                    <span class="text-gray-600">{{ $note->evaluation->matiere->nom ?? 'Matière' }}</span>
-                                </div>
-                                <span class="px-2 py-1 font-bold text-green-700 bg-green-100 rounded-md">{{ $note->note }}/20</span>
-                            </div>
-                            @endforeach
+                        <div class="text-center p-2">
+                            <p class="text-xs text-gray-500">Bulletin</p>
+                            <p class="text-sm font-bold text-purple-600 mt-1 truncate">
+                                {{ $enfantDonnees['dernier_bulletin']->periode ?? 'Aucun' }}
+                            </p>
                         </div>
                     </div>
-                    @endif
-
-                    <!-- Dernières absences -->
-                    @if($enfantDonnees['dernieres_absences']->count() > 0)
-                    <div class="mb-4">
-                        <h5 class="flex items-center mb-2 text-sm font-semibold text-gray-700">
-                            <svg class="w-4 h-4 mr-1 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            Dernières absences
-                        </h5>
-                        <div class="space-y-2">
-                            @foreach($enfantDonnees['dernieres_absences'] as $absence)
-                            <div class="flex items-center justify-between p-2 text-sm rounded-lg bg-gray-50">
-                                <div class="flex items-center">
-                                    <span class="inline-block w-2 h-2 mr-2 {{ $absence->justifiee ? 'bg-green-500' : 'bg-red-500' }} rounded-full"></span>
-                                    <span class="text-gray-600">{{ \Carbon\Carbon::parse($absence->date_absence)->format('d/m/Y') }}</span>
-                                </div>
-                                <span class="px-2 py-1 text-xs {{ $absence->justifiee ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }} rounded-full">
-                                    {{ $absence->justifiee ? 'Justifiée' : 'Non justifiée' }}
-                                </span>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                    @endif
-
-                    <!-- Dernier bulletin -->
-                    @if($enfantDonnees['dernier_bulletin'])
-                    <div class="p-3 mb-4 border border-purple-100 bg-purple-50 rounded-xl">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <svg class="w-4 h-4 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                </svg>
-                                <span class="text-sm text-gray-600">Dernier bulletin:</span>
-                            </div>
-                            <span class="text-sm font-medium text-purple-700">{{ $enfantDonnees['dernier_bulletin']->periode }}</span>
-                        </div>
-                    </div>
-                    @endif
 
                     <!-- Actions rapides -->
                     <div class="flex justify-end mt-4 space-x-2">

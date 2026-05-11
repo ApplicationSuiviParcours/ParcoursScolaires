@@ -1,4 +1,4 @@
-{{-- resources/views/admin/classes/index.blade.php --}}
+﻿{{-- resources/views/admin/classes/index.blade.php --}}
 @extends('layouts.app')
 
 @section('header')
@@ -235,7 +235,7 @@
                                         </div>
                                     </td>
                                     <td class="px-3 py-3 whitespace-nowrap">
-                                        <div class="text-xs sm:text-sm text-gray-900 font-bold">{{ $classe->nom }}</div>
+                                        <div class="text-xs sm:text-sm text-gray-900 font-bold">{{ $classe->nom_complet }}</div>
                                     </td>
                                     <td class="px-3 py-3 whitespace-nowrap hidden md:table-cell">
                                         @if($classe->serie)

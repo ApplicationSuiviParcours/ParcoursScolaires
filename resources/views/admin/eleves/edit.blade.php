@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('header')
     <h2 class="font-semibold text-base md:text-xl text-gray-800 leading-tight">
@@ -232,7 +232,7 @@
                                 <select name="nouvelle_classe_id" id="nouvelle_classe_id" class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-indigo-500 focus:ring-1">
                                     <option value="">Inscrire dans une classe (optionnel)</option>
                                     @foreach($classes as $classe)
-                                        <option value="{{ $classe->id }}" {{ old('nouvelle_classe_id') == $classe->id ? 'selected' : '' }}>{{ $classe->nom }}</option>
+                                        <option value="{{ $classe->id }}" {{ old('nouvelle_classe_id') == $classe->id ? 'selected' : '' }}>{{ $classe->nom_complet }}</option>
                                     @endforeach
                                 </select>
                             </div>

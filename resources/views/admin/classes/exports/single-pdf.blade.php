@@ -1,4 +1,4 @@
-{{-- resources/views/admin/classes/exports/single-pdf.blade.php --}}
+﻿{{-- resources/views/admin/classes/exports/single-pdf.blade.php --}}
 <!DOCTYPE html>
 <html>
 <head>
@@ -140,7 +140,7 @@
             </div>
             <div class="info-row">
                 <span class="info-label">Nom de la classe :</span>
-                <span class="info-value"><strong>{{ $classe->nom }}</strong></span>
+                <span class="info-value"><strong>{{ $classe->nom_complet }}</strong></span>
             </div>
             <div class="info-row">
                 <span class="info-label">Série :</span>

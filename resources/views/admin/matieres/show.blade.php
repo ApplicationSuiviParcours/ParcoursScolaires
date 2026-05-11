@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('title', 'Détails de la matière')
 
@@ -308,7 +308,7 @@
                                             {{ substr($classe->nom, 0, 2) }}
                                         </div>
                                         <div class="ml-3 md:ml-4 min-w-0">
-                                            <h4 class="font-bold text-gray-800 text-sm md:text-base truncate">{{ $classe->nom }}</h4>
+                                            <h4 class="font-bold text-gray-800 text-sm md:text-base truncate">{{ $classe->nom_complet }}</h4>
                                             <p class="text-xs text-gray-500">Niveau {{ $classe->niveau ?? 'N/A' }}</p>
                                         </div>
                                     </div>

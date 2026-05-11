@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <span class="inline-flex items-center px-2.5 py-0.5 md:px-3 md:py-1 bg-amber-100 text-amber-800 text-[10px] md:text-xs font-medium rounded-full">
-                    {{ $classe->nom }}
+                    {{ $classe->nom_complet }}
                 </span>
             </div>
             <div class="w-full h-1 bg-gray-200 rounded-full overflow-hidden">
@@ -58,7 +58,7 @@
                     </div>
                     <div class="ml-3 md:ml-4">
                         <h3 class="text-base md:text-lg font-bold text-white">Modifier la classe</h3>
-                        <p class="text-amber-200 text-xs md:text-sm hidden sm:block">{{ $classe->niveau }} - {{ $classe->nom }} @if($classe->serie)(Série {{ $classe->serie }})@endif</p>
+                        <p class="text-amber-200 text-xs md:text-sm hidden sm:block">{{ $classe->nom_complet }}</p>
                     </div>
                 </div>
             </div>

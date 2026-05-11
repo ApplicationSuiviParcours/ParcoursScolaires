@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('title', 'Gérer les matières de la classe')
 
@@ -136,7 +136,7 @@
                             <option value="">-- Sélectionner une classe --</option>
                             @foreach($classes as $classe)
                                 <option value="{{ $classe->id }}" {{ $classeId == $classe->id ? 'selected' : '' }}>
-                                    {{ $classe->nom }}
+                                    {{ $classe->nom_complet }}
                                 </option>
                             @endforeach
                         </select>
@@ -165,7 +165,7 @@
                             <span class="text-white font-bold text-xl sm:text-2xl">{{ substr($classe->nom, 0, 2) }}</span>
                         </div>
                         <div class="text-center sm:text-left">
-                            <h2 class="text-xl sm:text-2xl font-bold text-white">{{ $classe->nom }}</h2>
+                            <h2 class="text-xl sm:text-2xl font-bold text-white">{{ $classe->nom_complet }}</h2>
                             <p class="text-indigo-100 text-xs sm:text-sm">Gestion des matières assignées</p>
                         </div>
                     </div>

@@ -438,7 +438,7 @@ class EleveController extends Controller
         }
 
         $anneesScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
-        $periodes = ['trimestre1', 'trimestre2', 'trimestre3', 'semestre1', 'semestre2'];
+        $periodes = ['Trimestre 1', 'Trimestre 2', 'Trimestre 3'];
 
         return view('eleve.bulletin', compact('bulletins', 'eleve', 'anneesScolaires', 'periodes'));
     }
@@ -713,7 +713,7 @@ class EleveController extends Controller
         }
 
         $moyenneGenerale = $notes->avg('note');
-        $periodes = ['trimestre1', 'trimestre2', 'trimestre3', 'semestre1', 'semestre2'];
+        $periodes = ['Trimestre 1', 'Trimestre 2', 'Trimestre 3'];
 
         return view('eleve.releve-notes', compact('eleve', 'notesParMatiere', 'moyennes', 'moyenneGenerale', 'periode', 'periodes'));
     }
@@ -897,20 +897,34 @@ class EleveController extends Controller
      */
     public function exportEmploiDuTempsPdf()
     {
+        $data = $this->getEmploiDuTempsData();
+        if (isset($data['error'])) return redirect()->back()->with('error', $data['error']);
+
+        $pdf = Pdf::loadView('admin.emploi_du_temps.print', $data);
+        return $pdf->download('emploi_du_temps_' . date('Y-m-d') . '.pdf');
+    }
+
+    /**
+     * Afficher l'emploi du temps pour impression
+     */
+    public function imprimerEmploiDuTemps()
+    {
+        $data = $this->getEmploiDuTempsData();
+        if (isset($data['error'])) return redirect()->back()->with('error', $data['error']);
+
+        return view('admin.emploi_du_temps.print', $data);
+    }
+
+    /**
+     * Récupère les données de l'emploi du temps pour export/impression
+     */
+    protected function getEmploiDuTempsData()
+    {
         $eleve = $this->getEleveConnecte();
+        if (!$eleve) return ['error' => 'Aucun profil élève associé à ce compte.'];
 
-        if (!$eleve) {
-            return redirect()->route('login')
-                ->with('error', 'Aucun profil élève associé à ce compte.');
-        }
-
-        // MODIFICATION: Utiliser la méthode helper
         $classeActuelle = $this->getClasseActuelle($eleve);
-
-        if (!$classeActuelle) {
-            return redirect()->back()
-                ->with('error', 'Vous n\'êtes pas inscrit dans une classe active.');
-        }
+        if (!$classeActuelle) return ['error' => 'Vous n\'êtes pas inscrit dans une classe active.'];
 
         $emploiDuTemps = EmploiDuTemps::query()->where('classe_id', $classeActuelle->id)
             ->with(['matiere', 'enseignant'])
@@ -921,21 +935,14 @@ class EleveController extends Controller
         $jours = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
         $emploiParJour = [];
         
-        foreach ($jours as $jour) {
-            $emploiParJour[$jour] = $emploiDuTemps->filter(function($cours) use ($jour) {
-                return $cours->jour == $jour;
+        foreach ($jours as $index => $jour) {
+            $num = $index + 1;
+            $emploiParJour[$jour] = $emploiDuTemps->filter(function($cours) use ($num) {
+                return (string)$cours->jour === (string)$num;
             })->values();
         }
 
-        $pdf = Pdf::loadView('eleve.exports.emploi-temps-pdf', compact(
-            'eleve', 
-            'classeActuelle', 
-            'emploiDuTemps', 
-            'emploiParJour', 
-            'jours'
-        ));
-
-        return $pdf->download('emploi_du_temps_' . date('Y-m-d') . '.pdf');
+        return compact('eleve', 'classeActuelle', 'emploiDuTemps', 'emploiParJour', 'jours');
     }
 
     /**

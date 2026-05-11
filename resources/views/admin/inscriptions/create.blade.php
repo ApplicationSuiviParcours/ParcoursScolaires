@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('header')
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -251,7 +251,7 @@
                                                 <option value="" class="text-gray-500">Sélectionnez une classe</option>
                                                 @foreach($classes as $classe)
                                                     <option value="{{ $classe->id }}" {{ old('classe_id', $classe_id) == $classe->id ? 'selected' : '' }} class="py-2">
-                                                        {{ $classe->nom }}
+                                                        {{ $classe->nom_complet }}
                                                         ({{ $classe->niveau }}{{ $classe->serie ? ' - ' . $classe->serie : '' }})
                                                         - Capacité: {{ $classe->capacite }} places
                                                     </option>

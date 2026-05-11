@@ -87,6 +87,27 @@ class Evaluation extends Model
     ];
 
     /**
+     * Alias pour satisfaire la demande de casting du champ 'date'
+     */
+    public function getDateAttribute()
+    {
+        return $this->date_evaluation;
+    }
+
+    public function setDateAttribute($value)
+    {
+        $this->attributes['date_evaluation'] = $value;
+    }
+
+    /**
+     * Accesseur pour le statut de l'évaluation
+     */
+    public function getStatutAttribute(): string
+    {
+        return $this->date_evaluation->isFuture() ? 'À venir' : 'Passée';
+    }
+
+    /**
      * Relation avec l'enseignant qui a créé l'évaluation
      */
     public function enseignant(): BelongsTo
@@ -157,7 +178,7 @@ class Evaluation extends Model
      */
     public function scopeUpcoming($query)
     {
-        return $query->where('date_evaluation', '>=', now());
+        return $query->where('date_evaluation', '>=', today());
     }
 
     /**
@@ -165,7 +186,7 @@ class Evaluation extends Model
      */
     public function scopePast($query)
     {
-        return $query->where('date_evaluation', '<', now());
+        return $query->where('date_evaluation', '<', today());
     }
 
     /**

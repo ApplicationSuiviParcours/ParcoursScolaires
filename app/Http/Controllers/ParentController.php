@@ -493,7 +493,7 @@ class ParentController extends Controller
         $bulletins = $this->getBulletinsFiltres($request, $eleve);
         $stats = $this->calculerStatsBulletins($eleve->id);
         $anneesScolaires = AnneeScolaire::query()->orderBy('nom', 'desc')->get();
-        $periodes = ['Trimestre 1', 'Trimestre 2', 'Trimestre 3', 'Semestre 1', 'Semestre 2', 'Annuel'];
+        $periodes = ['Trimestre 1', 'Trimestre 2', 'Trimestre 3'];
 
         return view('parent.bulletin-enfant', compact(
             'bulletins',
@@ -905,5 +905,52 @@ class ParentController extends Controller
         $absence->save();
 
         return redirect()->back()->with('success', 'Absence justifiée avec succès.');
+    }
+
+    /**
+     * Exporte l'emploi du temps de l'enfant en PDF
+     */
+    public function exportEmploiDuTempsPdf(Eleve $eleve)
+    {
+        $data = $this->getEmploiDuTempsExportData($eleve);
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.emploi_du_temps.print', $data);
+        return $pdf->download('emploi_du_temps_' . $eleve->nom . '_' . date('Y-m-d') . '.pdf');
+    }
+
+    /**
+     * Affiche l'emploi du temps de l'enfant pour impression
+     */
+    public function imprimerEmploiDuTemps(Eleve $eleve)
+    {
+        $data = $this->getEmploiDuTempsExportData($eleve);
+        return view('admin.emploi_du_temps.print', $data);
+    }
+
+    /**
+     * Prépare les données pour l'export/impression de l'emploi du temps
+     */
+    protected function getEmploiDuTempsExportData(Eleve $eleve)
+    {
+        $this->verifierAccesParent($eleve);
+        $inscription = $this->getInscriptionActuelle($eleve);
+        
+        if (!$inscription || !$inscription->classe) {
+            abort(404, 'Inscription ou classe non trouvée.');
+        }
+
+        $classe = $inscription->classe;
+        $emploiDuTemps = $this->getEmploiDuTemps(request(), $classe, $inscription);
+        
+        $jours = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+        $emploiParJour = $this->organiserEmploiParJour($emploiDuTemps, $jours);
+
+        return [
+            'eleve' => $eleve,
+            'classe' => $classe,
+            'emploiDuTemps' => $emploiDuTemps,
+            'emploiParJour' => $emploiParJour,
+            'jours' => $jours,
+            'anneeScolaire' => $inscription->anneeScolaire
+        ];
     }
 }

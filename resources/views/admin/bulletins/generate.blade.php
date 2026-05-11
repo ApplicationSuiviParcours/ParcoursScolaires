@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('title', 'Générer des bulletins')
 
@@ -103,7 +103,7 @@
                                     <option value="">Sélectionnez une classe</option>
                                     @foreach($classes as $classe)
                                         <option value="{{ $classe->id }}" {{ old('classe_id') == $classe->id ? 'selected' : '' }}>
-                                            {{ $classe->nom }} ({{ $classe->inscriptions_count ?? $classe->inscriptions->count() }} élèves)
+                                            {{ $classe->nom_complet }} ({{ $classe->inscriptions_count ?? $classe->inscriptions->count() }} élèves)
                                         </option>
                                     @endforeach
                                 </select>
@@ -170,9 +170,6 @@
                                     <option value="Trimestre 1" {{ old('periode') == 'Trimestre 1' ? 'selected' : '' }}>Trimestre 1</option>
                                     <option value="Trimestre 2" {{ old('periode') == 'Trimestre 2' ? 'selected' : '' }}>Trimestre 2</option>
                                     <option value="Trimestre 3" {{ old('periode') == 'Trimestre 3' ? 'selected' : '' }}>Trimestre 3</option>
-                                    <option value="Semestre 1" {{ old('periode') == 'Semestre 1' ? 'selected' : '' }}>Semestre 1</option>
-                                    <option value="Semestre 2" {{ old('periode') == 'Semestre 2' ? 'selected' : '' }}>Semestre 2</option>
-                                    <option value="Annuel" {{ old('periode') == 'Annuel' ? 'selected' : '' }}>Annuel</option>
                                 </select>
                                 <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
                                     <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">

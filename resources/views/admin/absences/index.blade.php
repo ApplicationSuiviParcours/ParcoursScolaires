@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('title', 'Gestion des absences')
 
@@ -212,7 +212,7 @@
                     <select name="classe_id" id="classe_filter" class="w-full rounded-xl border-2 border-gray-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 px-4 py-2 text-sm">
                         <option value="">Toutes</option>
                         @foreach($classes as $classe)
-                            <option value="{{ $classe->id }}" {{ request('classe_id') == $classe->id ? 'selected' : '' }}>{{ $classe->nom }}</option>
+                            <option value="{{ $classe->id }}" {{ request('classe_id') == $classe->id ? 'selected' : '' }}>{{ $classe->nom_complet }}</option>
                         @endforeach
                     </select>
                 </div>

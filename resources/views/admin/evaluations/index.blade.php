@@ -200,7 +200,7 @@
                                 <option value="">Toutes les classes</option>
                                 @foreach($classes as $classe)
                                     <option value="{{ $classe->id }}" {{ ($classe_id ?? '') == $classe->id ? 'selected' : '' }}>
-                                        {{ $classe->nom }} ({{ $classe->niveau }})
+                                        {{ $classe->nom_complet }}
                                     </option>
                                 @endforeach
                             </select>
@@ -243,8 +243,6 @@
                                 <option value="Trimestre 1" {{ ($periode ?? '') == 'Trimestre 1' ? 'selected' : '' }}>Trimestre 1</option>
                                 <option value="Trimestre 2" {{ ($periode ?? '') == 'Trimestre 2' ? 'selected' : '' }}>Trimestre 2</option>
                                 <option value="Trimestre 3" {{ ($periode ?? '') == 'Trimestre 3' ? 'selected' : '' }}>Trimestre 3</option>
-                                <option value="Semestre 1" {{ ($periode ?? '') == 'Semestre 1' ? 'selected' : '' }}>Semestre 1</option>
-                                <option value="Semestre 2" {{ ($periode ?? '') == 'Semestre 2' ? 'selected' : '' }}>Semestre 2</option>
                             </select>
                         </div>
 
@@ -345,7 +343,7 @@
                                             {{ ucfirst($evaluation->type) }}
                                         </span>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-700">{{ $evaluation->classe->nom ?? '-' }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-gray-700">{{ $evaluation->classe->nom_complet ?? '-' }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-gray-700">{{ $evaluation->matiere->nom ?? '-' }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-gray-700">
                                         <span class="flex items-center space-x-1">
@@ -502,7 +500,7 @@
                                 </div>
                                 <div>
                                     <span class="text-gray-500 text-xs uppercase tracking-wide">Classe</span>
-                                    <p class="text-gray-700 font-medium mt-0.5">{{ $evaluation->classe->nom ?? '-' }}</p>
+                                    <p class="text-gray-700 font-medium mt-0.5">{{ $evaluation->classe->nom_complet ?? '-' }}</p>
                                 </div>
                                 <div>
                                     <span class="text-gray-500 text-xs uppercase tracking-wide">Matière</span>

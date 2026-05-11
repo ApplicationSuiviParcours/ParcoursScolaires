@@ -1,4 +1,4 @@
-{{-- resources/views/search/results.blade.php --}}
+﻿{{-- resources/views/search/results.blade.php --}}
 @extends('layouts.app')
 
 @section('title', 'Résultats de recherche')
@@ -143,7 +143,7 @@
                                         <div class="min-w-0 flex-1">
                                             <p class="text-sm font-medium text-gray-900 truncate">
                                                 <a href="{{ route('admin.classes.show', $classe) }}" class="hover:text-blue-600">
-                                                    {{ $classe->nom }}
+                                                    {{ $classe->nom_complet }}
                                                 </a>
                                             </p>
                                         </div>

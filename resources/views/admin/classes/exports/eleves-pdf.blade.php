@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Liste des élèves - {{ $classe->nom }}</title>
+    <title>Liste des élèves - {{ $classe->nom_complet }}</title>
     <style>
         body {
             font-family: 'DejaVu Sans', sans-serif;
@@ -152,8 +152,7 @@
 <body>
     <div class="header">
         <h1>Liste des élèves</h1>
-        <div class="subtitle">{{ $classe->nom }} - {{ $classe->niveau }} @if($classe->serie) (Série
-        {{ $classe->serie }}) @endif</div>
+        <div class="subtitle">{{ $classe->nom_complet }}</div>
         @if($classe->anneeScolaire)
             <div class="subtitle">Année scolaire: {{ $classe->anneeScolaire->nom }}</div>
         @endif
@@ -177,7 +176,7 @@
 
     <div class="class-info">
         <h2>Informations de la classe</h2>
-        <p><strong>Nom:</strong> {{ $classe->nom }}</p>
+        <p><strong>Nom:</strong> {{ $classe->nom_complet }}</p>
         <p><strong>Niveau:</strong> {{ $classe->niveau }}</p>
         @if($classe->serie)
             <p><strong>Série:</strong> {{ $classe->serie }}</p>

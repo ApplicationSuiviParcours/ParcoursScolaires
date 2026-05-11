@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('header')
     <h2 class="font-semibold text-lg sm:text-xl text-gray-800 leading-tight">
@@ -138,7 +138,7 @@
                                     <option value="">Toutes les classes</option>
                                     @forelse($classes as $classe)
                                         <option value="{{ $classe->id }}" {{ request('classe_id') == $classe->id ? 'selected' : '' }}>
-                                            {{ $classe->nom }}
+                                            {{ $classe->nom_complet }}
                                         </option>
                                     @empty
                                         <option value="" disabled>Aucune classe</option>

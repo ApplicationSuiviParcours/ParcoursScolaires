@@ -207,4 +207,67 @@ class EnseignantAdminController extends Controller
         return redirect()->route('admin.enseignants.show', $enseignant)
             ->with('success', $message);
     }
+
+    /**
+     * Export de la liste des enseignants en CSV
+     */
+    public function exportCsv(Request $request)
+    {
+        $enseignants = Enseignant::query()->orderBy('nom')->get();
+
+        $filename = "enseignants_export_" . date('Y-m-d_H-i-s') . ".csv";
+        $headers = [
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$filename",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        ];
+
+        $columns = ['Matricule', 'Nom', 'Prenom', 'Genre', 'Telephone', 'Email', 'Specialite', 'Statut'];
+
+        $callback = function() use($enseignants, $columns) {
+            $file = fopen('php://output', 'w');
+            fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
+            fputcsv($file, $columns, ';');
+
+            foreach ($enseignants as $enseignant) {
+                fputcsv($file, [
+                    $enseignant->matricule,
+                    $enseignant->nom,
+                    $enseignant->prenom,
+                    $enseignant->genre == 'm' ? 'Masculin' : 'Féminin',
+                    $enseignant->telephone,
+                    $enseignant->email,
+                    $enseignant->specialite,
+                    $enseignant->statut ? 'Actif' : 'Inactif',
+                ], ';');
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
+
+    /**
+     * Export de la liste des enseignants en PDF
+     */
+    public function exportPdf(Request $request)
+    {
+        $enseignants = Enseignant::query()->orderBy('nom')->get();
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.enseignants.print', compact('enseignants'))
+            ->setPaper('a4', 'landscape');
+        
+        return $pdf->download('liste_enseignants.pdf');
+    }
+
+    /**
+     * Impression de la liste des enseignants
+     */
+    public function imprimer(Request $request)
+    {
+        $enseignants = Enseignant::query()->orderBy('nom')->get();
+        return view('admin.enseignants.print', compact('enseignants'));
+    }
 }

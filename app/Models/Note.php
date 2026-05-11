@@ -139,18 +139,18 @@ class Note extends Model
     }
 
     /**
-     * Obtenir l'appréciation en fonction de la note
+     * Obtenir l'appréciation automatique en fonction de la note (Seuils Officiels)
      */
     public function getAppreciationAutoAttribute(): string
     {
         if ($this->note >= 18) {
             return 'Excellent';
         } elseif ($this->note >= 16) {
-            return 'Très bien';
+            return 'Très Bien';
         } elseif ($this->note >= 14) {
             return 'Bien';
         } elseif ($this->note >= 12) {
-            return 'Assez bien';
+            return 'Assez Bien';
         } elseif ($this->note >= 10) {
             return 'Passable';
         } elseif ($this->note >= 8) {
@@ -158,7 +158,7 @@ class Note extends Model
         } elseif ($this->note >= 5) {
             return 'Faible';
         } else {
-            return 'Très faible';
+            return 'Très Faible';
         }
     }
 

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('header')
     <h2 class="text-sm font-semibold leading-tight text-gray-800">
@@ -137,7 +137,7 @@
                             <select name="classe_id" required class="w-full px-2 py-1.5 sm:px-3 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
                                 <option value="">Sélectionner une classe</option>
                                 @foreach($classes as $classe)
-                                    <option value="{{ $classe->id }}">{{ $classe->nom }}</option>
+                                    <option value="{{ $classe->id }}">{{ $classe->nom_complet }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -169,12 +169,9 @@
                         <div>
                             <label class="block mb-1 sm:mb-2 text-xs sm:text-sm font-medium text-gray-700">Période *</label>
                             <select name="periode" required class="w-full px-2 py-1.5 sm:px-3 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
-                                <option value="">Sélectionner une période</option>
-                                <option value="1">Période 1</option>
-                                <option value="2">Période 2</option>
-                                <option value="3">Période 3</option>
-                                <option value="4">Période 4</option>
-                                <option value="5">Période 5</option>
+                                <option value="Trimestre 1">Trimestre 1</option>
+                                <option value="Trimestre 2">Trimestre 2</option>
+                                <option value="Trimestre 3">Trimestre 3</option>
                             </select>
                         </div>
 
@@ -250,7 +247,7 @@
                     <select id="filterClasse" class="px-3 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
                         <option value="">Toutes les classes</option>
                         @foreach($classes as $classe)
-                            <option value="{{ $classe->id }}">{{ $classe->nom }}</option>
+                            <option value="{{ $classe->id }}">{{ $classe->nom_complet }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -298,7 +295,7 @@
                                 <span class="font-medium">{{ $evaluation->bareme }}</span>
                             </td>
                             <td class="px-4 py-3 text-sm text-gray-900 whitespace-nowrap">
-                                <span class="px-2 py-1 text-xs bg-gray-100 rounded-full">P{{ $evaluation->periode }}</span>
+                                <span class="px-2 py-1 text-xs bg-gray-100 rounded-full">{{ $evaluation->periode }}</span>
                             </td>
                             <td class="px-4 py-3 whitespace-nowrap">
                                 @php

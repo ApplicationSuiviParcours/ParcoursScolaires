@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('header')
     <h2 class="font-semibold text-sm text-gray-800 leading-tight">
@@ -104,7 +104,7 @@
                         class="w-full bg-gray-50 border-gray-200 rounded-xl focus:ring-emerald-500 focus:border-emerald-500 py-2.5">
                         <option value="">Toutes les classes</option>
                         @foreach($classes ?? [] as $classe)
-                            <option value="{{ $classe->id }}">{{ $classe->nom }}</option>
+                            <option value="{{ $classe->id }}">{{ $classe->nom_complet }}</option>
                         @endforeach
                     </select>
                 </div>

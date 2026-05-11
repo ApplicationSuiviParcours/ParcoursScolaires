@@ -579,20 +579,20 @@
 
     {{-- ── OPTIONS D'EXPORT ─────────────────────────────────────────── --}}
     <div class="mt-4 sm:mt-6 flex flex-wrap justify-end gap-2 sm:gap-3">
-        <button class="inline-flex items-center px-4 py-2 bg-white border-2 border-gray-300 rounded-xl text-gray-700
+        <a href="{{ route('admin.parents.exportCsv') }}" class="inline-flex items-center px-4 py-2 bg-white border-2 border-gray-300 rounded-xl text-gray-700
                        hover:bg-gray-50 transition-all duration-300 transform hover:scale-105 text-sm">
             <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1.5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
             </svg>
             Exporter CSV
-        </button>
-        <button class="inline-flex items-center px-4 py-2 bg-white border-2 border-gray-300 rounded-xl text-gray-700
+        </a>
+        <a href="{{ route('admin.parents.imprimer') }}" target="_blank" class="inline-flex items-center px-4 py-2 bg-white border-2 border-gray-300 rounded-xl text-gray-700
                        hover:bg-gray-50 transition-all duration-300 transform hover:scale-105 text-sm">
             <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1.5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
             </svg>
             Imprimer la liste
-        </button>
+        </a>
     </div>
 </div>
 @endsection

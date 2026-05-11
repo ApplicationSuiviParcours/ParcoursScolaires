@@ -240,15 +240,13 @@ class Classe extends Model
     }
 
     /**
-     * Récupère le nom complet de la classe (niveau + nom + série)
+     * Retourne le nom complet de la classe.
+     * Le champ 'nom' contient déjà le nom complet (ex: "6ème A").
+     * Cette propriété est conservée pour la compatibilité.
      */
     public function getNomCompletAttribute(): string
     {
-        $nom = $this->niveau . ' ' . $this->nom;
-        if ($this->serie) {
-            $nom .= ' (Série ' . $this->serie . ')';
-        }
-        return $nom;
+        return $this->nom;
     }
 
     /**

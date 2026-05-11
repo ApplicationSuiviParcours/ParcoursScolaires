@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('header')
     <h2 class="font-semibold text-sm text-gray-800 leading-tight">
@@ -51,7 +51,7 @@
                     <select id="filter_classe" class="w-full px-2 py-1.5 sm:px-3 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
                         <option value="">Toutes les classes</option>
                         @foreach($classes ?? [] as $classe)
-                            <option value="{{ $classe->id }}">{{ $classe->nom }}</option>
+                            <option value="{{ $classe->id }}">{{ $classe->nom_complet }}</option>
                         @endforeach
                     </select>
                 </div>

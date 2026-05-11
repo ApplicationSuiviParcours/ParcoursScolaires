@@ -182,9 +182,9 @@
             </div>
         </div>
 
-        <!-- Section principale avec deux colonnes -->
+        <!-- Section principale avec deux colonnes (maintenant une seule colonne) -->
         <div class="grid grid-cols-1 gap-6 mb-8 lg:grid-cols-2">
-            <!-- Colonne de gauche -->
+            <!-- Colonne de gauche : Dernier bulletin -->
             <div class="space-y-6">
                 <!-- Dernier bulletin avec effet de carte premium -->
                 <div class="overflow-hidden transition-all duration-500 transform bg-white border border-gray-100 shadow-xl rounded-2xl hover:shadow-2xl hover:-translate-y-1">
@@ -259,7 +259,10 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
+            <!-- Colonne de droite : Dernières notes -->
+            <div class="space-y-6">
                 <!-- Dernières notes avec animations -->
                 <div class="overflow-hidden transition-all duration-500 transform bg-white border border-gray-100 shadow-xl rounded-2xl hover:shadow-2xl hover:-translate-y-1">
                     <div class="flex items-center justify-between px-4 sm:px-6 py-4 bg-gradient-to-r from-green-600 to-emerald-600">
@@ -280,7 +283,7 @@
                     <div class="p-4 sm:p-6">
                         @if($dernieresNotes->count() > 0)
                         <div class="space-y-3">
-                            @foreach($dernieresNotes as $index => $note)
+                            @foreach($dernieresNotes->take(4) as $index => $note)
                             @php
                                 $noteValue = $note->note ?? $note->valeur ?? 0;
                                 $colors = [
@@ -320,137 +323,6 @@
                                 </svg>
                             </div>
                             <p class="mt-4 text-gray-500">Aucune note disponible</p>
-                        </div>
-                        @endif
-                    </div>
-                </div>
-            </div>
-
-            <!-- Colonne de droite -->
-            <div class="space-y-6">
-                <!-- Performance par matière avec barres animées -->
-                <div class="overflow-hidden transition-all duration-500 transform bg-white border border-gray-100 shadow-xl rounded-2xl hover:shadow-2xl hover:-translate-y-1">
-                    <div class="px-4 sm:px-6 py-4 bg-gradient-to-r from-purple-600 to-pink-600">
-                        <h3 class="flex items-center text-base sm:text-lg font-semibold text-white">
-                            <svg class="w-5 h-5 mr-2 animate-spin-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                            </svg>
-                            Performance par matière
-                        </h3>
-                    </div>
-
-                    <div class="p-4 sm:p-6">
-                        @if(count($moyennesParMatiere) > 0)
-                        <div class="space-y-5">
-                            @foreach($moyennesParMatiere as $index => $matiere)
-                            @php
-                                $percentage = ($matiere['moyenne'] / 20) * 100;
-                                $barColor = $percentage >= 75 ? 'from-green-500 to-green-600' : ($percentage >= 50 ? 'from-yellow-500 to-yellow-600' : 'from-red-500 to-red-600');
-                                $textColor = $percentage >= 75 ? 'text-green-600' : ($percentage >= 50 ? 'text-yellow-600' : 'text-red-600');
-                                $delay = $index * 100;
-                            @endphp
-                            <div class="transition-all transform hover:scale-102">
-                                <div class="flex justify-between mb-1 text-sm">
-                                    <span class="flex items-center font-medium text-gray-700 min-w-0 mr-2">
-                                        <span class="w-2 h-2 rounded-full bg-gradient-to-r {{ $barColor }} mr-2 animate-pulse flex-shrink-0"></span>
-                                        <span class="truncate">{{ $matiere['nom'] }}</span>
-                                    </span>
-                                    <span class="font-semibold {{ $textColor }} animate-count flex-shrink-0">{{ number_format($matiere['moyenne'], 1) }}/20</span>
-                                </div>
-                                <div class="relative w-full h-3 overflow-hidden bg-gray-100 rounded-full">
-                                    <div class="absolute top-0 left-0 h-full bg-gradient-to-r {{ $barColor }} rounded-full transition-all duration-1000 ease-out"
-                                         style="width: 0%"
-                                         x-data="{ show: false }"
-                                         x-init="setTimeout(() => show = true, {{ $delay }})"
-                                         :style="show ? 'width: {{ $percentage }}%' : 'width: 0%'">
-                                    </div>
-                                </div>
-                                <p class="flex items-center mt-1 text-xs text-gray-400">
-                                    <svg class="w-3 h-3 mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
-                                    </svg>
-                                    {{ $matiere['nombreNotes'] }} note(s)
-                                </p>
-                            </div>
-                            @endforeach
-                        </div>
-                        @else
-                        <div class="py-8 text-center">
-                            <div class="relative inline-block animate-float animation-delay-200">
-                                <div class="absolute inset-0 bg-purple-300 rounded-full opacity-50 blur-xl"></div>
-                                <svg class="relative w-16 h-16 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                                </svg>
-                            </div>
-                            <p class="mt-4 text-gray-500">Aucune donnée disponible</p>
-                        </div>
-                        @endif
-                    </div>
-                </div>
-
-                <!-- Absences récentes avec timeline -->
-                <div class="overflow-hidden transition-all duration-500 transform bg-white border border-gray-100 shadow-xl rounded-2xl hover:shadow-2xl hover:-translate-y-1">
-                    <div class="flex items-center justify-between px-4 sm:px-6 py-4 bg-gradient-to-r from-red-600 to-pink-600">
-                        <h3 class="flex items-center text-base sm:text-lg font-semibold text-white">
-                            <svg class="w-5 h-5 mr-2 animate-shake" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
-                            </svg>
-                            Absences récentes
-                        </h3>
-                        <a href="{{ route('eleve.absences') }}" class="flex items-center transition-colors text-white/80 hover:text-white group">
-                            <span class="text-sm">Voir tout</span>
-                            <svg class="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </a>
-                    </div>
-
-                    <div class="p-4 sm:p-6">
-                        @php $recentAbsences = $absences->take(3); @endphp
-                        @if($recentAbsences->count() > 0)
-                        <div class="relative">
-                            <!-- Timeline line -->
-                            <div class="absolute left-5 top-0 bottom-0 w-0.5 bg-gray-200"></div>
-                            
-                            <div class="space-y-4">
-                                @foreach($recentAbsences as $index => $abs)
-                                <div class="relative flex items-start space-x-4 animate-slide-left" style="animation-delay: {{ $index * 150 }}ms">
-                                    <div class="relative z-10 flex-shrink-0">
-                                        <div class="w-10 h-10 rounded-full {{ $abs->justifie ? 'bg-green-500' : 'bg-red-500' }} flex items-center justify-center shadow-lg transform transition-transform hover:scale-110">
-                                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div class="flex-1 p-3 rounded-xl {{ $abs->justifie ? 'bg-green-50' : 'bg-red-50' }} transform transition-all hover:scale-102 min-w-0">
-                                        <div class="flex items-center justify-between flex-wrap gap-2">
-                                            <div class="min-w-0">
-                                                <p class="font-medium text-gray-900">{{ \Carbon\Carbon::parse($abs->date_absence)->format('d/m/Y') }}</p>
-                                                <p class="flex items-center mt-1 text-xs text-gray-600">
-                                                    <svg class="w-3 h-3 mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                                                    </svg>
-                                                    <span class="truncate">{{ $abs->matiere->nom ?? 'Matière' }}</span>
-                                                </p>
-                                            </div>
-                                            <span class="px-2 sm:px-3 py-1 text-xs font-semibold rounded-full flex-shrink-0 {{ $abs->justifie ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800' }}">
-                                                {{ $abs->justifie ? 'Justifiée' : 'Non justifiée' }}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
-                        @else
-                        <div class="py-8 text-center">
-                            <div class="relative inline-block animate-float animation-delay-400">
-                                <div class="absolute inset-0 bg-green-300 rounded-full opacity-50 blur-xl"></div>
-                                <svg class="relative w-16 h-16 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                            </div>
-                            <p class="mt-4 text-gray-500">Aucune absence</p>
                         </div>
                         @endif
                     </div>
@@ -540,59 +412,6 @@
             </div>
         </div>
 
-        <!-- Actions rapides avec effets -->
-        <div class="grid grid-cols-2 gap-3 sm:gap-4 mt-8 lg:grid-cols-4">
-            <a href="{{ route('eleve.notes') }}" 
-               class="relative p-4 sm:p-6 overflow-hidden text-center text-white transition-all duration-500 transform group bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl hover:shadow-2xl hover:-translate-y-2">
-                <div class="absolute inset-0 transition-opacity duration-500 bg-white opacity-0 group-hover:opacity-20"></div>
-                <div class="absolute transition-opacity duration-500 opacity-0 -inset-1 bg-gradient-to-r from-blue-400 to-blue-500 rounded-2xl blur group-hover:opacity-50"></div>
-                <div class="relative">
-                    <svg class="w-8 h-8 sm:w-10 sm:h-10 mx-auto mb-2 sm:mb-3 transition-all duration-500 group-hover:scale-110 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                    </svg>
-                    <span class="block text-sm sm:text-lg font-semibold">Mes notes</span>
-                    <span class="text-xs sm:text-sm text-blue-200 hidden sm:block">Consulter mes notes</span>
-                </div>
-            </a>
-            
-            <a href="{{ route('eleve.absences') }}" 
-               class="relative p-4 sm:p-6 overflow-hidden text-center text-white transition-all duration-500 transform group bg-gradient-to-br from-red-500 to-red-600 rounded-2xl hover:shadow-2xl hover:-translate-y-2">
-                <div class="absolute inset-0 transition-opacity duration-500 bg-white opacity-0 group-hover:opacity-20"></div>
-                <div class="absolute transition-opacity duration-500 opacity-0 -inset-1 bg-gradient-to-r from-red-400 to-red-500 rounded-2xl blur group-hover:opacity-50"></div>
-                <div class="relative">
-                    <svg class="w-8 h-8 sm:w-10 sm:h-10 mx-auto mb-2 sm:mb-3 transition-all duration-500 group-hover:scale-110 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
-                    </svg>
-                    <span class="block text-sm sm:text-lg font-semibold">Absences</span>
-                    <span class="text-xs sm:text-sm text-red-200 hidden sm:block">Suivre mes absences</span>
-                </div>
-            </a>
-            
-            <a href="{{ route('eleve.bulletin') }}" 
-               class="relative p-4 sm:p-6 overflow-hidden text-center text-white transition-all duration-500 transform group bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl hover:shadow-2xl hover:-translate-y-2">
-                <div class="absolute inset-0 transition-opacity duration-500 bg-white opacity-0 group-hover:opacity-20"></div>
-                <div class="absolute transition-opacity duration-500 opacity-0 -inset-1 bg-gradient-to-r from-purple-400 to-purple-500 rounded-2xl blur group-hover:opacity-50"></div>
-                <div class="relative">
-                    <svg class="w-8 h-8 sm:w-10 sm:h-10 mx-auto mb-2 sm:mb-3 transition-all duration-500 group-hover:scale-110 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                    </svg>
-                    <span class="block text-sm sm:text-lg font-semibold">Bulletins</span>
-                    <span class="text-xs sm:text-sm text-purple-200 hidden sm:block">Mes bulletins</span>
-                </div>
-            </a>
-            
-            <a href="{{ route('eleve.emploi-du-temps') }}" 
-               class="relative p-4 sm:p-6 overflow-hidden text-center text-white transition-all duration-500 transform group bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-2xl hover:shadow-2xl hover:-translate-y-2">
-                <div class="absolute inset-0 transition-opacity duration-500 bg-white opacity-0 group-hover:opacity-20"></div>
-                <div class="absolute transition-opacity duration-500 opacity-0 -inset-1 bg-gradient-to-r from-indigo-400 to-indigo-500 rounded-2xl blur group-hover:opacity-50"></div>
-                <div class="relative">
-                    <svg class="w-8 h-8 sm:w-10 sm:h-10 mx-auto mb-2 sm:mb-3 transition-all duration-500 group-hover:scale-110 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                    </svg>
-                    <span class="block text-sm sm:text-lg font-semibold">Emploi du temps</span>
-                    <span class="text-xs sm:text-sm text-indigo-200 hidden sm:block">Mon planning</span>
-                </div>
-            </a>
         </div>
     </div>
 </div>

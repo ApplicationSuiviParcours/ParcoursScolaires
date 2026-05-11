@@ -73,8 +73,8 @@
                                     id="classe_id" name="classe_id" required>
                                 <option value="">Sélectionner une classe</option>
                                 @foreach($classes as $classe)
-                                    <option value="{{ $classe->id }}" {{ old('classe_id') == $classe->id ? 'selected' : '' }} data-niveau="{{ $classe->niveau ?? '' }}">
-                                        {{ $classe->nom }} {{ $classe->niveau ? '(' . $classe->niveau . ')' : '' }}
+                                    <option value="{{ $classe->id }}" {{ old('classe_id') == $classe->id ? 'selected' : '' }}>
+                                        {{ $classe->nom_complet }}
                                     </option>
                                 @endforeach
                             </select>
@@ -264,9 +264,6 @@
                             <option value="Trimestre 1" {{ old('periode') == 'Trimestre 1' ? 'selected' : '' }}>Trimestre 1</option>
                             <option value="Trimestre 2" {{ old('periode') == 'Trimestre 2' ? 'selected' : '' }}>Trimestre 2</option>
                             <option value="Trimestre 3" {{ old('periode') == 'Trimestre 3' ? 'selected' : '' }}>Trimestre 3</option>
-                            <option value="Semestre 1" {{ old('periode') == 'Semestre 1' ? 'selected' : '' }}>Semestre 1</option>
-                            <option value="Semestre 2" {{ old('periode') == 'Semestre 2' ? 'selected' : '' }}>Semestre 2</option>
-                            <option value="Annuelle" {{ old('periode') == 'Annuelle' ? 'selected' : '' }}>Annuelle</option>
                         </select>
                         @error('periode')
                             <p class="text-sm text-red-600">{{ $message }}</p>

@@ -80,6 +80,14 @@
                                 Modifier
                             </a>
 
+                            <a href="{{ route('admin.eleves.parcours', $eleve) }}" 
+                               class="w-full sm:w-auto inline-flex items-center justify-center px-3 md:px-4 py-1.5 md:py-2 bg-indigo-500 text-white hover:bg-indigo-600 text-xs md:text-sm font-medium rounded-lg transition-colors">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                Parcours Académique
+                            </a>
+
                             @if($eleve->inscriptions->count() == 0)
                                 <form action="{{ route('admin.eleves.destroy', $eleve) }}" method="POST" class="w-full sm:w-auto inline delete-form">
                                     @csrf

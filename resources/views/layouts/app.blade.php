@@ -26,18 +26,9 @@
     <style>
         * {
             font-family: 'Inter', sans-serif;
-            max-width: 100%;
-            box-sizing: border-box;
-        }
-
-        /* Exception : les éléments positionnés absolument/fixes ne doivent PAS être limités
-           par max-width: 100% (sinon les dropdowns sont écrasés à la taille de leur parent) */
-        [style*="position: absolute"],
-        [class*="absolute"],
-        [class*="fixed"] {
-            max-width: none;
         }
         
+
         body, html {
             overflow-x: hidden;
             width: 100%;
@@ -241,27 +232,27 @@
             </button>
 
             <!-- En-tête avec logo -->
-            <div class="relative z-10 p-4 sm:p-5 md:p-6 border-b border-white/20">
-                <div class="flex items-center space-x-2 sm:space-x-3">
+            <div class="relative z-10 p-6 border-b border-white/10">
+                <div class="flex items-center space-x-3">
                     <div class="relative">
-                        <div class="transition-transform duration-300 hover:scale-105">
-                            <img src="{{ asset('image_icon/android-icon-144x144.png') }}" alt="Logo" class="w-10 h-10 sm:w-12 md:w-14 object-contain drop-shadow-xl">
+                        <div class="bg-white/20 backdrop-blur-sm p-1.5 rounded-xl shadow-lg border border-white/20 transition-transform duration-300 hover:scale-105">
+                            <img src="{{ asset('image_icon/apple-icon.png') }}" alt="Logo" class="w-10 h-10 object-contain drop-shadow-xl">
                         </div>
-                        <div class="absolute w-2.5 h-2.5 bg-green-400 border-2 border-purple-700 rounded-full -top-0.5 -right-0.5 status-indicator"></div>
+                        <div class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-green-400 border-2 border-purple-700 rounded-full shadow-lg"></div>
                     </div>
                     <div class="min-w-0">
-                        <h1 class="text-lg sm:text-xl md:text-2xl font-bold tracking-tight text-white font-display truncate">GEST'PARC</h1>
-                        <p class="text-[10px] sm:text-xs font-medium text-purple-200 truncate">
+                        <h1 class="text-2xl font-bold tracking-tight text-white font-display truncate">GEST'PARC</h1>
+                        <p class="text-[10px] font-bold text-purple-200 uppercase tracking-widest opacity-80 truncate">
                             @php
                                 $user = Auth::user();
                                 if ($user) {
-                                    if ($user->isEleve()) echo 'Espace Élève';
-                                    elseif ($user->isEnseignant()) echo 'Espace Enseignant';
-                                    elseif ($user->isParent()) echo 'Espace Parent';
-                                    elseif ($user->isAdmin()) echo 'Espace Administrateur';
-                                    else echo 'Espace Utilisateur';
+                                    if ($user->isAdmin()) echo 'Admin';
+                                    elseif ($user->isEleve()) echo 'Élève';
+                                    elseif ($user->isEnseignant()) echo 'Enseignant';
+                                    elseif ($user->isParent()) echo 'Parent';
+                                    else echo 'Utilisateur';
                                 } else {
-                                    echo 'Espace Public';
+                                    echo 'Public';
                                 }
                             @endphp
                         </p>
@@ -290,30 +281,28 @@
             @endphp
 
             <!-- Carte profil utilisateur -->
-            <div class="relative z-10 p-3 sm:p-4 md:p-5 border-b border-white/20">
-                <div class="p-2 sm:p-3 md:p-4 transition-all duration-300 cursor-pointer glass-morphism rounded-xl sm:rounded-2xl hover:bg-white/20 group">
-                    <div class="flex items-center space-x-2 sm:space-x-3">
+            <div class="relative z-10 p-5 border-b border-white/10">
+                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20 shadow-xl transition-all duration-300 hover:bg-white/20 group">
+                    <div class="flex items-center space-x-3">
                         <div class="relative flex-shrink-0">
                             <!-- LOGIQUE PHOTO SIDEBAR -->
                             @if(Auth::check() && Auth::user()->photo)
                                 <img src="{{ Storage::url(Auth::user()->photo) }}"
                                      alt="{{ Auth::user()->name }}"
-                                     class="object-cover transition-transform duration-300 shadow-lg w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-lg sm:rounded-xl group-hover:scale-110 ring-2 ring-white/30">
+                                     class="w-12 h-12 rounded-2xl object-cover shadow-2xl border-2 border-white/30 transition-transform duration-300 group-hover:scale-110">
                             @else
-                                <div class="flex items-center justify-center transition-transform duration-300 shadow-lg w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-gradient-to-br from-pink-400 via-purple-400 to-indigo-500 rounded-lg sm:rounded-xl group-hover:scale-110">
-                                    <span class="text-base sm:text-lg md:text-xl font-bold text-white font-display">{{ substr(Auth::user()->name ?? 'U', 0, 1) }}</span>
+                                <div class="w-12 h-12 flex items-center justify-center bg-purple-500 rounded-2xl shadow-2xl border-2 border-white/30 transition-transform duration-300 group-hover:scale-110">
+                                    <span class="text-xl font-bold text-white font-display uppercase">{{ substr(Auth::user()->name ?? 'U', 0, 1) }}</span>
                                 </div>
                             @endif
-                            <div class="absolute w-3 h-3 sm:w-3.5 sm:h-3.5 bg-green-400 border-2 border-purple-700 rounded-full -bottom-0.5 -right-0.5 status-indicator"></div>
+                            <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-purple-700 rounded-full shadow-lg"></div>
                         </div>
                         <div class="flex-1 min-w-0">
-                            <p class="text-xs sm:text-sm font-semibold text-white truncate">{{ Auth::user()->name ?? 'Utilisateur' }}</p>
-                            <p class="text-[9px] sm:text-xs text-purple-200 mt-0.5 truncate">{{ $infoRole }}</p>
-                            <div class="flex items-center mt-1 sm:mt-2">
-                                <div class="flex items-center bg-green-400/20 rounded-full px-1.5 py-0.5">
-                                    <div class="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-green-400 rounded-full mr-1 status-indicator"></div>
-                                    <span class="text-[8px] sm:text-xs font-medium text-green-300">En ligne</span>
-                                </div>
+                            <p class="text-sm font-bold text-white truncate leading-tight">{{ Auth::user()->name ?? 'Utilisateur' }}</p>
+                            <p class="text-[10px] text-purple-200 font-medium opacity-80 mb-1 truncate">{{ $infoRole }}</p>
+                            <div class="inline-flex items-center px-2 py-0.5 rounded-full bg-green-500/20 border border-green-500/30">
+                                <span class="w-1.5 h-1.5 bg-green-400 rounded-full mr-1.5 animate-pulse"></span>
+                                <span class="text-[10px] text-green-300 font-bold tracking-tight">En ligne</span>
                             </div>
                         </div>
                     </div>
@@ -323,7 +312,7 @@
             <!-- Navigation -->
             <nav class="relative z-10 flex-1 p-2 sm:p-3 md:p-4 space-y-0.5 overflow-y-auto custom-scrollbar">
                 <div class="mb-4 sm:mb-6">
-                    <p class="px-2 sm:px-3 mb-2 sm:mb-3 text-[9px] sm:text-xs font-bold tracking-wider uppercase text-purple-200/70">Menu Principal</p>
+                    <p class="px-4 mb-4 text-[10px] font-bold tracking-widest uppercase text-purple-200/60">MENU PRINCIPAL</p>
 
                     {{-- ================= ELEVE MENU ================= --}}
 
@@ -429,8 +418,8 @@
                         </a>
 
                         <!-- Gestion des Utilisateurs -->
-                        <div x-data="{ open: {{ request()->routeIs('admin.eleves.*') || request()->routeIs('admin.enseignants.*') || request()->routeIs('admin.parents.*') || request()->routeIs('admin.eleve-parents.*') ? 'true' : 'false' }} }">
-                            <button @click="open = !open" class="w-full flex items-center justify-between px-3 sm:px-4 py-2 sm:py-3 text-white rounded-lg sm:rounded-xl hover:bg-white/10 transition-colors {{ request()->routeIs('admin.eleves.*') || request()->routeIs('admin.enseignants.*') || request()->routeIs('admin.parents.*') || request()->routeIs('admin.eleve-parents.*') ? 'bg-white/10' : '' }}">
+                        <div x-data="{ open: {{ request()->routeIs('admin.eleves.*') || request()->routeIs('admin.enseignants.*') || request()->routeIs('admin.parents.*') ? 'true' : 'false' }} }">
+                            <button @click="open = !open" class="w-full flex items-center justify-between px-3 sm:px-4 py-2 sm:py-3 text-white rounded-lg sm:rounded-xl hover:bg-white/10 transition-colors {{ request()->routeIs('admin.eleves.*') || request()->routeIs('admin.enseignants.*') || request()->routeIs('admin.parents.*') ? 'bg-white/10' : '' }}">
                                 <div class="flex items-center space-x-2 sm:space-x-3">
                                     <div class="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-lg bg-white/10">
                                         <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
@@ -443,7 +432,7 @@
                                 <a href="{{ route('admin.eleves.index') }}" class="block py-1.5 text-xs sm:text-sm {{ request()->routeIs('admin.eleves.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Gestion Élèves</a>
                                 <a href="{{ route('admin.enseignants.index') }}" class="block py-1.5 text-xs sm:text-sm {{ request()->routeIs('admin.enseignants.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Gestion Enseignants</a>
                                 <a href="{{ route('admin.parents.index') }}" class="block py-1.5 text-xs sm:text-sm {{ request()->routeIs('admin.parents.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Gestion des Parents</a>
-                                <a href="{{ route('admin.eleve-parents.index') }}" class="block py-1.5 text-xs sm:text-sm {{ request()->routeIs('admin.eleve-parents.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Liaison Élève-Parents</a>
+                                {{-- <a href="{{ route('admin.eleve-parents.index') }}" class="block py-1.5 text-xs sm:text-sm {{ request()->routeIs('admin.eleve-parents.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Liaison Élève-Parents</a> --}}
                             </div>
                         </div>
 
@@ -506,7 +495,7 @@
 
                         <!-- Administration Système -->
                         <div class="pt-4 mt-4 border-t border-white/20">
-                            <p class="text-[10px] font-bold text-purple-200/50 uppercase tracking-wider px-4 mb-2">Paramètres Avancés</p>
+                            <p class="px-4 mb-4 text-[10px] font-bold tracking-widest uppercase text-purple-200/60">PARAMÈTRES AVANCÉS</p>
                             <div x-data="{ open: {{ request()->routeIs('admin.users.*') || request()->routeIs('admin.messages.*') ? 'true' : 'false' }} }">
                                 <button @click="open = !open" class="w-full flex items-center justify-between px-3 sm:px-4 py-2 sm:py-3 text-white rounded-lg sm:rounded-xl hover:bg-white/10 transition-colors {{ request()->routeIs('admin.users.*') || request()->routeIs('admin.messages.*') ? 'bg-white/10' : '' }}">
                                     <div class="flex items-center space-x-2 sm:space-x-3">
@@ -531,7 +520,7 @@
 
                 <!-- Paramètres -->
                 <div>
-                    <p class="px-2 sm:px-3 mb-2 sm:mb-3 text-[9px] sm:text-xs font-bold tracking-wider uppercase text-purple-200/70">Paramètres</p>
+                    <p class="px-4 mb-4 text-[10px] font-bold tracking-widest uppercase text-purple-200/60">PARAMÈTRES</p>
                     <a href="{{ route('profile.edit') }}" class="flex items-center px-3 sm:px-4 py-2 sm:py-3 space-x-2 sm:space-x-3 text-white nav-link rounded-lg sm:rounded-xl hover:bg-white/10 group">
                         <div class="flex items-center justify-center transition-all rounded-lg w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-white/10 group-hover:bg-white/20">
                             <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>

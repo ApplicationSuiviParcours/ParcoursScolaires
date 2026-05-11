@@ -32,14 +32,13 @@ class NoteSeeder extends Seeder
 
         $created = 0;
         foreach ($evaluations as $evaluation) {
+            // Récupérer TOUS les élèves inscrits dans cette classe
             $elevesInClass = Eleve::whereHas('inscriptions', function ($q) use ($evaluation) {
                 $q->where('classe_id', $evaluation->classe_id);
             })->get();
 
-            $numNotes = mt_rand(4, 8);
-            $notesToCreate = min($numNotes, $elevesInClass->count());
-
-            foreach ($elevesInClass->take($notesToCreate) as $eleve) {
+            // Créer une note pour CHAQUE élève de la classe pour cette évaluation
+            foreach ($elevesInClass as $eleve) {
                 // Trouver le bulletin correspondant pour lier la note (via période)
                 $bulletin = $bulletins->first(function($b) use ($eleve, $evaluation) {
                     return $b->eleve_id == $eleve->id && $b->periode == $evaluation->periode;

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('title', 'Matières par classe')
 
@@ -213,7 +213,7 @@
                             <option value="">Toutes les classes</option>
                             @foreach($classes as $classe)
                                 <option value="{{ $classe->id }}" {{ $classeId == $classe->id ? 'selected' : '' }}>
-                                    {{ $classe->nom }}
+                                    {{ $classe->nom_complet }}
                                 </option>
                             @endforeach
                         </select>
@@ -245,7 +245,7 @@
                             </div>
                             <div>
                                 <h2 class="text-xl sm:text-2xl font-bold text-white">
-                                    {{ $classe->nom }}
+                                    {{ $classe->nom_complet }}
                                 </h2>
                                 <div class="flex flex-wrap items-center mt-1 text-indigo-100 text-xs sm:text-sm">
                                     <span class="mr-2 px-2 py-0.5 bg-white/20 rounded-full">

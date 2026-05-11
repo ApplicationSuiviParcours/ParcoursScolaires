@@ -1,34 +1,9 @@
-{{-- resources/views/dashboard.blade.php --}}
 @extends('layouts.app')
-
-@section('header')
-    <h2 class="font-semibold  text-xl sm:text-sm md:text-sm text-gray-800 leading-tight">
-        {{ __('Tableau de bord') }}
-    </h2>
-@endsection
 
 @section('content')
     @php
-// Données simulées pour les graphiques
-$inscriptionsByMonth = [
-    'labels' => ['Sept', 'Oct', 'Nov', 'Déc', 'Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin'],
-    'data' => [45, 52, 38, 24, 33, 42, 55, 48, 51, 39]
-];
-
-$studentsByClass = [
-    'labels' => ['6ème A', '5ème B', '4ème C', '3ème D', '2nde A', '1ère B', 'Tle C'],
-    'data' => [32, 28, 35, 31, 29, 33, 27]
-];
-
-$gradesByTrimester = [
-    'labels' => ['Trimestre 1', 'Trimestre 2', 'Trimestre 3'],
-    'data' => [13.5, 14.2, 15.8]
-];
-
-$absencesByMonth = [
-    'labels' => ['Sept', 'Oct', 'Nov', 'Déc', 'Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin'],
-    'data' => [12, 18, 15, 8, 10, 14, 22, 16, 19, 13]
-];
+        // Les données sont maintenant injectées depuis le contrôleur
+        // $inscriptionsByMonth, $studentsByClass, $gradesByTrimester, $absencesByMonth, $stats, $activeYear
     @endphp
 
     {{-- Main Container: Added horizontal padding for mobile --}}
@@ -44,11 +19,11 @@ $absencesByMonth = [
                     <div class="flex-1 text-center md:text-left">
                         <div class="inline-flex items-center px-2 py-1 md:px-3 md:py-1.5 bg-white/20 backdrop-blur-sm rounded-full text-white text-[10px] md:text-xs font-semibold mb-2 md:mb-3">
                             <span class="w-1.5 h-1.5 bg-green-400 rounded-full mr-1.5 animate-pulse"></span>
-                            {{ now()->format('l d F Y') }}
+                            {{ now()->translatedFormat('l d F Y') }} • {{ $activeYear->nom ?? 'Année non définie' }}
                         </div>
                         <h3 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2">Bienvenue, Administrateur</h3>
                         <p class="text-blue-50 text-xs sm:text-sm md:text-base lg:text-lg max-w-2xl leading-relaxed">
-                            Gérez et analysez les performances de votre établissement scolaire en temps réel
+                            Gérez et analysez les performances de votre établissement scolaire pour l'année {{ $activeYear->nom ?? '' }}
                         </p>
 
                         <!-- Quick stats -->
@@ -63,7 +38,7 @@ $absencesByMonth = [
                             </div>
                             <div class="bg-white/10 backdrop-blur-sm rounded-lg px-2 py-1 md:px-3 md:py-1.5 flex items-center">
                                 <span class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-1"></span>
-                                <span class="text-white/90 text-[10px] md:text-xs">{{ \App\Models\Eleve::count() }} élèves</span>
+                                <span class="text-white/90 text-[10px] md:text-xs">{{ $stats['totalEleves'] }} élèves</span>
                             </div>
                         </div>
                     </div>
@@ -78,6 +53,7 @@ $absencesByMonth = [
                 </div>
             </div>
 
+
             <!-- Stats Cards -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6 mb-6 md:mb-8">
                 <!-- Total Élèves -->
@@ -88,14 +64,14 @@ $absencesByMonth = [
                             <div class="flex-1 min-w-0">
                                 <p class="text-[10px] sm:text-xs md:text-sm font-semibold text-gray-500 uppercase tracking-wide mb-1">Total Élèves</p>
                                 <p class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent truncate">
-                                    {{ \App\Models\Eleve::count() }}
+                                    {{ $stats['totalEleves'] }}
                                 </p>
                                 <div class="flex items-center mt-1">
                                     <span class="inline-flex items-center px-1.5 py-0.5 bg-green-100 text-green-600 text-[8px] sm:text-[10px] md:text-xs font-semibold rounded-full">
                                         <svg class="w-2 h-2 mr-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
                                         </svg>
-                                        +12% ce mois
+                                        Inscrits cette année
                                     </span>
                                 </div>
                             </div>
@@ -119,14 +95,14 @@ $absencesByMonth = [
                             <div class="flex-1 min-w-0">
                                 <p class="text-[10px] sm:text-xs md:text-sm font-semibold text-gray-500 uppercase tracking-wide mb-1">Enseignants</p>
                                 <p class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-green-600 to-emerald-400 bg-clip-text text-transparent truncate">
-                                    {{ \App\Models\Enseignant::count() }}
+                                    {{ $stats['totalEnseignants'] }}
                                 </p>
                                 <div class="flex items-center mt-1">
                                     <span class="inline-flex items-center px-1.5 py-0.5 bg-green-100 text-green-600 text-[8px] sm:text-[10px] md:text-xs font-semibold rounded-full">
                                         <svg class="w-2 h-2 mr-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
                                         </svg>
-                                        +5% ce mois
+                                        Corps enseignant
                                     </span>
                                 </div>
                             </div>
@@ -150,14 +126,14 @@ $absencesByMonth = [
                             <div class="flex-1 min-w-0">
                                 <p class="text-[10px] sm:text-xs md:text-sm font-semibold text-gray-500 uppercase tracking-wide mb-1">Classes</p>
                                 <p class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-purple-600 to-purple-400 bg-clip-text text-transparent truncate">
-                                    {{ \App\Models\Classe::count() }}
+                                    {{ $stats['totalClasses'] }}
                                 </p>
                                 <div class="flex items-center mt-1">
                                     <span class="inline-flex items-center px-1.5 py-0.5 bg-purple-100 text-purple-600 text-[8px] sm:text-[10px] md:text-xs font-semibold rounded-full">
                                         <svg class="w-2 h-2 mr-0.5" fill="currentColor" viewBox="0 0 24 24">
                                             <path d="M13 10h5l-6 6-6-6h5V3h2v7z"></path>
                                         </svg>
-                                        Stable
+                                        Divisions actives
                                     </span>
                                 </div>
                             </div>
@@ -181,14 +157,14 @@ $absencesByMonth = [
                             <div class="flex-1 min-w-0">
                                 <p class="text-[10px] sm:text-xs md:text-sm font-semibold text-gray-500 uppercase tracking-wide mb-1">Matières</p>
                                 <p class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-amber-600 to-orange-400 bg-clip-text text-transparent truncate">
-                                    {{ \App\Models\Matiere::count() }}
+                                    {{ $stats['totalMatieres'] }}
                                 </p>
                                 <div class="flex items-center mt-1">
                                     <span class="inline-flex items-center px-1.5 py-0.5 bg-green-100 text-green-600 text-[8px] sm:text-[10px] md:text-xs font-semibold rounded-full">
                                         <svg class="w-2 h-2 mr-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
                                         </svg>
-                                        +3 nouvelles
+                                        Programmes d'études
                                     </span>
                                 </div>
                             </div>
@@ -199,7 +175,7 @@ $absencesByMonth = [
                             </div>
                         </div>
                         <div class="mt-2 md:mt-3 h-1 w-full bg-gray-100 rounded-full overflow-hidden">
-                            <div class="h-full w-4/5 bg-gradient-to-r from-amber-400 to-orange-600 rounded-full progress-bar"></div>
+                            <div class="h-full bg-gradient-to-r from-amber-400 to-orange-600 rounded-full progress-bar" style="width: 75%"></div>
                         </div>
                     </div>
                 </div>
@@ -293,193 +269,8 @@ $absencesByMonth = [
                 </div>
             </div>
 
-            <!-- Quick Actions -->
-            <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 mb-6 md:mb-8 border border-gray-100">
-                <div class="p-3 sm:p-4 md:p-5 lg:p-6 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white">
-                    <div class="flex items-center">
-                        <div class="bg-gradient-to-br from-blue-400 to-indigo-600 rounded-lg p-1 mr-2 shadow-md">
-                            <svg class="w-3 h-3 sm:w-4 sm:h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-sm sm:text-base md:text-lg font-bold text-gray-900">Actions rapides</h3>
-                    </div>
-                </div>
-                <div class="p-3 sm:p-4 md:p-5 lg:p-6">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3">
-                        <a href="{{ route('admin.classes.index') }}"
-                           class="group relative bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-lg p-3 md:p-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl overflow-hidden">
-                            <div class="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full -translate-y-8 translate-x-8 group-hover:translate-y-0 group-hover:translate-x-0 transition-transform duration-500"></div>
-                            <div class="relative flex items-center">
-                                <svg class="w-5 h-5 sm:w-6 sm:h-6 mr-2 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-                                </svg>
-                                <div>
-                                    <span class="block font-bold text-xs sm:text-sm md:text-base">Classes</span>
-                                    <span class="text-[8px] sm:text-[10px] md:text-xs text-blue-100">{{ \App\Models\Classe::count() }} classes</span>
-                                </div>
-                            </div>
-                        </a>
 
-                        <a href="{{ route('admin.matieres.index') }}"
-                           class="group relative bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white rounded-lg p-3 md:p-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl overflow-hidden">
-                            <div class="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full -translate-y-8 translate-x-8 group-hover:translate-y-0 group-hover:translate-x-0 transition-transform duration-500"></div>
-                            <div class="relative flex items-center">
-                                <svg class="w-5 h-5 sm:w-6 sm:h-6 mr-2 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                                </svg>
-                                <div>
-                                    <span class="block font-bold text-xs sm:text-sm md:text-base">Matières</span>
-                                    <span class="text-[8px] sm:text-[10px] md:text-xs text-green-100">{{ \App\Models\Matiere::count() }} matières</span>
-                                </div>
-                            </div>
-                        </a>
 
-                        <a href="{{ route('admin.inscriptions.index') }}"
-                           class="group relative bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white rounded-lg p-3 md:p-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl overflow-hidden">
-                            <div class="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full -translate-y-8 translate-x-8 group-hover:translate-y-0 group-hover:translate-x-0 transition-transform duration-500"></div>
-                            <div class="relative flex items-center">
-                                <svg class="w-5 h-5 sm:w-6 sm:h-6 mr-2 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
-                                </svg>
-                                <div>
-                                    <span class="block font-bold text-xs sm:text-sm md:text-base">Inscriptions</span>
-                                    <span class="text-[8px] sm:text-[10px] md:text-xs text-purple-100">{{ \App\Models\Inscription::count() }}</span>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="{{ route('admin.eleves.index') }}"
-                           class="group relative bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 text-white rounded-lg p-3 md:p-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl overflow-hidden">
-                            <div class="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full -translate-y-8 translate-x-8 group-hover:translate-y-0 group-hover:translate-x-0 transition-transform duration-500"></div>
-                            <div class="relative flex items-center">
-                                <svg class="w-5 h-5 sm:w-6 sm:h-6 mr-2 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                                </svg>
-                                <div>
-                                    <span class="block font-bold text-xs sm:text-sm md:text-base">Élèves</span>
-                                    <span class="text-[8px] sm:text-[10px] md:text-xs text-cyan-100">{{ \App\Models\Eleve::count() }} élèves</span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Recent Inscriptions -->
-            <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100">
-                <div class="p-3 sm:p-4 md:p-5 lg:p-6 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white">
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
-                        <div class="flex items-center">
-                            <div class="bg-gradient-to-br from-blue-400 to-indigo-600 rounded-lg p-1 mr-2 shadow-md">
-                                <svg class="w-3 h-3 sm:w-4 sm:h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                            </div>
-                            <h3 class="text-sm sm:text-base md:text-lg font-bold text-gray-900">Inscriptions récentes</h3>
-                        </div>
-                        <a href="{{ route('admin.inscriptions.index') }}" class="text-[10px] sm:text-xs md:text-sm text-indigo-600 hover:text-indigo-800 font-semibold flex items-center group">
-                            Voir tout
-                            <svg class="w-3 h-3 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-100">
-                        <thead class="bg-gradient-to-r from-gray-50 to-gray-100">
-                            <tr>
-                                <th class="px-3 sm:px-4 md:px-6 py-2 md:py-3 text-left text-[8px] sm:text-[10px] md:text-xs font-bold text-gray-600 uppercase tracking-wider">Élève</th>
-                                <th class="px-3 sm:px-4 md:px-6 py-2 md:py-3 text-left text-[8px] sm:text-[10px] md:text-xs font-bold text-gray-600 uppercase tracking-wider">Classe</th>
-                                <th class="hidden sm:table-cell px-3 sm:px-4 md:px-6 py-2 md:py-3 text-left text-[8px] sm:text-[10px] md:text-xs font-bold text-gray-600 uppercase tracking-wider">Date</th>
-                                <th class="px-3 sm:px-4 md:px-6 py-2 md:py-3 text-left text-[8px] sm:text-[10px] md:text-xs font-bold text-gray-600 uppercase tracking-wider">Statut</th>
-                                <th class="px-3 sm:px-4 md:px-6 py-2 md:py-3 text-left text-[8px] sm:text-[10px] md:text-xs font-bold text-gray-600 uppercase tracking-wider">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-100">
-                            @forelse(\App\Models\Inscription::with(['eleve', 'classe'])->latest()->take(5)->get() as $inscription)
-                                <tr class="hover:bg-gradient-to-r hover:from-blue-50 hover:to-transparent transition-all duration-200 group">
-                                    <td class="px-3 sm:px-4 md:px-6 py-2 md:py-3 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold text-[10px] sm:text-xs mr-2 shadow-md flex-shrink-0">
-                                                {{ strtoupper(substr($inscription->eleve->prenom ?? '', 0, 1)) }}{{ strtoupper(substr($inscription->eleve->nom ?? '', 0, 1)) }}
-                                            </div>
-                                            <div class="min-w-0">
-                                                <div class="text-[10px] sm:text-xs md:text-sm font-bold text-gray-900 truncate max-w-[80px] sm:max-w-none">
-                                                    {{ $inscription->eleve->nom ?? '' }} {{ $inscription->eleve->prenom ?? '' }}
-                                                </div>
-                                                <div class="text-[8px] sm:text-[9px] md:text-xs text-gray-500">ID: #{{ $inscription->eleve->id ?? 'N/A' }}</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-3 sm:px-4 md:px-6 py-2 md:py-3 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="w-5 h-5 sm:w-6 sm:h-6 bg-purple-100 rounded-lg flex items-center justify-center mr-1 flex-shrink-0">
-                                                <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-                                                </svg>
-                                            </div>
-                                            <span class="text-[10px] sm:text-xs md:text-sm font-medium text-gray-700 truncate max-w-[60px] sm:max-w-none">{{ $inscription->classe->nom ?? 'N/A' }}</span>
-                                        </div>
-                                    </td>
-                                    <td class="hidden sm:table-cell px-3 sm:px-4 md:px-6 py-2 md:py-3 whitespace-nowrap">
-                                        <div class="flex items-center text-[10px] sm:text-xs text-gray-500">
-                                            <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 mr-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                            </svg>
-                                            {{ $inscription->date_inscription->format('d/m/Y') }}
-                                        </div>
-                                    </td>
-                                    <td class="px-3 sm:px-4 md:px-6 py-2 md:py-3 whitespace-nowrap">
-                                        @if($inscription->statut)
-                                            <span class="px-1.5 py-0.5 md:px-2 md:py-1 inline-flex items-center text-[8px] sm:text-[10px] md:text-xs font-bold rounded-full bg-gradient-to-r from-green-400 to-emerald-500 text-white shadow-sm">
-                                                <span class="w-1 h-1 bg-white rounded-full mr-1 animate-pulse"></span>
-                                                Actif
-                                            </span>
-                                        @else
-                                            <span class="px-1.5 py-0.5 md:px-2 md:py-1 inline-flex items-center text-[8px] sm:text-[10px] md:text-xs font-bold rounded-full bg-gradient-to-r from-red-400 to-red-500 text-white shadow-sm">
-                                                <span class="w-1 h-1 bg-white rounded-full mr-1"></span>
-                                                Inactif
-                                            </span>
-                                        @endif
-                                    </td>
-                                    <td class="px-3 sm:px-4 md:px-6 py-2 md:py-3 whitespace-nowrap">
-                                        <div class="flex items-center space-x-1">
-                                            <a href="#" class="p-1 md:p-1.5 bg-blue-100 text-blue-600 rounded-lg hover:bg-blue-200 transition-colors">
-                                                <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="5" class="px-3 sm:px-4 md:px-6 py-6 md:py-8 text-center">
-                                        <div class="flex flex-col items-center justify-center">
-                                            <div class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gray-100 rounded-2xl flex items-center justify-center mb-2 md:mb-3">
-                                                <svg class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
-                                                </svg>
-                                            </div>
-                                            <h4 class="text-xs sm:text-sm md:text-base font-bold text-gray-700 mb-1">Aucune inscription récente</h4>
-                                            <p class="text-[10px] sm:text-xs text-gray-500 mb-2 md:mb-3">Les nouvelles inscriptions apparaîtront ici</p>
-                                            <a href="{{ route('admin.inscriptions.create') }}" class="px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-[9px] sm:text-[10px] md:text-xs font-bold rounded-lg hover:shadow-lg transition-all">
-                                                <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                                                </svg>
-                                                Nouvelle inscription
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
-            </div>
         </div>
     </div>
 

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('title', 'Modifier la réinscription')
 
@@ -178,7 +178,7 @@
                                     <option value="">Sélectionnez une classe</option>
                                     @foreach($classes as $classe)
                                         <option value="{{ $classe->id }}" {{ old('classe_id', $reinscription->classe_id) == $classe->id ? 'selected' : '' }}>
-                                            {{ $classe->nom }}
+                                            {{ $classe->nom_complet }}
                                         </option>
                                     @endforeach
                                 </select>

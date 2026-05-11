@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('title', 'Tableau des notes par classe')
 
@@ -143,7 +143,7 @@
                         <option value="">Sélectionner</option>
                         @foreach($classes as $classe)
                             <option value="{{ $classe->id }}" {{ $classeId == $classe->id ? 'selected' : '' }}>
-                                {{ $classe->nom }}
+                                {{ $classe->nom_complet }}
                             </option>
                         @endforeach
                     </select>
@@ -167,8 +167,6 @@
                         <option value="Trimestre 1" {{ $periode == 'Trimestre 1' ? 'selected' : '' }}>Trimestre 1</option>
                         <option value="Trimestre 2" {{ $periode == 'Trimestre 2' ? 'selected' : '' }}>Trimestre 2</option>
                         <option value="Trimestre 3" {{ $periode == 'Trimestre 3' ? 'selected' : '' }}>Trimestre 3</option>
-                        <option value="Semestre 1" {{ $periode == 'Semestre 1' ? 'selected' : '' }}>Semestre 1</option>
-                        <option value="Semestre 2" {{ $periode == 'Semestre 2' ? 'selected' : '' }}>Semestre 2</option>
                     </select>
                 </div>
 

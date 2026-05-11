@@ -11,7 +11,7 @@
                 </svg>
             </div>
         </div>
-        <h2 class="text-2xl font-extrabold text-gray-900">Connexion Élève/Enseignant/Parent</h2>
+        <h2 class="text-2xl font-extrabold text-gray-900">Connexion </h2>
         <p class="mt-1 text-sm text-gray-500">Saisissez seulement votre numéro matricule</p>
     </div>
 

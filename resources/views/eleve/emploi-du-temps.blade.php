@@ -32,6 +32,18 @@
                                 Aucune classe assignée
                             @endif
                         </p>
+                        <div class="flex flex-wrap gap-2 mt-4 sm:mt-6">
+                            <a href="{{ route('eleve.emploi-du-temps.exportPdf') }}" 
+                               class="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 bg-white/20 hover:bg-white/30 text-white border border-white/40 rounded-xl backdrop-blur-sm transition-all text-xs sm:text-sm font-medium">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                                Exporter PDF
+                            </a>
+                            <a href="{{ route('eleve.emploi-du-temps.imprimer') }}" target="_blank"
+                               class="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 bg-white text-green-700 hover:bg-green-50 rounded-xl shadow-lg transition-all text-xs sm:text-sm font-medium">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                                Imprimer
+                            </a>
+                        </div>
                     </div>
                     <div class="hidden transition-all duration-700 transform sm:block animate-slide-in-right hover:rotate-12 hover:scale-110">
                         <div class="p-3 border rounded-full sm:p-5 bg-white/20 backdrop-blur-sm border-white/30">

@@ -718,7 +718,7 @@ class EleveAdminController extends Controller
      */
     public function releveNotes(Eleve $eleve, Request $request)
     {
-        $periode = $request->get('periode', 'trimestre1');
+        $periode = $request->get('periode', 'Trimestre 1');
 
         $notes = $eleve->notes()
             ->with(['evaluation.matiere', 'evaluation.classe'])
@@ -730,6 +730,39 @@ class EleveAdminController extends Controller
         $moyenne = $notes->avg('note');
 
         return view('admin.eleves.releve-notes', compact('eleve', 'notes', 'moyenne', 'periode'));
+    }
+
+    /**
+     * Affiche le parcours complet (historique) de l'élève pour l'administrateur
+     */
+    public function parcours(Eleve $eleve)
+    {
+        $eleve->load([
+            'inscriptions' => function($q) {
+                $q->with(['classe.anneeScolaire'])->latest();
+            },
+            'bulletins' => function($q) {
+                $q->with(['classe', 'anneeScolaire'])->latest();
+            },
+            'notes' => function($q) {
+                $q->with(['evaluation.matiere', 'evaluation.classe'])->latest();
+            },
+        ]);
+
+        // Historique via l'attribut du modèle
+        $historique = $eleve->historique_classes;
+
+        // Statistiques globales pour le parcours
+        $statsParcours = [
+            'nombre_annees' => $historique->count(),
+            'premiere_annee' => $historique->last()['annee_scolaire']->nom ?? 'N/A',
+            'derniere_annee' => $historique->first()['annee_scolaire']->nom ?? 'N/A',
+            'moyenne_globale' => $eleve->moyenne_generale,
+            'total_bulletins' => $eleve->bulletins->count(),
+            'total_absences' => $eleve->absences()->count(),
+        ];
+
+        return view('admin.eleves.parcours', compact('eleve', 'historique', 'statsParcours'));
     }
 
     // ============ MÉTHODES D'EXPORT PDF ============

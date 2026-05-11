@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('header')
     <h2 class="font-semibold text-sm text-gray-800 leading-tight">
@@ -47,7 +47,7 @@
                                 <option value="">Sélectionner une classe</option>
                                 @foreach($classes as $classe)
                                     <option value="{{ $classe->id }}" {{ old('classe_id', $evaluation->classe_id) == $classe->id ? 'selected' : '' }}>
-                                        {{ $classe->nom }}
+                                        {{ $classe->nom_complet }}
                                     </option>
                                 @endforeach
                             </select>
@@ -84,9 +84,9 @@
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-2">Période <span class="text-red-500">*</span></label>
                             <select name="periode" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 focus:bg-white transition-colors">
-                                @for($i = 1; $i <= 5; $i++)
-                                    <option value="{{ $i }}" {{ old('periode', $evaluation->periode) == $i ? 'selected' : '' }}>Période {{ $i }}</option>
-                                @endfor
+                                @foreach(['Trimestre 1', 'Trimestre 2', 'Trimestre 3'] as $trim)
+                                    <option value="{{ $trim }}" {{ old('periode', $evaluation->periode) == $trim ? 'selected' : '' }}>{{ $trim }}</option>
+                                @endforeach
                             </select>
                             @error('periode') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                         </div>

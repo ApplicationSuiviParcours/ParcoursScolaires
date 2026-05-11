@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('title', 'Centre de Messages')
 
@@ -100,7 +100,7 @@
                         <select name="classe_id" class="w-full rounded-xl border-2 border-gray-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 px-4 py-2.5 text-sm">
                             <option value="">— Choisir une classe —</option>
                             @foreach($classes as $classe)
-                                <option value="{{ $classe->id }}">{{ $classe->nom }}</option>
+                                <option value="{{ $classe->id }}">{{ $classe->nom_complet }}</option>
                             @endforeach
                         </select>
                     </div>
