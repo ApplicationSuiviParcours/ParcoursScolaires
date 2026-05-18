@@ -147,4 +147,57 @@ class EnfantsController extends Controller
 
         return view('parent.enfant-parcours', compact('eleve', 'historique', 'statsParcours'));
     }
+
+    /**
+     * Exporter le certificat de réussite d'un enfant au format PDF pour les parents
+     */
+    public function exportCertificatEnfantPdf(Eleve $eleve, $anneeScolaireId)
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $parent = $user->parentEleve;
+
+        if (!$parent || !$parent->eleves()->where('eleve_id', $eleve->id)->exists()) {
+            abort(403, 'Vous n\'êtes pas autorisé à consulter le parcours de cet élève.');
+        }
+
+        $anneeScolaire = \App\Models\AnneeScolaire::findOrFail($anneeScolaireId);
+
+        // Récupérer l'inscription de l'élève pour cette année scolaire
+        $inscription = \App\Models\Inscription::where('eleve_id', $eleve->id)
+            ->where('annee_scolaire_id', $anneeScolaire->id)
+            ->with('classe')
+            ->first();
+
+        if (!$inscription) {
+            return redirect()->back()
+                ->with('error', 'Aucune inscription trouvée pour l\'année scolaire demandée.');
+        }
+
+        // Récupérer les bulletins de cette année scolaire
+        $bulletinsAnnee = $eleve->bulletins->where('annee_scolaire_id', $anneeScolaire->id);
+        $moyenneAnnee = $bulletinsAnnee->isNotEmpty() ? round($bulletinsAnnee->avg('moyenne_generale'), 2) : null;
+
+        if ($moyenneAnnee === null || $moyenneAnnee < 10) {
+            return redirect()->back()
+                ->with('error', 'Le certificat de réussite n\'est pas disponible car la moyenne annuelle est insuffisante ou non calculée.');
+        }
+
+        // Calculer la mention
+        $mention = 'Passable';
+        if ($moyenneAnnee >= 16) {
+            $mention = 'Très Bien';
+        } elseif ($moyenneAnnee >= 14) {
+            $mention = 'Bien';
+        } elseif ($moyenneAnnee >= 12) {
+            $mention = 'Assez Bien';
+        }
+
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('eleve.exports.certificat-pdf', compact('eleve', 'anneeScolaire', 'inscription', 'moyenneAnnee', 'mention'));
+        $pdf->setPaper('A4', 'landscape');
+
+        $filename = 'certificat_reussite_' . $eleve->matricule . '_' . str_replace('/', '-', $anneeScolaire->nom) . '.pdf';
+
+        return $pdf->download($filename);
+    }
 }

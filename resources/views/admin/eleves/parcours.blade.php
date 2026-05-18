@@ -207,44 +207,44 @@
             </div>
         </div>
 
-        <!-- Section Conseils/Statistiques Administratives -->
+        <!-- Section Graphique + Suivi administratif -->
         <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="p-8 bg-gradient-to-br from-indigo-900 to-indigo-800 rounded-3xl text-white shadow-xl">
-                <h4 class="text-lg font-black mb-4 flex items-center">
-                    <svg class="w-6 h-6 mr-2 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-                    Performance Globale
+            <!-- Graphique Chart.js -->
+            <div class="p-6 bg-gradient-to-br from-indigo-900 to-indigo-800 rounded-3xl text-white shadow-xl">
+                <h4 class="text-lg font-black mb-1 flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-indigo-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                    </svg>
+                    Progression académique
                 </h4>
-                <p class="text-blue-100 mb-6">Résumé de la trajectoire académique de l'élève à travers les cycles scolaire.</p>
-                <div class="space-y-4">
-                    @php
-                        $progression = [];
-                        foreach($historique->reverse() as $item) {
-                             $bulletins = $eleve->bulletins->where('annee_scolaire_id', $item['annee_scolaire']->id);
-                             if($bulletins->isNotEmpty()) {
-                                 $progression[] = $bulletins->avg('moyenne');
-                             }
-                        }
-                    @endphp
-                    <div class="flex justify-between items-end h-24 gap-1">
-                        @foreach($progression as $moy)
-                            <div class="flex-1 bg-white/20 rounded-t-lg transition-all hover:bg-white/40 cursor-help group relative" style="height: {{ $moy * 5 }}%">
-                                <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-white text-indigo-900 text-[10px] font-black px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
-                                    {{ number_format($moy, 2) }}
-                                </div>
-                            </div>
-                        @endforeach
-                        @if(empty($progression))
-                            <div class="w-full h-full flex items-center justify-center text-white/30 italic text-sm">Données insuffisantes</div>
-                        @endif
-                    </div>
-                    <div class="flex justify-between text-[10px] font-bold text-blue-300 uppercase tracking-tighter">
-                        <span>Début</span>
-                        <span>Progression annuelle</span>
-                        <span>Actuel</span>
-                    </div>
+                <p class="text-indigo-300 text-xs mb-4">Moyennes par trimestre sur toutes les années scolaires</p>
+
+                @php
+                    $chartLabels = [];
+                    $chartT1 = []; $chartT2 = []; $chartT3 = [];
+                    foreach($historique->reverse() as $hi) {
+                        $bAnnee = $eleve->bulletins->where('annee_scolaire_id', $hi['annee_scolaire']->id);
+                        $chartLabels[] = $hi['annee_scolaire']->nom;
+                        $bT1 = $bAnnee->firstWhere('periode', 'Trimestre 1');
+                        $bT2 = $bAnnee->firstWhere('periode', 'Trimestre 2');
+                        $bT3 = $bAnnee->firstWhere('periode', 'Trimestre 3');
+                        $chartT1[] = $bT1 ? round($bT1->moyenne_generale, 2) : null;
+                        $chartT2[] = $bT2 ? round($bT2->moyenne_generale, 2) : null;
+                        $chartT3[] = $bT3 ? round($bT3->moyenne_generale, 2) : null;
+                    }
+                @endphp
+
+                <div style="position:relative; height:200px;">
+                    <canvas id="adminEvolutionChart"></canvas>
+                </div>
+                <div class="flex flex-wrap gap-4 mt-3 text-xs font-semibold">
+                    <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-indigo-400 inline-block"></span> Trimestre 1</span>
+                    <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-emerald-400 inline-block"></span> Trimestre 2</span>
+                    <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-purple-400 inline-block"></span> Trimestre 3</span>
                 </div>
             </div>
 
+            <!-- Suivi administratif -->
             <div class="p-8 bg-white border border-gray-100 rounded-3xl shadow-xl">
                 <h4 class="text-lg font-black mb-4 text-gray-800 flex items-center">
                     <svg class="w-6 h-6 mr-2 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
@@ -273,6 +273,96 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const ctx = document.getElementById('adminEvolutionChart');
+    if (!ctx) return;
+
+    const labels  = @json($chartLabels ?? []);
+    const dataT1  = @json($chartT1 ?? []);
+    const dataT2  = @json($chartT2 ?? []);
+    const dataT3  = @json($chartT3 ?? []);
+
+    const thresholdPlugin = {
+        id: 'threshold',
+        beforeDraw(chart) {
+            const { ctx, chartArea: { left, right }, scales: { y } } = chart;
+            const y10 = y.getPixelForValue(10);
+            ctx.save();
+            ctx.setLineDash([6, 4]);
+            ctx.strokeStyle = 'rgba(255,255,255,0.35)';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(left, y10);
+            ctx.lineTo(right, y10);
+            ctx.stroke();
+            ctx.restore();
+        }
+    };
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Trimestre 1',
+                    data: dataT1,
+                    borderColor: '#818cf8',
+                    pointBackgroundColor: '#818cf8',
+                    pointRadius: 5, pointHoverRadius: 8,
+                    tension: 0.4, spanGaps: true, fill: false,
+                },
+                {
+                    label: 'Trimestre 2',
+                    data: dataT2,
+                    borderColor: '#34d399',
+                    pointBackgroundColor: '#34d399',
+                    pointRadius: 5, pointHoverRadius: 8,
+                    tension: 0.4, spanGaps: true, fill: false,
+                },
+                {
+                    label: 'Trimestre 3',
+                    data: dataT3,
+                    borderColor: '#c084fc',
+                    pointBackgroundColor: '#c084fc',
+                    pointRadius: 5, pointHoverRadius: 8,
+                    tension: 0.4, spanGaps: true, fill: false,
+                },
+            ],
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: 'rgba(15,23,42,0.9)',
+                    callbacks: {
+                        label: ctx => ctx.dataset.label + ' : ' + (ctx.raw !== null ? ctx.raw + '/20' : 'N/A'),
+                    }
+                },
+            },
+            scales: {
+                y: {
+                    min: 0, max: 20,
+                    grid: { color: 'rgba(255,255,255,0.07)' },
+                    ticks: { callback: v => v + '/20', stepSize: 5, font: { size: 10 }, color: 'rgba(255,255,255,0.6)' },
+                },
+                x: {
+                    grid: { display: false },
+                    ticks: { font: { size: 10 }, color: 'rgba(255,255,255,0.6)' },
+                },
+            },
+        },
+        plugins: [thresholdPlugin],
+    });
+});
+</script>
+@endpush
 
 <style>
     @keyframes pulse-slow {

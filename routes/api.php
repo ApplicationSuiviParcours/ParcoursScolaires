@@ -41,6 +41,7 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::post('/absences/{absence_id}/justifier', [\App\Http\Controllers\Api\Parent\AbsenceController::class, 'justifier']);
             Route::get('/emploi-du-temps', [\App\Http\Controllers\Api\Parent\EmploiController::class, 'show']);
             Route::get('/parcours', [\App\Http\Controllers\Api\Parent\EnfantsController::class, 'parcoursEnfant']);
+            Route::get('/parcours/{annee_scolaire_id}/certificat', [\App\Http\Controllers\Api\Parent\EnfantsController::class, 'certificat']);
         });
     });
 
@@ -56,6 +57,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/emploi-du-temps', [\App\Http\Controllers\Api\Eleve\EmploiController::class, 'index']);
         Route::get('/agenda', [\App\Http\Controllers\Api\Eleve\AgendaController::class, 'index']);
         Route::get('/parcours', [\App\Http\Controllers\Api\Eleve\DashboardController::class, 'parcours']);
+        Route::get('/parcours/{annee_scolaire_id}/certificat', [\App\Http\Controllers\Api\Eleve\DashboardController::class, 'certificat']);
     });
 
     // -------------------------------------------------------

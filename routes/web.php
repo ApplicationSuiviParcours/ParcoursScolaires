@@ -363,6 +363,7 @@ Route::middleware(['auth', 'role:eleve'])->group(function () {
     Route::get('/eleve/emploi-du-temps/export-pdf', [EleveController::class, 'exportEmploiDuTempsPdf'])->name('eleve.emploi-du-temps.exportPdf');
     Route::get('/eleve/emploi-du-temps/imprimer', [EleveController::class, 'imprimerEmploiDuTemps'])->name('eleve.emploi-du-temps.imprimer');
     Route::get('/eleve/mon-parcours', [EleveController::class, 'monParcours'])->name('eleve.parcours');
+    Route::get('/eleve/parcours/{annee_scolaire_id}/certificat', [EleveController::class, 'exportCertificatPdf'])->name('eleve.certificat');
 });
 
 // ============================================
@@ -398,6 +399,7 @@ Route::middleware(['auth', 'role:parent'])->group(function () {
 
     // Parcours de l'enfant
     Route::get('/parent/enfant/{eleve}/parcours', [App\Http\Controllers\Parent\EnfantsController::class, 'parcoursEnfant'])->name('parent.enfant.parcours');
+    Route::get('/parent/enfant/{eleve}/parcours/{annee_scolaire_id}/certificat', [App\Http\Controllers\Parent\EnfantsController::class, 'exportCertificatEnfantPdf'])->name('parent.enfant.certificat');
 });
 
 // Route pour la recherche
