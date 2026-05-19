@@ -3,7 +3,7 @@
 @section('title', 'Gérer les matières de la classe')
 
 @section('header')
-<div class="relative overflow-hidden bg-gradient-to-br from-teal-600 via-teal-700 to-cyan-800 py-8 md:py-12">
+<div class="relative overflow-hidden bg-blue-900 py-8 md:py-12">
     <!-- Éléments décoratifs animés -->
     <div class="absolute inset-0 opacity-10">
         <div class="absolute -top-24 -right-24 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-pulse"></div>
@@ -108,7 +108,7 @@
 
     <!-- Sélection de la classe -->
     <div class="bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden mb-6 sm:mb-8">
-        <div class="bg-gradient-to-r from-teal-500 to-cyan-600 px-4 sm:px-8 py-4 sm:py-6">
+        <div class="bg-blue-900 px-4 sm:px-8 py-4 sm:py-6">
             <div class="flex flex-col sm:flex-row items-center sm:items-center">
                 <div class="w-12 h-12 sm:w-14 sm:h-14 bg-white/20 backdrop-blur-lg rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-0 sm:mr-5">
                     <svg class="w-6 h-6 sm:w-7 sm:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -147,7 +147,7 @@
                     <a href="{{ route('admin.classe_matieres.manage') }}" class="w-full sm:w-auto text-center px-4 sm:px-6 py-2.5 sm:py-3 bg-gray-100 text-gray-700 rounded-lg sm:rounded-xl hover:bg-gray-200 transition-all duration-300 text-sm">
                         Réinitialiser
                     </a>
-                    <button type="submit" class="w-full sm:w-auto px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-teal-500 to-cyan-600 hover:from-teal-600 hover:to-cyan-700 text-white font-semibold rounded-lg sm:rounded-xl transition-all duration-300 text-sm">
+                    <button type="submit" class="w-full sm:w-auto px-4 sm:px-6 py-2.5 sm:py-3 bg-blue-900 hover:from-teal-600 hover:to-cyan-700 text-white font-semibold rounded-lg sm:rounded-xl transition-all duration-300 text-sm">
                         Afficher
                     </button>
                 </div>
@@ -158,7 +158,7 @@
     @if($classeId && isset($classe))
         <!-- Informations de la classe -->
         <div class="bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden mb-6 sm:mb-8">
-            <div class="bg-gradient-to-r from-indigo-500 to-purple-600 px-4 sm:px-8 py-4 sm:py-5">
+            <div class="bg-blue-900 px-4 sm:px-8 py-4 sm:py-5">
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div class="flex items-center">
                         <div class="w-12 h-12 sm:w-14 sm:h-14 bg-white/20 backdrop-blur-lg rounded-xl sm:rounded-2xl flex items-center justify-center mr-3 sm:mr-5">
@@ -166,7 +166,7 @@
                         </div>
                         <div class="text-center sm:text-left">
                             <h2 class="text-xl sm:text-2xl font-bold text-white">{{ $classe->nom_complet }}</h2>
-                            <p class="text-indigo-100 text-xs sm:text-sm">Gestion des matières assignées</p>
+                            <p class="text-blue-100 text-xs sm:text-sm">Gestion des matières assignées</p>
                         </div>
                     </div>
                     <div class="bg-white/20 backdrop-blur-lg rounded-lg sm:rounded-xl px-4 sm:px-6 py-2 sm:py-3 text-white text-center">
@@ -243,8 +243,8 @@
                                     <tr class="hover:bg-gray-50 transition-colors duration-200">
                                         <td class="px-4 sm:px-6 py-3 sm:py-4">
                                             <div class="flex items-center">
-                                                <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center mr-2 sm:mr-3 flex-shrink-0">
-                                                    <span class="text-purple-700 font-bold text-xs">{{ substr($assignation->matiere->nom, 0, 2) }}</span>
+                                                <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-2 sm:mr-3 flex-shrink-0">
+                                                    <span class="text-blue-900 font-bold text-xs">{{ substr($assignation->matiere->nom, 0, 2) }}</span>
                                                 </div>
                                                 <div class="min-w-0">
                                                     <span class="text-xs sm:text-sm font-medium text-gray-900 block truncate">{{ $assignation->matiere->nom }}</span>
@@ -291,11 +291,11 @@
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                             <div class="bg-gray-50 rounded-lg sm:rounded-xl p-3 sm:p-4">
                                 <p class="text-xs text-gray-500 mb-1">Total coefficients</p>
-                                <p class="text-xl sm:text-2xl font-bold text-indigo-600">{{ $stats['coefficient_total'] }}</p>
+                                <p class="text-xl sm:text-2xl font-bold text-blue-900">{{ $stats['coefficient_total'] }}</p>
                             </div>
                             <div class="bg-gray-50 rounded-lg sm:rounded-xl p-3 sm:p-4">
                                 <p class="text-xs text-gray-500 mb-1">Moyenne</p>
-                                <p class="text-xl sm:text-2xl font-bold text-purple-600">{{ $stats['coefficient_moyen'] }}</p>
+                                <p class="text-xl sm:text-2xl font-bold text-yellow-600">{{ $stats['coefficient_moyen'] }}</p>
                             </div>
                             <div class="bg-gray-50 rounded-lg sm:rounded-xl p-3 sm:p-4">
                                 <p class="text-xs text-gray-500 mb-1">Nombre de matières</p>

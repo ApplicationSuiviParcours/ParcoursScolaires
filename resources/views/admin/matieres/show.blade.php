@@ -3,7 +3,7 @@
 @section('title', 'Détails de la matière')
 
 @section('header')
-<div class="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 py-8 md:py-12">
+<div class="relative overflow-hidden bg-blue-900 py-8 md:py-12">
     <!-- Éléments décoratifs animés -->
     <div class="absolute inset-0 opacity-10">
         <div class="absolute -top-24 -right-24 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-pulse"></div>
@@ -89,7 +89,7 @@
                 <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-700">
                     {{ $matiere->code }}
                 </span>
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-700">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-900">
                     Coef. {{ $matiere->coefficient }}
                 </span>
             </div>
@@ -100,19 +100,19 @@
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 mb-8">
         <!-- Carte Informations générales -->
         <div class="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden">
-            <div class="bg-gradient-to-r from-blue-500 to-indigo-600 px-4 md:px-6 py-4">
+            <div class="bg-blue-900 px-4 md:px-6 py-4">
                 <h3 class="text-lg font-semibold text-white">Informations générales</h3>
             </div>
             <div class="p-4 md:p-6">
                 <div class="flex flex-col sm:flex-row items-center sm:items-start mb-6 text-center sm:text-left">
-                    <div class="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center text-white font-bold text-2xl md:text-3xl shadow-lg flex-shrink-0 mb-4 sm:mb-0 sm:mr-4">
+                    <div class="w-16 h-16 md:w-20 md:h-20 bg-blue-900 rounded-2xl flex items-center justify-center text-white font-bold text-2xl md:text-3xl shadow-lg flex-shrink-0 mb-4 sm:mb-0 sm:mr-4">
                         {{ substr($matiere->nom, 0, 2) }}
                     </div>
                     <div class="min-w-0">
                         <h2 class="text-xl md:text-2xl font-bold text-gray-800 truncate">{{ $matiere->nom }}</h2>
                         <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mt-2">
                             <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs md:text-sm font-medium rounded-full">{{ $matiere->code }}</span>
-                            <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs md:text-sm font-medium rounded-full">Coef. {{ $matiere->coefficient }}</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-900 text-xs md:text-sm font-medium rounded-full">Coef. {{ $matiere->coefficient }}</span>
                         </div>
                     </div>
                 </div>
@@ -138,7 +138,7 @@
 
         <!-- Carte Statistiques -->
         <div class="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden">
-            <div class="bg-gradient-to-r from-green-500 to-emerald-600 px-4 md:px-6 py-4">
+            <div class="bg-blue-900 px-4 md:px-6 py-4">
                 <h3 class="text-lg font-semibold text-white">Statistiques</h3>
             </div>
             <div class="p-4 md:p-6">
@@ -146,7 +146,7 @@
                     <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
                         <div class="flex items-center min-w-0">
                             <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center mr-3 flex-shrink-0">
-                                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                                 </svg>
                             </div>
@@ -188,8 +188,8 @@
 
                     <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
                         <div class="flex items-center min-w-0">
-                            <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center mr-3 flex-shrink-0">
-                                <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center mr-3 flex-shrink-0">
+                                <svg class="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                 </svg>
                             </div>
@@ -205,7 +205,7 @@
 
         <!-- Carte Performance -->
         <div class="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden md:col-span-2 xl:col-span-1">
-            <div class="bg-gradient-to-r from-purple-500 to-pink-600 px-4 md:px-6 py-4">
+            <div class="bg-blue-900 px-4 md:px-6 py-4">
                 <h3 class="text-lg font-semibold text-white">Performance</h3>
             </div>
             <div class="p-4 md:p-6">
@@ -219,7 +219,7 @@
                             </span>
                         </div>
                         <div class="w-full bg-gray-200 rounded-full h-2.5 md:h-3">
-                            <div class="bg-gradient-to-r from-purple-500 to-pink-600 h-2.5 md:h-3 rounded-full" 
+                            <div class="bg-blue-900 h-2.5 md:h-3 rounded-full" 
                                  style="width: {{ ($stats['moyenne_notes'] / 20) * 100 }}%"></div>
                         </div>
                     </div>
@@ -241,8 +241,8 @@
                     <!-- Heures de cours -->
                     <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
                         <div class="flex items-center">
-                            <div class="w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center mr-3">
-                                <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center mr-3">
+                                <svg class="w-5 h-5 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
                             </div>
@@ -263,7 +263,7 @@
             <!-- Onglets scrollables sur mobile -->
             <nav class="flex overflow-x-auto scrollbar-hide space-x-2 md:space-x-8 px-4 md:px-6" aria-label="Tabs" style="-webkit-overflow-scrolling: touch;">
                 <button @click="tab = 'classes'" 
-                        :class="{ 'border-indigo-500 text-indigo-600': tab === 'classes', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': tab !== 'classes' }"
+                        :class="{ 'border-blue-900 text-blue-900': tab === 'classes', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': tab !== 'classes' }"
                         class="py-3 md:py-4 px-2 md:px-1 border-b-2 font-medium text-xs md:text-sm transition-colors duration-200 whitespace-nowrap flex-shrink-0">
                     <svg class="w-4 h-4 md:w-5 md:h-5 inline mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z"></path>
@@ -271,7 +271,7 @@
                     Classes ({{ $stats['total_classes'] }})
                 </button>
                 <button @click="tab = 'enseignants'" 
-                        :class="{ 'border-indigo-500 text-indigo-600': tab === 'enseignants', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': tab !== 'enseignants' }"
+                        :class="{ 'border-blue-900 text-blue-900': tab === 'enseignants', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': tab !== 'enseignants' }"
                         class="py-3 md:py-4 px-2 md:px-1 border-b-2 font-medium text-xs md:text-sm transition-colors duration-200 whitespace-nowrap flex-shrink-0">
                     <svg class="w-4 h-4 md:w-5 md:h-5 inline mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
@@ -279,7 +279,7 @@
                     Enseignants ({{ $stats['total_enseignants'] }})
                 </button>
                 <button @click="tab = 'evaluations'" 
-                        :class="{ 'border-indigo-500 text-indigo-600': tab === 'evaluations', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': tab !== 'evaluations' }"
+                        :class="{ 'border-blue-900 text-blue-900': tab === 'evaluations', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': tab !== 'evaluations' }"
                         class="py-3 md:py-4 px-2 md:px-1 border-b-2 font-medium text-xs md:text-sm transition-colors duration-200 whitespace-nowrap flex-shrink-0">
                     <svg class="w-4 h-4 md:w-5 md:h-5 inline mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
@@ -287,7 +287,7 @@
                     Évaluations
                 </button>
                 <button @click="tab = 'absences'" 
-                        :class="{ 'border-indigo-500 text-indigo-600': tab === 'absences', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': tab !== 'absences' }"
+                        :class="{ 'border-blue-900 text-blue-900': tab === 'absences', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': tab !== 'absences' }"
                         class="py-3 md:py-4 px-2 md:px-1 border-b-2 font-medium text-xs md:text-sm transition-colors duration-200 whitespace-nowrap flex-shrink-0">
                     <svg class="w-4 h-4 md:w-5 md:h-5 inline mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -302,9 +302,9 @@
                     @if($classes->count() > 0)
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
                             @foreach($classes as $classe)
-                                <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl md:rounded-2xl p-4 md:p-5 hover:shadow-lg transition-all duration-300">
+                                <div class="bg-blue-900 rounded-xl md:rounded-2xl p-4 md:p-5 hover:shadow-lg transition-all duration-300">
                                     <div class="flex items-center">
-                                        <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg md:rounded-xl flex items-center justify-center text-white font-bold text-base md:text-lg flex-shrink-0">
+                                        <div class="w-10 h-10 md:w-12 md:h-12 bg-blue-900 rounded-lg md:rounded-xl flex items-center justify-center text-white font-bold text-base md:text-lg flex-shrink-0">
                                             {{ substr($classe->nom, 0, 2) }}
                                         </div>
                                         <div class="ml-3 md:ml-4 min-w-0">
@@ -325,9 +325,9 @@
                     @if($enseignants->count() > 0)
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
                             @foreach($enseignants as $enseignant)
-                                <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl md:rounded-2xl p-4 md:p-5 hover:shadow-lg transition-all duration-300">
+                                <div class="bg-blue-900 rounded-xl md:rounded-2xl p-4 md:p-5 hover:shadow-lg transition-all duration-300">
                                     <div class="flex items-center">
-                                        <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg md:rounded-xl flex items-center justify-center text-white font-bold text-base md:text-lg flex-shrink-0">
+                                        <div class="w-10 h-10 md:w-12 md:h-12 bg-blue-900 rounded-lg md:rounded-xl flex items-center justify-center text-white font-bold text-base md:text-lg flex-shrink-0">
                                             {{ substr($enseignant->prenom, 0, 1) }}{{ substr($enseignant->nom, 0, 1) }}
                                         </div>
                                         <div class="ml-3 md:ml-4 flex-1 min-w-0">

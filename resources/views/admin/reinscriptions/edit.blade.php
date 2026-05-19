@@ -3,7 +3,7 @@
 @section('title', 'Modifier la réinscription')
 
 @section('header')
-<div class="relative overflow-hidden bg-gradient-to-br from-amber-600 via-amber-700 to-orange-800 py-10 sm:py-12 no-print">
+<div class="relative overflow-hidden bg-blue-900 py-10 sm:py-12 no-print">
     <!-- Éléments décoratifs animés -->
     <div class="absolute inset-0 opacity-10">
         <div class="absolute -top-24 -right-24 w-64 sm:w-96 h-64 sm:h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-pulse"></div>
@@ -105,7 +105,7 @@
     <div class="bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden mb-6 sm:mb-8 transition-all duration-500 hover:shadow-2xl">
 
         {{-- En-tête du formulaire --}}
-        <div class="bg-gradient-to-r from-amber-500 to-orange-600 px-5 sm:px-8 py-5 sm:py-6">
+        <div class="bg-blue-900 px-5 sm:px-8 py-5 sm:py-6">
             <div class="flex items-start sm:items-center gap-4">
                 <div class="w-12 h-12 sm:w-14 sm:h-14 bg-white/20 backdrop-blur-lg rounded-xl sm:rounded-2xl flex items-center justify-center flex-shrink-0">
                     <svg class="w-6 h-6 sm:w-7 sm:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -125,7 +125,7 @@
                 @method('PUT')
 
                 {{-- ── INFOS ÉLÈVE (lecture seule) ── --}}
-                <div class="mb-6 sm:mb-8 p-4 sm:p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl sm:rounded-2xl border border-blue-100">
+                <div class="mb-6 sm:mb-8 p-4 sm:p-6 bg-blue-900 rounded-xl sm:rounded-2xl border border-blue-100">
                     <div class="flex items-center mb-4 gap-3">
                         <div class="w-9 h-9 sm:w-10 sm:h-10 bg-blue-500 rounded-xl flex items-center justify-center flex-shrink-0">
                             <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -263,7 +263,7 @@
                         </div>
 
                         {{-- Aperçu du statut --}}
-                        <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-4 sm:p-5 border border-gray-200">
+                        <div class="bg-blue-900 rounded-xl p-4 sm:p-5 border border-gray-200">
                             <div class="flex items-center justify-between mb-2">
                                 <span class="text-xs sm:text-sm font-medium text-gray-600">Aperçu du statut :</span>
                                 <div id="statusPreview" class="status-badge">
@@ -334,7 +334,7 @@
                     </a>
                     <button type="submit"
                             class="group inline-flex items-center justify-center px-7 sm:px-10 py-3 sm:py-3.5
-                                   bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700
+                                   bg-blue-900 hover:from-amber-600 hover:to-orange-700
                                    text-white font-semibold rounded-xl transition-all duration-300
                                    transform hover:scale-105 hover:shadow-xl text-sm">
                         <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2 flex-shrink-0 group-hover:animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -351,7 +351,7 @@
     <div class="bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden border-l-4 sm:border-l-8 border-red-500 transition-all duration-500 hover:shadow-2xl">
 
         {{-- En-tête zone danger --}}
-        <div class="bg-gradient-to-r from-red-50 to-red-100 px-5 sm:px-8 py-5 sm:py-6">
+        <div class="bg-blue-900 px-5 sm:px-8 py-5 sm:py-6">
             <div class="flex items-center gap-3 sm:gap-5">
                 <div class="w-12 h-12 sm:w-14 sm:h-14 bg-red-500 rounded-xl sm:rounded-2xl flex items-center justify-center flex-shrink-0 animate-pulse">
                     <svg class="w-6 h-6 sm:w-7 sm:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -5,8 +5,8 @@
     <div class="mb-5 text-center">
         <div class="relative inline-flex items-center justify-center mb-3">
             <div class="absolute inset-0 bg-green-100 rounded-full animate-ping opacity-20"></div>
-            <div class="relative inline-flex items-center justify-center rounded-full shadow-lg w-14 h-14 bg-gradient-to-br from-green-600 to-emerald-500">
-                <svg class="text-white w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="relative inline-flex items-center justify-center rounded-full shadow-lg w-14 h-14 bg-blue-900">
+                <svg class="text-yellow-500 w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                 </svg>
             </div>
@@ -53,7 +53,7 @@
             </label>
         </div>
 
-        <button type="submit" class="group relative w-full flex justify-center py-2.5 px-4 border border-transparent rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-700 hover:to-emerald-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-150 shadow-md hover:shadow-lg">
+        <button type="submit" class="group relative w-full flex justify-center py-2.5 px-4 border border-transparent rounded-xl text-sm font-semibold text-white bg-blue-900 hover:from-green-700 hover:to-emerald-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-150 shadow-md hover:shadow-lg">
             <span class="absolute inset-y-0 left-0 flex items-center pl-3">
                 <svg class="w-5 h-5 text-green-300 transition-colors group-hover:text-green-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14"></path>

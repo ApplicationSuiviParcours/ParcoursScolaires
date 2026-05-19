@@ -3,7 +3,7 @@
 @section('title', 'Matières par classe')
 
 @section('header')
-<div class="relative overflow-hidden bg-gradient-to-br from-indigo-600 via-indigo-700 to-purple-800 py-8 md:py-12">
+<div class="relative overflow-hidden bg-blue-900 py-8 md:py-12">
     <!-- Éléments décoratifs animés -->
     <div class="absolute inset-0 opacity-10">
         <div class="absolute -top-24 -right-24 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-pulse"></div>
@@ -93,14 +93,14 @@
 
     <!-- Statistiques rapides -->
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-8">
-        <div class="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 border-l-4 border-indigo-500 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 group">
+        <div class="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 border-l-4 border-blue-900 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 group">
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-xs sm:text-sm text-gray-500 font-medium uppercase">Total</p>
-                    <p class="text-xl sm:text-3xl font-bold text-gray-800 group-hover:text-indigo-600 transition-colors duration-300">{{ $stats['total_assignations'] }}</p>
+                    <p class="text-xl sm:text-3xl font-bold text-gray-800 group-hover:text-blue-900 transition-colors duration-300">{{ $stats['total_assignations'] }}</p>
                 </div>
-                <div class="bg-indigo-100 rounded-lg sm:rounded-xl p-2 sm:p-3 group-hover:scale-110 transition-transform duration-300">
-                    <svg class="w-5 h-5 sm:w-8 sm:h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="bg-blue-100 rounded-lg sm:rounded-xl p-2 sm:p-3 group-hover:scale-110 transition-transform duration-300">
+                    <svg class="w-5 h-5 sm:w-8 sm:h-8 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l5 5a2 2 0 01.586 1.414V19a2 2 0 01-2 2H7a2 2 0 01-2-2V5a2 2 0 012-2z"></path>
                     </svg>
                 </div>
@@ -133,16 +133,16 @@
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-xs sm:text-sm text-gray-500 font-medium uppercase">Coeff. Moyen</p>
-                    <p class="text-xl sm:text-3xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">{{ $stats['moyenne_coefficient'] }}</p>
+                    <p class="text-xl sm:text-3xl font-bold text-gray-800 group-hover:text-blue-900 transition-colors duration-300">{{ $stats['moyenne_coefficient'] }}</p>
                 </div>
                 <div class="bg-blue-100 rounded-lg sm:rounded-xl p-2 sm:p-3 group-hover:scale-110 transition-transform duration-300">
-                    <svg class="w-5 h-5 sm:w-8 sm:h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 sm:w-8 sm:h-8 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                     </svg>
                 </div>
             </div>
             <div class="mt-3 sm:mt-4 flex items-center justify-between text-xs sm:text-sm">
-                <span class="text-purple-600">Min: {{ $stats['coefficient_min'] ?? 0 }}</span>
+                <span class="text-yellow-600">Min: {{ $stats['coefficient_min'] ?? 0 }}</span>
                 <span class="text-orange-600">Max: {{ $stats['coefficient_max'] ?? 0 }}</span>
             </div>
         </div>
@@ -166,12 +166,12 @@
     <div class="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 mb-6 sm:mb-8" x-data="{ filters: {{ request()->anyFilled(['search', 'classe_id']) ? 'true' : 'false' }} }">
         <div class="flex items-center justify-between mb-4">
             <h2 class="text-base sm:text-lg font-semibold text-gray-800 flex items-center">
-                <svg class="w-5 h-5 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 mr-2 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
                 </svg>
                 Filtres
             </h2>
-            <button @click="filters = !filters" class="text-indigo-600 hover:text-indigo-800 p-1">
+            <button @click="filters = !filters" class="text-blue-900 hover:text-indigo-800 p-1">
                 <svg class="w-5 h-5 transition-transform duration-500" :class="{ 'rotate-180': filters }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
@@ -191,10 +191,10 @@
                            name="search" 
                            value="{{ $search ?? '' }}"
                            placeholder="Rechercher une classe..."
-                           class="w-full pl-10 sm:pl-12 pr-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border-2 border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-300 text-sm">
+                           class="w-full pl-10 sm:pl-12 pr-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl border-2 border-gray-200 focus:border-blue-900 focus:ring-2 focus:ring-indigo-200 transition-all duration-300 text-sm">
                 </div>
                 <button type="submit" 
-                        class="w-full sm:w-auto px-6 py-2.5 sm:py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-lg sm:rounded-xl transition-all duration-300 transform hover:scale-105 text-sm">
+                        class="w-full sm:w-auto px-6 py-2.5 sm:py-3 bg-blue-900 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-lg sm:rounded-xl transition-all duration-300 transform hover:scale-105 text-sm">
                     Rechercher
                 </button>
             </div>
@@ -209,7 +209,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z"></path>
                             </svg>
                         </div>
-                        <select name="classe_id" class="w-full pl-10 sm:pl-12 pr-4 py-2 sm:py-2.5 rounded-lg sm:rounded-xl border-2 border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 appearance-none bg-white text-sm">
+                        <select name="classe_id" class="w-full pl-10 sm:pl-12 pr-4 py-2 sm:py-2.5 rounded-lg sm:rounded-xl border-2 border-gray-200 focus:border-blue-900 focus:ring-2 focus:ring-indigo-200 appearance-none bg-white text-sm">
                             <option value="">Toutes les classes</option>
                             @foreach($classes as $classe)
                                 <option value="{{ $classe->id }}" {{ $classeId == $classe->id ? 'selected' : '' }}>
@@ -234,7 +234,7 @@
         @forelse($classes as $index => $classe)
             <div class="bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl transform hover:-translate-y-1">
                 <!-- En-tête de classe -->
-                <div class="bg-gradient-to-r from-indigo-500 to-purple-600 px-4 sm:px-8 py-4 sm:py-5 relative overflow-hidden">
+                <div class="bg-blue-900 px-4 sm:px-8 py-4 sm:py-5 relative overflow-hidden">
                     <!-- Décorations -->
                     <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full transform translate-x-16 -translate-y-16"></div>
                     
@@ -247,7 +247,7 @@
                                 <h2 class="text-xl sm:text-2xl font-bold text-white">
                                     {{ $classe->nom_complet }}
                                 </h2>
-                                <div class="flex flex-wrap items-center mt-1 text-indigo-100 text-xs sm:text-sm">
+                                <div class="flex flex-wrap items-center mt-1 text-blue-100 text-xs sm:text-sm">
                                     <span class="mr-2 px-2 py-0.5 bg-white/20 rounded-full">
                                         {{ $classe->matieres->count() }} matière(s)
                                     </span>
@@ -279,10 +279,10 @@
                                 </thead>
                                 <tbody class="divide-y divide-gray-200">
                                     @foreach($classe->matieres as $assignation)
-                                        <tr class="hover:bg-indigo-50/50 transition-colors duration-200">
+                                        <tr class="hover:bg-blue-50/50 transition-colors duration-200">
                                             <td class="px-4 sm:px-6 py-3 sm:py-4">
                                                 <div class="flex items-center">
-                                                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-lg flex items-center justify-center mr-2 sm:mr-3 text-white font-bold text-xs sm:text-sm shadow">
+                                                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-blue-900 rounded-lg flex items-center justify-center mr-2 sm:mr-3 text-white font-bold text-xs sm:text-sm shadow">
                                                         {{ substr($assignation->matiere->nom, 0, 2) }}
                                                     </div>
                                                     <span class="text-xs sm:text-sm font-medium text-gray-900">
@@ -291,16 +291,16 @@
                                                 </div>
                                             </td>
                                             <td class="px-6 py-4 hidden sm:table-cell">
-                                                <span class="px-3 py-1 bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 text-xs font-medium rounded-full border border-blue-200">
+                                                <span class="px-3 py-1 bg-blue-900 text-blue-700 text-xs font-medium rounded-full border border-blue-200">
                                                     {{ $assignation->matiere->code }}
                                                 </span>
                                             </td>
                                             <td class="px-4 sm:px-6 py-3 sm:py-4">
-                                                <span class="text-lg sm:text-2xl font-bold text-indigo-600">{{ $assignation->coefficient }}</span>
+                                                <span class="text-lg sm:text-2xl font-bold text-blue-900">{{ $assignation->coefficient }}</span>
                                             </td>
                                             <td class="px-4 sm:px-6 py-3 sm:py-4">
                                                 <div class="flex items-center justify-end gap-1 md:gap-2 whitespace-nowrap">
-                                                    <a href="{{ route('admin.classe_matieres.show', $assignation) }}" class="p-1.5 md:p-2 text-blue-600 bg-transparent hover:bg-blue-50 rounded-lg transition-colors border-none" title="Voir">
+                                                    <a href="{{ route('admin.classe_matieres.show', $assignation) }}" class="p-1.5 md:p-2 text-blue-900 bg-transparent hover:bg-blue-50 rounded-lg transition-colors border-none" title="Voir">
                                                         <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                                                     </a>
                                                     <a href="{{ route('admin.classe_matieres.edit', $assignation) }}" class="p-1.5 md:p-2 text-amber-600 bg-transparent hover:bg-amber-50 rounded-lg transition-colors border-none" title="Modifier">
@@ -328,7 +328,7 @@
                             </div>
                             <p class="text-gray-500 mb-4 text-sm sm:text-base">Aucune matière assignée</p>
                             <a href="{{ route('admin.classe_matieres.manage', ['classe_id' => $classe->id]) }}" 
-                               class="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-semibold rounded-lg sm:rounded-xl">
+                               class="inline-flex items-center px-4 sm:px-6 py-2 sm:py-3 bg-blue-900 text-white text-sm font-semibold rounded-lg sm:rounded-xl">
                                 Ajouter des matières
                             </a>
                         </div>
@@ -344,16 +344,16 @@
                         @endphp
                         <div class="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-gray-200">
                             <div class="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
-                                <div class="bg-indigo-50 rounded-lg p-3 sm:p-4 text-center">
-                                    <p class="text-xs text-indigo-600">Total</p>
-                                    <p class="text-lg sm:text-2xl font-bold text-indigo-700">{{ $totalCoeff }}</p>
+                                <div class="bg-blue-50 rounded-lg p-3 sm:p-4 text-center">
+                                    <p class="text-xs text-blue-900">Total</p>
+                                    <p class="text-lg sm:text-2xl font-bold text-blue-900">{{ $totalCoeff }}</p>
                                 </div>
                                 <div class="bg-green-50 rounded-lg p-3 sm:p-4 text-center">
                                     <p class="text-xs text-green-600">Moyenne</p>
                                     <p class="text-lg sm:text-2xl font-bold text-green-700">{{ $moyenneCoeff }}</p>
                                 </div>
                                 <div class="bg-blue-50 rounded-lg p-3 sm:p-4 text-center">
-                                    <p class="text-xs text-blue-600">Max</p>
+                                    <p class="text-xs text-blue-900">Max</p>
                                     <p class="text-lg sm:text-2xl font-bold text-blue-700">{{ $maxCoeff }}</p>
                                 </div>
                                 <div class="bg-orange-50 rounded-lg p-3 sm:p-4 text-center">
@@ -375,7 +375,7 @@
                 <h3 class="text-xl sm:text-2xl font-bold text-gray-800 mb-3">Aucune classe trouvée</h3>
                 <p class="text-gray-500 text-sm sm:text-base mb-6 sm:mb-8">Commencez par créer des classes.</p>
                 <a href="{{ route('admin.classes.create') }}" 
-                   class="inline-flex items-center px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-lg sm:rounded-xl text-sm sm:text-base">
+                   class="inline-flex items-center px-6 sm:px-8 py-3 sm:py-4 bg-blue-900 text-white font-bold rounded-lg sm:rounded-xl text-sm sm:text-base">
                     Créer une classe
                 </a>
             </div>

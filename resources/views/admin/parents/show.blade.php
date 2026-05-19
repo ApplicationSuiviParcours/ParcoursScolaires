@@ -3,7 +3,7 @@
 @section('title', 'Détails du parent')
 
 @section('header')
-    <div class="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 py-8 md:py-12">
+    <div class="relative overflow-hidden bg-blue-900 py-8 md:py-12">
         <!-- Éléments décoratifs animés -->
         <div class="absolute inset-0 opacity-10">
             <div
@@ -143,7 +143,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 mb-8">
             <!-- Carte Photo/Identité -->
             <div class="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden">
-                <div class="bg-gradient-to-r from-blue-500 to-indigo-600 px-4 md:px-6 py-4">
+                <div class="bg-blue-900 px-4 md:px-6 py-4">
                     <h3 class="text-lg font-semibold text-white">Identité</h3>
                 </div>
                 <div class="p-4 md:p-6">
@@ -173,7 +173,7 @@
                         <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs md:text-sm font-medium rounded-full">
                             {{ $parent->genre_text }}
                         </span>
-                        <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs md:text-sm font-medium rounded-full">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-900 text-xs md:text-sm font-medium rounded-full">
                             ID: #{{ $parent->id }}
                         </span>
                     </div>
@@ -200,7 +200,7 @@
 
             <!-- Carte Coordonnées -->
             <div class="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden">
-                <div class="bg-gradient-to-r from-green-500 to-emerald-600 px-4 md:px-6 py-4">
+                <div class="bg-blue-900 px-4 md:px-6 py-4">
                     <h3 class="text-lg font-semibold text-white">Coordonnées</h3>
                 </div>
                 <div class="p-4 md:p-6 space-y-4">
@@ -228,7 +228,7 @@
                         <div
                             class="flex items-center p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors duration-300">
                             <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center mr-3 flex-shrink-0">
-                                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
                                     </path>
@@ -244,8 +244,8 @@
                     @if($parent->adresse)
                         <div
                             class="flex items-center p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors duration-300">
-                            <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center mr-3 flex-shrink-0">
-                                <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center mr-3 flex-shrink-0">
+                                <svg class="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
                                     </path>
@@ -265,7 +265,7 @@
                         <div class="flex space-x-2 mt-4">
                             @if($parent->facebook)
                                 <a href="{{ $parent->facebook }}" target="_blank"
-                                    class="p-2 bg-blue-100 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-all duration-300">
+                                    class="p-2 bg-blue-100 text-blue-900 rounded-xl hover:bg-blue-600 hover:text-white transition-all duration-300">
                                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                                         <path
                                             d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12z">
@@ -291,14 +291,14 @@
             <!-- Carte Compte Utilisateur -->
             <div
                 class="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden md:col-span-2 xl:col-span-1">
-                <div class="bg-gradient-to-r from-purple-500 to-pink-600 px-4 md:px-6 py-4">
+                <div class="bg-blue-900 px-4 md:px-6 py-4">
                     <h3 class="text-lg font-semibold text-white">Compte utilisateur</h3>
                 </div>
                 <div class="p-4 md:p-6">
                     @if($parent->user)
                         <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mr-4 flex-shrink-0">
-                                <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mr-4 flex-shrink-0">
+                                <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z">
                                     </path>
@@ -362,7 +362,7 @@
                         <p class="text-xl md:text-2xl font-bold text-gray-800">{{ $parent->enfants_count }}</p>
                     </div>
                     <div class="bg-blue-100 rounded-xl p-2">
-                        <svg class="w-5 h-5 md:w-6 md:h-6 text-blue-600" fill="none" stroke="currentColor"
+                        <svg class="w-5 h-5 md:w-6 md:h-6 text-blue-900" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
@@ -407,15 +407,15 @@
                 </div>
             </div>
 
-            <div class="bg-white rounded-2xl shadow-lg p-4 border-l-4 border-purple-500">
+            <div class="bg-white rounded-2xl shadow-lg p-4 border-l-4 border-blue-900">
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-xs text-gray-500">Bulletins</p>
                         <p class="text-xl md:text-2xl font-bold text-gray-800">
                             {{ $parent->eleves->sum(fn($e) => $e->bulletins->count()) }}</p>
                     </div>
-                    <div class="bg-purple-100 rounded-xl p-2">
-                        <svg class="w-5 h-5 md:w-6 md:h-6 text-purple-600" fill="none" stroke="currentColor"
+                    <div class="bg-blue-100 rounded-xl p-2">
+                        <svg class="w-5 h-5 md:w-6 md:h-6 text-yellow-600" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
@@ -428,7 +428,7 @@
 
         <!-- Liste des enfants -->
         <div class="bg-white rounded-3xl shadow-xl overflow-hidden mb-8">
-            <div class="bg-gradient-to-r from-amber-500 to-orange-600 px-4 md:px-8 py-5">
+            <div class="bg-blue-900 px-4 md:px-8 py-5">
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                     <div class="flex items-center mb-3 sm:mb-0">
                         <div
@@ -454,10 +454,10 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                         @foreach($parent->eleves as $eleve)
                             <div
-                                class="group relative bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-4 md:p-6 hover:shadow-xl transition-all duration-300">
+                                class="group relative bg-blue-900 rounded-2xl p-4 md:p-6 hover:shadow-xl transition-all duration-300">
                                 <div class="flex items-start">
                                     <div
-                                        class="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center text-white font-bold text-xl md:text-2xl shadow-lg group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+                                        class="w-12 h-12 md:w-16 md:h-16 bg-blue-900 rounded-xl flex items-center justify-center text-white font-bold text-xl md:text-2xl shadow-lg group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
                                         {{ strtoupper(substr($eleve->prenom, 0, 1)) }}{{ strtoupper(substr($eleve->nom, 0, 1)) }}
                                     </div>
                                     <div class="ml-3 md:ml-4 flex-1 min-w-0">
@@ -465,7 +465,7 @@
                                             <h3 class="text-base md:text-lg font-bold text-gray-800 truncate mr-2">
                                                 {{ $eleve->prenom }} {{ $eleve->nom }}</h3>
                                             <a href="{{ route('admin.eleves.show', $eleve) }}"
-                                                class="text-blue-600 hover:text-blue-800 p-1 hover:bg-blue-100 rounded-lg transition-all duration-300 flex-shrink-0">
+                                                class="text-blue-900 hover:text-blue-800 p-1 hover:bg-blue-100 rounded-lg transition-all duration-300 flex-shrink-0">
                                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                         d="M9 5l7 7-7 7"></path>
@@ -539,7 +539,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             @if($parent->notes)
                 <div class="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300">
-                    <div class="bg-gradient-to-r from-gray-800 to-gray-900 px-4 md:px-6 py-4">
+                    <div class="bg-blue-900 px-4 md:px-6 py-4">
                         <div class="flex items-center">
                             <div class="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center mr-3">
                                 <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -568,7 +568,7 @@
 
             <div
                 class="bg-white rounded-3xl shadow-xl overflow-hidden {{ !$parent->notes ? 'md:col-span-2' : '' }} hover:shadow-2xl transition-all duration-300">
-                <div class="bg-gradient-to-r from-gray-800 to-gray-900 px-4 md:px-6 py-4">
+                <div class="bg-blue-900 px-4 md:px-6 py-4">
                     <div class="flex items-center">
                         <div class="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center mr-3">
                             <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -617,7 +617,7 @@
         <!-- Actions supplémentaires -->
         <div class="mt-8 flex flex-col sm:flex-row justify-center sm:justify-end space-y-3 sm:space-y-0 sm:space-x-4">
             <button onclick="window.print()"
-                class="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white font-medium rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl flex items-center justify-center">
+                class="w-full sm:w-auto px-6 py-3 bg-blue-900 hover:from-gray-700 hover:to-gray-800 text-white font-medium rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl flex items-center justify-center">
                 <svg class="w-5 h-5 mr-2 group-hover:animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z">

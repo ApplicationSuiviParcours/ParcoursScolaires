@@ -9,7 +9,7 @@
     <div class="px-4 mx-auto max-w-5xl sm:px-6 lg:px-8">
 
         {{-- En-tête élève --}}
-        <div class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl p-6 mb-8 shadow-2xl">
+        <div class="bg-blue-900 rounded-3xl p-6 mb-8 shadow-2xl">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div class="flex items-center gap-4">
                     <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center text-3xl font-bold text-white">
@@ -104,7 +104,7 @@
         @if($notes->count() > 0)
             @foreach($notes as $matiere => $notesMatiere)
             <div class="bg-white shadow-lg rounded-2xl overflow-hidden mb-6">
-                <div class="p-4 bg-gradient-to-r from-indigo-600 to-blue-600">
+                <div class="p-4 bg-blue-900">
                     <h3 class="font-bold text-white">{{ $matiere }}</h3>
                     <p class="text-blue-200 text-sm">
                         Moyenne : {{ number_format($notesMatiere->avg('note'), 2) }}/20 ·

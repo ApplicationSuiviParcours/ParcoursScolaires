@@ -6,7 +6,7 @@
 <div class="py-6 sm:py-12">
     <div class="px-4 mx-auto max-w-5xl sm:px-6 lg:px-8">
 
-        <div class="bg-gradient-to-r from-gray-800 to-gray-900 rounded-3xl p-6 mb-6 shadow-2xl">
+        <div class="bg-blue-900 rounded-3xl p-6 mb-6 shadow-2xl">
             <h1 class="text-xl font-bold text-white font-mono">🛠 Debug — Bulletin #{{ $bulletin->id }}</h1>
             <p class="text-gray-400 mt-1">Vue de débogage pour vérifier les données du bulletin</p>
         </div>

@@ -28,7 +28,7 @@
         
         <!-- Header - responsive -->
         <div class="relative mb-6 md:mb-8 overflow-hidden group rounded-xl md:rounded-2xl">
-            <div class="absolute inset-0 bg-gradient-to-r from-red-600 via-orange-500 to-red-600 animate-gradient-x"></div>
+            <div class="absolute inset-0 bg-blue-900 animate-gradient-x"></div>
             <div class="absolute inset-0 opacity-20">
                 <div class="absolute bg-white rounded-full w-64 h-64 md:w-96 md:h-96 -top-48 -right-48 blur-3xl animate-pulse-slow"></div>
                 <div class="absolute bg-yellow-300 rounded-full w-64 h-64 md:w-96 md:h-96 -bottom-48 -left-48 blur-3xl animate-pulse-slow animation-delay-2000"></div>
@@ -168,7 +168,7 @@
                            class="px-3 md:px-6 py-2 md:py-3 text-xs md:text-sm font-semibold text-gray-700 bg-gray-100 rounded-lg md:rounded-xl hover:bg-gray-200">
                             Réinitialiser
                         </a>
-                        <button type="submit" class="px-3 md:px-6 py-2 md:py-3 text-xs md:text-sm font-semibold text-white bg-gradient-to-r from-red-500 to-red-600 rounded-lg md:rounded-xl hover:from-red-600 hover:to-red-700">
+                        <button type="submit" class="px-3 md:px-6 py-2 md:py-3 text-xs md:text-sm font-semibold text-white bg-blue-900 rounded-lg md:rounded-xl hover:from-red-600 hover:to-red-700">
                             Filtrer
                         </button>
                     </div>
@@ -224,10 +224,10 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-xs md:text-sm text-gray-500">Ce mois</p>
-                        <p class="mt-1 md:mt-2 text-xl md:text-4xl font-bold text-blue-600">{{ $stats['mois_courant'] }}</p>
+                        <p class="mt-1 md:mt-2 text-xl md:text-4xl font-bold text-blue-900">{{ $stats['mois_courant'] }}</p>
                     </div>
                     <div class="p-2 md:p-4 bg-blue-100 rounded-lg md:rounded-xl">
-                        <svg class="w-5 h-5 md:w-8 md:h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5 md:w-8 md:h-8 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                         </svg>
                     </div>
@@ -260,7 +260,7 @@
 
         <!-- Tableau des absences - responsive -->
         <div class="overflow-hidden bg-white border border-gray-100 shadow-xl rounded-xl md:rounded-2xl">
-            <div class="p-4 md:p-6 bg-gradient-to-r from-red-600 to-orange-600">
+            <div class="p-4 md:p-6 bg-blue-900">
                 <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
                     <h3 class="text-base md:text-lg font-semibold text-white">Historique des absences</h3>
                     <span class="px-2 md:px-4 py-1 md:py-2 text-xs md:text-sm text-white rounded-full bg-white/20">
@@ -294,14 +294,14 @@
                                 </td>
                                 <td class="px-3 md:px-6 py-3 md:py-4">
                                     <div class="flex items-center">
-                                        <div class="flex items-center justify-center w-6 h-6 md:w-8 md:h-8 mr-2 md:mr-3 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600">
+                                        <div class="flex items-center justify-center w-6 h-6 md:w-8 md:h-8 mr-2 md:mr-3 rounded-lg bg-blue-900">
                                             <span class="text-[10px] md:text-xs font-bold text-white">{{ $absence->matiere ? substr($absence->matiere->nom, 0, 2) : 'M' }}</span>
                                         </div>
                                         <span class="text-xs md:text-sm">{{ $absence->matiere->nom ?? '-' }}</span>
                                     </div>
                                 </td>
                                 <td class="px-3 md:px-6 py-3 md:py-4">
-                                    <span class="px-2 md:px-3 py-1 text-xs md:text-sm font-medium text-purple-700 bg-purple-100 rounded-full whitespace-nowrap">
+                                    <span class="px-2 md:px-3 py-1 text-xs md:text-sm font-medium text-blue-900 bg-blue-100 rounded-full whitespace-nowrap">
                                         {{ $absence->nombre_heures ?? 1 }}h
                                     </span>
                                 </td>
@@ -317,7 +317,7 @@
                                         </span>
                                         @if($absence->document_path)
                                         <a href="{{ route('parent.telecharger-justificatif', $absence->id) }}" 
-                                           class="inline-flex items-center mt-1 text-[10px] md:text-xs text-blue-600 hover:text-blue-800">
+                                           class="inline-flex items-center mt-1 text-[10px] md:text-xs text-blue-900 hover:text-blue-800">
                                             <svg class="w-2 h-2 md:w-3 md:h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                                             </svg>
@@ -329,7 +329,7 @@
                                 <td class="px-3 md:px-6 py-3 md:py-4">
                                     @if(!$absence->justifiee)
                                         <button onclick="showJustificationModal({{ $absence->id }})" 
-                                                class="px-2 md:px-3 py-1 md:py-2 text-[10px] md:text-xs font-medium text-white rounded-lg bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 whitespace-nowrap">
+                                                class="px-2 md:px-3 py-1 md:py-2 text-[10px] md:text-xs font-medium text-white rounded-lg bg-blue-900 hover:from-green-600 hover:to-green-700 whitespace-nowrap">
                                             Justifier
                                         </button>
                                     @else
@@ -372,7 +372,7 @@
         <!-- Graphique de répartition - responsive -->
         @if($stats['total'] > 0)
         <div class="mt-6 md:mt-8 overflow-hidden bg-white border border-gray-100 shadow-xl rounded-xl md:rounded-2xl">
-            <div class="p-4 md:p-6 bg-gradient-to-r from-purple-600 to-pink-600">
+            <div class="p-4 md:p-6 bg-blue-900">
                 <h3 class="text-base md:text-lg font-semibold text-white">Répartition des absences</h3>
             </div>
             <div class="p-4 md:p-6">

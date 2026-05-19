@@ -8,7 +8,7 @@
 <div class="py-6 sm:py-12">
     <div class="px-4 mx-auto max-w-6xl sm:px-6 lg:px-8">
 
-        <div class="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-3xl p-6 mb-8 shadow-2xl">
+        <div class="bg-blue-900 rounded-3xl p-6 mb-8 shadow-2xl">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
                     <h1 class="text-2xl font-bold text-white">
@@ -18,7 +18,7 @@
                 </div>
                 <div class="flex gap-3">
                     <a href="{{ route('admin.emploi-du-temps.create') }}"
-                        class="px-4 py-2 bg-white text-purple-700 font-semibold rounded-xl hover:bg-purple-50 transition-colors">
+                        class="px-4 py-2 bg-white text-blue-900 font-semibold rounded-xl hover:bg-purple-50 transition-colors">
                         + Ajouter un créneau
                     </a>
                     <a href="{{ route('admin.classes.show', $classe) }}"
@@ -38,7 +38,7 @@
             @foreach($jours as $jour)
             @if(isset($emploisParJour[$jour]) && $emploisParJour[$jour]->count() > 0)
             <div class="bg-white shadow-lg rounded-2xl overflow-hidden">
-                <div class="px-6 py-4 bg-indigo-50 border-b border-indigo-100">
+                <div class="px-6 py-4 bg-blue-50 border-b border-indigo-100">
                     <h3 class="font-bold text-indigo-800 text-lg">{{ $jour }}</h3>
                 </div>
                 <div class="p-4 space-y-3">
@@ -55,7 +55,7 @@
                             @endif
                         </div>
                         @if($emploi->salle ?? null)
-                        <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-sm font-medium rounded-full shrink-0">
+                        <span class="px-3 py-1 bg-blue-100 text-indigo-800 text-sm font-medium rounded-full shrink-0">
                             Salle {{ $emploi->salle }}
                         </span>
                         @endif
@@ -81,7 +81,7 @@
             </svg>
             <p class="text-gray-500 text-lg mb-4">Aucun emploi du temps configuré pour cette classe.</p>
             <a href="{{ route('admin.emploi-du-temps.create') }}"
-                class="px-6 py-3 bg-purple-600 text-white font-semibold rounded-xl hover:bg-purple-700 transition-colors">
+                class="px-6 py-3 bg-blue-900 text-white font-semibold rounded-xl hover:bg-blue-800 transition-colors">
                 Créer un créneau
             </a>
         </div>

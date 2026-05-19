@@ -3,7 +3,7 @@
 @section('title', 'Importer des notes')
 
 @section('header')
-<div class="relative overflow-hidden bg-gradient-to-br from-purple-600 via-purple-700 to-pink-800 py-12">
+<div class="relative overflow-hidden bg-blue-900 py-12">
     <!-- Éléments décoratifs animés -->
     <div class="absolute inset-0 opacity-10">
         <div class="absolute -top-24 -right-24 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-pulse"></div>
@@ -65,7 +65,7 @@
     <div class="max-w-3xl mx-auto">
         <!-- Formulaire d'import -->
         <div class="bg-white rounded-3xl shadow-xl overflow-hidden mb-8">
-            <div class="bg-gradient-to-r from-purple-500 to-pink-600 px-8 py-6">
+            <div class="bg-blue-900 px-8 py-6">
                 <div class="flex items-center">
                     <div class="w-14 h-14 bg-white/20 backdrop-blur-lg rounded-2xl flex items-center justify-center mr-5">
                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -86,7 +86,7 @@
                     <div class="space-y-6">
                         <!-- Évaluation -->
                         <div class="group">
-                            <label for="evaluation_id" class="block text-sm font-semibold text-gray-700 mb-2 group-hover:text-purple-600 transition-colors duration-300">
+                            <label for="evaluation_id" class="block text-sm font-semibold text-gray-700 mb-2 group-hover:text-yellow-600 transition-colors duration-300">
                                 Évaluation <span class="text-red-500">*</span>
                             </label>
                             <div class="relative">
@@ -97,7 +97,7 @@
                                 </div>
                                 <select name="evaluation_id" 
                                         id="evaluation_id" 
-                                        class="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all duration-300 @error('evaluation_id') border-red-500 @enderror appearance-none bg-white"
+                                        class="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-900 focus:ring-2 focus:ring-purple-200 transition-all duration-300 @error('evaluation_id') border-red-500 @enderror appearance-none bg-white"
                                         required>
                                     <option value="">Sélectionnez une évaluation</option>
                                     <!-- Options à remplir dynamiquement -->
@@ -115,10 +115,10 @@
 
                         <!-- Fichier -->
                         <div class="group">
-                            <label for="fichier" class="block text-sm font-semibold text-gray-700 mb-2 group-hover:text-purple-600 transition-colors duration-300">
+                            <label for="fichier" class="block text-sm font-semibold text-gray-700 mb-2 group-hover:text-yellow-600 transition-colors duration-300">
                                 Fichier (Excel ou CSV) <span class="text-red-500">*</span>
                             </label>
-                            <div class="relative border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-purple-500 transition-colors duration-300" id="dropzone">
+                            <div class="relative border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-blue-900 transition-colors duration-300" id="dropzone">
                                 <input type="file" 
                                        name="fichier" 
                                        id="fichier" 
@@ -146,11 +146,11 @@
                             </h4>
                             <div class="space-y-3">
                                 <label class="flex items-center">
-                                    <input type="checkbox" name="update_existing" value="1" class="rounded border-gray-300 text-purple-600 shadow-sm focus:border-purple-300 focus:ring focus:ring-purple-200 focus:ring-opacity-50">
+                                    <input type="checkbox" name="update_existing" value="1" class="rounded border-gray-300 text-yellow-600 shadow-sm focus:border-purple-300 focus:ring focus:ring-purple-200 focus:ring-opacity-50">
                                     <span class="ml-2 text-sm text-gray-600">Mettre à jour les notes existantes</span>
                                 </label>
                                 <label class="flex items-center">
-                                    <input type="checkbox" name="skip_first_row" value="1" checked class="rounded border-gray-300 text-purple-600 shadow-sm focus:border-purple-300 focus:ring focus:ring-purple-200 focus:ring-opacity-50">
+                                    <input type="checkbox" name="skip_first_row" value="1" checked class="rounded border-gray-300 text-yellow-600 shadow-sm focus:border-purple-300 focus:ring focus:ring-purple-200 focus:ring-opacity-50">
                                     <span class="ml-2 text-sm text-gray-600">Ignorer la première ligne (en-têtes)</span>
                                 </label>
                             </div>
@@ -165,7 +165,7 @@
                                 Format attendu
                             </h4>
                             <p class="text-sm text-blue-700 mb-2">Le fichier doit contenir les colonnes suivantes :</p>
-                            <ul class="text-sm text-blue-600 list-disc list-inside space-y-1">
+                            <ul class="text-sm text-blue-900 list-disc list-inside space-y-1">
                                 <li><span class="font-medium">matricule</span> ou <span class="font-medium">nom</span> + <span class="font-medium">prenom</span> - Identifiant de l'élève</li>
                                 <li><span class="font-medium">note</span> - La note (entre 0 et 20)</li>
                                 <li><span class="font-medium">observation</span> (optionnel) - Observation sur la note</li>
@@ -187,7 +187,7 @@ matricule,note,observation
                                 Annuler
                             </a>
                             <button type="submit" 
-                                    class="px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+                                    class="px-8 py-3 bg-blue-900 hover:from-purple-600 hover:to-pink-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
                                 <svg class="w-5 h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0l-4 4m4-4v12"></path>
                                 </svg>
@@ -201,7 +201,7 @@ matricule,note,observation
 
         <!-- Modèle de fichier -->
         <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
-            <div class="bg-gradient-to-r from-gray-800 to-gray-900 px-8 py-5">
+            <div class="bg-blue-900 px-8 py-5">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
                         <div class="w-12 h-12 bg-white/10 backdrop-blur-lg rounded-xl flex items-center justify-center mr-4">
@@ -260,11 +260,11 @@ matricule,note,observation
     });
 
     function highlight() {
-        dropzone.classList.add('border-purple-500', 'bg-purple-50');
+        dropzone.classList.add('border-blue-900', 'bg-purple-50');
     }
 
     function unhighlight() {
-        dropzone.classList.remove('border-purple-500', 'bg-purple-50');
+        dropzone.classList.remove('border-blue-900', 'bg-purple-50');
     }
 
     dropzone.addEventListener('drop', handleDrop, false);
@@ -283,7 +283,7 @@ matricule,note,observation
     });
 
     function updateFileName(file) {
-        fileName.innerHTML = `<span class="font-medium text-purple-600">${file.name}</span> (${(file.size / 1024).toFixed(2)} Ko)`;
+        fileName.innerHTML = `<span class="font-medium text-yellow-600">${file.name}</span> (${(file.size / 1024).toFixed(2)} Ko)`;
     }
 </script>
 @endpush

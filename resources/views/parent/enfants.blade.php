@@ -23,7 +23,7 @@
             <!-- Header avec design moderne - responsive -->
             <div class="relative mb-6 md:mb-8 overflow-hidden group rounded-2xl md:rounded-3xl">
                 <div
-                    class="absolute inset-0 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 animate-gradient-xy">
+                    class="absolute inset-0 bg-blue-900 animate-gradient-xy">
                 </div>
                 <div class="absolute inset-0 opacity-20">
                     <div
@@ -111,12 +111,12 @@
                                     Total enfants
                                 </p>
                                 <p
-                                    class="mt-1 md:mt-2 text-xl md:text-4xl font-black text-blue-600 transition-transform origin-left group-hover:scale-110">
+                                    class="mt-1 md:mt-2 text-xl md:text-4xl font-black text-blue-900 transition-transform origin-left group-hover:scale-110">
                                     {{ $enfants->count() }}</p>
                             </div>
                             <div
-                                class="p-2 md:p-4 transition-transform shadow-lg bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg md:rounded-2xl group-hover:scale-110">
-                                <svg class="w-5 h-5 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor"
+                                class="p-2 md:p-4 transition-transform shadow-lg bg-blue-900 rounded-lg md:rounded-2xl group-hover:scale-110">
+                                <svg class="w-5 h-5 md:w-8 md:h-8 text-yellow-500" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
@@ -125,7 +125,7 @@
                             </div>
                         </div>
                         <div
-                            class="absolute bottom-0 left-0 w-full h-0.5 md:h-1 transition-transform origin-left transform scale-x-0 bg-gradient-to-r from-blue-500 to-indigo-600 group-hover:scale-x-100">
+                            class="absolute bottom-0 left-0 w-full h-0.5 md:h-1 transition-transform origin-left transform scale-x-0 bg-blue-900 group-hover:scale-x-100">
                         </div>
                     </div>
 
@@ -146,8 +146,8 @@
                                     {{ $statsGlobales['total_notes'] }}</p>
                             </div>
                             <div
-                                class="p-2 md:p-4 transition-transform shadow-lg bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg md:rounded-2xl group-hover:scale-110">
-                                <svg class="w-5 h-5 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor"
+                                class="p-2 md:p-4 transition-transform shadow-lg bg-blue-900 rounded-lg md:rounded-2xl group-hover:scale-110">
+                                <svg class="w-5 h-5 md:w-8 md:h-8 text-yellow-500" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -173,8 +173,8 @@
                                     {{ $statsGlobales['total_absences'] }}</p>
                             </div>
                             <div
-                                class="p-2 md:p-4 transition-transform shadow-lg bg-gradient-to-br from-red-500 to-rose-600 rounded-lg md:rounded-2xl group-hover:scale-110">
-                                <svg class="w-5 h-5 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor"
+                                class="p-2 md:p-4 transition-transform shadow-lg bg-blue-900 rounded-lg md:rounded-2xl group-hover:scale-110">
+                                <svg class="w-5 h-5 md:w-8 md:h-8 text-yellow-500" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
@@ -194,15 +194,15 @@
                             <div>
                                 <p class="flex items-center text-xs md:text-sm font-medium text-gray-600">
                                     <span
-                                        class="w-1.5 h-1.5 md:w-2 md:h-2 mr-1 md:mr-2 bg-purple-500 rounded-full animate-pulse animation-delay-600"></span>
+                                        class="w-1.5 h-1.5 md:w-2 md:h-2 mr-1 md:mr-2 bg-blue-800 rounded-full animate-pulse animation-delay-600"></span>
                                     Total bulletins
                                 </p>
-                                <p class="mt-1 md:mt-2 text-xl md:text-4xl font-black text-purple-600">
+                                <p class="mt-1 md:mt-2 text-xl md:text-4xl font-black text-yellow-600">
                                     {{ $statsGlobales['total_bulletins'] }}</p>
                             </div>
                             <div
-                                class="p-2 md:p-4 transition-transform shadow-lg bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg md:rounded-2xl group-hover:scale-110">
-                                <svg class="w-5 h-5 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor"
+                                class="p-2 md:p-4 transition-transform shadow-lg bg-blue-900 rounded-lg md:rounded-2xl group-hover:scale-110">
+                                <svg class="w-5 h-5 md:w-8 md:h-8 text-yellow-500" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
@@ -249,7 +249,7 @@
                         <div class="overflow-hidden transition-all duration-500 transform border shadow-xl group bg-white/90 backdrop-blur-xl border-white/50 rounded-xl md:rounded-2xl hover:shadow-2xl hover:-translate-y-2 animate-fade-in-up"
                             style="animation-delay: {{ $animationDelay }}ms">
                             <!-- En-tête avec dégradé - responsive -->
-                            <div class="relative h-24 md:h-32 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">
+                            <div class="relative h-24 md:h-32 bg-blue-900">
                                 <div class="absolute inset-0 opacity-20">
                                     <div
                                         class="absolute w-32 h-32 md:w-40 md:h-40 bg-white rounded-full -top-20 -right-20 blur-2xl">
@@ -265,7 +265,7 @@
                                         <div
                                             class="relative transition-all duration-500 transform group-hover/avatar:rotate-y-180 preserve-3d">
                                             <div
-                                                class="flex items-center justify-center w-16 h-16 md:w-24 md:h-24 text-xl md:text-3xl font-bold text-white transition-all duration-300 border-2 md:border-4 border-white shadow-2xl rounded-xl md:rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 group-hover:scale-110 group-hover:shadow-purple-500/50">
+                                                class="flex items-center justify-center w-16 h-16 md:w-24 md:h-24 text-xl md:text-3xl font-bold text-white transition-all duration-300 border-2 md:border-4 border-white shadow-2xl rounded-xl md:rounded-2xl bg-blue-900 group-hover:scale-110 group-hover:shadow-purple-500/50">
                                                 {{ substr($enfant->prenom, 0, 1) }}{{ substr($enfant->nom, 0, 1) }}
                                             </div>
                                         </div>
@@ -278,7 +278,7 @@
                                 <!-- Lien parental avec badge - responsive -->
                                 @if($enfant->lien_parental)
                                     <div
-                                        class="absolute px-2 md:px-3 py-1 md:py-1.5 text-[10px] md:text-xs font-bold text-white bg-gradient-to-r from-purple-500 to-pink-600 rounded-full top-2 md:top-4 right-2 md:right-4 shadow-lg">
+                                        class="absolute px-2 md:px-3 py-1 md:py-1.5 text-[10px] md:text-xs font-bold text-white bg-blue-900 rounded-full top-2 md:top-4 right-2 md:right-4 shadow-lg">
                                         {{ $enfant->lien_parental }}
                                     </div>
                                 @endif
@@ -295,7 +295,7 @@
                                 <!-- Infos enfant -->
                                 <div class="mb-3 md:mb-4">
                                     <h4
-                                        class="text-base md:text-xl font-bold text-gray-900 transition-colors group-hover:text-blue-600">
+                                        class="text-base md:text-xl font-bold text-gray-900 transition-colors group-hover:text-blue-900">
                                         {{ $enfant->prenom }} {{ $enfant->nom }}</h4>
                                     <div class="flex items-center mt-0.5 md:mt-1 text-xs md:text-sm text-gray-500">
                                         <svg class="w-3 h-3 md:w-4 md:h-4 mr-1" fill="none" stroke="currentColor"
@@ -397,7 +397,7 @@
                                     </a>
 
                                     <a href="{{ route('parent.enfant.bulletin', $enfant->id) }}"
-                                        class="relative flex flex-col items-center p-2 md:p-3 text-purple-700 transition-all duration-300 group/btn bg-purple-50 rounded-lg md:rounded-xl hover:bg-purple-100 hover:scale-110"
+                                        class="relative flex flex-col items-center p-2 md:p-3 text-blue-900 transition-all duration-300 group/btn bg-purple-50 rounded-lg md:rounded-xl hover:bg-blue-100 hover:scale-110"
                                         title="Voir les bulletins">
                                         <svg class="w-4 h-4 md:w-5 md:h-5 mb-0.5 md:mb-1" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
@@ -518,7 +518,7 @@
                         </p>
                         <div class="flex justify-center mt-4 md:mt-8 space-x-3 md:space-x-4">
                             <a href="{{ route('parent.dashboard') }}"
-                                class="inline-flex items-center px-4 md:px-6 py-2 md:py-3 text-sm md:text-base font-semibold text-white transition-all duration-300 transform bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg md:rounded-xl hover:from-blue-600 hover:to-indigo-700 hover:scale-105 hover:shadow-lg">
+                                class="inline-flex items-center px-4 md:px-6 py-2 md:py-3 text-sm md:text-base font-semibold text-white transition-all duration-300 transform bg-blue-900 rounded-lg md:rounded-xl hover:from-blue-600 hover:to-indigo-700 hover:scale-105 hover:shadow-lg">
                                 <svg class="w-4 h-4 md:w-5 md:h-5 mr-1 md:mr-2" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

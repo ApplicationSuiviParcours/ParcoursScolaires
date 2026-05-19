@@ -3,7 +3,7 @@
 @section('title', 'Absences de l\'élève')
 
 @section('header')
-<div class="relative overflow-hidden bg-gradient-to-br from-purple-600 via-purple-700 to-pink-800 py-12">
+<div class="relative overflow-hidden bg-blue-900 py-12">
     <!-- Éléments décoratifs animés -->
     <div class="absolute inset-0 opacity-10">
         <div class="absolute -top-24 -right-24 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-pulse"></div>
@@ -107,7 +107,7 @@
         <form method="GET" action="{{ route('admin.absences.by-eleve', $eleve) }}" class="flex flex-col md:flex-row gap-4 items-end">
             <div class="flex-1">
                 <label class="block text-sm font-semibold text-gray-700 mb-2">Année scolaire</label>
-                <select name="annee_scolaire_id" class="w-full rounded-xl border-2 border-gray-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 px-4 py-3">
+                <select name="annee_scolaire_id" class="w-full rounded-xl border-2 border-gray-200 focus:border-blue-900 focus:ring-2 focus:ring-purple-200 px-4 py-3">
                     <option value="">Toutes les années</option>
                     @foreach($anneeScolaires as $annee)
                         <option value="{{ $annee->id }}" {{ $anneeScolaireId == $annee->id ? 'selected' : '' }}>
@@ -116,7 +116,7 @@
                     @endforeach
                 </select>
             </div>
-            <button type="submit" class="px-8 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105">
+            <button type="submit" class="px-8 py-3 bg-blue-900 hover:bg-blue-800 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105">
                 Filtrer
             </button>
         </form>
@@ -124,14 +124,14 @@
 
     <!-- Statistiques de l'élève -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-purple-500 hover:shadow-xl transition-all duration-300">
+        <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-blue-900 hover:shadow-xl transition-all duration-300">
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-sm text-gray-500 font-medium uppercase">Total absences</p>
                     <p class="text-3xl font-bold text-gray-800">{{ $stats['total'] }}</p>
                 </div>
-                <div class="bg-purple-100 rounded-xl p-3">
-                    <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="bg-blue-100 rounded-xl p-3">
+                    <svg class="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                 </div>
@@ -175,7 +175,7 @@
                     </p>
                 </div>
                 <div class="bg-blue-100 rounded-xl p-3">
-                    <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-8 h-8 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                     </svg>
                 </div>
@@ -185,7 +185,7 @@
 
     <!-- Tableau des absences -->
     <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
-        <div class="bg-gradient-to-r from-gray-800 to-gray-900 px-8 py-5">
+        <div class="bg-blue-900 px-8 py-5">
             <div class="flex items-center">
                 <div class="w-12 h-12 bg-white/10 backdrop-blur-lg rounded-xl flex items-center justify-center mr-4">
                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -217,8 +217,8 @@
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex items-center">
-                                    <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center mr-2">
-                                        <span class="text-purple-700 font-bold text-xs">{{ substr($absence->matiere->code ?? 'MT', 0, 3) }}</span>
+                                    <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-2">
+                                        <span class="text-blue-900 font-bold text-xs">{{ substr($absence->matiere->code ?? 'MT', 0, 3) }}</span>
                                     </div>
                                     <span class="text-sm text-gray-900">{{ $absence->matiere->nom }}</span>
                                 </div>
@@ -256,7 +256,7 @@
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center space-x-2">
                                     <a href="{{ route('admin.absences.show', $absence) }}" 
-                                       class="p-2 bg-blue-100 text-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition-all duration-300"
+                                       class="p-2 bg-blue-100 text-blue-900 rounded-lg hover:bg-blue-600 hover:text-white transition-all duration-300"
                                        title="Voir détails">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>

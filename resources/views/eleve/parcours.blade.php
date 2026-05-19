@@ -14,7 +14,7 @@
              EN-TÊTE
         ══════════════════════════════════════════════════ --}}
         <div class="relative mb-8 overflow-hidden bg-white shadow-2xl rounded-3xl">
-            <div class="absolute inset-0 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 opacity-90"></div>
+            <div class="absolute inset-0 bg-blue-900 opacity-90"></div>
             <div class="absolute inset-0 opacity-10">
                 <div class="absolute bg-white rounded-full w-96 h-96 -top-48 -right-48 blur-3xl"></div>
             </div>
@@ -24,7 +24,7 @@
                         @if($eleve->photo)
                             <img src="{{ asset('storage/' . $eleve->photo) }}" alt="{{ $eleve->nom_complet }}" class="w-full h-full object-cover">
                         @else
-                            <span class="text-4xl font-bold text-indigo-600">{{ substr($eleve->prenom, 0, 1) }}{{ substr($eleve->nom, 0, 1) }}</span>
+                            <span class="text-4xl font-bold text-blue-900">{{ substr($eleve->prenom, 0, 1) }}{{ substr($eleve->nom, 0, 1) }}</span>
                         @endif
                     </div>
                     <div class="text-center md:text-left text-white">
@@ -72,8 +72,8 @@
         @if($historique->count() > 0)
         <div class="mb-8 bg-white shadow-xl rounded-3xl overflow-hidden border border-gray-100">
             <div class="p-6 border-b border-gray-100 bg-gray-50/50 flex items-center gap-3">
-                <div class="p-2 bg-indigo-100 rounded-xl">
-                    <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="p-2 bg-blue-100 rounded-xl">
+                    <svg class="w-5 h-5 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
                     </svg>
                 </div>
@@ -87,9 +87,9 @@
                     <canvas id="evolutionChart"></canvas>
                 </div>
                 <div class="flex flex-wrap gap-5 mt-4 justify-center text-xs font-semibold text-gray-600">
-                    <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-indigo-500 inline-block"></span> Trimestre 1</span>
+                    <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-blue-800 inline-block"></span> Trimestre 1</span>
                     <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span> Trimestre 2</span>
-                    <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-purple-500 inline-block"></span> Trimestre 3</span>
+                    <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-blue-800 inline-block"></span> Trimestre 3</span>
                     <span class="flex items-center gap-1.5"><span class="w-8 border-t-2 border-dashed border-gray-400 inline-block"></span> Seuil d'admission (10/20)</span>
                 </div>
             </div>
@@ -101,7 +101,7 @@
         ══════════════════════════════════════════════════ --}}
         <div class="bg-white shadow-xl rounded-3xl overflow-hidden border border-gray-100">
             <div class="p-6 border-b border-gray-100 bg-gray-50/50 flex items-center gap-3">
-                <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-6 h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
                 <h3 class="text-xl font-bold text-gray-800">Historique de scolarité — année par année</h3>
@@ -111,7 +111,7 @@
                 @if($historique->count() > 0)
                     <div class="relative">
                         {{-- Ligne verticale centrale --}}
-                        <div class="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-indigo-400 via-purple-400 to-pink-400 rounded-full opacity-20"></div>
+                        <div class="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-1 bg-blue-900 rounded-full opacity-20"></div>
 
                         <div class="space-y-14">
                             @foreach($historique as $index => $item)
@@ -151,8 +151,8 @@
 
                                 <div class="relative flex flex-col md:flex-row items-start group">
                                     {{-- Point de la timeline --}}
-                                    <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-9 h-9 rounded-full bg-white border-4 border-indigo-500 shadow-xl z-10 transition-all duration-300 group-hover:scale-110 group-hover:bg-indigo-500 flex items-center justify-center mt-6">
-                                        <span class="text-[9px] font-black text-indigo-600 group-hover:text-white transition-colors">{{ substr($item['annee_scolaire']->nom, -4) }}</span>
+                                    <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-9 h-9 rounded-full bg-white border-4 border-blue-900 shadow-xl z-10 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-800 flex items-center justify-center mt-6">
+                                        <span class="text-[9px] font-black text-blue-900 group-hover:text-white transition-colors">{{ substr($item['annee_scolaire']->nom, -4) }}</span>
                                     </div>
 
                                     {{-- Carte de l'année --}}
@@ -161,7 +161,7 @@
 
                                             {{-- En-tête : année + badge décision --}}
                                             <div class="flex flex-wrap items-center gap-2 mb-4">
-                                                <span class="px-3 py-1 text-sm font-bold text-indigo-600 bg-indigo-50 rounded-full">
+                                                <span class="px-3 py-1 text-sm font-bold text-blue-900 bg-blue-50 rounded-full">
                                                     {{ $item['annee_scolaire']->nom }}
                                                 </span>
                                                 @if($decisionLabel)
@@ -206,7 +206,7 @@
                                                     @if($meilleurRang)
                                                         <div class="flex items-center gap-1.5">
                                                             <span class="text-gray-500 font-semibold">Meilleur rang :</span>
-                                                            <span class="font-black text-indigo-600">{{ $meilleurRang }}</span>
+                                                            <span class="font-black text-blue-900">{{ $meilleurRang }}</span>
                                                         </div>
                                                     @endif
                                                 </div>
@@ -225,7 +225,7 @@
                                             {{-- Boutons d'action --}}
                                             <div class="mt-5 pt-4 border-t border-gray-100 grid grid-cols-3 gap-2">
                                                 <a href="{{ route('eleve.bulletin', ['annee_scolaire_id' => $item['annee_scolaire']->id]) }}"
-                                                   class="flex flex-col items-center p-2 rounded-xl bg-purple-50 text-purple-700 hover:bg-purple-100 transition-colors">
+                                                   class="flex flex-col items-center p-2 rounded-xl bg-purple-50 text-blue-900 hover:bg-blue-100 transition-colors">
                                                     <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                                     </svg>
@@ -250,7 +250,7 @@
                                             @if($moyenneAnnee !== null && $moyenneAnnee >= 10)
                                                 <div class="mt-3">
                                                     <a href="{{ route('eleve.certificat', ['annee_scolaire_id' => $item['annee_scolaire']->id]) }}"
-                                                       class="flex items-center justify-center gap-2 p-2.5 rounded-xl bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 hover:from-amber-600 hover:via-yellow-600 hover:to-amber-700 text-white font-black text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">
+                                                       class="flex items-center justify-center gap-2 p-2.5 rounded-xl bg-blue-900 hover:from-amber-600 hover:via-yellow-600 hover:to-amber-700 text-white font-black text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">
                                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                                         </svg>
@@ -282,9 +282,9 @@
         </div>
 
         {{-- Footer --}}
-        <div class="mt-8 p-6 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-2xl border border-indigo-100 text-center">
-            <p class="text-indigo-800 font-medium">
-                <span class="text-2xl mr-2">🚀</span> Chaque année est une nouvelle étape vers votre succès. Continuez vos efforts !
+        <div class="mt-8 p-6 bg-blue-900 rounded-2xl border border-indigo-100 text-center">
+            <p class="text-white font-medium">
+                Chaque année est une nouvelle étape vers votre succès. Continuez vos efforts !
             </p>
         </div>
     </div>

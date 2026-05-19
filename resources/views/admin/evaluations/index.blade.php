@@ -3,14 +3,14 @@
 @section('title', 'Évaluations')
 
 @section('content')
-<div class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-8">
+<div class="min-h-screen bg-transparent py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <!-- En-tête avec animation -->
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 space-y-4 sm:space-y-0 animate__animated animate__fadeInDown">
             <div class="flex items-center space-x-3">
-                <div class="p-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl shadow-lg">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="p-3 bg-blue-900 rounded-xl shadow-lg">
+                    <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                     </svg>
                 </div>
@@ -33,8 +33,8 @@
                     Passées
                 </a>
                 <a href="{{ route('admin.evaluations.create') }}"
-                   class="group inline-flex items-center px-4 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 text-sm">
-                    <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1.5 sm:mr-2 flex-shrink-0 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                   class="group inline-flex items-center px-4 py-2 sm:px-6 sm:py-3 bg-yellow-500 text-blue-900 font-bold rounded-xl shadow-lg hover:bg-yellow-400 hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 text-sm">
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1.5 sm:mr-2 flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                     </svg>
                     Nouvelle évaluation
@@ -51,7 +51,7 @@
                         <p class="text-xl sm:text-2xl font-bold text-gray-800">{{ $totalEvaluations ?? $evaluations->total() }}</p>
                     </div>
                     <div class="p-2 sm:p-3 bg-blue-100 rounded-lg">
-                        <svg class="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-6 h-6 sm:w-8 sm:h-8 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                         </svg>
                     </div>
@@ -92,8 +92,8 @@
                         <p class="text-xs sm:text-sm text-gray-600 font-medium">Période active</p>
                         <p class="text-xl sm:text-2xl font-bold text-gray-800">{{ $currentPeriode ?? 'Trimestre 2' }}</p>
                     </div>
-                    <div class="p-2 sm:p-3 bg-purple-100 rounded-lg">
-                        <svg class="w-6 h-6 sm:w-8 sm:h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="p-2 sm:p-3 bg-blue-100 rounded-lg">
+                        <svg class="w-6 h-6 sm:w-8 sm:h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                         </svg>
                     </div>
@@ -271,7 +271,7 @@
                     <!-- Boutons filtre -->
                     <div class="flex flex-wrap gap-3 pt-2">
                         <button type="submit"
-                                class="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-xl hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300 text-sm">
+                                class="inline-flex items-center px-5 py-2.5 bg-blue-900 text-white font-medium rounded-xl hover:bg-blue-800 hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300 text-sm">
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
                             </svg>
@@ -296,7 +296,7 @@
                 <!-- VUE TABLEAU — visible sur lg+ -->
                 <div class="hidden lg:block overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gradient-to-r from-gray-50 to-gray-100/80">
+                        <thead class="bg-blue-900/80">
                             <tr>
                                 <th class="px-6 py-4 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">ID</th>
                                 <th class="px-6 py-4 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Nom</th>
@@ -315,13 +315,13 @@
                             @forelse($evaluations as $evaluation)
                                 <tr class="hover:bg-white/60 transition-colors duration-300 group">
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="inline-flex items-center justify-center w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold text-sm rounded-lg shadow-md group-hover:scale-110 transition-transform duration-300">
+                                        <span class="inline-flex items-center justify-center w-8 h-8 bg-blue-100 text-blue-900 font-semibold text-sm rounded-lg shadow-sm">
                                             {{ $evaluation->id }}
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <a href="{{ route('admin.evaluations.show', $evaluation) }}"
-                                           class="text-blue-600 hover:text-purple-600 font-medium transition-colors duration-300">
+                                           class="text-blue-900 hover:text-yellow-600 font-medium transition-colors duration-300">
                                             {{ $evaluation->nom }}
                                         </a>
                                         @if($evaluation->description)
@@ -359,7 +359,7 @@
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-3 py-1 bg-purple-100 rounded-full text-sm font-medium text-purple-700">
+                                        <span class="px-3 py-1 bg-blue-100 rounded-full text-sm font-medium text-blue-900">
                                             {{ $evaluation->bareme }}
                                         </span>
                                     </td>
@@ -389,7 +389,7 @@
                                     <td class="px-3 md:px-4 py-3 whitespace-nowrap">
                                         <div class="flex items-center justify-end gap-2 whitespace-nowrap">
                                             <a href="{{ route('admin.evaluations.show', $evaluation) }}"
-                                               class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-blue-100 text-blue-600 hover:bg-blue-200 transition-all duration-200 hover:scale-110 flex-shrink-0"
+                                               class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-blue-100 text-blue-900 hover:bg-blue-200 transition-all duration-200 hover:scale-110 flex-shrink-0"
                                                title="Voir">
                                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                                             </a>
@@ -406,7 +406,7 @@
                                             </a>
                                             @if($evaluation->notes()->count() > 0)
                                                 <a href="{{ route('admin.evaluations.export', $evaluation) }}"
-                                                   class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-purple-100 text-purple-600 hover:bg-purple-200 transition-all duration-200 hover:scale-110 flex-shrink-0"
+                                                   class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-blue-100 text-yellow-600 hover:bg-purple-200 transition-all duration-200 hover:scale-110 flex-shrink-0"
                                                    title="Exporter les notes">
                                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                                                 </a>
@@ -430,7 +430,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                             </svg>
                                             <p class="text-gray-500 text-lg">Aucune évaluation trouvée.</p>
-                                            <a href="{{ route('admin.evaluations.create') }}" class="text-blue-600 hover:text-purple-600 font-medium">
+                                            <a href="{{ route('admin.evaluations.create') }}" class="text-blue-900 hover:text-yellow-600 font-medium">
                                                 Créer votre première évaluation
                                             </a>
                                         </div>
@@ -460,12 +460,12 @@
                             <!-- Ligne 1 : ID + Nom + Statut -->
                             <div class="flex items-start justify-between mb-3">
                                 <div class="flex items-center space-x-3 min-w-0">
-                                    <span class="inline-flex items-center justify-center w-8 h-8 flex-shrink-0 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold text-sm rounded-lg shadow-md">
+                                    <span class="inline-flex items-center justify-center w-8 h-8 flex-shrink-0 bg-blue-800 text-white font-semibold text-sm rounded-lg shadow-md">
                                         {{ $evaluation->id }}
                                     </span>
                                     <div class="min-w-0">
                                         <a href="{{ route('admin.evaluations.show', $evaluation) }}"
-                                           class="text-blue-600 hover:text-purple-600 font-medium transition-colors duration-300 block truncate">
+                                           class="text-blue-900 hover:text-yellow-600 font-medium transition-colors duration-300 block truncate">
                                             {{ $evaluation->nom }}
                                         </a>
                                         @if($evaluation->description)
@@ -515,7 +515,7 @@
                                 <div>
                                     <span class="text-gray-500 text-xs uppercase tracking-wide">Barème</span>
                                     <p class="mt-0.5">
-                                        <span class="px-2 py-0.5 bg-purple-100 rounded-full text-sm font-medium text-purple-700">{{ $evaluation->bareme }}</span>
+                                        <span class="px-2 py-0.5 bg-blue-100 rounded-full text-sm font-medium text-blue-900">{{ $evaluation->bareme }}</span>
                                     </p>
                                 </div>
                             </div>
@@ -532,7 +532,7 @@
                                 </div>
                                 <div class="flex items-center space-x-1.5">
                                     <a href="{{ route('admin.evaluations.show', $evaluation) }}"
-                                       class="p-2 bg-blue-100 text-blue-600 rounded-lg hover:bg-blue-200 transition-all duration-300" title="Voir">
+                                       class="p-2 bg-blue-100 text-blue-900 rounded-lg hover:bg-blue-200 transition-all duration-300" title="Voir">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
@@ -553,7 +553,7 @@
                                     </a>
                                     @if($evaluation->notes()->count() > 0)
                                         <a href="{{ route('admin.evaluations.export', $evaluation) }}"
-                                           class="p-2 bg-purple-100 text-purple-600 rounded-lg hover:bg-purple-200 transition-all duration-300" title="Exporter">
+                                           class="p-2 bg-blue-100 text-yellow-600 rounded-lg hover:bg-purple-200 transition-all duration-300" title="Exporter">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                             </svg>
@@ -580,7 +580,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                 </svg>
                                 <p class="text-gray-500 text-lg">Aucune évaluation trouvée.</p>
-                                <a href="{{ route('admin.evaluations.create') }}" class="text-blue-600 hover:text-purple-600 font-medium">
+                                <a href="{{ route('admin.evaluations.create') }}" class="text-blue-900 hover:text-yellow-600 font-medium">
                                     Créer votre première évaluation
                                 </a>
                             </div>
@@ -589,7 +589,7 @@
                 </div>
 
                 <!-- Pagination -->
-                <div class="px-4 sm:px-6 py-4 bg-gradient-to-r from-gray-50 to-gray-100/80 border-t border-gray-200">
+                <div class="px-4 sm:px-6 py-4 bg-blue-900/80 border-t border-gray-200">
                     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                         <div class="text-sm text-gray-700">
                             Affichage de <span class="font-medium">{{ $evaluations->firstItem() ?? 0 }}</span>

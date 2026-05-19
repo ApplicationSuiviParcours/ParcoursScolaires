@@ -65,15 +65,15 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        /* Gradient de fond pour la sidebar */
+        /* Gradient de fond pour la sidebar (Bleu Marine) */
         .sidebar-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1e3a8a 0%, #172554 100%);
             position: relative;
             overflow: hidden;
         }
 
         .dark .sidebar-bg {
-             background: linear-gradient(135deg, #3b4a6b 0%, #4a2d6b 100%);
+             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
         }
 
         .sidebar-bg::before {
@@ -197,7 +197,7 @@
     @stack('styles')
 </head>
 
-<body class="min-h-screen antialiased transition-colors duration-300 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-slate-900 dark:to-indigo-950 overflow-x-hidden">
+<body class="min-h-screen antialiased transition-colors duration-300 bg-gray-50 dark:bg-gray-900 overflow-x-hidden">
 
     <!-- Ajout de x-data pour gérer l'état de la sidebar globalement -->
     <div class="flex min-h-screen overflow-x-hidden" x-data="{ sidebarOpen: false }" @resize.window="if (window.innerWidth >= 768) sidebarOpen = false">
@@ -291,7 +291,7 @@
                                      alt="{{ Auth::user()->name }}"
                                      class="w-12 h-12 rounded-2xl object-cover shadow-2xl border-2 border-white/30 transition-transform duration-300 group-hover:scale-110">
                             @else
-                                <div class="w-12 h-12 flex items-center justify-center bg-purple-500 rounded-2xl shadow-2xl border-2 border-white/30 transition-transform duration-300 group-hover:scale-110">
+                                <div class="w-12 h-12 flex items-center justify-center bg-blue-800 rounded-2xl shadow-2xl border-2 border-white/30 transition-transform duration-300 group-hover:scale-110">
                                     <span class="text-xl font-bold text-white font-display uppercase">{{ substr(Auth::user()->name ?? 'U', 0, 1) }}</span>
                                 </div>
                             @endif
@@ -566,7 +566,7 @@
                             <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                         </button>
 
-                        <div class="w-0.5 h-8 sm:h-10 md:h-12 rounded-full bg-gradient-to-b from-purple-600 via-indigo-600 to-blue-600"></div>
+                        <div class="w-0.5 h-8 sm:h-10 md:h-12 rounded-full bg-blue-900"></div>
                         <div class="min-w-0">
                             <h2 class="text-sm sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-900 dark:text-white font-display truncate">
                                 @yield('header')
@@ -581,11 +581,11 @@
                         <!-- Barre de recherche (Cachée sur très petit mobile) -->
                         <form action="{{ route('search') }}" method="GET" class="relative hidden md:block">
                             <input type="text" name="q" value="{{ request('q') }}" placeholder="Rechercher..."
-                                class="w-32 sm:w-48 md:w-64 lg:w-80 pl-8 sm:pl-10 pr-12 py-1.5 sm:py-2 border border-gray-200 dark:border-gray-700 rounded-lg sm:rounded-xl text-xs sm:text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 transition-all placeholder:text-gray-400 dark:placeholder:text-gray-500">
+                                class="w-32 sm:w-48 md:w-64 lg:w-80 pl-8 sm:pl-10 pr-12 py-1.5 sm:py-2 border border-gray-200 dark:border-gray-700 rounded-lg sm:rounded-xl text-xs sm:text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-blue-900 transition-all placeholder:text-gray-400 dark:placeholder:text-gray-500">
                             <svg class="absolute w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 -translate-y-1/2 dark:text-gray-500 left-2.5 sm:left-3 top-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
-                            <button type="submit" class="absolute right-1.5 top-1/2 -translate-y-1/2 px-1.5 sm:px-2 py-0.5 sm:py-1 bg-purple-600 hover:bg-purple-700 text-white text-[9px] sm:text-xs font-medium rounded-md sm:rounded-lg transition-all duration-300 hover:scale-105">
+                            <button type="submit" class="absolute right-1.5 top-1/2 -translate-y-1/2 px-1.5 sm:px-2 py-0.5 sm:py-1 bg-blue-900 hover:bg-blue-800 text-white text-[9px] sm:text-xs font-medium rounded-md sm:rounded-lg transition-all duration-300 hover:scale-105">
                                 OK
                             </button>
                         </form>
@@ -607,7 +607,7 @@
                         @endphp
                         <div class="relative" x-data="{ open: false }">
                                 <button @click="open = !open" class="relative p-1.5 sm:p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all group">
-                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 transition-colors notification-bell group-hover:text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 transition-colors notification-bell group-hover:text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                                     </svg>
                                     <span id="notificationBadge" class="absolute top-0 right-0 min-w-[16px] h-4 bg-red-500 rounded-full ring-2 ring-white dark:ring-gray-900 text-white text-[8px] sm:text-[10px] flex items-center justify-center px-0.5 badge-glow {{ $notificationCount > 0 ? '' : 'hidden' }}">
@@ -628,10 +628,10 @@
                                      style="transform-origin: top right; width: 320px; max-width: none;">
 
                                     <!-- En-tête du panneau -->
-                                    <div class="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-900/30 dark:to-indigo-900/30 border-b border-gray-100 dark:border-gray-700">
+                                    <div class="flex items-center justify-between px-4 py-3 bg-blue-900 dark:from-purple-900/30 dark:to-indigo-900/30 border-b border-gray-100 dark:border-gray-700">
                                         <div class="flex items-center gap-2">
-                                            <div class="w-7 h-7 rounded-lg bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center">
-                                                <svg class="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                                            <div class="w-7 h-7 rounded-lg bg-blue-100 dark:bg-purple-900/50 flex items-center justify-center">
+                                                <svg class="w-3.5 h-3.5 text-yellow-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
                                             </div>
                                             <h3 class="text-sm font-semibold text-gray-800 dark:text-white">Notifications</h3>
                                             @if($notificationCount > 0)
@@ -641,7 +641,7 @@
                                         @if($notificationCount > 0)
                                         <form action="{{ route('notifications.read-all') }}" method="POST" class="inline">
                                             @csrf
-                                            <button type="submit" class="text-xs text-purple-600 hover:text-purple-800 dark:text-purple-400 font-medium transition-colors">Tout lire</button>
+                                            <button type="submit" class="text-xs text-yellow-600 hover:text-purple-800 dark:text-purple-400 font-medium transition-colors">Tout lire</button>
                                         </form>
                                         @endif
                                     </div>
@@ -662,7 +662,7 @@
                                                         </div>
                                                     @else
                                                         <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                                                            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                                            <svg class="w-4 h-4 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                                                         </div>
                                                     @endif
                                                 </div>
@@ -685,7 +685,7 @@
 
                                     <!-- Footer -->
                                     <div class="px-4 py-2.5 border-t border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-700/50">
-                                        <a href="{{ route('notifications.index') }}" class="text-xs text-purple-600 hover:text-purple-800 font-medium transition-colors flex items-center justify-center gap-1">
+                                        <a href="{{ route('notifications.index') }}" class="text-xs text-yellow-600 hover:text-purple-800 font-medium transition-colors flex items-center justify-center gap-1">
                                             Voir toutes les notifications
                                             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                                         </a>
@@ -712,7 +712,7 @@
                                              alt="{{ Auth::user()->name }}"
                                              class="object-cover transition-transform duration-300 shadow-md w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 rounded-lg sm:rounded-xl group-hover:scale-105 ring-2 ring-white dark:ring-gray-900">
                                     @else
-                                        <div class="flex items-center justify-center transition-transform duration-300 shadow-md w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 bg-gradient-to-br from-purple-500 via-indigo-500 to-blue-600 rounded-lg sm:rounded-xl group-hover:scale-105">
+                                        <div class="flex items-center justify-center transition-transform duration-300 shadow-md w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 bg-blue-900 rounded-lg sm:rounded-xl group-hover:scale-105">
                                             <span class="text-xs sm:text-sm md:text-base font-bold text-white font-display">{{ substr(Auth::user()->name ?? 'U', 0, 1) }}</span>
                                         </div>
                                     @endif
@@ -734,13 +734,13 @@
                                      style="transform-origin: top right; width: 240px; max-width: none; margin-top: 12px;">
 
                                     <!-- En-tête du menu profil avec avatar -->
-                                    <div class="px-4 py-3 bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-900/30 dark:to-indigo-900/30 border-b border-gray-100 dark:border-gray-700">
+                                    <div class="px-4 py-3 bg-blue-900 dark:from-purple-900/30 dark:to-indigo-900/30 border-b border-gray-100 dark:border-gray-700">
                                         <div class="flex items-center gap-3">
                                             <!-- Avatar -->
                                             @if(Auth::check() && Auth::user()->photo)
                                                 <img src="{{ Storage::url(Auth::user()->photo) }}" alt="{{ Auth::user()->name }}" class="w-10 h-10 rounded-xl object-cover ring-2 ring-white shadow-sm flex-shrink-0">
                                             @else
-                                                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white font-bold text-sm shadow-sm flex-shrink-0">
+                                                <div class="w-10 h-10 rounded-xl bg-blue-900 flex items-center justify-center text-white font-bold text-sm shadow-sm flex-shrink-0">
                                                     {{ substr(Auth::user()->name ?? 'U', 0, 1) }}
                                                 </div>
                                             @endif
@@ -753,15 +753,15 @@
 
                                     <!-- Liens du menu -->
                                     <div class="py-1">
-                                        <a href="{{ route('profile.show') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:text-purple-700 dark:hover:text-purple-400 transition-colors group">
-                                            <div class="w-7 h-7 rounded-lg bg-gray-100 dark:bg-gray-700 group-hover:bg-purple-100 dark:group-hover:bg-purple-900/40 flex items-center justify-center transition-colors flex-shrink-0">
-                                                <svg class="w-3.5 h-3.5 text-gray-500 group-hover:text-purple-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                                        <a href="{{ route('profile.show') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:text-blue-900 dark:hover:text-purple-400 transition-colors group">
+                                            <div class="w-7 h-7 rounded-lg bg-gray-100 dark:bg-gray-700 group-hover:bg-blue-100 dark:group-hover:bg-purple-900/40 flex items-center justify-center transition-colors flex-shrink-0">
+                                                <svg class="w-3.5 h-3.5 text-gray-500 group-hover:text-yellow-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
                                             </div>
                                             <span class="text-xs font-medium">Mon profil</span>
                                         </a>
-                                        <a href="{{ route('settings.index') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:text-purple-700 dark:hover:text-purple-400 transition-colors group">
-                                            <div class="w-7 h-7 rounded-lg bg-gray-100 dark:bg-gray-700 group-hover:bg-purple-100 dark:group-hover:bg-purple-900/40 flex items-center justify-center transition-colors flex-shrink-0">
-                                                <svg class="w-3.5 h-3.5 text-gray-500 group-hover:text-purple-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                        <a href="{{ route('settings.index') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:text-blue-900 dark:hover:text-purple-400 transition-colors group">
+                                            <div class="w-7 h-7 rounded-lg bg-gray-100 dark:bg-gray-700 group-hover:bg-blue-100 dark:group-hover:bg-purple-900/40 flex items-center justify-center transition-colors flex-shrink-0">
+                                                <svg class="w-3.5 h-3.5 text-gray-500 group-hover:text-yellow-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                                             </div>
                                             <span class="text-xs font-medium">Paramètres</span>
                                         </a>
@@ -769,9 +769,9 @@
                                     
                                     <!-- Profil Security (Mot de passe) -->
                                     <div class="border-t border-gray-100 dark:border-gray-700 py-1">
-                                        <a href="{{ route('profile.password') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:text-purple-700 dark:hover:text-purple-400 transition-colors group">
-                                            <div class="w-7 h-7 rounded-lg bg-gray-100 dark:bg-gray-700 group-hover:bg-purple-100 dark:group-hover:bg-purple-900/40 flex items-center justify-center transition-colors flex-shrink-0">
-                                                <svg class="w-3.5 h-3.5 text-gray-500 group-hover:text-purple-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                                        <a href="{{ route('profile.password') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:text-blue-900 dark:hover:text-purple-400 transition-colors group">
+                                            <div class="w-7 h-7 rounded-lg bg-gray-100 dark:bg-gray-700 group-hover:bg-blue-100 dark:group-hover:bg-purple-900/40 flex items-center justify-center transition-colors flex-shrink-0">
+                                                <svg class="w-3.5 h-3.5 text-gray-500 group-hover:text-yellow-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
                                             </div>
                                             <span class="text-xs font-medium">Sécurité</span>
                                         </a>
@@ -806,11 +806,11 @@
                 <div class="flex flex-col items-center justify-between space-y-2 text-[10px] sm:text-xs md:text-sm text-gray-600 dark:text-gray-400 md:flex-row md:space-y-0">
                     <p class="font-medium">© 2026 GEST'PARC - Tous droits réservés</p>
                     <div class="flex items-center space-x-3 sm:space-x-4 md:space-x-6">
-                        <a href="#" class="font-medium transition-colors hover:text-purple-600 dark:hover:text-purple-400">Aide</a>
+                        <a href="#" class="font-medium transition-colors hover:text-yellow-600 dark:hover:text-purple-400">Aide</a>
                         <span class="text-gray-300 dark:text-gray-600">•</span>
-                        <a href="#" class="font-medium transition-colors hover:text-purple-600 dark:hover:text-purple-400">Contact</a>
+                        <a href="#" class="font-medium transition-colors hover:text-yellow-600 dark:hover:text-purple-400">Contact</a>
                         <span class="text-gray-300 dark:text-gray-600">•</span>
-                        <a href="#" class="font-medium transition-colors hover:text-purple-600 dark:hover:text-purple-400">Confidentialité</a>
+                        <a href="#" class="font-medium transition-colors hover:text-yellow-600 dark:hover:text-purple-400">Confidentialité</a>
                     </div>
                 </div>
             </footer>

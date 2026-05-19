@@ -3,7 +3,7 @@
 @section('title', 'Nouvelle réinscription')
 
 @section('header')
-<div class="relative overflow-hidden bg-gradient-to-br from-emerald-600 via-emerald-700 to-teal-800 py-10 sm:py-12 no-print">
+<div class="relative overflow-hidden bg-blue-900 py-10 sm:py-12 no-print">
     <!-- Éléments décoratifs animés -->
     <div class="absolute inset-0 opacity-10">
         <div class="absolute -top-24 -right-24 w-64 sm:w-96 h-64 sm:h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-pulse"></div>
@@ -82,7 +82,7 @@
     <div class="bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl">
 
         {{-- En-tête du formulaire --}}
-        <div class="relative bg-gradient-to-r from-emerald-500 to-teal-600 px-5 sm:px-8 py-5 sm:py-6">
+        <div class="relative bg-blue-900 px-5 sm:px-8 py-5 sm:py-6">
             <div class="flex items-start sm:items-center gap-4">
                 <div class="w-12 h-12 sm:w-14 sm:h-14 bg-white/20 backdrop-blur-lg rounded-xl sm:rounded-2xl flex items-center justify-center flex-shrink-0">
                     <svg class="w-6 h-6 sm:w-7 sm:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -307,7 +307,7 @@
                         </div>
 
                         {{-- Aperçu du statut --}}
-                        <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-4 sm:p-5 border border-gray-200">
+                        <div class="bg-blue-900 rounded-xl p-4 sm:p-5 border border-gray-200">
                             <div class="flex items-center justify-between mb-2">
                                 <span class="text-xs sm:text-sm font-medium text-gray-600">Aperçu du statut :</span>
                                 <div id="statusPreview" class="status-badge">
@@ -362,7 +362,7 @@
                         <span class="text-xs sm:text-sm font-medium text-emerald-600" id="completionPercentage">0%</span>
                     </div>
                     <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
-                        <div class="h-full bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full transition-all duration-500"
+                        <div class="h-full bg-blue-900 rounded-full transition-all duration-500"
                              id="progressBar" style="width: 0%"></div>
                     </div>
                 </div>
@@ -383,7 +383,7 @@
                     </button>
                     <button type="submit"
                             class="group inline-flex items-center justify-center px-7 sm:px-10 py-3 sm:py-3.5
-                                   bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700
+                                   bg-blue-900 hover:from-emerald-600 hover:to-teal-700
                                    text-white font-semibold rounded-xl transition-all duration-300
                                    transform hover:scale-105 hover:shadow-xl text-sm">
                         <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2 flex-shrink-0 group-hover:animate-bounce"
@@ -398,10 +398,10 @@
     </div>
 
     {{-- ── INFORMATION SUPPLÉMENTAIRE ── --}}
-    <div class="mt-6 sm:mt-8 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-blue-100">
+    <div class="mt-6 sm:mt-8 bg-blue-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-blue-100">
         <div class="flex items-start gap-3 sm:gap-4">
             <div class="flex-shrink-0 mt-0.5">
-                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
             </div>

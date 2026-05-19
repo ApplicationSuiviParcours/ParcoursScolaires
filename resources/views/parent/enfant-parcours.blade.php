@@ -38,7 +38,7 @@
              EN-TÊTE
         ══════════════════════════════════════════════════ --}}
         <div class="relative mb-8 overflow-hidden bg-white shadow-2xl rounded-3xl">
-            <div class="absolute inset-0 bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 opacity-90"></div>
+            <div class="absolute inset-0 bg-blue-900 opacity-90"></div>
             <div class="absolute inset-0 opacity-10">
                 <div class="absolute bg-white rounded-full w-96 h-96 -top-48 -right-48 blur-3xl"></div>
             </div>
@@ -136,7 +136,7 @@
             <div class="p-8">
                 @if($historique->count() > 0)
                     <div class="relative">
-                        <div class="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-emerald-400 via-teal-400 to-cyan-400 rounded-full opacity-20"></div>
+                        <div class="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-1 bg-blue-900 rounded-full opacity-20"></div>
 
                         <div class="space-y-12">
                             @foreach($historique as $index => $item)
@@ -245,7 +245,7 @@
                                             {{-- Boutons d'action --}}
                                             <div class="mt-5 pt-4 border-t border-gray-100 grid grid-cols-3 gap-2">
                                                 <a href="{{ route('parent.enfant.bulletin', ['eleve' => $eleve->id, 'annee_scolaire_id' => $item['annee_scolaire']->id]) }}"
-                                                   class="flex flex-col items-center p-2 rounded-xl bg-purple-50 text-purple-700 hover:bg-purple-100 transition-colors">
+                                                   class="flex flex-col items-center p-2 rounded-xl bg-purple-50 text-blue-900 hover:bg-blue-100 transition-colors">
                                                     <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                                     </svg>
@@ -270,7 +270,7 @@
                                             @if($moyenneAnnee !== null && $moyenneAnnee >= 10)
                                                 <div class="mt-3">
                                                     <a href="{{ route('parent.enfant.certificat', ['eleve' => $eleve->id, 'annee_scolaire_id' => $item['annee_scolaire']->id]) }}"
-                                                       class="flex items-center justify-center gap-2 p-2.5 rounded-xl bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 hover:from-amber-600 hover:via-yellow-600 hover:to-amber-700 text-white font-black text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">
+                                                       class="flex items-center justify-center gap-2 p-2.5 rounded-xl bg-blue-900 hover:from-amber-600 hover:via-yellow-600 hover:to-amber-700 text-white font-black text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">
                                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                                         </svg>

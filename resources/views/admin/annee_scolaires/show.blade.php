@@ -3,7 +3,7 @@
 @section('title', 'Détails de l\'année scolaire')
 
 @section('header')
-<div class="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 py-8 md:py-12">
+<div class="relative overflow-hidden bg-blue-900 py-8 md:py-12">
     <!-- Éléments décoratifs animés -->
     <div class="absolute inset-0 opacity-10">
         <div class="absolute -top-24 -right-24 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-pulse"></div>
@@ -107,12 +107,12 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-8 mb-6 sm:mb-8">
             <!-- Carte Informations générales -->
             <div class="bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden">
-                <div class="bg-gradient-to-r from-blue-500 to-indigo-600 px-4 sm:px-6 py-3 sm:py-4">
+                <div class="bg-blue-900 px-4 sm:px-6 py-3 sm:py-4">
                     <h3 class="text-base sm:text-lg font-semibold text-white">Informations générales</h3>
                 </div>
                 <div class="p-4 sm:p-6">
                     <div class="flex items-center mb-4 sm:mb-6">
-                        <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl sm:rounded-2xl flex items-center justify-center text-white font-bold text-xl sm:text-2xl shadow-lg">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 bg-blue-900 rounded-xl sm:rounded-2xl flex items-center justify-center text-white font-bold text-xl sm:text-2xl shadow-lg">
                             {{ substr($anneeScolaire->nom, 0, 2) }}
                         </div>
                         <div class="ml-3 sm:ml-4">
@@ -158,7 +158,7 @@
 
             <!-- Carte Statistiques -->
             <div class="bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden">
-                <div class="bg-gradient-to-r from-green-500 to-emerald-600 px-4 sm:px-6 py-3 sm:py-4">
+                <div class="bg-blue-900 px-4 sm:px-6 py-3 sm:py-4">
                     <h3 class="text-base sm:text-lg font-semibold text-white">Statistiques</h3>
                 </div>
                 <div class="p-4 sm:p-6">
@@ -167,7 +167,7 @@
                         <div class="flex items-center justify-between p-2 sm:p-3 bg-gray-50 rounded-lg sm:rounded-xl">
                             <div class="flex items-center overflow-hidden">
                                 <div class="w-8 h-8 sm:w-10 sm:h-10 bg-blue-100 rounded-lg sm:rounded-xl flex items-center justify-center mr-2 sm:mr-3 flex-shrink-0">
-                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
                                     </svg>
                                 </div>
@@ -176,7 +176,7 @@
                                     <p class="text-base sm:text-xl font-bold text-gray-800">{{ $stats['total_inscriptions'] }}</p>
                                 </div>
                             </div>
-                            <span class="hidden sm:inline-block text-sm text-blue-600 bg-blue-50 px-2 py-1 rounded-lg">{{ $stats['total_inscriptions'] }}</span>
+                            <span class="hidden sm:inline-block text-sm text-blue-900 bg-blue-50 px-2 py-1 rounded-lg">{{ $stats['total_inscriptions'] }}</span>
                         </div>
 
                         <!-- Autres stats identiques -->
@@ -197,8 +197,8 @@
 
                         <div class="flex items-center justify-between p-2 sm:p-3 bg-gray-50 rounded-lg sm:rounded-xl">
                             <div class="flex items-center">
-                                <div class="w-8 h-8 sm:w-10 sm:h-10 bg-purple-100 rounded-lg sm:rounded-xl flex items-center justify-center mr-2 sm:mr-3 flex-shrink-0">
-                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="w-8 h-8 sm:w-10 sm:h-10 bg-blue-100 rounded-lg sm:rounded-xl flex items-center justify-center mr-2 sm:mr-3 flex-shrink-0">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                     </svg>
                                 </div>
@@ -207,7 +207,7 @@
                                     <p class="text-base sm:text-xl font-bold text-gray-800">{{ $stats['total_emplois'] }}</p>
                                 </div>
                             </div>
-                            <span class="hidden sm:inline-block text-sm text-purple-600 bg-purple-50 px-2 py-1 rounded-lg">{{ $stats['total_emplois'] }}</span>
+                            <span class="hidden sm:inline-block text-sm text-yellow-600 bg-purple-50 px-2 py-1 rounded-lg">{{ $stats['total_emplois'] }}</span>
                         </div>
 
                         <div class="flex items-center justify-between p-2 sm:p-3 bg-gray-50 rounded-lg sm:rounded-xl">
@@ -230,7 +230,7 @@
 
             <!-- Carte État d'avancement -->
             <div class="bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden">
-                <div class="bg-gradient-to-r from-purple-500 to-pink-600 px-4 sm:px-6 py-3 sm:py-4">
+                <div class="bg-blue-900 px-4 sm:px-6 py-3 sm:py-4">
                     <h3 class="text-base sm:text-lg font-semibold text-white">État d'avancement</h3>
                 </div>
                 <div class="p-4 sm:p-6">
@@ -245,25 +245,25 @@
                     @endphp
 
                     <div class="text-center mb-4 sm:mb-6">
-                        <span class="text-4xl sm:text-5xl font-bold {{ $pourcentage > 100 ? 'text-red-600' : 'text-blue-600' }}">
+                        <span class="text-4xl sm:text-5xl font-bold {{ $pourcentage > 100 ? 'text-red-600' : 'text-blue-900' }}">
                             {{ $pourcentage }}%
                         </span>
                         <p class="text-xs sm:text-sm text-gray-500 mt-1">de l'année scolaire écoulée</p>
                     </div>
 
                     <div class="w-full bg-gray-200 rounded-full h-3 sm:h-4 mb-3 sm:mb-4">
-                        <div class="bg-gradient-to-r from-blue-500 to-purple-600 h-3 sm:h-4 rounded-full transition-all duration-500" 
+                        <div class="bg-blue-900 h-3 sm:h-4 rounded-full transition-all duration-500" 
                              style="width: {{ $pourcentage }}%"></div>
                     </div>
 
                     <div class="grid grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm mt-3 sm:mt-4">
                         <div class="bg-blue-50 rounded-lg sm:rounded-xl p-2 sm:p-3 text-center">
-                            <p class="text-xs text-blue-600">Jours passés</p>
+                            <p class="text-xs text-blue-900">Jours passés</p>
                             <p class="text-lg sm:text-xl font-bold text-blue-700">{{ $joursPasses }}</p>
                         </div>
                         <div class="bg-purple-50 rounded-lg sm:rounded-xl p-2 sm:p-3 text-center">
-                            <p class="text-xs text-purple-600">Jours restants</p>
-                            <p class="text-lg sm:text-xl font-bold text-purple-700">{{ max(0, $totalJours - $joursPasses) }}</p>
+                            <p class="text-xs text-yellow-600">Jours restants</p>
+                            <p class="text-lg sm:text-xl font-bold text-blue-900">{{ max(0, $totalJours - $joursPasses) }}</p>
                         </div>
                     </div>
 
@@ -286,7 +286,7 @@
                 <!-- Onglets scrollables horizontalement sur mobile -->
                 <nav class="flex space-x-4 sm:space-x-8 px-2 sm:px-6 overflow-x-auto scrollbar-hide" aria-label="Tabs">
                     <button @click="tab = 'inscriptions'" 
-                            :class="{ 'border-blue-500 text-blue-600': tab === 'inscriptions', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': tab !== 'inscriptions' }"
+                            :class="{ 'border-blue-500 text-blue-900': tab === 'inscriptions', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': tab !== 'inscriptions' }"
                             class="py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm transition-colors duration-200 whitespace-nowrap">
                         <svg class="w-4 h-4 sm:w-5 sm:h-5 inline mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
@@ -294,7 +294,7 @@
                         Inscriptions ({{ $anneeScolaire->inscriptions->count() }})
                     </button>
                     <button @click="tab = 'evaluations'" 
-                            :class="{ 'border-blue-500 text-blue-600': tab === 'evaluations', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': tab !== 'evaluations' }"
+                            :class="{ 'border-blue-500 text-blue-900': tab === 'evaluations', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': tab !== 'evaluations' }"
                             class="py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm transition-colors duration-200 whitespace-nowrap">
                         <svg class="w-4 h-4 sm:w-5 sm:h-5 inline mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
@@ -302,7 +302,7 @@
                         Évaluations ({{ $anneeScolaire->evaluations->count() }})
                     </button>
                     <button @click="tab = 'emplois'" 
-                            :class="{ 'border-blue-500 text-blue-600': tab === 'emplois', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': tab !== 'emplois' }"
+                            :class="{ 'border-blue-500 text-blue-900': tab === 'emplois', 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': tab !== 'emplois' }"
                             class="py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm transition-colors duration-200 whitespace-nowrap">
                         <svg class="w-4 h-4 sm:w-5 sm:h-5 inline mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -398,7 +398,7 @@
                                                     {{ substr($emploi->heure_debut, 0, 5) }} - {{ substr($emploi->heure_fin, 0, 5) }}
                                                 </p>
                                             </div>
-                                            <span class="px-2 sm:px-3 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded-full self-start sm:self-center">
+                                            <span class="px-2 sm:px-3 py-1 bg-blue-100 text-blue-900 text-xs font-medium rounded-full self-start sm:self-center">
                                                 {{ $emploi->enseignant->nom ?? 'N/A' }} {{ $emploi->enseignant->prenom ?? '' }}
                                             </span>
                                         </div>
@@ -415,7 +415,7 @@
 
         <!-- Informations système -->
         <div class="bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden">
-            <div class="bg-gradient-to-r from-gray-800 to-gray-900 px-4 sm:px-6 py-3 sm:py-4">
+            <div class="bg-blue-900 px-4 sm:px-6 py-3 sm:py-4">
                 <h3 class="text-base sm:text-lg font-semibold text-white">Informations système</h3>
             </div>
             <div class="p-4 sm:p-6">

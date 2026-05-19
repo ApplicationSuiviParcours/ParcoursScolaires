@@ -3,7 +3,7 @@
 @section('title', 'Tableau des notes par classe')
 
 @section('header')
-<div class="relative overflow-hidden bg-gradient-to-br from-green-600 via-green-700 to-teal-800 py-8 md:py-12">
+<div class="relative overflow-hidden bg-blue-900 py-8 md:py-12">
     <!-- Éléments décoratifs animés -->
     <div class="absolute inset-0 opacity-10">
         <div class="absolute -top-24 -right-24 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-pulse"></div>
@@ -51,7 +51,7 @@
             </div>
             <div class="flex flex-col sm:flex-row justify-center md:justify-end space-y-3 sm:space-y-0 sm:space-x-3 animate-fade-in-right">
                 <a href="{{ route('admin.notes.import') }}" 
-                   class="group relative inline-flex items-center justify-center px-4 py-2.5 md:px-5 bg-purple-500 hover:bg-purple-600 text-white font-medium rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl overflow-hidden text-sm">
+                   class="group relative inline-flex items-center justify-center px-4 py-2.5 md:px-5 bg-blue-800 hover:bg-blue-900 text-white font-medium rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl overflow-hidden text-sm">
                     <span class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
                     <svg class="w-5 h-5 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0l-4 4m4-4v12"></path>
@@ -121,7 +121,7 @@
 
     <!-- Formulaire de sélection -->
     <div class="bg-white rounded-2xl md:rounded-3xl shadow-xl overflow-hidden mb-6 md:mb-8">
-        <div class="bg-gradient-to-r from-green-500 to-teal-600 px-4 md:px-8 py-4 md:py-6">
+        <div class="bg-blue-900 px-4 md:px-8 py-4 md:py-6">
             <div class="flex items-center">
                 <div class="w-12 h-12 md:w-14 md:h-14 bg-white/20 backdrop-blur-lg rounded-xl md:rounded-2xl flex items-center justify-center mr-4 md:mr-5 flex-shrink-0">
                     <svg class="w-6 h-6 md:w-7 md:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -184,7 +184,7 @@
                     <a href="{{ route('admin.notes.by-classe') }}" class="w-full sm:w-auto text-center px-4 py-2 md:py-3 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-all duration-300 text-sm font-medium">
                         Réinitialiser
                     </a>
-                    <button type="submit" class="w-full sm:w-auto px-6 py-2.5 md:py-3 bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 text-sm">
+                    <button type="submit" class="w-full sm:w-auto px-6 py-2.5 md:py-3 bg-blue-900 hover:from-green-600 hover:to-teal-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 text-sm">
                         <svg class="w-5 h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
@@ -229,7 +229,7 @@
 
         <!-- Tableau -->
         <div class="bg-white rounded-2xl md:rounded-3xl shadow-xl overflow-hidden">
-            <div class="bg-gradient-to-r from-gray-800 to-gray-900 px-4 md:px-8 py-4 md:py-5">
+            <div class="bg-blue-900 px-4 md:px-8 py-4 md:py-5">
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                     <div class="flex items-center">
                         <div class="w-10 h-10 md:w-12 md:h-12 bg-white/10 backdrop-blur-lg rounded-lg md:rounded-xl flex items-center justify-center mr-3 md:mr-4 flex-shrink-0">
@@ -276,7 +276,7 @@
                                 <!-- Nom élève sticky -->
                                 <td class="px-3 md:px-4 py-2 md:py-3 whitespace-nowrap sticky left-0 bg-white group-hover:bg-gray-50 z-10">
                                     <div class="flex items-center">
-                                        <div class="flex-shrink-0 h-7 w-7 md:h-8 md:w-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-md md:rounded-lg flex items-center justify-center text-white font-bold text-[10px] md:text-xs shadow">
+                                        <div class="flex-shrink-0 h-7 w-7 md:h-8 md:w-8 bg-blue-900 rounded-md md:rounded-lg flex items-center justify-center text-white font-bold text-[10px] md:text-xs shadow">
                                             {{ strtoupper(substr($eleve->prenom, 0, 1)) }}{{ strtoupper(substr($eleve->nom, 0, 1)) }}
                                         </div>
                                         <div class="ml-2 truncate">

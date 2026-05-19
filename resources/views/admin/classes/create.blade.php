@@ -27,8 +27,8 @@
         <div class="mb-4 md:mb-6">
             <div class="flex items-center justify-between mb-3">
                 <div class="flex items-center space-x-2 md:space-x-3">
-                    <div class="bg-gradient-to-r from-indigo-600 to-indigo-700 p-1.5 md:p-2 rounded-lg shadow-md">
-                        <svg class="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="bg-blue-900 p-1.5 md:p-2 rounded-lg shadow-md">
+                        <svg class="w-5 h-5 md:w-6 md:h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                         </svg>
                     </div>
@@ -37,19 +37,19 @@
                         <p class="text-xs md:text-sm text-gray-500 hidden sm:block">Remplissez les informations ci-dessous</p>
                     </div>
                 </div>
-                <span class="inline-flex items-center px-2.5 py-0.5 md:px-3 md:py-1 bg-indigo-100 text-indigo-800 text-[10px] md:text-xs font-medium rounded-full">
+                <span class="inline-flex items-center px-2.5 py-0.5 md:px-3 md:py-1 bg-blue-100 text-indigo-800 text-[10px] md:text-xs font-medium rounded-full">
                     Nouvelle
                 </span>
             </div>
             <div class="w-full h-1 bg-gray-200 rounded-full overflow-hidden">
-                <div class="bg-gradient-to-r from-indigo-600 to-indigo-400 h-1 w-full rounded-full"></div>
+                <div class="bg-blue-900 h-1 w-full rounded-full"></div>
             </div>
         </div>
 
         <!-- Formulaire principal -->
         <div class="bg-white rounded-xl md:rounded-2xl shadow-xl overflow-hidden border border-gray-100">
             <!-- En-tête du formulaire -->
-            <div class="bg-gradient-to-r from-indigo-600 to-indigo-700 px-4 md:px-6 py-4 md:py-5">
+            <div class="bg-blue-900 px-4 md:px-6 py-4 md:py-5">
                 <div class="flex items-center">
                     <div class="bg-white/20 p-1.5 md:p-2.5 rounded-lg backdrop-blur-sm">
                         <svg class="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -71,7 +71,7 @@
                     <!-- Section Informations générales -->
                     <div class="bg-gray-50/50 p-4 md:p-6 rounded-xl border border-gray-100">
                         <div class="flex items-center mb-3 md:mb-4 pb-2 border-b border-gray-200">
-                            <div class="w-1 h-5 md:h-6 bg-gradient-to-b from-indigo-600 to-indigo-400 rounded-full mr-2 md:mr-3"></div>
+                            <div class="w-1 h-5 md:h-6 bg-blue-900 rounded-full mr-2 md:mr-3"></div>
                             <h4 class="text-sm md:text-md font-semibold text-gray-700">📋 Informations générales</h4>
                         </div>
 
@@ -83,7 +83,7 @@
                                 </label>
                                 <div class="relative">
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <svg class="h-4 w-4 md:h-5 md:w-5 text-gray-400 group-focus-within:text-indigo-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <svg class="h-4 w-4 md:h-5 md:w-5 text-gray-400 group-focus-within:text-blue-900 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
                                         </svg>
                                     </div>
@@ -117,7 +117,7 @@
                                 </label>
                                 <div class="relative">
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <svg class="h-4 w-4 md:h-5 md:w-5 text-gray-400 group-focus-within:text-indigo-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <svg class="h-4 w-4 md:h-5 md:w-5 text-gray-400 group-focus-within:text-blue-900 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                         </svg>
                                     </div>
@@ -151,7 +151,7 @@
                     <!-- Section Niveau et Série -->
                     <div class="bg-gray-50/50 p-4 md:p-6 rounded-xl border border-gray-100">
                         <div class="flex items-center mb-3 md:mb-4 pb-2 border-b border-gray-200">
-                            <div class="w-1 h-5 md:h-6 bg-gradient-to-b from-indigo-600 to-indigo-400 rounded-full mr-2 md:mr-3"></div>
+                            <div class="w-1 h-5 md:h-6 bg-blue-900 rounded-full mr-2 md:mr-3"></div>
                             <h4 class="text-sm md:text-md font-semibold text-gray-700">🎓 Niveau et Série</h4>
                         </div>
 
@@ -163,7 +163,7 @@
                                 </label>
                                 <div class="relative">
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <svg class="h-4 w-4 md:h-5 md:w-5 text-gray-400 group-focus-within:text-indigo-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <svg class="h-4 w-4 md:h-5 md:w-5 text-gray-400 group-focus-within:text-blue-900 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                                         </svg>
                                     </div>
@@ -212,7 +212,7 @@
                                 </label>
                                 <div class="relative">
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <svg class="h-4 w-4 md:h-5 md:w-5 text-gray-400 group-focus-within:text-indigo-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <svg class="h-4 w-4 md:h-5 md:w-5 text-gray-400 group-focus-within:text-blue-900 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l5 5a2 2 0 01.586 1.414V19a2 2 0 01-2 2H7a2 2 0 01-2-2V5a2 2 0 012-2z"></path>
                                         </svg>
                                     </div>
@@ -249,7 +249,7 @@
                     <!-- Section Année scolaire -->
                     <div class="bg-gray-50/50 p-4 md:p-6 rounded-xl border border-gray-100">
                         <div class="flex items-center mb-3 md:mb-4 pb-2 border-b border-gray-200">
-                            <div class="w-1 h-5 md:h-6 bg-gradient-to-b from-indigo-600 to-indigo-400 rounded-full mr-2 md:mr-3"></div>
+                            <div class="w-1 h-5 md:h-6 bg-blue-900 rounded-full mr-2 md:mr-3"></div>
                             <h4 class="text-sm md:text-md font-semibold text-gray-700">📅 Année scolaire</h4>
                         </div>
 
@@ -260,7 +260,7 @@
                             </label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <svg class="h-4 w-4 md:h-5 md:w-5 text-gray-400 group-focus-within:text-indigo-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="h-4 w-4 md:h-5 md:w-5 text-gray-400 group-focus-within:text-blue-900 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                     </svg>
                                 </div>
@@ -295,7 +295,7 @@
                             Annuler
                         </a>
                         <button type="submit"
-                                class="w-full sm:w-auto px-4 md:px-6 py-2.5 md:py-3 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white font-medium rounded-lg md:rounded-xl hover:from-indigo-700 hover:to-indigo-800 text-center text-sm shadow-lg shadow-indigo-200 flex items-center justify-center group">
+                                class="w-full sm:w-auto px-4 md:px-6 py-2.5 md:py-3 bg-yellow-500 text-blue-900 font-bold text-white font-medium rounded-lg md:rounded-xl hover:from-indigo-700 hover:to-indigo-800 text-center text-sm shadow-lg shadow-indigo-200 flex items-center justify-center group">
                             <svg class="w-4 h-4 md:w-5 md:h-5 mr-2 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
                             </svg>
@@ -307,18 +307,18 @@
         </div>
 
         <!-- Message d'aide -->
-        <div class="mt-4 md:mt-6 bg-gradient-to-r from-indigo-50 to-indigo-100/50 rounded-xl p-4 md:p-5 border border-indigo-100">
+        <div class="mt-4 md:mt-6 bg-blue-900/50 rounded-xl p-4 md:p-5 border border-indigo-100">
             <div class="flex items-start">
                 <div class="flex-shrink-0">
                     <div class="bg-indigo-200 p-1.5 md:p-2 rounded-lg">
-                        <svg class="w-4 h-4 md:w-5 md:h-5 text-indigo-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-4 h-4 md:w-5 md:h-5 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                     </div>
                 </div>
                 <div class="ml-3 md:ml-4">
                     <h5 class="text-xs md:text-sm font-semibold text-indigo-800 mb-1">Bon à savoir</h5>
-                    <p class="text-xs md:text-sm text-indigo-700">
+                    <p class="text-xs md:text-sm text-blue-900">
                         Les champs marqués d'un <span class="font-bold text-red-500">*</span> sont obligatoires.
                         La série est optionnelle mais recommandée pour les classes du second cycle.
                     </p>
@@ -348,7 +348,7 @@
                 if (length >= 45) {
                     nomCounter.className = 'text-[10px] md:text-xs text-orange-600 font-medium';
                 } else if (length >= 40) {
-                    nomCounter.className = 'text-[10px] md:text-xs text-blue-600 font-medium';
+                    nomCounter.className = 'text-[10px] md:text-xs text-blue-900 font-medium';
                 } else {
                     nomCounter.className = 'text-[10px] md:text-xs text-gray-400';
                 }

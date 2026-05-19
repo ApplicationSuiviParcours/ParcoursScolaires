@@ -10,14 +10,14 @@
 <div class="py-6 sm:py-12">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <!-- Header avec bouton de création -->
-        <div class="p-4 sm:p-6 mb-6 sm:mb-8 shadow-lg bg-gradient-to-r from-indigo-700 to-indigo-500 rounded-lg sm:rounded-xl">
+        <div class="p-4 sm:p-6 mb-6 sm:mb-8 shadow-lg bg-blue-900 rounded-lg sm:rounded-xl">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
                     <h3 class="text-xl sm:text-2xl font-bold text-white">Mes Évaluations</h3>
-                    <p class="mt-0.5 sm:mt-1 text-indigo-100 text-sm sm:text-base">Gérer et créer mes évaluations</p>
+                    <p class="mt-0.5 sm:mt-1 text-blue-100 text-sm sm:text-base">Gérer et créer mes évaluations</p>
                 </div>
                 <div class="flex items-center justify-between sm:justify-end gap-3 sm:gap-4">
-                    <button onclick="openCreateModal()" class="flex items-center px-3 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base font-semibold text-indigo-600 transition-colors bg-white rounded-lg hover:bg-indigo-50">
+                    <button onclick="openCreateModal()" class="flex items-center px-3 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base font-semibold text-blue-900 transition-colors bg-white rounded-lg hover:bg-blue-50">
                         <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                         </svg>
@@ -42,8 +42,8 @@
                         <p class="text-xs sm:text-sm font-medium text-gray-500">Total évaluations</p>
                         <p class="mt-1 text-2xl sm:text-3xl font-bold text-gray-900">{{ $evaluations->count() }}</p>
                     </div>
-                    <div class="p-2 sm:p-3 bg-indigo-100 rounded-full">
-                        <svg class="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="p-2 sm:p-3 bg-blue-100 rounded-full">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                         </svg>
                     </div>
@@ -58,7 +58,7 @@
                         </p>
                     </div>
                     <div class="p-2 sm:p-3 bg-blue-100 rounded-full">
-                        <svg class="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                         </svg>
                     </div>
@@ -97,8 +97,8 @@
                             @endphp
                         </p>
                     </div>
-                    <div class="p-2 sm:p-3 bg-purple-100 rounded-full">
-                        <svg class="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="p-2 sm:p-3 bg-blue-100 rounded-full">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
                         </svg>
@@ -127,14 +127,14 @@
                         <div class="col-span-1 md:col-span-2">
                             <label class="block mb-1 sm:mb-2 text-xs sm:text-sm font-medium text-gray-700">Nom de l'évaluation *</label>
                             <input type="text" name="nom" required 
-                                   class="w-full px-2 py-1.5 sm:px-3 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+                                   class="w-full px-2 py-1.5 sm:px-3 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-blue-900"
                                    placeholder="Ex: Devoir de contrôle n°1">
                         </div>
 
                         <!-- Classe -->
                         <div>
                             <label class="block mb-1 sm:mb-2 text-xs sm:text-sm font-medium text-gray-700">Classe *</label>
-                            <select name="classe_id" required class="w-full px-2 py-1.5 sm:px-3 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
+                            <select name="classe_id" required class="w-full px-2 py-1.5 sm:px-3 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-blue-900">
                                 <option value="">Sélectionner une classe</option>
                                 @foreach($classes as $classe)
                                     <option value="{{ $classe->id }}">{{ $classe->nom_complet }}</option>
@@ -145,7 +145,7 @@
                         <!-- Matière -->
                         <div>
                             <label class="block mb-1 sm:mb-2 text-xs sm:text-sm font-medium text-gray-700">Matière *</label>
-                            <select name="matiere_id" required class="w-full px-2 py-1.5 sm:px-3 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
+                            <select name="matiere_id" required class="w-full px-2 py-1.5 sm:px-3 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-blue-900">
                                 <option value="">Sélectionner une matière</option>
                                 @foreach($matieres as $matiere)
                                     <option value="{{ $matiere->id }}">{{ $matiere->nom }}</option>
@@ -156,7 +156,7 @@
                         <!-- Type d'évaluation -->
                         <div>
                             <label class="block mb-1 sm:mb-2 text-xs sm:text-sm font-medium text-gray-700">Type *</label>
-                            <select name="type" required class="w-full px-2 py-1.5 sm:px-3 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
+                            <select name="type" required class="w-full px-2 py-1.5 sm:px-3 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-blue-900">
                                 <option value="">Sélectionner un type</option>
                                 <option value="devoir">Devoir</option>
                                 <option value="examen">Examen</option>
@@ -168,7 +168,7 @@
                         <!-- Période -->
                         <div>
                             <label class="block mb-1 sm:mb-2 text-xs sm:text-sm font-medium text-gray-700">Période *</label>
-                            <select name="periode" required class="w-full px-2 py-1.5 sm:px-3 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
+                            <select name="periode" required class="w-full px-2 py-1.5 sm:px-3 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-blue-900">
                                 <option value="Trimestre 1">Trimestre 1</option>
                                 <option value="Trimestre 2">Trimestre 2</option>
                                 <option value="Trimestre 3">Trimestre 3</option>
@@ -179,7 +179,7 @@
                         <div>
                             <label class="block mb-1 sm:mb-2 text-xs sm:text-sm font-medium text-gray-700">Date de l'évaluation *</label>
                             <input type="date" name="date_evaluation" required 
-                                   class="w-full px-2 py-1.5 sm:px-3 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+                                   class="w-full px-2 py-1.5 sm:px-3 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-blue-900"
                                    value="{{ date('Y-m-d') }}">
                         </div>
 
@@ -187,7 +187,7 @@
                         <div>
                             <label class="block mb-1 sm:mb-2 text-xs sm:text-sm font-medium text-gray-700">Coefficient *</label>
                             <input type="number" name="coefficient" step="0.5" min="0.5" max="10" required 
-                                   class="w-full px-2 py-1.5 sm:px-3 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+                                   class="w-full px-2 py-1.5 sm:px-3 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-blue-900"
                                    value="1">
                         </div>
 
@@ -195,7 +195,7 @@
                         <div>
                             <label class="block mb-1 sm:mb-2 text-xs sm:text-sm font-medium text-gray-700">Barème *</label>
                             <input type="number" name="bareme" step="0.5" min="0" max="40" required 
-                                   class="w-full px-2 py-1.5 sm:px-3 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+                                   class="w-full px-2 py-1.5 sm:px-3 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-blue-900"
                                    value="20">
                         </div>
 
@@ -205,7 +205,7 @@
                         @else
                             <div class="col-span-1 md:col-span-2">
                                 <label class="block mb-1 sm:mb-2 text-xs sm:text-sm font-medium text-gray-700">Année scolaire *</label>
-                                <select name="annee_scolaire_id" required class="w-full px-2 py-1.5 sm:px-3 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
+                                <select name="annee_scolaire_id" required class="w-full px-2 py-1.5 sm:px-3 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-blue-900">
                                     <option value="">Sélectionner une année</option>
                                     @foreach($anneesScolaires as $annee)
                                         <option value="{{ $annee->id }}">{{ $annee->libelle }}</option>
@@ -218,7 +218,7 @@
                         <div class="col-span-1 md:col-span-2">
                             <label class="block mb-1 sm:mb-2 text-xs sm:text-sm font-medium text-gray-700">Description (optionnelle)</label>
                             <textarea name="description" rows="3" 
-                                      class="w-full px-2 py-1.5 sm:px-3 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+                                      class="w-full px-2 py-1.5 sm:px-3 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-blue-900"
                                       placeholder="Ajouter une description..."></textarea>
                         </div>
                     </div>
@@ -229,7 +229,7 @@
                             Annuler
                         </button>
                         <button type="submit" 
-                                class="px-3 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base text-white transition-colors bg-indigo-600 rounded-lg hover:bg-indigo-700">
+                                class="px-3 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base text-white transition-colors bg-blue-900 rounded-lg hover:bg-blue-800">
                             Créer l'évaluation
                         </button>
                     </div>
@@ -243,8 +243,8 @@
                 <h3 class="text-base sm:text-lg font-semibold text-gray-900">Historique des évaluations</h3>
                 <div class="flex flex-col sm:flex-row gap-2">
                     <input type="text" id="searchEvaluation" placeholder="Rechercher..." 
-                           class="px-3 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
-                    <select id="filterClasse" class="px-3 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
+                           class="px-3 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-blue-900">
+                    <select id="filterClasse" class="px-3 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-blue-900">
                         <option value="">Toutes les classes</option>
                         @foreach($classes as $classe)
                             <option value="{{ $classe->id }}">{{ $classe->nom_complet }}</option>
@@ -282,7 +282,7 @@
                             <td class="px-4 py-3 whitespace-nowrap">
                                 <span class="px-2 py-1 text-xs rounded-full 
                                     @if($evaluation->type == 'devoir') bg-blue-100 text-blue-800
-                                    @elseif($evaluation->type == 'examen') bg-purple-100 text-purple-800
+                                    @elseif($evaluation->type == 'examen') bg-blue-100 text-purple-800
                                     @elseif($evaluation->type == 'interrogation') bg-green-100 text-green-800
                                     @else bg-gray-100 text-gray-800
                                     @endif">
@@ -312,14 +312,14 @@
                             <td class="px-4 py-3 text-sm font-medium whitespace-nowrap">
                                 <div class="flex items-center justify-center space-x-3">
                                     <a href="{{ route('enseignant.evaluations.show', $evaluation->id) }}" 
-                                       class="text-indigo-600 hover:text-indigo-900 transition-colors" title="Voir détails">
+                                       class="text-blue-900 hover:text-indigo-900 transition-colors" title="Voir détails">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                                         </svg>
                                     </a>
                                     <a href="{{ route('enseignant.evaluations.edit', $evaluation->id) }}" 
-                                       class="text-blue-600 hover:text-blue-900 transition-colors" title="Modifier">
+                                       class="text-blue-900 hover:text-blue-900 transition-colors" title="Modifier">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                         </svg>
@@ -347,7 +347,7 @@
                                 </svg>
                                 <p class="text-lg">Aucune évaluation trouvée</p>
                                 <p class="mt-2 text-sm">Commencez par créer votre première évaluation</p>
-                                <button onclick="openCreateModal()" class="px-4 py-2 mt-4 text-sm text-white bg-indigo-600 rounded-lg hover:bg-indigo-700">
+                                <button onclick="openCreateModal()" class="px-4 py-2 mt-4 text-sm text-white bg-blue-900 rounded-lg hover:bg-blue-800">
                                     Créer une évaluation
                                 </button>
                             </td>

@@ -5,7 +5,7 @@
 @section('content')
 <div class="py-6 sm:py-12">
     <div class="px-4 mx-auto max-w-6xl sm:px-6 lg:px-8">
-        <div class="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-3xl p-8 mb-8 shadow-2xl">
+        <div class="bg-blue-900 rounded-3xl p-8 mb-8 shadow-2xl">
             <h1 class="text-2xl font-bold text-white">📈 Mes statistiques</h1>
             <p class="text-indigo-200 mt-1">Vue d'ensemble de vos activités d'enseignement</p>
         </div>
@@ -15,7 +15,7 @@
             </svg>
             <p class="text-gray-500 text-lg">Statistiques en cours de développement.</p>
             <div class="mt-6 flex flex-wrap justify-center gap-4">
-                <a href="{{ route('enseignant.evaluations.index') }}" class="px-4 py-2 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700">Mes évaluations</a>
+                <a href="{{ route('enseignant.evaluations.index') }}" class="px-4 py-2 bg-blue-900 text-white rounded-xl hover:bg-blue-800">Mes évaluations</a>
                 <a href="{{ route('enseignant.notes.index') }}" class="px-4 py-2 bg-green-600 text-white rounded-xl hover:bg-green-700">Mes notes</a>
                 <a href="{{ route('enseignant.absences.statistiques') }}" class="px-4 py-2 bg-red-600 text-white rounded-xl hover:bg-red-700">Stats absences</a>
             </div>

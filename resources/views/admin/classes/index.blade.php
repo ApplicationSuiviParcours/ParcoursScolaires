@@ -13,7 +13,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <!-- En-tête moderne -->
-            <div class="bg-gradient-to-r from-indigo-600 via-indigo-700 to-purple-700 rounded-xl md:rounded-2xl shadow-2xl mb-6 md:mb-8 overflow-hidden relative group">
+            <div class="bg-blue-900 rounded-xl md:rounded-2xl shadow-2xl mb-6 md:mb-8 overflow-hidden relative group">
                 <div class="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent"></div>
 
                 <div class="relative px-4 sm:px-6 md:px-8 py-4 md:py-6">
@@ -29,7 +29,7 @@
                                 <div class="min-w-0"> {{-- min-w-0 permet au texte de wrap correctement --}}
                                     <h3 class="text-xl sm:text-2xl font-bold text-white truncate">Liste des Classes</h3>
                                     @if(isset($anneeScolaire) && $anneeScolaire)
-                                        <p class="text-indigo-100 flex items-center text-xs sm:text-sm mt-1">
+                                        <p class="text-blue-100 flex items-center text-xs sm:text-sm mt-1">
                                             <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                             </svg>
@@ -59,7 +59,7 @@
                             </a>
 
                             <a href="{{ route('admin.classes.create') }}"
-                               class="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2.5 bg-white rounded-lg text-xs font-semibold text-indigo-600 hover:bg-indigo-50 transition shadow-sm">
+                               class="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2.5 bg-yellow-500 rounded-lg text-xs font-semibold text-blue-900 hover:bg-blue-50 transition shadow-sm">
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                 </svg>
@@ -73,14 +73,14 @@
             <!-- Cartes statistiques -->
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 mb-6 md:mb-8">
                 <!-- Total Classes -->
-                <div class="bg-white rounded-xl md:rounded-2xl shadow p-4 md:p-5 border-l-4 border-indigo-500 hover:shadow-lg transition">
+                <div class="bg-white rounded-xl md:rounded-2xl shadow p-4 md:p-5 border-l-4 border-blue-900 hover:shadow-lg transition">
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-[10px] md:text-xs text-gray-500 font-medium uppercase">Total Classes</p>
                             <p class="text-xl md:text-2xl font-bold text-gray-900 mt-1">{{ $classes->total() }}</p>
                         </div>
-                        <div class="p-2 md:p-3 bg-indigo-100 rounded-lg md:rounded-xl">
-                            <svg class="w-5 h-5 md:w-6 md:h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="p-2 md:p-3 bg-blue-100 rounded-lg md:rounded-xl">
+                            <svg class="w-5 h-5 md:w-6 md:h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                             </svg>
                         </div>
@@ -110,7 +110,7 @@
                             <p class="text-xl md:text-2xl font-bold text-gray-900 mt-1">{{ $classes->sum('eleves_count') }}</p>
                         </div>
                         <div class="p-2 md:p-3 bg-blue-100 rounded-lg md:rounded-xl">
-                            <svg class="w-5 h-5 md:w-6 md:h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 md:w-6 md:h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1z"></path>
                             </svg>
                         </div>
@@ -185,7 +185,7 @@
                         </div>
                         <div class="mt-4 flex flex-col sm:flex-row gap-2 sm:justify-end">
                             <a href="{{ route('admin.classes.index') }}" class="w-full sm:w-auto px-4 py-2 bg-gray-100 text-gray-600 rounded-lg text-sm text-center hover:bg-gray-200">Réinitialiser</a>
-                            <button type="submit" class="w-full sm:w-auto px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm hover:bg-indigo-700 shadow">Filtrer</button>
+                            <button type="submit" class="w-full sm:w-auto px-4 py-2 bg-blue-900 text-white rounded-lg text-sm hover:bg-blue-800 shadow">Filtrer</button>
                         </div>
                     </form>
                 </div>
@@ -228,8 +228,8 @@
                                     </td>
                                     <td class="px-3 py-3 whitespace-nowrap">
                                         <div class="flex items-center gap-2">
-                                            <div class="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                                <span class="text-indigo-700 font-bold text-xs">{{ strtoupper(substr($classe->niveau, 0, 2)) }}</span>
+                                            <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                                <span class="text-blue-900 font-bold text-xs">{{ strtoupper(substr($classe->niveau, 0, 2)) }}</span>
                                             </div>
                                             <span class="text-xs sm:text-sm font-medium text-gray-900">{{ $classe->niveau }}</span>
                                         </div>
@@ -252,7 +252,7 @@
                                     </td>
                                     <td class="px-3 py-3 whitespace-nowrap text-right">
                                         <div class="flex items-center justify-end gap-1 md:gap-2 whitespace-nowrap">
-                                            <a href="{{ route('admin.classes.show', $classe) }}" class="p-1.5 md:p-2 text-blue-600 bg-transparent hover:bg-blue-50 rounded-lg transition-colors border-none" title="Voir">
+                                            <a href="{{ route('admin.classes.show', $classe) }}" class="p-1.5 md:p-2 text-blue-900 bg-transparent hover:bg-blue-50 rounded-lg transition-colors border-none" title="Voir">
                                                 <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                                             </a>
                                             <a href="{{ route('admin.classes.edit', $classe) }}" class="p-1.5 md:p-2 text-amber-600 bg-transparent hover:bg-amber-50 rounded-lg transition-colors border-none" title="Modifier">
@@ -277,7 +277,7 @@
                                 <tr>
                                     <td colspan="7" class="text-center py-10">
                                         <p class="text-gray-500 mb-4">Aucune classe trouvée</p>
-                                        <a href="{{ route('admin.classes.create') }}" class="px-4 py-2 bg-indigo-600 text-white text-sm rounded-lg">Créer une classe</a>
+                                        <a href="{{ route('admin.classes.create') }}" class="px-4 py-2 bg-blue-900 text-white text-sm rounded-lg">Créer une classe</a>
                                     </td>
                                 </tr>
                             @endforelse

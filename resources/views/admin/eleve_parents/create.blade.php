@@ -5,7 +5,7 @@
 
 @section('header')
     {{-- Header Responsive --}}
-    <div class="relative bg-gradient-to-r from-green-600 to-green-800 py-3 sm:py-4 md:py-6 overflow-x-hidden">
+    <div class="relative bg-blue-900 py-3 sm:py-4 md:py-6 overflow-x-hidden">
         <div class="absolute inset-0 bg-black opacity-10"></div>
         <div class="container mx-auto px-3 sm:px-4 md:px-6 relative">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-1.5 sm:gap-2">
@@ -46,14 +46,14 @@
         <!-- Statistiques rapides - Responsive Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 md:gap-4 lg:gap-6 mb-3 sm:mb-4 md:mb-6 lg:mb-8">
             <!-- Total élèves -->
-            <div class="bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow p-2.5 sm:p-3 md:p-4 lg:p-6 border-l-4 border-indigo-500 hover:shadow-lg transition-shadow">
+            <div class="bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow p-2.5 sm:p-3 md:p-4 lg:p-6 border-l-4 border-blue-900 hover:shadow-lg transition-shadow">
                 <div class="flex items-center justify-between">
                     <div class="min-w-0">
                         <p class="text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-medium text-gray-500 uppercase">Élèves</p>
                         <p class="text-sm sm:text-base md:text-xl lg:text-3xl font-bold text-gray-800 mt-0.5">{{ \App\Models\Eleve::count() }}</p>
                     </div>
-                    <div class="p-1.5 sm:p-2 md:p-3 lg:p-4 bg-indigo-100 rounded-lg md:rounded-xl flex-shrink-0 ml-2">
-                        <i class="fas fa-child text-sm sm:text-base md:text-lg lg:text-3xl text-indigo-600"></i>
+                    <div class="p-1.5 sm:p-2 md:p-3 lg:p-4 bg-blue-100 rounded-lg md:rounded-xl flex-shrink-0 ml-2">
+                        <i class="fas fa-child text-sm sm:text-base md:text-lg lg:text-3xl text-blue-900"></i>
                     </div>
                 </div>
             </div>
@@ -72,14 +72,14 @@
             </div>
 
             <!-- Relations existantes -->
-            <div class="bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow p-2.5 sm:p-3 md:p-4 lg:p-6 border-l-4 border-purple-500 hover:shadow-lg transition-shadow">
+            <div class="bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow p-2.5 sm:p-3 md:p-4 lg:p-6 border-l-4 border-blue-900 hover:shadow-lg transition-shadow">
                 <div class="flex items-center justify-between">
                     <div class="min-w-0">
                         <p class="text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-medium text-gray-500 uppercase">Relations</p>
                         <p class="text-sm sm:text-base md:text-xl lg:text-3xl font-bold text-gray-800 mt-0.5">{{ \App\Models\EleveParent::count() }}</p>
                     </div>
-                    <div class="p-1.5 sm:p-2 md:p-3 lg:p-4 bg-purple-100 rounded-lg md:rounded-xl flex-shrink-0 ml-2">
-                        <i class="fas fa-handshake text-sm sm:text-base md:text-lg lg:text-3xl text-purple-600"></i>
+                    <div class="p-1.5 sm:p-2 md:p-3 lg:p-4 bg-blue-100 rounded-lg md:rounded-xl flex-shrink-0 ml-2">
+                        <i class="fas fa-handshake text-sm sm:text-base md:text-lg lg:text-3xl text-yellow-600"></i>
                     </div>
                 </div>
             </div>
@@ -103,7 +103,7 @@
         <!-- Formulaire - Responsive -->
         <div class="bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow-xl overflow-hidden">
             <!-- En-tête -->
-            <div class="bg-gradient-to-r from-green-600 to-green-700 px-3 sm:px-4 md:px-5 lg:px-6 py-2 sm:py-2.5 md:py-3 lg:py-4">
+            <div class="bg-blue-900 px-3 sm:px-4 md:px-5 lg:px-6 py-2 sm:py-2.5 md:py-3 lg:py-4">
                 <div class="flex items-center">
                     <div class="p-1 sm:p-1.5 md:p-2 bg-white bg-opacity-20 rounded-lg">
                         <i class="fas fa-pen text-white text-[10px] sm:text-xs md:text-sm lg:text-xl"></i>
@@ -119,7 +119,7 @@
                     <!-- Section Élève -->
                     <div class="space-y-2 sm:space-y-3 md:space-y-4">
                         <div class="flex items-center gap-1.5 sm:gap-2">
-                            <div class="w-0.5 h-5 sm:h-6 md:h-7 lg:h-8 bg-indigo-600 rounded-full"></div>
+                            <div class="w-0.5 h-5 sm:h-6 md:h-7 lg:h-8 bg-blue-900 rounded-full"></div>
                             <h4 class="text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-gray-800">Sélection de l'élève <span class="text-[8px] sm:text-[9px] text-red-500">*</span></h4>
                         </div>
 
@@ -144,14 +144,14 @@
                             </div>
 
                             <!-- Aperçu Élève -->
-                            <div id="elevePreview" class="bg-indigo-50 rounded-lg p-2 sm:p-2.5 md:p-3 hidden">
+                            <div id="elevePreview" class="bg-blue-50 rounded-lg p-2 sm:p-2.5 md:p-3 hidden">
                                 <div class="flex items-center">
                                     <div class="p-1 sm:p-1.5 md:p-2 bg-indigo-200 rounded-lg">
-                                        <i class="fas fa-child text-indigo-700 text-[10px] sm:text-xs md:text-sm"></i>
+                                        <i class="fas fa-child text-blue-900 text-[10px] sm:text-xs md:text-sm"></i>
                                     </div>
                                     <div class="ml-2 sm:ml-2.5 md:ml-3">
                                         <p class="text-[8px] sm:text-[9px] md:text-xs font-medium text-indigo-900" id="elevePreviewName"></p>
-                                        <p class="text-[7px] sm:text-[8px] md:text-[9px] text-indigo-700" id="elevePreviewClass"></p>
+                                        <p class="text-[7px] sm:text-[8px] md:text-[9px] text-blue-900" id="elevePreviewClass"></p>
                                     </div>
                                 </div>
                             </div>
@@ -203,7 +203,7 @@
                     <!-- Section Lien parental -->
                     <div class="space-y-2 sm:space-y-3 md:space-y-4">
                         <div class="flex items-center gap-1.5 sm:gap-2">
-                            <div class="w-0.5 h-5 sm:h-6 md:h-7 lg:h-8 bg-purple-600 rounded-full"></div>
+                            <div class="w-0.5 h-5 sm:h-6 md:h-7 lg:h-8 bg-blue-900 rounded-full"></div>
                             <h4 class="text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-gray-800">Type de lien <span class="text-[8px] sm:text-[9px] text-red-500">*</span></h4>
                         </div>
 
@@ -239,7 +239,7 @@
                     <!-- Section Résumé - Responsive -->
                     <div id="summarySection" class="bg-gray-50 rounded-lg p-2.5 sm:p-3 md:p-4 lg:p-6 hidden">
                         <h5 class="text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-gray-800 mb-2 sm:mb-3 flex items-center">
-                            <i class="fas fa-clipboard-list text-indigo-600 mr-1.5 sm:mr-2 text-[10px] sm:text-xs"></i>
+                            <i class="fas fa-clipboard-list text-blue-900 mr-1.5 sm:mr-2 text-[10px] sm:text-xs"></i>
                             Résumé
                         </h5>
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5 sm:gap-2 md:gap-3 lg:gap-4">
@@ -278,8 +278,8 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 md:gap-4 mt-3 sm:mt-4 md:mt-6 lg:mt-8">
             <div class="bg-white rounded-lg md:rounded-xl p-2 sm:p-2.5 md:p-3 lg:p-4 shadow-sm">
                 <div class="flex items-center">
-                    <div class="p-1 sm:p-1.5 md:p-2 bg-indigo-100 rounded-lg flex-shrink-0">
-                        <i class="fas fa-lightbulb text-indigo-600 text-[8px] sm:text-[9px] md:text-xs lg:text-base"></i>
+                    <div class="p-1 sm:p-1.5 md:p-2 bg-blue-100 rounded-lg flex-shrink-0">
+                        <i class="fas fa-lightbulb text-blue-900 text-[8px] sm:text-[9px] md:text-xs lg:text-base"></i>
                     </div>
                     <div class="ml-2 sm:ml-2.5 md:ml-3">
                         <h6 class="text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-semibold text-gray-800">Astuce #1</h6>
@@ -300,8 +300,8 @@
             </div>
             <div class="bg-white rounded-lg md:rounded-xl p-2 sm:p-2.5 md:p-3 lg:p-4 shadow-sm">
                 <div class="flex items-center">
-                    <div class="p-1 sm:p-1.5 md:p-2 bg-purple-100 rounded-lg flex-shrink-0">
-                        <i class="fas fa-lightbulb text-purple-600 text-[8px] sm:text-[9px] md:text-xs lg:text-base"></i>
+                    <div class="p-1 sm:p-1.5 md:p-2 bg-blue-100 rounded-lg flex-shrink-0">
+                        <i class="fas fa-lightbulb text-yellow-600 text-[8px] sm:text-[9px] md:text-xs lg:text-base"></i>
                     </div>
                     <div class="ml-2 sm:ml-2.5 md:ml-3">
                         <h6 class="text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-semibold text-gray-800">Astuce #3</h6>

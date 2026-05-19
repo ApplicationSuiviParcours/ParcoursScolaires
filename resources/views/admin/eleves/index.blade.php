@@ -1,4 +1,4 @@
-﻿{{-- resources/views/admin/eleves/index.blade.php --}}
+{{-- resources/views/admin/eleves/index.blade.php --}}
 @extends('layouts.app')
 
 @section('header')
@@ -49,7 +49,7 @@
                             <p class="text-[10px] md:text-xs text-gray-400 mt-1 hidden sm:block">Inscrits</p>
                         </div>
                         <div class="bg-blue-100 p-2 md:p-3 rounded-lg md:rounded-xl group-hover:scale-110 transition-transform">
-                            <svg class="w-5 h-5 md:w-6 md:h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 md:w-6 md:h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
                             </svg>
                         </div>
@@ -77,11 +77,11 @@
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-[10px] md:text-xs font-medium text-gray-500 uppercase tracking-wider">Garçons</p>
-                            <p class="text-xl md:text-3xl font-bold text-blue-600 mt-1">{{ $stats['garcons'] }}</p>
+                            <p class="text-xl md:text-3xl font-bold text-blue-900 mt-1">{{ $stats['garcons'] }}</p>
                             <p class="text-[10px] md:text-xs text-gray-400 mt-1 hidden sm:block">{{ $stats['total'] > 0 ? round(($stats['garcons'] / $stats['total']) * 100, 1) : 0 }}%</p>
                         </div>
                         <div class="bg-blue-100 p-2 md:p-3 rounded-lg md:rounded-xl group-hover:scale-110 transition-transform">
-                            <svg class="w-5 h-5 md:w-6 md:h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 md:w-6 md:h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                             </svg>
                         </div>
@@ -124,7 +124,7 @@
                                        class="block w-full pl-10 pr-3 py-2.5 md:py-3 border border-gray-200 rounded-lg md:rounded-xl text-xs md:text-sm focus:border-blue-400 focus:ring-1">
                             </div>
                             <div class="flex gap-2">
-                                <button type="submit" class="flex-1 sm:flex-none px-4 md:px-6 py-2.5 md:py-3 bg-blue-600 text-white rounded-lg md:rounded-xl text-xs md:text-sm font-medium shadow-sm">
+                                <button type="submit" class="flex-1 sm:flex-none px-4 md:px-6 py-2.5 md:py-3 bg-blue-900 text-white rounded-lg md:rounded-xl text-xs md:text-sm font-medium shadow-sm hover:bg-blue-800 transition-colors">
                                     Rechercher
                                 </button>
                                 @if(request('search') || request('statut'))
@@ -170,7 +170,7 @@
                             Export Excel
                         </a>
                         <a href="{{ route('admin.inscriptions.create', ['is_new_eleve' => 1]) }}"
-                           class="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg text-xs font-medium shadow-sm sm:ml-auto">
+                           class="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2 bg-yellow-500 text-blue-900 font-bold rounded-lg text-xs shadow-sm sm:ml-auto hover:bg-yellow-400 transition-colors">
                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                             Ajouter un élève
                         </a>
@@ -250,10 +250,10 @@
                                     <!-- Actions -->
                                     <td class="px-2 py-2 md:px-4 md:py-3 text-right">
                                         <div class="flex items-center justify-end gap-1 md:gap-2 whitespace-nowrap">
-                                            <a href="{{ route('admin.eleves.show', $eleve) }}" class="p-1.5 md:p-2 text-blue-600 bg-transparent hover:bg-blue-50 rounded-lg transition-colors border-none" title="Voir">
+                                            <a href="{{ route('admin.eleves.show', $eleve) }}" class="p-1.5 md:p-2 text-blue-900 bg-transparent hover:bg-blue-50 rounded-lg transition-colors border-none" title="Voir">
                                                 <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                                             </a>
-                                            <a href="{{ route('admin.eleves.parcours', $eleve) }}" class="p-1.5 md:p-2 text-indigo-600 bg-transparent hover:bg-indigo-50 rounded-lg transition-colors border-none" title="Parcours Scolaire">
+                                            <a href="{{ route('admin.eleves.parcours', $eleve) }}" class="p-1.5 md:p-2 text-blue-900 bg-transparent hover:bg-blue-50 rounded-lg transition-colors border-none" title="Parcours Scolaire">
                                                 <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                             </a>
                                             <a href="{{ route('admin.eleves.edit', $eleve) }}" class="p-1.5 md:p-2 text-amber-600 bg-transparent hover:bg-amber-50 rounded-lg transition-colors border-none" title="Modifier">

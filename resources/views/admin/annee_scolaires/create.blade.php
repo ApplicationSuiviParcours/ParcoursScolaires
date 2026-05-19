@@ -3,7 +3,7 @@
 @section('title', 'Nouvelle année scolaire')
 
 @section('header')
-<div class="relative overflow-hidden bg-gradient-to-br from-emerald-600 via-emerald-700 to-teal-800 py-8 md:py-12">
+<div class="relative overflow-hidden bg-blue-900 py-8 md:py-12">
     <!-- Éléments décoratifs animés -->
     <div class="absolute inset-0 opacity-10">
         <div class="absolute -top-24 -right-24 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-pulse"></div>
@@ -66,7 +66,7 @@
     <div class="max-w-3xl mx-auto">
         <!-- Formulaire -->
         <div class="bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden">
-            <div class="bg-gradient-to-r from-emerald-500 to-teal-600 px-4 sm:px-8 py-4 sm:py-6">
+            <div class="bg-blue-900 px-4 sm:px-8 py-4 sm:py-6">
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div class="flex flex-col sm:flex-row items-center sm:items-center">
                         <div class="w-12 h-12 sm:w-14 sm:h-14 bg-white/20 backdrop-blur-lg rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-0 sm:mr-5">
@@ -211,7 +211,7 @@
                         </div>
 
                         <!-- Récapitulatif -->
-                        <div class="mt-6 sm:mt-8 p-3 sm:p-4 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl sm:rounded-2xl border border-emerald-200" id="recapSection" style="display: none;">
+                        <div class="mt-6 sm:mt-8 p-3 sm:p-4 bg-blue-900 rounded-xl sm:rounded-2xl border border-emerald-200" id="recapSection" style="display: none;">
                             <h4 class="text-xs sm:text-sm font-medium text-emerald-800 mb-3 flex items-center">
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -245,7 +245,7 @@
                                 Annuler
                             </a>
                             <button type="submit" 
-                                    class="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold text-sm rounded-lg sm:rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+                                    class="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 bg-yellow-500 text-blue-900 font-bold hover:from-emerald-600 hover:to-teal-700 text-white font-semibold text-sm rounded-lg sm:rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
                                 <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
                                 </svg>

@@ -11,7 +11,7 @@
         <div class="px-3 mx-auto max-w-7xl sm:px-4 lg:px-6">
 
             <!-- Welcome Banner -->
-            <div class="bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 rounded-xl shadow-2xl mb-6 md:mb-8 p-4 sm:p-6 md:p-8 relative overflow-hidden group">
+            <div class="bg-blue-900 rounded-xl shadow-2xl mb-6 md:mb-8 p-4 sm:p-6 md:p-8 relative overflow-hidden group">
                 <div class="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-purple-400/20 animate-pulse"></div>
                 <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
 
@@ -58,12 +58,12 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6 mb-6 md:mb-8">
                 <!-- Total Élèves -->
                 <div class="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-2">
-                    <div class="h-1.5 bg-gradient-to-r from-blue-400 to-blue-600"></div>
+                    <div class="h-1.5 bg-blue-900"></div>
                     <div class="p-3 sm:p-4 md:p-5 lg:p-6">
                         <div class="flex items-center justify-between">
                             <div class="flex-1 min-w-0">
                                 <p class="text-[10px] sm:text-xs md:text-sm font-semibold text-gray-500 uppercase tracking-wide mb-1">Total Élèves</p>
-                                <p class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent truncate">
+                                <p class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-blue-900 bg-clip-text text-transparent truncate">
                                     {{ $stats['totalEleves'] }}
                                 </p>
                                 <div class="flex items-center mt-1">
@@ -75,26 +75,26 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="flex-shrink-0 ml-2 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl p-2 sm:p-3 md:p-4 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                                <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="flex-shrink-0 ml-2 bg-blue-900 rounded-xl p-2 sm:p-3 md:p-4 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
                                 </svg>
                             </div>
                         </div>
                         <div class="mt-2 md:mt-3 h-1 w-full bg-gray-100 rounded-full overflow-hidden">
-                            <div class="h-full w-3/4 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full progress-bar"></div>
+                            <div class="h-full w-3/4 bg-blue-900 rounded-full progress-bar"></div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Total Enseignants -->
                 <div class="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-2">
-                    <div class="h-1.5 bg-gradient-to-r from-green-400 to-emerald-600"></div>
+                    <div class="h-1.5 bg-blue-900"></div>
                     <div class="p-3 sm:p-4 md:p-5 lg:p-6">
                         <div class="flex items-center justify-between">
                             <div class="flex-1 min-w-0">
                                 <p class="text-[10px] sm:text-xs md:text-sm font-semibold text-gray-500 uppercase tracking-wide mb-1">Enseignants</p>
-                                <p class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-green-600 to-emerald-400 bg-clip-text text-transparent truncate">
+                                <p class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-blue-900 bg-clip-text text-transparent truncate">
                                     {{ $stats['totalEnseignants'] }}
                                 </p>
                                 <div class="flex items-center mt-1">
@@ -106,30 +106,30 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="flex-shrink-0 ml-2 bg-gradient-to-br from-green-400 to-emerald-600 rounded-xl p-2 sm:p-3 md:p-4 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                                <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="flex-shrink-0 ml-2 bg-blue-900 rounded-xl p-2 sm:p-3 md:p-4 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                                 </svg>
                             </div>
                         </div>
                         <div class="mt-2 md:mt-3 h-1 w-full bg-gray-100 rounded-full overflow-hidden">
-                            <div class="h-full w-4/5 bg-gradient-to-r from-green-400 to-emerald-600 rounded-full progress-bar"></div>
+                            <div class="h-full w-4/5 bg-blue-900 rounded-full progress-bar"></div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Total Classes -->
                 <div class="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-2">
-                    <div class="h-1.5 bg-gradient-to-r from-purple-400 to-purple-600"></div>
+                    <div class="h-1.5 bg-blue-900"></div>
                     <div class="p-3 sm:p-4 md:p-5 lg:p-6">
                         <div class="flex items-center justify-between">
                             <div class="flex-1 min-w-0">
                                 <p class="text-[10px] sm:text-xs md:text-sm font-semibold text-gray-500 uppercase tracking-wide mb-1">Classes</p>
-                                <p class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-purple-600 to-purple-400 bg-clip-text text-transparent truncate">
+                                <p class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-blue-900 bg-clip-text text-transparent truncate">
                                     {{ $stats['totalClasses'] }}
                                 </p>
                                 <div class="flex items-center mt-1">
-                                    <span class="inline-flex items-center px-1.5 py-0.5 bg-purple-100 text-purple-600 text-[8px] sm:text-[10px] md:text-xs font-semibold rounded-full">
+                                    <span class="inline-flex items-center px-1.5 py-0.5 bg-blue-100 text-yellow-600 text-[8px] sm:text-[10px] md:text-xs font-semibold rounded-full">
                                         <svg class="w-2 h-2 mr-0.5" fill="currentColor" viewBox="0 0 24 24">
                                             <path d="M13 10h5l-6 6-6-6h5V3h2v7z"></path>
                                         </svg>
@@ -137,26 +137,26 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="flex-shrink-0 ml-2 bg-gradient-to-br from-purple-400 to-purple-600 rounded-xl p-2 sm:p-3 md:p-4 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                                <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="flex-shrink-0 ml-2 bg-blue-900 rounded-xl p-2 sm:p-3 md:p-4 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
                                 </svg>
                             </div>
                         </div>
                         <div class="mt-2 md:mt-3 h-1 w-full bg-gray-100 rounded-full overflow-hidden">
-                            <div class="h-full w-full bg-gradient-to-r from-purple-400 to-purple-600 rounded-full progress-bar"></div>
+                            <div class="h-full w-full bg-blue-900 rounded-full progress-bar"></div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Total Matières -->
                 <div class="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-2">
-                    <div class="h-1.5 bg-gradient-to-r from-amber-400 to-orange-600"></div>
+                    <div class="h-1.5 bg-blue-900"></div>
                     <div class="p-3 sm:p-4 md:p-5 lg:p-6">
                         <div class="flex items-center justify-between">
                             <div class="flex-1 min-w-0">
                                 <p class="text-[10px] sm:text-xs md:text-sm font-semibold text-gray-500 uppercase tracking-wide mb-1">Matières</p>
-                                <p class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-amber-600 to-orange-400 bg-clip-text text-transparent truncate">
+                                <p class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-blue-900 bg-clip-text text-transparent truncate">
                                     {{ $stats['totalMatieres'] }}
                                 </p>
                                 <div class="flex items-center mt-1">
@@ -168,14 +168,14 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="flex-shrink-0 ml-2 bg-gradient-to-br from-amber-400 to-orange-600 rounded-xl p-2 sm:p-3 md:p-4 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                                <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="flex-shrink-0 ml-2 bg-blue-900 rounded-xl p-2 sm:p-3 md:p-4 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                                 </svg>
                             </div>
                         </div>
                         <div class="mt-2 md:mt-3 h-1 w-full bg-gray-100 rounded-full overflow-hidden">
-                            <div class="h-full bg-gradient-to-r from-amber-400 to-orange-600 rounded-full progress-bar" style="width: 75%"></div>
+                            <div class="h-full bg-blue-900 rounded-full progress-bar" style="width: 75%"></div>
                         </div>
                     </div>
                 </div>
@@ -187,15 +187,15 @@
                 <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 p-3 sm:p-4 md:p-5 lg:p-6 backdrop-blur-sm border border-gray-100">
                     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-3 md:mb-4 gap-2">
                         <h3 class="text-sm sm:text-base md:text-lg font-bold text-gray-900 flex items-center">
-                            <div class="bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg p-1 mr-2 shadow-md">
-                                <svg class="w-3 h-3 sm:w-4 sm:h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="bg-blue-900 rounded-lg p-1 mr-2 shadow-md">
+                                <svg class="w-3 h-3 sm:w-4 sm:h-4 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                                 </svg>
                             </div>
                             <span class="text-xs sm:text-sm md:text-base">Inscriptions par mois</span>
                         </h3>
                         <div class="flex items-center space-x-1 sm:space-x-2">
-                            <span class="px-1.5 py-0.5 md:px-2 md:py-1 bg-blue-50 text-blue-600 text-[8px] sm:text-[10px] md:text-xs font-semibold rounded-full">2025</span>
+                            <span class="px-1.5 py-0.5 md:px-2 md:py-1 bg-blue-50 text-blue-900 text-[8px] sm:text-[10px] md:text-xs font-semibold rounded-full">2025</span>
                             <span class="px-1.5 py-0.5 md:px-2 md:py-1 bg-gray-50 text-gray-600 text-[8px] sm:text-[10px] md:text-xs font-semibold rounded-full">Total: {{ array_sum($inscriptionsByMonth['data']) }}</span>
                         </div>
                     </div>
@@ -208,8 +208,8 @@
                 <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 p-3 sm:p-4 md:p-5 lg:p-6 backdrop-blur-sm border border-gray-100">
                     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-3 md:mb-4 gap-2">
                         <h3 class="text-sm sm:text-base md:text-lg font-bold text-gray-900 flex items-center">
-                            <div class="bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg p-1 mr-2 shadow-md">
-                                <svg class="w-3 h-3 sm:w-4 sm:h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="bg-blue-900 rounded-lg p-1 mr-2 shadow-md">
+                                <svg class="w-3 h-3 sm:w-4 sm:h-4 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
                                 </svg>
@@ -217,7 +217,7 @@
                             <span class="text-xs sm:text-sm md:text-base">Répartition par classe</span>
                         </h3>
                         <div class="flex items-center space-x-1 sm:space-x-2">
-                            <span class="px-1.5 py-0.5 md:px-2 md:py-1 bg-purple-50 text-purple-600 text-[8px] sm:text-[10px] md:text-xs font-semibold rounded-full">Total: {{ array_sum($studentsByClass['data']) }}</span>
+                            <span class="px-1.5 py-0.5 md:px-2 md:py-1 bg-purple-50 text-yellow-600 text-[8px] sm:text-[10px] md:text-xs font-semibold rounded-full">Total: {{ array_sum($studentsByClass['data']) }}</span>
                         </div>
                     </div>
                     <div class="relative h-48 sm:h-56 md:h-64">
@@ -232,8 +232,8 @@
                 <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 p-3 sm:p-4 md:p-5 lg:p-6 backdrop-blur-sm border border-gray-100">
                     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-3 md:mb-4 gap-2">
                         <h3 class="text-sm sm:text-base md:text-lg font-bold text-gray-900 flex items-center">
-                            <div class="bg-gradient-to-br from-green-400 to-emerald-600 rounded-lg p-1 mr-2 shadow-md">
-                                <svg class="w-3 h-3 sm:w-4 sm:h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="bg-blue-900 rounded-lg p-1 mr-2 shadow-md">
+                                <svg class="w-3 h-3 sm:w-4 sm:h-4 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                                 </svg>
                             </div>
@@ -252,8 +252,8 @@
                 <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 p-3 sm:p-4 md:p-5 lg:p-6 backdrop-blur-sm border border-gray-100">
                     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-3 md:mb-4 gap-2">
                         <h3 class="text-sm sm:text-base md:text-lg font-bold text-gray-900 flex items-center">
-                            <div class="bg-gradient-to-br from-red-400 to-red-600 rounded-lg p-1 mr-2 shadow-md">
-                                <svg class="w-3 h-3 sm:w-4 sm:h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="bg-blue-900 rounded-lg p-1 mr-2 shadow-md">
+                                <svg class="w-3 h-3 sm:w-4 sm:h-4 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
                                 </svg>
                             </div>

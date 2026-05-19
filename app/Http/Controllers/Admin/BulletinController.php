@@ -271,6 +271,11 @@ class BulletinController extends Controller
             ->orderBy('moyenne_generale', 'desc')
             ->get();
 
+        if ($bulletins->isEmpty()) return;
+
+        // Calcul de la moyenne globale de la classe
+        $moyenneClasse = round($bulletins->avg('moyenne_generale'), 2);
+
         $rang = 1;
         $moyennePrecedente = null;
         $rangPrecedent = 1;
@@ -284,6 +289,9 @@ class BulletinController extends Controller
                 $bulletin->rang = $index + 1;
                 $rangPrecedent = $index + 1;
             }
+            
+            // On sauvegarde la moyenne de classe pour chaque bulletin
+            $bulletin->moyenne_classe = $moyenneClasse;
             
             $bulletin->save();
             $moyennePrecedente = $bulletin->moyenne_generale;

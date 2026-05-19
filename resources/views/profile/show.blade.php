@@ -36,9 +36,9 @@
 
         <div class="bg-white rounded-lg shadow-md overflow-hidden">
             <!-- En-tête du profil avec avatar - Responsive -->
-            <div class="bg-gradient-to-r from-purple-600 to-blue-500 px-4 sm:px-5 md:px-6 py-5 sm:py-6 md:py-8">
+            <div class="bg-blue-900 px-4 sm:px-5 md:px-6 py-5 sm:py-6 md:py-8">
                 <div class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left">
-                    <div class="w-20 h-20 sm:w-24 sm:h-24 bg-white rounded-full flex items-center justify-center text-2xl sm:text-3xl font-bold text-purple-600 shadow-lg flex-shrink-0">
+                    <div class="w-20 h-20 sm:w-24 sm:h-24 bg-white rounded-full flex items-center justify-center text-2xl sm:text-3xl font-bold text-yellow-600 shadow-lg flex-shrink-0">
                         {{ substr($user->name, 0, 1) }}
                     </div>
                     <div class="sm:ml-6 mt-3 sm:mt-0">
@@ -56,11 +56,11 @@
                 <!-- Statistiques rapides - Responsive -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8">
                     <div class="bg-gray-50 rounded-lg p-3 sm:p-4 text-center">
-                        <div class="text-xl sm:text-2xl font-bold text-purple-600">{{ $user->created_at->format('d/m/Y') }}</div>
+                        <div class="text-xl sm:text-2xl font-bold text-yellow-600">{{ $user->created_at->format('d/m/Y') }}</div>
                         <div class="text-xs sm:text-sm text-gray-600">Date d'inscription</div>
                     </div>
                     <div class="bg-gray-50 rounded-lg p-3 sm:p-4 text-center">
-                        <div class="text-xl sm:text-2xl font-bold text-purple-600">
+                        <div class="text-xl sm:text-2xl font-bold text-yellow-600">
                             @if($user->email_verified_at)
                                 <span class="text-green-600">✓</span>
                             @else
@@ -76,7 +76,7 @@
                         </div>
                     </div>
                     <div class="bg-gray-50 rounded-lg p-3 sm:p-4 text-center">
-                        <div class="text-xl sm:text-2xl font-bold text-purple-600">{{ $user->updated_at->format('d/m/Y') }}</div>
+                        <div class="text-xl sm:text-2xl font-bold text-yellow-600">{{ $user->updated_at->format('d/m/Y') }}</div>
                         <div class="text-xs sm:text-sm text-gray-600">Dernière mise à jour</div>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                     <h3 class="text-base sm:text-lg font-semibold text-gray-800 mb-3 sm:mb-4">Rôles et permissions</h3>
                     <div class="flex flex-wrap gap-1.5 sm:gap-2">
                         @foreach($user->roles as $role)
-                            <span class="px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 bg-purple-100 text-purple-800 text-xs sm:text-sm font-medium rounded-lg">
+                            <span class="px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 bg-blue-100 text-purple-800 text-xs sm:text-sm font-medium rounded-lg">
                                 {{ ucfirst($role->name) }}
                             </span>
                         @endforeach
@@ -117,7 +117,7 @@
                 <!-- Actions du profil - Responsive -->
                 <div class="mt-6 sm:mt-8 flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
                     <a href="{{ route('profile.edit') }}" 
-                       class="inline-flex items-center justify-center px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 transition duration-200 shadow-md hover:shadow-lg text-sm sm:text-base">
+                       class="inline-flex items-center justify-center px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 bg-blue-900 text-white font-medium rounded-lg hover:bg-blue-800 transition duration-200 shadow-md hover:shadow-lg text-sm sm:text-base">
                         <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1.5 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                         </svg>

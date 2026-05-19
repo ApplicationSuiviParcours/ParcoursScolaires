@@ -9,7 +9,7 @@
     <div class="px-4 mx-auto max-w-6xl sm:px-6 lg:px-8">
 
         {{-- En-tête --}}
-        <div class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl p-6 mb-8 shadow-2xl">
+        <div class="bg-blue-900 rounded-3xl p-6 mb-8 shadow-2xl">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
                     <h1 class="text-2xl font-bold text-white">
@@ -49,7 +49,7 @@
                             <td class="px-4 py-3 text-sm text-gray-500">{{ $inscriptions->firstItem() + $index }}</td>
                             <td class="px-4 py-3">
                                 <div class="flex items-center gap-3">
-                                    <div class="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center text-white text-xs font-bold">
+                                    <div class="w-8 h-8 bg-blue-900 rounded-lg flex items-center justify-center text-white text-xs font-bold">
                                         {{ strtoupper(substr($eleve->prenom, 0, 1)) }}{{ strtoupper(substr($eleve->nom, 0, 1)) }}
                                     </div>
                                     <div>
@@ -71,7 +71,7 @@
                             </td>
                             <td class="px-4 py-3 text-center">
                                 <a href="{{ route('admin.eleves.show', $eleve) }}"
-                                    class="p-2 text-blue-600 bg-blue-100 rounded-lg hover:bg-blue-200 inline-flex items-center">
+                                    class="p-2 text-blue-900 bg-blue-100 rounded-lg hover:bg-blue-200 inline-flex items-center">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>

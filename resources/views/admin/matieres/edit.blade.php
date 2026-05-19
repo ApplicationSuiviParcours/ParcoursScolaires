@@ -3,7 +3,7 @@
 @section('title', 'Modifier la matière')
 
 @section('header')
-<div class="relative overflow-hidden bg-gradient-to-br from-amber-600 via-amber-700 to-orange-800 py-8 md:py-12">
+<div class="relative overflow-hidden bg-blue-900 py-8 md:py-12">
     <!-- Éléments décoratifs animés -->
     <div class="absolute inset-0 opacity-10">
         <div class="absolute -top-24 -right-24 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-pulse"></div>
@@ -95,7 +95,7 @@
     <div class="max-w-3xl mx-auto">
         <!-- Formulaire -->
         <div class="bg-white rounded-2xl md:rounded-3xl shadow-xl overflow-hidden">
-            <div class="bg-gradient-to-r from-amber-500 to-orange-600 px-4 md:px-8 py-4 md:py-6">
+            <div class="bg-blue-900 px-4 md:px-8 py-4 md:py-6">
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div class="flex items-center">
                         <div class="w-12 h-12 md:w-14 md:h-14 bg-white/20 backdrop-blur-lg rounded-xl md:rounded-2xl flex items-center justify-center mr-4 md:mr-5 flex-shrink-0">
@@ -120,9 +120,9 @@
 
             <div class="p-4 md:p-8">
                 <!-- Aperçu rapide -->
-                <div class="mb-6 md:mb-8 p-4 bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl md:rounded-2xl border border-amber-200">
+                <div class="mb-6 md:mb-8 p-4 bg-blue-900 rounded-xl md:rounded-2xl border border-amber-200">
                     <div class="flex flex-col sm:flex-row items-center text-center sm:text-left">
-                        <div class="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center text-white font-bold text-xl md:text-2xl mb-3 sm:mb-0 sm:mr-4 flex-shrink-0" id="previewInitiales">
+                        <div class="w-14 h-14 md:w-16 md:h-16 bg-blue-900 rounded-xl flex items-center justify-center text-white font-bold text-xl md:text-2xl mb-3 sm:mb-0 sm:mr-4 flex-shrink-0" id="previewInitiales">
                             {{ substr($matiere->nom, 0, 2) }}
                         </div>
                         <div>
@@ -297,7 +297,7 @@
                                 Annuler
                             </a>
                             <button type="submit" 
-                                    class="w-full sm:w-auto px-6 py-2.5 md:py-3 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl text-sm md:text-base">
+                                    class="w-full sm:w-auto px-6 py-2.5 md:py-3 bg-blue-900 hover:from-amber-600 hover:to-orange-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl text-sm md:text-base">
                                 <svg class="w-5 h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
                                 </svg>
@@ -311,7 +311,7 @@
 
         <!-- Zone de danger (suppression) -->
         <div class="mt-6 md:mt-8 bg-white rounded-2xl md:rounded-3xl shadow-xl overflow-hidden border-l-4 md:border-l-8 border-red-500">
-            <div class="bg-gradient-to-r from-red-50 to-red-100 px-4 md:px-8 py-4 md:py-6">
+            <div class="bg-blue-900 px-4 md:px-8 py-4 md:py-6">
                 <div class="flex items-center">
                     <div class="w-12 h-12 md:w-14 md:h-14 bg-red-500 rounded-xl md:rounded-2xl flex items-center justify-center mr-4 md:mr-5 flex-shrink-0">
                         <svg class="w-6 h-6 md:w-7 md:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">

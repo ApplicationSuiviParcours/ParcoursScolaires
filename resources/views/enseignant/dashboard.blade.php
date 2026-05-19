@@ -11,7 +11,7 @@
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         
         <!-- Message de bienvenue amélioré - Responsive -->
-        <div class="relative overflow-hidden mb-6 sm:mb-8 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 rounded-2xl sm:rounded-3xl shadow-2xl transform hover:scale-[1.02] transition-all duration-500">
+        <div class="relative overflow-hidden mb-6 sm:mb-8 bg-blue-900 rounded-2xl sm:rounded-3xl shadow-2xl transform hover:scale-[1.02] transition-all duration-500">
             <!-- Motifs de fond -->
             <div class="absolute inset-0 opacity-20">
                 <div class="absolute w-48 sm:w-64 h-48 sm:h-64 bg-white rounded-full -top-24 -right-24 blur-3xl animate-pulse"></div>
@@ -23,7 +23,7 @@
                     <div class="flex items-center space-x-4 sm:space-x-6">
                         <!-- Avatar enseignant -->
                         <div class="relative group">
-                            <div class="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 transition-all duration-300 transform shadow-2xl bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl sm:rounded-2xl group-hover:rotate-6">
+                            <div class="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 transition-all duration-300 transform shadow-2xl bg-blue-900 rounded-xl sm:rounded-2xl group-hover:rotate-6">
                                 <span class="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
                                     {{ substr($enseignant->prenom ?? 'E', 0, 1) }}{{ substr($enseignant->nom ?? 'N', 0, 1) }}
                                 </span>
@@ -73,12 +73,12 @@
             <div class="overflow-hidden transition-all duration-300 transform bg-white shadow-lg group rounded-xl sm:rounded-2xl hover:shadow-2xl hover:-translate-y-2">
                 <div class="p-4 sm:p-6">
                     <div class="flex items-center justify-between mb-3 sm:mb-4">
-                        <div class="flex items-center justify-center transition-transform shadow-lg w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg sm:rounded-xl group-hover:scale-110">
-                            <svg class="text-white w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex items-center justify-center transition-transform shadow-lg w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-blue-900 rounded-lg sm:rounded-xl group-hover:scale-110">
+                            <svg class="text-yellow-500 w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
                             </svg>
                         </div>
-                        <span class="px-2 py-0.5 sm:px-3 sm:py-1 text-xs sm:text-sm font-semibold text-blue-600 bg-blue-100 rounded-full">Actives</span>
+                        <span class="px-2 py-0.5 sm:px-3 sm:py-1 text-xs sm:text-sm font-semibold text-blue-900 bg-blue-100 rounded-full">Actives</span>
                     </div>
                     <p class="mb-1 text-xs sm:text-sm font-medium text-gray-500">Mes Classes</p>
                     <p class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">{{ $classesCount }}</p>
@@ -89,8 +89,8 @@
             <div class="overflow-hidden transition-all duration-300 transform bg-white shadow-lg group rounded-xl sm:rounded-2xl hover:shadow-2xl hover:-translate-y-2">
                 <div class="p-4 sm:p-6">
                     <div class="flex items-center justify-between mb-3 sm:mb-4">
-                        <div class="flex items-center justify-center transition-transform shadow-lg w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-lg sm:rounded-xl group-hover:scale-110">
-                            <svg class="text-white w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex items-center justify-center transition-transform shadow-lg w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-blue-900 rounded-lg sm:rounded-xl group-hover:scale-110">
+                            <svg class="text-yellow-500 w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                             </svg>
                         </div>
@@ -105,8 +105,8 @@
             <div class="overflow-hidden transition-all duration-300 transform bg-white shadow-lg group rounded-xl sm:rounded-2xl hover:shadow-2xl hover:-translate-y-2">
                 <div class="p-4 sm:p-6">
                     <div class="flex items-center justify-between mb-3 sm:mb-4">
-                        <div class="flex items-center justify-center transition-transform shadow-lg w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-lg sm:rounded-xl group-hover:scale-110">
-                            <svg class="text-white w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex items-center justify-center transition-transform shadow-lg w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-blue-900 rounded-lg sm:rounded-xl group-hover:scale-110">
+                            <svg class="text-yellow-500 w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                         </div>
@@ -121,8 +121,8 @@
             <div class="overflow-hidden transition-all duration-300 transform bg-white shadow-lg group rounded-xl sm:rounded-2xl hover:shadow-2xl hover:-translate-y-2">
                 <div class="p-4 sm:p-6">
                     <div class="flex items-center justify-between mb-3 sm:mb-4">
-                        <div class="flex items-center justify-center transition-transform shadow-lg w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-gradient-to-br from-red-500 to-red-600 rounded-lg sm:rounded-xl group-hover:scale-110">
-                            <svg class="text-white w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex items-center justify-center transition-transform shadow-lg w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-blue-900 rounded-lg sm:rounded-xl group-hover:scale-110">
+                            <svg class="text-yellow-500 w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
                             </svg>
                         </div>
@@ -138,7 +138,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
             <!-- Dernières évaluations -->
             <div class="overflow-hidden transition-all bg-white shadow-lg rounded-xl sm:rounded-2xl hover:shadow-xl">
-                <div class="p-4 sm:p-6 bg-gradient-to-r from-blue-600 to-indigo-600">
+                <div class="p-4 sm:p-6 bg-blue-900">
                     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                         <h3 class="flex items-center text-base sm:text-lg font-bold text-white">
                             <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -199,7 +199,7 @@
 
             <!-- Dernières notes saisies -->
             <div class="overflow-hidden transition-all bg-white shadow-lg rounded-xl sm:rounded-2xl hover:shadow-xl">
-                <div class="p-4 sm:p-6 bg-gradient-to-r from-green-600 to-emerald-600">
+                <div class="p-4 sm:p-6 bg-blue-900">
                     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                         <h3 class="flex items-center text-base sm:text-lg font-bold text-white">
                             <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -254,7 +254,7 @@
 
         <!-- Emploi du temps - Responsive -->
         <div class="overflow-hidden transition-all bg-white shadow-lg rounded-xl sm:rounded-2xl hover:shadow-xl">
-            <div class="p-4 sm:p-6 bg-gradient-to-r from-purple-600 to-indigo-600">
+            <div class="p-4 sm:p-6 bg-blue-900">
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                     <h3 class="flex items-center text-base sm:text-lg font-bold text-white">
                         <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -296,7 +296,7 @@
                             @foreach($emploiDuTemps as $cours)
                             <tr class="transition-colors hover:bg-gray-50">
                                 <td class="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap">
-                                    <span class="inline-flex items-center px-2 py-0.5 sm:px-3 sm:py-1 text-xs sm:text-sm font-medium text-purple-800 bg-purple-100 rounded-full">
+                                    <span class="inline-flex items-center px-2 py-0.5 sm:px-3 sm:py-1 text-xs sm:text-sm font-medium text-purple-800 bg-blue-100 rounded-full">
                                         {{ $cours['jour'] }}
                                     </span>
                                 </td>

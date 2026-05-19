@@ -13,7 +13,7 @@
         <!-- Header avec design moderne - Version responsive -->
         <div class="relative mb-6 md:mb-8 overflow-hidden group rounded-2xl md:rounded-3xl">
             <!-- Fond animé avec dégradé -->
-            <div class="absolute inset-0 bg-gradient-to-r from-emerald-600 via-teal-500 to-cyan-600 animate-gradient-xy"></div>
+            <div class="absolute inset-0 bg-blue-900 animate-gradient-xy"></div>
             <div class="absolute inset-0 opacity-20">
                 <div class="absolute rounded-full bg-white/30 w-64 h-64 md:w-96 md:h-96 -top-48 -right-48 blur-3xl animate-pulse-slow"></div>
                 <div class="absolute rounded-full bg-emerald-300/30 w-64 h-64 md:w-96 md:h-96 -bottom-48 -left-48 blur-3xl animate-pulse-slow animation-delay-2000"></div>
@@ -43,7 +43,7 @@
                             <div class="absolute w-4 h-4 md:w-5 md:h-5 bg-green-400 border-2 md:border-4 border-white rounded-full -bottom-1 -right-1 animate-pulse ring-2 ring-emerald-500/50"></div>
                             <!-- Badge moyenne -->
                             @if(isset($stats['moyenne_generale']))
-                            <div class="absolute -top-2 -right-2 px-2 md:px-3 py-1 md:py-1.5 text-xs font-bold text-white bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full shadow-lg animate-bounce-subtle">
+                            <div class="absolute -top-2 -right-2 px-2 md:px-3 py-1 md:py-1.5 text-xs font-bold text-white bg-blue-900 rounded-full shadow-lg animate-bounce-subtle">
                                 {{ number_format($stats['moyenne_generale'], 1) }}/20
                             </div>
                             @endif
@@ -200,7 +200,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
                             </svg>
                         </a>
-                        <button type="submit" class="flex-1 px-3 md:px-4 py-2 md:py-3 font-semibold text-white transition-all bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg md:rounded-xl hover:from-emerald-600 hover:to-teal-600 hover:shadow-lg hover:scale-105 active:scale-95">
+                        <button type="submit" class="flex-1 px-3 md:px-4 py-2 md:py-3 font-semibold text-white transition-all bg-blue-900 rounded-lg md:rounded-xl hover:from-emerald-600 hover:to-teal-600 hover:shadow-lg hover:scale-105 active:scale-95">
                             <svg class="w-4 h-4 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                             </svg>
@@ -218,16 +218,16 @@
                 <div class="relative flex items-center justify-between">
                     <div>
                         <p class="text-xs md:text-sm font-medium text-gray-600">Total notes</p>
-                        <p class="mt-1 md:mt-2 text-xl md:text-4xl font-black text-gray-900 transition-colors group-hover:text-blue-600">{{ $stats['total_notes'] }}</p>
+                        <p class="mt-1 md:mt-2 text-xl md:text-4xl font-black text-gray-900 transition-colors group-hover:text-blue-900">{{ $stats['total_notes'] }}</p>
                         <p class="mt-0.5 md:mt-1 text-xs text-gray-400 hidden md:block">depuis la rentrée</p>
                     </div>
-                    <div class="p-2 md:p-4 transition-transform shadow-lg bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg md:rounded-2xl group-hover:scale-110">
-                        <svg class="w-5 h-5 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="p-2 md:p-4 transition-transform shadow-lg bg-blue-900 rounded-lg md:rounded-2xl group-hover:scale-110">
+                        <svg class="w-5 h-5 md:w-8 md:h-8 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                         </svg>
                     </div>
                 </div>
-                <div class="absolute bottom-0 left-0 w-full h-0.5 md:h-1 transition-transform origin-left transform scale-x-0 bg-gradient-to-r from-blue-500 to-purple-500 group-hover:scale-x-100"></div>
+                <div class="absolute bottom-0 left-0 w-full h-0.5 md:h-1 transition-transform origin-left transform scale-x-0 bg-blue-800 group-hover:scale-x-100"></div>
             </div>
 
             <!-- Moyenne générale -->
@@ -241,8 +241,8 @@
                         </p>
                         <p class="mt-0.5 md:mt-1 text-xs text-gray-400 hidden md:block">sur 20</p>
                     </div>
-                    <div class="p-2 md:p-4 transition-transform shadow-lg bg-gradient-to-br from-emerald-500 to-teal-500 rounded-lg md:rounded-2xl group-hover:scale-110">
-                        <svg class="w-5 h-5 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="p-2 md:p-4 transition-transform shadow-lg bg-blue-900 rounded-lg md:rounded-2xl group-hover:scale-110">
+                        <svg class="w-5 h-5 md:w-8 md:h-8 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
                         </svg>
                     </div>
@@ -255,11 +255,11 @@
                 <div class="relative flex items-center justify-between">
                     <div>
                         <p class="text-xs md:text-sm font-medium text-gray-600">Meilleure note</p>
-                        <p class="mt-1 md:mt-2 text-xl md:text-4xl font-black text-purple-600 transition-transform group-hover:scale-110">{{ number_format($stats['note_max'], 2) }}</p>
+                        <p class="mt-1 md:mt-2 text-xl md:text-4xl font-black text-yellow-600 transition-transform group-hover:scale-110">{{ number_format($stats['note_max'], 2) }}</p>
                         <p class="mt-0.5 md:mt-1 text-xs text-gray-400 hidden md:block">/20</p>
                     </div>
-                    <div class="p-2 md:p-4 transition-transform shadow-lg bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg md:rounded-2xl group-hover:scale-110">
-                        <svg class="w-5 h-5 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="p-2 md:p-4 transition-transform shadow-lg bg-blue-900 rounded-lg md:rounded-2xl group-hover:scale-110">
+                        <svg class="w-5 h-5 md:w-8 md:h-8 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
                         </svg>
                     </div>
@@ -275,8 +275,8 @@
                         <p class="mt-1 md:mt-2 text-xl md:text-4xl font-black text-red-500 transition-transform group-hover:scale-110">{{ number_format($stats['note_min'], 2) }}</p>
                         <p class="mt-0.5 md:mt-1 text-xs text-gray-400 hidden md:block">/20</p>
                     </div>
-                    <div class="p-2 md:p-4 transition-transform shadow-lg bg-gradient-to-br from-red-500 to-orange-500 rounded-lg md:rounded-2xl group-hover:scale-110">
-                        <svg class="w-5 h-5 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="p-2 md:p-4 transition-transform shadow-lg bg-blue-900 rounded-lg md:rounded-2xl group-hover:scale-110">
+                        <svg class="w-5 h-5 md:w-8 md:h-8 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                     </div>
@@ -286,7 +286,7 @@
 
         <!-- Table des notes avec design moderne et responsive -->
         <div class="overflow-hidden border shadow-xl bg-white/90 backdrop-blur-xl border-white/50 rounded-xl md:rounded-2xl">
-            <div class="p-4 md:p-6 bg-gradient-to-r from-emerald-600 via-teal-500 to-cyan-600">
+            <div class="p-4 md:p-6 bg-blue-900">
                 <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
                     <h3 class="text-lg md:text-xl font-bold text-white drop-shadow-md">📋 Liste des notes</h3>
                     <div class="flex items-center space-x-2 md:space-x-3">
@@ -305,7 +305,7 @@
             <!-- Tableau responsive avec défilement horizontal seulement si nécessaire -->
             <div class="overflow-x-auto">
                 <table class="min-w-full md:w-full">
-                    <thead class="bg-gradient-to-r from-gray-50 to-gray-100/80">
+                    <thead class="bg-blue-900/80">
                         <tr>
                             <th class="px-3 md:px-6 py-3 md:py-4 text-xs font-bold tracking-wider text-left text-gray-600 uppercase whitespace-nowrap">Date</th>
                             <th class="px-3 md:px-6 py-3 md:py-4 text-xs font-bold tracking-wider text-left text-gray-600 uppercase whitespace-nowrap">Matière</th>
@@ -350,14 +350,14 @@
                                 </td>
                                 <td class="px-3 md:px-6 py-3 md:py-5">
                                     <div class="flex items-center">
-                                        <div class="flex items-center justify-center w-7 h-7 md:w-10 md:h-10 mr-2 md:mr-3 transition-transform shadow-lg bg-gradient-to-br from-emerald-500 to-teal-500 rounded-lg md:rounded-xl group-hover:scale-110">
+                                        <div class="flex items-center justify-center w-7 h-7 md:w-10 md:h-10 mr-2 md:mr-3 transition-transform shadow-lg bg-blue-900 rounded-lg md:rounded-xl group-hover:scale-110">
                                             <span class="text-xs md:text-sm font-bold text-white">{{ $note->evaluation && $note->evaluation->matiere ? substr($note->evaluation->matiere->nom, 0, 2) : 'MAT' }}</span>
                                         </div>
                                         <span class="text-xs md:text-sm font-semibold text-gray-800">{{ $note->evaluation && $note->evaluation->matiere ? $note->evaluation->matiere->nom : '-' }}</span>
                                     </div>
                                 </td>
                                 <td class="px-3 md:px-6 py-3 md:py-5">
-                                    <span class="px-2 md:px-3 py-1 md:py-1.5 text-xs font-semibold text-purple-700 bg-purple-100 rounded-full border border-purple-200 whitespace-nowrap">
+                                    <span class="px-2 md:px-3 py-1 md:py-1.5 text-xs font-semibold text-blue-900 bg-blue-100 rounded-full border border-purple-200 whitespace-nowrap">
                                         {{ $note->evaluation->type ?? 'Évaluation' }}
                                     </span>
                                 </td>
@@ -417,7 +417,7 @@
             </div>
 
             @if(method_exists($notes, 'links'))
-            <div class="p-4 md:p-6 border-t border-gray-100 bg-gradient-to-r from-gray-50 to-gray-100/50">
+            <div class="p-4 md:p-6 border-t border-gray-100 bg-blue-900/50">
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-0">
                     <p class="text-xs md:text-sm text-gray-600">
                         Affichage de <span class="font-semibold">{{ $notes->firstItem() ?? 0 }}</span> 
@@ -435,7 +435,7 @@
         <!-- Graphique de progression - version responsive -->
         @if($stats['total_notes'] > 5)
         <div class="mt-6 md:mt-8 overflow-hidden border shadow-xl bg-white/90 backdrop-blur-xl border-white/50 rounded-xl md:rounded-2xl">
-            <div class="p-4 md:p-6 bg-gradient-to-r from-indigo-600 to-purple-600">
+            <div class="p-4 md:p-6 bg-blue-900">
                 <h3 class="text-base md:text-lg font-semibold text-white">📈 Progression des notes</h3>
             </div>
             <div class="p-4 md:p-6">
@@ -447,10 +447,10 @@
                     @foreach($recentNotes as $index => $note)
                         @php
                             $height = ($note->note / 20) * 100;
-                            $color = $note->note >= 16 ? 'bg-gradient-to-t from-green-400 to-green-500' :
-                                    ($note->note >= 14 ? 'bg-gradient-to-t from-blue-400 to-blue-500' :
-                                    ($note->note >= 10 ? 'bg-gradient-to-t from-yellow-400 to-yellow-500' :
-                                    'bg-gradient-to-t from-red-400 to-red-500'));
+                            $color = $note->note >= 16 ? 'bg-blue-900' :
+                                    ($note->note >= 14 ? 'bg-blue-900' :
+                                    ($note->note >= 10 ? 'bg-blue-900' :
+                                    'bg-blue-900'));
                         @endphp
                         <div class="flex flex-col items-center flex-1 group">
                             <div class="relative w-full">

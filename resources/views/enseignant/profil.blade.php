@@ -18,13 +18,13 @@
         @endif
 
         {{-- En-tête profil --}}
-        <div class="relative overflow-hidden mb-8 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 rounded-3xl shadow-2xl">
+        <div class="relative overflow-hidden mb-8 bg-blue-900 rounded-3xl shadow-2xl">
             <div class="absolute inset-0 opacity-20">
                 <div class="absolute w-64 h-64 bg-white rounded-full -top-24 -right-24 blur-3xl animate-pulse"></div>
             </div>
             <div class="relative p-8">
                 <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6">
-                    <div class="flex items-center justify-center w-24 h-24 shadow-2xl bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl text-4xl font-bold text-white">
+                    <div class="flex items-center justify-center w-24 h-24 shadow-2xl bg-blue-900 rounded-2xl text-4xl font-bold text-white">
                         {{ strtoupper(substr($enseignant->prenom ?? 'E', 0, 1)) }}{{ strtoupper(substr($enseignant->nom ?? 'N', 0, 1)) }}
                     </div>
                     <div class="text-center sm:text-left">
@@ -43,7 +43,7 @@
 
         {{-- Informations personnelles --}}
         <div class="bg-white shadow-lg rounded-2xl overflow-hidden mb-6">
-            <div class="p-6 bg-gradient-to-r from-blue-600 to-indigo-600">
+            <div class="p-6 bg-blue-900">
                 <h3 class="text-lg font-bold text-white flex items-center gap-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
@@ -92,7 +92,7 @@
         {{-- Compte utilisateur --}}
         @if($enseignant->user)
         <div class="bg-white shadow-lg rounded-2xl overflow-hidden">
-            <div class="p-6 bg-gradient-to-r from-purple-600 to-pink-600">
+            <div class="p-6 bg-blue-900">
                 <h3 class="text-lg font-bold text-white flex items-center gap-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
@@ -112,7 +112,7 @@
                     </div>
                     <div>
                         <label class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Rôle</label>
-                        <span class="inline-flex items-center px-3 py-1 text-sm font-semibold bg-indigo-100 text-indigo-800 rounded-full">
+                        <span class="inline-flex items-center px-3 py-1 text-sm font-semibold bg-blue-100 text-indigo-800 rounded-full">
                             {{ $enseignant->user->role ?? 'enseignant' }}
                         </span>
                     </div>
@@ -124,7 +124,7 @@
                     </div>
                 </div>
                 <div class="mt-6">
-                    <a href="{{ route('profile.edit') }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-colors">
+                    <a href="{{ route('profile.edit') }}" class="inline-flex items-center px-4 py-2 bg-blue-900 text-white rounded-xl hover:bg-blue-800 transition-colors">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
                         </svg>

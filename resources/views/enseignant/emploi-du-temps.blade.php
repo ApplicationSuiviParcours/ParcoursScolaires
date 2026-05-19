@@ -6,7 +6,7 @@
 <div class="py-6 sm:py-12">
     <div class="px-4 mx-auto max-w-6xl sm:px-6 lg:px-8">
 
-        <div class="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-3xl p-8 mb-8 shadow-2xl">
+        <div class="bg-blue-900 rounded-3xl p-8 mb-8 shadow-2xl">
             <h1 class="text-2xl font-bold text-white">📅 Mon emploi du temps</h1>
             <p class="text-purple-200 mt-1">Semaine du {{ now()->startOfWeek()->format('d/m') }} au {{ now()->endOfWeek()->format('d/m/Y') }}</p>
         </div>
@@ -22,10 +22,10 @@
                     @foreach($jours as $jour)
                     @if(isset($emploisParJour[$jour]))
                     <div>
-                        <h3 class="text-base font-bold text-indigo-700 mb-3 pb-2 border-b border-indigo-100">{{ $jour }}</h3>
+                        <h3 class="text-base font-bold text-blue-900 mb-3 pb-2 border-b border-indigo-100">{{ $jour }}</h3>
                         <div class="space-y-2">
                             @foreach($emploisParJour[$jour]->sortBy('heure_debut') as $emploi)
-                            <div class="flex items-center gap-4 p-4 bg-indigo-50 rounded-xl hover:bg-indigo-100 transition-colors">
+                            <div class="flex items-center gap-4 p-4 bg-blue-50 rounded-xl hover:bg-blue-100 transition-colors">
                                 <div class="w-20 text-center">
                                     <span class="text-sm font-bold text-indigo-800">{{ $emploi->heure_debut ?? '--:--' }}</span>
                                     <p class="text-xs text-indigo-500">{{ $emploi->heure_fin ?? '--:--' }}</p>

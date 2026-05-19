@@ -3,7 +3,7 @@
 @section('title', 'Détails du bulletin')
 
 @section('header')
-<div class="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 py-8 md:py-12">
+<div class="relative overflow-hidden bg-blue-900 py-8 md:py-12">
     <!-- Éléments décoratifs animés -->
     <div class="absolute inset-0 opacity-10">
         <div class="absolute -top-24 -right-24 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-pulse"></div>
@@ -96,12 +96,12 @@
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 mb-8">
         <!-- Carte Élève -->
         <div class="bg-white rounded-2xl md:rounded-3xl shadow-xl overflow-hidden">
-            <div class="bg-gradient-to-r from-blue-500 to-indigo-600 px-4 md:px-6 py-4">
+            <div class="bg-blue-900 px-4 md:px-6 py-4">
                 <h3 class="text-lg font-semibold text-white">Élève</h3>
             </div>
             <div class="p-4 md:p-6">
                 <div class="flex flex-col sm:flex-row items-center text-center sm:text-left">
-                    <div class="flex-shrink-0 h-14 w-14 md:h-16 md:w-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl md:rounded-2xl flex items-center justify-center text-white font-bold text-xl md:text-2xl shadow-lg mb-3 sm:mb-0 sm:mr-4">
+                    <div class="flex-shrink-0 h-14 w-14 md:h-16 md:w-16 bg-blue-900 rounded-xl md:rounded-2xl flex items-center justify-center text-white font-bold text-xl md:text-2xl shadow-lg mb-3 sm:mb-0 sm:mr-4">
                         {{ strtoupper(substr($bulletin->eleve->prenom, 0, 1)) }}{{ strtoupper(substr($bulletin->eleve->nom, 0, 1)) }}
                     </div>
                     <div>
@@ -115,7 +115,7 @@
 
         <!-- Carte Classe & Année -->
         <div class="bg-white rounded-2xl md:rounded-3xl shadow-xl overflow-hidden">
-            <div class="bg-gradient-to-r from-green-500 to-emerald-600 px-4 md:px-6 py-4">
+            <div class="bg-blue-900 px-4 md:px-6 py-4">
                 <h3 class="text-lg font-semibold text-white">Classe & Année</h3>
             </div>
             <div class="p-4 md:p-6">
@@ -162,7 +162,7 @@
 
         <!-- Carte Résultats -->
         <div class="bg-white rounded-2xl md:rounded-3xl shadow-xl overflow-hidden md:col-span-2 xl:col-span-1">
-            <div class="bg-gradient-to-r from-purple-500 to-pink-600 px-4 md:px-6 py-4">
+            <div class="bg-blue-900 px-4 md:px-6 py-4">
                 <h3 class="text-lg font-semibold text-white">Résultats</h3>
             </div>
             <div class="p-4 md:p-6">
@@ -202,7 +202,7 @@
 
     <!-- Tableau des notes par matière -->
     <div class="bg-white rounded-2xl md:rounded-3xl shadow-xl overflow-hidden mb-8">
-        <div class="bg-gradient-to-r from-gray-800 to-gray-900 px-4 md:px-8 py-4 md:py-5">
+        <div class="bg-blue-900 px-4 md:px-8 py-4 md:py-5">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                 <div class="flex items-center">
                     <div class="w-10 h-10 md:w-12 md:h-12 bg-white/10 backdrop-blur-lg rounded-lg md:rounded-xl flex items-center justify-center mr-3 md:mr-4 flex-shrink-0">
@@ -288,7 +288,7 @@
                                         <span class="text-xs text-gray-500">/20</span>
                                     </td>
                                     <td class="hidden md:table-cell px-6 py-4 whitespace-nowrap">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-purple-800">
                                             x{{ $coefficient }}
                                         </span>
                                     </td>
@@ -311,7 +311,7 @@
     <!-- Appréciation -->
     @if($bulletin->appreciation)
     <div class="bg-white rounded-2xl md:rounded-3xl shadow-xl overflow-hidden mb-8">
-        <div class="bg-gradient-to-r from-amber-500 to-orange-600 px-4 md:px-8 py-4 md:py-5">
+        <div class="bg-blue-900 px-4 md:px-8 py-4 md:py-5">
             <div class="flex items-center">
                 <div class="w-10 h-10 md:w-12 md:h-12 bg-white/20 backdrop-blur-lg rounded-lg md:rounded-xl flex items-center justify-center mr-3 md:mr-4 flex-shrink-0">
                     <svg class="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -329,7 +329,7 @@
 
     <!-- Informations système -->
     <div class="bg-white rounded-2xl md:rounded-3xl shadow-xl overflow-hidden">
-        <div class="bg-gradient-to-r from-gray-800 to-gray-900 px-4 md:px-6 py-4">
+        <div class="bg-blue-900 px-4 md:px-6 py-4">
             <h3 class="text-base md:text-lg font-semibold text-white">Informations système</h3>
         </div>
         <div class="p-4 md:p-6">

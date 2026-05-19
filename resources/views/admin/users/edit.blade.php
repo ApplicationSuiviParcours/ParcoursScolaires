@@ -12,11 +12,11 @@
         <div class="max-w-4xl mx-auto px-3 sm:px-4 lg:px-6">
             <!-- Fil d'Ariane - Responsive -->
             <div class="mb-3 sm:mb-4 flex flex-wrap items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-500 animate-fade-in">
-                <a href="{{ route('admin.users.index') }}" class="hover:text-blue-600 transition-colors">Utilisateurs</a>
+                <a href="{{ route('admin.users.index') }}" class="hover:text-blue-900 transition-colors">Utilisateurs</a>
                 <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                 </svg>
-                <a href="{{ route('admin.users.show', $user) }}" class="hover:text-blue-600 transition-colors truncate max-w-[120px] sm:max-w-none">{{ $user->name }}</a>
+                <a href="{{ route('admin.users.show', $user) }}" class="hover:text-blue-900 transition-colors truncate max-w-[120px] sm:max-w-none">{{ $user->name }}</a>
                 <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                 </svg>
@@ -25,7 +25,7 @@
 
             <div class="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300">
                 <!-- En-tête avec photo et informations - Responsive -->
-                <div class="px-4 sm:px-5 md:px-6 py-4 sm:py-5 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+                <div class="px-4 sm:px-5 md:px-6 py-4 sm:py-5 bg-blue-900 text-white">
                     <div class="flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-4">
                         <!-- Photo de profil -->
                         <div class="relative group flex-shrink-0">
@@ -33,7 +33,7 @@
                                 @if($user->photo)
                                     <img src="{{ $user->photo_url }}" alt="{{ $user->name }}" class="h-full w-full object-cover">
                                 @else
-                                    <div class="h-full w-full bg-gradient-to-br from-blue-400 to-blue-500 flex items-center justify-center text-white font-bold text-xl sm:text-2xl">
+                                    <div class="h-full w-full bg-blue-900 flex items-center justify-center text-white font-bold text-xl sm:text-2xl">
                                         {{ $user->initials }}
                                     </div>
                                 @endif
@@ -65,7 +65,7 @@
                                 @if($user->email_verified_at)
                                     <span class="text-[9px] sm:text-xs bg-green-500 text-white px-1.5 py-0.5 rounded-full">Vérifié</span>
                                 @else
-                                    <span class="text-[9px] sm:text-xs bg-yellow-500 text-white px-1.5 py-0.5 rounded-full">Non vérifié</span>
+                                    <span class="text-[9px] sm:text-xs bg-yellow-500 text-blue-900 font-bold px-1.5 py-0.5 rounded-full">Non vérifié</span>
                                 @endif
                             </p>
                         </div>
@@ -107,11 +107,11 @@
                             <div class="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-5 md:gap-6">
                                 <!-- Aperçu de la photo actuelle -->
                                 <div class="shrink-0">
-                                    <div id="preview" class="h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 rounded-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center border-4 border-white shadow-lg overflow-hidden">
+                                    <div id="preview" class="h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 rounded-full bg-blue-900 flex items-center justify-center border-4 border-white shadow-lg overflow-hidden">
                                         @if($user->photo)
                                             <img src="{{ $user->photo_url }}" class="h-full w-full object-cover" alt="Photo actuelle">
                                         @else
-                                            <div class="h-full w-full bg-gradient-to-br from-blue-400 to-blue-500 flex items-center justify-center text-white font-bold text-xl sm:text-2xl md:text-3xl">
+                                            <div class="h-full w-full bg-blue-900 flex items-center justify-center text-white font-bold text-xl sm:text-2xl md:text-3xl">
                                                 {{ $user->initials }}
                                             </div>
                                         @endif
@@ -258,7 +258,7 @@
                                                id="email_verified" 
                                                value="1" 
                                                {{ $user->email_verified_at ? 'checked' : '' }}
-                                               class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                               class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-900 border-gray-300 rounded focus:ring-blue-500">
                                         <label for="email_verified" class="text-[10px] sm:text-xs text-gray-700">
                                             Marquer comme vérifié
                                         </label>
@@ -364,15 +364,15 @@
                                         <input type="checkbox" 
                                                name="roles[]" 
                                                value="{{ $role->id }}" 
-                                               class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 mt-0.5"
+                                               class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-900 border-gray-300 rounded focus:ring-blue-500 mt-0.5"
                                                {{ $isChecked ? 'checked' : '' }}>
                                         <div class="ml-2 sm:ml-3 flex-1 min-w-0">
                                             <div class="flex flex-wrap items-center justify-between gap-1">
-                                                <span class="text-[10px] sm:text-xs font-medium text-gray-700 group-hover:text-blue-600 transition-colors">
+                                                <span class="text-[10px] sm:text-xs font-medium text-gray-700 group-hover:text-blue-900 transition-colors">
                                                     {{ ucfirst($role->name) }}
                                                 </span>
                                                 <span class="text-[8px] sm:text-[9px] px-1.5 py-0.5 rounded-full 
-                                                    @if($role->name == 'administrateur') bg-purple-100 text-purple-800
+                                                    @if($role->name == 'administrateur') bg-blue-100 text-purple-800
                                                     @elseif($role->name == 'enseignant') bg-blue-100 text-blue-800
                                                     @elseif($role->name == 'eleve') bg-green-100 text-green-800
                                                     @elseif($role->name == 'parent') bg-yellow-100 text-yellow-800
@@ -435,7 +435,7 @@
                             <!-- Dernière connexion (info only) -->
                             <div class="flex items-center p-2.5 sm:p-3 bg-gray-50 border-2 border-gray-200 rounded-lg sm:rounded-xl">
                                 <div class="p-1.5 sm:p-2 bg-blue-100 rounded-lg">
-                                    <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                     </svg>
                                 </div>
@@ -449,7 +449,7 @@
                         </div>
 
                         <!-- Dates d'audit - Responsive -->
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 p-3 sm:p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg sm:rounded-xl border border-blue-200">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 p-3 sm:p-4 bg-blue-900 rounded-lg sm:rounded-xl border border-blue-200">
                             <div class="flex items-center gap-2 sm:gap-3">
                                 <div class="p-1.5 sm:p-2 bg-blue-200 rounded-lg">
                                     <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -457,31 +457,31 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <p class="text-[8px] sm:text-[9px] text-blue-600">Créé le</p>
+                                    <p class="text-[8px] sm:text-[9px] text-blue-900">Créé le</p>
                                     <p class="text-[10px] sm:text-xs font-semibold text-blue-900">{{ $user->created_at->format('d/m/Y') }}</p>
                                 </div>
                             </div>
                             
                             <div class="flex items-center gap-2 sm:gap-3">
                                 <div class="p-1.5 sm:p-2 bg-indigo-200 rounded-lg">
-                                    <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-indigo-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
                                     </svg>
                                 </div>
                                 <div>
-                                    <p class="text-[8px] sm:text-[9px] text-indigo-600">Dernière mise à jour</p>
+                                    <p class="text-[8px] sm:text-[9px] text-blue-900">Dernière mise à jour</p>
                                     <p class="text-[10px] sm:text-xs font-semibold text-indigo-900">{{ $user->updated_at->format('d/m/Y') }}</p>
                                 </div>
                             </div>
                             
                             <div class="flex items-center gap-2 sm:gap-3">
                                 <div class="p-1.5 sm:p-2 bg-purple-200 rounded-lg">
-                                    <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-purple-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                     </svg>
                                 </div>
                                 <div>
-                                    <p class="text-[8px] sm:text-[9px] text-purple-600">Créé par</p>
+                                    <p class="text-[8px] sm:text-[9px] text-yellow-600">Créé par</p>
                                     <p class="text-[10px] sm:text-xs font-semibold text-purple-900">Administrateur</p>
                                 </div>
                             </div>
@@ -531,7 +531,7 @@
                             </a>
                             
                             <button type="submit" 
-                                    class="w-full sm:w-auto px-5 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-1.5 sm:gap-2 order-1 sm:order-2 text-xs sm:text-sm">
+                                    class="w-full sm:w-auto px-5 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 bg-blue-900 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-1.5 sm:gap-2 order-1 sm:order-2 text-xs sm:text-sm">
                                 <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
@@ -600,7 +600,7 @@
                     // Afficher un indicateur visuel
                     const preview = document.getElementById('preview');
                     preview.innerHTML = `
-                        <div class="h-full w-full bg-gradient-to-br from-red-200 to-red-300 flex items-center justify-center">
+                        <div class="h-full w-full bg-blue-900 flex items-center justify-center">
                             <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                             </svg>

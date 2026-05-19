@@ -11,7 +11,7 @@
     <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
         
         <!-- Header moderne avec dégradé -->
-        <div class="bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 rounded-2xl shadow-2xl mb-8 overflow-hidden relative group">
+        <div class="bg-blue-900 rounded-2xl shadow-2xl mb-8 overflow-hidden relative group">
             <div class="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent"></div>
             <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-32 translate-x-32 group-hover:translate-y-0 group-hover:translate-x-0 transition-transform duration-700"></div>
             <div class="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-24 -translate-x-24 group-hover:translate-y-0 group-hover:translate-x-0 transition-transform duration-700"></div>
@@ -60,8 +60,8 @@
             <div class="px-6 py-5 bg-gradient-to-r from-gray-50 to-white border-b border-gray-200">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
-                        <div class="bg-gradient-to-br from-blue-100 to-blue-200 p-3 rounded-xl">
-                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="bg-blue-900 p-3 rounded-xl">
+                            <svg class="w-6 h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                             </svg>
                         </div>
@@ -84,10 +84,10 @@
 
             <!-- Barre d'information sur le matricule -->
             <div class="px-6 pt-4">
-                <div class="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-xl p-4 border border-indigo-100 flex items-center justify-between">
+                <div class="bg-blue-900 rounded-xl p-4 border border-indigo-100 flex items-center justify-between">
                     <div class="flex items-center">
                         <div class="bg-indigo-200 p-2 rounded-lg">
-                            <svg class="w-5 h-5 text-indigo-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"></path>
                             </svg>
                         </div>
@@ -122,7 +122,7 @@
             <!-- Statistiques rapides -->
             <div class="px-6 mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="bg-blue-50 rounded-lg p-3 border border-blue-100">
-                    <p class="text-xs text-blue-600 uppercase font-semibold">Classes enseignées</p>
+                    <p class="text-xs text-blue-900 uppercase font-semibold">Classes enseignées</p>
                     <p class="text-xl font-bold text-blue-800">{{ $enseignant->nombre_classes ?? 0 }}</p>
                 </div>
                 <div class="bg-green-50 rounded-lg p-3 border border-green-100">
@@ -130,7 +130,7 @@
                     <p class="text-xl font-bold text-green-800">{{ $enseignant->nombre_matieres ?? 0 }}</p>
                 </div>
                 <div class="bg-purple-50 rounded-lg p-3 border border-purple-100">
-                    <p class="text-xs text-purple-600 uppercase font-semibold">Évaluations</p>
+                    <p class="text-xs text-yellow-600 uppercase font-semibold">Évaluations</p>
                     <p class="text-xl font-bold text-purple-800">{{ $enseignant->evaluations_count ?? 0 }}</p>
                 </div>
             </div>
@@ -146,7 +146,7 @@
                         <label class="block text-sm font-medium text-gray-700 mb-3">Photo de profil</label>
                         <div class="flex items-center space-x-6">
                             <div class="flex-shrink-0">
-                                <div class="w-20 h-20 rounded-xl bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center border-2 border-gray-300 overflow-hidden shadow-md" id="photo-preview-container">
+                                <div class="w-20 h-20 rounded-xl bg-blue-900 flex items-center justify-center border-2 border-gray-300 overflow-hidden shadow-md" id="photo-preview-container">
                                     @if($enseignant->photo)
                                         <img src="{{ Storage::url($enseignant->photo) }}" alt="{{ $enseignant->prenom }}" class="w-full h-full object-cover">
                                     @else
@@ -434,7 +434,7 @@
                             Annuler
                         </a>
                         <button type="submit"
-                                class="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 font-medium text-sm shadow-lg shadow-blue-200 flex items-center group">
+                                class="px-8 py-3 bg-blue-900 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 font-medium text-sm shadow-lg shadow-blue-200 flex items-center group">
                             <svg class="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
                             </svg>
@@ -456,8 +456,8 @@
                     @foreach($enseignant->enseignantMatiereClasses as $assignation)
                         <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
                             <div class="flex items-center justify-between mb-2">
-                                <span class="text-sm font-semibold text-indigo-600">{{ $assignation->matiere->nom ?? 'Matière' }}</span>
-                                <span class="text-xs px-2 py-1 bg-indigo-100 text-indigo-800 rounded-full">{{ $assignation->classe->nom ?? 'Classe' }}</span>
+                                <span class="text-sm font-semibold text-blue-900">{{ $assignation->matiere->nom ?? 'Matière' }}</span>
+                                <span class="text-xs px-2 py-1 bg-blue-100 text-indigo-800 rounded-full">{{ $assignation->classe->nom ?? 'Classe' }}</span>
                             </div>
                             <p class="text-xs text-gray-500">Année scolaire: {{ $assignation->anneeScolaire->libelle ?? 'N/A' }}</p>
                         </div>

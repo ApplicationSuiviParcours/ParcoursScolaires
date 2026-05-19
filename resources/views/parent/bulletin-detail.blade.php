@@ -31,7 +31,7 @@
             <!-- Header avec design moderne - responsive -->
             <div class="relative mb-6 md:mb-8 overflow-hidden group rounded-2xl md:rounded-3xl">
                 <div
-                    class="absolute inset-0 bg-gradient-to-r from-purple-700 via-purple-600 to-indigo-700 animate-gradient-xy">
+                    class="absolute inset-0 bg-blue-900 animate-gradient-xy">
                 </div>
                 <div class="absolute inset-0 opacity-20">
                     <div
@@ -132,7 +132,7 @@
                 class="flex flex-col sm:flex-row flex-wrap items-start sm:items-center justify-between gap-3 md:gap-4 mb-4 md:mb-6">
                 <a href="{{ route('parent.enfant.bulletin', $eleve->id) }}"
                     class="group inline-flex items-center px-3 md:px-5 py-2 md:py-2.5 text-xs md:text-sm text-gray-700 bg-white/80 backdrop-blur-sm hover:bg-white rounded-lg md:rounded-xl transition-all duration-300 shadow-md hover:shadow-xl border border-gray-200/50">
-                    <svg class="w-4 h-4 md:w-5 md:h-5 mr-1 md:mr-2 text-purple-600 transition-transform group-hover:-translate-x-1"
+                    <svg class="w-4 h-4 md:w-5 md:h-5 mr-1 md:mr-2 text-yellow-600 transition-transform group-hover:-translate-x-1"
                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
@@ -152,7 +152,7 @@
                         </svg>
                     </a>
                     <a href="{{ route('parent.telecharger-bulletin', [$eleve->id, $bulletin->id]) }}"
-                        class="inline-flex items-center px-3 md:px-5 py-2 md:py-3 text-xs md:text-sm font-semibold text-white transition-all shadow-lg bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg md:rounded-xl hover:from-purple-700 hover:to-indigo-700 hover:shadow-xl group">
+                        class="inline-flex items-center px-3 md:px-5 py-2 md:py-3 text-xs md:text-sm font-semibold text-white transition-all shadow-lg bg-blue-900 rounded-lg md:rounded-xl hover:from-purple-700 hover:to-indigo-700 hover:shadow-xl group">
                         <svg class="w-4 h-4 md:w-5 md:h-5 mr-1 md:mr-2 group-hover:animate-bounce" fill="none"
                             stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -187,8 +187,8 @@
                             @endif
                         </div>
                         <div
-                            class="p-2 md:p-4 transition-transform shadow-lg bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg md:rounded-2xl group-hover:scale-110">
-                            <svg class="w-5 h-5 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor"
+                            class="p-2 md:p-4 transition-transform shadow-lg bg-blue-900 rounded-lg md:rounded-2xl group-hover:scale-110">
+                            <svg class="w-5 h-5 md:w-8 md:h-8 text-yellow-500" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
@@ -215,8 +215,8 @@
                             <p class="mt-0.5 md:mt-1 text-[10px] md:text-xs text-gray-500">/20</p>
                         </div>
                         <div
-                            class="p-2 md:p-4 transition-transform shadow-lg bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg md:rounded-2xl group-hover:scale-110">
-                            <svg class="w-5 h-5 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor"
+                            class="p-2 md:p-4 transition-transform shadow-lg bg-blue-900 rounded-lg md:rounded-2xl group-hover:scale-110">
+                            <svg class="w-5 h-5 md:w-8 md:h-8 text-yellow-500" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
@@ -236,7 +236,7 @@
                         <div>
                             <p class="flex items-center text-xs md:text-sm font-medium text-gray-600">
                                 <span
-                                    class="w-1.5 h-1.5 md:w-2 md:h-2 mr-1 md:mr-2 bg-purple-500 rounded-full animate-pulse animation-delay-400"></span>
+                                    class="w-1.5 h-1.5 md:w-2 md:h-2 mr-1 md:mr-2 bg-blue-800 rounded-full animate-pulse animation-delay-400"></span>
                                 Écart
                             </p>
                             <p
@@ -246,8 +246,8 @@
                             <p class="mt-0.5 md:mt-1 text-[10px] md:text-xs text-gray-500">par rapport à la classe</p>
                         </div>
                         <div
-                            class="p-2 md:p-4 transition-transform shadow-lg bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg md:rounded-2xl group-hover:scale-110">
-                            <svg class="w-5 h-5 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor"
+                            class="p-2 md:p-4 transition-transform shadow-lg bg-blue-900 rounded-lg md:rounded-2xl group-hover:scale-110">
+                            <svg class="w-5 h-5 md:w-8 md:h-8 text-yellow-500" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M7 7l.01 0M7 3h5c.512 0 1.024.195 1.414.586l5 5a2 2 0 01.586 1.414V19a2 2 0 01-2 2H7a2 2 0 01-2-2V5a2 2 0 012-2z">
@@ -276,8 +276,8 @@
                             </p>
                         </div>
                         <div
-                            class="p-2 md:p-4 transition-transform shadow-lg bg-gradient-to-br from-orange-500 to-red-600 rounded-lg md:rounded-2xl group-hover:scale-110">
-                            <svg class="w-5 h-5 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor"
+                            class="p-2 md:p-4 transition-transform shadow-lg bg-blue-900 rounded-lg md:rounded-2xl group-hover:scale-110">
+                            <svg class="w-5 h-5 md:w-8 md:h-8 text-yellow-500" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
@@ -310,7 +310,7 @@
                                 </div>
                                 <div>
                                     <p class="text-lg md:text-3xl font-black {{ $mention == 'Très bien' ? 'text-green-600' :
-        ($mention == 'Bien' ? 'text-blue-600' :
+        ($mention == 'Bien' ? 'text-blue-900' :
             ($mention == 'Assez bien' ? 'text-yellow-600' :
                 ($mention == 'Passable' ? 'text-orange-600' : 'text-red-600'))) }}">
                                         {{ $mention }}
@@ -337,7 +337,7 @@
                             <p class="text-xs md:text-sm font-medium text-gray-600">Statut</p>
                             <div class="flex items-center mt-1 md:mt-2">
                                 <div
-                                    class="w-8 h-8 md:w-12 md:h-12 {{ $estAdmis ? 'bg-gradient-to-br from-green-500 to-emerald-600' : 'bg-gradient-to-br from-red-500 to-rose-600' }} rounded-lg md:rounded-xl flex items-center justify-center shadow-lg mr-2 md:mr-4">
+                                    class="w-8 h-8 md:w-12 md:h-12 {{ $estAdmis ? 'bg-blue-900' : 'bg-blue-900' }} rounded-lg md:rounded-xl flex items-center justify-center shadow-lg mr-2 md:mr-4">
                                     @if($estAdmis)
                                         <svg class="w-4 h-4 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
@@ -388,8 +388,8 @@
                     class="p-4 md:p-6 mb-6 md:mb-8 border shadow-lg border-yellow-200/50 bg-gradient-to-r from-yellow-50/80 to-amber-50/80 backdrop-blur-sm rounded-xl md:rounded-2xl">
                     <div class="flex items-start space-x-2 md:space-x-4">
                         <div
-                            class="p-2 md:p-3 shadow-lg bg-gradient-to-br from-yellow-500 to-amber-500 rounded-lg md:rounded-xl">
-                            <svg class="w-4 h-4 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            class="p-2 md:p-3 shadow-lg bg-blue-900 rounded-lg md:rounded-xl">
+                            <svg class="w-4 h-4 md:w-6 md:h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z">
                                 </path>
@@ -412,7 +412,7 @@
             <!-- Message si aucune note - responsive -->
             @if(!$hasNotes)
                 <div
-                    class="p-6 md:p-8 mb-6 text-center border border-yellow-200 bg-gradient-to-r from-yellow-50 to-amber-50 rounded-xl md:rounded-2xl">
+                    class="p-6 md:p-8 mb-6 text-center border border-yellow-200 bg-blue-900 rounded-xl md:rounded-2xl">
                     <div
                         class="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 mb-3 md:mb-4 bg-yellow-100 rounded-full">
                         <svg class="w-8 h-8 md:w-10 md:h-10 text-yellow-600" fill="none" stroke="currentColor"
@@ -434,7 +434,7 @@
                     <div class="p-4 md:p-6 border-b border-gray-100/50 bg-gradient-to-r from-purple-50/80 to-indigo-50/80">
                         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
                             <h4 class="flex items-center text-base md:text-xl font-semibold text-gray-900">
-                                <svg class="w-5 h-5 md:w-6 md:h-6 mr-2 text-purple-600" fill="none" stroke="currentColor"
+                                <svg class="w-5 h-5 md:w-6 md:h-6 mr-2 text-yellow-600" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2">
@@ -485,7 +485,7 @@
                                             <td class="px-3 md:px-6 py-3 md:py-5">
                                                 <div class="flex items-center">
                                                     <div
-                                                        class="flex items-center justify-center w-7 h-7 md:w-10 md:h-10 mr-2 md:mr-3 transition-transform shadow-lg bg-gradient-to-br from-purple-500 to-indigo-600 rounded-lg md:rounded-xl group-hover:scale-110">
+                                                        class="flex items-center justify-center w-7 h-7 md:w-10 md:h-10 mr-2 md:mr-3 transition-transform shadow-lg bg-blue-900 rounded-lg md:rounded-xl group-hover:scale-110">
                                                         <span
                                                             class="text-[10px] md:text-sm font-bold text-white">{{ substr($data['matiere_nom'] ?? 'M', 0, 3) }}</span>
                                                     </div>
@@ -495,7 +495,7 @@
                                             </td>
                                             <td class="px-3 md:px-6 py-3 md:py-5">
                                                 <span
-                                                    class="px-2 md:px-4 py-1 md:py-2 text-xs md:text-sm font-bold text-purple-700 bg-purple-100 border border-purple-200 rounded-full whitespace-nowrap">
+                                                    class="px-2 md:px-4 py-1 md:py-2 text-xs md:text-sm font-bold text-blue-900 bg-blue-100 border border-purple-200 rounded-full whitespace-nowrap">
                                                     x{{ $data['coefficient'] ?? 1 }}
                                                 </span>
                                             </td>
@@ -566,7 +566,7 @@
                                                                 clip-rule="evenodd"></path>
                                                         </svg>
                                                         <span
-                                                            class="text-[10px] md:text-sm italic text-gray-600 truncate transition-colors group-hover/appreciation:text-purple-600 cursor-help"
+                                                            class="text-[10px] md:text-sm italic text-gray-600 truncate transition-colors group-hover/appreciation:text-yellow-600 cursor-help"
                                                             title="{{ $appreciationTrouvee }}">
                                                             "{{ Str::limit($appreciationTrouvee, 20) }}"
                                                         </span>
@@ -579,11 +579,11 @@
                                     @endforeach
 
                                     <!-- Ligne récapitulative -->
-                                    <tr class="font-semibold bg-gradient-to-r from-purple-50 to-indigo-50">
+                                    <tr class="font-semibold bg-blue-900">
                                         <td colspan="2" class="px-3 md:px-6 py-3 md:py-5 text-xs md:text-sm text-gray-700">
                                             <span class="flex items-center">
                                                 <span
-                                                    class="w-1.5 h-1.5 md:w-2 md:h-2 mr-1 md:mr-2 bg-purple-600 rounded-full"></span>
+                                                    class="w-1.5 h-1.5 md:w-2 md:h-2 mr-1 md:mr-2 bg-blue-900 rounded-full"></span>
                                                 Total général
                                             </span>
                                         </td>
@@ -624,11 +624,11 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                             @foreach($appreciations as $appreciation)
                                 <div
-                                    class="p-3 md:p-5 transition-all border border-yellow-100 group bg-gradient-to-br from-yellow-50 to-amber-50/50 rounded-lg md:rounded-xl hover:shadow-lg hover:-translate-y-1">
+                                    class="p-3 md:p-5 transition-all border border-yellow-100 group bg-blue-900/50 rounded-lg md:rounded-xl hover:shadow-lg hover:-translate-y-1">
                                     <div class="flex flex-col sm:flex-row sm:items-start justify-between mb-2 md:mb-3 gap-2">
                                         <div class="flex items-center">
                                             <div
-                                                class="flex items-center justify-center w-8 h-8 md:w-10 md:h-10 mr-2 md:mr-3 rounded-lg shadow-md bg-gradient-to-br from-yellow-500 to-amber-600">
+                                                class="flex items-center justify-center w-8 h-8 md:w-10 md:h-10 mr-2 md:mr-3 rounded-lg shadow-md bg-blue-900">
                                                 <span
                                                     class="text-[10px] md:text-sm font-bold text-white">{{ substr($appreciation->professeur->nom ?? 'P', 0, 2) }}</span>
                                             </div>
@@ -660,7 +660,7 @@
                 <div
                     class="p-4 md:p-6 mt-6 md:mt-8 border shadow-xl bg-white/90 backdrop-blur-xl border-white/50 rounded-xl md:rounded-2xl">
                     <h4 class="flex items-center mb-3 md:mb-4 text-sm md:text-lg font-semibold text-gray-900">
-                        <svg class="w-4 h-4 md:w-5 md:h-5 mr-2 text-purple-600" fill="none" stroke="currentColor"
+                        <svg class="w-4 h-4 md:w-5 md:h-5 mr-2 text-yellow-600" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
@@ -672,10 +672,10 @@
                         @foreach($notesParMatiere as $data)
                             @php
                                 $pourcentage = ($data['moyenne'] / 20) * 100;
-                                $barColor = $data['moyenne'] >= 16 ? 'bg-gradient-to-r from-green-500 to-emerald-500' :
-                                    ($data['moyenne'] >= 14 ? 'bg-gradient-to-r from-blue-500 to-cyan-500' :
-                                        ($data['moyenne'] >= 10 ? 'bg-gradient-to-r from-yellow-500 to-amber-500' :
-                                            'bg-gradient-to-r from-red-500 to-rose-500'));
+                                $barColor = $data['moyenne'] >= 16 ? 'bg-blue-900' :
+                                    ($data['moyenne'] >= 14 ? 'bg-blue-900' :
+                                        ($data['moyenne'] >= 10 ? 'bg-blue-900' :
+                                            'bg-blue-900'));
                             @endphp
                             <div>
                                 <div class="flex justify-between mb-0.5 md:mb-1 text-[10px] md:text-sm">

@@ -3,7 +3,7 @@
 @section('title', 'Absences par classe')
 
 @section('header')
-    <div class="relative overflow-hidden bg-gradient-to-br from-teal-600 via-teal-700 to-cyan-800 py-8 md:py-12">
+    <div class="relative overflow-hidden bg-blue-900 py-8 md:py-12">
         <!-- Éléments décoratifs animés -->
         <div class="absolute inset-0 opacity-10">
             <div
@@ -89,7 +89,7 @@
     <div class="container mx-auto px-4 py-6 md:py-10 bg-gray-50">
         <!-- Formulaire de sélection -->
         <div class="bg-white rounded-2xl md:rounded-3xl shadow-xl overflow-hidden mb-6 md:mb-8">
-            <div class="bg-gradient-to-r from-teal-500 to-cyan-600 px-4 md:px-8 py-4 md:py-6">
+            <div class="bg-blue-900 px-4 md:px-8 py-4 md:py-6">
                 <div class="flex items-center">
                     <div
                         class="w-12 h-12 md:w-14 md:h-14 bg-white/20 backdrop-blur-lg rounded-xl md:rounded-2xl flex items-center justify-center mr-4 md:mr-5 flex-shrink-0">
@@ -142,7 +142,7 @@
                             Reinitialiser
                         </a>
                         <button type="submit"
-                            class="flex-1 px-4 py-2.5 md:py-3 bg-gradient-to-r from-teal-500 to-cyan-600 hover:from-teal-600 hover:to-cyan-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 text-sm md:text-base">
+                            class="flex-1 px-4 py-2.5 md:py-3 bg-blue-900 hover:from-teal-600 hover:to-cyan-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 text-sm md:text-base">
                             Afficher
                         </button>
                     </div>
@@ -196,7 +196,7 @@
                             <p class="text-xl md:text-3xl font-bold text-gray-800">{{ $stats['moyenne_par_eleve'] }}</p>
                         </div>
                         <div class="bg-blue-100 rounded-lg md:rounded-xl p-2 md:p-3">
-                            <svg class="w-5 h-5 md:w-8 md:h-8 text-blue-600" fill="none" stroke="currentColor"
+                            <svg class="w-5 h-5 md:w-8 md:h-8 text-blue-900" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
@@ -226,7 +226,7 @@
 
             <!-- Tableau des absences par élève -->
             <div class="bg-white rounded-2xl md:rounded-3xl shadow-xl overflow-hidden">
-                <div class="bg-gradient-to-r from-gray-800 to-gray-900 px-4 md:px-8 py-4 md:py-5">
+                <div class="bg-blue-900 px-4 md:px-8 py-4 md:py-5">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center">
                             <div
@@ -283,7 +283,7 @@
                                     <td class="px-3 md:px-6 py-3 md:py-4 sticky left-0 bg-white z-10">
                                         <div class="flex items-center">
                                             <div
-                                                class="flex-shrink-0 h-8 w-8 md:h-10 md:w-10 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-lg flex items-center justify-center text-white font-bold text-sm md:text-lg shadow">
+                                                class="flex-shrink-0 h-8 w-8 md:h-10 md:w-10 bg-blue-900 rounded-lg flex items-center justify-center text-white font-bold text-sm md:text-lg shadow">
                                                 {{ strtoupper(substr($eleve->prenom, 0, 1)) }}{{ strtoupper(substr($eleve->nom, 0, 1)) }}
                                             </div>
                                             <div class="ml-2 md:ml-4 min-w-0">

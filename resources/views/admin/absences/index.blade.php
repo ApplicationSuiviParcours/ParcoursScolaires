@@ -3,7 +3,7 @@
 @section('title', 'Gestion des absences')
 
 @section('header')
-<div class="relative overflow-hidden bg-gradient-to-br from-orange-600 via-orange-700 to-red-800 py-8 md:py-12">
+<div class="relative overflow-hidden bg-blue-900 py-8 md:py-12">
     <!-- Éléments décoratifs animés -->
     <div class="absolute inset-0 opacity-10">
         <div class="absolute -top-24 -right-24 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-pulse"></div>
@@ -150,7 +150,7 @@
                     <p class="text-xl md:text-3xl font-bold text-gray-800">{{ $stats['aujourd_hui'] }}</p>
                 </div>
                 <div class="bg-blue-100 rounded-lg md:rounded-xl p-2 md:p-3">
-                    <svg class="w-5 h-5 md:w-8 md:h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 md:w-8 md:h-8 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
                 </div>
@@ -190,7 +190,7 @@
                            class="w-full pl-12 pr-4 py-2.5 md:py-3 rounded-xl border-2 border-gray-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition-all duration-300 text-sm">
                 </div>
                 <button type="submit" 
-                        class="w-full sm:w-auto px-6 py-2.5 md:py-3 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 text-sm">
+                        class="w-full sm:w-auto px-6 py-2.5 md:py-3 bg-blue-900 hover:from-orange-700 hover:to-red-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 text-sm">
                     Rechercher
                 </button>
             </div>
@@ -260,16 +260,16 @@
     <div class="bg-white rounded-2xl md:rounded-3xl shadow-xl overflow-hidden">
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gradient-to-r from-orange-50 to-red-50">
+                <thead class="bg-blue-900">
                     <tr>
                         <!-- Colonne Élève sticky -->
-                        <th class="px-3 md:px-6 py-3 md:py-4 text-left text-[10px] md:text-xs font-semibold text-orange-700 uppercase tracking-wider sticky left-0 bg-gradient-to-r from-orange-50 to-red-50 z-10 min-w-[140px] md:min-w-[200px]">Élève</th>
+                        <th class="px-3 md:px-6 py-3 md:py-4 text-left text-[10px] md:text-xs font-semibold text-orange-700 uppercase tracking-wider sticky left-0 bg-blue-900 z-10 min-w-[140px] md:min-w-[200px]">Élève</th>
                         <th class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold text-orange-700 uppercase tracking-wider">Matière</th>
                         <th class="px-3 md:px-6 py-3 md:py-4 text-left text-[10px] md:text-xs font-semibold text-orange-700 uppercase tracking-wider min-w-[80px]">Date</th>
                         <th class="hidden lg:table-cell px-6 py-4 text-left text-xs font-semibold text-orange-700 uppercase tracking-wider">Horaire</th>
                         <th class="px-3 md:px-6 py-3 md:py-4 text-left text-[10px] md:text-xs font-semibold text-orange-700 uppercase tracking-wider">Motif</th>
                         <th class="px-3 md:px-6 py-3 md:py-4 text-left text-[10px] md:text-xs font-semibold text-orange-700 uppercase tracking-wider">Statut</th>
-                        <th class="px-3 md:px-6 py-3 md:py-4 text-left text-[10px] md:text-xs font-semibold text-orange-700 uppercase tracking-wider sticky right-0 bg-gradient-to-l from-orange-50 to-red-50 z-10 shadow-[-4px_0_10px_rgba(0,0,0,0.05)] text-center">Actions</th>
+                        <th class="px-3 md:px-6 py-3 md:py-4 text-left text-[10px] md:text-xs font-semibold text-orange-700 uppercase tracking-wider sticky right-0 bg-blue-900 z-10 shadow-[-4px_0_10px_rgba(0,0,0,0.05)] text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
@@ -278,7 +278,7 @@
                             <!-- Élève (Sticky) -->
                             <td class="px-3 md:px-6 py-3 md:py-4 sticky left-0 bg-white group-hover:bg-orange-50/50 z-10">
                                 <div class="flex items-center">
-                                    <div class="flex-shrink-0 h-8 w-8 md:h-10 md:w-10 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg md:rounded-xl flex items-center justify-center text-white font-bold text-sm md:text-lg shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                    <div class="flex-shrink-0 h-8 w-8 md:h-10 md:w-10 bg-blue-900 rounded-lg md:rounded-xl flex items-center justify-center text-white font-bold text-sm md:text-lg shadow-lg group-hover:scale-110 transition-transform duration-300">
                                         {{ strtoupper(substr($absence->eleve->prenom, 0, 1)) }}{{ strtoupper(substr($absence->eleve->nom, 0, 1)) }}
                                     </div>
                                     <div class="ml-2 md:ml-4 min-w-0">
@@ -293,8 +293,8 @@
                             </td>
                             <td class="hidden md:table-cell px-6 py-4">
                                 <div class="flex items-center">
-                                    <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center mr-2 flex-shrink-0">
-                                        <span class="text-purple-700 font-bold text-[10px] md:text-xs">{{ substr($absence->matiere->code ?? 'MT', 0, 3) }}</span>
+                                    <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-2 flex-shrink-0">
+                                        <span class="text-blue-900 font-bold text-[10px] md:text-xs">{{ substr($absence->matiere->code ?? 'MT', 0, 3) }}</span>
                                     </div>
                                     <span class="text-sm font-medium text-gray-900 truncate">{{ $absence->matiere->nom }}</span>
                                 </div>
@@ -306,7 +306,7 @@
                                 @if($absence->heure_debut && $absence->heure_fin)
                                     <div class="flex items-center gap-1.5">
                                         <div class="w-6 h-6 bg-blue-100 rounded-md flex items-center justify-center flex-shrink-0">
-                                            <svg class="w-3.5 h-3.5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                            <svg class="w-3.5 h-3.5 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                         </div>
                                         <span class="text-sm font-medium text-gray-700">{{ \Carbon\Carbon::parse($absence->heure_debut)->format('H:i') }}</span>
                                         <span class="text-gray-400">→</span>
@@ -345,7 +345,7 @@
                             </td>
                             <td class="px-3 md:px-6 py-3 md:py-4 whitespace-nowrap sticky right-0 bg-white group-hover:bg-orange-50/50 z-10 shadow-[-4px_0_10px_rgba(0,0,0,0.02)] border-l border-gray-100">
                                 <div class="flex items-center justify-center gap-1 md:gap-2 whitespace-nowrap min-w-[max-content]">
-                                    <a href="{{ route('admin.absences.show', $absence) }}" class="p-1.5 md:p-2 text-blue-600 bg-transparent hover:bg-blue-50 rounded-lg transition-colors border-none inline-flex flex-shrink-0 items-center justify-center" title="Voir">
+                                    <a href="{{ route('admin.absences.show', $absence) }}" class="p-1.5 md:p-2 text-blue-900 bg-transparent hover:bg-blue-50 rounded-lg transition-colors border-none inline-flex flex-shrink-0 items-center justify-center" title="Voir">
                                         <svg class="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                                     </a>
                                     <a href="{{ route('admin.absences.edit', $absence) }}" class="p-1.5 md:p-2 text-amber-600 bg-transparent hover:bg-amber-50 rounded-lg transition-colors border-none inline-flex flex-shrink-0 items-center justify-center" title="Modifier">
@@ -387,7 +387,7 @@
                                     </p>
                                     @if(!request()->anyFilled(['annee_scolaire_id', 'classe_id', 'matiere_id', 'justifiee']))
                                         <a href="{{ route('admin.absences.create') }}" 
-                                           class="inline-flex items-center px-5 py-2.5 md:px-6 md:py-3 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 text-sm md:text-base">
+                                           class="inline-flex items-center px-5 py-2.5 md:px-6 md:py-3 bg-yellow-500 text-blue-900 font-bold hover:from-orange-700 hover:to-red-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 text-sm md:text-base">
                                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                             </svg>

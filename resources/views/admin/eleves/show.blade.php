@@ -36,7 +36,7 @@
 
             <!-- En-tête de navigation -->
             <div class="mb-4 md:mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
-                <a href="{{ route('admin.eleves.index') }}" class="inline-flex items-center text-xs md:text-sm text-gray-600 hover:text-indigo-600 transition-colors group">
+                <a href="{{ route('admin.eleves.index') }}" class="inline-flex items-center text-xs md:text-sm text-gray-600 hover:text-blue-900 transition-colors group">
                     <svg class="w-4 h-4 mr-1 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                     </svg>
@@ -51,7 +51,7 @@
 
             <!-- En-tête du profil -->
             <div class="bg-white shadow-lg border border-gray-200 rounded-lg md:rounded-xl overflow-hidden mb-4 md:mb-6">
-                <div class="bg-gradient-to-r from-indigo-600 to-indigo-800 px-4 md:px-6 py-3 md:py-4">
+                <div class="bg-blue-900 px-4 md:px-6 py-3 md:py-4">
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                         <div class="flex items-center">
                             <div class="bg-white bg-opacity-20 p-2 md:p-3 rounded-lg">
@@ -63,7 +63,7 @@
                                 <h3 class="text-base md:text-xl font-bold text-white">{{ $eleve->nom }} {{ $eleve->prenom }}</h3>
                                 <div class="flex flex-wrap items-center mt-1 gap-1 md:gap-2">
                                     <span class="text-indigo-200 text-[10px] md:text-sm">Matricule :</span>
-                                    <span class="px-1.5 md:px-2 py-0.5 bg-indigo-500 text-white text-[10px] md:text-xs font-mono font-medium rounded">{{ $eleve->matricule }}</span>
+                                    <span class="px-1.5 md:px-2 py-0.5 bg-blue-800 text-white text-[10px] md:text-xs font-mono font-medium rounded">{{ $eleve->matricule }}</span>
                                     <span class="px-1.5 md:px-2 py-0.5 rounded-full text-[10px] md:text-xs font-medium {{ $eleve->statut ? 'bg-green-500 text-white' : 'bg-red-500 text-white' }}">
                                         {{ $eleve->statut ? 'Actif' : 'Inactif' }}
                                     </span>
@@ -73,7 +73,7 @@
 
                         <div class="flex flex-wrap gap-2">
                             <a href="{{ route('admin.eleves.edit', $eleve) }}" 
-                               class="w-full sm:w-auto inline-flex items-center justify-center px-3 md:px-4 py-1.5 md:py-2 bg-white text-indigo-600 hover:bg-indigo-50 text-xs md:text-sm font-medium rounded-lg transition-colors">
+                               class="w-full sm:w-auto inline-flex items-center justify-center px-3 md:px-4 py-1.5 md:py-2 bg-yellow-500 text-blue-900 hover:bg-blue-50 text-xs md:text-sm font-medium rounded-lg transition-colors">
                                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                 </svg>
@@ -81,7 +81,7 @@
                             </a>
 
                             <a href="{{ route('admin.eleves.parcours', $eleve) }}" 
-                               class="w-full sm:w-auto inline-flex items-center justify-center px-3 md:px-4 py-1.5 md:py-2 bg-indigo-500 text-white hover:bg-indigo-600 text-xs md:text-sm font-medium rounded-lg transition-colors">
+                               class="w-full sm:w-auto inline-flex items-center justify-center px-3 md:px-4 py-1.5 md:py-2 bg-blue-800 text-white hover:bg-blue-900 text-xs md:text-sm font-medium rounded-lg transition-colors">
                                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
@@ -130,8 +130,8 @@
                     <div class="bg-white shadow-lg border border-gray-200 rounded-lg md:rounded-xl overflow-hidden">
                         <div class="border-b border-gray-200 px-4 md:px-6 py-3 md:py-4 bg-gradient-to-r from-gray-50 to-white">
                             <div class="flex items-center">
-                                <div class="bg-indigo-100 p-1.5 md:p-2 rounded-lg">
-                                    <svg class="w-4 h-4 md:w-5 md:h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="bg-blue-100 p-1.5 md:p-2 rounded-lg">
+                                    <svg class="w-4 h-4 md:w-5 md:h-5 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                     </svg>
                                 </div>
@@ -260,14 +260,14 @@
                         <div class="border-b border-gray-200 px-4 md:px-6 py-3 md:py-4 bg-gradient-to-r from-gray-50 to-white">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <div class="bg-indigo-100 p-1.5 md:p-2 rounded-lg">
-                                        <svg class="w-4 h-4 md:w-5 md:h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div class="bg-blue-100 p-1.5 md:p-2 rounded-lg">
+                                        <svg class="w-4 h-4 md:w-5 md:h-5 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                         </svg>
                                     </div>
                                     <h3 class="ml-2 md:ml-3 text-sm md:text-lg font-semibold text-gray-800">Historique des inscriptions</h3>
                                 </div>
-                                <span class="px-2 py-0.5 md:py-1 bg-indigo-100 text-indigo-800 text-[10px] md:text-xs font-semibold rounded-full">
+                                <span class="px-2 py-0.5 md:py-1 bg-blue-100 text-indigo-800 text-[10px] md:text-xs font-semibold rounded-full">
                                     Total : {{ $eleve->inscriptions->count() }}
                                 </span>
                             </div>
@@ -320,7 +320,7 @@
                                             @foreach($eleve->inscriptions as $inscription)
                                                 <tr class="hover:bg-gray-50 transition-colors">
                                                     <td class="px-2 md:px-4 py-2 md:py-3 font-medium text-gray-900">
-                                                        <span class="px-1.5 md:px-2 py-0.5 md:py-1 {{ $inscription->statut ? 'bg-green-50 text-green-700 border-green-200' : 'bg-indigo-50 text-indigo-700 border-indigo-200' }} rounded-lg border text-[10px] md:text-xs">
+                                                        <span class="px-1.5 md:px-2 py-0.5 md:py-1 {{ $inscription->statut ? 'bg-green-50 text-green-700 border-green-200' : 'bg-blue-50 text-blue-900 border-indigo-200' }} rounded-lg border text-[10px] md:text-xs">
                                                             {{ $inscription->classe->nom ?? 'Non définie' }}
                                                         </span>
                                                     </td>
@@ -358,14 +358,14 @@
                         <div class="border-b border-gray-200 px-4 md:px-6 py-3 md:py-4 bg-gradient-to-r from-gray-50 to-white">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <div class="bg-indigo-100 p-1.5 md:p-2 rounded-lg">
-                                        <svg class="w-4 h-4 md:w-5 md:h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div class="bg-blue-100 p-1.5 md:p-2 rounded-lg">
+                                        <svg class="w-4 h-4 md:w-5 md:h-5 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                         </svg>
                                     </div>
                                     <h3 class="ml-2 md:ml-3 text-sm md:text-lg font-semibold text-gray-800">Dernières absences</h3>
                                 </div>
-                                <span class="px-2 py-0.5 md:py-1 bg-indigo-100 text-indigo-800 text-[10px] md:text-xs font-semibold rounded-full">
+                                <span class="px-2 py-0.5 md:py-1 bg-blue-100 text-indigo-800 text-[10px] md:text-xs font-semibold rounded-full">
                                     Total : {{ $stats['total_absences'] ?? 0 }}
                                 </span>
                             </div>
@@ -423,14 +423,14 @@
                         <div class="border-b border-gray-200 px-4 md:px-6 py-3 md:py-4 bg-gradient-to-r from-gray-50 to-white">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <div class="bg-indigo-100 p-1.5 md:p-2 rounded-lg">
-                                        <svg class="w-4 h-4 md:w-5 md:h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div class="bg-blue-100 p-1.5 md:p-2 rounded-lg">
+                                        <svg class="w-4 h-4 md:w-5 md:h-5 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                                         </svg>
                                     </div>
                                     <h3 class="ml-2 md:ml-3 text-sm md:text-lg font-semibold text-gray-800">Dernières notes</h3>
                                 </div>
-                                <span class="px-2 py-0.5 md:py-1 bg-indigo-100 text-indigo-800 text-[10px] md:text-xs font-semibold rounded-full">
+                                <span class="px-2 py-0.5 md:py-1 bg-blue-100 text-indigo-800 text-[10px] md:text-xs font-semibold rounded-full">
                                     Total : {{ $stats['notes_count'] ?? 0 }}
                                 </span>
                             </div>
@@ -454,7 +454,7 @@
                                                         {{ $note->evaluation->nom ?? 'Non définie' }}
                                                     </td>
                                                     <td class="px-2 md:px-4 py-2 md:py-3">
-                                                        <span class="px-1.5 md:px-2 py-0.5 md:py-1 bg-indigo-100 text-indigo-800 font-semibold rounded-full text-[10px] md:text-xs">
+                                                        <span class="px-1.5 md:px-2 py-0.5 md:py-1 bg-blue-100 text-indigo-800 font-semibold rounded-full text-[10px] md:text-xs">
                                                             {{ number_format($note->note, 2) }}/20
                                                         </span>
                                                     </td>
@@ -482,14 +482,14 @@
                         <div class="border-b border-gray-200 px-4 md:px-6 py-3 md:py-4 bg-gradient-to-r from-gray-50 to-white">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <div class="bg-indigo-100 p-1.5 md:p-2 rounded-lg">
-                                        <svg class="w-4 h-4 md:w-5 md:h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div class="bg-blue-100 p-1.5 md:p-2 rounded-lg">
+                                        <svg class="w-4 h-4 md:w-5 md:h-5 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                         </svg>
                                     </div>
                                     <h3 class="ml-2 md:ml-3 text-sm md:text-lg font-semibold text-gray-800">Bulletins</h3>
                                 </div>
-                                <span class="px-2 py-0.5 md:py-1 bg-indigo-100 text-indigo-800 text-[10px] md:text-xs font-semibold rounded-full">
+                                <span class="px-2 py-0.5 md:py-1 bg-blue-100 text-indigo-800 text-[10px] md:text-xs font-semibold rounded-full">
                                     Total : {{ $stats['bulletins_count'] ?? 0 }}
                                 </span>
                             </div>
@@ -511,7 +511,7 @@
                                             @foreach($eleve->bulletins as $bulletin)
                                                 <tr class="hover:bg-gray-50 transition-colors">
                                                     <td class="px-2 md:px-4 py-2 md:py-3 font-medium text-gray-900">
-                                                        <span class="px-1.5 md:px-2 py-0.5 md:py-1 bg-indigo-50 text-indigo-700 rounded-lg border border-indigo-200 text-[10px] md:text-xs">
+                                                        <span class="px-1.5 md:px-2 py-0.5 md:py-1 bg-blue-50 text-blue-900 rounded-lg border border-indigo-200 text-[10px] md:text-xs">
                                                             {{ $bulletin->classe->nom ?? 'Non définie' }}
                                                         </span>
                                                     </td>
@@ -519,7 +519,7 @@
                                                         {{ $bulletin->periode }}
                                                     </td>
                                                     <td class="px-2 md:px-4 py-2 md:py-3">
-                                                        <span class="px-1.5 md:px-2 py-0.5 md:py-1 bg-indigo-100 text-indigo-800 font-semibold rounded-full text-[10px] md:text-xs">
+                                                        <span class="px-1.5 md:px-2 py-0.5 md:py-1 bg-blue-100 text-indigo-800 font-semibold rounded-full text-[10px] md:text-xs">
                                                             {{ number_format($bulletin->moyenne_generale, 2) }}/20
                                                         </span>
                                                     </td>
@@ -556,8 +556,8 @@
                     <div class="bg-white shadow-lg border border-gray-200 rounded-lg md:rounded-xl overflow-hidden">
                         <div class="border-b border-gray-200 px-4 md:px-6 py-3 md:py-4 bg-gradient-to-r from-gray-50 to-white">
                             <div class="flex items-center">
-                                <div class="bg-indigo-100 p-1.5 md:p-2 rounded-lg">
-                                    <svg class="w-4 h-4 md:w-5 md:h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="bg-blue-100 p-1.5 md:p-2 rounded-lg">
+                                    <svg class="w-4 h-4 md:w-5 md:h-5 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                     </svg>
                                 </div>
@@ -572,7 +572,7 @@
                                 </div>
                             @else
                                 <div class="flex justify-center">
-                                    <div class="w-32 h-32 md:w-48 md:h-48 rounded-lg bg-gradient-to-br from-indigo-100 to-indigo-200 flex items-center justify-center border-2 md:border-4 border-indigo-100 shadow-md">
+                                    <div class="w-32 h-32 md:w-48 md:h-48 rounded-lg bg-blue-900 flex items-center justify-center border-2 md:border-4 border-indigo-100 shadow-md">
                                         <span class="text-4xl md:text-6xl font-bold text-indigo-400">
                                             {{ substr($eleve->prenom, 0, 1) }}{{ substr($eleve->nom, 0, 1) }}
                                         </span>
@@ -588,14 +588,14 @@
                         <div class="border-b border-gray-200 px-4 md:px-6 py-3 md:py-4 bg-gradient-to-r from-gray-50 to-white">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <div class="bg-indigo-100 p-1.5 md:p-2 rounded-lg">
-                                        <svg class="w-4 h-4 md:w-5 md:h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div class="bg-blue-100 p-1.5 md:p-2 rounded-lg">
+                                        <svg class="w-4 h-4 md:w-5 md:h-5 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
                                         </svg>
                                     </div>
                                     <h3 class="ml-2 md:ml-3 text-sm md:text-lg font-semibold text-gray-800">Parents</h3>
                                 </div>
-                                <span class="px-2 py-0.5 md:py-1 bg-indigo-100 text-indigo-800 text-[10px] md:text-xs font-semibold rounded-full">
+                                <span class="px-2 py-0.5 md:py-1 bg-blue-100 text-indigo-800 text-[10px] md:text-xs font-semibold rounded-full">
                                     {{ $stats['parents_count'] ?? 0 }}
                                 </span>
                             </div>
@@ -607,15 +607,15 @@
                                     @foreach($eleve->parents as $parent)
                                         <div class="p-3 md:p-4 bg-gray-50 border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
                                             <div class="flex items-start">
-                                                <div class="bg-indigo-100 p-1.5 md:p-2 rounded-full mr-2 md:mr-3">
-                                                    <svg class="w-3 h-3 md:w-4 md:h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <div class="bg-blue-100 p-1.5 md:p-2 rounded-full mr-2 md:mr-3">
+                                                    <svg class="w-3 h-3 md:w-4 md:h-4 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                                     </svg>
                                                 </div>
                                                 <div class="flex-1">
                                                     <p class="font-semibold text-gray-900 text-xs md:text-sm">{{ $parent->nom }} {{ $parent->prenom }}</p>
                                                     @if($parent->pivot && $parent->pivot->lien_parental)
-                                                        <p class="text-[10px] md:text-xs text-indigo-600 mt-0.5 md:mt-1">Lien: {{ $parent->pivot->lien_parental }}</p>
+                                                        <p class="text-[10px] md:text-xs text-blue-900 mt-0.5 md:mt-1">Lien: {{ $parent->pivot->lien_parental }}</p>
                                                     @endif
                                                     <p class="text-[10px] md:text-xs text-gray-600 flex items-center mt-0.5 md:mt-1">
                                                         <svg class="w-3 h-3 md:w-4 md:h-4 mr-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -643,8 +643,8 @@
                     <div class="bg-white shadow-lg border border-gray-200 rounded-lg md:rounded-xl overflow-hidden">
                         <div class="border-b border-gray-200 px-4 md:px-6 py-3 md:py-4 bg-gradient-to-r from-gray-50 to-white">
                             <div class="flex items-center">
-                                <div class="bg-indigo-100 p-1.5 md:p-2 rounded-lg">
-                                    <svg class="w-4 h-4 md:w-5 md:h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="bg-blue-100 p-1.5 md:p-2 rounded-lg">
+                                    <svg class="w-4 h-4 md:w-5 md:h-5 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                     </svg>
                                 </div>
@@ -683,8 +683,8 @@
                     <div class="bg-white shadow-lg border border-gray-200 rounded-lg md:rounded-xl overflow-hidden">
                         <div class="border-b border-gray-200 px-4 md:px-6 py-3 md:py-4 bg-gradient-to-r from-gray-50 to-white">
                             <div class="flex items-center">
-                                <div class="bg-indigo-100 p-1.5 md:p-2 rounded-lg">
-                                    <svg class="w-4 h-4 md:w-5 md:h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="bg-blue-100 p-1.5 md:p-2 rounded-lg">
+                                    <svg class="w-4 h-4 md:w-5 md:h-5 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                                     </svg>
                                 </div>
@@ -695,15 +695,15 @@
                         <div class="p-4 md:p-6">
                             <div class="grid grid-cols-2 gap-2 md:gap-4">
                                 <div class="bg-gray-50 p-2 md:p-3 text-center border border-gray-200 rounded-lg">
-                                    <p class="text-lg md:text-2xl font-bold text-indigo-600">{{ $stats['inscriptions_count'] ?? 0 }}</p>
+                                    <p class="text-lg md:text-2xl font-bold text-blue-900">{{ $stats['inscriptions_count'] ?? 0 }}</p>
                                     <p class="text-[10px] md:text-xs text-gray-600 uppercase tracking-wider mt-0.5 md:mt-1">Inscriptions</p>
                                 </div>
                                 <div class="bg-gray-50 p-2 md:p-3 text-center border border-gray-200 rounded-lg">
-                                    <p class="text-lg md:text-2xl font-bold text-indigo-600">{{ $stats['parents_count'] ?? 0 }}</p>
+                                    <p class="text-lg md:text-2xl font-bold text-blue-900">{{ $stats['parents_count'] ?? 0 }}</p>
                                     <p class="text-[10px] md:text-xs text-gray-600 uppercase tracking-wider mt-0.5 md:mt-1">Parents</p>
                                 </div>
                                 <div class="bg-gray-50 p-2 md:p-3 text-center border border-gray-200 rounded-lg">
-                                    <p class="text-lg md:text-2xl font-bold text-indigo-600">{{ $stats['total_absences'] ?? 0 }}</p>
+                                    <p class="text-lg md:text-2xl font-bold text-blue-900">{{ $stats['total_absences'] ?? 0 }}</p>
                                     <p class="text-[10px] md:text-xs text-gray-600 uppercase tracking-wider mt-0.5 md:mt-1">Absences</p>
                                 </div>
                                 <div class="bg-gray-50 p-2 md:p-3 text-center border border-gray-200 rounded-lg">
@@ -715,7 +715,7 @@
                                     <p class="text-[10px] md:text-xs text-gray-600 uppercase tracking-wider mt-0.5 md:mt-1">Non justifiées</p>
                                 </div>
                                 <div class="bg-gray-50 p-2 md:p-3 text-center border border-gray-200 rounded-lg">
-                                    <p class="text-lg md:text-2xl font-bold text-indigo-600">{{ isset($stats['moyenne_generale']) && $stats['moyenne_generale'] ? number_format($stats['moyenne_generale'], 2) : 'N/A' }}</p>
+                                    <p class="text-lg md:text-2xl font-bold text-blue-900">{{ isset($stats['moyenne_generale']) && $stats['moyenne_generale'] ? number_format($stats['moyenne_generale'], 2) : 'N/A' }}</p>
                                     <p class="text-[10px] md:text-xs text-gray-600 uppercase tracking-wider mt-0.5 md:mt-1">Moyenne</p>
                                 </div>
                             </div>

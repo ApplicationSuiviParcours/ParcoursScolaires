@@ -40,16 +40,16 @@
                 <span class="text-[10px] md:text-sm text-gray-500">Formulaire de modification</span>
             </div>
             <div class="w-full bg-gray-200 h-0.5">
-                <div class="bg-indigo-600 h-0.5 w-full"></div>
+                <div class="bg-blue-900 h-0.5 w-full"></div>
             </div>
         </div>
 
         <!-- Formulaire principal -->
         <div class="bg-white shadow-lg overflow-hidden border border-gray-200 rounded-lg md:rounded-xl">
             <!-- En-tête du formulaire -->
-            <div class="bg-gradient-to-r from-indigo-600 to-indigo-700 px-4 md:px-6 py-3 md:py-4">
+            <div class="bg-blue-900 px-4 md:px-6 py-3 md:py-4">
                 <div class="flex items-center">
-                    <div class="bg-indigo-500 p-1.5 md:p-2 rounded-lg">
+                    <div class="bg-blue-800 p-1.5 md:p-2 rounded-lg">
                         <svg class="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                         </svg>
@@ -98,7 +98,7 @@
                             <div class="flex-1 w-full">
                                 <label for="photo" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Nouvelle photo</label>
                                 <input type="file" name="photo" id="photo" accept="image/*"
-                                       class="block w-full text-xs text-gray-500 file:mr-2 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                                       class="block w-full text-xs text-gray-500 file:mr-2 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100">
                                 <p class="mt-1 text-[10px] text-gray-500">Formats : JPEG, PNG (max. 2 Mo)</p>
                             </div>
                         </div>
@@ -107,7 +107,7 @@
                     <!-- Section Identité -->
                     <div>
                         <div class="flex items-center mb-3 pb-2 border-b border-gray-200">
-                            <div class="bg-indigo-600 w-1 h-5 md:h-6 mr-2 md:mr-3 rounded-full"></div>
+                            <div class="bg-blue-900 w-1 h-5 md:h-6 mr-2 md:mr-3 rounded-full"></div>
                             <h4 class="text-sm md:text-md font-semibold text-gray-800 uppercase tracking-wide">Identité</h4>
                         </div>
 
@@ -124,7 +124,7 @@
                             <div>
                                 <label for="nom" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Nom <span class="text-red-500">*</span></label>
                                 <input type="text" name="nom" id="nom" required placeholder="DIOP"
-                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-indigo-500 focus:ring-1 @error('nom') border-red-500 @enderror" value="{{ old('nom', $eleve->nom) }}">
+                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1 @error('nom') border-red-500 @enderror" value="{{ old('nom', $eleve->nom) }}">
                                 @error('nom')<p class="mt-1 text-[10px] text-red-600">{{ $message }}</p>@enderror
                             </div>
 
@@ -132,14 +132,14 @@
                             <div>
                                 <label for="prenom" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Prénom <span class="text-red-500">*</span></label>
                                 <input type="text" name="prenom" id="prenom" required placeholder="Mamadou"
-                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-indigo-500 focus:ring-1 @error('prenom') border-red-500 @enderror" value="{{ old('prenom', $eleve->prenom) }}">
+                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1 @error('prenom') border-red-500 @enderror" value="{{ old('prenom', $eleve->prenom) }}">
                                 @error('prenom')<p class="mt-1 text-[10px] text-red-600">{{ $message }}</p>@enderror
                             </div>
 
                             <!-- Genre -->
                             <div>
                                 <label for="genre" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Genre <span class="text-red-500">*</span></label>
-                                <select name="genre" id="genre" required class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-indigo-500 focus:ring-1 @error('genre') border-red-500 @enderror">
+                                <select name="genre" id="genre" required class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1 @error('genre') border-red-500 @enderror">
                                     <option value="m" {{ old('genre', $eleve->genre) === 'm' ? 'selected' : '' }}>Masculin</option>
                                     <option value="f" {{ old('genre', $eleve->genre) === 'f' ? 'selected' : '' }}>Féminin</option>
                                 </select>
@@ -158,13 +158,13 @@
                             <div>
                                 <label for="date_naissance" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Date <span class="text-red-500">*</span></label>
                                 <input type="date" name="date_naissance" id="date_naissance" required
-                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-indigo-500 focus:ring-1 @error('date_naissance') border-red-500 @enderror" value="{{ old('date_naissance', $eleve->date_naissance->format('Y-m-d')) }}">
+                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1 @error('date_naissance') border-red-500 @enderror" value="{{ old('date_naissance', $eleve->date_naissance->format('Y-m-d')) }}">
                             </div>
 
                             <div>
                                 <label for="lieu_naissance" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Lieu <span class="text-red-500">*</span></label>
                                 <input type="text" name="lieu_naissance" id="lieu_naissance" required placeholder="Dakar"
-                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-indigo-500 focus:ring-1 @error('lieu_naissance') border-red-500 @enderror" value="{{ old('lieu_naissance', $eleve->lieu_naissance) }}">
+                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1 @error('lieu_naissance') border-red-500 @enderror" value="{{ old('lieu_naissance', $eleve->lieu_naissance) }}">
                             </div>
                         </div>
                     </div>
@@ -172,7 +172,7 @@
                     <!-- Section Contact -->
                     <div>
                         <div class="flex items-center mb-3 pb-2 border-b border-gray-200">
-                            <div class="bg-indigo-500 w-1 h-5 md:h-6 mr-2 md:mr-3 rounded-full"></div>
+                            <div class="bg-blue-800 w-1 h-5 md:h-6 mr-2 md:mr-3 rounded-full"></div>
                             <h4 class="text-sm md:text-md font-semibold text-gray-800 uppercase tracking-wide">Coordonnées</h4>
                         </div>
 
@@ -180,12 +180,12 @@
                             <div>
                                 <label for="telephone" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Téléphone</label>
                                 <input type="tel" name="telephone" id="telephone" placeholder="77 123 45 67"
-                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-indigo-500 focus:ring-1" value="{{ old('telephone', $eleve->telephone) }}">
+                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1" value="{{ old('telephone', $eleve->telephone) }}">
                             </div>
                             <div>
                                 <label for="email" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Email</label>
                                 <input type="email" name="email" id="email" placeholder="eleve@exemple.com"
-                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-indigo-500 focus:ring-1" value="{{ old('email', $eleve->email) }}">
+                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1" value="{{ old('email', $eleve->email) }}">
                             </div>
                         </div>
                     </div>
@@ -229,7 +229,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                             <div>
                                 <label for="nouvelle_classe_id" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Nouvelle inscription</label>
-                                <select name="nouvelle_classe_id" id="nouvelle_classe_id" class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-indigo-500 focus:ring-1">
+                                <select name="nouvelle_classe_id" id="nouvelle_classe_id" class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1">
                                     <option value="">Inscrire dans une classe (optionnel)</option>
                                     @foreach($classes as $classe)
                                         <option value="{{ $classe->id }}" {{ old('nouvelle_classe_id') == $classe->id ? 'selected' : '' }}>{{ $classe->nom_complet }}</option>
@@ -242,7 +242,7 @@
                                 <label class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Statut <span class="text-red-500">*</span></label>
                                 <div class="flex items-center space-x-4 pt-2 md:pt-3">
                                     <label class="inline-flex items-center">
-                                        <input type="radio" name="statut" value="1" class="form-radio text-indigo-600" {{ old('statut', $eleve->statut) ? 'checked' : '' }}>
+                                        <input type="radio" name="statut" value="1" class="form-radio text-blue-900" {{ old('statut', $eleve->statut) ? 'checked' : '' }}>
                                         <span class="ml-2 text-xs md:text-sm text-gray-700">Actif</span>
                                     </label>
                                     <label class="inline-flex items-center">
@@ -264,7 +264,7 @@
                         <div>
                             <label for="adresse" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Adresse <span class="text-red-500">*</span></label>
                             <textarea name="adresse" id="adresse" rows="2" required placeholder="123 Rue Liberté, Dakar"
-                                      class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-indigo-500 focus:ring-1">{{ old('adresse', $eleve->adresse) }}</textarea>
+                                      class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1">{{ old('adresse', $eleve->adresse) }}</textarea>
                         </div>
                     </div>
 
@@ -279,7 +279,7 @@
                             <span class="px-2 py-0.5 bg-green-100 text-green-800 text-[10px] font-semibold rounded-full">Actif</span>
                         </div>
                         <div class="mt-3 flex items-center">
-                            <input type="checkbox" name="update_user" id="update_user" value="1" {{ old('update_user') ? 'checked' : '' }} class="h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                            <input type="checkbox" name="update_user" id="update_user" value="1" {{ old('update_user') ? 'checked' : '' }} class="h-4 w-4 text-blue-900 border-gray-300 rounded">
                             <label for="update_user" class="ml-2 block text-xs md:text-sm text-gray-900">Mettre à jour le mot de passe</label>
                         </div>
 
@@ -304,7 +304,7 @@
                             Annuler
                         </a>
                         <button type="submit"
-                                class="w-full sm:w-auto px-4 md:px-6 py-2.5 md:py-3 bg-indigo-600 text-white hover:bg-indigo-700 text-xs md:text-sm font-medium rounded-lg shadow-sm">
+                                class="w-full sm:w-auto px-4 md:px-6 py-2.5 md:py-3 bg-blue-900 text-white hover:bg-blue-800 text-xs md:text-sm font-medium rounded-lg shadow-sm">
                             Mettre à jour
                         </button>
                     </div>

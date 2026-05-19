@@ -12,7 +12,7 @@
         
         <!-- Welcome Banner avec animation de particules -->
         <div class="relative mb-8 overflow-hidden group">
-            <div class="absolute inset-0 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 animate-gradient-x"></div>
+            <div class="absolute inset-0 bg-blue-900 animate-gradient-x"></div>
             <div class="absolute inset-0 opacity-20">
                 <div class="absolute bg-white rounded-full w-96 h-96 -top-48 -right-48 blur-3xl animate-pulse-slow"></div>
                 <div class="absolute bg-yellow-300 rounded-full w-96 h-96 -bottom-48 -left-48 blur-3xl animate-pulse-slow animation-delay-2000"></div>
@@ -30,8 +30,8 @@
                     <div class="flex flex-col sm:flex-row items-center sm:items-start space-y-3 sm:space-y-0 sm:space-x-6">
                         <!-- Avatar avec effet de halo -->
                         <div class="relative group flex-shrink-0">
-                            <div class="absolute inset-0 transition-opacity duration-500 opacity-75 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl blur-xl group-hover:opacity-100"></div>
-                            <div class="relative flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 transition-all duration-500 transform shadow-2xl bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl group-hover:scale-110 group-hover:rotate-3">
+                            <div class="absolute inset-0 transition-opacity duration-500 opacity-75 bg-blue-900 rounded-2xl blur-xl group-hover:opacity-100"></div>
+                            <div class="relative flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 transition-all duration-500 transform shadow-2xl bg-blue-900 rounded-2xl group-hover:scale-110 group-hover:rotate-3">
                                 <span class="text-3xl sm:text-4xl font-bold text-white drop-shadow-lg">{{ substr($eleve->prenom ?? 'E', 0, 1) }}{{ substr($eleve->nom ?? 'L', 0, 1) }}</span>
                             </div>
                             <div class="absolute w-5 h-5 bg-green-400 border-4 border-indigo-600 rounded-full -bottom-1 -right-1 animate-ping"></div>
@@ -89,8 +89,8 @@
                                     <p class="text-xs sm:text-sm text-gray-500">Moyenne</p>
                                     <p class="text-xl sm:text-2xl font-bold text-gray-900">{{ $moyenneGenerale ? number_format($moyenneGenerale, 2) : '-' }}</p>
                                 </div>
-                                <div class="p-2 sm:p-3 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 animate-float">
-                                    <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="p-2 sm:p-3 rounded-lg bg-blue-900 animate-float">
+                                    <svg class="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                                     </svg>
                                 </div>
@@ -99,7 +99,7 @@
                     </div>
                     <!-- Face arrière -->
                     <div class="absolute inset-0 backface-hidden rotate-y-180">
-                        <div class="flex items-center justify-center h-full p-5 shadow-lg bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl">
+                        <div class="flex items-center justify-center h-full p-5 shadow-lg bg-blue-900 rounded-xl">
                             <p class="font-semibold text-white text-sm sm:text-base text-center">Performance globale</p>
                         </div>
                     </div>
@@ -115,8 +115,8 @@
                                     <p class="text-xs sm:text-sm text-gray-500">Notes</p>
                                     <p class="text-xl sm:text-2xl font-bold text-gray-900">{{ $notes->count() }}</p>
                                 </div>
-                                <div class="p-2 sm:p-3 rounded-lg bg-gradient-to-br from-green-500 to-green-600 animate-float animation-delay-200">
-                                    <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="p-2 sm:p-3 rounded-lg bg-blue-900 animate-float animation-delay-200">
+                                    <svg class="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                     </svg>
                                 </div>
@@ -124,7 +124,7 @@
                         </div>
                     </div>
                     <div class="absolute inset-0 backface-hidden rotate-y-180">
-                        <div class="flex items-center justify-center h-full p-5 shadow-lg bg-gradient-to-br from-green-500 to-green-600 rounded-xl">
+                        <div class="flex items-center justify-center h-full p-5 shadow-lg bg-blue-900 rounded-xl">
                             <p class="font-semibold text-white text-sm sm:text-base text-center">{{ $notes->count() }} notes</p>
                         </div>
                     </div>
@@ -140,8 +140,8 @@
                                     <p class="text-xs sm:text-sm text-gray-500">Absences</p>
                                     <p class="text-xl sm:text-2xl font-bold text-gray-900">{{ $absences->count() }}</p>
                                 </div>
-                                <div class="p-2 sm:p-3 rounded-lg bg-gradient-to-br from-red-500 to-red-600 animate-float animation-delay-400">
-                                    <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="p-2 sm:p-3 rounded-lg bg-blue-900 animate-float animation-delay-400">
+                                    <svg class="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
                                     </svg>
                                 </div>
@@ -149,7 +149,7 @@
                         </div>
                     </div>
                     <div class="absolute inset-0 backface-hidden rotate-y-180">
-                        <div class="flex items-center justify-center h-full p-5 shadow-lg bg-gradient-to-br from-red-500 to-red-600 rounded-xl">
+                        <div class="flex items-center justify-center h-full p-5 shadow-lg bg-blue-900 rounded-xl">
                             <p class="font-semibold text-white text-sm sm:text-base text-center">{{ $absencesNonJustifiees }} non justifiées</p>
                         </div>
                     </div>
@@ -165,8 +165,8 @@
                                     <p class="text-xs sm:text-sm text-gray-500">Bulletins</p>
                                     <p class="text-xl sm:text-2xl font-bold text-gray-900">{{ $bulletins->count() }}</p>
                                 </div>
-                                <div class="p-2 sm:p-3 rounded-lg bg-gradient-to-br from-purple-500 to-purple-600 animate-float animation-delay-600">
-                                    <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="p-2 sm:p-3 rounded-lg bg-blue-900 animate-float animation-delay-600">
+                                    <svg class="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                     </svg>
                                 </div>
@@ -174,7 +174,7 @@
                         </div>
                     </div>
                     <div class="absolute inset-0 backface-hidden rotate-y-180">
-                        <div class="flex items-center justify-center h-full p-5 shadow-lg bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl">
+                        <div class="flex items-center justify-center h-full p-5 shadow-lg bg-blue-900 rounded-xl">
                             <p class="font-semibold text-white text-sm sm:text-base text-center">{{ $bulletins->count() }} bulletins</p>
                         </div>
                     </div>
@@ -188,7 +188,7 @@
             <div class="space-y-6">
                 <!-- Dernier bulletin avec effet de carte premium -->
                 <div class="overflow-hidden transition-all duration-500 transform bg-white border border-gray-100 shadow-xl rounded-2xl hover:shadow-2xl hover:-translate-y-1">
-                    <div class="relative px-4 sm:px-6 py-4 overflow-hidden bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600">
+                    <div class="relative px-4 sm:px-6 py-4 overflow-hidden bg-blue-900">
                         <div class="absolute inset-0 transition-transform duration-700 transform translate-x-full -skew-x-12 bg-white/10 group-hover:translate-x-0"></div>
                         <div class="flex items-center justify-between">
                             <h3 class="flex items-center text-base sm:text-lg font-semibold text-white flex-wrap gap-2">
@@ -196,7 +196,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                 </svg>
                                 Dernier bulletin
-                                <span class="px-3 py-1 text-xs font-medium text-indigo-600 rounded-full bg-white/20 backdrop-blur-sm animate-pulse">
+                                <span class="px-3 py-1 text-xs font-medium text-blue-900 rounded-full bg-white/20 backdrop-blur-sm animate-pulse">
                                     {{ $bulletinCourant->periode ?? 'N/A' }}
                                 </span>
                             </h3>
@@ -209,8 +209,8 @@
                         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                             <div class="flex items-center space-x-4">
                                 <div class="relative group flex-shrink-0">
-                                    <div class="absolute inset-0 transition-opacity opacity-50 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl blur-lg group-hover:opacity-75"></div>
-                                    <div class="relative flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 transition-transform transform bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl group-hover:scale-110">
+                                    <div class="absolute inset-0 transition-opacity opacity-50 bg-blue-900 rounded-2xl blur-lg group-hover:opacity-75"></div>
+                                    <div class="relative flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 transition-transform transform bg-blue-900 rounded-2xl group-hover:scale-110">
                                         <span class="text-2xl sm:text-3xl font-bold text-white animate-count">{{ number_format($bulletinCourant->moyenne_generale ?? 0, 1) }}</span>
                                     </div>
                                 </div>
@@ -218,7 +218,7 @@
                                     <div class="flex items-center space-x-4">
                                         <div class="transition-all transform hover:scale-110">
                                             <span class="text-xs text-gray-400">Rang</span>
-                                            <p class="font-semibold text-indigo-600">{{ $bulletinCourant->rang ?? '-' }}{{ $bulletinCourant->rang ? 'ème' : '' }}</p>
+                                            <p class="font-semibold text-blue-900">{{ $bulletinCourant->rang ?? '-' }}{{ $bulletinCourant->rang ? 'ème' : '' }}</p>
                                         </div>
                                         <div class="transition-all transform hover:scale-110">
                                             <span class="text-xs text-gray-400">Moy. classe</span>
@@ -234,7 +234,7 @@
                             </div>
                         </div>
                         @if($bulletinCourant->appreciation)
-                        <div class="p-3 sm:p-4 mt-4 border-l-4 border-indigo-500 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl animate-slide-right">
+                        <div class="p-3 sm:p-4 mt-4 border-l-4 border-blue-900 bg-blue-900 rounded-xl animate-slide-right">
                             <p class="text-sm italic text-gray-600">"{{ $bulletinCourant->appreciation }}"</p>
                         </div>
                         @endif
@@ -250,7 +250,7 @@
                         </div>
                         @endif
                         <div class="mt-4 text-right">
-                            <a href="{{ route('eleve.bulletin') }}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white transition-all transform rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 hover:scale-105 group">
+                            <a href="{{ route('eleve.bulletin') }}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white transition-all transform rounded-lg bg-blue-900 hover:from-indigo-600 hover:to-purple-700 hover:scale-105 group">
                                 Voir tous les bulletins
                                 <svg class="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -265,7 +265,7 @@
             <div class="space-y-6">
                 <!-- Dernières notes avec animations -->
                 <div class="overflow-hidden transition-all duration-500 transform bg-white border border-gray-100 shadow-xl rounded-2xl hover:shadow-2xl hover:-translate-y-1">
-                    <div class="flex items-center justify-between px-4 sm:px-6 py-4 bg-gradient-to-r from-green-600 to-emerald-600">
+                    <div class="flex items-center justify-between px-4 sm:px-6 py-4 bg-blue-900">
                         <h3 class="flex items-center text-base sm:text-lg font-semibold text-white">
                             <svg class="w-5 h-5 mr-2 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
@@ -288,8 +288,8 @@
                                 $noteValue = $note->note ?? $note->valeur ?? 0;
                                 $colors = [
                                     ['bg' => 'from-green-500 to-green-600', 'text' => 'text-green-600', 'bg-light' => 'bg-green-50'],
-                                    ['bg' => 'from-blue-500 to-blue-600', 'text' => 'text-blue-600', 'bg-light' => 'bg-blue-50'],
-                                    ['bg' => 'from-purple-500 to-purple-600', 'text' => 'text-purple-600', 'bg-light' => 'bg-purple-50'],
+                                    ['bg' => 'from-blue-500 to-blue-600', 'text' => 'text-blue-900', 'bg-light' => 'bg-blue-50'],
+                                    ['bg' => 'from-purple-500 to-purple-600', 'text' => 'text-yellow-600', 'bg-light' => 'bg-purple-50'],
                                 ];
                                 $colorIndex = $index % 3;
                             @endphp
@@ -332,7 +332,7 @@
 
         <!-- Emploi du temps avec design moderne -->
         <div class="overflow-hidden transition-all duration-500 transform bg-white border border-gray-100 shadow-xl rounded-2xl hover:shadow-2xl hover:-translate-y-1">
-            <div class="flex items-center justify-between px-4 sm:px-6 py-4 bg-gradient-to-r from-indigo-600 to-blue-600">
+            <div class="flex items-center justify-between px-4 sm:px-6 py-4 bg-blue-900">
                 <h3 class="flex items-center text-base sm:text-lg font-semibold text-white">
                     <svg class="w-5 h-5 mr-2 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
@@ -361,8 +361,8 @@
                             @foreach($emploiDuTemps as $index => $edt)
                             <tr class="transition-colors hover:bg-gray-50 animate-slide-up" style="animation-delay: {{ $index * 50 }}ms">
                                 <td class="px-2 py-2 sm:px-4 sm:py-3">
-                                    <span class="inline-flex items-center px-2 py-1 sm:px-3 text-xs sm:text-sm font-medium text-indigo-700 bg-indigo-100 rounded-full">
-                                        <span class="w-2 h-2 mr-1 sm:mr-2 bg-indigo-600 rounded-full animate-pulse flex-shrink-0"></span>
+                                    <span class="inline-flex items-center px-2 py-1 sm:px-3 text-xs sm:text-sm font-medium text-blue-900 bg-blue-100 rounded-full">
+                                        <span class="w-2 h-2 mr-1 sm:mr-2 bg-blue-900 rounded-full animate-pulse flex-shrink-0"></span>
                                         {{ $edt->jour }}
                                     </span>
                                 </td>

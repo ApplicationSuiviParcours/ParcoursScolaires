@@ -4,8 +4,8 @@
     <div class="mb-3 text-center">
         <div class="relative inline-flex items-center justify-center mb-2">
             <div class="absolute inset-0 bg-blue-100 rounded-full animate-ping opacity-20"></div>
-            <div class="relative inline-flex items-center justify-center rounded-full shadow-lg w-11 h-11 bg-gradient-to-br from-blue-800 to-blue-600">
-                <svg class="text-white w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="relative inline-flex items-center justify-center rounded-full shadow-lg w-11 h-11 bg-blue-900">
+                <svg class="text-yellow-500 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                 </svg>
             </div>
@@ -75,7 +75,7 @@
                     placeholder="Entrez votre mot de passe"
                 >
                 <button type="button" @click="showPassword = !showPassword"
-                    class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-blue-600 focus:outline-none">
+                    class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-blue-900 focus:outline-none">
                     <svg x-show="!showPassword" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -90,25 +90,25 @@
 
         <!-- Se souvenir de moi -->
         <div class="flex items-center">
-            <input id="remember_me" type="checkbox" name="remember" class="h-3.5 w-3.5 text-blue-600 border-gray-300 rounded focus:ring-blue-500 cursor-pointer">
+            <input id="remember_me" type="checkbox" name="remember" class="h-3.5 w-3.5 text-blue-900 border-gray-300 rounded focus:ring-blue-500 cursor-pointer">
             <label for="remember_me" class="ml-2 block text-xs font-medium text-gray-600 cursor-pointer select-none">
                 Se souvenir de moi
             </label>
         </div>
 
         <!-- Bouton Se Connecter -->
-        <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-lg text-sm font-semibold text-white bg-gradient-to-r from-blue-800 to-blue-600 hover:from-blue-900 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-150 shadow-md hover:shadow-lg">
+        <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-lg text-sm font-semibold text-white bg-blue-900 hover:from-blue-900 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-150 shadow-md hover:shadow-lg">
             Se Connecter
         </button>
 
         <!-- Liens bas de formulaire -->
         <div class="flex items-center justify-between pt-1.5 border-t border-gray-100">
             @if (Route::has('password.request'))
-                <a class="text-xs font-medium text-blue-600 hover:text-blue-800 hover:underline" href="{{ route('password.request') }}">
+                <a class="text-xs font-medium text-blue-900 hover:text-blue-800 hover:underline" href="{{ route('password.request') }}">
                     Mot de passe oublié ?
                 </a>
             @endif
-            <a href="{{ route('login') }}" class="text-xs font-medium text-gray-500 hover:text-blue-600 hover:underline">
+            <a href="{{ route('login') }}" class="text-xs font-medium text-gray-500 hover:text-blue-900 hover:underline">
                 Retour &rsaquo;
             </a>
         </div>

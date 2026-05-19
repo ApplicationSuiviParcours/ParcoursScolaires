@@ -3,7 +3,7 @@
 @section('title', 'Centre de Messages')
 
 @section('header')
-<div class="relative overflow-hidden bg-gradient-to-br from-violet-600 via-purple-700 to-indigo-800 py-8 md:py-12">
+<div class="relative overflow-hidden bg-blue-900 py-8 md:py-12">
     <div class="absolute inset-0 opacity-10">
         <div class="absolute -top-24 -right-24 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-pulse"></div>
         <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-purple-300 rounded-full mix-blend-overlay filter blur-3xl animate-pulse delay-700"></div>
@@ -55,7 +55,7 @@
         {{-- Formulaire d'envoi --}}
         <div class="lg:col-span-2">
             <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-                <div class="bg-gradient-to-r from-violet-600 to-purple-700 px-6 py-4 flex items-center gap-3">
+                <div class="bg-blue-900 px-6 py-4 flex items-center gap-3">
                     <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
                         <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
                     </div>
@@ -77,7 +77,7 @@
                                     'tous_parents'     => ['label' => 'Tous les parents',     'icon' => '👨‍👩‍👧‍👦', 'count' => $stats['parents'],     'color' => 'border-green-300 bg-green-50 text-green-700'],
                                     'tous_enseignants' => ['label' => 'Tous enseignants',      'icon' => '🎓',      'count' => $stats['enseignants'], 'color' => 'border-blue-300 bg-blue-50 text-blue-700'],
                                     'classe'           => ['label' => 'Parents d\'une classe', 'icon' => '🏫',      'count' => null,                 'color' => 'border-amber-300 bg-amber-50 text-amber-700'],
-                                    'utilisateur'      => ['label' => 'Utilisateur précis',   'icon' => '👤',      'count' => null,                 'color' => 'border-purple-300 bg-purple-50 text-purple-700'],
+                                    'utilisateur'      => ['label' => 'Utilisateur précis',   'icon' => '👤',      'count' => null,                 'color' => 'border-purple-300 bg-purple-50 text-blue-900'],
                                 ];
                             @endphp
                             @foreach($destinataires as $value => $dest)
@@ -97,7 +97,7 @@
                     {{-- Sélecteur conditionnel classe --}}
                     <div id="classe-selector" class="hidden">
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Classe *</label>
-                        <select name="classe_id" class="w-full rounded-xl border-2 border-gray-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 px-4 py-2.5 text-sm">
+                        <select name="classe_id" class="w-full rounded-xl border-2 border-gray-200 focus:border-blue-900 focus:ring-2 focus:ring-purple-200 px-4 py-2.5 text-sm">
                             <option value="">— Choisir une classe —</option>
                             @foreach($classes as $classe)
                                 <option value="{{ $classe->id }}">{{ $classe->nom_complet }}</option>
@@ -108,7 +108,7 @@
                     {{-- Sélecteur conditionnel utilisateur --}}
                     <div id="user-selector" class="hidden">
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Utilisateur *</label>
-                        <select name="user_id" class="w-full rounded-xl border-2 border-gray-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 px-4 py-2.5 text-sm">
+                        <select name="user_id" class="w-full rounded-xl border-2 border-gray-200 focus:border-blue-900 focus:ring-2 focus:ring-purple-200 px-4 py-2.5 text-sm">
                             <option value="">— Choisir un utilisateur —</option>
                             @foreach($users as $user)
                                 <option value="{{ $user->id }}">{{ $user->name }} ({{ $user->getRoleNamesAttribute() }})</option>
@@ -135,7 +135,7 @@
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Titre *</label>
                         <input type="text" name="titre" value="{{ old('titre') }}" required maxlength="255"
                                placeholder="Ex: Réunion parents le 15 janvier..."
-                               class="w-full rounded-xl border-2 border-gray-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 px-4 py-2.5 text-sm transition-all duration-200">
+                               class="w-full rounded-xl border-2 border-gray-200 focus:border-blue-900 focus:ring-2 focus:ring-purple-200 px-4 py-2.5 text-sm transition-all duration-200">
                         @error('titre') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                     </div>
 
@@ -144,7 +144,7 @@
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Message *</label>
                         <textarea name="message" rows="4" required maxlength="1000"
                                   placeholder="Rédigez votre message ici..."
-                                  class="w-full rounded-xl border-2 border-gray-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 px-4 py-2.5 text-sm transition-all duration-200 resize-none">{{ old('message') }}</textarea>
+                                  class="w-full rounded-xl border-2 border-gray-200 focus:border-blue-900 focus:ring-2 focus:ring-purple-200 px-4 py-2.5 text-sm transition-all duration-200 resize-none">{{ old('message') }}</textarea>
                         @error('message') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                         <p class="text-xs text-gray-400 mt-1">Maximum 1000 caractères</p>
                     </div>
@@ -154,13 +154,13 @@
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Lien (optionnel)</label>
                         <input type="url" name="lien" value="{{ old('lien') }}"
                                placeholder="https://... (lien vers une page de l'application)"
-                               class="w-full rounded-xl border-2 border-gray-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 px-4 py-2.5 text-sm transition-all duration-200">
+                               class="w-full rounded-xl border-2 border-gray-200 focus:border-blue-900 focus:ring-2 focus:ring-purple-200 px-4 py-2.5 text-sm transition-all duration-200">
                     </div>
 
                     {{-- Bouton --}}
                     <div class="pt-2">
                         <button type="submit"
-                                class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-violet-600 to-purple-700 hover:from-violet-700 hover:to-purple-800 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-purple-300">
+                                class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-900 hover:from-violet-700 hover:to-purple-800 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-purple-300">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
                             Envoyer la notification
                         </button>
@@ -174,7 +174,7 @@
 
             {{-- Stats --}}
             <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-                <div class="bg-gradient-to-r from-violet-500 to-purple-600 px-5 py-3">
+                <div class="bg-blue-900 px-5 py-3">
                     <h3 class="text-sm font-bold text-white flex items-center gap-2">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
                         Statistiques
@@ -187,11 +187,11 @@
                     </div>
                     <div class="text-center p-3 bg-blue-50 rounded-xl">
                         <p class="text-2xl font-bold text-blue-700">{{ $stats['enseignants'] }}</p>
-                        <p class="text-xs text-blue-600 font-medium">Enseignants</p>
+                        <p class="text-xs text-blue-900 font-medium">Enseignants</p>
                     </div>
                     <div class="text-center p-3 bg-purple-50 rounded-xl">
-                        <p class="text-2xl font-bold text-purple-700">{{ $stats['total_notifs'] }}</p>
-                        <p class="text-xs text-purple-600 font-medium">Notifs envoyées</p>
+                        <p class="text-2xl font-bold text-blue-900">{{ $stats['total_notifs'] }}</p>
+                        <p class="text-xs text-yellow-600 font-medium">Notifs envoyées</p>
                     </div>
                     <div class="text-center p-3 bg-amber-50 rounded-xl">
                         <p class="text-2xl font-bold text-amber-700">{{ $stats['non_lues'] }}</p>
@@ -202,7 +202,7 @@
 
             {{-- Guide --}}
             <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-                <div class="bg-gradient-to-r from-indigo-500 to-blue-600 px-5 py-3">
+                <div class="bg-blue-900 px-5 py-3">
                     <h3 class="text-sm font-bold text-white flex items-center gap-2">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                         Guide d'utilisation
@@ -229,7 +229,7 @@
             </div>
 
             {{-- Notifications automatiques --}}
-            <div class="bg-gradient-to-br from-emerald-50 to-green-50 rounded-2xl border border-emerald-200 p-5">
+            <div class="bg-blue-900 rounded-2xl border border-emerald-200 p-5">
                 <h3 class="text-sm font-bold text-emerald-800 mb-3 flex items-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                     Notifications automatiques actives

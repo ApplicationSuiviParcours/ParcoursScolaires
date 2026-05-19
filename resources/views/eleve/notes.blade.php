@@ -12,7 +12,7 @@
         
         <!-- Header avec animation améliorée -->
         <div class="relative mb-6 overflow-hidden group sm:mb-8 rounded-xl sm:rounded-2xl">
-            <div class="absolute inset-0 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 animate-gradient-x"></div>
+            <div class="absolute inset-0 bg-blue-900 animate-gradient-x"></div>
             <div class="absolute inset-0 opacity-20">
                 <div class="absolute bg-white rounded-full w-64 h-64 sm:w-96 sm:h-96 -top-48 -right-48 blur-3xl animate-pulse-slow"></div>
                 <div class="absolute bg-yellow-300 rounded-full w-64 h-64 sm:w-96 sm:h-96 -bottom-48 -left-48 blur-3xl animate-pulse-slow animation-delay-2000"></div>
@@ -64,8 +64,8 @@
                                     </p>
                                     <p class="mt-1 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl animate-count truncate">{{ $stats['total_notes'] }}</p>
                                 </div>
-                                <div class="flex-shrink-0 ml-3 p-2 shadow-lg sm:p-3 md:p-4 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl animate-float">
-                                    <svg class="w-5 h-5 text-white sm:w-6 sm:h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="flex-shrink-0 ml-3 p-2 shadow-lg sm:p-3 md:p-4 bg-blue-900 rounded-xl animate-float">
+                                    <svg class="w-5 h-5 text-yellow-500 sm:w-6 sm:h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                     </svg>
                                 </div>
@@ -74,8 +74,8 @@
                     </div>
                     <!-- Face arrière -->
                     <div class="absolute inset-0 backface-hidden rotate-y-180">
-                        <div class="flex flex-col items-center justify-center h-full p-4 shadow-xl sm:p-6 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl sm:rounded-2xl">
-                            <svg class="w-8 h-8 mb-2 text-white sm:w-10 sm:h-10 md:w-12 md:h-12 sm:mb-3 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex flex-col items-center justify-center h-full p-4 shadow-xl sm:p-6 bg-blue-900 rounded-xl sm:rounded-2xl">
+                            <svg class="w-8 h-8 mb-2 text-yellow-500 sm:w-10 sm:h-10 md:w-12 md:h-12 sm:mb-3 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                             </svg>
                             <p class="text-sm font-bold text-center text-white sm:text-base md:text-lg">Total des notes<br>enregistrées</p>
@@ -100,8 +100,8 @@
                                         <span class="ml-1 text-sm text-gray-400 sm:text-base md:text-lg">/20</span>
                                     </p>
                                 </div>
-                                <div class="flex-shrink-0 ml-3 p-2 shadow-lg sm:p-3 md:p-4 bg-gradient-to-br from-green-500 to-green-600 rounded-xl animate-float animation-delay-200">
-                                    <svg class="w-5 h-5 text-white sm:w-6 sm:h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="flex-shrink-0 ml-3 p-2 shadow-lg sm:p-3 md:p-4 bg-blue-900 rounded-xl animate-float animation-delay-200">
+                                    <svg class="w-5 h-5 text-yellow-500 sm:w-6 sm:h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
                                     </svg>
                                 </div>
@@ -109,8 +109,8 @@
                         </div>
                     </div>
                     <div class="absolute inset-0 backface-hidden rotate-y-180">
-                        <div class="flex flex-col items-center justify-center h-full p-4 shadow-xl sm:p-6 bg-gradient-to-br from-green-500 to-green-600 rounded-xl sm:rounded-2xl">
-                            <svg class="w-8 h-8 mb-2 text-white sm:w-10 sm:h-10 md:w-12 md:h-12 sm:mb-3 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex flex-col items-center justify-center h-full p-4 shadow-xl sm:p-6 bg-blue-900 rounded-xl sm:rounded-2xl">
+                            <svg class="w-8 h-8 mb-2 text-yellow-500 sm:w-10 sm:h-10 md:w-12 md:h-12 sm:mb-3 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                             </svg>
                             <p class="text-sm font-bold text-center text-white sm:text-base md:text-lg">Performance<br>globale</p>
@@ -127,7 +127,7 @@
                             <div class="flex items-center justify-between">
                                 <div class="flex-1 min-w-0">
                                     <p class="flex items-center text-xs font-medium text-gray-500 sm:text-sm">
-                                        <span class="w-1.5 h-1.5 mr-1 bg-purple-500 rounded-full animate-pulse animation-delay-400 sm:w-2 sm:h-2 sm:mr-2"></span>
+                                        <span class="w-1.5 h-1.5 mr-1 bg-blue-800 rounded-full animate-pulse animation-delay-400 sm:w-2 sm:h-2 sm:mr-2"></span>
                                         Meilleure note
                                     </p>
                                     <p class="mt-1 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl truncate">
@@ -135,8 +135,8 @@
                                         <span class="ml-1 text-sm text-gray-400 sm:text-base md:text-lg">/20</span>
                                     </p>
                                 </div>
-                                <div class="flex-shrink-0 ml-3 p-2 shadow-lg sm:p-3 md:p-4 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl animate-float animation-delay-400">
-                                    <svg class="w-5 h-5 text-white sm:w-6 sm:h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="flex-shrink-0 ml-3 p-2 shadow-lg sm:p-3 md:p-4 bg-blue-900 rounded-xl animate-float animation-delay-400">
+                                    <svg class="w-5 h-5 text-yellow-500 sm:w-6 sm:h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
                                     </svg>
                                 </div>
@@ -144,8 +144,8 @@
                         </div>
                     </div>
                     <div class="absolute inset-0 backface-hidden rotate-y-180">
-                        <div class="flex flex-col items-center justify-center h-full p-4 shadow-xl sm:p-6 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl sm:rounded-2xl">
-                            <svg class="w-8 h-8 mb-2 text-white sm:w-10 sm:h-10 md:w-12 md:h-12 sm:mb-3 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex flex-col items-center justify-center h-full p-4 shadow-xl sm:p-6 bg-blue-900 rounded-xl sm:rounded-2xl">
+                            <svg class="w-8 h-8 mb-2 text-yellow-500 sm:w-10 sm:h-10 md:w-12 md:h-12 sm:mb-3 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
                             </svg>
                             <p class="text-sm font-bold text-center text-white sm:text-base md:text-lg">Ta meilleure<br>performance</p>
@@ -159,7 +159,7 @@
         <div class="mb-6 overflow-hidden transition-all duration-500 transform bg-white border border-gray-100 shadow-xl sm:mb-8 rounded-xl sm:rounded-2xl hover:shadow-2xl animate-fade-in-up">
             <div class="p-4 border-b border-gray-100 sm:p-6 bg-gradient-to-r from-gray-50 to-white">
                 <h3 class="flex items-center text-base font-semibold text-gray-900 sm:text-lg">
-                    <svg class="w-4 h-4 mr-1 text-blue-600 sm:w-5 sm:h-5 sm:mr-2 animate-spin-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-4 h-4 mr-1 text-blue-900 sm:w-5 sm:h-5 sm:mr-2 animate-spin-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
                     </svg>
                     Filtrer les notes
@@ -228,7 +228,7 @@
                             </svg>
                             Réinitialiser
                         </a>
-                        <button type="submit" class="flex items-center justify-center px-4 py-2 text-sm font-semibold text-white transition-all duration-300 transform bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg sm:px-6 sm:py-3 sm:text-base hover:from-blue-600 hover:to-blue-700 hover:scale-105 hover:shadow-lg group">
+                        <button type="submit" class="flex items-center justify-center px-4 py-2 text-sm font-semibold text-white transition-all duration-300 transform bg-blue-900 rounded-lg sm:px-6 sm:py-3 sm:text-base hover:from-blue-600 hover:to-blue-700 hover:scale-105 hover:shadow-lg group">
                             <svg class="w-4 h-4 mr-1 transition-all duration-500 sm:w-5 sm:h-5 sm:mr-2 group-hover:animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                             </svg>
@@ -241,7 +241,7 @@
 
         <!-- Tableau des notes -->
         <div class="overflow-hidden transition-all duration-500 transform bg-white border border-gray-100 shadow-xl rounded-xl sm:rounded-2xl hover:shadow-2xl animate-fade-in-up animation-delay-200">
-            <div class="p-4 bg-gradient-to-r from-indigo-600 to-blue-600 sm:p-6">
+            <div class="p-4 bg-blue-900 sm:p-6">
                 <div class="flex flex-col items-start justify-between space-y-2 sm:flex-row sm:items-center sm:space-y-0">
                     <h3 class="flex items-center text-base font-semibold text-white sm:text-lg">
                         <svg class="w-4 h-4 mr-1 sm:w-5 sm:h-5 sm:mr-2 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -288,7 +288,7 @@
                                 @endphp
                                 <tr class="{{ $bgColor }} hover:bg-blue-50/50 transition-all duration-300 transform hover:scale-102 hover:shadow-md animate-slide-up" style="animation-delay: {{ $index * 50 }}ms">
                                     <td class="px-2 py-2 whitespace-nowrap sm:px-3 sm:py-3 md:px-4 md:py-4">
-                                        <span class="inline-flex items-center px-1.5 py-0.5 text-xs font-medium text-indigo-700 bg-indigo-100 rounded-full sm:px-2 sm:py-1 md:px-3 md:py-1">
+                                        <span class="inline-flex items-center px-1.5 py-0.5 text-xs font-medium text-blue-900 bg-blue-100 rounded-full sm:px-2 sm:py-1 md:px-3 md:py-1">
                                             <svg class="w-2 h-2 mr-0.5 sm:w-2.5 sm:h-2.5 sm:mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                             </svg>
@@ -297,14 +297,14 @@
                                     </td>
                                     <td class="px-2 py-2 whitespace-nowrap sm:px-3 sm:py-3 md:px-4 md:py-4">
                                         <div class="flex items-center">
-                                            <div class="flex items-center justify-center w-5 h-5 mr-1 rounded-lg shadow-md sm:w-6 sm:h-6 sm:mr-2 md:w-8 md:h-8 md:mr-3 bg-gradient-to-br from-blue-500 to-indigo-600">
+                                            <div class="flex items-center justify-center w-5 h-5 mr-1 rounded-lg shadow-md sm:w-6 sm:h-6 sm:mr-2 md:w-8 md:h-8 md:mr-3 bg-blue-900">
                                                 <span class="text-[10px] font-bold text-white sm:text-xs md:text-sm">{{ substr($note->evaluation->matiere->nom ?? 'M', 0, 2) }}</span>
                                             </div>
                                             <span class="text-xs font-medium text-gray-900 sm:text-sm truncate max-w-[80px] sm:max-w-none">{{ optional($note->evaluation->matiere)->nom ?? '-' }}</span>
                                         </div>
                                     </td>
                                     <td class="px-2 py-2 whitespace-nowrap sm:px-3 sm:py-3 md:px-4 md:py-4">
-                                        <span class="px-1.5 py-0.5 text-xs font-medium text-purple-600 bg-purple-100 rounded-full sm:px-2 sm:py-1 md:px-3">
+                                        <span class="px-1.5 py-0.5 text-xs font-medium text-yellow-600 bg-blue-100 rounded-full sm:px-2 sm:py-1 md:px-3">
                                             {{ $note->evaluation->type ?? '-' }}
                                         </span>
                                     </td>
@@ -383,7 +383,7 @@
         @endphp
 
         <div class="mt-6 overflow-hidden transition-all duration-500 transform bg-white border border-gray-100 shadow-xl sm:mt-8 rounded-xl sm:rounded-2xl hover:shadow-2xl animate-fade-in-up animation-delay-400">
-            <div class="p-4 bg-gradient-to-r from-purple-600 to-pink-600 sm:p-6">
+            <div class="p-4 bg-blue-900 sm:p-6">
                 <div class="flex items-center justify-between">
                     <h3 class="flex items-center text-base font-semibold text-white sm:text-lg">
                         <svg class="w-4 h-4 mr-1 sm:w-5 sm:h-5 sm:mr-2 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">

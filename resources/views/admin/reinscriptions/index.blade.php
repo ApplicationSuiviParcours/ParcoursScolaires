@@ -3,7 +3,7 @@
 @section('title', 'Gestion des réinscriptions')
 
 @section('header')
-    <div class="relative overflow-hidden bg-gradient-to-br from-indigo-900 via-indigo-800 to-purple-900 py-6 sm:py-10 md:py-16 overflow-x-hidden">
+    <div class="relative overflow-hidden bg-blue-900 py-6 sm:py-10 md:py-16 overflow-x-hidden">
         <!-- Arrière-plan animé -->
         <div class="absolute inset-0 opacity-10">
             <div
@@ -70,13 +70,13 @@
                 <div
                     class="relative bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden">
                     <div
-                        class="absolute inset-0 bg-gradient-to-br from-blue-500 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        class="absolute inset-0 bg-blue-900 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     </div>
                     <div class="relative p-3 sm:p-4 md:p-5 lg:p-6">
                         <div class="flex items-center justify-between mb-2 sm:mb-3 md:mb-4">
                             <div
                                 class="w-9 h-9 sm:w-10 sm:h-10 md:w-11 md:h-11 lg:w-12 lg:h-12 bg-blue-100 rounded-lg sm:rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:bg-white/20 transition-all duration-300">
-                                <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-blue-600 group-hover:text-white transition-colors duration-300"
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-blue-900 group-hover:text-white transition-colors duration-300"
                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -93,7 +93,7 @@
                                 class="text-[10px] sm:text-xs font-medium text-green-500 group-hover:text-white/70 transition-colors duration-300">+12%</span>
                         </div>
                         <div class="mt-2 sm:mt-3 md:mt-4 h-1.5 bg-gray-200 rounded-full overflow-hidden">
-                            <div class="h-full bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full animate-progress"
+                            <div class="h-full bg-blue-900 rounded-full animate-progress"
                                 style="width: 75%"></div>
                         </div>
                     </div>
@@ -105,7 +105,7 @@
                 <div
                     class="relative bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden">
                     <div
-                        class="absolute inset-0 bg-gradient-to-br from-green-500 to-emerald-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        class="absolute inset-0 bg-blue-900 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     </div>
                     <div class="relative p-3 sm:p-4 md:p-5 lg:p-6">
                         <div class="flex items-center justify-between mb-2 sm:mb-3 md:mb-4">
@@ -124,7 +124,7 @@
                         <p class="text-[10px] sm:text-xs text-gray-500 group-hover:text-white/70 transition-colors duration-300">Confirmées
                         </p>
                         <div
-                            class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-green-500 to-emerald-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left">
+                            class="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-900 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left">
                         </div>
                     </div>
                 </div>
@@ -135,7 +135,7 @@
                 <div
                     class="relative bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden">
                     <div
-                        class="absolute inset-0 bg-gradient-to-br from-yellow-500 to-amber-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        class="absolute inset-0 bg-blue-900 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     </div>
                     <div class="relative p-3 sm:p-4 md:p-5 lg:p-6">
                         <div class="flex items-center justify-between mb-2 sm:mb-3 md:mb-4">
@@ -169,7 +169,7 @@
                 <div
                     class="relative bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden">
                     <div
-                        class="absolute inset-0 bg-gradient-to-br from-red-500 to-rose-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        class="absolute inset-0 bg-blue-900 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     </div>
                     <div class="relative p-3 sm:p-4 md:p-5 lg:p-6">
                         <div class="flex items-center justify-between mb-2 sm:mb-3 md:mb-4">
@@ -203,19 +203,19 @@
         {{-- ── FILTRES ──────────────────────────────────────────────────── --}}
         <div class="bg-white rounded-xl sm:rounded-2xl md:rounded-3xl shadow-xl mb-6 sm:mb-8 md:mb-10 overflow-hidden transition-all duration-500 hover:shadow-2xl"
             x-data="{ open: true }">
-            <div class="bg-gradient-to-r from-gray-50 to-gray-100 px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4 md:py-5 border-b border-gray-200 flex items-center justify-between cursor-pointer"
+            <div class="bg-blue-900 px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4 md:py-5 border-b border-gray-200 flex items-center justify-between cursor-pointer"
                 @click="open = !open">
                 <div class="flex items-center space-x-1.5 sm:space-x-2 md:space-x-3 min-w-0">
                     <div
-                        class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 bg-indigo-100 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
-                        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-indigo-600" fill="none" stroke="currentColor"
+                        class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 bg-blue-100 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
+                        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-blue-900" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
                         </svg>
                     </div>
                     <h2 class="text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-gray-800 truncate">Filtres avancés</h2>
-                    <span class="px-1.5 py-0.5 sm:px-2 sm:py-1 bg-indigo-100 text-indigo-700 text-[9px] sm:text-xs font-medium rounded-full flex-shrink-0">3
+                    <span class="px-1.5 py-0.5 sm:px-2 sm:py-1 bg-blue-100 text-blue-900 text-[9px] sm:text-xs font-medium rounded-full flex-shrink-0">3
                         actifs</span>
                 </div>
                 <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-gray-500 transform transition-transform duration-300 flex-shrink-0 ml-2"
@@ -237,7 +237,7 @@
                         <!-- Recherche -->
                         <div class="group">
                             <label
-                                class="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2 group-hover:text-indigo-600 transition-colors duration-300">Recherche</label>
+                                class="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2 group-hover:text-blue-900 transition-colors duration-300">Recherche</label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-2 sm:pl-2.5 md:pl-3 flex items-center pointer-events-none">
                                     <svg class="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5 text-gray-400 group-hover:text-indigo-500 transition-colors duration-300"
@@ -248,7 +248,7 @@
                                 </div>
                                 <input type="text" name="search" value="{{ request('search') }}"
                                     placeholder="Nom, prénom, matricule..." class="w-full pl-7 sm:pl-8 md:pl-9 lg:pl-10 pr-3 sm:pr-4 py-1.5 sm:py-2 md:py-2.5 lg:py-3 rounded-lg sm:rounded-xl border-2 border-gray-200
-                                              focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200
+                                              focus:border-blue-900 focus:ring-2 focus:ring-indigo-200
                                               transition-all duration-300 group-hover:border-indigo-300 text-xs sm:text-sm">
                             </div>
                         </div>
@@ -256,7 +256,7 @@
                         <!-- Année scolaire -->
                         <div class="group">
                             <label
-                                class="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2 group-hover:text-indigo-600 transition-colors duration-300">Année
+                                class="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2 group-hover:text-blue-900 transition-colors duration-300">Année
                                 scolaire</label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-2 sm:pl-2.5 md:pl-3 flex items-center pointer-events-none">
@@ -268,7 +268,7 @@
                                 </div>
                                 <select name="annee_scolaire_id"
                                     class="w-full pl-7 sm:pl-8 md:pl-9 lg:pl-10 pr-3 sm:pr-4 py-1.5 sm:py-2 md:py-2.5 lg:py-3 rounded-lg sm:rounded-xl border-2 border-gray-200
-                                               focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200
+                                               focus:border-blue-900 focus:ring-2 focus:ring-indigo-200
                                                transition-all duration-300 group-hover:border-indigo-300 appearance-none bg-white text-xs sm:text-sm">
                                     <option value="">Toutes les années</option>
                                     @foreach($anneesScolaires as $annee)
@@ -283,7 +283,7 @@
                         <!-- Classe -->
                         <div class="group">
                             <label
-                                class="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2 group-hover:text-indigo-600 transition-colors duration-300">Classe</label>
+                                class="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2 group-hover:text-blue-900 transition-colors duration-300">Classe</label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-2 sm:pl-2.5 md:pl-3 flex items-center pointer-events-none">
                                     <svg class="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5 text-gray-400 group-hover:text-indigo-500 transition-colors duration-300"
@@ -294,7 +294,7 @@
                                 </div>
                                 <select name="classe_id"
                                     class="w-full pl-7 sm:pl-8 md:pl-9 lg:pl-10 pr-3 sm:pr-4 py-1.5 sm:py-2 md:py-2.5 lg:py-3 rounded-lg sm:rounded-xl border-2 border-gray-200
-                                               focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200
+                                               focus:border-blue-900 focus:ring-2 focus:ring-indigo-200
                                                transition-all duration-300 group-hover:border-indigo-300 appearance-none bg-white text-xs sm:text-sm">
                                     <option value="">Toutes les classes</option>
                                     @foreach($classes as $classe)
@@ -309,7 +309,7 @@
                         <!-- Statut -->
                         <div class="group">
                             <label
-                                class="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2 group-hover:text-indigo-600 transition-colors duration-300">Statut</label>
+                                class="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2 group-hover:text-blue-900 transition-colors duration-300">Statut</label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-2 sm:pl-2.5 md:pl-3 flex items-center pointer-events-none">
                                     <svg class="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5 text-gray-400 group-hover:text-indigo-500 transition-colors duration-300"
@@ -320,7 +320,7 @@
                                 </div>
                                 <select name="statut"
                                     class="w-full pl-7 sm:pl-8 md:pl-9 lg:pl-10 pr-3 sm:pr-4 py-1.5 sm:py-2 md:py-2.5 lg:py-3 rounded-lg sm:rounded-xl border-2 border-gray-200
-                                               focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200
+                                               focus:border-blue-900 focus:ring-2 focus:ring-indigo-200
                                                transition-all duration-300 group-hover:border-indigo-300 appearance-none bg-white text-xs sm:text-sm">
                                     <option value="">Tous les statuts</option>
                                     @foreach($statuts as $value => $label)
@@ -349,7 +349,7 @@
                         </a>
                         <button type="submit"
                             class="group inline-flex items-center justify-center px-4 sm:px-5 md:px-6 lg:px-8 py-1.5 sm:py-2 md:py-2.5 lg:py-3
-                                       bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700
+                                       bg-yellow-500 text-blue-900 font-bold hover:from-indigo-700 hover:to-purple-700
                                        text-white font-medium rounded-lg sm:rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl text-xs sm:text-sm">
                             <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 mr-1.5 group-hover:animate-bounce flex-shrink-0" fill="none"
                                 stroke="currentColor" viewBox="0 0 24 24">
@@ -367,7 +367,7 @@
         <div class="fixed bottom-4 sm:bottom-6 md:bottom-8 right-3 sm:right-4 md:right-6 lg:right-8 z-50">
             <a href="{{ route('admin.inscriptions.create', ['is_new_eleve' => 0]) }}"
                 class="group relative flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16
-                      bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700
+                      bg-blue-900 hover:from-indigo-700 hover:to-purple-700
                       text-white rounded-full shadow-2xl transition-all duration-500 transform hover:scale-110 hover:rotate-90" x-data="{ tooltip: false }"
                 @mouseenter="tooltip = true" @mouseleave="tooltip = false">
                 <svg class="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -392,12 +392,12 @@
         {{-- ── TABLEAU / CARTES ──────────────────────────────────────────── --}}
         <div class="bg-white rounded-xl sm:rounded-2xl md:rounded-3xl shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl">
             <!-- En-tête -->
-            <div class="bg-gradient-to-r from-gray-50 to-gray-100 px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4 md:py-5 border-b border-gray-200">
+            <div class="bg-blue-900 px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4 md:py-5 border-b border-gray-200">
                 <div class="flex items-center justify-between flex-wrap gap-2 sm:gap-3">
                     <div class="flex items-center space-x-1.5 sm:space-x-2 md:space-x-3 min-w-0">
                         <div
-                            class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 bg-indigo-100 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
-                            <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-indigo-600" fill="none" stroke="currentColor"
+                            class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 bg-blue-100 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
+                            <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-blue-900" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M4 6h16M4 12h16M4 18h16" />
@@ -405,7 +405,7 @@
                         </div>
                         <h2 class="text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-gray-800 truncate">Liste des réinscriptions</h2>
                         <span
-                            class="px-1.5 py-0.5 sm:px-2 sm:py-1 bg-indigo-100 text-indigo-700 text-[9px] sm:text-xs font-medium rounded-full flex-shrink-0">
+                            class="px-1.5 py-0.5 sm:px-2 sm:py-1 bg-blue-100 text-blue-900 text-[9px] sm:text-xs font-medium rounded-full flex-shrink-0">
                             {{ $reinscriptions->total() }}
                         </span>
                     </div>
@@ -463,7 +463,7 @@
                                 ];
                                 $style = $statutStyles[$reinscription->statut] ?? ['bg-gray-100', 'text-gray-700', 'ring-gray-500/30'];
                             @endphp
-                            <tr class="group hover:bg-indigo-50 transition-all duration-300 cursor-pointer"
+                            <tr class="group hover:bg-blue-50 transition-all duration-300 cursor-pointer"
                                 x-data="{ show: false }" x-init="setTimeout(() => show = true, {{ $index * 50 }})" x-show="show"
                                 x-transition:enter="transition-all duration-500 ease-out"
                                 x-transition:enter-start="opacity-0 transform -translate-y-4"
@@ -475,7 +475,7 @@
                                     <div class="flex items-center">
                                         <div class="relative flex-shrink-0">
                                             <div
-                                                class="w-8 h-8 lg:w-9 lg:h-9 xl:w-10 xl:h-10 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-lg sm:rounded-xl flex items-center justify-center text-white font-bold text-xs sm:text-sm shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                                class="w-8 h-8 lg:w-9 lg:h-9 xl:w-10 xl:h-10 bg-blue-900 rounded-lg sm:rounded-xl flex items-center justify-center text-white font-bold text-xs sm:text-sm shadow-lg group-hover:scale-110 transition-transform duration-300">
                                                 {{ strtoupper(substr($reinscription->eleve->prenom ?? '?', 0, 1)) }}{{ strtoupper(substr($reinscription->eleve->nom ?? '?', 0, 1)) }}
                                             </div>
                                             <div
@@ -484,7 +484,7 @@
                                         </div>
                                         <div class="ml-2 lg:ml-3 xl:ml-4">
                                             <div
-                                                class="text-xs sm:text-sm font-semibold text-gray-900 group-hover:text-indigo-700 transition-colors duration-300">
+                                                class="text-xs sm:text-sm font-semibold text-gray-900 group-hover:text-blue-900 transition-colors duration-300">
                                                 {{ $reinscription->eleve->nom ?? '' }} {{ $reinscription->eleve->prenom ?? '' }}
                                             </div>
                                             @if($reinscription->eleve && $reinscription->eleve->matricule)
@@ -505,8 +505,8 @@
                                 <td class="px-3 lg:px-5 xl:px-8 py-3 lg:py-4 xl:py-5">
                                     <div class="flex items-center">
                                         <div
-                                            class="w-5 h-5 lg:w-6 lg:h-6 xl:w-7 xl:h-7 bg-indigo-100 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
-                                            <svg class="w-2.5 h-2.5 lg:w-3 lg:h-3 xl:w-3.5 xl:h-3.5 text-indigo-600" fill="none" stroke="currentColor"
+                                            class="w-5 h-5 lg:w-6 lg:h-6 xl:w-7 xl:h-7 bg-blue-100 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+                                            <svg class="w-2.5 h-2.5 lg:w-3 lg:h-3 xl:w-3.5 xl:h-3.5 text-blue-900" fill="none" stroke="currentColor"
                                                 viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -520,7 +520,7 @@
                                 <!-- Année -->
                                 <td class="px-3 lg:px-5 xl:px-8 py-3 lg:py-4 xl:py-5">
                                     <span
-                                        class="inline-flex items-center px-2 lg:px-3 xl:px-4 py-1 lg:py-1.5 xl:py-2 bg-purple-100 text-purple-700 text-[9px] lg:text-xs xl:text-sm font-medium rounded-lg lg:rounded-xl group-hover:scale-105 transition-transform duration-300">
+                                        class="inline-flex items-center px-2 lg:px-3 xl:px-4 py-1 lg:py-1.5 xl:py-2 bg-blue-100 text-blue-900 text-[9px] lg:text-xs xl:text-sm font-medium rounded-lg lg:rounded-xl group-hover:scale-105 transition-transform duration-300">
                                         {{ $reinscription->anneeScolaire->nom ?? '' }}
                                     </span>
                                  </td>
@@ -549,7 +549,7 @@
                                 <!-- Actions -->
                                 <td class="px-3 lg:px-5 xl:px-8 py-3 lg:py-4 xl:py-5">
                                     <div class="flex items-center justify-end gap-1 md:gap-2 whitespace-nowrap" @click.stop>
-                                        <a href="{{ route('admin.reinscriptions.show', $reinscription) }}" class="p-1.5 md:p-2 text-blue-600 bg-transparent hover:bg-blue-50 rounded-lg transition-colors border-none" title="Voir">
+                                        <a href="{{ route('admin.reinscriptions.show', $reinscription) }}" class="p-1.5 md:p-2 text-blue-900 bg-transparent hover:bg-blue-50 rounded-lg transition-colors border-none" title="Voir">
                                             <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                                         </a>
                                         <a href="{{ route('admin.reinscriptions.edit', $reinscription) }}" class="p-1.5 md:p-2 text-amber-600 bg-transparent hover:bg-amber-50 rounded-lg transition-colors border-none" title="Modifier">
@@ -578,7 +578,7 @@
                                                 </svg>
                                             </div>
                                             <div
-                                                class="absolute -top-1 -right-1 w-6 h-6 sm:w-7 sm:h-7 bg-indigo-500 rounded-full animate-ping">
+                                                class="absolute -top-1 -right-1 w-6 h-6 sm:w-7 sm:h-7 bg-blue-800 rounded-full animate-ping">
                                             </div>
                                         </div>
                                         <h3 class="text-base sm:text-lg md:text-xl font-bold text-gray-800 mb-2">Aucune réinscription trouvée
@@ -591,7 +591,7 @@
                                             @endif
                                         </p>
                                         <a href="{{ route('admin.inscriptions.create', ['is_new_eleve' => 0]) }}"
-                                            class="inline-flex items-center px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium rounded-lg sm:rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl text-xs sm:text-sm md:text-base">
+                                            class="inline-flex items-center px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 bg-blue-900 hover:from-indigo-700 hover:to-purple-700 text-white font-medium rounded-lg sm:rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl text-xs sm:text-sm md:text-base">
                                             <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 mr-1.5" fill="none" stroke="currentColor"
                                                 viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -618,7 +618,7 @@
                         ];
                         $style = $statutStyles[$reinscription->statut] ?? ['bg-gray-100', 'text-gray-700', 'ring-gray-500/30'];
                     @endphp
-                    <div class="p-3 sm:p-4 hover:bg-indigo-50/50 transition-colors duration-200 cursor-pointer"
+                    <div class="p-3 sm:p-4 hover:bg-blue-50/50 transition-colors duration-200 cursor-pointer"
                         onclick="window.location.href='{{ route('admin.reinscriptions.show', $reinscription) }}'">
 
                         {{-- Ligne 1 : Avatar + Nom + Statut --}}
@@ -626,7 +626,7 @@
                             <div class="flex items-center gap-2 sm:gap-3 min-w-0">
                                 <div class="relative flex-shrink-0">
                                     <div
-                                        class="w-9 h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-xl sm:rounded-2xl flex items-center justify-center text-white font-bold text-xs sm:text-sm shadow-lg">
+                                        class="w-9 h-9 sm:w-10 sm:h-10 bg-blue-900 rounded-xl sm:rounded-2xl flex items-center justify-center text-white font-bold text-xs sm:text-sm shadow-lg">
                                         {{ strtoupper(substr($reinscription->eleve->prenom ?? '?', 0, 1)) }}{{ strtoupper(substr($reinscription->eleve->nom ?? '?', 0, 1)) }}
                                     </div>
                                     <div
@@ -669,7 +669,7 @@
                         {{-- Ligne 3 : Actions --}}
                         <div class="flex items-center gap-1.5 sm:gap-2 pt-1.5 sm:pt-2 border-t border-gray-100" onclick="event.stopPropagation()">
                             <a href="{{ route('admin.reinscriptions.show', $reinscription) }}" class="flex-1 inline-flex items-center justify-center gap-1 py-1.5 sm:py-2 px-2 sm:px-3
-                                          bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white
+                                          bg-blue-50 text-blue-900 hover:bg-yellow-500 text-blue-900 font-bold hover:text-white
                                           rounded-lg sm:rounded-xl transition-all duration-300 text-[9px] sm:text-xs font-medium">
                                 <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -716,7 +716,7 @@
                                             d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                                     </svg>
                                 </div>
-                                <div class="absolute -top-1 -right-1 w-6 h-6 sm:w-7 sm:h-7 bg-indigo-500 rounded-full animate-ping"></div>
+                                <div class="absolute -top-1 -right-1 w-6 h-6 sm:w-7 sm:h-7 bg-blue-800 rounded-full animate-ping"></div>
                             </div>
                             <h3 class="text-sm sm:text-base md:text-lg font-bold text-gray-800">Aucune réinscription trouvée</h3>
                             <p class="text-gray-500 text-xs sm:text-sm max-w-xs">
@@ -727,7 +727,7 @@
                                 @endif
                             </p>
                             <a href="{{ route('admin.inscriptions.create', ['is_new_eleve' => 0]) }}"
-                                class="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-medium rounded-lg sm:rounded-xl text-xs sm:text-sm transition-all duration-300 hover:shadow-xl">
+                                class="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-blue-900 text-white font-medium rounded-lg sm:rounded-xl text-xs sm:text-sm transition-all duration-300 hover:shadow-xl">
                                 <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                                 </svg>

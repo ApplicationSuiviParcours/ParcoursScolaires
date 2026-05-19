@@ -21,7 +21,7 @@
 
 <body class="font-sans text-gray-900 antialiased">
     <div
-        class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gradient-to-br from-blue-900 via-blue-600 to-blue-400">
+        class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-blue-900">
         <!-- Logo et en-tête avec animation subtile -->
         <div class="text-center mb-8 transform hover:scale-105 transition-transform duration-300">
             <a href="/" class="inline-flex items-center justify-center">
@@ -41,7 +41,7 @@
         <div
             class="w-full sm:max-w-md mt-4 px-8 py-8 bg-white/95 backdrop-blur-sm shadow-2xl overflow-hidden sm:rounded-2xl border border-white/20 hover:shadow-3xl transition-shadow duration-300 relative">
             <!-- Barre décorative en haut de la carte -->
-            <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-400 via-blue-600 to-blue-800">
+            <div class="absolute top-0 left-0 w-full h-1.5 bg-blue-900">
             </div>
 
             <!-- Contenu de la carte -->

@@ -3,7 +3,7 @@
 @section('title', 'Affectations Enseignant-Matière-Classe')
 
 @section('header')
-<div class="relative overflow-hidden bg-gradient-to-br from-indigo-600 via-indigo-700 to-purple-800 py-8 md:py-12">
+<div class="relative overflow-hidden bg-blue-900 py-8 md:py-12">
     <!-- Éléments décoratifs animés -->
     <div class="absolute inset-0 opacity-10">
         <div class="absolute -top-24 -right-24 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-pulse"></div>
@@ -91,14 +91,14 @@
 
     <!-- Statistiques rapides -->
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
-        <div class="bg-white rounded-xl md:rounded-2xl shadow-lg p-4 md:p-6 border-l-4 border-indigo-500 hover:shadow-xl transition-all duration-300">
+        <div class="bg-white rounded-xl md:rounded-2xl shadow-lg p-4 md:p-6 border-l-4 border-blue-900 hover:shadow-xl transition-all duration-300">
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-xs text-gray-500 font-medium uppercase">Total</p>
                     <p class="text-xl md:text-3xl font-bold text-gray-800">{{ $stats['total'] }}</p>
                 </div>
-                <div class="bg-indigo-100 rounded-lg md:rounded-xl p-2 md:p-3">
-                    <svg class="w-5 h-5 md:w-8 md:h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="bg-blue-100 rounded-lg md:rounded-xl p-2 md:p-3">
+                    <svg class="w-5 h-5 md:w-8 md:h-8 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
                     </svg>
                 </div>
@@ -129,7 +129,7 @@
                     <p class="text-xl md:text-3xl font-bold text-gray-800">{{ $stats['total_matieres'] }}</p>
                 </div>
                 <div class="bg-blue-100 rounded-lg md:rounded-xl p-2 md:p-3">
-                    <svg class="w-5 h-5 md:w-8 md:h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 md:w-8 md:h-8 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                     </svg>
                 </div>
@@ -155,12 +155,12 @@
     <div class="bg-white rounded-2xl shadow-lg p-4 md:p-6 mb-6 md:mb-8" x-data="{ filters: {{ request()->anyFilled(['search', 'enseignant_id', 'classe_id', 'matiere_id', 'annee_scolaire_id']) ? 'true' : 'false' }} }">
         <div class="flex items-center justify-between mb-4">
             <h2 class="text-base md:text-lg font-semibold text-gray-800 flex items-center">
-                <svg class="w-5 h-5 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 mr-2 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
                 </svg>
                 Filtres
             </h2>
-            <button @click="filters = !filters" class="text-indigo-600 hover:text-indigo-800 p-1">
+            <button @click="filters = !filters" class="text-blue-900 hover:text-indigo-800 p-1">
                 <svg class="w-5 h-5 transition-transform duration-300" :class="{ 'rotate-180': filters }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
@@ -180,10 +180,10 @@
                            name="search" 
                            value="{{ $search ?? '' }}"
                            placeholder="Rechercher..."
-                           class="w-full pl-12 pr-4 py-2.5 md:py-3 rounded-xl border-2 border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-300 text-sm">
+                           class="w-full pl-12 pr-4 py-2.5 md:py-3 rounded-xl border-2 border-gray-200 focus:border-blue-900 focus:ring-2 focus:ring-indigo-200 transition-all duration-300 text-sm">
                 </div>
                 <button type="submit" 
-                        class="w-full sm:w-auto px-6 py-2.5 md:py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 text-sm">
+                        class="w-full sm:w-auto px-6 py-2.5 md:py-3 bg-blue-900 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 text-sm">
                     Rechercher
                 </button>
             </div>
@@ -192,7 +192,7 @@
             <div x-show="filters" x-transition.duration.300 class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
                 <div>
                     <label class="block text-xs font-medium text-gray-700 mb-1">Enseignant</label>
-                    <select name="enseignant_id" class="w-full rounded-xl border-2 border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 px-4 py-2 text-sm">
+                    <select name="enseignant_id" class="w-full rounded-xl border-2 border-gray-200 focus:border-blue-900 focus:ring-2 focus:ring-indigo-200 px-4 py-2 text-sm">
                         <option value="">Tous</option>
                         @foreach($enseignants as $enseignant)
                             <option value="{{ $enseignant->id }}" {{ request('enseignant_id') == $enseignant->id ? 'selected' : '' }}>
@@ -204,7 +204,7 @@
 
                 <div>
                     <label class="block text-xs font-medium text-gray-700 mb-1">Classe</label>
-                    <select name="classe_id" class="w-full rounded-xl border-2 border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 px-4 py-2 text-sm">
+                    <select name="classe_id" class="w-full rounded-xl border-2 border-gray-200 focus:border-blue-900 focus:ring-2 focus:ring-indigo-200 px-4 py-2 text-sm">
                         <option value="">Toutes</option>
                         @foreach($classes as $classe)
                             <option value="{{ $classe->id }}" {{ request('classe_id') == $classe->id ? 'selected' : '' }}>
@@ -216,7 +216,7 @@
 
                 <div>
                     <label class="block text-xs font-medium text-gray-700 mb-1">Matière</label>
-                    <select name="matiere_id" class="w-full rounded-xl border-2 border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 px-4 py-2 text-sm">
+                    <select name="matiere_id" class="w-full rounded-xl border-2 border-gray-200 focus:border-blue-900 focus:ring-2 focus:ring-indigo-200 px-4 py-2 text-sm">
                         <option value="">Toutes</option>
                         @foreach($matieres as $matiere)
                             <option value="{{ $matiere->id }}" {{ request('matiere_id') == $matiere->id ? 'selected' : '' }}>
@@ -228,7 +228,7 @@
 
                 <div>
                     <label class="block text-xs font-medium text-gray-700 mb-1">Année scolaire</label>
-                    <select name="annee_scolaire_id" class="w-full rounded-xl border-2 border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 px-4 py-2 text-sm">
+                    <select name="annee_scolaire_id" class="w-full rounded-xl border-2 border-gray-200 focus:border-blue-900 focus:ring-2 focus:ring-indigo-200 px-4 py-2 text-sm">
                         <option value="">Toutes</option>
                         @foreach($anneeScolaires as $annee)
                             <option value="{{ $annee->id }}" {{ request('annee_scolaire_id') == $annee->id ? 'selected' : '' }}>
@@ -252,28 +252,28 @@
     <div class="bg-white rounded-2xl md:rounded-3xl shadow-xl overflow-hidden">
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gradient-to-r from-indigo-50 to-purple-50">
+                <thead class="bg-blue-900">
                     <tr>
                         <!-- Colonne sticky -->
-                        <th class="px-3 md:px-6 py-3 md:py-4 text-left text-[10px] md:text-xs font-semibold text-indigo-700 uppercase tracking-wider sticky left-0 bg-gradient-to-r from-indigo-50 to-purple-50 z-10 min-w-[150px] md:min-w-[200px]">Enseignant</th>
-                        <th class="px-3 md:px-6 py-3 md:py-4 text-left text-[10px] md:text-xs font-semibold text-indigo-700 uppercase tracking-wider min-w-[100px]">Matière</th>
-                        <th class="px-3 md:px-6 py-3 md:py-4 text-left text-[10px] md:text-xs font-semibold text-indigo-700 uppercase tracking-wider min-w-[80px]">Classe</th>
-                        <th class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold text-indigo-700 uppercase tracking-wider">Année scolaire</th>
-                        <th class="hidden sm:table-cell px-6 py-4 text-left text-xs font-semibold text-indigo-700 uppercase tracking-wider">Date</th>
-                        <th class="px-3 md:px-6 py-3 md:py-4 text-left text-[10px] md:text-xs font-semibold text-indigo-700 uppercase tracking-wider">Actions</th>
+                        <th class="px-3 md:px-6 py-3 md:py-4 text-left text-[10px] md:text-xs font-semibold text-blue-900 uppercase tracking-wider sticky left-0 bg-blue-900 z-10 min-w-[150px] md:min-w-[200px]">Enseignant</th>
+                        <th class="px-3 md:px-6 py-3 md:py-4 text-left text-[10px] md:text-xs font-semibold text-blue-900 uppercase tracking-wider min-w-[100px]">Matière</th>
+                        <th class="px-3 md:px-6 py-3 md:py-4 text-left text-[10px] md:text-xs font-semibold text-blue-900 uppercase tracking-wider min-w-[80px]">Classe</th>
+                        <th class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold text-blue-900 uppercase tracking-wider">Année scolaire</th>
+                        <th class="hidden sm:table-cell px-6 py-4 text-left text-xs font-semibold text-blue-900 uppercase tracking-wider">Date</th>
+                        <th class="px-3 md:px-6 py-3 md:py-4 text-left text-[10px] md:text-xs font-semibold text-blue-900 uppercase tracking-wider">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
                     @forelse($affectations as $affectation)
-                        <tr class="hover:bg-indigo-50/50 transition-colors duration-200 group">
+                        <tr class="hover:bg-blue-50/50 transition-colors duration-200 group">
                             <!-- Enseignant (Sticky) -->
-                            <td class="px-3 md:px-6 py-3 md:py-4 sticky left-0 bg-white group-hover:bg-indigo-50/50 z-10">
+                            <td class="px-3 md:px-6 py-3 md:py-4 sticky left-0 bg-white group-hover:bg-blue-50/50 z-10">
                                 <div class="flex items-center">
-                                    <div class="flex-shrink-0 h-8 w-8 md:h-10 md:w-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg md:rounded-xl flex items-center justify-center text-white font-bold text-sm md:text-lg shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                    <div class="flex-shrink-0 h-8 w-8 md:h-10 md:w-10 bg-blue-900 rounded-lg md:rounded-xl flex items-center justify-center text-white font-bold text-sm md:text-lg shadow-lg group-hover:scale-110 transition-transform duration-300">
                                         {{ $affectation->enseignant->initiales ?? '?' }}
                                     </div>
                                     <div class="ml-2 md:ml-4 min-w-0">
-                                        <div class="text-xs md:text-sm font-semibold text-gray-900 group-hover:text-indigo-700 transition-colors duration-300 truncate">
+                                        <div class="text-xs md:text-sm font-semibold text-gray-900 group-hover:text-blue-900 transition-colors duration-300 truncate">
                                             {{ $affectation->enseignant->nom }} {{ $affectation->enseignant->prenom }}
                                         </div>
                                         <div class="text-[10px] md:text-xs text-gray-500 truncate hidden sm:block">
@@ -303,7 +303,7 @@
                             </td>
                             <td class="px-3 md:px-6 py-3 md:py-4 whitespace-nowrap">
                                 <div class="flex items-center justify-end gap-1 md:gap-2 whitespace-nowrap">
-                                    <a href="{{ route('admin.enseignant_matiere_classes.show', $affectation) }}" class="p-1.5 md:p-2 text-blue-600 bg-transparent hover:bg-blue-50 rounded-lg transition-colors border-none" title="Voir">
+                                    <a href="{{ route('admin.enseignant_matiere_classes.show', $affectation) }}" class="p-1.5 md:p-2 text-blue-900 bg-transparent hover:bg-blue-50 rounded-lg transition-colors border-none" title="Voir">
                                         <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                                     </a>
                                     <a href="{{ route('admin.enseignant_matiere_classes.edit', $affectation) }}" class="p-1.5 md:p-2 text-amber-600 bg-transparent hover:bg-amber-50 rounded-lg transition-colors border-none" title="Modifier">
@@ -322,7 +322,7 @@
                         <tr>
                             <td colspan="6" class="px-6 py-12">
                                 <div class="flex flex-col items-center justify-center text-center">
-                                    <div class="w-20 h-20 md:w-24 md:h-24 bg-indigo-100 rounded-full flex items-center justify-center mb-4 animate-pulse">
+                                    <div class="w-20 h-20 md:w-24 md:h-24 bg-blue-100 rounded-full flex items-center justify-center mb-4 animate-pulse">
                                         <svg class="w-10 h-10 md:w-12 md:h-12 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
                                         </svg>
@@ -331,7 +331,7 @@
                                     <p class="text-sm md:text-base text-gray-500 max-w-md mb-6 px-4">
                                         @if(request()->anyFilled(['search', 'enseignant_id', 'classe_id', 'matiere_id', 'annee_scolaire_id']))
                                             Aucun résultat.
-                                            <a href="{{ route('admin.enseignant_matiere_classes.index') }}" class="text-indigo-600 hover:text-indigo-800 font-medium block mt-2">
+                                            <a href="{{ route('admin.enseignant_matiere_classes.index') }}" class="text-blue-900 hover:text-indigo-800 font-medium block mt-2">
                                                 Effacer les filtres
                                             </a>
                                         @else
@@ -340,7 +340,7 @@
                                     </p>
                                     @if(!request()->anyFilled(['search', 'enseignant_id', 'classe_id', 'matiere_id', 'annee_scolaire_id']))
                                         <a href="{{ route('admin.enseignant_matiere_classes.create') }}" 
-                                           class="inline-flex items-center px-5 py-2.5 md:px-6 md:py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 text-sm md:text-base">
+                                           class="inline-flex items-center px-5 py-2.5 md:px-6 md:py-3 bg-yellow-500 text-blue-900 font-bold hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 text-sm md:text-base">
                                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                             </svg>

@@ -7,7 +7,7 @@
     <div class="px-4 mx-auto max-w-5xl sm:px-6 lg:px-8">
 
         {{-- Navigation --}}
-        <div class="bg-gradient-to-r from-red-600 to-pink-600 rounded-3xl p-6 mb-8 shadow-2xl">
+        <div class="bg-blue-900 rounded-3xl p-6 mb-8 shadow-2xl">
             <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div>
                     <h1 class="text-2xl font-bold text-white">📅 Calendrier des absences</h1>
@@ -83,7 +83,7 @@
 
         {{-- Liste des absences du mois --}}
         <div class="bg-white shadow-lg rounded-2xl overflow-hidden">
-            <div class="p-6 bg-gradient-to-r from-red-600 to-pink-600">
+            <div class="p-6 bg-blue-900">
                 <h3 class="text-lg font-bold text-white">{{ $absences->count() }} absence(s) ce mois</h3>
             </div>
             <div class="p-6">

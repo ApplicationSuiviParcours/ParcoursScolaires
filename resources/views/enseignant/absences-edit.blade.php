@@ -10,7 +10,7 @@
     <div class="py-12">
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
             <!-- Header avec bouton retour -->
-            <div class="p-6 mb-8 shadow-lg bg-gradient-to-r from-yellow-600 to-yellow-400 rounded-xl">
+            <div class="p-6 mb-8 shadow-lg bg-blue-900 rounded-xl">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
                         <a href="{{ route('enseignant.absences.index') }}" class="mr-4 text-white hover:text-yellow-100">

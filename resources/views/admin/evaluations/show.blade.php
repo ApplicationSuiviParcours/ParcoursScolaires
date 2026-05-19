@@ -3,14 +3,14 @@
 @section('title', 'Détails de l\'évaluation')
 
 @section('content')
-<div class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-8">
+<div class="min-h-screen bg-transparent py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <!-- En-tête -->
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 space-y-4 sm:space-y-0 animate__animated animate__fadeInDown">
             <div class="flex flex-wrap items-center gap-2 min-w-0">
-                <div class="p-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl shadow-lg flex-shrink-0">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="p-3 bg-blue-900 rounded-xl shadow-lg flex-shrink-0">
+                    <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                     </svg>
                 </div>
@@ -106,7 +106,7 @@
                         <p class="text-xl sm:text-2xl font-bold text-gray-800">{{ $statistiques['notes_count'] ?? 0 }}</p>
                     </div>
                     <div class="p-2 sm:p-3 bg-blue-100 rounded-lg">
-                        <svg class="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-6 h-6 sm:w-8 sm:h-8 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                         </svg>
                     </div>
@@ -137,8 +137,8 @@
                             {{ isset($statistiques['taux_reussite']) ? number_format($statistiques['taux_reussite'], 1) . '%' : 'N/A' }}
                         </p>
                     </div>
-                    <div class="p-2 sm:p-3 bg-purple-100 rounded-lg">
-                        <svg class="w-6 h-6 sm:w-8 sm:h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="p-2 sm:p-3 bg-blue-100 rounded-lg">
+                        <svg class="w-6 h-6 sm:w-8 sm:h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
                         </svg>
                     </div>
@@ -173,7 +173,7 @@
             <!-- Informations détaillées (2/3) -->
             <div class="lg:col-span-2 space-y-6">
                 <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl overflow-hidden border border-white/20 animate__animated animate__fadeInUp">
-                    <div class="bg-gradient-to-r from-blue-600 to-purple-600 px-4 sm:px-6 py-4">
+                    <div class="bg-blue-900 px-4 sm:px-6 py-4">
                         <h2 class="text-lg sm:text-xl font-semibold text-white flex items-center">
                             <svg class="w-5 h-5 sm:w-6 sm:h-6 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -197,7 +197,7 @@
                                             'devoir'  => 'bg-blue-100 text-blue-800',
                                             'examen'  => 'bg-red-100 text-red-800',
                                             'test'    => 'bg-green-100 text-green-800',
-                                            'projet'  => 'bg-purple-100 text-purple-800',
+                                            'projet'  => 'bg-blue-100 text-purple-800',
                                             'autre'   => 'bg-gray-100 text-gray-800',
                                         ];
                                         $colorClass = $typeColors[$evaluation->type] ?? 'bg-gray-100 text-gray-800';
@@ -243,7 +243,7 @@
                             <div class="space-y-1">
                                 <dt class="text-xs sm:text-sm font-medium text-gray-500">Barème</dt>
                                 <dd>
-                                    <span class="px-3 py-1 bg-purple-100 rounded-full text-sm font-medium text-purple-700">{{ $evaluation->bareme }}</span>
+                                    <span class="px-3 py-1 bg-blue-100 rounded-full text-sm font-medium text-blue-900">{{ $evaluation->bareme }}</span>
                                 </dd>
                             </div>
 
@@ -267,7 +267,7 @@
             <div class="space-y-6">
                 <!-- Actions rapides -->
                 <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl overflow-hidden border border-white/20 animate__animated animate__fadeInUp">
-                    <div class="bg-gradient-to-r from-purple-600 to-pink-600 px-4 sm:px-6 py-4">
+                    <div class="bg-blue-900 px-4 sm:px-6 py-4">
                         <h2 class="text-lg sm:text-xl font-semibold text-white flex items-center">
                             <svg class="w-5 h-5 sm:w-6 sm:h-6 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
@@ -296,7 +296,7 @@
 
                         @if($evaluation->notes()->count() > 0)
                             <a href="{{ route('admin.evaluations.export', $evaluation) }}"
-                               class="w-full inline-flex items-center justify-center px-5 py-3 bg-purple-100 text-purple-700 font-medium rounded-xl hover:bg-purple-200 hover:shadow-md transform hover:-translate-y-1 transition-all duration-300 text-sm">
+                               class="w-full inline-flex items-center justify-center px-5 py-3 bg-blue-100 text-blue-900 font-medium rounded-xl hover:bg-purple-200 hover:shadow-md transform hover:-translate-y-1 transition-all duration-300 text-sm">
                                 <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                 </svg>
@@ -321,7 +321,7 @@
 
                 <!-- Enseignant responsable -->
                 <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl overflow-hidden border border-white/20 animate__animated animate__fadeInUp">
-                    <div class="bg-gradient-to-r from-indigo-600 to-blue-600 px-4 sm:px-6 py-4">
+                    <div class="bg-blue-900 px-4 sm:px-6 py-4">
                         <h3 class="text-base sm:text-lg font-semibold text-white flex items-center">
                             <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
@@ -332,7 +332,7 @@
                     <div class="p-4 sm:p-6">
                         @if($evaluation->enseignant)
                             <div class="flex items-center space-x-3">
-                                <div class="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-base sm:text-lg">
+                                <div class="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 bg-blue-800 rounded-full flex items-center justify-center text-white font-bold text-base sm:text-lg">
                                     {{ substr($evaluation->enseignant->nom ?? 'U', 0, 1) }}{{ substr($evaluation->enseignant->prenom ?? '', 0, 1) }}
                                 </div>
                                 <div class="min-w-0">
@@ -352,7 +352,7 @@
 
         <!-- Notes de l'évaluation -->
         <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl overflow-hidden border border-white/20 animate__animated animate__fadeInUp">
-            <div class="bg-gradient-to-r from-blue-600 to-purple-600 px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-2">
+            <div class="bg-blue-900 px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-2">
                 <h2 class="text-lg sm:text-xl font-semibold text-white flex items-center">
                     <svg class="w-5 h-5 sm:w-6 sm:h-6 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
@@ -386,7 +386,7 @@
                                     <tr class="hover:bg-gray-50 transition-colors duration-300">
                                         <td class="px-4 sm:px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center">
-                                                <div class="flex-shrink-0 h-9 w-9 sm:h-10 sm:w-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-semibold text-sm">
+                                                <div class="flex-shrink-0 h-9 w-9 sm:h-10 sm:w-10 bg-blue-800 rounded-full flex items-center justify-center text-white font-semibold text-sm">
                                                     {{ substr($note->eleve->nom ?? 'U', 0, 1) }}{{ substr($note->eleve->prenom ?? '', 0, 1) }}
                                                 </div>
                                                 <div class="ml-3 sm:ml-4">
@@ -435,7 +435,7 @@
                                 <!-- Élève + Statut -->
                                 <div class="flex items-center justify-between mb-3">
                                     <div class="flex items-center space-x-3 min-w-0">
-                                        <div class="flex-shrink-0 h-9 w-9 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-semibold text-sm">
+                                        <div class="flex-shrink-0 h-9 w-9 bg-blue-800 rounded-full flex items-center justify-center text-white font-semibold text-sm">
                                             {{ substr($note->eleve->nom ?? 'U', 0, 1) }}{{ substr($note->eleve->prenom ?? '', 0, 1) }}
                                         </div>
                                         <div class="min-w-0">

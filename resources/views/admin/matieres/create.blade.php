@@ -3,7 +3,7 @@
 @section('title', 'Nouvelle matière')
 
 @section('header')
-<div class="relative overflow-hidden bg-gradient-to-br from-emerald-600 via-emerald-700 to-teal-800 py-8 md:py-12">
+<div class="relative overflow-hidden bg-blue-900 py-8 md:py-12">
     <!-- Éléments décoratifs animés -->
     <div class="absolute inset-0 opacity-10">
         <div class="absolute -top-24 -right-24 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-pulse"></div>
@@ -66,7 +66,7 @@
     <div class="max-w-3xl mx-auto">
         <!-- Formulaire -->
         <div class="bg-white rounded-2xl md:rounded-3xl shadow-xl overflow-hidden">
-            <div class="bg-gradient-to-r from-emerald-500 to-teal-600 px-4 md:px-8 py-4 md:py-6">
+            <div class="bg-blue-900 px-4 md:px-8 py-4 md:py-6">
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div class="flex items-center">
                         <div class="w-12 h-12 md:w-14 md:h-14 bg-white/20 backdrop-blur-lg rounded-xl md:rounded-2xl flex items-center justify-center mr-4 md:mr-5 flex-shrink-0">
@@ -218,7 +218,7 @@
                         </div>
 
                         <!-- Aperçu -->
-                        <div class="mt-6 md:mt-8 p-4 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl md:rounded-2xl border border-emerald-200">
+                        <div class="mt-6 md:mt-8 p-4 bg-blue-900 rounded-xl md:rounded-2xl border border-emerald-200">
                             <h4 class="text-xs md:text-sm font-medium text-emerald-800 mb-3 flex items-center">
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -227,7 +227,7 @@
                                 Aperçu de la matière
                             </h4>
                             <div class="flex flex-col sm:flex-row items-center text-center sm:text-left space-y-3 sm:space-y-0 sm:space-x-4">
-                                <div class="flex-shrink-0 w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center text-white font-bold text-xl md:text-2xl shadow-lg" id="previewInitiales">
+                                <div class="flex-shrink-0 w-14 h-14 md:w-16 md:h-16 bg-blue-900 rounded-xl flex items-center justify-center text-white font-bold text-xl md:text-2xl shadow-lg" id="previewInitiales">
                                     ?
                                 </div>
                                 <div class="flex-1 min-w-0">
@@ -248,7 +248,7 @@
                                 Annuler
                             </a>
                             <button type="submit" 
-                                    class="w-full sm:w-auto px-6 py-2.5 md:py-3 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl text-sm md:text-base">
+                                    class="w-full sm:w-auto px-6 py-2.5 md:py-3 bg-yellow-500 text-blue-900 font-bold hover:from-emerald-600 hover:to-teal-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl text-sm md:text-base">
                                 <svg class="w-5 h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
                                 </svg>

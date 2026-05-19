@@ -27,8 +27,8 @@
         <div class="mb-4 md:mb-6">
             <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-3 gap-2">
                 <div class="flex items-center space-x-2 md:space-x-3">
-                    <div class="bg-gradient-to-r from-amber-600 to-amber-700 p-1.5 md:p-2 rounded-lg shadow-md">
-                        <svg class="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="bg-blue-900 p-1.5 md:p-2 rounded-lg shadow-md">
+                        <svg class="w-5 h-5 md:w-6 md:h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                         </svg>
                     </div>
@@ -42,14 +42,14 @@
                 </span>
             </div>
             <div class="w-full h-1 bg-gray-200 rounded-full overflow-hidden">
-                <div class="bg-gradient-to-r from-amber-600 to-amber-400 h-1 w-full rounded-full"></div>
+                <div class="bg-blue-900 h-1 w-full rounded-full"></div>
             </div>
         </div>
 
         <!-- Formulaire principal -->
         <div class="bg-white rounded-xl md:rounded-2xl shadow-xl overflow-hidden border border-gray-100">
             <!-- En-tête du formulaire -->
-            <div class="bg-gradient-to-r from-amber-600 to-amber-700 px-4 md:px-6 py-4 md:py-5">
+            <div class="bg-blue-900 px-4 md:px-6 py-4 md:py-5">
                 <div class="flex items-center">
                     <div class="bg-white/20 p-1.5 md:p-2.5 rounded-lg backdrop-blur-sm">
                         <svg class="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -72,7 +72,7 @@
                     <!-- Section Informations générales -->
                     <div class="bg-gray-50/50 p-4 md:p-6 rounded-xl border border-gray-100">
                         <div class="flex items-center mb-3 md:mb-4 pb-2 border-b border-gray-200">
-                            <div class="w-1 h-5 md:h-6 bg-gradient-to-b from-amber-600 to-amber-400 rounded-full mr-2 md:mr-3"></div>
+                            <div class="w-1 h-5 md:h-6 bg-blue-900 rounded-full mr-2 md:mr-3"></div>
                             <h4 class="text-sm md:text-md font-semibold text-gray-700">📋 Informations générales</h4>
                         </div>
 
@@ -156,7 +156,7 @@
                     <!-- Section Niveau et Série -->
                     <div class="bg-gray-50/50 p-4 md:p-6 rounded-xl border border-gray-100">
                         <div class="flex items-center mb-3 md:mb-4 pb-2 border-b border-gray-200">
-                            <div class="w-1 h-5 md:h-6 bg-gradient-to-b from-amber-600 to-amber-400 rounded-full mr-2 md:mr-3"></div>
+                            <div class="w-1 h-5 md:h-6 bg-blue-900 rounded-full mr-2 md:mr-3"></div>
                             <h4 class="text-sm md:text-md font-semibold text-gray-700">🎓 Niveau et Série</h4>
                         </div>
 
@@ -233,7 +233,7 @@
                     <!-- Section Année scolaire -->
                     <div class="bg-gray-50/50 p-4 md:p-6 rounded-xl border border-gray-100">
                         <div class="flex items-center mb-3 md:mb-4 pb-2 border-b border-gray-200">
-                            <div class="w-1 h-5 md:h-6 bg-gradient-to-b from-amber-600 to-amber-400 rounded-full mr-2 md:mr-3"></div>
+                            <div class="w-1 h-5 md:h-6 bg-blue-900 rounded-full mr-2 md:mr-3"></div>
                             <h4 class="text-sm md:text-md font-semibold text-gray-700">📅 Année scolaire</h4>
                         </div>
 
@@ -281,7 +281,7 @@
                             Annuler
                         </a>
                         <button type="submit"
-                                class="w-full sm:w-auto px-4 md:px-6 py-2.5 md:py-3 bg-gradient-to-r from-amber-600 to-amber-700 text-white font-medium rounded-lg md:rounded-xl hover:from-amber-700 hover:to-amber-800 text-center text-sm shadow-lg shadow-amber-200 flex items-center justify-center group">
+                                class="w-full sm:w-auto px-4 md:px-6 py-2.5 md:py-3 bg-blue-900 text-white font-medium rounded-lg md:rounded-xl hover:from-amber-700 hover:to-amber-800 text-center text-sm shadow-lg shadow-amber-200 flex items-center justify-center group">
                             <svg class="w-4 h-4 md:w-5 md:h-5 mr-2 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
                             </svg>
@@ -293,7 +293,7 @@
         </div>
 
         <!-- Message d'aide -->
-        <div class="mt-4 md:mt-6 bg-gradient-to-r from-amber-50 to-amber-100/50 rounded-xl p-4 md:p-5 border border-amber-100">
+        <div class="mt-4 md:mt-6 bg-blue-900/50 rounded-xl p-4 md:p-5 border border-amber-100">
             <div class="flex items-start">
                 <div class="flex-shrink-0">
                     <div class="bg-amber-200 p-1.5 md:p-2 rounded-lg">
@@ -332,7 +332,7 @@
                 if (length >= 45) {
                     nomCounter.className = 'text-[10px] md:text-xs text-orange-600 font-medium';
                 } else if (length >= 40) {
-                    nomCounter.className = 'text-[10px] md:text-xs text-blue-600 font-medium';
+                    nomCounter.className = 'text-[10px] md:text-xs text-blue-900 font-medium';
                 } else {
                     nomCounter.className = 'text-[10px] md:text-xs text-gray-400';
                 }

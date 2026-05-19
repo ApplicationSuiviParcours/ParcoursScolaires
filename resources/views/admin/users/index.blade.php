@@ -62,7 +62,7 @@
             <!-- Header avec animation -->
             <div class="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 animate-fade-in-down">
                 <div>
-                    <h3 class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+                    <h3 class="text-xl sm:text-2xl font-bold bg-blue-900 bg-clip-text text-transparent">
                         Liste des utilisateurs
                     </h3>
                     <p class="text-xs sm:text-sm text-gray-500 mt-1 flex items-center gap-1 flex-wrap">
@@ -73,7 +73,7 @@
                     </p>
                 </div>
                 <a href="{{ route('admin.users.create') }}"
-                    class="group inline-flex items-center justify-center px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white text-xs sm:text-sm font-medium rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300">
+                    class="group inline-flex items-center justify-center px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 bg-blue-900 hover:from-emerald-600 hover:to-green-700 text-white text-xs sm:text-sm font-medium rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300">
                     <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1.5 sm:mr-2 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                     </svg>
@@ -87,7 +87,7 @@
                 <div class="group bg-white rounded-xl sm:rounded-2xl border border-gray-100 p-2.5 sm:p-3 md:p-4 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 animate-fade-in-up" style="animation-delay: 0.1s">
                     <div class="flex flex-col items-center text-center">
                         <div class="bg-blue-50 rounded-full p-1.5 sm:p-2 md:p-3 group-hover:bg-blue-100 transition-colors duration-300 mb-1 sm:mb-2">
-                            <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
                             </svg>
                         </div>
@@ -128,8 +128,8 @@
                 <!-- Admins Card -->
                 <div class="group bg-white rounded-xl sm:rounded-2xl border border-gray-100 p-2.5 sm:p-3 md:p-4 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 animate-fade-in-up" style="animation-delay: 0.3s">
                     <div class="flex flex-col items-center text-center">
-                        <div class="bg-purple-50 rounded-full p-1.5 sm:p-2 md:p-3 group-hover:bg-purple-100 transition-colors duration-300 mb-1 sm:mb-2">
-                            <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="bg-purple-50 rounded-full p-1.5 sm:p-2 md:p-3 group-hover:bg-blue-100 transition-colors duration-300 mb-1 sm:mb-2">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                         </div>
@@ -143,7 +143,7 @@
                 <div class="group bg-white rounded-xl sm:rounded-2xl border border-gray-100 p-2.5 sm:p-3 md:p-4 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 animate-fade-in-up" style="animation-delay: 0.4s">
                     <div class="flex flex-col items-center text-center">
                         <div class="bg-blue-50 rounded-full p-1.5 sm:p-2 md:p-3 group-hover:bg-blue-100 transition-colors duration-300 mb-1 sm:mb-2">
-                            <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                             </svg>
                         </div>
@@ -245,7 +245,7 @@
 
                             <div class="sm:col-span-2 lg:col-span-2 flex gap-2 sm:gap-3">
                                 <button type="submit"
-                                    class="flex-1 px-3 sm:px-4 md:px-5 lg:px-6 py-2 sm:py-2.5 md:py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-1.5 sm:gap-2 group text-xs sm:text-sm">
+                                    class="flex-1 px-3 sm:px-4 md:px-5 lg:px-6 py-2 sm:py-2.5 md:py-3 bg-blue-900 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-1.5 sm:gap-2 group text-xs sm:text-sm">
                                     <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
                                     </svg>
@@ -271,7 +271,7 @@
             <div class="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300 animate-fade-in-up" style="animation-delay: 0.8s">
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gradient-to-r from-gray-50 to-gray-100">
+                        <thead class="bg-blue-900">
                             <tr>
                                 <th class="px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-3 md:py-4 text-left text-[10px] sm:text-xs font-semibold text-gray-600 uppercase tracking-wider">Utilisateur</th>
                                 <th class="px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-3 md:py-4 text-left text-[10px] sm:text-xs font-semibold text-gray-600 uppercase tracking-wider">Rôle(s)</th>
@@ -296,7 +296,7 @@
                                                              loading="lazy">
                                                     </div>
                                                 @else
-                                                    <div class="h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 lg:h-12 lg:w-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold text-sm sm:text-base md:text-lg shadow-lg">
+                                                    <div class="h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 lg:h-12 lg:w-12 rounded-full bg-blue-900 flex items-center justify-center text-white font-bold text-sm sm:text-base md:text-lg shadow-lg">
                                                         {{ $user->initials }}
                                                     </div>
                                                 @endif
@@ -310,7 +310,7 @@
                                                         {{ $user->name }}
                                                     </div>
                                                     @if($user->roles->count() > 1)
-                                                        <span class="px-1 py-0.5 text-[8px] sm:text-[9px] bg-purple-100 text-purple-800 rounded-full">
+                                                        <span class="px-1 py-0.5 text-[8px] sm:text-[9px] bg-blue-100 text-purple-800 rounded-full">
                                                             {{ $user->roles->count() }} rôles
                                                         </span>
                                                     @endif
@@ -335,7 +335,7 @@
                                                 @foreach($user->roles as $role)
                                                     @php
                                                         $roleClass = match($role->name) {
-                                                            'administrateur' => 'bg-purple-100 text-purple-800 border-purple-200',
+                                                            'administrateur' => 'bg-blue-100 text-purple-800 border-purple-200',
                                                             'enseignant' => 'bg-blue-100 text-blue-800 border-blue-200',
                                                             'eleve' => 'bg-green-100 text-green-800 border-green-200',
                                                             'parent' => 'bg-yellow-100 text-yellow-800 border-yellow-200',
@@ -349,7 +349,7 @@
                                             @elseif($user->role)
                                                 @php
                                                     $dbRoleClass = match(strtolower($user->role)) {
-                                                        'administrateur', 'admin' => 'bg-purple-100 text-purple-800 border-purple-200',
+                                                        'administrateur', 'admin' => 'bg-blue-100 text-purple-800 border-purple-200',
                                                         'enseignant' => 'bg-blue-100 text-blue-800 border-blue-200',
                                                         'eleve', 'etudiant' => 'bg-green-100 text-green-800 border-green-200',
                                                         'parent' => 'bg-yellow-100 text-yellow-800 border-yellow-200',
@@ -421,7 +421,7 @@
                                         <div class="flex items-center justify-end gap-1 md:gap-2 whitespace-nowrap">
                                             <!-- Voir -->
                                             <a href="{{ route('admin.users.show', $user) }}"
-                                                class="p-1.5 md:p-2 text-blue-600 bg-transparent hover:bg-blue-50 rounded-lg transition-colors border-none flex-shrink-0"
+                                                class="p-1.5 md:p-2 text-blue-900 bg-transparent hover:bg-blue-50 rounded-lg transition-colors border-none flex-shrink-0"
                                                 title="Voir">
                                                 <svg class="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                                             </a>
@@ -475,7 +475,7 @@
                                             </svg>
                                             <p class="text-sm sm:text-base text-gray-500 font-medium">Aucun utilisateur trouvé</p>
                                             <p class="text-xs sm:text-sm text-gray-400 mt-1">Essayez de modifier vos filtres ou créez un nouvel utilisateur</p>
-                                            <a href="{{ route('admin.users.create') }}" class="mt-3 sm:mt-4 px-3 sm:px-4 md:px-5 lg:px-6 py-1.5 sm:py-2 md:py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-xs sm:text-sm rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl transition-all duration-200">
+                                            <a href="{{ route('admin.users.create') }}" class="mt-3 sm:mt-4 px-3 sm:px-4 md:px-5 lg:px-6 py-1.5 sm:py-2 md:py-2.5 bg-blue-900 hover:from-blue-700 hover:to-blue-800 text-white text-xs sm:text-sm rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl transition-all duration-200">
                                                 Créer un utilisateur
                                             </a>
                                         </div>
@@ -548,7 +548,7 @@
                 <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                     <div class="sm:flex sm:items-start">
                         <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10" id="toggle-icon-container">
-                            <svg class="h-6 w-6 text-blue-600" id="toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="h-6 w-6 text-blue-900" id="toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
                             </svg>
                         </div>

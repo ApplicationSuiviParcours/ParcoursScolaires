@@ -11,7 +11,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white rounded-xl shadow-md overflow-hidden">
                 <!-- En-tête -->
-                <div class="bg-gradient-to-r from-green-600 to-green-800 px-4 sm:px-6 py-4 sm:py-5">
+                <div class="bg-blue-900 px-4 sm:px-6 py-4 sm:py-5">
                     <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
                         <h3 class="text-lg sm:text-xl font-bold text-white">Fiche d'inscription</h3>
                         <div class="flex space-x-2 w-full sm:w-auto justify-center">

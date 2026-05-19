@@ -1,8 +1,8 @@
 <x-guest-layout>
     <!-- Header avec Gradient & Icône -->
     <div class="text-center mb-10">
-        <div class="inline-flex items-center justify-center w-20 h-20 mx-auto rounded-3xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-xl mb-6 transform hover:rotate-6 transition-transform duration-300">
-            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="inline-flex items-center justify-center w-20 h-20 mx-auto rounded-3xl bg-blue-900 shadow-xl mb-6 transform hover:rotate-6 transition-transform duration-300">
+            <svg class="w-10 h-10 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
             </svg>
         </div>
@@ -27,7 +27,7 @@
 
         <!-- Email Address -->
         <div class="group">
-            <label for="email" class="block text-sm font-semibold text-gray-700 mb-2 group-focus-within:text-blue-600 transition-colors">
+            <label for="email" class="block text-sm font-semibold text-gray-700 mb-2 group-focus-within:text-blue-900 transition-colors">
                 Adresse Email professionnelle
             </label>
             <div class="relative">
@@ -45,7 +45,7 @@
 
         <div class="pt-2">
             <button type="submit" 
-                    class="w-full group relative flex justify-center py-4 px-4 border border-transparent text-sm font-bold rounded-2xl text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 shadow-lg shadow-blue-200 transform transition-all duration-300 active:scale-[0.98]">
+                    class="w-full group relative flex justify-center py-4 px-4 border border-transparent text-sm font-bold rounded-2xl text-white bg-blue-900 hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 shadow-lg shadow-blue-200 transform transition-all duration-300 active:scale-[0.98]">
                 <span class="absolute left-0 inset-y-0 flex items-center pl-3">
                     <svg class="h-5 w-5 text-blue-300 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
@@ -56,7 +56,7 @@
         </div>
 
         <div class="text-center mt-6">
-            <a href="{{ route('login') }}" class="inline-flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-blue-600 transition-colors py-2">
+            <a href="{{ route('login') }}" class="inline-flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-blue-900 transition-colors py-2">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                 </svg>

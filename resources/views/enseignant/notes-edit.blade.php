@@ -40,13 +40,13 @@
                 
                 <!-- Form Header -->
                 <div class="flex items-center mb-8 pb-6 border-b border-gray-100">
-                    <div class="bg-gradient-to-br from-blue-400 to-indigo-500 text-white p-4 rounded-2xl shadow-lg shadow-blue-500/30 mr-5 transform hover:-rotate-3 transition-transform duration-300">
+                    <div class="bg-blue-900 text-white p-4 rounded-2xl shadow-lg shadow-blue-500/30 mr-5 transform hover:-rotate-3 transition-transform duration-300">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                         </svg>
                     </div>
                     <div>
-                        <h3 class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-800">
+                        <h3 class="text-2xl font-extrabold text-transparent bg-clip-text bg-blue-900">
                             Modification de la note de {{ $note->eleve->prenom }} {{ $note->eleve->nom }}
                         </h3>
                         <p class="text-gray-500 text-sm mt-1 font-medium">Réajustez la note ou modifiez votre appréciation.</p>
@@ -73,7 +73,7 @@
                             <div>
                                 <p class="text-xs uppercase tracking-wider font-semibold text-gray-500 mb-1">Type & Date</p>
                                 <p class="text-base text-gray-900 font-bold capitalize">{{ $note->evaluation->type }}</p>
-                                <p class="text-sm text-indigo-700 font-medium">{{ \Carbon\Carbon::parse($note->evaluation->date_evaluation)->format('d/m/Y') }}</p>
+                                <p class="text-sm text-blue-900 font-medium">{{ \Carbon\Carbon::parse($note->evaluation->date_evaluation)->format('d/m/Y') }}</p>
                             </div>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                         <!-- Ligne Note et Barème -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div class="group">
-                                <label for="note" class="block text-sm font-semibold text-gray-700 mb-2 group-hover:text-blue-600 transition-colors">
+                                <label for="note" class="block text-sm font-semibold text-gray-700 mb-2 group-hover:text-blue-900 transition-colors">
                                     Note de l'élève <span class="text-red-500">*</span>
                                 </label>
                                 <div class="relative rounded-xl shadow-sm overflow-hidden flex ring-1 ring-gray-200 focus-within:ring-2 focus-within:ring-blue-500 transition-all duration-300">
@@ -105,7 +105,7 @@
 
                         <!-- Observation -->
                         <div class="group">
-                            <label for="observation" class="block text-sm font-semibold text-gray-700 mb-2 group-hover:text-blue-600 transition-colors">
+                            <label for="observation" class="block text-sm font-semibold text-gray-700 mb-2 group-hover:text-blue-900 transition-colors">
                                 Observation / Appréciation <span class="text-gray-400 font-normal">(Optionnel)</span>
                             </label>
                             <textarea id="observation" name="observation" rows="4"
@@ -123,7 +123,7 @@
                             Annuler
                         </a>
                         <button type="submit" 
-                            class="px-8 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold rounded-xl shadow-lg shadow-blue-500/30 hover:shadow-xl hover:from-blue-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center">
+                            class="px-8 py-3 bg-blue-900 text-white font-bold rounded-xl shadow-lg shadow-blue-500/30 hover:shadow-xl hover:from-blue-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center">
                             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                             </svg>

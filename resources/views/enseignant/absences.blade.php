@@ -10,7 +10,7 @@
 <div class="py-6 sm:py-12">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <!-- Header avec bouton de création -->
-        <div class="bg-gradient-to-r from-red-600 to-red-400 rounded-lg sm:rounded-xl shadow-lg mb-6 sm:mb-8 p-4 sm:p-6">
+        <div class="bg-blue-900 rounded-lg sm:rounded-xl shadow-lg mb-6 sm:mb-8 p-4 sm:p-6">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
                     <h3 class="text-xl sm:text-2xl font-bold text-white">Gestion des Absences</h3>
@@ -221,7 +221,7 @@
                                 <div class="flex items-center gap-1 sm:gap-2">
                                     <!-- Voir détails -->
                                     <a href="{{ route('enseignant.absences.show', $absence->id) }}" 
-                                       class="text-blue-600 hover:text-blue-900 p-1" title="Voir détails">
+                                       class="text-blue-900 hover:text-blue-900 p-1" title="Voir détails">
                                         <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>

@@ -12,10 +12,10 @@
         <div class="max-w-3xl mx-auto px-3 sm:px-4 lg:px-6">
             <div class="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300">
                 <!-- En-tête avec animation - Responsive -->
-                <div class="px-4 sm:px-5 md:px-6 py-3 sm:py-4 md:py-5 bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-gray-100">
+                <div class="px-4 sm:px-5 md:px-6 py-3 sm:py-4 md:py-5 bg-blue-900 border-b border-gray-100">
                     <div class="flex items-center gap-2 sm:gap-3">
                         <div class="p-1.5 sm:p-2 bg-blue-100 rounded-lg">
-                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
                             </svg>
                         </div>
@@ -44,7 +44,7 @@
                             <div class="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6">
                                 <!-- Aperçu de la photo -->
                                 <div class="shrink-0">
-                                    <div id="preview" class="h-20 w-20 sm:h-24 sm:w-24 rounded-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center border-4 border-white shadow-lg overflow-hidden">
+                                    <div id="preview" class="h-20 w-20 sm:h-24 sm:w-24 rounded-full bg-blue-900 flex items-center justify-center border-4 border-white shadow-lg overflow-hidden">
                                         <svg class="h-10 w-10 sm:h-12 sm:w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                         </svg>
@@ -179,14 +179,14 @@
                                         <input type="checkbox" 
                                                name="roles[]" 
                                                value="{{ $role->id }}" 
-                                               class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                                               class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-900 border-gray-300 rounded focus:ring-blue-500"
                                                {{ in_array($role->id, old('roles', [])) ? 'checked' : '' }}>
-                                        <span class="ml-2 text-xs sm:text-sm font-medium text-gray-700 group-hover:text-blue-600 transition-colors duration-300">
+                                        <span class="ml-2 text-xs sm:text-sm font-medium text-gray-700 group-hover:text-blue-900 transition-colors duration-300">
                                             {{ ucfirst($role->name) }}
                                         </span>
                                         <span class="ml-auto text-[9px] sm:text-xs">
                                             @if($role->name == 'administrateur')
-                                                <span class="px-1.5 py-0.5 sm:px-2 sm:py-0.5 bg-purple-100 text-purple-800 rounded-full">Accès total</span>
+                                                <span class="px-1.5 py-0.5 sm:px-2 sm:py-0.5 bg-blue-100 text-purple-800 rounded-full">Accès total</span>
                                             @elseif($role->name == 'enseignant')
                                                 <span class="px-1.5 py-0.5 sm:px-2 sm:py-0.5 bg-blue-100 text-blue-800 rounded-full">Gestion cours</span>
                                             @elseif($role->name == 'eleve')
@@ -228,7 +228,7 @@
                                        name="email_verified" 
                                        id="email_verified" 
                                        value="1"
-                                       class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 mt-0.5">
+                                       class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-900 border-gray-300 rounded focus:ring-blue-500 mt-0.5">
                                 <label for="email_verified" class="ml-2 text-xs sm:text-sm text-gray-700 cursor-pointer">
                                     <span class="font-medium">Email vérifié</span>
                                     <p class="text-[9px] sm:text-xs text-gray-500">Marquer l'email comme vérifié</p>
@@ -239,12 +239,12 @@
                         <!-- Informations supplémentaires (optionnelles) - Responsive -->
                         <div class="p-3 sm:p-4 bg-blue-50 rounded-lg sm:rounded-xl border border-blue-200">
                             <div class="flex items-start gap-2 sm:gap-3">
-                                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-blue-900 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
                                 <div>
                                     <p class="text-xs sm:text-sm font-medium text-blue-800">Informations importantes</p>
-                                    <ul class="text-[10px] sm:text-xs text-blue-600 mt-1 space-y-0.5 list-disc list-inside">
+                                    <ul class="text-[10px] sm:text-xs text-blue-900 mt-1 space-y-0.5 list-disc list-inside">
                                         <li>Le mot de passe doit contenir au moins 8 caractères</li>
                                         <li>L'email doit être unique dans le système</li>
                                         <li>Vous pourrez ajouter des informations supplémentaires après la création</li>
@@ -264,7 +264,7 @@
                                 Annuler
                             </a>
                             <button type="submit" 
-                                    class="w-full sm:w-auto px-5 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 group text-sm sm:text-base">
+                                    class="w-full sm:w-auto px-5 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 bg-yellow-500 text-blue-900 font-bold hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 group text-sm sm:text-base">
                                 <svg class="w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
                                 </svg>

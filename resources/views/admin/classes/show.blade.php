@@ -37,7 +37,7 @@
         <!-- En-tête avec infos classe -->
         <div class="bg-white rounded-xl md:rounded-2xl shadow-xl mb-6 md:mb-8 overflow-hidden border border-gray-100">
             <!-- Bannière dégradée -->
-            <div class="relative bg-gradient-to-r from-indigo-600 via-indigo-700 to-purple-700 px-4 md:px-8 py-4 md:py-6">
+            <div class="relative bg-blue-900 px-4 md:px-8 py-4 md:py-6">
                 <!-- Éléments décoratifs -->
                 <div class="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent"></div>
                 <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-32 translate-x-32"></div>
@@ -57,7 +57,7 @@
                                         ID: {{ $classe->id }}
                                     </span>
                                 </div>
-                                <div class="flex flex-wrap items-center gap-2 md:gap-4 text-indigo-100 text-xs md:text-sm">
+                                <div class="flex flex-wrap items-center gap-2 md:gap-4 text-blue-100 text-xs md:text-sm">
                                     <span class="flex items-center">
                                         <svg class="w-3 h-3 md:w-4 md:h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
@@ -119,14 +119,14 @@
             <!-- Cartes statistiques -->
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 p-4 md:p-6 bg-gradient-to-br from-gray-50 to-white">
                 <!-- Total élèves -->
-                <div class="group bg-white rounded-lg md:rounded-xl shadow p-3 md:p-5 border-l-4 border-indigo-500 hover:shadow-md transition-all">
+                <div class="group bg-white rounded-lg md:rounded-xl shadow p-3 md:p-5 border-l-4 border-blue-900 hover:shadow-md transition-all">
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-[10px] md:text-xs font-medium text-gray-500 uppercase">Total élèves</p>
                             <p class="text-lg md:text-2xl font-bold text-gray-800 mt-1">{{ $inscriptions->count() }}</p>
                         </div>
-                        <div class="bg-indigo-100 p-2 md:p-3 rounded-lg group-hover:scale-110 transition-transform">
-                            <svg class="w-5 h-5 md:w-6 md:h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="bg-blue-100 p-2 md:p-3 rounded-lg group-hover:scale-110 transition-transform">
+                            <svg class="w-5 h-5 md:w-6 md:h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                             </svg>
                         </div>
@@ -165,14 +165,14 @@
                 </div>
 
                 <!-- Élèves actifs -->
-                <div class="group bg-white rounded-lg md:rounded-xl shadow p-3 md:p-5 border-l-4 border-purple-500 hover:shadow-md transition-all">
+                <div class="group bg-white rounded-lg md:rounded-xl shadow p-3 md:p-5 border-l-4 border-blue-900 hover:shadow-md transition-all">
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-[10px] md:text-xs font-medium text-gray-500 uppercase">Actifs</p>
                             <p class="text-lg md:text-2xl font-bold text-gray-800 mt-1">{{ $inscriptions->where('statut', true)->count() }}</p>
                         </div>
-                        <div class="bg-purple-100 p-2 md:p-3 rounded-lg group-hover:scale-110 transition-transform">
-                            <svg class="w-5 h-5 md:w-6 md:h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="bg-blue-100 p-2 md:p-3 rounded-lg group-hover:scale-110 transition-transform">
+                            <svg class="w-5 h-5 md:w-6 md:h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                             </svg>
                         </div>
@@ -187,8 +187,8 @@
             <div class="bg-gradient-to-r from-gray-50 to-white px-4 md:px-6 py-4 md:py-5 border-b border-gray-200">
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                     <div class="flex items-center gap-2 md:gap-3">
-                        <div class="bg-gradient-to-br from-indigo-100 to-indigo-200 p-1.5 md:p-2.5 rounded-lg md:rounded-xl">
-                            <svg class="w-5 h-5 md:w-6 md:h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="bg-blue-900 p-1.5 md:p-2.5 rounded-lg md:rounded-xl">
+                            <svg class="w-5 h-5 md:w-6 md:h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
                             </svg>
                         </div>
@@ -201,7 +201,7 @@
                     <div class="flex items-center gap-2 md:gap-3">
                         @if(Route::has('admin.inscriptions.create'))
                         <a href="{{ route('admin.inscriptions.create', ['classe_id' => $classe->id]) }}"
-                           class="w-full sm:w-auto inline-flex items-center justify-center px-3 md:px-4 py-2 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white rounded-lg md:rounded-xl text-xs font-medium shadow-sm group">
+                           class="w-full sm:w-auto inline-flex items-center justify-center px-3 md:px-4 py-2 bg-blue-900 text-white rounded-lg md:rounded-xl text-xs font-medium shadow-sm group">
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                             </svg>
@@ -231,7 +231,7 @@
                     <tbody class="divide-y divide-gray-100">
                         @forelse($inscriptions as $inscription)
                             @if($inscription->eleve)
-                                <tr class="hover:bg-indigo-50/50 transition-all">
+                                <tr class="hover:bg-blue-50/50 transition-all">
                                     <!-- Photo -->
                                     <td class="px-3 md:px-6 py-3 whitespace-nowrap">
                                         @if($inscription->eleve->photo)
@@ -239,8 +239,8 @@
                                                  src="{{ Storage::url($inscription->eleve->photo) }}"
                                                  alt="{{ $inscription->eleve->prenom }}">
                                         @else
-                                            <div class="h-8 w-8 md:h-10 md:w-10 rounded-lg bg-indigo-100 flex items-center justify-center border">
-                                                <span class="text-[10px] md:text-xs font-bold text-indigo-700">
+                                            <div class="h-8 w-8 md:h-10 md:w-10 rounded-lg bg-blue-100 flex items-center justify-center border">
+                                                <span class="text-[10px] md:text-xs font-bold text-blue-900">
                                                     {{ strtoupper(substr($inscription->eleve->prenom, 0, 1)) }}{{ strtoupper(substr($inscription->eleve->nom, 0, 1)) }}
                                                 </span>
                                             </div>
@@ -249,7 +249,7 @@
 
                                     <!-- Matricule -->
                                     <td class="px-3 md:px-6 py-3 whitespace-nowrap">
-                                        <span class="px-2 py-1 bg-indigo-50 text-indigo-700 rounded text-[10px] md:text-xs font-mono font-semibold">
+                                        <span class="px-2 py-1 bg-blue-50 text-blue-900 rounded text-[10px] md:text-xs font-mono font-semibold">
                                             {{ $inscription->eleve->matricule ?? '-' }}
                                         </span>
                                     </td>
@@ -308,7 +308,7 @@
                                     <td class="px-3 md:px-6 py-3 whitespace-nowrap text-right">
                                         <div class="flex items-center justify-end gap-1 md:gap-2">
                                             <a href="{{ route('admin.eleves.show', $inscription->eleve) }}"
-                                               class="p-1.5 md:p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all"
+                                               class="p-1.5 md:p-2 text-blue-900 hover:bg-blue-50 rounded-lg transition-all"
                                                title="Voir">
                                                 <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -350,7 +350,7 @@
                                         <p class="text-gray-500 text-xs md:text-sm mb-4 md:mb-6">Cette classe est vide</p>
                                         @if(Route::has('admin.inscriptions.create'))
                                         <a href="{{ route('admin.inscriptions.create', ['classe_id' => $classe->id]) }}"
-                                           class="px-4 md:px-6 py-2 md:py-3 bg-indigo-600 text-white text-xs md:text-sm font-medium rounded-lg md:rounded-xl shadow">
+                                           class="px-4 md:px-6 py-2 md:py-3 bg-blue-900 text-white text-xs md:text-sm font-medium rounded-lg md:rounded-xl shadow">
                                             Inscrire un élève
                                         </a>
                                         @endif
@@ -367,7 +367,7 @@
             <div class="bg-gray-50 px-4 md:px-6 py-3 md:py-4 border-t">
                 <div class="flex flex-col sm:flex-row justify-between items-center gap-2 text-xs md:text-sm text-gray-600">
                     <div class="flex items-center">
-                        <span>Total: <span class="font-semibold text-indigo-600">{{ $inscriptions->count() }}</span> élève(s)</span>
+                        <span>Total: <span class="font-semibold text-blue-900">{{ $inscriptions->count() }}</span> élève(s)</span>
                     </div>
                     <div>
                         <span class="font-semibold text-green-600">{{ $inscriptions->where('statut', true)->count() }}</span> actif(s) ·

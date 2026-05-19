@@ -20,7 +20,7 @@
         
         <!-- En-tête du Parcours -->
         <div class="relative mb-8 overflow-hidden bg-white shadow-2xl rounded-3xl group">
-            <div class="absolute inset-0 bg-gradient-to-r from-blue-700 via-indigo-700 to-indigo-900 opacity-95"></div>
+            <div class="absolute inset-0 bg-blue-900 opacity-95"></div>
             <div class="absolute inset-0 opacity-20">
                 <div class="absolute bg-white rounded-full w-96 h-96 -top-48 -right-48 blur-3xl animate-pulse"></div>
             </div>
@@ -33,7 +33,7 @@
                             @if($eleve->photo)
                                 <img src="{{ asset('storage/' . $eleve->photo) }}" alt="{{ $eleve->nom_complet }}" class="w-full h-full object-cover">
                             @else
-                                <span class="text-4xl font-bold text-indigo-700">{{ substr($eleve->prenom, 0, 1) }}{{ substr($eleve->nom, 0, 1) }}</span>
+                                <span class="text-4xl font-bold text-blue-900">{{ substr($eleve->prenom, 0, 1) }}{{ substr($eleve->nom, 0, 1) }}</span>
                             @endif
                         </div>
                     </div>
@@ -72,7 +72,7 @@
         <div class="bg-white shadow-xl rounded-3xl overflow-hidden border border-gray-100">
             <div class="p-6 border-b border-gray-100 bg-gray-50/50 flex items-center justify-between">
                 <h3 class="text-xl font-bold text-gray-800 flex items-center">
-                    <svg class="w-6 h-6 mr-3 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-6 h-6 mr-3 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                     Timeline de Progression Cycle (Primaire → Collège → Lycée)
@@ -89,13 +89,13 @@
                 @if($historique->count() > 0)
                     <div class="relative">
                         <!-- Ligne verticale de la timeline -->
-                        <div class="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-600 via-indigo-600 to-purple-600 rounded-full opacity-20"></div>
+                        <div class="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-1 bg-blue-900 rounded-full opacity-20"></div>
                         
                         <div class="space-y-16">
                             @foreach($historique as $index => $item)
                                 <div class="relative flex flex-col md:flex-row items-center group">
                                     <!-- Point central avec année -->
-                                    <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 flex items-center justify-center w-12 h-12 rounded-full bg-white border-4 border-indigo-600 shadow-xl z-10 transition-all duration-300 group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white">
+                                    <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 flex items-center justify-center w-12 h-12 rounded-full bg-white border-4 border-indigo-600 shadow-xl z-10 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-900 group-hover:text-white">
                                         <span class="text-[10px] font-bold">{{ substr($item['annee_scolaire']->nom, -4) }}</span>
                                     </div>
                                     
@@ -103,7 +103,7 @@
                                     <div class="ml-16 md:ml-0 md:w-1/2 {{ $index % 2 == 0 ? 'md:pr-20 md:text-right' : 'md:pl-20 md:order-last md:text-left' }}">
                                         <div class="p-8 bg-white border border-gray-100 rounded-3xl shadow-sm hover:shadow-2xl transition-all duration-500 border-t-4 border-t-indigo-600">
                                             <div class="flex items-center {{ $index % 2 == 0 ? 'md:justify-end' : 'md:justify-start' }} mb-4">
-                                                <span class="px-4 py-1.5 text-sm font-black text-indigo-700 bg-indigo-50 rounded-full">
+                                                <span class="px-4 py-1.5 text-sm font-black text-blue-900 bg-blue-50 rounded-full">
                                                     {{ $item['annee_scolaire']->nom }}
                                                 </span>
                                             </div>
@@ -123,7 +123,7 @@
                                                     $cycleColor = 'bg-blue-100 text-blue-700';
                                                 } elseif (str_contains($niveau, 'sec') || str_contains($niveau, 'pre') || str_contains($niveau, 'ter')) {
                                                     $cycle = 'Lycée';
-                                                    $cycleColor = 'bg-purple-100 text-purple-700';
+                                                    $cycleColor = 'bg-blue-100 text-blue-900';
                                                 }
                                             @endphp
                                             
@@ -160,7 +160,7 @@
                                             </div>
                                             
                                             @if($item['observation'])
-                                                <div class="mt-6 p-4 bg-indigo-50/50 rounded-2xl border border-indigo-100/50 italic text-sm text-indigo-700 relative">
+                                                <div class="mt-6 p-4 bg-blue-50/50 rounded-2xl border border-indigo-100/50 italic text-sm text-blue-900 relative">
                                                     <svg class="absolute -top-3 -left-1 w-6 h-6 text-indigo-200 fill-current" viewBox="0 0 24 24"><path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H16.017C14.9124 8 14.017 7.10457 14.017 6V5C14.017 3.89543 14.9124 3 16.017 3H19.017C21.2261 3 23.017 4.79086 23.017 7V15C23.017 18.866 19.883 22 16.017 22H14.017V21ZM1 15V7C1 4.79086 2.79086 3 5 3H8C9.10457 3 10 3.89543 10 5V6C10 7.10457 9.10457 8 8 8H5C4.44772 8 4 8.44772 4 9V15C4 15.5523 4.44772 16 5 16H8C9.10457 16 10 16.8954 10 18V21H8V22C4.13401 22 1 18.866 1 15Z"/></svg>
                                                     "{{ $item['observation'] }}"
                                                 </div>
@@ -169,7 +169,7 @@
                                             <!-- Actions Admin pour cette année -->
                                             <div class="mt-8 pt-6 border-t border-gray-100 flex flex-wrap gap-2 {{ $index % 2 == 0 ? 'md:justify-end' : 'md:justify-start' }}">
                                                 <a href="{{ route('admin.bulletins.index', ['eleve_id' => $eleve->id, 'annee_scolaire_id' => $item['annee_scolaire']->id]) }}" 
-                                                   class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200">
+                                                   class="inline-flex items-center px-4 py-2 bg-blue-900 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-800 transition-all shadow-lg shadow-indigo-200">
                                                     Bulletins
                                                 </a>
                                                 <a href="{{ route('admin.notes.by-eleve', $eleve) }}" 
@@ -199,7 +199,7 @@
                         </div>
                         <h4 class="text-2xl font-black text-gray-800">Historique non disponible</h4>
                         <p class="text-gray-500 mt-2 max-w-md mx-auto">Cet élève n'a pas encore d'historique de scolarité enregistré dans le système.</p>
-                        <a href="{{ route('admin.inscriptions.create', ['eleve_id' => $eleve->id]) }}" class="mt-8 inline-flex items-center px-6 py-3 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition-all">
+                        <a href="{{ route('admin.inscriptions.create', ['eleve_id' => $eleve->id]) }}" class="mt-8 inline-flex items-center px-6 py-3 bg-blue-900 text-white font-bold rounded-xl hover:bg-blue-800 transition-all">
                             Inscrire à une classe
                         </a>
                     </div>
@@ -210,7 +210,7 @@
         <!-- Section Graphique + Suivi administratif -->
         <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Graphique Chart.js -->
-            <div class="p-6 bg-gradient-to-br from-indigo-900 to-indigo-800 rounded-3xl text-white shadow-xl">
+            <div class="p-6 bg-blue-900 rounded-3xl text-white shadow-xl">
                 <h4 class="text-lg font-black mb-1 flex items-center">
                     <svg class="w-5 h-5 mr-2 text-indigo-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>

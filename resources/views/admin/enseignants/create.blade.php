@@ -10,7 +10,7 @@
     <div class="py-12">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <!-- En-tête moderne avec dégradé -->
-            <div class="bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 rounded-2xl shadow-2xl mb-8 overflow-hidden relative group">
+            <div class="bg-blue-900 rounded-2xl shadow-2xl mb-8 overflow-hidden relative group">
                 <!-- Éléments décoratifs animés -->
                 <div class="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent"></div>
                 <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-32 translate-x-32 group-hover:translate-y-0 group-hover:translate-x-0 transition-transform duration-700"></div>
@@ -59,8 +59,8 @@
                 <!-- En-tête du formulaire -->
                 <div class="px-6 py-5 bg-gradient-to-r from-gray-50 to-white border-b border-gray-200">
                     <div class="flex items-center">
-                        <div class="bg-gradient-to-br from-blue-100 to-blue-200 p-3 rounded-xl">
-                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="bg-blue-900 p-3 rounded-xl">
+                            <svg class="w-6 h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                             </svg>
                         </div>
@@ -74,11 +74,11 @@
                 <!-- Barre de progression -->
                 <div class="px-6 pt-4">
                     <div class="flex items-center justify-between mb-2">
-                        <span class="text-xs font-semibold text-blue-600 uppercase tracking-wider">Progression</span>
+                        <span class="text-xs font-semibold text-blue-900 uppercase tracking-wider">Progression</span>
                         <span class="text-xs text-gray-500">Étape 1/3</span>
                     </div>
                     <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
-                        <div class="bg-gradient-to-r from-blue-500 to-indigo-600 h-2 rounded-full progress-bar" style="width: 33%"></div>
+                        <div class="bg-blue-900 h-2 rounded-full progress-bar" style="width: 33%"></div>
                     </div>
                     <p class="text-xs text-gray-500 mt-2">Informations personnelles</p>
                 </div>
@@ -93,7 +93,7 @@
                             <label class="block text-sm font-medium text-gray-700 mb-3">Photo de profil</label>
                             <div class="flex items-center space-x-6">
                                 <div class="flex-shrink-0">
-                                    <div class="w-20 h-20 rounded-xl bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center border-2 border-gray-300 overflow-hidden" id="photo-preview-container">
+                                    <div class="w-20 h-20 rounded-xl bg-blue-900 flex items-center justify-center border-2 border-gray-300 overflow-hidden" id="photo-preview-container">
                                         <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                         </svg>
@@ -400,7 +400,7 @@
                                 Annuler
                             </a>
                             <button type="submit"
-                                    class="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 font-medium text-sm shadow-lg shadow-blue-200 flex items-center group">
+                                    class="px-8 py-3 bg-blue-900 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 font-medium text-sm shadow-lg shadow-blue-200 flex items-center group">
                                 <svg class="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
                                 </svg>
@@ -412,7 +412,7 @@
             </div>
 
             <!-- Aide contextuelle -->
-            <div class="mt-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-5 border border-blue-100">
+            <div class="mt-6 bg-blue-900 rounded-xl p-5 border border-blue-100">
                 <div class="flex">
                     <div class="flex-shrink-0">
                         <div class="bg-blue-200 p-2 rounded-lg">

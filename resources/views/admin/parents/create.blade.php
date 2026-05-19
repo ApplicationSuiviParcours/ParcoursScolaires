@@ -3,7 +3,7 @@
 @section('title', 'Nouveau parent')
 
 @section('header')
-<div class="relative overflow-hidden bg-gradient-to-br from-emerald-600 via-emerald-700 to-teal-800 py-10 sm:py-12">
+<div class="relative overflow-hidden bg-blue-900 py-10 sm:py-12">
     <!-- Éléments décoratifs animés -->
     <div class="absolute inset-0 opacity-10">
         <div class="absolute -top-24 -right-24 w-64 sm:w-96 h-64 sm:h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-pulse"></div>
@@ -70,7 +70,7 @@
         <div class="bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden">
 
             {{-- En-tête du formulaire --}}
-            <div class="bg-gradient-to-r from-emerald-500 to-teal-600 px-5 sm:px-8 py-5 sm:py-6">
+            <div class="bg-blue-900 px-5 sm:px-8 py-5 sm:py-6">
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div class="flex items-start sm:items-center gap-3 sm:gap-5">
                         <div class="w-12 h-12 sm:w-14 sm:h-14 bg-white/20 backdrop-blur-lg rounded-xl sm:rounded-2xl flex items-center justify-center flex-shrink-0">
@@ -98,7 +98,7 @@
                     @csrf
 
                     {{-- Aperçu rapide --}}
-                    <div class="mb-6 sm:mb-8 p-4 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl sm:rounded-2xl border border-emerald-200 hidden" id="previewSection">
+                    <div class="mb-6 sm:mb-8 p-4 bg-blue-900 rounded-xl sm:rounded-2xl border border-emerald-200 hidden" id="previewSection">
                         <div class="flex items-center gap-3 sm:gap-4">
                             <div class="w-12 h-12 sm:w-16 sm:h-16 bg-emerald-500 rounded-xl flex items-center justify-center text-white font-bold text-lg sm:text-2xl flex-shrink-0" id="previewInitiales">
                                 ?
@@ -423,7 +423,7 @@
                                 <label for="facebook" class="block text-sm font-medium text-gray-700 mb-2">Facebook</label>
                                 <div class="relative">
                                     <div class="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
-                                        <svg class="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                                        <svg class="h-4 w-4 sm:h-5 sm:w-5 text-blue-900" fill="currentColor" viewBox="0 0 24 24">
                                             <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12z"/>
                                         </svg>
                                     </div>
@@ -545,7 +545,7 @@
                             Annuler
                         </a>
                         <button type="submit"
-                                class="inline-flex items-center justify-center px-6 sm:px-8 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl text-sm">
+                                class="inline-flex items-center justify-center px-6 sm:px-8 py-3 bg-blue-900 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl text-sm">
                             <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/>
                             </svg>

@@ -25,7 +25,7 @@
                     Aucun élément ne correspond à votre recherche "{{ $query }}".
                 </p>
                 <div class="mt-4 sm:mt-6">
-                    <a href="{{ url()->previous() }}" class="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 text-xs font-semibold tracking-widest text-white uppercase bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 transition duration-200">
+                    <a href="{{ url()->previous() }}" class="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 text-xs font-semibold tracking-widest text-white uppercase bg-blue-900 border border-transparent rounded-md hover:bg-blue-800 transition duration-200">
                         Retour
                     </a>
                 </div>
@@ -37,7 +37,7 @@
                 <!-- Résultats Élèves - Responsive -->
                 @if(count($results['eleves']) > 0)
                 <div class="overflow-hidden bg-white shadow-sm rounded-lg sm:rounded-xl">
-                    <div class="px-3 sm:px-4 md:px-6 py-2.5 sm:py-3 md:py-4 border-b border-indigo-100 bg-indigo-50">
+                    <div class="px-3 sm:px-4 md:px-6 py-2.5 sm:py-3 md:py-4 border-b border-indigo-100 bg-blue-50">
                         <h2 class="text-sm sm:text-base md:text-lg font-semibold text-indigo-900">
                             Élèves ({{ count($results['eleves']) }})
                         </h2>
@@ -49,15 +49,15 @@
                                 <div class="flex-1 w-full sm:w-auto">
                                     <div class="flex items-center space-x-2 sm:space-x-3">
                                         <div class="flex-shrink-0">
-                                            <div class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-indigo-100 rounded-full">
-                                                <span class="text-xs sm:text-sm font-medium text-indigo-600">
+                                            <div class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-blue-100 rounded-full">
+                                                <span class="text-xs sm:text-sm font-medium text-blue-900">
                                                     {{ strtoupper(substr($eleve->prenom, 0, 1)) }}{{ strtoupper(substr($eleve->nom, 0, 1)) }}
                                                 </span>
                                             </div>
                                         </div>
                                         <div class="min-w-0 flex-1">
                                             <p class="text-sm font-medium text-gray-900 truncate">
-                                                <a href="{{ route('admin.eleves.show', $eleve) }}" class="hover:text-indigo-600">
+                                                <a href="{{ route('admin.eleves.show', $eleve) }}" class="hover:text-blue-900">
                                                     {{ $eleve->nom }} {{ $eleve->prenom }}
                                                 </a>
                                             </p>
@@ -68,7 +68,7 @@
                                     </div>
                                 </div>
                                 <a href="{{ route('admin.eleves.show', $eleve) }}"
-                                   class="inline-flex items-center px-2.5 sm:px-3 py-1 text-xs sm:text-sm font-medium leading-5 text-indigo-700 bg-indigo-100 border border-transparent rounded-md hover:bg-indigo-200 transition duration-200 whitespace-nowrap">
+                                   class="inline-flex items-center px-2.5 sm:px-3 py-1 text-xs sm:text-sm font-medium leading-5 text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-indigo-200 transition duration-200 whitespace-nowrap">
                                     Voir
                                 </a>
                             </div>
@@ -135,14 +135,14 @@
                                     <div class="flex items-center space-x-2 sm:space-x-3">
                                         <div class="flex-shrink-0">
                                             <div class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-blue-100 rounded-full">
-                                                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                                                 </svg>
                                             </div>
                                         </div>
                                         <div class="min-w-0 flex-1">
                                             <p class="text-sm font-medium text-gray-900 truncate">
-                                                <a href="{{ route('admin.classes.show', $classe) }}" class="hover:text-blue-600">
+                                                <a href="{{ route('admin.classes.show', $classe) }}" class="hover:text-blue-900">
                                                     {{ $classe->nom_complet }}
                                                 </a>
                                             </p>
@@ -162,7 +162,7 @@
 
                 <!-- Lien pour voir tous les résultats - Responsive -->
                 <div class="mt-4 sm:mt-5 md:mt-6 text-center">
-                    <a href="{{ route('search', ['q' => $query]) }}" class="text-sm sm:text-base text-indigo-600 hover:text-indigo-900 transition duration-200">
+                    <a href="{{ route('search', ['q' => $query]) }}" class="text-sm sm:text-base text-blue-900 hover:text-indigo-900 transition duration-200">
                         Voir tous les résultats →
                     </a>
                 </div>

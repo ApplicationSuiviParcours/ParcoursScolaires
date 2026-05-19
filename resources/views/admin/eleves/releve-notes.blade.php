@@ -32,7 +32,7 @@
                 <div class="mb-6 flex justify-between items-center">
                     <div>
                         <h3 class="text-lg font-bold text-gray-800">{{ $periode }}</h3>
-                        <p class="text-sm text-gray-500">Moyenne de la période : <span class="font-bold text-indigo-600">{{ $moyenne ? number_format($moyenne, 2) : '--' }}/20</span></p>
+                        <p class="text-sm text-gray-500">Moyenne de la période : <span class="font-bold text-blue-900">{{ $moyenne ? number_format($moyenne, 2) : '--' }}/20</span></p>
                     </div>
                     <a href="{{ route('admin.eleves.releve-notes-pdf', ['eleve' => $eleve->id, 'periode' => $periode]) }}" class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-md text-xs font-bold uppercase tracking-widest hover:bg-red-700 transition-colors">
                         Télécharger PDF

@@ -77,7 +77,7 @@
 </head>
 
 <body class="font-sans antialiased text-gray-900 bg-gray-100 overflow-x-hidden">
-    <div class="relative flex flex-col items-center min-h-screen overflow-x-hidden sm:justify-center bg-gradient-to-br from-blue-900 via-blue-700 to-blue-500">
+    <div class="relative flex flex-col items-center min-h-screen overflow-x-hidden sm:justify-center bg-blue-900">
         
         <!-- Éléments décoratifs de fond - Responsive -->
         <div class="absolute inset-0 z-0 w-full h-full overflow-hidden pointer-events-none">
@@ -86,7 +86,7 @@
             <!-- Deuxième blob - taille adaptée -->
             <div class="absolute bg-blue-400 rounded-full blob-delayed top-1/2 -right-20 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 mix-blend-multiply filter blur-3xl opacity-15 sm:opacity-20"></div>
             <!-- Troisième blob - taille adaptée -->
-            <div class="absolute bg-indigo-500 rounded-full blob -bottom-20 left-1/3 w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 mix-blend-multiply filter blur-3xl opacity-15 sm:opacity-20"></div>
+            <div class="absolute bg-blue-800 rounded-full blob -bottom-20 left-1/3 w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 mix-blend-multiply filter blur-3xl opacity-15 sm:opacity-20"></div>
         </div>
 
         <!-- Conteneur principal - Responsive -->
@@ -116,7 +116,7 @@
             <div class="relative w-full overflow-hidden border shadow-2xl bg-white/95 backdrop-blur-md rounded-xl sm:rounded-2xl border-white/20">
                 
                 <!-- Barre décorative -->
-                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 via-blue-600 to-blue-800 sm:h-1.5"></div>
+                <div class="absolute top-0 left-0 w-full h-1 bg-blue-900 sm:h-1.5"></div>
 
                 <!-- Contenu avec paddings adaptatifs -->
                 <div class="p-4 sm:p-5 md:p-6">

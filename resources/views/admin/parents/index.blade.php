@@ -3,7 +3,7 @@
 @section('title', 'Gestion des parents')
 
 @section('header')
-<div class="relative overflow-hidden bg-gradient-to-br from-purple-600 via-purple-700 to-indigo-800 py-10 sm:py-12">
+<div class="relative overflow-hidden bg-blue-900 py-10 sm:py-12">
     <!-- Éléments décoratifs animés -->
     <div class="absolute inset-0 opacity-10">
         <div class="absolute -top-24 -right-24 w-64 sm:w-96 h-64 sm:h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-pulse"></div>
@@ -62,7 +62,7 @@
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
 
         <!-- Total parents -->
-        <div class="bg-white rounded-2xl shadow-lg p-4 sm:p-6 border-l-4 border-purple-500 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+        <div class="bg-white rounded-2xl shadow-lg p-4 sm:p-6 border-l-4 border-blue-900 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
             <div class="flex items-center justify-between">
                 <div class="min-w-0">
                     <p class="text-xs sm:text-sm text-gray-500 font-medium uppercase tracking-wider leading-tight">Total parents</p>
@@ -70,8 +70,8 @@
 
                     <p class="text-xs text-gray-500 mt-1 hidden sm:block">Tous les parents inscrits</p>
                 </div>
-                <div class="bg-purple-100 rounded-xl p-2 sm:p-3 flex-shrink-0 ml-2">
-                    <svg class="w-6 h-6 sm:w-8 sm:h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="bg-blue-100 rounded-xl p-2 sm:p-3 flex-shrink-0 ml-2">
+                    <svg class="w-6 h-6 sm:w-8 sm:h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
                     </svg>
                 </div>
@@ -112,7 +112,7 @@
                     <p class="text-xs text-gray-500 mt-1 hidden sm:block">Ont des enfants inscrits</p>
                 </div>
                 <div class="bg-blue-100 rounded-xl p-2 sm:p-3 flex-shrink-0 ml-2">
-                    <svg class="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-6 h-6 sm:w-8 sm:h-8 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
                     </svg>
                 </div>
@@ -140,7 +140,7 @@
                 </div>
             </div>
             <div class="mt-3 sm:mt-4">
-                <a href="#" class="text-xs sm:text-sm text-purple-600 hover:text-purple-800 font-medium">
+                <a href="#" class="text-xs sm:text-sm text-yellow-600 hover:text-purple-800 font-medium">
                     + Créer des comptes →
                 </a>
             </div>
@@ -151,12 +151,12 @@
     <div class="bg-white rounded-2xl shadow-lg p-4 sm:p-6 mb-6 sm:mb-8" x-data="{ filters: false }">
         <div class="flex items-center justify-between mb-4">
             <h2 class="text-base sm:text-lg font-semibold text-gray-800 flex items-center gap-2">
-                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-yellow-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
                 </svg>
                 Recherche et filtres
             </h2>
-            <button @click="filters = !filters" class="text-purple-600 hover:text-purple-800 p-1">
+            <button @click="filters = !filters" class="text-yellow-600 hover:text-purple-800 p-1">
                 <svg class="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300" :class="{ 'rotate-180': filters }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                 </svg>
@@ -177,12 +177,12 @@
                            value="{{ $search ?? '' }}"
                            placeholder="Rechercher par nom, prénom, téléphone, email..."
                            class="w-full pl-10 sm:pl-12 pr-4 py-2.5 sm:py-3 rounded-xl border-2 border-gray-200
-                                  focus:border-purple-500 focus:ring-2 focus:ring-purple-200
+                                  focus:border-blue-900 focus:ring-2 focus:ring-purple-200
                                   transition-all duration-300 text-sm">
                 </div>
                 <button type="submit"
                         class="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3
-                               bg-gradient-to-r from-purple-600 to-indigo-600
+                               bg-blue-900
                                hover:from-purple-700 hover:to-indigo-700
                                text-white font-semibold rounded-xl
                                transition-all duration-300 transform hover:scale-105 hover:shadow-lg text-sm">
@@ -197,7 +197,7 @@
                     <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5">Statut du compte</label>
                     <select name="statut"
                             class="w-full px-3 py-2 sm:py-2.5 rounded-xl border-2 border-gray-200
-                                   focus:border-purple-500 focus:ring-2 focus:ring-purple-200 text-sm">
+                                   focus:border-blue-900 focus:ring-2 focus:ring-purple-200 text-sm">
                         <option value="">Tous</option>
                         <option value="1" {{ request('statut') === '1' ? 'selected' : '' }}>Avec compte</option>
                         <option value="0" {{ request('statut') === '0' ? 'selected' : '' }}>Sans compte</option>
@@ -207,7 +207,7 @@
                     <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5">Genre</label>
                     <select name="genre"
                             class="w-full px-3 py-2 sm:py-2.5 rounded-xl border-2 border-gray-200
-                                   focus:border-purple-500 focus:ring-2 focus:ring-purple-200 text-sm">
+                                   focus:border-blue-900 focus:ring-2 focus:ring-purple-200 text-sm">
                         <option value="">Tous</option>
                         <option value="m" {{ request('genre') === 'm' ? 'selected' : '' }}>Masculin</option>
                         <option value="f" {{ request('genre') === 'f' ? 'selected' : '' }}>Féminin</option>
@@ -217,7 +217,7 @@
                     <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5">Nombre d'enfants</label>
                     <select name="enfants"
                             class="w-full px-3 py-2 sm:py-2.5 rounded-xl border-2 border-gray-200
-                                   focus:border-purple-500 focus:ring-2 focus:ring-purple-200 text-sm">
+                                   focus:border-blue-900 focus:ring-2 focus:ring-purple-200 text-sm">
                         <option value="">Tous</option>
                         <option value="0" {{ request('enfants') === '0' ? 'selected' : '' }}>Sans enfant</option>
                         <option value="1" {{ request('enfants') === '1' ? 'selected' : '' }}>1 enfant</option>
@@ -233,7 +233,7 @@
                            value="{{ request('profession') }}"
                            placeholder="Ex: Enseignant"
                            class="w-full px-3 py-2 sm:py-2.5 rounded-xl border-2 border-gray-200
-                                  focus:border-purple-500 focus:ring-2 focus:ring-purple-200 text-sm">
+                                  focus:border-blue-900 focus:ring-2 focus:ring-purple-200 text-sm">
                 </div>
             </div>
         </form>
@@ -245,14 +245,14 @@
         {{-- TABLEAU — visible sur lg+ --}}
         <div class="hidden lg:block overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gradient-to-r from-purple-50 to-indigo-50">
+                <thead class="bg-blue-900">
                     <tr>
-                        <th class="px-6 py-4 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Parent</th>
-                        <th class="px-6 py-4 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Contact</th>
-                        <th class="px-6 py-4 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Informations</th>
-                        <th class="px-6 py-4 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Enfants</th>
-                        <th class="px-6 py-4 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Statut</th>
-                        <th class="px-6 py-4 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Actions</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-blue-900 uppercase tracking-wider">Parent</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-blue-900 uppercase tracking-wider">Contact</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-blue-900 uppercase tracking-wider">Informations</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-blue-900 uppercase tracking-wider">Enfants</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-blue-900 uppercase tracking-wider">Statut</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-blue-900 uppercase tracking-wider">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
@@ -265,7 +265,7 @@
                                         {{ $parent->initiales }}
                                     </div>
                                     <div class="ml-4">
-                                        <div class="text-sm font-semibold text-gray-900 group-hover:text-purple-700 transition-colors duration-300">
+                                        <div class="text-sm font-semibold text-gray-900 group-hover:text-blue-900 transition-colors duration-300">
                                             {{ $parent->matricule }} - {{ $parent->full_name }}
                                         </div>
 
@@ -331,7 +331,7 @@
                                                 <div class="truncate max-w-[150px]">{{ $eleve->prenom }} {{ $eleve->nom }}</div>
                                             @endforeach
                                             @if($parent->enfants_count > 2)
-                                                <div class="text-purple-600">+{{ $parent->enfants_count - 2 }} autre(s)</div>
+                                                <div class="text-yellow-600">+{{ $parent->enfants_count - 2 }} autre(s)</div>
                                             @endif
                                         </div>
                                     @endif
@@ -361,7 +361,7 @@
                             {{-- Actions --}}
                             <td class="px-6 py-4">
                                 <div class="flex items-center justify-end gap-1 md:gap-2 whitespace-nowrap">
-                                    <a href="{{ route('admin.parents.show', $parent) }}" class="p-1.5 md:p-2 text-blue-600 bg-transparent hover:bg-blue-50 rounded-lg transition-colors border-none" title="Voir">
+                                    <a href="{{ route('admin.parents.show', $parent) }}" class="p-1.5 md:p-2 text-blue-900 bg-transparent hover:bg-blue-50 rounded-lg transition-colors border-none" title="Voir">
                                         <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                                     </a>
                                     <a href="{{ route('admin.parents.edit', $parent) }}" class="p-1.5 md:p-2 text-amber-600 bg-transparent hover:bg-amber-50 rounded-lg transition-colors border-none" title="Modifier">
@@ -388,7 +388,7 @@
                         <tr>
                             <td colspan="6" class="px-6 py-12 text-center">
                                 <div class="flex flex-col items-center justify-center gap-4">
-                                    <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center animate-pulse">
+                                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center animate-pulse">
                                         <svg class="w-10 h-10 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
                                         </svg>
@@ -398,7 +398,7 @@
                                         <p class="text-gray-500 text-sm max-w-md">
                                             @if(request()->anyFilled(['search','statut','genre','enfants','profession']))
                                                 Aucun résultat ne correspond à vos critères.
-                                                <a href="{{ route('admin.parents.index') }}" class="text-purple-600 font-medium block mt-1">Effacer les filtres</a>
+                                                <a href="{{ route('admin.parents.index') }}" class="text-yellow-600 font-medium block mt-1">Effacer les filtres</a>
                                             @else
                                                 Commencez par ajouter un nouveau parent.
                                             @endif
@@ -406,7 +406,7 @@
                                     </div>
                                     @if(!request()->anyFilled(['search','statut','genre','enfants','profession']))
                                         <a href="{{ route('admin.parents.create') }}"
-                                           class="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 text-sm inline-flex items-center gap-2">
+                                           class="px-5 py-2.5 bg-yellow-500 text-blue-900 font-bold hover:from-purple-700 hover:to-indigo-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 text-sm inline-flex items-center gap-2">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
                                             Ajouter un parent
                                         </a>
@@ -497,7 +497,7 @@
                     <div class="flex items-center gap-2 pt-2 border-t border-gray-100">
                         <a href="{{ route('admin.parents.show', $parent) }}"
                            class="flex-1 inline-flex items-center justify-center gap-1.5 py-2 px-2
-                                  bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white
+                                  bg-blue-50 text-blue-900 hover:bg-blue-600 hover:text-white
                                   rounded-xl transition-all duration-300 text-xs font-medium">
                             <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
@@ -532,7 +532,7 @@
             @empty
                 <div class="px-4 py-12 text-center">
                     <div class="flex flex-col items-center gap-4">
-                        <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center animate-pulse">
+                        <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center animate-pulse">
                             <svg class="w-10 h-10 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
                             </svg>
@@ -542,7 +542,7 @@
                             <p class="text-gray-500 text-sm">
                                 @if(request()->anyFilled(['search','statut','genre','enfants','profession']))
                                     Aucun résultat ne correspond à vos critères.
-                                    <a href="{{ route('admin.parents.index') }}" class="text-purple-600 font-medium block mt-1">Effacer les filtres</a>
+                                    <a href="{{ route('admin.parents.index') }}" class="text-yellow-600 font-medium block mt-1">Effacer les filtres</a>
                                 @else
                                     Commencez par ajouter un nouveau parent.
                                 @endif
@@ -550,7 +550,7 @@
                         </div>
                         @if(!request()->anyFilled(['search','statut','genre','enfants','profession']))
                             <a href="{{ route('admin.parents.create') }}"
-                               class="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold rounded-xl text-sm transition-all duration-300">
+                               class="inline-flex items-center gap-2 px-5 py-2.5 bg-yellow-500 text-blue-900 font-bold text-white font-semibold rounded-xl text-sm transition-all duration-300">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
                                 Ajouter un parent
                             </a>

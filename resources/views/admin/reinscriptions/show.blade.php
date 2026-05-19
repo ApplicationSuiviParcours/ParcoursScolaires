@@ -3,7 +3,7 @@
 @section('title', 'Détails de la réinscription')
 
 @section('header')
-<div class="relative overflow-hidden bg-gradient-to-br from-indigo-900 via-indigo-800 to-purple-900 py-6 sm:py-8 md:py-10 lg:py-12 no-print overflow-x-hidden">
+<div class="relative overflow-hidden bg-blue-900 py-6 sm:py-8 md:py-10 lg:py-12 no-print overflow-x-hidden">
     <!-- Éléments décoratifs -->
     <div class="absolute inset-0 opacity-10">
         <div class="absolute -top-24 -right-24 w-48 sm:w-64 md:w-80 lg:w-96 h-48 sm:h-64 md:h-80 lg:h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-pulse"></div>
@@ -54,7 +54,7 @@
             <div class="flex flex-wrap justify-center md:justify-end gap-1.5 sm:gap-2 md:gap-3 animate-fade-in-right no-print">
                 <a href="{{ route('admin.reinscriptions.edit', $reinscription) }}"
                    class="group relative inline-flex items-center px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 md:py-2.5
-                          bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700
+                          bg-blue-900 hover:from-yellow-600 hover:to-amber-700
                           text-white font-medium rounded-lg sm:rounded-xl transition-all duration-300
                           transform hover:scale-105 hover:shadow-xl overflow-hidden text-[10px] sm:text-xs md:text-sm">
                     <span class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
@@ -131,29 +131,29 @@
 
             {{-- Version écran --}}
             <div class="print:hidden">
-                <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-600 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+                <div class="absolute inset-0 bg-blue-900 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
                 <div class="absolute top-0 right-0 w-20 sm:w-24 md:w-28 lg:w-32 h-20 sm:h-24 md:h-28 lg:h-32 bg-blue-500 rounded-full filter blur-3xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
 
                 <div class="relative p-4 sm:p-5 md:p-6 lg:p-8">
                     <div class="flex items-center justify-between mb-3 sm:mb-4 md:mb-5 lg:mb-6">
                         <div class="flex items-center space-x-2 sm:space-x-3 md:space-x-4">
                             <div class="relative flex-shrink-0">
-                                <div class="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg sm:rounded-xl md:rounded-2xl flex items-center justify-center transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
-                                    <svg class="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-blue-900 rounded-lg sm:rounded-xl md:rounded-2xl flex items-center justify-center transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
+                                    <svg class="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                                     </svg>
                                 </div>
                                 <div class="absolute -bottom-0.5 -right-0.5 w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 lg:w-5 lg:h-5 bg-green-400 border-2 sm:border-4 border-white rounded-full group-hover:animate-ping"></div>
                             </div>
-                            <h2 class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">Élève</h2>
+                            <h2 class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-800 group-hover:text-blue-900 transition-colors duration-300">Élève</h2>
                         </div>
-                        <span class="px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 bg-blue-100 text-blue-600 text-[9px] sm:text-[10px] md:text-xs font-medium rounded-lg sm:rounded-xl group-hover:scale-105 transition-transform duration-300 flex-shrink-0">
+                        <span class="px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 bg-blue-100 text-blue-900 text-[9px] sm:text-[10px] md:text-xs font-medium rounded-lg sm:rounded-xl group-hover:scale-105 transition-transform duration-300 flex-shrink-0">
                             Principal
                         </span>
                     </div>
 
                     <div class="space-y-2 sm:space-y-3 md:space-y-4">
-                        <div class="flex items-center p-2 sm:p-3 md:p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg sm:rounded-xl md:rounded-2xl group-hover:shadow-lg transition-all duration-300">
+                        <div class="flex items-center p-2 sm:p-3 md:p-4 bg-blue-900 rounded-lg sm:rounded-xl md:rounded-2xl group-hover:shadow-lg transition-all duration-300">
                             <div class="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-12 lg:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center mr-2 sm:mr-3 md:mr-4 flex-shrink-0">
                                 <svg class="w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 lg:w-6 lg:h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -200,10 +200,10 @@
                     <div class="mt-4 sm:mt-5 md:mt-6 pt-3 sm:pt-4 md:pt-5 lg:pt-6 border-t border-gray-200">
                         <div class="flex items-center justify-between mb-1 sm:mb-2">
                             <span class="text-[9px] sm:text-[10px] md:text-xs text-gray-600">Progression scolaire</span>
-                            <span class="text-[9px] sm:text-[10px] md:text-xs font-medium text-blue-600">75%</span>
+                            <span class="text-[9px] sm:text-[10px] md:text-xs font-medium text-blue-900">75%</span>
                         </div>
                         <div class="h-1.5 bg-gray-200 rounded-full overflow-hidden">
-                            <div class="h-full bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full animate-progress" style="width: 75%"></div>
+                            <div class="h-full bg-blue-900 rounded-full animate-progress" style="width: 75%"></div>
                         </div>
                     </div>
                 </div>
@@ -226,13 +226,13 @@
 
             {{-- Version écran --}}
             <div class="print:hidden">
-                <div class="absolute inset-0 bg-gradient-to-r from-green-500 to-emerald-600 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+                <div class="absolute inset-0 bg-blue-900 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
                 <div class="absolute top-0 right-0 w-20 sm:w-24 md:w-28 lg:w-32 h-20 sm:h-24 md:h-28 lg:h-32 bg-green-500 rounded-full filter blur-3xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
 
                 <div class="relative p-4 sm:p-5 md:p-6 lg:p-8">
                     <div class="flex items-center space-x-2 sm:space-x-3 md:space-x-4 mb-3 sm:mb-4 md:mb-5 lg:mb-6">
-                        <div class="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg sm:rounded-xl md:rounded-2xl flex items-center justify-center transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 flex-shrink-0">
-                            <svg class="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-blue-900 rounded-lg sm:rounded-xl md:rounded-2xl flex items-center justify-center transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 flex-shrink-0">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z"/>
                             </svg>
                         </div>
@@ -240,7 +240,7 @@
                     </div>
 
                     <div class="space-y-2 sm:space-y-3 md:space-y-4">
-                        <div class="relative p-3 sm:p-4 md:p-5 lg:p-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden">
+                        <div class="relative p-3 sm:p-4 md:p-5 lg:p-6 bg-blue-900 rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden">
                             <div class="absolute top-0 right-0 w-12 sm:w-14 md:w-16 lg:w-20 h-12 sm:h-14 md:h-16 lg:h-20 bg-green-200 rounded-full filter blur-2xl opacity-50"></div>
                             <div class="relative z-10">
                                 <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-500 mb-1">Classe actuelle</p>
@@ -314,22 +314,22 @@
 
             {{-- Version écran --}}
             <div class="print:hidden">
-                <div class="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-600 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
-                <div class="absolute top-0 right-0 w-20 sm:w-24 md:w-28 lg:w-32 h-20 sm:h-24 md:h-28 lg:h-32 bg-purple-500 rounded-full filter blur-3xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
+                <div class="absolute inset-0 bg-blue-900 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+                <div class="absolute top-0 right-0 w-20 sm:w-24 md:w-28 lg:w-32 h-20 sm:h-24 md:h-28 lg:h-32 bg-blue-800 rounded-full filter blur-3xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
 
                 <div class="relative p-4 sm:p-5 md:p-6 lg:p-8">
                     <div class="flex items-center space-x-2 sm:space-x-3 md:space-x-4 mb-3 sm:mb-4 md:mb-5 lg:mb-6">
-                        <div class="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg sm:rounded-xl md:rounded-2xl flex items-center justify-center transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 flex-shrink-0">
-                            <svg class="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-blue-900 rounded-lg sm:rounded-xl md:rounded-2xl flex items-center justify-center transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 flex-shrink-0">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                             </svg>
                         </div>
-                        <h2 class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-800 group-hover:text-purple-600 transition-colors duration-300">Statut & Date</h2>
+                        <h2 class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-800 group-hover:text-yellow-600 transition-colors duration-300">Statut & Date</h2>
                     </div>
 
                     <div class="space-y-2 sm:space-y-3 md:space-y-4">
                         <!-- Statut -->
-                        <div class="relative p-3 sm:p-4 md:p-5 lg:p-6 bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden">
+                        <div class="relative p-3 sm:p-4 md:p-5 lg:p-6 bg-blue-900 rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden">
                             <div class="absolute inset-0 bg-white/50 backdrop-blur-sm"></div>
                             <div class="relative z-10 text-center">
                                 <p class="text-[9px] sm:text-[10px] md:text-xs text-gray-500 mb-1 sm:mb-2">Statut actuel</p>
@@ -342,8 +342,8 @@
                         <!-- Timeline dates -->
                         <div class="space-y-1.5 sm:space-y-2 md:space-y-3">
                             @foreach([
-                                ['bg-purple-100','text-purple-600','M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z','Date de réinscription', $reinscription->date_reinscription ? $reinscription->date_reinscription->format('d/m/Y') : ''],
-                                ['bg-blue-100','text-blue-600','M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z','Date de création', $reinscription->created_at ? $reinscription->created_at->format('d/m/Y H:i') : ''],
+                                ['bg-blue-100','text-yellow-600','M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z','Date de réinscription', $reinscription->date_reinscription ? $reinscription->date_reinscription->format('d/m/Y') : ''],
+                                ['bg-blue-100','text-blue-900','M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z','Date de création', $reinscription->created_at ? $reinscription->created_at->format('d/m/Y H:i') : ''],
                                 ['bg-green-100','text-green-600','M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15','Dernière mise à jour', $reinscription->updated_at ? $reinscription->updated_at->format('d/m/Y H:i') : ''],
                             ] as [$bg, $tc, $path, $label, $value])
                             <div class="flex items-center p-2 sm:p-3 md:p-4 bg-gray-50 rounded-lg sm:rounded-xl hover:bg-gray-100 transition-all duration-300">
@@ -376,7 +376,7 @@
             </div>
             {{-- Version écran --}}
             <div class="print:hidden">
-                <div class="bg-gradient-to-r from-amber-500 to-orange-600 px-4 sm:px-5 md:px-6 lg:px-8 py-3 sm:py-4 md:py-5">
+                <div class="bg-blue-900 px-4 sm:px-5 md:px-6 lg:px-8 py-3 sm:py-4 md:py-5">
                     <div class="flex items-center gap-2 sm:gap-3 md:gap-4">
                         <div class="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-12 lg:h-12 bg-white/20 backdrop-blur-lg rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
                             <svg class="w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 lg:w-6 lg:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -396,7 +396,7 @@
 
     {{-- ── INFORMATIONS SYSTÈME (masquées à l'impression) ── --}}
     <div class="bg-white rounded-xl sm:rounded-2xl md:rounded-3xl shadow-xl overflow-hidden mb-5 sm:mb-6 md:mb-8 transition-all duration-500 hover:-translate-y-1 no-print">
-        <div class="bg-gradient-to-r from-gray-800 to-gray-900 px-4 sm:px-5 md:px-6 lg:px-8 py-3 sm:py-4 md:py-5">
+        <div class="bg-blue-900 px-4 sm:px-5 md:px-6 lg:px-8 py-3 sm:py-4 md:py-5">
             <div class="flex items-center gap-2 sm:gap-3 md:gap-4">
                 <div class="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-12 lg:h-12 bg-white/10 backdrop-blur-lg rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
                     <svg class="w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 lg:w-6 lg:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -412,7 +412,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
                 <div class="flex items-center p-2 sm:p-3 md:p-4 bg-gray-50 rounded-lg sm:rounded-xl hover:bg-gray-100 transition-all duration-300">
                     <div class="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-12 lg:h-12 bg-blue-100 rounded-lg sm:rounded-xl flex items-center justify-center mr-2 sm:mr-3 md:mr-4 flex-shrink-0">
-                        <svg class="w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 lg:w-6 lg:h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 lg:w-6 lg:h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
                     </div>
@@ -447,7 +447,7 @@
     <div class="flex justify-end no-print mt-4 sm:mt-5 md:mt-6">
         <button onclick="window.print()"
                 class="group relative inline-flex items-center px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3
-                       bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800
+                       bg-blue-900 hover:from-gray-700 hover:to-gray-800
                        text-white font-medium rounded-lg sm:rounded-xl transition-all duration-300
                        transform hover:scale-105 hover:shadow-xl overflow-hidden text-[10px] sm:text-xs md:text-sm">
             <span class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>

@@ -2,9 +2,9 @@
 
 @section('header')
     <h2 class="font-semibold text-sm text-gray-800 leading-tight">
-        <a href="{{ route('enseignant.notes.index') }}" class="text-gray-500 hover:text-indigo-600 transition-colors mr-2">Notes</a> 
+        <a href="{{ route('enseignant.notes.index') }}" class="text-gray-500 hover:text-blue-900 transition-colors mr-2">Notes</a> 
         <span class="text-gray-300">/</span> 
-        <span class="text-indigo-600 ml-2">{{ __('Détails de la Note') }}</span>
+        <span class="text-blue-900 ml-2">{{ __('Détails de la Note') }}</span>
     </h2>
 @endsection
 
@@ -17,7 +17,7 @@
             <!-- Header avec actions -->
             <div class="px-8 py-6 border-b border-gray-100 flex flex-col md:flex-row md:justify-between md:items-center gap-4 bg-gradient-to-r from-gray-50/80 to-white">
                 <h3 class="text-xl font-extrabold text-gray-900 flex items-center">
-                    <div class="bg-indigo-100 p-2.5 rounded-xl mr-3 text-indigo-600 shrink-0">
+                    <div class="bg-blue-100 p-2.5 rounded-xl mr-3 text-blue-900 shrink-0">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                         </svg>
@@ -25,7 +25,7 @@
                     Informations sur la Note
                 </h3>
                 <div class="flex flex-wrap gap-3">
-                    <a href="{{ route('enseignant.notes.edit', $note->id) }}" class="inline-flex items-center px-4 py-2.5 bg-white text-indigo-700 hover:bg-indigo-50 border border-indigo-200 rounded-xl text-sm font-bold shadow-sm transition-colors">
+                    <a href="{{ route('enseignant.notes.edit', $note->id) }}" class="inline-flex items-center px-4 py-2.5 bg-white text-blue-900 hover:bg-blue-50 border border-indigo-200 rounded-xl text-sm font-bold shadow-sm transition-colors">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                         </svg>
@@ -64,7 +64,7 @@
                                     <div>
                                         <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-0.5">Élève & Matricule</p>
                                         <p class="text-lg text-gray-900 font-bold leading-tight">{{ $note->eleve->prenom }} {{ $note->eleve->nom }}</p>
-                                        <p class="text-sm text-indigo-600 font-semibold mt-0.5">{{ $note->eleve->matricule }}</p>
+                                        <p class="text-sm text-blue-900 font-semibold mt-0.5">{{ $note->eleve->matricule }}</p>
                                     </div>
                                 </div>
                                 
@@ -90,7 +90,7 @@
                                         <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-0.5">Évaluation</p>
                                         <div class="flex items-center gap-2 mt-0.5">
                                             <p class="text-base text-gray-900 font-bold">{{ $note->evaluation->nom }}</p>
-                                            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-100 text-indigo-800 border border-indigo-200 shadow-sm">
+                                            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-100 text-indigo-800 border border-indigo-200 shadow-sm">
                                                 {{ ucfirst($note->evaluation->type) }}
                                             </span>
                                         </div>
@@ -136,7 +136,7 @@
                                 <span class="block text-sm font-bold text-gray-500 uppercase tracking-wider mb-2">Note Finale de l'élève</span>
                                 
                                 <div class="flex items-baseline justify-center">
-                                    <span class="text-7xl font-black tracking-tight {{ $note->note >= 10 ? 'text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-emerald-700' : 'text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-rose-700' }}">
+                                    <span class="text-7xl font-black tracking-tight {{ $note->note >= 10 ? 'text-transparent bg-clip-text bg-blue-900' : 'text-transparent bg-clip-text bg-blue-900' }}">
                                         {{ $note->note }}
                                     </span>
                                     <span class="text-3xl text-gray-400 font-bold ml-1">/{{ $note->evaluation->bareme ?? 20 }}</span>
@@ -153,7 +153,7 @@
                         <div>
                             <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2.5">Observation / Appréciation Rédigée</p>
                             <div class="relative group">
-                                <div class="absolute -inset-0.5 bg-gradient-to-r from-gray-200 to-gray-300 rounded-2xl opacity-50 group-hover:opacity-100 transition duration-300 blur-sm"></div>
+                                <div class="absolute -inset-0.5 bg-blue-900 rounded-2xl opacity-50 group-hover:opacity-100 transition duration-300 blur-sm"></div>
                                 <div class="relative bg-white p-6 rounded-2xl shadow-sm min-h-[140px]">
                                     @if($note->observation)
                                         <p class="text-base text-gray-800 leading-relaxed italic border-l-4 border-indigo-200 pl-4 py-1">"{{ $note->observation }}"</p>

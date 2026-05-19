@@ -5,7 +5,7 @@
 
 @section('header')
     {{-- Header Responsive --}}
-    <div class="relative bg-gradient-to-r from-indigo-600 to-indigo-800 py-3 sm:py-4 md:py-6 overflow-x-hidden">
+    <div class="relative bg-blue-900 py-3 sm:py-4 md:py-6 overflow-x-hidden">
         <div class="absolute inset-0 bg-black opacity-10"></div>
         <div class="container mx-auto px-3 sm:px-4 md:px-6 relative">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-1.5 sm:gap-2">
@@ -15,7 +15,7 @@
                     </div>
                     <div>
                         <h1 class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white">Relations Élèves-Parents</h1>
-                        <p class="text-indigo-100 text-[9px] sm:text-[10px] md:text-xs lg:text-sm mt-0.5">Gérez les liens entre élèves et parents</p>
+                        <p class="text-blue-100 text-[9px] sm:text-[10px] md:text-xs lg:text-sm mt-0.5">Gérez les liens entre élèves et parents</p>
                     </div>
                 </div>
                 <nav class="mt-1 md:mt-0">
@@ -40,14 +40,14 @@
         <!-- Statistiques rapides - Responsive Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-5 lg:gap-6 mb-4 sm:mb-6 md:mb-8">
             <!-- Total relations -->
-            <div class="bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow p-3 sm:p-4 md:p-5 lg:p-6 border-l-4 border-indigo-500 hover:shadow-lg transition-shadow">
+            <div class="bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow p-3 sm:p-4 md:p-5 lg:p-6 border-l-4 border-blue-900 hover:shadow-lg transition-shadow">
                 <div class="flex items-center justify-between">
                     <div class="min-w-0">
                         <p class="text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-medium text-gray-500 uppercase">Total relations</p>
                         <p class="text-base sm:text-lg md:text-xl lg:text-3xl font-bold text-gray-800 mt-0.5 sm:mt-1">{{ $relations->total() }}</p>
                         <p class="text-[7px] sm:text-[8px] md:text-[9px] lg:text-xs text-gray-400 mt-0.5 hidden sm:block">+2.5% ce mois</p>
                     </div>
-                    <div class="p-1.5 sm:p-2 md:p-3 lg:p-4 bg-indigo-600 rounded-lg md:rounded-xl lg:rounded-2xl shadow-inner flex-shrink-0 ml-2">
+                    <div class="p-1.5 sm:p-2 md:p-3 lg:p-4 bg-blue-900 rounded-lg md:rounded-xl lg:rounded-2xl shadow-inner flex-shrink-0 ml-2">
                         <i class="fas fa-users text-sm sm:text-base md:text-lg lg:text-2xl text-white"></i>
                     </div>
                 </div>
@@ -87,10 +87,10 @@
             <div class="p-3 sm:p-4 md:p-5 lg:p-6 border-b border-gray-100">
                 <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3 mb-2 sm:mb-3 md:mb-4">
                     <h2 class="text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-gray-800">
-                        <i class="fas fa-filter text-indigo-600 mr-1 text-[10px] sm:text-xs"></i>
+                        <i class="fas fa-filter text-blue-900 mr-1 text-[10px] sm:text-xs"></i>
                         Filtres
                     </h2>
-                    <button id="resetFilters" class="text-[8px] sm:text-[9px] md:text-xs lg:text-sm text-gray-500 hover:text-indigo-600">
+                    <button id="resetFilters" class="text-[8px] sm:text-[9px] md:text-xs lg:text-sm text-gray-500 hover:text-blue-900">
                         <i class="fas fa-undo mr-0.5"></i>Réinitialiser
                     </button>
                 </div>
@@ -130,7 +130,7 @@
             <div class="px-3 sm:px-4 md:px-5 lg:px-6 py-2 sm:py-3 md:py-4 bg-gray-50 border-t">
                 <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3">
                     <div class="text-[8px] sm:text-[9px] md:text-xs lg:text-sm text-gray-600">
-                        <span id="selectedCount" class="font-semibold text-indigo-600">0</span> sélectionné(s)
+                        <span id="selectedCount" class="font-semibold text-blue-900">0</span> sélectionné(s)
                     </div>
                     
                     <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 w-full sm:w-auto justify-start sm:justify-end">
@@ -145,7 +145,7 @@
                             <span class="hidden sm:inline">Excel</span>
                         </a>
                         <a href="{{ route('admin.eleve-parents.create') }}" 
-                           class="flex-1 sm:flex-none inline-flex items-center justify-center px-3 sm:px-4 md:px-5 lg:px-6 py-1.5 sm:py-2 md:py-2.5 lg:py-3 bg-indigo-600 text-white text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-medium rounded-lg md:rounded-xl shadow hover:bg-indigo-700">
+                           class="flex-1 sm:flex-none inline-flex items-center justify-center px-3 sm:px-4 md:px-5 lg:px-6 py-1.5 sm:py-2 md:py-2.5 lg:py-3 bg-blue-900 text-white text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-medium rounded-lg md:rounded-xl shadow hover:bg-blue-800">
                             <i class="fas fa-plus-circle mr-0.5 sm:mr-1 text-[8px] sm:text-[9px]"></i>
                             Nouvelle relation
                         </a>
@@ -170,7 +170,7 @@
                     <thead class="bg-gray-50">
                         <tr>
                             <th class="px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-2.5 md:py-3 lg:py-4 text-left w-8 md:w-auto">
-                                <input type="checkbox" class="w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-4 md:h-4 rounded border-gray-300 text-indigo-600" id="selectAll">
+                                <input type="checkbox" class="w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-4 md:h-4 rounded border-gray-300 text-blue-900" id="selectAll">
                             </th>
                             <th class="px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-2.5 md:py-3 lg:py-4 text-left text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-semibold text-gray-600 uppercase">Élève</th>
                             <th class="px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-2.5 md:py-3 lg:py-4 text-left text-[8px] sm:text-[9px] md:text-xs lg:text-sm font-semibold text-gray-600 uppercase">Parent</th>
@@ -182,14 +182,14 @@
                     </thead>
                     <tbody class="divide-y divide-gray-100">
                         @forelse($relations as $relation)
-                            <tr class="group hover:bg-indigo-50/50 transition-colors">
+                            <tr class="group hover:bg-blue-50/50 transition-colors">
                                 <td class="px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-2.5 md:py-3 lg:py-4 whitespace-nowrap">
-                                    <input type="checkbox" class="row-checkbox w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-4 md:h-4 rounded border-gray-300 text-indigo-600" value="{{ $relation->id }}">
+                                    <input type="checkbox" class="row-checkbox w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-4 md:h-4 rounded border-gray-300 text-blue-900" value="{{ $relation->id }}">
                                 </td>
                                 <td class="px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-2.5 md:py-3 lg:py-4 whitespace-nowrap">
                                     <div class="flex items-center">
-                                        <div class="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 lg:h-10 lg:w-10 rounded-lg md:rounded-xl bg-indigo-100 flex items-center justify-center flex-shrink-0">
-                                            <span class="text-indigo-700 font-bold text-[8px] sm:text-[9px] md:text-xs lg:text-sm">
+                                        <div class="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 lg:h-10 lg:w-10 rounded-lg md:rounded-xl bg-blue-100 flex items-center justify-center flex-shrink-0">
+                                            <span class="text-blue-900 font-bold text-[8px] sm:text-[9px] md:text-xs lg:text-sm">
                                                 {{ strtoupper(substr($relation->eleve->prenom, 0, 1)) }}{{ strtoupper(substr($relation->eleve->nom, 0, 1)) }}
                                             </span>
                                         </div>
@@ -216,7 +216,7 @@
                                         $badgeConfig = [
                                             'Père' => ['bg-blue-600', 'fa-mars'],
                                             'Mère' => ['bg-pink-600', 'fa-venus'],
-                                            'Tuteur' => ['bg-purple-600', 'fa-user-tie'],
+                                            'Tuteur' => ['bg-blue-900', 'fa-user-tie'],
                                             'Grand-parent' => ['bg-amber-600', 'fa-users'],
                                             'Autre' => ['bg-gray-600', 'fa-heart']
                                         ];
@@ -236,7 +236,7 @@
                                 <td class="px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-2.5 md:py-3 lg:py-4 whitespace-nowrap text-right">
                                     <div class="flex items-center justify-end gap-1 md:gap-2 whitespace-nowrap">
                                         <!-- Voir -->
-                                        <a href="{{ route('admin.eleve-parents.show', $relation) }}" class="p-1.5 md:p-2 text-blue-600 bg-transparent hover:bg-blue-50 rounded-lg transition-colors border-none" title="Voir">
+                                        <a href="{{ route('admin.eleve-parents.show', $relation) }}" class="p-1.5 md:p-2 text-blue-900 bg-transparent hover:bg-blue-50 rounded-lg transition-colors border-none" title="Voir">
                                             <i class="fas fa-eye w-4 h-4 md:w-5 md:h-5 flex items-center justify-center"></i>
                                         </a>
                                         
@@ -246,7 +246,7 @@
                                         </a>
                                         
                                         <!-- PDF -->
-                                        <button type="button" onclick="window.location.href='{{ route('admin.eleve-parents.pdf', $relation) }}'" class="p-1.5 md:p-2 text-purple-600 bg-transparent hover:bg-purple-50 rounded-lg transition-colors border-none cursor-pointer" title="PDF">
+                                        <button type="button" onclick="window.location.href='{{ route('admin.eleve-parents.pdf', $relation) }}'" class="p-1.5 md:p-2 text-yellow-600 bg-transparent hover:bg-purple-50 rounded-lg transition-colors border-none cursor-pointer" title="PDF">
                                             <i class="fas fa-file-pdf w-4 h-4 md:w-5 md:h-5 flex items-center justify-center"></i>
                                         </button>
                                         
@@ -297,7 +297,7 @@
             <div class="fixed inset-0 bg-black opacity-50" id="modalBackdrop"></div>
             
             <div class="relative bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow-xl w-full max-w-md sm:max-w-lg mx-auto z-10 overflow-hidden">
-                <div class="bg-indigo-600 px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 flex justify-between items-center">
+                <div class="bg-blue-900 px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 flex justify-between items-center">
                     <h3 class="text-xs sm:text-sm md:text-base font-semibold text-white">Nouveau message</h3>
                     <button type="button" class="text-white hover:text-indigo-200 close-modal">
                         <i class="fas fa-times text-[10px] sm:text-xs"></i>
@@ -323,7 +323,7 @@
                 </form>
                 <div class="px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 bg-gray-50 flex justify-end gap-1.5 sm:gap-2">
                     <button type="button" class="px-2 sm:px-2.5 md:px-3 py-1 sm:py-1.5 text-[8px] sm:text-[9px] md:text-xs border rounded-lg close-modal">Annuler</button>
-                    <button type="submit" form="messageForm" class="px-2 sm:px-2.5 md:px-3 py-1 sm:py-1.5 text-[8px] sm:text-[9px] md:text-xs bg-indigo-600 text-white rounded-lg">Envoyer</button>
+                    <button type="submit" form="messageForm" class="px-2 sm:px-2.5 md:px-3 py-1 sm:py-1.5 text-[8px] sm:text-[9px] md:text-xs bg-blue-900 text-white rounded-lg">Envoyer</button>
                 </div>
             </div>
         </div>

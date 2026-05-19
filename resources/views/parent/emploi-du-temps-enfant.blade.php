@@ -12,7 +12,7 @@
         
         <!-- Header -->
         <div class="relative mb-8 overflow-hidden group rounded-2xl">
-            <div class="absolute inset-0 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 animate-gradient-x"></div>
+            <div class="absolute inset-0 bg-blue-900 animate-gradient-x"></div>
             <div class="absolute inset-0 opacity-20">
                 <div class="absolute bg-white rounded-full w-96 h-96 -top-48 -right-48 blur-3xl animate-pulse-slow"></div>
                 <div class="absolute bg-yellow-300 rounded-full w-96 h-96 -bottom-48 -left-48 blur-3xl animate-pulse-slow animation-delay-2000"></div>
@@ -61,7 +61,7 @@
                                     Exporter PDF
                                 </a>
                                 <a href="{{ route('parent.enfant.emploi-du-temps.imprimer', $eleve) }}" target="_blank"
-                                   class="inline-flex items-center px-4 py-2 bg-white text-indigo-700 hover:bg-indigo-50 rounded-xl shadow-lg transition-all text-sm font-medium">
+                                   class="inline-flex items-center px-4 py-2 bg-white text-blue-900 hover:bg-blue-50 rounded-xl shadow-lg transition-all text-sm font-medium">
                                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
                                     Imprimer
                                 </a>
@@ -97,7 +97,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
             </svg>
             <p class="mt-4 text-xl text-gray-500">{{ $message }}</p>
-            <a href="{{ route('parent.enfants') }}" class="inline-block mt-6 px-6 py-3 font-semibold text-white bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl hover:from-blue-600 hover:to-indigo-700">
+            <a href="{{ route('parent.enfants') }}" class="inline-block mt-6 px-6 py-3 font-semibold text-white bg-blue-900 rounded-xl hover:from-blue-600 hover:to-indigo-700">
                 Retour à mes enfants
             </a>
         </div>
@@ -107,7 +107,7 @@
         <div class="mb-8 overflow-hidden transition-all duration-500 transform bg-white border border-gray-100 shadow-xl rounded-2xl hover:shadow-2xl">
             <div class="p-4 md:p-6 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white">
                 <h3 class="flex items-center text-lg font-semibold text-gray-900">
-                    <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 mr-2 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
                     Filtrer par jour
@@ -117,7 +117,7 @@
                 <form method="GET" action="{{ route('parent.enfant.emploi-du-temps', $eleve->id) }}" class="flex flex-wrap gap-2">
                     @foreach($jours as $jour)
                         <button type="submit" name="jour" value="{{ $jour }}" 
-                                class="px-4 py-2 font-medium rounded-xl transition-all duration-300 {{ request('jour') == $jour ? 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}">
+                                class="px-4 py-2 font-medium rounded-xl transition-all duration-300 {{ request('jour') == $jour ? 'bg-blue-900 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}">
                             {{ $jour }}
                         </button>
                     @endforeach
@@ -133,7 +133,7 @@
         <!-- Grille de l'emploi du temps -->
         @if(count($emploiParJour) > 0 && collect($emploiParJour)->flatten()->count() > 0)
         <!-- Header du planning -->
-        <div class="flex flex-col sm:flex-row items-center justify-between p-4 sm:p-6 mb-8 gap-4 sm:gap-0 shadow-lg bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl">
+        <div class="flex flex-col sm:flex-row items-center justify-between p-4 sm:p-6 mb-8 gap-4 sm:gap-0 shadow-lg bg-blue-900 rounded-2xl">
             <h3 class="flex items-center text-lg sm:text-xl font-bold text-white text-center sm:text-left">
                 <svg class="hidden sm:block w-6 h-6 mr-3 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
@@ -154,7 +154,7 @@
                 @if(isset($emploiParJour[$jour]) && $emploiParJour[$jour]->count() > 0)
                 <div class="relative overflow-hidden bg-white border border-gray-100 shadow-sm transition-all duration-300 rounded-2xl hover:shadow-lg group">
                     <!-- Barre latérale colorée animée -->
-                    <div class="absolute top-0 bottom-0 left-0 w-2 transition-all duration-300 bg-gradient-to-b from-blue-400 to-indigo-600 group-hover:w-3"></div>
+                    <div class="absolute top-0 bottom-0 left-0 w-2 transition-all duration-300 bg-blue-900 group-hover:w-3"></div>
                     
                     <div class="p-4 pl-6 sm:p-6 sm:pl-8">
                         <div class="flex items-center mb-6">
@@ -169,7 +169,7 @@
                                 <div class="absolute w-16 h-16 transition-transform duration-500 bg-blue-100 rounded-full opacity-50 -right-4 -top-4 group-hover/card:scale-150"></div>
                                 
                                 <!-- Horaire -->
-                                <div class="relative z-10 flex items-center mb-3 font-semibold text-indigo-600">
+                                <div class="relative z-10 flex items-center mb-3 font-semibold text-blue-900">
                                     <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                     </svg>

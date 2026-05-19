@@ -38,13 +38,13 @@
                 
                 <!-- Form Header -->
                 <div class="flex items-center mb-10 pb-6 border-b border-gray-100">
-                    <div class="bg-gradient-to-br from-emerald-400 to-teal-500 text-white p-4 rounded-2xl shadow-lg shadow-emerald-500/30 mr-5 transform hover:rotate-3 transition-transform duration-300">
+                    <div class="bg-blue-900 text-white p-4 rounded-2xl shadow-lg shadow-emerald-500/30 mr-5 transform hover:rotate-3 transition-transform duration-300">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
                         </svg>
                     </div>
                     <div>
-                        <h3 class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-800">
+                        <h3 class="text-2xl font-extrabold text-transparent bg-clip-text bg-blue-900">
                             Saisir une nouvelle note
                         </h3>
                         <p class="text-gray-500 text-sm mt-1 font-medium">Sélectionnez une évaluation pour commencer à noter vos élèves.</p>
@@ -148,7 +148,7 @@
                             Annuler
                         </a>
                         <button type="submit" 
-                            class="px-8 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold rounded-xl shadow-lg shadow-emerald-500/30 hover:shadow-xl hover:from-emerald-600 hover:to-teal-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center">
+                            class="px-8 py-3 bg-blue-900 text-white font-bold rounded-xl shadow-lg shadow-emerald-500/30 hover:shadow-xl hover:from-emerald-600 hover:to-teal-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center">
                             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>

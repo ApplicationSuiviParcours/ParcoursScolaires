@@ -97,7 +97,7 @@
                             Annuler
                         </a>
                         <button type="submit"
-                                class="w-full sm:w-auto px-4 sm:px-5 md:px-6 py-1.5 sm:py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition duration-200 text-sm sm:text-base">
+                                class="w-full sm:w-auto px-4 sm:px-5 md:px-6 py-1.5 sm:py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-800 transition duration-200 text-sm sm:text-base">
                             Changer le mot de passe
                         </button>
                     </div>

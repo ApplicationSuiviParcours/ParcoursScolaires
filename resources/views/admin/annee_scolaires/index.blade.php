@@ -3,7 +3,7 @@
 @section('title', 'Gestion des années scolaires')
 
 @section('header')
-<div class="relative overflow-hidden bg-gradient-to-br from-teal-600 via-teal-700 to-cyan-800 py-8 md:py-12">
+<div class="relative overflow-hidden bg-blue-900 py-8 md:py-12">
     <!-- Éléments décoratifs animés -->
     <div class="absolute inset-0 opacity-10">
         <div class="absolute -top-24 -right-24 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-pulse"></div>
@@ -145,7 +145,7 @@
                     <p class="text-xl md:text-3xl font-bold text-gray-800">{{ $stats['avec_inscriptions'] }}</p>
                 </div>
                 <div class="bg-blue-100 rounded-lg md:rounded-xl p-2 md:p-3">
-                    <svg class="w-5 h-5 md:w-8 md:h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 md:w-8 md:h-8 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
                     </svg>
                 </div>
@@ -199,7 +199,7 @@
                            class="w-full pl-12 pr-4 py-2.5 md:py-3 rounded-xl border-2 border-gray-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 transition-all duration-300 text-sm">
                 </div>
                 <button type="submit" 
-                        class="w-full sm:w-auto px-6 py-2.5 md:py-3 bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-700 hover:to-cyan-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 text-sm">
+                        class="w-full sm:w-auto px-6 py-2.5 md:py-3 bg-blue-900 hover:from-teal-700 hover:to-cyan-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 text-sm">
                     Rechercher
                 </button>
             </div>
@@ -239,10 +239,10 @@
     <div class="bg-white rounded-2xl md:rounded-3xl shadow-xl overflow-hidden">
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gradient-to-r from-teal-50 to-cyan-50">
+                <thead class="bg-blue-900">
                     <tr>
                         <!-- Colonne Nom sticky -->
-                        <th class="px-3 md:px-6 py-3 md:py-4 text-left text-[10px] md:text-xs font-semibold text-teal-700 uppercase tracking-wider sticky left-0 bg-gradient-to-r from-teal-50 to-cyan-50 z-10 min-w-[140px] md:min-w-[200px]">Nom</th>
+                        <th class="px-3 md:px-6 py-3 md:py-4 text-left text-[10px] md:text-xs font-semibold text-teal-700 uppercase tracking-wider sticky left-0 bg-blue-900 z-10 min-w-[140px] md:min-w-[200px]">Nom</th>
                         <th class="hidden md:table-cell px-6 py-4 text-left text-xs font-semibold text-teal-700 uppercase tracking-wider">Période</th>
                         <th class="px-3 md:px-6 py-3 md:py-4 text-left text-[10px] md:text-xs font-semibold text-teal-700 uppercase tracking-wider min-w-[80px]">Statut</th>
                         <th class="hidden lg:table-cell px-6 py-4 text-left text-xs font-semibold text-teal-700 uppercase tracking-wider">Statistiques</th>
@@ -255,7 +255,7 @@
                             <!-- Nom (Sticky) -->
                             <td class="px-3 md:px-6 py-3 md:py-4 sticky left-0 bg-white group-hover:bg-teal-50/50 z-10">
                                 <div class="flex items-center">
-                                    <div class="flex-shrink-0 h-8 w-8 md:h-10 md:w-10 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-lg md:rounded-xl flex items-center justify-center text-white font-bold text-sm md:text-lg shadow group-hover:scale-110 transition-transform duration-300">
+                                    <div class="flex-shrink-0 h-8 w-8 md:h-10 md:w-10 bg-blue-900 rounded-lg md:rounded-xl flex items-center justify-center text-white font-bold text-sm md:text-lg shadow group-hover:scale-110 transition-transform duration-300">
                                         {{ substr($annee->nom, 0, 2) }}
                                     </div>
                                     <div class="ml-2 md:ml-4 min-w-0">
@@ -299,7 +299,7 @@
                                         </svg>
                                         {{ $annee->evaluations_count }}
                                     </span>
-                                    <span class="inline-flex items-center px-2 py-1 rounded-lg text-[10px] md:text-xs font-medium bg-purple-100 text-purple-700" title="Emplois du temps">
+                                    <span class="inline-flex items-center px-2 py-1 rounded-lg text-[10px] md:text-xs font-medium bg-blue-100 text-blue-900" title="Emplois du temps">
                                         <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                         </svg>
@@ -309,7 +309,7 @@
                             </td>
                             <td class="px-3 md:px-6 py-3 md:py-4 whitespace-nowrap">
                                 <div class="flex items-center justify-end gap-1 md:gap-2 whitespace-nowrap">
-                                    <a href="{{ route('admin.annee_scolaires.show', $annee) }}" class="p-1.5 md:p-2 text-blue-600 bg-transparent hover:bg-blue-50 rounded-lg transition-colors border-none" title="Voir">
+                                    <a href="{{ route('admin.annee_scolaires.show', $annee) }}" class="p-1.5 md:p-2 text-blue-900 bg-transparent hover:bg-blue-50 rounded-lg transition-colors border-none" title="Voir">
                                         <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                                     </a>
                                     <a href="{{ route('admin.annee_scolaires.edit', $annee) }}" class="p-1.5 md:p-2 text-amber-600 bg-transparent hover:bg-amber-50 rounded-lg transition-colors border-none" title="Modifier">
@@ -361,7 +361,7 @@
                                     </p>
                                     @if(!request()->anyFilled(['search', 'active', 'date_debut_min', 'date_debut_max']))
                                         <a href="{{ route('admin.annee_scolaires.create') }}" 
-                                           class="inline-flex items-center px-5 py-2.5 md:px-6 md:py-3 bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-700 hover:to-cyan-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 text-sm md:text-base">
+                                           class="inline-flex items-center px-5 py-2.5 md:px-6 md:py-3 bg-yellow-500 text-blue-900 font-bold hover:from-teal-700 hover:to-cyan-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 text-sm md:text-base">
                                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                             </svg>

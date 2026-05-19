@@ -2,9 +2,9 @@
 
 @section('header')
     <h2 class="font-semibold text-sm text-gray-800 leading-tight">
-        <a href="{{ route('enseignant.evaluations.index') }}" class="text-gray-500 hover:text-indigo-600 transition-colors mr-2">Évaluations</a> 
+        <a href="{{ route('enseignant.evaluations.index') }}" class="text-gray-500 hover:text-blue-900 transition-colors mr-2">Évaluations</a> 
         <span class="text-gray-300">/</span> 
-        <span class="text-indigo-600 ml-2">Détails de l'Évaluation</span>
+        <span class="text-blue-900 ml-2">Détails de l'Évaluation</span>
     </h2>
 @endsection
 
@@ -13,10 +13,10 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
         <!-- Header Section -->
         <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
-            <div class="bg-gradient-to-r from-indigo-600 to-indigo-800 px-6 py-8 sm:px-8 text-white flex justify-between items-center">
+            <div class="bg-blue-900 px-6 py-8 sm:px-8 text-white flex justify-between items-center">
                 <div>
                     <h3 class="text-2xl font-bold">{{ $evaluation->nom }}</h3>
-                    <p class="mt-2 text-indigo-100 flex items-center space-x-4">
+                    <p class="mt-2 text-blue-100 flex items-center space-x-4">
                         <span><svg class="inline w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253"></path></svg> {{ optional($evaluation->matiere)->nom }}</span>
                         <span><svg class="inline w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg> {{ optional($evaluation->classe)->nom }}</span>
                         <span><svg class="inline w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg> {{ \Carbon\Carbon::parse($evaluation->date_evaluation)->format('d/m/Y') }}</span>
@@ -29,7 +29,7 @@
             </div>
             
             <div class="px-6 py-6 sm:px-8 bg-gray-50 flex space-x-4">
-                 <a href="{{ route('enseignant.evaluations.edit', $evaluation->id) }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white hover:bg-indigo-700 rounded-lg text-sm font-medium transition-colors">
+                 <a href="{{ route('enseignant.evaluations.edit', $evaluation->id) }}" class="inline-flex items-center px-4 py-2 bg-blue-900 text-white hover:bg-blue-800 rounded-lg text-sm font-medium transition-colors">
                      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                      Modifier
                  </a>
@@ -45,9 +45,9 @@
             <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100 flex items-center justify-between">
                 <div>
                     <p class="text-xs uppercase font-bold text-gray-500">Moyenne</p>
-                    <p class="text-2xl font-black text-indigo-600 mt-1">{{ number_format($stats['moyenne'], 2) }} <span class="text-sm font-normal text-gray-400">/{{ $evaluation->bareme }}</span></p>
+                    <p class="text-2xl font-black text-blue-900 mt-1">{{ number_format($stats['moyenne'], 2) }} <span class="text-sm font-normal text-gray-400">/{{ $evaluation->bareme }}</span></p>
                 </div>
-                <div class="p-3 bg-indigo-50 rounded-full text-indigo-500">
+                <div class="p-3 bg-blue-50 rounded-full text-indigo-500">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
                 </div>
             </div>
@@ -72,7 +72,7 @@
             <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100 flex items-center justify-between">
                 <div>
                     <p class="text-xs uppercase font-bold text-gray-500">Saisie</p>
-                    <p class="text-2xl font-black text-blue-600 mt-1">{{ $stats['notes_saisies'] }} <span class="text-sm font-normal text-gray-400">/{{ $stats['total_eleves'] }}</span></p>
+                    <p class="text-2xl font-black text-blue-900 mt-1">{{ $stats['notes_saisies'] }} <span class="text-sm font-normal text-gray-400">/{{ $stats['total_eleves'] }}</span></p>
                 </div>
                 <div class="p-3 bg-blue-50 rounded-full text-blue-500">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
@@ -112,7 +112,7 @@
                             </td>
                             <td class="px-6 py-4 text-gray-500 italic max-w-xs truncate" title="{{ $note->observation }}">{{ $note->observation ?? '-' }}</td>
                             <td class="px-6 py-4 text-right">
-                                <a href="{{ route('enseignant.notes.edit', $note->id) }}" class="text-indigo-600 hover:text-indigo-900 font-medium">Modifier</a>
+                                <a href="{{ route('enseignant.notes.edit', $note->id) }}" class="text-blue-900 hover:text-indigo-900 font-medium">Modifier</a>
                             </td>
                         </tr>
                         @empty
@@ -120,7 +120,7 @@
                             <td colspan="5" class="px-6 py-12 text-center text-gray-500">
                                 <svg class="w-12 h-12 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                                 Aucune note n'a encore été saisie pour cette évaluation.<br>
-                                <a href="{{ route('enseignant.notes.create', ['evaluation' => $evaluation->id]) }}" class="mt-2 inline-block text-indigo-600 font-semibold hover:underline">Commencer la saisie</a>
+                                <a href="{{ route('enseignant.notes.create', ['evaluation' => $evaluation->id]) }}" class="mt-2 inline-block text-blue-900 font-semibold hover:underline">Commencer la saisie</a>
                             </td>
                         </tr>
                         @endforelse

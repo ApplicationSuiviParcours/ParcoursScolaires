@@ -11,7 +11,7 @@
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         
         <!-- Header -->
-        <div class="relative overflow-hidden mb-8 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 shadow-xl group">
+        <div class="relative overflow-hidden mb-8 rounded-2xl bg-blue-900 shadow-xl group">
             <div class="absolute inset-0 opacity-20">
                 <div class="absolute w-96 h-96 bg-white rounded-full -top-48 -right-48 blur-3xl animate-pulse-slow"></div>
             </div>
@@ -34,7 +34,7 @@
             <!-- Carte Profil -->
             <a href="{{ route('profile.edit') }}" class="group block p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-xl hover:border-blue-100 transition-all duration-300 transform hover:-translate-y-1">
                 <div class="flex items-center space-x-4 mb-4">
-                    <div class="w-12 h-12 flex flex-shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                    <div class="w-12 h-12 flex flex-shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-900 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
                     </div>
                     <div>
@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <p class="text-gray-600 text-sm mb-4">Mettez à jour votre nom, votre adresse email et d'autres informations publiques.</p>
-                <div class="flex items-center text-blue-600 text-sm font-semibold group-hover:translate-x-1 transition-transform">
+                <div class="flex items-center text-blue-900 text-sm font-semibold group-hover:translate-x-1 transition-transform">
                     Gérer le profil 
                     <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
                 </div>
@@ -91,7 +91,7 @@
             <div class="group block p-6 bg-white border border-gray-100 rounded-2xl shadow-sm opacity-80 relative cursor-not-allowed">
                 <div class="absolute top-4 right-4 bg-gray-100 text-gray-500 text-[10px] uppercase font-bold px-2 py-1 rounded-full">Bientôt</div>
                 <div class="flex items-center space-x-4 mb-4 opacity-50">
-                    <div class="w-12 h-12 flex flex-shrink-0 items-center justify-center rounded-xl bg-purple-50 text-purple-600 group-hover:bg-purple-50">
+                    <div class="w-12 h-12 flex flex-shrink-0 items-center justify-center rounded-xl bg-purple-50 text-yellow-600 group-hover:bg-purple-50">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
                     </div>
                     <div>

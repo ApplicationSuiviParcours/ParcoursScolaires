@@ -35,7 +35,7 @@
                 <!-- Formulaire principal -->
                 <div class="lg:col-span-2">
                     <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
-                        <div class="bg-gradient-to-r from-yellow-500 to-amber-600 px-6 py-5">
+                        <div class="bg-blue-900 px-6 py-5">
                             <div class="flex items-center">
                                 <div class="p-2 bg-white bg-opacity-20 rounded-lg backdrop-filter backdrop-blur-lg mr-4">
                                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -348,7 +348,7 @@
                                     Annuler
                                 </a>
                                 <button type="submit" id="submit-btn"
-                                    class="px-6 py-3 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white rounded-lg font-medium transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 shadow-lg hover:shadow-xl flex items-center">
+                                    class="px-6 py-3 bg-blue-900 hover:from-yellow-600 hover:to-amber-700 text-white rounded-lg font-medium transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 shadow-lg hover:shadow-xl flex items-center">
                                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M5 13l4 4L19 7"></path>
@@ -424,7 +424,7 @@
                             <div class="space-y-3">
                                 <a href="{{ route('admin.inscriptions.show', $inscription) }}"
                                     class="flex items-center p-3 text-sm text-gray-700 hover:bg-blue-50 rounded-lg transition-colors">
-                                    <svg class="w-5 h-5 mr-3 text-blue-600" fill="none" stroke="currentColor"
+                                    <svg class="w-5 h-5 mr-3 text-blue-900" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -448,7 +448,7 @@
                     </div>
 
                     <!-- Carte d'aide -->
-                    <div class="bg-gradient-to-br from-yellow-50 to-amber-50 rounded-xl p-6 border border-yellow-200">
+                    <div class="bg-blue-900 rounded-xl p-6 border border-yellow-200">
                         <div class="flex items-start">
                             <div class="flex-shrink-0">
                                 <svg class="h-6 w-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -471,7 +471,7 @@
 
             <!-- Zone de danger (suppression) -->
             <div class="mt-6 bg-white rounded-xl shadow-lg overflow-hidden border border-red-200">
-                <div class="bg-gradient-to-r from-red-50 to-red-100 px-6 py-4 border-b border-red-200">
+                <div class="bg-blue-900 px-6 py-4 border-b border-red-200">
                     <h4 class="text-lg font-semibold text-red-800 flex items-center">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

@@ -34,7 +34,7 @@
             <!-- Header avec design moderne - responsive -->
             <div class="relative mb-6 md:mb-8 overflow-hidden group rounded-2xl md:rounded-3xl">
                 <div
-                    class="absolute inset-0 bg-gradient-to-r from-purple-700 via-purple-600 to-indigo-700 animate-gradient-xy">
+                    class="absolute inset-0 bg-blue-900 animate-gradient-xy">
                 </div>
                 <div class="absolute inset-0 opacity-20">
                     <div
@@ -73,7 +73,7 @@
                                 </div>
                                 @if($stats['total'] > 0)
                                     <div
-                                        class="absolute -top-2 -right-2 px-1.5 md:px-3 py-0.5 md:py-1.5 text-[10px] md:text-xs font-bold text-white bg-gradient-to-r from-purple-500 to-indigo-600 rounded-full shadow-lg animate-bounce-subtle">
+                                        class="absolute -top-2 -right-2 px-1.5 md:px-3 py-0.5 md:py-1.5 text-[10px] md:text-xs font-bold text-white bg-blue-900 rounded-full shadow-lg animate-bounce-subtle">
                                         {{ $stats['total'] }} bulletin(s)
                                     </div>
                                 @endif
@@ -135,7 +135,7 @@
                 class="flex flex-col sm:flex-row flex-wrap items-start sm:items-center justify-between gap-3 md:gap-4 mb-4 md:mb-6">
                 <a href="{{ route('parent.enfants') }}"
                     class="group inline-flex items-center px-3 md:px-5 py-2 md:py-2.5 text-xs md:text-sm text-gray-700 bg-white/80 backdrop-blur-sm hover:bg-white rounded-lg md:rounded-xl transition-all duration-300 shadow-md hover:shadow-xl border border-gray-200/50">
-                    <svg class="w-4 h-4 md:w-5 md:h-5 mr-1 md:mr-2 text-purple-600 transition-transform group-hover:-translate-x-1"
+                    <svg class="w-4 h-4 md:w-5 md:h-5 mr-1 md:mr-2 text-yellow-600 transition-transform group-hover:-translate-x-1"
                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
@@ -161,7 +161,7 @@
                 <div class="p-4 md:p-6 border-b border-gray-100/50 bg-gradient-to-r from-purple-50/80 to-indigo-50/80">
                     <div class="flex items-center justify-between">
                         <h3 class="flex items-center text-base md:text-lg font-semibold text-gray-900">
-                            <svg class="w-4 h-4 md:w-5 md:h-5 mr-2 text-purple-600 animate-spin-slow" fill="none"
+                            <svg class="w-4 h-4 md:w-5 md:h-5 mr-2 text-yellow-600 animate-spin-slow" fill="none"
                                 stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z">
@@ -187,7 +187,7 @@
                                 Période
                             </label>
                             <select name="periode"
-                                class="w-full p-2 text-sm transition-all border-gray-200 rounded-lg md:rounded-xl focus:border-purple-500 focus:ring-purple-500 hover:border-purple-300">
+                                class="w-full p-2 text-sm transition-all border-gray-200 rounded-lg md:rounded-xl focus:border-blue-900 focus:ring-purple-500 hover:border-purple-300">
                                 <option value="">Toutes les périodes</option>
                                 @foreach($periodes as $periode)
                                     <option value="{{ $periode }}" {{ request('periode') == $periode ? 'selected' : '' }}>
@@ -208,7 +208,7 @@
                                 Année scolaire
                             </label>
                             <select name="annee_scolaire_id"
-                                class="w-full p-2 text-sm transition-all border-gray-200 rounded-lg md:rounded-xl focus:border-purple-500 focus:ring-purple-500 hover:border-purple-300">
+                                class="w-full p-2 text-sm transition-all border-gray-200 rounded-lg md:rounded-xl focus:border-blue-900 focus:ring-purple-500 hover:border-purple-300">
                                 <option value="">Toutes les années</option>
                                 @foreach($anneesScolaires as $annee)
                                     <option value="{{ $annee->id }}" {{ request('annee_scolaire_id') == $annee->id ? 'selected' : '' }}>
@@ -229,7 +229,7 @@
                                 </svg>
                             </a>
                             <button type="submit"
-                                class="flex-1 px-3 md:px-6 py-2 md:py-3 font-semibold text-white transition-all bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg md:rounded-xl hover:from-purple-600 hover:to-indigo-700 hover:shadow-lg hover:scale-105 active:scale-95">
+                                class="flex-1 px-3 md:px-6 py-2 md:py-3 font-semibold text-white transition-all bg-blue-900 rounded-lg md:rounded-xl hover:from-purple-600 hover:to-indigo-700 hover:shadow-lg hover:scale-105 active:scale-95">
                                 <svg class="w-4 h-4 md:w-5 md:h-5 mx-auto" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -253,18 +253,18 @@
                         <div>
                             <p class="flex items-center text-xs md:text-sm font-medium text-gray-600">
                                 <span
-                                    class="w-1.5 h-1.5 md:w-2 md:h-2 mr-1 md:mr-2 bg-purple-500 rounded-full animate-pulse"></span>
+                                    class="w-1.5 h-1.5 md:w-2 md:h-2 mr-1 md:mr-2 bg-blue-800 rounded-full animate-pulse"></span>
                                 Total bulletins
                             </p>
                             <p
-                                class="mt-1 md:mt-2 text-2xl md:text-5xl font-black text-gray-900 transition-colors group-hover:text-purple-600">
+                                class="mt-1 md:mt-2 text-2xl md:text-5xl font-black text-gray-900 transition-colors group-hover:text-yellow-600">
                                 {{ $stats['total'] }}</p>
                             <p class="mt-0.5 md:mt-1 text-[10px] md:text-xs text-gray-400 hidden md:block">depuis la rentrée
                             </p>
                         </div>
                         <div
-                            class="p-2 md:p-4 transition-transform shadow-lg bg-gradient-to-br from-purple-500 to-indigo-600 rounded-lg md:rounded-2xl group-hover:scale-110">
-                            <svg class="w-5 h-5 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor"
+                            class="p-2 md:p-4 transition-transform shadow-lg bg-blue-900 rounded-lg md:rounded-2xl group-hover:scale-110">
+                            <svg class="w-5 h-5 md:w-8 md:h-8 text-yellow-500" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
@@ -273,7 +273,7 @@
                         </div>
                     </div>
                     <div
-                        class="absolute bottom-0 left-0 w-full h-0.5 md:h-1 transition-transform origin-left transform scale-x-0 bg-gradient-to-r from-purple-500 to-indigo-600 group-hover:scale-x-100">
+                        class="absolute bottom-0 left-0 w-full h-0.5 md:h-1 transition-transform origin-left transform scale-x-0 bg-blue-900 group-hover:scale-x-100">
                     </div>
                 </div>
 
@@ -297,8 +297,8 @@
                             <p class="mt-0.5 md:mt-1 text-[10px] md:text-xs text-gray-400 hidden md:block">sur 20</p>
                         </div>
                         <div
-                            class="p-2 md:p-4 transition-transform shadow-lg bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg md:rounded-2xl group-hover:scale-110">
-                            <svg class="w-5 h-5 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor"
+                            class="p-2 md:p-4 transition-transform shadow-lg bg-blue-900 rounded-lg md:rounded-2xl group-hover:scale-110">
+                            <svg class="w-5 h-5 md:w-8 md:h-8 text-yellow-500" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
@@ -321,7 +321,7 @@
                                 Dernier bulletin
                             </p>
                             <p
-                                class="mt-1 md:mt-2 text-sm md:text-2xl font-bold text-gray-900 transition-colors group-hover:text-blue-600">
+                                class="mt-1 md:mt-2 text-sm md:text-2xl font-bold text-gray-900 transition-colors group-hover:text-blue-900">
                                 {{ $stats['dernier']->periode ?? 'N/A' }}
                             </p>
                             @if($stats['dernier'])
@@ -331,8 +331,8 @@
                             @endif
                         </div>
                         <div
-                            class="p-2 md:p-4 transition-transform shadow-lg bg-gradient-to-br from-blue-500 to-cyan-600 rounded-lg md:rounded-2xl group-hover:scale-110">
-                            <svg class="w-5 h-5 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor"
+                            class="p-2 md:p-4 transition-transform shadow-lg bg-blue-900 rounded-lg md:rounded-2xl group-hover:scale-110">
+                            <svg class="w-5 h-5 md:w-8 md:h-8 text-yellow-500" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
@@ -373,7 +373,7 @@
                                 <div class="flex items-center justify-between mb-3 md:mb-4">
                                     <div>
                                         <h4
-                                            class="text-base md:text-xl font-bold text-gray-900 transition-colors group-hover:text-purple-600">
+                                            class="text-base md:text-xl font-bold text-gray-900 transition-colors group-hover:text-yellow-600">
                                             {{ $bulletin->periode }}</h4>
                                         <p class="flex items-center mt-0.5 md:mt-1 text-xs md:text-sm text-gray-500">
                                             <svg class="w-3 h-3 md:w-4 md:h-4 mr-1 text-gray-400" fill="none" stroke="currentColor"
@@ -386,14 +386,14 @@
                                         </p>
                                         @if($bulletin->trimestre)
                                             <span
-                                                class="inline-block mt-1 px-1.5 md:px-2 py-0.5 text-[10px] md:text-xs bg-purple-100 text-purple-700 rounded-full">
+                                                class="inline-block mt-1 px-1.5 md:px-2 py-0.5 text-[10px] md:text-xs bg-blue-100 text-blue-900 rounded-full">
                                                 Trimestre {{ $bulletin->trimestre }}
                                             </span>
                                         @endif
                                     </div>
                                     <div
-                                        class="p-2 md:p-3 transition-transform bg-gradient-to-br from-purple-100 to-indigo-100 rounded-lg md:rounded-xl group-hover:scale-110">
-                                        <svg class="w-5 h-5 md:w-8 md:h-8 text-purple-600" fill="none" stroke="currentColor"
+                                        class="p-2 md:p-3 transition-transform bg-blue-900 rounded-lg md:rounded-xl group-hover:scale-110">
+                                        <svg class="w-5 h-5 md:w-8 md:h-8 text-yellow-600" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
@@ -444,7 +444,7 @@
                                 <!-- Appréciation - responsive -->
                                 @if($bulletin->appreciation)
                                     <div
-                                        class="relative p-3 md:p-4 mb-3 md:mb-4 border border-yellow-100 bg-gradient-to-r from-yellow-50 to-amber-50 rounded-lg md:rounded-xl">
+                                        class="relative p-3 md:p-4 mb-3 md:mb-4 border border-yellow-100 bg-blue-900 rounded-lg md:rounded-xl">
                                         <svg class="absolute w-6 h-6 md:w-8 md:h-8 top-1 md:top-2 right-1 md:right-2 text-yellow-200/50"
                                             fill="currentColor" viewBox="0 0 24 24">
                                             <path
@@ -467,7 +467,7 @@
                                         {{ $dateCreation }}
                                     </span>
                                     <a href="{{ route('parent.enfant.bulletin.detail', ['eleve' => $eleve->id, 'bulletin' => $bulletin->id]) }}"
-                                        class="inline-flex items-center px-3 md:px-5 py-1.5 md:py-2.5 text-xs md:text-sm font-medium text-white bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg md:rounded-xl hover:from-purple-600 hover:to-indigo-700 transition-all shadow-md hover:shadow-lg group/btn">
+                                        class="inline-flex items-center px-3 md:px-5 py-1.5 md:py-2.5 text-xs md:text-sm font-medium text-white bg-blue-900 rounded-lg md:rounded-xl hover:from-purple-600 hover:to-indigo-700 transition-all shadow-md hover:shadow-lg group/btn">
                                         <span>Détails</span>
                                         <svg class="w-3 h-3 md:w-4 md:h-4 ml-1 md:ml-2 transition-transform group-hover/btn:translate-x-1"
                                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -506,7 +506,7 @@
                             Les bulletins apparaîtront ici une fois publiés par l'administration.
                         </p>
                         <div
-                            class="inline-flex items-center px-3 md:px-5 py-2 md:py-3 mt-6 md:mt-8 text-xs md:text-sm text-purple-700 bg-purple-50 rounded-lg md:rounded-xl">
+                            class="inline-flex items-center px-3 md:px-5 py-2 md:py-3 mt-6 md:mt-8 text-xs md:text-sm text-blue-900 bg-purple-50 rounded-lg md:rounded-xl">
                             <svg class="w-4 h-4 md:w-5 md:h-5 mr-1 md:mr-2" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

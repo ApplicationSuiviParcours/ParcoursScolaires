@@ -8,7 +8,7 @@
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}" class="group relative">
                         <div class="absolute inset-0 bg-blue-600 rounded-lg opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
-                        <x-application-logo class="block h-7 w-auto sm:h-8 md:h-9 fill-current text-gray-800 group-hover:text-blue-600 transition-colors duration-300" />
+                        <x-application-logo class="block h-7 w-auto sm:h-8 md:h-9 fill-current text-gray-800 group-hover:text-blue-900 transition-colors duration-300" />
                     </a>
                 </div>
 
@@ -85,14 +85,14 @@
                             <button class="flex items-center space-x-2 sm:space-x-3 px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-xl bg-gradient-to-r from-gray-50 to-white border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all duration-200 group">
                                 <!-- Avatar utilisateur - Responsive -->
                                 <div class="relative">
-                                    <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-semibold text-xs sm:text-sm shadow-sm">
+                                    <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-blue-900 flex items-center justify-center text-white font-semibold text-xs sm:text-sm shadow-sm">
                                         {{ substr(Auth::user()->name, 0, 1) }}{{ substr(Auth::user()->name, strpos(Auth::user()->name, ' ') + 1, 1) ?? '' }}
                                     </div>
                                     <span class="absolute bottom-0 right-0 w-2 h-2 sm:w-2.5 sm:h-2.5 bg-green-500 border-2 border-white rounded-full"></span>
                                 </div>
                                 
                                 <div class="text-left hidden lg:block">
-                                    <div class="text-xs sm:text-sm font-semibold text-gray-700 group-hover:text-blue-600 transition-colors truncate max-w-[100px]">
+                                    <div class="text-xs sm:text-sm font-semibold text-gray-700 group-hover:text-blue-900 transition-colors truncate max-w-[100px]">
                                         {{ Auth::user()->name }}
                                     </div>
                                     <div class="text-[10px] sm:text-xs text-gray-500">
@@ -108,7 +108,7 @@
 
                         <x-slot name="content">
                             <!-- En-tête du dropdown - Responsive -->
-                            <div class="px-3 sm:px-4 py-2 sm:py-3 border-b border-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50">
+                            <div class="px-3 sm:px-4 py-2 sm:py-3 border-b border-gray-100 bg-blue-900">
                                 <p class="text-[10px] sm:text-xs text-gray-500">Connecté en tant que</p>
                                 <p class="text-xs sm:text-sm font-semibold text-gray-700 truncate">{{ Auth::user()->email }}</p>
                             </div>
@@ -143,7 +143,7 @@
 
             <!-- Hamburger avec design amélioré - Responsive -->
             <div class="-me-2 flex items-center sm:hidden">
-                <button @click="open = !open" class="inline-flex items-center justify-center p-1.5 sm:p-2 rounded-xl text-gray-500 hover:text-blue-600 hover:bg-blue-50 focus:outline-none focus:bg-blue-50 focus:text-blue-600 transition-all duration-200">
+                <button @click="open = !open" class="inline-flex items-center justify-center p-1.5 sm:p-2 rounded-xl text-gray-500 hover:text-blue-900 hover:bg-blue-50 focus:outline-none focus:bg-blue-50 focus:text-blue-900 transition-all duration-200">
                     <svg class="h-5 w-5 sm:h-6 sm:w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': !open}" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         <path :class="{'hidden': !open, 'inline-flex': open}" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -156,9 +156,9 @@
     <!-- Responsive Navigation Menu avec design amélioré - Responsive -->
     <div :class="{'block': open, 'hidden': !open}" class="hidden sm:hidden bg-white border-t border-gray-100 shadow-lg">
         <!-- Informations utilisateur mobile - Responsive -->
-        <div class="px-3 sm:px-4 py-2 sm:py-3 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div class="px-3 sm:px-4 py-2 sm:py-3 bg-blue-900">
             <div class="flex items-center">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-semibold text-sm sm:text-base">
+                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-900 flex items-center justify-center text-white font-semibold text-sm sm:text-base">
                     {{ substr(Auth::user()->name, 0, 1) }}{{ substr(Auth::user()->name, strpos(Auth::user()->name, ' ') + 1, 1) ?? '' }}
                 </div>
                 <div class="ml-2 sm:ml-3 min-w-0">

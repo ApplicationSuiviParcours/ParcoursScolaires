@@ -7,7 +7,7 @@
     <div class="px-4 mx-auto max-w-5xl sm:px-6 lg:px-8">
 
         {{-- En-tête --}}
-        <div class="relative overflow-hidden mb-8 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-3xl shadow-2xl">
+        <div class="relative overflow-hidden mb-8 bg-blue-900 rounded-3xl shadow-2xl">
             <div class="p-8">
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div>
@@ -33,7 +33,7 @@
             </div>
             <div class="bg-white shadow-lg rounded-2xl p-5 text-center">
                 <p class="text-xs text-gray-500 uppercase tracking-wide font-semibold">Notes saisies</p>
-                <p class="text-3xl font-bold text-blue-600 mt-1">{{ $stats['notes_saisies'] }}</p>
+                <p class="text-3xl font-bold text-blue-900 mt-1">{{ $stats['notes_saisies'] }}</p>
             </div>
             <div class="bg-white shadow-lg rounded-2xl p-5 text-center">
                 <p class="text-xs text-gray-500 uppercase tracking-wide font-semibold">Moyenne</p>
@@ -55,7 +55,7 @@
 
         {{-- Distribution des notes --}}
         <div class="bg-white shadow-lg rounded-2xl overflow-hidden mb-6">
-            <div class="p-6 bg-gradient-to-r from-indigo-600 to-purple-600">
+            <div class="p-6 bg-blue-900">
                 <h3 class="text-lg font-bold text-white">Distribution des notes</h3>
             </div>
             <div class="p-6">
@@ -89,7 +89,7 @@
 
         {{-- Notes des élèves --}}
         <div class="bg-white shadow-lg rounded-2xl overflow-hidden">
-            <div class="p-6 bg-gradient-to-r from-green-600 to-emerald-600">
+            <div class="p-6 bg-blue-900">
                 <h3 class="text-lg font-bold text-white">Notes par élève</h3>
             </div>
             <div class="p-6 overflow-x-auto">

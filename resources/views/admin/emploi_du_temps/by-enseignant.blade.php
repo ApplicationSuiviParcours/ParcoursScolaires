@@ -3,7 +3,7 @@
 @section('title', 'Emploi du temps par enseignant')
 
 @section('content')
-<div class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-8">
+<div class="min-h-screen bg-transparent py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <!-- En-tête -->
@@ -12,8 +12,8 @@
                 <a href="{{ route('admin.emploi_du_temps.index') }}" class="p-2 bg-white rounded-xl shadow hover:bg-gray-50 transition-colors">
                     <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                 </a>
-                <div class="p-3 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl shadow-lg flex-shrink-0">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="p-3 bg-blue-900 rounded-xl shadow-lg flex-shrink-0">
+                    <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                     </svg>
                 </div>
@@ -77,7 +77,7 @@
                         <!-- Boutons filtre -->
                         <div class="flex items-end">
                             <button type="submit"
-                                    class="w-full inline-flex items-center justify-center px-5 py-2.5 bg-gradient-to-r from-purple-500 to-pink-600 text-white font-medium rounded-xl hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300 text-sm">
+                                    class="w-full inline-flex items-center justify-center px-5 py-2.5 bg-blue-900 text-white font-medium rounded-xl hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300 text-sm">
                                 Afficher l'emploi du temps
                             </button>
                         </div>
@@ -98,19 +98,19 @@
                         @endphp
                         
                         <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl overflow-hidden border border-white/20 transform hover:scale-[1.02] transition-transform duration-300 flex flex-col h-full">
-                            <div class="bg-gradient-to-r from-purple-500 to-pink-600 px-4 py-3 flex-shrink-0">
+                            <div class="bg-blue-900 px-4 py-3 flex-shrink-0">
                                 <h3 class="text-white font-bold text-center text-lg">{{ $jourFr }}</h3>
                             </div>
                             
                             <div class="p-4 flex-1 space-y-4">
                                 @forelse($coursDuJour as $emploi)
                                     <div class="relative pl-4 border-l-2 border-purple-400 pb-2">
-                                        <div class="absolute w-3 h-3 bg-purple-500 rounded-full -left-[7px] top-1 shadow-sm"></div>
+                                        <div class="absolute w-3 h-3 bg-blue-800 rounded-full -left-[7px] top-1 shadow-sm"></div>
                                         <div class="text-sm font-bold text-gray-800">
                                             {{ \Carbon\Carbon::parse($emploi->heure_debut)->format('H:i') }} - 
                                             {{ \Carbon\Carbon::parse($emploi->heure_fin)->format('H:i') }}
                                         </div>
-                                        <div class="mt-1 text-purple-600 font-semibold">{{ $emploi->matiere->nom ?? '-' }}</div>
+                                        <div class="mt-1 text-yellow-600 font-semibold">{{ $emploi->matiere->nom ?? '-' }}</div>
                                         <div class="mt-1 text-sm text-gray-600 flex items-center gap-1">
                                             <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
                                             <span class="truncate">Classe: {{ $emploi->classe->nom ?? '-' }}</span>
@@ -144,11 +144,11 @@
             @endif
         @else
             <div class="bg-purple-50/50 rounded-2xl shadow-inner p-12 text-center border border-dashed border-purple-200 animate__animated animate__fadeInUp">
-                <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <svg class="w-10 h-10 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                 </div>
                 <h3 class="text-xl font-medium text-purple-900 mb-2">Sélectionnez un enseignant</h3>
-                <p class="text-purple-600 max-w-md mx-auto">Veuillez choisir un professeur dans les filtres ci-dessus pour visualiser son emploi du temps complet.</p>
+                <p class="text-yellow-600 max-w-md mx-auto">Veuillez choisir un professeur dans les filtres ci-dessus pour visualiser son emploi du temps complet.</p>
             </div>
         @endif
 

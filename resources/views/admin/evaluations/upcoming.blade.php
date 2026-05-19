@@ -6,7 +6,7 @@
 <div class="py-6 sm:py-12">
     <div class="px-4 mx-auto max-w-5xl sm:px-6 lg:px-8">
 
-        <div class="bg-gradient-to-r from-green-600 to-emerald-600 rounded-3xl p-6 mb-8 shadow-2xl">
+        <div class="bg-blue-900 rounded-3xl p-6 mb-8 shadow-2xl">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
                     <h1 class="text-2xl font-bold text-white">📅 Évaluations à venir</h1>

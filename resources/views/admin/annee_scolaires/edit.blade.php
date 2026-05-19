@@ -3,7 +3,7 @@
 @section('title', 'Modifier l\'année scolaire')
 
 @section('header')
-<div class="relative overflow-hidden bg-gradient-to-br from-amber-600 via-amber-700 to-orange-800 py-8 md:py-12">
+<div class="relative overflow-hidden bg-blue-900 py-8 md:py-12">
     <!-- Éléments décoratifs animés -->
     <div class="absolute inset-0 opacity-10">
         <div class="absolute -top-24 -right-24 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-pulse"></div>
@@ -95,7 +95,7 @@
     <div class="max-w-3xl mx-auto">
         <!-- Formulaire -->
         <div class="bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden">
-            <div class="bg-gradient-to-r from-amber-500 to-orange-600 px-4 sm:px-8 py-4 sm:py-6">
+            <div class="bg-blue-900 px-4 sm:px-8 py-4 sm:py-6">
                 <div class="flex flex-col sm:flex-row items-center sm:items-center">
                     <div class="w-12 h-12 sm:w-14 sm:h-14 bg-white/20 backdrop-blur-lg rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-0 sm:mr-5">
                         <svg class="w-6 h-6 sm:w-7 sm:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -111,9 +111,9 @@
 
             <div class="p-4 sm:p-8">
                 <!-- Aperçu rapide -->
-                <div class="mb-6 sm:mb-8 p-3 sm:p-4 bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl sm:rounded-2xl border border-amber-200">
+                <div class="mb-6 sm:mb-8 p-3 sm:p-4 bg-blue-900 rounded-xl sm:rounded-2xl border border-amber-200">
                     <div class="flex flex-col sm:flex-row items-center">
-                        <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl sm:rounded-2xl flex items-center justify-center text-white font-bold text-xl sm:text-2xl mb-3 sm:mb-0 sm:mr-4">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 bg-blue-900 rounded-xl sm:rounded-2xl flex items-center justify-center text-white font-bold text-xl sm:text-2xl mb-3 sm:mb-0 sm:mr-4">
                             {{ substr($anneeScolaire->nom, 0, 2) }}
                         </div>
                         <div class="text-center sm:text-left">
@@ -273,7 +273,7 @@
                                 Annuler
                             </a>
                             <button type="submit" 
-                                    class="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-semibold text-sm rounded-lg sm:rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+                                    class="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 bg-blue-900 hover:from-amber-600 hover:to-orange-700 text-white font-semibold text-sm rounded-lg sm:rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
                                 <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
                                 </svg>
@@ -287,7 +287,7 @@
 
         <!-- Zone de danger (suppression) -->
         <div class="mt-6 sm:mt-8 bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden border-l-4 sm:border-l-8 border-red-500">
-            <div class="bg-gradient-to-r from-red-50 to-red-100 px-4 sm:px-8 py-4 sm:py-6">
+            <div class="bg-blue-900 px-4 sm:px-8 py-4 sm:py-6">
                 <div class="flex flex-col sm:flex-row items-center">
                     <div class="w-12 h-12 sm:w-14 sm:h-14 bg-red-500 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-0 sm:mr-5 animate-pulse">
                         <svg class="w-6 h-6 sm:w-7 sm:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">

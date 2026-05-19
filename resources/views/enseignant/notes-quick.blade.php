@@ -16,7 +16,7 @@
         @endif
 
         {{-- Info évaluation --}}
-        <div class="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-2xl p-6 mb-6 shadow-lg">
+        <div class="bg-blue-900 rounded-2xl p-6 mb-6 shadow-lg">
             <h1 class="text-2xl font-bold text-white">⚡ Saisie rapide des notes</h1>
             <p class="text-purple-200 mt-1">{{ $evaluation->nom }} — {{ $evaluation->classe->nom_complet ?? $evaluation->classe->nom }}</p>
             <div class="flex flex-wrap gap-4 mt-3 text-sm">
@@ -28,7 +28,7 @@
         </div>
 
         <div class="bg-white shadow-lg rounded-2xl overflow-hidden">
-            <div class="p-6 bg-gradient-to-r from-green-600 to-emerald-600 flex items-center justify-between">
+            <div class="p-6 bg-blue-900 flex items-center justify-between">
                 <h3 class="text-lg font-bold text-white">{{ $eleves->count() }} élève(s)</h3>
                 <a href="{{ route('enseignant.evaluations.show', $evaluation->id) }}" class="text-white/80 hover:text-white text-sm">← Retour</a>
             </div>
@@ -51,7 +51,7 @@
                             <tr class="hover:bg-gray-50 transition-colors">
                                 <td class="px-4 py-3">
                                     <div class="flex items-center gap-3">
-                                        <div class="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center text-white text-xs font-bold">
+                                        <div class="w-8 h-8 bg-blue-900 rounded-lg flex items-center justify-center text-white text-xs font-bold">
                                             {{ strtoupper(substr($eleve->prenom, 0, 1)) }}{{ strtoupper(substr($eleve->nom, 0, 1)) }}
                                         </div>
                                         <div>

@@ -6,7 +6,7 @@
 <div class="py-6 sm:py-12">
     <div class="px-4 mx-auto max-w-4xl sm:px-6 lg:px-8">
         <div class="bg-white shadow-lg rounded-2xl overflow-hidden">
-            <div class="p-6 bg-gradient-to-r from-blue-600 to-indigo-600 flex items-center justify-between">
+            <div class="p-6 bg-blue-900 flex items-center justify-between">
                 <div>
                     <h1 class="text-xl font-bold text-white">Relevé de notes — {{ $eleve->prenom }} {{ $eleve->nom }}</h1>
                     <p class="text-blue-200 mt-1">{{ $stats['periode'] ?? 'Toutes périodes' }}</p>

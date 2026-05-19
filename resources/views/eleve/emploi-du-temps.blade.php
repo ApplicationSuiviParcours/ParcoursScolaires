@@ -12,7 +12,7 @@
 
         <!-- Header avec design amélioré -->
         <div class="relative mb-6 overflow-hidden group sm:mb-8 rounded-xl sm:rounded-2xl">
-            <div class="absolute inset-0 bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 animate-gradient-x"></div>
+            <div class="absolute inset-0 bg-blue-900 animate-gradient-x"></div>
             <div class="absolute inset-0 opacity-20">
                 <div class="absolute bg-white rounded-full w-64 h-64 sm:w-96 sm:h-96 -top-48 -right-48 blur-3xl"></div>
                 <div class="absolute bg-yellow-300 rounded-full w-64 h-64 sm:w-96 sm:h-96 -bottom-48 -left-48 blur-3xl"></div>
@@ -74,7 +74,7 @@
                             </option>
                         @endforeach
                     </select>
-                    <button type="submit" class="px-3 py-2 text-sm text-white transition-all duration-300 transform bg-gradient-to-r from-green-500 to-green-600 rounded-lg sm:px-4 sm:py-2 sm:text-base hover:from-green-600 hover:to-green-700 hover:scale-105">
+                    <button type="submit" class="px-3 py-2 text-sm text-white transition-all duration-300 transform bg-blue-900 rounded-lg sm:px-4 sm:py-2 sm:text-base hover:from-green-600 hover:to-green-700 hover:scale-105">
                         Filtrer
                     </button>
                     @if(request('jour'))
@@ -115,7 +115,7 @@
                     @php $coursDuJour = $emploiParJour[$jour] ?? collect(); @endphp
                     
                     <div class="overflow-hidden transition-all duration-500 transform bg-white border border-gray-100 shadow-xl rounded-xl sm:rounded-2xl hover:shadow-2xl">
-                        <div class="p-3 bg-gradient-to-r from-green-600 to-green-500 sm:p-4">
+                        <div class="p-3 bg-blue-900 sm:p-4">
                             <h4 class="flex flex-wrap items-center text-lg font-bold text-white sm:text-xl">
                                 <svg class="w-5 h-5 mr-1 sm:w-6 sm:h-6 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>

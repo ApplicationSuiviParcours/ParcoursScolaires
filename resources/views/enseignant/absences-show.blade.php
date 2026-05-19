@@ -10,7 +10,7 @@
 <div class="py-12">
     <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
         <!-- Header avec bouton retour -->
-        <div class="p-6 mb-8 shadow-lg bg-gradient-to-r from-red-600 to-red-400 rounded-xl">
+        <div class="p-6 mb-8 shadow-lg bg-blue-900 rounded-xl">
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
                     <a href="{{ route('enseignant.absences.index') }}" class="mr-4 text-white hover:text-red-100">
@@ -65,7 +65,7 @@
                     <div class="p-4 rounded-lg bg-gray-50">
                         <div class="flex items-center">
                             <div class="flex-shrink-0 p-3 bg-blue-100 rounded-full">
-                                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-6 h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
                                 </svg>
                             </div>
@@ -94,8 +94,8 @@
                     <!-- Date -->
                     <div class="p-4 rounded-lg bg-gray-50">
                         <div class="flex items-center">
-                            <div class="flex-shrink-0 p-3 bg-purple-100 rounded-full">
-                                <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="flex-shrink-0 p-3 bg-blue-100 rounded-full">
+                                <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                 </svg>
                             </div>

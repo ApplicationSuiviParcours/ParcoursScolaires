@@ -3,7 +3,7 @@
 @section('title', 'Détails de l\'affectation')
 
 @section('header')
-<div class="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 py-8 md:py-12">
+<div class="relative overflow-hidden bg-blue-900 py-8 md:py-12">
     <!-- Éléments décoratifs animés -->
     <div class="absolute inset-0 opacity-10">
         <div class="absolute -top-24 -right-24 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-pulse"></div>
@@ -89,7 +89,7 @@
     <div class="max-w-4xl mx-auto">
         <!-- Carte principale -->
         <div class="bg-white rounded-2xl md:rounded-3xl shadow-xl overflow-hidden mb-6 md:mb-8">
-            <div class="bg-gradient-to-r from-blue-500 to-indigo-600 px-4 md:px-8 py-4 md:py-6">
+            <div class="bg-blue-900 px-4 md:px-8 py-4 md:py-6">
                 <div class="flex items-center">
                     <div class="w-12 h-12 md:w-16 md:h-16 bg-white/20 backdrop-blur-lg rounded-xl md:rounded-2xl flex items-center justify-center mr-4 md:mr-5 flex-shrink-0">
                         <svg class="w-6 h-6 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -110,14 +110,14 @@
                         <!-- Enseignant -->
                         <div class="bg-gray-50 rounded-xl md:rounded-2xl p-4 md:p-5">
                             <h3 class="text-xs md:text-sm font-medium text-gray-500 mb-3 flex items-center">
-                                <svg class="w-4 h-4 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-4 h-4 mr-2 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                 </svg>
                                 Enseignant
                             </h3>
                             @if($enseignantMatiereClasse->enseignant)
                                 <div class="flex flex-col sm:flex-row items-center text-center sm:text-left">
-                                    <div class="flex-shrink-0 h-12 w-12 md:h-14 md:w-14 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center text-white font-bold text-lg md:text-xl shadow-lg mb-3 sm:mb-0 sm:mr-4">
+                                    <div class="flex-shrink-0 h-12 w-12 md:h-14 md:w-14 bg-blue-900 rounded-xl flex items-center justify-center text-white font-bold text-lg md:text-xl shadow-lg mb-3 sm:mb-0 sm:mr-4">
                                         {{ $enseignantMatiereClasse->enseignant->initiales ?? '?' }}
                                     </div>
                                     <div>
@@ -160,15 +160,15 @@
                         <!-- Matière -->
                         <div class="bg-gray-50 rounded-xl md:rounded-2xl p-4 md:p-5">
                             <h3 class="text-xs md:text-sm font-medium text-gray-500 mb-3 flex items-center">
-                                <svg class="w-4 h-4 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-4 h-4 mr-2 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                                 </svg>
                                 Matière
                             </h3>
                             @if($enseignantMatiereClasse->matiere)
                                 <div class="flex flex-col sm:flex-row items-center text-center sm:text-left">
-                                    <div class="w-10 h-10 md:w-12 md:h-12 bg-purple-100 rounded-lg md:rounded-xl flex items-center justify-center mb-3 sm:mb-0 sm:mr-3 flex-shrink-0">
-                                        <span class="text-purple-700 font-bold text-sm md:text-base">{{ substr($enseignantMatiereClasse->matiere->code ?? 'MT', 0, 3) }}</span>
+                                    <div class="w-10 h-10 md:w-12 md:h-12 bg-blue-100 rounded-lg md:rounded-xl flex items-center justify-center mb-3 sm:mb-0 sm:mr-3 flex-shrink-0">
+                                        <span class="text-blue-900 font-bold text-sm md:text-base">{{ substr($enseignantMatiereClasse->matiere->code ?? 'MT', 0, 3) }}</span>
                                     </div>
                                     <div>
                                         <p class="text-base md:text-lg font-bold text-gray-800">{{ $enseignantMatiereClasse->matiere->nom }}</p>
@@ -234,7 +234,7 @@
         <!-- Autres affectations -->
         @if(isset($autresAffectations) && $autresAffectations && $autresAffectations->count() > 0)
         <div class="bg-white rounded-2xl md:rounded-3xl shadow-xl overflow-hidden mb-6 md:mb-8">
-            <div class="bg-gradient-to-r from-gray-800 to-gray-900 px-4 md:px-8 py-4 md:py-5">
+            <div class="bg-blue-900 px-4 md:px-8 py-4 md:py-5">
                 <div class="flex items-center">
                     <div class="w-10 h-10 md:w-12 md:h-12 bg-white/10 backdrop-blur-lg rounded-lg md:rounded-xl flex items-center justify-center mr-3 md:mr-4 flex-shrink-0">
                         <svg class="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -249,8 +249,8 @@
                     @foreach($autresAffectations as $affectation)
                         <a href="{{ route('admin.enseignant_matiere_classes.show', $affectation) }}" class="block p-3 md:p-4 bg-gray-50 rounded-lg md:rounded-xl hover:bg-gray-100 transition-all duration-300">
                             <div class="flex items-center">
-                                <div class="w-8 h-8 md:w-10 md:h-10 bg-indigo-100 rounded-lg flex items-center justify-center mr-2 md:mr-3 flex-shrink-0">
-                                    <span class="text-indigo-700 font-bold text-[10px] md:text-sm">{{ substr($affectation->matiere->code ?? 'MT', 0, 3) }}</span>
+                                <div class="w-8 h-8 md:w-10 md:h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-2 md:mr-3 flex-shrink-0">
+                                    <span class="text-blue-900 font-bold text-[10px] md:text-sm">{{ substr($affectation->matiere->code ?? 'MT', 0, 3) }}</span>
                                 </div>
                                 <div class="flex-1 min-w-0">
                                     <p class="font-medium text-gray-800 text-xs md:text-sm truncate">{{ $affectation->matiere->nom ?? 'N/A' }}</p>
@@ -269,7 +269,7 @@
 
         <!-- Zone de danger -->
         <div class="bg-white rounded-2xl md:rounded-3xl shadow-xl overflow-hidden border-l-4 md:border-l-8 border-red-500">
-            <div class="bg-gradient-to-r from-red-50 to-red-100 px-4 md:px-8 py-4 md:py-6">
+            <div class="bg-blue-900 px-4 md:px-8 py-4 md:py-6">
                 <div class="flex items-center">
                     <div class="w-12 h-12 md:w-14 md:h-14 bg-red-500 rounded-xl md:rounded-2xl flex items-center justify-center mr-4 md:mr-5 flex-shrink-0">
                         <svg class="w-6 h-6 md:w-7 md:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">

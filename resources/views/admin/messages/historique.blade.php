@@ -8,12 +8,12 @@
     <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
         <div>
             <h1 class="text-2xl font-bold text-gray-900 flex items-center gap-2">
-                <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
                 Historique des notifications
             </h1>
             <p class="text-sm text-gray-500 mt-1">{{ $notifications->total() }} notification(s) au total</p>
         </div>
-        <a href="{{ route('admin.messages.index') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl text-sm font-semibold transition-all">
+        <a href="{{ route('admin.messages.index') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-blue-900 hover:bg-blue-800 text-white rounded-xl text-sm font-semibold transition-all">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
             Envoyer
         </a>
@@ -24,7 +24,7 @@
         <form method="GET" action="{{ route('admin.messages.historique') }}" class="flex flex-wrap gap-3 items-end">
             <div>
                 <label class="block text-xs font-medium text-gray-700 mb-1">Type</label>
-                <select name="type" class="rounded-xl border-2 border-gray-200 focus:border-purple-500 px-3 py-2 text-sm">
+                <select name="type" class="rounded-xl border-2 border-gray-200 focus:border-blue-900 px-3 py-2 text-sm">
                     <option value="">Tous</option>
                     <option value="info" {{ request('type') === 'info' ? 'selected' : '' }}>Info</option>
                     <option value="success" {{ request('type') === 'success' ? 'selected' : '' }}>Succès</option>
@@ -34,7 +34,7 @@
             </div>
             <div>
                 <label class="block text-xs font-medium text-gray-700 mb-1">Statut</label>
-                <select name="statut" class="rounded-xl border-2 border-gray-200 focus:border-purple-500 px-3 py-2 text-sm">
+                <select name="statut" class="rounded-xl border-2 border-gray-200 focus:border-blue-900 px-3 py-2 text-sm">
                     <option value="">Tous</option>
                     <option value="non_lu" {{ request('statut') === 'non_lu' ? 'selected' : '' }}>Non lus</option>
                     <option value="lu" {{ request('statut') === 'lu' ? 'selected' : '' }}>Lus</option>
@@ -43,9 +43,9 @@
             <div>
                 <label class="block text-xs font-medium text-gray-700 mb-1">Recherche</label>
                 <input type="text" name="search" value="{{ request('search') }}" placeholder="Titre ou message..."
-                       class="rounded-xl border-2 border-gray-200 focus:border-purple-500 px-3 py-2 text-sm w-48">
+                       class="rounded-xl border-2 border-gray-200 focus:border-blue-900 px-3 py-2 text-sm w-48">
             </div>
-            <button type="submit" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl text-sm font-semibold transition-all">Filtrer</button>
+            <button type="submit" class="px-4 py-2 bg-blue-900 hover:bg-blue-800 text-white rounded-xl text-sm font-semibold transition-all">Filtrer</button>
             <a href="{{ route('admin.messages.historique') }}" class="px-4 py-2 bg-gray-100 text-gray-600 rounded-xl text-sm hover:bg-gray-200 transition-all">Reset</a>
         </form>
     </div>
@@ -54,14 +54,14 @@
     <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gradient-to-r from-purple-50 to-indigo-50">
+                <thead class="bg-blue-900">
                     <tr>
-                        <th class="px-4 py-3 text-left text-xs font-semibold text-purple-700 uppercase">Destinataire</th>
-                        <th class="px-4 py-3 text-left text-xs font-semibold text-purple-700 uppercase">Type</th>
-                        <th class="px-4 py-3 text-left text-xs font-semibold text-purple-700 uppercase">Titre</th>
-                        <th class="px-4 py-3 text-left text-xs font-semibold text-purple-700 uppercase hidden md:table-cell">Message</th>
-                        <th class="px-4 py-3 text-left text-xs font-semibold text-purple-700 uppercase">Statut</th>
-                        <th class="px-4 py-3 text-left text-xs font-semibold text-purple-700 uppercase">Date</th>
+                        <th class="px-4 py-3 text-left text-xs font-semibold text-blue-900 uppercase">Destinataire</th>
+                        <th class="px-4 py-3 text-left text-xs font-semibold text-blue-900 uppercase">Type</th>
+                        <th class="px-4 py-3 text-left text-xs font-semibold text-blue-900 uppercase">Titre</th>
+                        <th class="px-4 py-3 text-left text-xs font-semibold text-blue-900 uppercase hidden md:table-cell">Message</th>
+                        <th class="px-4 py-3 text-left text-xs font-semibold text-blue-900 uppercase">Statut</th>
+                        <th class="px-4 py-3 text-left text-xs font-semibold text-blue-900 uppercase">Date</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100">
@@ -78,7 +78,7 @@
                         <tr class="hover:bg-purple-50/30 transition-colors">
                             <td class="px-4 py-3">
                                 <div class="flex items-center gap-2">
-                                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+                                    <div class="w-8 h-8 rounded-lg bg-blue-900 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
                                         {{ strtoupper(substr($notif->user?->name ?? '?', 0, 1)) }}
                                     </div>
                                     <div>
@@ -120,7 +120,7 @@
                         <tr>
                             <td colspan="6" class="px-6 py-12 text-center">
                                 <div class="flex flex-col items-center gap-3">
-                                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center">
+                                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
                                         <svg class="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
                                     </div>
                                     <p class="text-gray-500 font-medium">Aucune notification trouvée</p>

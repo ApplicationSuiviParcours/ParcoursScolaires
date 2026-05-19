@@ -2,8 +2,8 @@
 <x-guest-layout>
     <!-- Header avec design moderne -->
     <div class="text-center mb-8">
-        <div class="relative inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-yellow-500 to-orange-600 mb-5 shadow-xl shadow-yellow-200 transform hover:scale-105 transition-transform duration-300">
-            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="relative inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-blue-900 mb-5 shadow-xl shadow-yellow-200 transform hover:scale-105 transition-transform duration-300">
+            <svg class="w-10 h-10 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8" />
             </svg>
@@ -23,7 +23,7 @@
     </div>
 
     <!-- Message principal -->
-    <div class="mb-6 p-5 bg-gradient-to-r from-yellow-50 to-orange-50 border-l-4 border-yellow-500 rounded-r-lg">
+    <div class="mb-6 p-5 bg-blue-900 border-l-4 border-yellow-500 rounded-r-lg">
         <div class="flex items-start">
             <div class="flex-shrink-0">
                 <svg class="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -78,7 +78,7 @@
             <form method="POST" action="{{ route('verification.send') }}" class="w-full sm:w-auto">
                 @csrf
                 <button type="submit" 
-                        class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-xl shadow-lg text-sm font-semibold text-white bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700 focus:outline-none focus:ring-4 focus:ring-yellow-200 transition-all duration-200 transform hover:scale-[1.02] group">
+                        class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-xl shadow-lg text-sm font-semibold text-white bg-blue-900 hover:from-yellow-700 hover:to-orange-700 focus:outline-none focus:ring-4 focus:ring-yellow-200 transition-all duration-200 transform hover:scale-[1.02] group">
                     <svg class="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                     </svg>

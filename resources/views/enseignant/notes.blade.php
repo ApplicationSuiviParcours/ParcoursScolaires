@@ -11,7 +11,7 @@
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 space-y-8">
         
         <!-- Header Section -->
-        <div class="bg-gradient-to-r from-emerald-600 to-teal-600 rounded-3xl shadow-xl p-8 relative overflow-hidden">
+        <div class="bg-blue-900 rounded-3xl shadow-xl p-8 relative overflow-hidden">
             <!-- Decorative Background Element -->
             <div class="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl"></div>
             
@@ -189,7 +189,7 @@
                                 
                                 <td class="p-4">
                                     <div class="flex items-center">
-                                        <div class="h-10 w-10 shrink-0 rounded-full bg-gradient-to-br from-indigo-100 to-emerald-100 flex items-center justify-center text-indigo-700 font-bold border border-white shadow-sm mr-3">
+                                        <div class="h-10 w-10 shrink-0 rounded-full bg-blue-900 flex items-center justify-center text-blue-900 font-bold border border-white shadow-sm mr-3">
                                             {{ substr($note->eleve->prenom, 0, 1) }}{{ substr($note->eleve->nom, 0, 1) }}
                                         </div>
                                         <div>
@@ -208,13 +208,13 @@
 
                                 <td class="p-4">
                                     <div class="text-sm font-bold text-gray-900 truncate max-w-[200px]" title="{{ $note->evaluation->nom }}">{{ $note->evaluation->nom }}</div>
-                                    <div class="text-xs font-semibold text-blue-600 mt-0.5">{{ $note->evaluation->matiere->nom ?? '-' }}</div>
+                                    <div class="text-xs font-semibold text-blue-900 mt-0.5">{{ $note->evaluation->matiere->nom ?? '-' }}</div>
                                 </td>
 
                                 <td class="p-4 text-center">
                                     <span class="inline-flex px-3 py-1 text-xs font-bold rounded-full 
                                         @if(($note->evaluation->type ?? '') == 'devoir') bg-blue-100 text-blue-700 border border-blue-200
-                                        @elseif(($note->evaluation->type ?? '') == 'examen') bg-purple-100 text-purple-700 border border-purple-200
+                                        @elseif(($note->evaluation->type ?? '') == 'examen') bg-blue-100 text-blue-900 border border-purple-200
                                         @elseif(($note->evaluation->type ?? '') == 'interrogation') bg-orange-100 text-orange-700 border border-orange-200
                                         @else bg-gray-100 text-gray-700 border border-gray-200
                                         @endif">
@@ -232,7 +232,7 @@
                                     <div class="flex items-center justify-center gap-2">
                                         <!-- Voir détails -->
                                         <a href="{{ route('enseignant.notes.show', $note->id) }}"
-                                            class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white transition-all duration-200 shadow-sm" title="Voir détails">
+                                            class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-blue-50 text-blue-900 hover:bg-blue-600 hover:text-white transition-all duration-200 shadow-sm" title="Voir détails">
                                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>

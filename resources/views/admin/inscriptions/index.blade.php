@@ -56,7 +56,7 @@
                 <div class="bg-white rounded-xl shadow-md p-4 sm:p-6 transform hover:scale-105 transition-transform duration-200">
                     <div class="flex items-center">
                         <div class="p-2 sm:p-3 bg-blue-100 rounded-full">
-                            <svg class="w-5 h-5 sm:w-8 sm:h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 sm:w-8 sm:h-8 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
                             </svg>
                         </div>
@@ -83,8 +83,8 @@
 
                 <div class="bg-white rounded-xl shadow-md p-4 sm:p-6 transform hover:scale-105 transition-transform duration-200">
                     <div class="flex items-center">
-                        <div class="p-2 sm:p-3 bg-purple-100 rounded-full">
-                            <svg class="w-5 h-5 sm:w-8 sm:h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="p-2 sm:p-3 bg-blue-100 rounded-full">
+                            <svg class="w-5 h-5 sm:w-8 sm:h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                             </svg>
                         </div>
@@ -98,7 +98,7 @@
 
             <!-- En-tête avec filtres -->
             <div class="bg-white rounded-xl shadow-lg mb-6 overflow-hidden border border-gray-200">
-                <div class="bg-gradient-to-r from-green-600 to-emerald-700 px-4 sm:px-6 py-4">
+                <div class="bg-blue-900 px-4 sm:px-6 py-4">
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                         <div class="flex items-center space-x-3">
                             <div class="p-2 bg-white bg-opacity-20 rounded-lg backdrop-filter backdrop-blur-lg">
@@ -231,7 +231,7 @@
                                 <tr class="hover:bg-green-50 transition-colors duration-200 group">
                                     <td class="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap">
                                         <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-8 w-8 sm:h-10 sm:w-10 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-md">
+                                            <div class="flex-shrink-0 h-8 w-8 sm:h-10 sm:w-10 bg-blue-900 rounded-full flex items-center justify-center shadow-md">
                                                 <span class="text-white font-semibold text-xs sm:text-sm">
                                                     {{ substr($inscription->eleve->prenom ?? 'N', 0, 1) }}{{ substr($inscription->eleve->nom ?? 'A', 0, 1) }}
                                                 </span>
@@ -268,7 +268,7 @@
                                     </td>
                                     <td class="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-sm font-medium">
                                         <div class="flex items-center justify-end gap-1 md:gap-2 whitespace-nowrap">
-                                            <a href="{{ route('admin.inscriptions.show', $inscription) }}" class="p-1.5 md:p-2 text-blue-600 bg-transparent hover:bg-blue-50 rounded-lg transition-colors border-none" title="Voir">
+                                            <a href="{{ route('admin.inscriptions.show', $inscription) }}" class="p-1.5 md:p-2 text-blue-900 bg-transparent hover:bg-blue-50 rounded-lg transition-colors border-none" title="Voir">
                                                 <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                                             </a>
                                             <a href="{{ route('admin.inscriptions.edit', $inscription) }}" class="p-1.5 md:p-2 text-amber-600 bg-transparent hover:bg-amber-50 rounded-lg transition-colors border-none" title="Modifier">

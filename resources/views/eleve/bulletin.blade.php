@@ -12,7 +12,7 @@
         
         <!-- Header avec animation -->
         <div class="relative mb-8 overflow-hidden group rounded-2xl">
-            <div class="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-500 to-indigo-600 animate-gradient-x"></div>
+            <div class="absolute inset-0 bg-blue-900 animate-gradient-x"></div>
             <div class="absolute inset-0 opacity-20">
                 <div class="absolute bg-white rounded-full w-96 h-96 -top-48 -right-48 blur-3xl animate-pulse-slow"></div>
                 <div class="absolute bg-yellow-300 rounded-full w-96 h-96 -bottom-48 -left-48 blur-3xl animate-pulse-slow animation-delay-2000"></div>
@@ -52,7 +52,7 @@
         <div class="mb-8 overflow-hidden transition-all duration-500 transform bg-white border border-gray-100 shadow-xl rounded-2xl hover:shadow-2xl animate-fade-in-up">
             <div class="p-6 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white">
                 <h3 class="flex items-center text-lg font-semibold text-gray-900">
-                    <svg class="w-5 h-5 mr-2 text-purple-600 animate-spin-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 mr-2 text-yellow-600 animate-spin-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
                     </svg>
                     Filtrer les bulletins
@@ -67,7 +67,7 @@
                             </svg>
                             Période
                         </label>
-                        <select name="periode" class="w-full transition-all p-2 duration-300 border-gray-300 rounded-xl focus:border-purple-500 focus:ring-purple-500 hover:border-purple-400 hover:shadow-lg">
+                        <select name="periode" class="w-full transition-all p-2 duration-300 border-gray-300 rounded-xl focus:border-blue-900 focus:ring-purple-500 hover:border-purple-400 hover:shadow-lg">
                             <option value="">Toutes les périodes</option>
                             @foreach($periodes as $key => $periode)
                                 <option value="{{ $key }}" {{ request('periode') == $key ? 'selected' : '' }}>
@@ -83,7 +83,7 @@
                             </svg>
                             Année scolaire
                         </label>
-                        <select name="annee_scolaire_id" class="w-full transition-all p-2 duration-300 border-gray-300 rounded-xl focus:border-purple-500 focus:ring-purple-500 hover:border-purple-400 hover:shadow-lg">
+                        <select name="annee_scolaire_id" class="w-full transition-all p-2 duration-300 border-gray-300 rounded-xl focus:border-blue-900 focus:ring-purple-500 hover:border-purple-400 hover:shadow-lg">
                             <option value="">Toutes les années</option>
                             @foreach($anneesScolaires as $annee)
                                 <option value="{{ $annee->id }}" {{ request('annee_scolaire_id') == $annee->id ? 'selected' : '' }}>
@@ -100,7 +100,7 @@
                             </svg>
                             Réinitialiser
                         </a>
-                        <button type="submit" class="flex items-center px-6 py-3 font-semibold text-white transition-all duration-300 transform bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl hover:from-purple-600 hover:to-purple-700 hover:scale-105 hover:shadow-lg group">
+                        <button type="submit" class="flex items-center px-6 py-3 font-semibold text-white transition-all duration-300 transform bg-blue-900 rounded-xl hover:from-purple-600 hover:to-purple-700 hover:scale-105 hover:shadow-lg group">
                             <svg class="w-5 h-5 mr-2 transition-all duration-500 group-hover:animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                             </svg>
@@ -115,7 +115,7 @@
         @forelse($bulletins as $bulletin)
             <div class="mb-8 overflow-hidden transition-all duration-500 transform bg-white border border-gray-100 shadow-xl rounded-2xl hover:shadow-2xl animate-fade-in-up" style="animation-delay: {{ $loop->index * 100 }}ms">
                 <!-- Bulletin Header avec dégradé -->
-                <div class="relative p-8 overflow-hidden bg-gradient-to-r from-purple-700 via-purple-600 to-indigo-600">
+                <div class="relative p-8 overflow-hidden bg-blue-900">
                     <div class="absolute inset-0 opacity-10">
                         <div class="absolute w-64 h-64 bg-white rounded-full -top-32 -right-32 blur-3xl"></div>
                         <div class="absolute w-64 h-64 bg-yellow-300 rounded-full -bottom-32 -left-32 blur-3xl"></div>
@@ -191,7 +191,7 @@
                                     </p>
                                 </div>
                                 <div class="p-3 bg-blue-100 rounded-lg">
-                                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-6 h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                     </svg>
                                 </div>
@@ -266,8 +266,8 @@
                                         {{ $moyenneEleve && $moyenneClasse ? number_format($ecart, 2) : '-' }}
                                     </p>
                                 </div>
-                                <div class="p-3 bg-purple-100 rounded-lg">
-                                    <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="p-3 bg-blue-100 rounded-lg">
+                                    <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7l.01 0M7 3h5c.512 0 1.024.195 1.414.586l5 5a2 2 0 01.586 1.414V19a2 2 0 01-2 2H7a2 2 0 01-2-2V5a2 2 0 012-2z"></path>
                                     </svg>
                                 </div>
@@ -294,7 +294,7 @@
 
                     <!-- Notes par matière - VERSION CORRIGÉE -->
                     <h4 class="flex items-center mb-4 text-lg font-semibold text-gray-900">
-                        <svg class="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5 mr-2 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                         </svg>
                         Détail des notes par matière
@@ -341,7 +341,7 @@
 
                         <div class="overflow-hidden border border-gray-200 rounded-xl">
                             <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gradient-to-r from-purple-50 to-indigo-50">
+                                <thead class="bg-blue-900">
                                     <tr>
                                         <th class="px-6 py-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Matière</th>
                                         <th class="px-6 py-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Coefficient</th>
@@ -362,14 +362,14 @@
                                         <tr class="transition-all duration-300 hover:bg-gray-50">
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <div class="flex items-center">
-                                                    <div class="flex items-center justify-center w-8 h-8 mr-3 rounded-lg shadow-md bg-gradient-to-br from-purple-500 to-indigo-600">
+                                                    <div class="flex items-center justify-center w-8 h-8 mr-3 rounded-lg shadow-md bg-blue-900">
                                                         <span class="text-xs font-bold text-white">{{ substr($matiereData['nom'], 0, 2) }}</span>
                                                     </div>
                                                     <span class="font-medium text-gray-900">{{ $matiereData['nom'] }}</span>
                                                 </div>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
-                                                <span class="inline-flex items-center px-3 py-1 text-sm font-medium text-purple-700 bg-purple-100 rounded-full">
+                                                <span class="inline-flex items-center px-3 py-1 text-sm font-medium text-blue-900 bg-blue-100 rounded-full">
                                                     {{ $matiereData['coefficient'] }}
                                                 </span>
                                             </td>
@@ -413,7 +413,7 @@
                                     @endforeach
                                     
                                     <!-- Ligne récapitulative -->
-                                    <tr class="font-semibold bg-gradient-to-r from-purple-50 to-indigo-50">
+                                    <tr class="font-semibold bg-blue-900">
                                         <td colspan="2" class="px-6 py-4 text-sm text-gray-700">Total général</td>
                                         <td class="px-6 py-4 text-sm text-gray-700">{{ $totalPoints ?? 0 }} points</td>
                                         <td class="px-6 py-4 text-sm text-gray-700">Coeff. {{ $totalCoeffs ?? 0 }}</td>

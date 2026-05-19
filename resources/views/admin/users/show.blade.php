@@ -12,7 +12,7 @@
         <div class="max-w-5xl mx-auto px-3 sm:px-4 lg:px-6">
             <!-- Fil d'Ariane - Responsive -->
             <div class="mb-3 sm:mb-4 flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-500 animate-fade-in flex-wrap">
-                <a href="{{ route('admin.users.index') }}" class="hover:text-blue-600 transition-colors">Utilisateurs</a>
+                <a href="{{ route('admin.users.index') }}" class="hover:text-blue-900 transition-colors">Utilisateurs</a>
                 <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                 </svg>
@@ -22,7 +22,7 @@
             <!-- Carte principale -->
             <div class="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300">
                 <!-- En-tête avec photo et informations principales - Responsive -->
-                <div class="px-4 sm:px-5 md:px-6 py-4 sm:py-5 md:py-6 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+                <div class="px-4 sm:px-5 md:px-6 py-4 sm:py-5 md:py-6 bg-blue-900 text-white">
                     <div class="flex flex-col md:flex-row items-start md:items-center gap-4 sm:gap-5 md:gap-6">
                         <!-- Photo de profil avec options -->
                         <div class="relative group flex-shrink-0">
@@ -30,7 +30,7 @@
                                 @if($user->photo)
                                     <img src="{{ $user->photo_url }}" alt="{{ $user->name }}" class="h-full w-full object-cover">
                                 @else
-                                    <div class="h-full w-full bg-gradient-to-br from-blue-400 to-blue-500 flex items-center justify-center text-white font-bold text-2xl sm:text-3xl md:text-4xl">
+                                    <div class="h-full w-full bg-blue-900 flex items-center justify-center text-white font-bold text-2xl sm:text-3xl md:text-4xl">
                                         {{ $user->initials }}
                                     </div>
                                 @endif
@@ -82,7 +82,7 @@
                             <div class="flex flex-wrap items-center gap-2 sm:gap-3">
                                 <h3 class="text-xl sm:text-2xl font-bold truncate">{{ $user->name }}</h3>
                                 @if($user->hasMultipleRoles())
-                                    <span class="text-[10px] sm:text-xs bg-white text-blue-600 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full flex items-center gap-1">
+                                    <span class="text-[10px] sm:text-xs bg-white text-blue-900 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full flex items-center gap-1">
                                         <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
                                         </svg>
@@ -109,7 +109,7 @@
                                         Vérifié
                                     </span>
                                 @else
-                                    <span class="text-[9px] sm:text-xs bg-yellow-500 text-white px-1.5 py-0.5 rounded-full flex items-center gap-1">
+                                    <span class="text-[9px] sm:text-xs bg-yellow-500 text-blue-900 font-bold px-1.5 py-0.5 rounded-full flex items-center gap-1">
                                         <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                         </svg>
@@ -260,7 +260,7 @@
                                         <div class="flex flex-wrap items-center justify-between gap-2 p-2 sm:p-3 bg-white rounded-lg border border-gray-200 hover:border-purple-200 transition-colors">
                                             <div class="flex items-center gap-1.5 sm:gap-2">
                                                 <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full 
-                                                    @if($role->name == 'administrateur') bg-purple-500
+                                                    @if($role->name == 'administrateur') bg-blue-800
                                                     @elseif($role->name == 'enseignant') bg-blue-500
                                                     @elseif($role->name == 'eleve') bg-green-500
                                                     @elseif($role->name == 'parent') bg-yellow-500
@@ -269,7 +269,7 @@
                                                 <span class="text-xs sm:text-sm font-medium">{{ ucfirst($role->name) }}</span>
                                             </div>
                                             <span class="text-[9px] sm:text-xs px-1.5 py-0.5 sm:px-2 rounded-full 
-                                                @if($role->name == 'administrateur') bg-purple-100 text-purple-800
+                                                @if($role->name == 'administrateur') bg-blue-100 text-purple-800
                                                 @elseif($role->name == 'enseignant') bg-blue-100 text-blue-800
                                                 @elseif($role->name == 'eleve') bg-green-100 text-green-800
                                                 @elseif($role->name == 'parent') bg-yellow-100 text-yellow-800
@@ -313,7 +313,7 @@
                                     
                                     <div class="flex items-start gap-2 sm:gap-3">
                                         <div class="flex-shrink-0 w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                                            <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
                                             </svg>
                                         </div>
@@ -326,8 +326,8 @@
 
                                     @if($user->last_login_at)
                                         <div class="flex items-start gap-2 sm:gap-3">
-                                            <div class="flex-shrink-0 w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 bg-purple-100 rounded-full flex items-center justify-center">
-                                                <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <div class="flex-shrink-0 w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                                <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
                                                 </svg>
                                             </div>
@@ -386,7 +386,7 @@
                                     <div class="bg-gradient-to-r from-blue-50 to-white rounded-lg p-2.5 sm:p-3 md:p-4 border border-blue-200 mb-2 sm:mb-3 hover:shadow-md transition-shadow">
                                         <div class="flex items-center gap-1.5 sm:gap-2 mb-2 sm:mb-3">
                                             <div class="p-1.5 sm:p-2 bg-blue-100 rounded-lg">
-                                                <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                                                 </svg>
                                             </div>
@@ -541,7 +541,7 @@
                                 Retour
                             </a>
                             <a href="{{ route('admin.users.edit', $user) }}" 
-                               class="flex-1 sm:flex-none px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 md:py-2.5 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white rounded-lg sm:rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-1.5 sm:gap-2 shadow-md hover:shadow-lg text-xs sm:text-sm">
+                               class="flex-1 sm:flex-none px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 md:py-2.5 bg-blue-900 hover:from-yellow-600 hover:to-yellow-700 text-white rounded-lg sm:rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-1.5 sm:gap-2 shadow-md hover:shadow-lg text-xs sm:text-sm">
                                 <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                 </svg>

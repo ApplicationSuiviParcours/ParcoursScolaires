@@ -7,7 +7,7 @@
     <div class="px-4 mx-auto max-w-6xl sm:px-6 lg:px-8">
 
         {{-- En-tête --}}
-        <div class="bg-gradient-to-r from-red-600 to-pink-600 rounded-3xl p-8 mb-8 shadow-2xl">
+        <div class="bg-blue-900 rounded-3xl p-8 mb-8 shadow-2xl">
             <h1 class="text-2xl font-bold text-white">📊 Statistiques des absences</h1>
             <p class="text-red-200 mt-1">Vue d'ensemble de l'assiduité de vos élèves</p>
         </div>
@@ -15,7 +15,7 @@
         {{-- Statistiques par classe --}}
         @if(!empty($statsParClasse))
         <div class="bg-white shadow-lg rounded-2xl overflow-hidden mb-6">
-            <div class="p-6 bg-gradient-to-r from-orange-600 to-red-600">
+            <div class="p-6 bg-blue-900">
                 <h3 class="text-lg font-bold text-white">Par classe</h3>
             </div>
             <div class="p-6 overflow-x-auto">
@@ -61,7 +61,7 @@
         {{-- Top élèves absents --}}
         @if($topElevesAbsents->count() > 0)
         <div class="bg-white shadow-lg rounded-2xl overflow-hidden mb-6">
-            <div class="p-6 bg-gradient-to-r from-red-700 to-red-500">
+            <div class="p-6 bg-blue-900">
                 <h3 class="text-lg font-bold text-white">🔴 Top 5 — Élèves les plus absents</h3>
             </div>
             <div class="p-6">
@@ -88,7 +88,7 @@
         {{-- Statistiques par mois --}}
         @if($statsParMois->count() > 0)
         <div class="bg-white shadow-lg rounded-2xl overflow-hidden">
-            <div class="p-6 bg-gradient-to-r from-indigo-600 to-purple-600">
+            <div class="p-6 bg-blue-900">
                 <h3 class="text-lg font-bold text-white">Par mois (12 derniers mois)</h3>
             </div>
             <div class="p-6 overflow-x-auto">

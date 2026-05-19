@@ -4,7 +4,7 @@
 @section('title', 'Modifier la relation Élève-Parent')
 
 @section('header')
-    <div class="relative bg-gradient-to-r from-amber-600 to-amber-800 py-6">
+    <div class="relative bg-blue-900 py-6">
         <div class="absolute inset-0 bg-black opacity-10"></div>
         <div class="container mx-auto px-6 relative">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between">
@@ -55,7 +55,7 @@
                 </div>
                 <div class="flex items-center space-x-3">
                     <a href="{{ route('admin.eleve-parents.show', $eleveParent) }}" 
-                       class="inline-flex items-center px-6 py-3 bg-indigo-600 text-white text-sm font-medium rounded-xl hover:bg-indigo-700 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200 shadow-lg shadow-indigo-200 group">
+                       class="inline-flex items-center px-6 py-3 bg-blue-900 text-white text-sm font-medium rounded-xl hover:bg-blue-800 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200 shadow-lg shadow-indigo-200 group">
                         <i class="fas fa-eye mr-2 group-hover:scale-110 transition-transform duration-200"></i>
                         Voir les détails
                     </a>
@@ -71,10 +71,10 @@
         <!-- Aperçu rapide de la relation actuelle -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <!-- Élève -->
-            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-indigo-500">
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-blue-900">
                 <div class="flex items-center">
-                    <div class="p-3 bg-indigo-100 rounded-xl">
-                        <i class="fas fa-child text-2xl text-indigo-600"></i>
+                    <div class="p-3 bg-blue-100 rounded-xl">
+                        <i class="fas fa-child text-2xl text-blue-900"></i>
                     </div>
                     <div class="ml-4">
                         <p class="text-sm font-medium text-gray-500 uppercase tracking-wider">Élève</p>
@@ -99,10 +99,10 @@
             </div>
 
             <!-- Lien actuel -->
-            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-purple-500">
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-blue-900">
                 <div class="flex items-center">
-                    <div class="p-3 bg-purple-100 rounded-xl">
-                        <i class="fas fa-link text-2xl text-purple-600"></i>
+                    <div class="p-3 bg-blue-100 rounded-xl">
+                        <i class="fas fa-link text-2xl text-yellow-600"></i>
                     </div>
                     <div class="ml-4">
                         <p class="text-sm font-medium text-gray-500 uppercase tracking-wider">Lien actuel</p>
@@ -110,7 +110,7 @@
                             $badgeConfig = [
                                 'Père' => ['bg-blue-100', 'text-blue-800', 'fa-mars'],
                                 'Mère' => ['bg-pink-100', 'text-pink-800', 'fa-venus'],
-                                'Tuteur' => ['bg-purple-100', 'text-purple-800', 'fa-user-tie'],
+                                'Tuteur' => ['bg-blue-100', 'text-purple-800', 'fa-user-tie'],
                                 'Grand-parent' => ['bg-amber-100', 'text-amber-800', 'fa-users'],
                                 'Autre' => ['bg-gray-100', 'text-gray-800', 'fa-heart']
                             ];
@@ -127,7 +127,7 @@
 
         <!-- Formulaire de modification -->
         <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-            <div class="bg-gradient-to-r from-amber-600 to-amber-700 px-6 py-4">
+            <div class="bg-blue-900 px-6 py-4">
                 <div class="flex items-center">
                     <div class="p-2 bg-white bg-opacity-20 rounded-lg">
                         <i class="fas fa-pen text-white text-xl"></i>
@@ -144,7 +144,7 @@
                     <!-- Sélection de l'élève -->
                     <div class="space-y-4">
                         <div class="flex items-center space-x-2">
-                            <div class="w-1 h-8 bg-indigo-600 rounded-full"></div>
+                            <div class="w-1 h-8 bg-blue-900 rounded-full"></div>
                             <h4 class="text-lg font-semibold text-gray-800">Informations de l'élève</h4>
                         </div>
 
@@ -179,14 +179,14 @@
                             </div>
 
                             <!-- Affichage des infos rapides de l'élève sélectionné -->
-                            <div id="eleveInfo" class="bg-indigo-50 rounded-xl p-4 hidden">
+                            <div id="eleveInfo" class="bg-blue-50 rounded-xl p-4 hidden">
                                 <div class="flex items-center">
                                     <div class="p-2 bg-indigo-200 rounded-lg">
-                                        <i class="fas fa-info-circle text-indigo-700"></i>
+                                        <i class="fas fa-info-circle text-blue-900"></i>
                                     </div>
                                     <div class="ml-3">
                                         <p class="text-sm font-medium text-indigo-900" id="eleveName"></p>
-                                        <p class="text-xs text-indigo-700" id="eleveDetails"></p>
+                                        <p class="text-xs text-blue-900" id="eleveDetails"></p>
                                     </div>
                                 </div>
                             </div>
@@ -251,7 +251,7 @@
                     <!-- Lien parental -->
                     <div class="space-y-4">
                         <div class="flex items-center space-x-2">
-                            <div class="w-1 h-8 bg-purple-600 rounded-full"></div>
+                            <div class="w-1 h-8 bg-blue-900 rounded-full"></div>
                             <h4 class="text-lg font-semibold text-gray-800">Lien parental</h4>
                         </div>
 
@@ -265,7 +265,7 @@
                                         $liens = [
                                             'Père' => ['bg-blue-600', 'fa-mars'],
                                             'Mère' => ['bg-pink-600', 'fa-venus'],
-                                            'Tuteur' => ['bg-purple-600', 'fa-user-tie'],
+                                            'Tuteur' => ['bg-blue-900', 'fa-user-tie'],
                                             'Grand-parent' => ['bg-amber-600', 'fa-users'],
                                             'Autre' => ['bg-gray-600', 'fa-heart']
                                         ];
@@ -300,11 +300,11 @@
                             <div id="lienPreview" class="bg-purple-50 rounded-xl p-4 hidden">
                                 <div class="flex items-center">
                                     <div class="p-2 bg-purple-200 rounded-lg">
-                                        <i class="fas fa-eye text-purple-700"></i>
+                                        <i class="fas fa-eye text-blue-900"></i>
                                     </div>
                                     <div class="ml-3">
                                         <p class="text-sm font-medium text-purple-900">Aperçu du lien</p>
-                                        <p class="text-xs text-purple-700" id="previewText">Sélectionnez un lien parental</p>
+                                        <p class="text-xs text-blue-900" id="previewText">Sélectionnez un lien parental</p>
                                     </div>
                                 </div>
                             </div>
@@ -319,7 +319,7 @@
                             Annuler
                         </a>
                         <button type="submit" 
-                                class="inline-flex items-center px-8 py-3 bg-gradient-to-r from-amber-600 to-amber-700 text-white text-sm font-medium rounded-xl hover:from-amber-700 hover:to-amber-800 focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-all duration-200 shadow-lg shadow-amber-200 group">
+                                class="inline-flex items-center px-8 py-3 bg-blue-900 text-white text-sm font-medium rounded-xl hover:from-amber-700 hover:to-amber-800 focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-all duration-200 shadow-lg shadow-amber-200 group">
                             <i class="fas fa-save mr-2 group-hover:scale-110 transition-transform duration-200"></i>
                             Mettre à jour la relation
                         </button>
@@ -331,10 +331,10 @@
         <!-- Informations complémentaires -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
             <!-- Dernière modification -->
-            <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-6">
+            <div class="bg-blue-900 rounded-2xl p-6">
                 <div class="flex items-center">
-                    <div class="p-3 bg-indigo-100 rounded-xl">
-                        <i class="fas fa-clock text-indigo-600"></i>
+                    <div class="p-3 bg-blue-100 rounded-xl">
+                        <i class="fas fa-clock text-blue-900"></i>
                     </div>
                     <div class="ml-4">
                         <p class="text-sm font-medium text-gray-600">Dernière modification</p>
@@ -345,7 +345,7 @@
             </div>
 
             <!-- Création -->
-            <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-6">
+            <div class="bg-blue-900 rounded-2xl p-6">
                 <div class="flex items-center">
                     <div class="p-3 bg-green-100 rounded-xl">
                         <i class="fas fa-calendar-check text-green-600"></i>

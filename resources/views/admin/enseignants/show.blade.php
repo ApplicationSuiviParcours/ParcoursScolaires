@@ -41,7 +41,7 @@
 
             <!-- Header avec navigation -->
             <div
-                class="bg-gradient-to-r from-indigo-600 via-indigo-700 to-purple-700 rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl mb-6 sm:mb-8 overflow-hidden relative group">
+                class="bg-blue-900 rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl mb-6 sm:mb-8 overflow-hidden relative group">
                 <div class="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent"></div>
 
                 <div class="relative px-4 sm:px-8 py-4 sm:py-6">
@@ -150,7 +150,7 @@
                 <!-- Informations personnelles -->
                 <div class="bg-white rounded-xl sm:rounded-2xl shadow border border-gray-100 overflow-hidden">
                     <div
-                        class="bg-gradient-to-r from-blue-50 to-indigo-50 px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200">
+                        class="bg-blue-900 px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200">
                         <div class="flex items-center">
                             <div class="bg-blue-200 p-1.5 sm:p-2 rounded-lg">
                                 <svg class="w-4 h-4 sm:w-5 sm:h-5 text-blue-700" fill="none" stroke="currentColor"
@@ -199,7 +199,7 @@
                 <!-- Coordonnées -->
                 <div class="bg-white rounded-xl sm:rounded-2xl shadow border border-gray-100 overflow-hidden">
                     <div
-                        class="bg-gradient-to-r from-green-50 to-emerald-50 px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200">
+                        class="bg-blue-900 px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200">
                         <div class="flex items-center">
                             <div class="bg-green-200 p-1.5 sm:p-2 rounded-lg">
                                 <svg class="w-4 h-4 sm:w-5 sm:h-5 text-green-700" fill="none" stroke="currentColor"
@@ -236,10 +236,10 @@
                 <!-- Statistiques -->
                 <div class="bg-white rounded-xl sm:rounded-2xl shadow border border-gray-100 overflow-hidden">
                     <div
-                        class="bg-gradient-to-r from-purple-50 to-pink-50 px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200">
+                        class="bg-blue-900 px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200">
                         <div class="flex items-center">
                             <div class="bg-purple-200 p-1.5 sm:p-2 rounded-lg">
-                                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-700" fill="none" stroke="currentColor"
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-blue-900" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
@@ -252,7 +252,7 @@
                     <div class="p-4 sm:p-6">
                         <div class="grid grid-cols-2 gap-3 sm:gap-4">
                             <div class="bg-blue-50 rounded-lg sm:rounded-xl p-3 sm:p-4 text-center">
-                                <p class="text-xl sm:text-2xl font-bold text-blue-600">{{ $enseignant->nombre_classes }}</p>
+                                <p class="text-xl sm:text-2xl font-bold text-blue-900">{{ $enseignant->nombre_classes }}</p>
                                 <p class="text-xs text-gray-500 mt-1">Classes</p>
                             </div>
                             <div class="bg-green-50 rounded-lg sm:rounded-xl p-3 sm:p-4 text-center">
@@ -261,7 +261,7 @@
                                 <p class="text-xs text-gray-500 mt-1">Matières</p>
                             </div>
                             <div class="bg-purple-50 rounded-lg sm:rounded-xl p-3 sm:p-4 text-center">
-                                <p class="text-xl sm:text-2xl font-bold text-purple-600">
+                                <p class="text-xl sm:text-2xl font-bold text-yellow-600">
                                     {{ $enseignant->evaluations_count ?? $enseignant->evaluations->count() }}</p>
                                 <p class="text-xs text-gray-500 mt-1">Évaluations</p>
                             </div>
@@ -280,7 +280,7 @@
                 <div class="border-b border-gray-200 overflow-x-auto">
                     <nav class="flex whitespace-nowrap">
                         <button
-                            class="tab-btn active px-4 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-medium text-blue-600 border-b-2 border-blue-600 flex items-center"
+                            class="tab-btn active px-4 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-medium text-blue-900 border-b-2 border-blue-600 flex items-center"
                             data-tab="classes">
                             <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
@@ -317,7 +317,7 @@
                                                 <h4 class="font-semibold text-gray-900 text-sm sm:text-base">
                                                     {{ $assignation->classe->nom ?? 'Classe' }}</h4>
                                                 <span
-                                                    class="text-xs px-2 py-1 bg-indigo-100 text-indigo-800 rounded-full mt-1 inline-block">
+                                                    class="text-xs px-2 py-1 bg-blue-100 text-indigo-800 rounded-full mt-1 inline-block">
                                                     {{ $assignation->matiere->nom ?? 'Matière' }}
                                                 </span>
                                             </div>
@@ -494,7 +494,7 @@
                                     <div class="relative flex space-x-3 sm:space-x-4">
                                         <div>
                                             <span
-                                                class="h-6 w-6 sm:h-8 sm:w-8 rounded-full bg-purple-500 flex items-center justify-center ring-4 sm:ring-8 ring-white">
+                                                class="h-6 w-6 sm:h-8 sm:w-8 rounded-full bg-blue-800 flex items-center justify-center ring-4 sm:ring-8 ring-white">
                                                 <svg class="h-3 w-3 sm:h-5 sm:w-5 text-white" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -534,11 +534,11 @@
                         const tabId = this.dataset.tab;
 
                         tabBtns.forEach(b => {
-                            b.classList.remove('active', 'text-blue-600', 'border-blue-600');
+                            b.classList.remove('active', 'text-blue-900', 'border-blue-600');
                             b.classList.add('text-gray-500', 'border-transparent');
                         });
 
-                        this.classList.add('active', 'text-blue-600', 'border-blue-600');
+                        this.classList.add('active', 'text-blue-900', 'border-blue-600');
                         this.classList.remove('text-gray-500', 'border-transparent');
 
                         tabContents.forEach(content => content.classList.add('hidden'));

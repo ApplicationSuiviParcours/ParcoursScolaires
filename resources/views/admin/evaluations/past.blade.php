@@ -6,7 +6,7 @@
 <div class="py-6 sm:py-12">
     <div class="px-4 mx-auto max-w-5xl sm:px-6 lg:px-8">
 
-        <div class="bg-gradient-to-r from-gray-600 to-gray-800 rounded-3xl p-6 mb-8 shadow-2xl">
+        <div class="bg-blue-900 rounded-3xl p-6 mb-8 shadow-2xl">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
                     <h1 class="text-2xl font-bold text-white">📋 Évaluations passées</h1>
@@ -36,7 +36,7 @@
                     @endphp
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors gap-4">
                         <div class="flex items-center gap-4">
-                            <div class="w-14 h-14 bg-gradient-to-br from-gray-400 to-gray-600 rounded-xl flex flex-col items-center justify-center text-white text-center shrink-0">
+                            <div class="w-14 h-14 bg-blue-900 rounded-xl flex flex-col items-center justify-center text-white text-center shrink-0">
                                 <span class="text-xl font-bold leading-none">{{ $date->format('d') }}</span>
                                 <span class="text-xs">{{ $date->translatedFormat('M') }}</span>
                             </div>

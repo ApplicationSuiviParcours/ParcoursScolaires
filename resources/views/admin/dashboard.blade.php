@@ -259,7 +259,7 @@
                 style="min-height: auto;">
                 <!-- Fond -->
                 <div
-                    class="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 animate-gradient bg-[length:200%_200%]">
+                    class="absolute inset-0 bg-blue-900 animate-gradient bg-[length:200%_200%]">
                 </div>
 
                 <!-- Motif -->
@@ -333,7 +333,7 @@
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 lg:gap-6 mb-4 md:mb-6 lg:mb-10">
                 <!-- Total Élèves -->
                 <div
-                    class="stat-card bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg animate-in delay-100">
+                    class="stat-card bg-blue-900 rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg animate-in delay-100">
                     <div class="p-2 sm:p-3 md:p-4 lg:p-5 xl:p-6">
                         <div class="flex items-start justify-between mb-2 md:mb-3">
                             <div class="flex-1 min-w-0">
@@ -363,7 +363,7 @@
 
                 <!-- Enseignants -->
                 <div
-                    class="stat-card bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg animate-in delay-200">
+                    class="stat-card bg-blue-900 rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg animate-in delay-200">
                     <div class="p-2 sm:p-3 md:p-4 lg:p-5 xl:p-6">
                         <div class="flex items-start justify-between mb-2 md:mb-3">
                             <div class="flex-1 min-w-0">
@@ -394,7 +394,7 @@
 
                 <!-- Classes -->
                 <div
-                    class="stat-card bg-gradient-to-br from-purple-600 to-purple-700 rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg animate-in delay-300">
+                    class="stat-card bg-blue-900 rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg animate-in delay-300">
                     <div class="p-2 sm:p-3 md:p-4 lg:p-5 xl:p-6">
                         <div class="flex items-start justify-between mb-2 md:mb-3">
                             <div class="flex-1 min-w-0">
@@ -424,7 +424,7 @@
 
                 <!-- Matières -->
                 <div
-                    class="stat-card bg-gradient-to-br from-amber-600 to-amber-700 rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg animate-in delay-400">
+                    class="stat-card bg-blue-900 rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg animate-in delay-400">
                     <div class="p-2 sm:p-3 md:p-4 lg:p-5 xl:p-6">
                         <div class="flex items-start justify-between mb-2 md:mb-3">
                             <div class="flex-1 min-w-0">
@@ -454,7 +454,7 @@
 
                 <!-- Inscriptions -->
                 <div
-                    class="stat-card bg-gradient-to-br from-rose-600 to-rose-700 rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg animate-in delay-500">
+                    class="stat-card bg-blue-900 rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg animate-in delay-500">
                     <div class="p-2 sm:p-3 md:p-4 lg:p-5 xl:p-6">
                         <div class="flex items-start justify-between mb-2 md:mb-3">
                             <div class="flex-1 min-w-0">
@@ -484,7 +484,7 @@
 
                 <!-- Parents -->
                 <div
-                    class="stat-card bg-gradient-to-br from-cyan-600 to-cyan-700 rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg animate-in delay-600">
+                    class="stat-card bg-blue-900 rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg animate-in delay-600">
                     <div class="p-2 sm:p-3 md:p-4 lg:p-5 xl:p-6">
                         <div class="flex items-start justify-between mb-2 md:mb-3">
                             <div class="flex-1 min-w-0">
@@ -514,7 +514,7 @@
 
                 <!-- Réinscriptions -->
                 <div
-                    class="stat-card bg-gradient-to-br from-teal-600 to-teal-700 rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg animate-in delay-700">
+                    class="stat-card bg-blue-900 rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg animate-in delay-700">
                     <div class="p-2 sm:p-3 md:p-4 lg:p-5 xl:p-6">
                         <div class="flex items-start justify-between mb-2 md:mb-3">
                             <div class="flex-1 min-w-0">
@@ -544,7 +544,7 @@
 
                 <!-- Année Scolaire -->
                 <div
-                    class="stat-card bg-gradient-to-br from-indigo-600 to-indigo-700 rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg animate-in delay-800">
+                    class="stat-card bg-blue-900 rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg animate-in delay-800">
                     <div class="p-2 sm:p-3 md:p-4 lg:p-5 xl:p-6">
                         @php
                             $anneeActive = \App\Models\AnneeScolaire::where('statut', true)->first();
@@ -552,7 +552,7 @@
                         <div class="flex items-start justify-between mb-2 md:mb-3">
                             <div class="flex-1 min-w-0">
                                 <p
-                                    class="text-[8px] sm:text-[9px] md:text-xs font-semibold text-indigo-100 uppercase tracking-wider mb-0.5 md:mb-1">
+                                    class="text-[8px] sm:text-[9px] md:text-xs font-semibold text-blue-100 uppercase tracking-wider mb-0.5 md:mb-1">
                                     Année Scolaire</p>
                                 <p class="text-xs sm:text-sm md:text-base lg:text-xl font-bold text-white truncate">
                                     {{ $anneeActive ? $anneeActive->annee : 'N/A' }}</p>
@@ -580,14 +580,14 @@
             <div
                 class="bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl md:rounded-3xl shadow-xl mb-4 md:mb-6 lg:mb-10 overflow-hidden animate-in delay-500 border border-white/50">
                 <div
-                    class="bg-gradient-to-r from-indigo-600 to-purple-600 px-3 sm:px-4 md:px-5 lg:px-6 py-2.5 sm:py-3 md:py-4 lg:py-5">
+                    class="bg-blue-900 px-3 sm:px-4 md:px-5 lg:px-6 py-2.5 sm:py-3 md:py-4 lg:py-5">
                     <div class="flex items-center gap-1.5 sm:gap-2 md:gap-3">
                         <div class="bg-white/20 rounded-lg p-1.5 sm:p-2 md:p-2.5">
                             <i class="fas fa-bolt text-white text-xs sm:text-sm md:text-base lg:text-lg"></i>
                         </div>
                         <div>
                             <h3 class="text-sm sm:text-base md:text-lg font-bold text-white">Actions rapides</h3>
-                            <p class="text-indigo-100 text-[10px] sm:text-xs hidden sm:block">Accédez rapidement aux
+                            <p class="text-blue-100 text-[10px] sm:text-xs hidden sm:block">Accédez rapidement aux
                                 fonctionnalités principales</p>
                         </div>
                     </div>
@@ -597,7 +597,7 @@
 
                         <!-- Classes -->
                         <a href="{{ route('admin.classes.index') }}"
-                            class="group relative bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                            class="group relative bg-blue-900 hover:from-blue-600 hover:to-blue-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                             <div
                                 class="absolute top-1 right-1 sm:top-2 sm:right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <i class="fas fa-arrow-right text-[8px] sm:text-xs"></i>
@@ -616,7 +616,7 @@
 
                         <!-- Matières -->
                         <a href="{{ route('admin.matieres.index') }}"
-                            class="group relative bg-gradient-to-br from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                            class="group relative bg-blue-900 hover:from-emerald-600 hover:to-emerald-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                             <div
                                 class="absolute top-1 right-1 sm:top-2 sm:right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <i class="fas fa-arrow-right text-[8px] sm:text-xs"></i>
@@ -635,7 +635,7 @@
 
                         <!-- Inscriptions -->
                         <a href="{{ route('admin.inscriptions.index') }}"
-                            class="group relative bg-gradient-to-br from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                            class="group relative bg-blue-900 hover:from-purple-600 hover:to-purple-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                             <div
                                 class="absolute top-1 right-1 sm:top-2 sm:right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <i class="fas fa-arrow-right text-[8px] sm:text-xs"></i>
@@ -654,7 +654,7 @@
 
                         <!-- Élèves -->
                         <a href="{{ route('admin.eleves.index') }}"
-                            class="group relative bg-gradient-to-br from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                            class="group relative bg-blue-900 hover:from-cyan-600 hover:to-cyan-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                             <div
                                 class="absolute top-1 right-1 sm:top-2 sm:right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <i class="fas fa-arrow-right text-[8px] sm:text-xs"></i>
@@ -673,7 +673,7 @@
 
                         <!-- Enseignants -->
                         <a href="{{ route('admin.enseignants.index') }}"
-                            class="group relative bg-gradient-to-br from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                            class="group relative bg-blue-900 hover:from-indigo-600 hover:to-indigo-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                             <div
                                 class="absolute top-1 right-1 sm:top-2 sm:right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <i class="fas fa-arrow-right text-[8px] sm:text-xs"></i>
@@ -684,7 +684,7 @@
                                 </div>
                                 <div>
                                     <span class="font-bold text-xs sm:text-sm md:text-base">Enseignants</span>
-                                    <p class="text-indigo-100 text-[8px] sm:text-[9px] md:text-xs mt-0.5">
+                                    <p class="text-blue-100 text-[8px] sm:text-[9px] md:text-xs mt-0.5">
                                         {{ \App\Models\Enseignant::count() }}</p>
                                 </div>
                             </div>
@@ -692,7 +692,7 @@
 
                         <!-- Parents -->
                         <a href="{{ route('admin.parents.index') }}"
-                            class="group relative bg-gradient-to-br from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                            class="group relative bg-blue-900 hover:from-pink-600 hover:to-pink-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                             <div
                                 class="absolute top-1 right-1 sm:top-2 sm:right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <i class="fas fa-arrow-right text-[8px] sm:text-xs"></i>
@@ -711,7 +711,7 @@
 
                         <!-- Années scolaires -->
                         <a href="{{ route('admin.annee_scolaires.index') }}"
-                            class="group relative bg-gradient-to-br from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                            class="group relative bg-blue-900 hover:from-amber-600 hover:to-amber-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                             <div
                                 class="absolute top-1 right-1 sm:top-2 sm:right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <i class="fas fa-arrow-right text-[8px] sm:text-xs"></i>
@@ -729,7 +729,7 @@
 
                         <!-- Bulletins -->
                         <a href="{{ route('admin.bulletins.index') }}"
-                            class="group relative bg-gradient-to-br from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                            class="group relative bg-blue-900 hover:from-red-600 hover:to-red-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                             <div
                                 class="absolute top-1 right-1 sm:top-2 sm:right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <i class="fas fa-arrow-right text-[8px] sm:text-xs"></i>
@@ -747,7 +747,7 @@
 
                         <!-- Notes -->
                         <a href="{{ route('admin.notes.index') }}"
-                            class="group relative bg-gradient-to-br from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                            class="group relative bg-blue-900 hover:from-teal-600 hover:to-teal-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                             <div
                                 class="absolute top-1 right-1 sm:top-2 sm:right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <i class="fas fa-arrow-right text-[8px] sm:text-xs"></i>
@@ -765,7 +765,7 @@
 
                         <!-- Absences -->
                         <a href="{{ route('admin.absences.index') }}"
-                            class="group relative bg-gradient-to-br from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                            class="group relative bg-blue-900 hover:from-orange-600 hover:to-orange-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                             <div
                                 class="absolute top-1 right-1 sm:top-2 sm:right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <i class="fas fa-arrow-right text-[8px] sm:text-xs"></i>
@@ -783,7 +783,7 @@
 
                         <!-- Emploi du temps -->
                         <a href="{{ route('admin.emploi_du_temps.index') }}"
-                            class="group relative bg-gradient-to-br from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                            class="group relative bg-blue-900 hover:from-rose-600 hover:to-rose-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                             <div
                                 class="absolute top-1 right-1 sm:top-2 sm:right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <i class="fas fa-arrow-right text-[8px] sm:text-xs"></i>
@@ -801,7 +801,7 @@
 
                         <!-- Classes-Matières -->
                         <a href="{{ route('admin.classe_matieres.index') }}"
-                            class="group relative bg-gradient-to-br from-violet-500 to-violet-600 hover:from-violet-600 hover:to-violet-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                            class="group relative bg-blue-900 hover:from-violet-600 hover:to-violet-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                             <div
                                 class="absolute top-1 right-1 sm:top-2 sm:right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <i class="fas fa-arrow-right text-[8px] sm:text-xs"></i>
@@ -819,7 +819,7 @@
 
                         <!-- Utilisateurs -->
                         <a href="{{ route('admin.users.index') }}"
-                            class="group relative bg-gradient-to-br from-slate-500 to-slate-600 hover:from-slate-600 hover:to-slate-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                            class="group relative bg-blue-900 hover:from-slate-600 hover:to-slate-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                             <div
                                 class="absolute top-1 right-1 sm:top-2 sm:right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <i class="fas fa-arrow-right text-[8px] sm:text-xs"></i>
@@ -838,7 +838,7 @@
 
                         <!-- Élève-Parents -->
                         <a href="{{ route('admin.eleve-parents.index') }}"
-                            class="group relative bg-gradient-to-br from-fuchsia-500 to-fuchsia-600 hover:from-fuchsia-600 hover:to-fuchsia-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                            class="group relative bg-blue-900 hover:from-fuchsia-600 hover:to-fuchsia-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                             <div
                                 class="absolute top-1 right-1 sm:top-2 sm:right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <i class="fas fa-arrow-right text-[8px] sm:text-xs"></i>
@@ -856,7 +856,7 @@
 
                         <!-- Évaluations -->
                         <a href="{{ route('admin.evaluations.index') }}"
-                            class="group relative bg-gradient-to-br from-lime-500 to-lime-600 hover:from-lime-600 hover:to-lime-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                            class="group relative bg-blue-900 hover:from-lime-600 hover:to-lime-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                             <div
                                 class="absolute top-1 right-1 sm:top-2 sm:right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <i class="fas fa-arrow-right text-[8px] sm:text-xs"></i>
@@ -874,7 +874,7 @@
 
                         <!-- Enseignant-Matières -->
                         <a href="{{ route('admin.enseignant_matiere_classes.index') }}"
-                            class="group relative bg-gradient-to-br from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                            class="group relative bg-blue-900 hover:from-cyan-600 hover:to-cyan-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-3 md:p-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                             <div
                                 class="absolute top-1 right-1 sm:top-2 sm:right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <i class="fas fa-arrow-right text-[8px] sm:text-xs"></i>
@@ -897,7 +897,7 @@
             <div
                 class="bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl md:rounded-3xl shadow-xl overflow-hidden animate-in delay-600 border border-white/50">
                 <div
-                    class="bg-gradient-to-r from-indigo-600 to-purple-600 px-3 sm:px-4 md:px-5 lg:px-6 py-2.5 sm:py-3 md:py-4 lg:py-5">
+                    class="bg-blue-900 px-3 sm:px-4 md:px-5 lg:px-6 py-2.5 sm:py-3 md:py-4 lg:py-5">
                     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
                         <div class="flex items-center gap-1.5 sm:gap-2 md:gap-3">
                             <div class="bg-white/20 rounded-lg p-1.5 sm:p-2 md:p-2.5">
@@ -905,7 +905,7 @@
                             </div>
                             <div>
                                 <h3 class="text-sm sm:text-base md:text-lg font-bold text-white">Inscriptions récentes</h3>
-                                <p class="text-indigo-100 text-[10px] hidden sm:block">Les 5 dernières inscriptions</p>
+                                <p class="text-blue-100 text-[10px] hidden sm:block">Les 5 dernières inscriptions</p>
                             </div>
                         </div>
                         <a href="{{ route('admin.inscriptions.index') }}"
@@ -918,7 +918,7 @@
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead>
-                            <tr class="bg-gradient-to-r from-gray-50 to-gray-100">
+                            <tr class="bg-blue-900">
                                 <th
                                     class="px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-2.5 md:py-3 text-left text-[9px] sm:text-[10px] md:text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                     <div class="flex items-center gap-1">
@@ -955,13 +955,13 @@
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-100">
                             @forelse(\App\Models\Inscription::with(['eleve', 'classe'])->latest()->take(5)->get() as $inscription)
-                                <tr class="table-row hover:bg-indigo-50/50 transition-all duration-200">
+                                <tr class="table-row hover:bg-blue-50/50 transition-all duration-200">
                                     <td class="px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-2.5 md:py-3 whitespace-nowrap">
                                         <div class="flex items-center gap-1.5 sm:gap-2 md:gap-3">
                                             <div
-                                                class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-full bg-gradient-to-br from-indigo-100 to-indigo-200 flex items-center justify-center flex-shrink-0">
+                                                class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-full bg-blue-900 flex items-center justify-center flex-shrink-0">
                                                 <span
-                                                    class="text-indigo-700 font-semibold text-[8px] sm:text-[9px] md:text-xs lg:text-sm">
+                                                    class="text-blue-900 font-semibold text-[8px] sm:text-[9px] md:text-xs lg:text-sm">
                                                     {{ strtoupper(substr($inscription->eleve->prenom ?? '', 0, 1)) }}{{ strtoupper(substr($inscription->eleve->nom ?? '', 0, 1)) }}
                                                 </span>
                                             </div>
@@ -979,9 +979,9 @@
                                     <td class="px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-2.5 md:py-3 whitespace-nowrap">
                                         <div class="flex items-center gap-1">
                                             <div
-                                                class="w-4 h-4 sm:w-5 sm:h-5 rounded-lg bg-indigo-100 flex items-center justify-center flex-shrink-0">
+                                                class="w-4 h-4 sm:w-5 sm:h-5 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
                                                 <i
-                                                    class="fas fa-school text-[6px] sm:text-[7px] md:text-xs text-indigo-600"></i>
+                                                    class="fas fa-school text-[6px] sm:text-[7px] md:text-xs text-blue-900"></i>
                                             </div>
                                             <span
                                                 class="text-[10px] sm:text-xs md:text-sm text-gray-700 truncate max-w-[60px] sm:max-w-none">{{ $inscription->classe->nom ?? 'N/A' }}</span>
@@ -1014,7 +1014,7 @@
                                     <td
                                         class="px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-2.5 md:py-3 whitespace-nowrap text-right">
                                         <a href="#"
-                                            class="text-indigo-600 hover:text-indigo-800 transition-colors duration-200 p-0.5 sm:p-1">
+                                            class="text-blue-900 hover:text-indigo-800 transition-colors duration-200 p-0.5 sm:p-1">
                                             <i class="fas fa-eye text-[10px] sm:text-xs md:text-sm"></i>
                                         </a>
                                     </td>
@@ -1024,7 +1024,7 @@
                                     <td colspan="5" class="px-3 sm:px-4 md:px-6 py-6 sm:py-8 md:py-12">
                                         <div class="flex flex-col items-center justify-center gap-2 sm:gap-3">
                                             <div
-                                                class="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl sm:rounded-2xl flex items-center justify-center">
+                                                class="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 bg-blue-900 rounded-xl sm:rounded-2xl flex items-center justify-center">
                                                 <i class="fas fa-inbox text-sm sm:text-base md:text-xl text-gray-400"></i>
                                             </div>
                                             <h4 class="text-xs sm:text-sm md:text-base font-semibold text-gray-700">Aucune
@@ -1032,7 +1032,7 @@
                                             <p class="text-[10px] sm:text-xs text-gray-500 text-center">Les inscriptions
                                                 récentes apparaîtront ici</p>
                                             <a href="{{ route('admin.inscriptions.create') }}"
-                                                class="mt-1 sm:mt-2 px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-[9px] sm:text-xs md:text-sm font-medium rounded-lg sm:rounded-xl hover:shadow-lg transition-all duration-200">
+                                                class="mt-1 sm:mt-2 px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 bg-blue-900 text-white text-[9px] sm:text-xs md:text-sm font-medium rounded-lg sm:rounded-xl hover:shadow-lg transition-all duration-200">
                                                 <i class="fas fa-plus-circle mr-1 text-[8px] sm:text-[9px]"></i>
                                                 Nouvelle inscription
                                             </a>
@@ -1050,8 +1050,8 @@
                 <div class="bg-white/80 backdrop-blur-sm rounded-lg sm:rounded-xl p-2 sm:p-3 md:p-4 border border-white/50">
                     <div class="flex items-center gap-2 sm:gap-3">
                         <div
-                            class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-chart-line text-indigo-600 text-[10px] sm:text-xs md:text-sm"></i>
+                            class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 bg-blue-900 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-chart-line text-blue-900 text-[10px] sm:text-xs md:text-sm"></i>
                         </div>
                         <div>
                             <p class="text-[8px] sm:text-[9px] md:text-xs text-gray-500">Taux d'occupation</p>
@@ -1062,7 +1062,7 @@
                 <div class="bg-white/80 backdrop-blur-sm rounded-lg sm:rounded-xl p-2 sm:p-3 md:p-4 border border-white/50">
                     <div class="flex items-center gap-2 sm:gap-3">
                         <div
-                            class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex items-center justify-center flex-shrink-0">
+                            class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 bg-blue-900 rounded-lg flex items-center justify-center flex-shrink-0">
                             <i class="fas fa-check-circle text-green-600 text-[10px] sm:text-xs md:text-sm"></i>
                         </div>
                         <div>
@@ -1074,8 +1074,8 @@
                 <div class="bg-white/80 backdrop-blur-sm rounded-lg sm:rounded-xl p-2 sm:p-3 md:p-4 border border-white/50">
                     <div class="flex items-center gap-2 sm:gap-3">
                         <div
-                            class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-star text-purple-600 text-[10px] sm:text-xs md:text-sm"></i>
+                            class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 bg-blue-900 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-star text-yellow-600 text-[10px] sm:text-xs md:text-sm"></i>
                         </div>
                         <div>
                             <p class="text-[8px] sm:text-[9px] md:text-xs text-gray-500">Moyenne générale</p>

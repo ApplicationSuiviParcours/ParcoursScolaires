@@ -3,7 +3,7 @@
 @section('title', 'Générer des bulletins')
 
 @section('header')
-<div class="relative overflow-hidden bg-gradient-to-br from-green-600 via-green-700 to-teal-800 py-8 md:py-12">
+<div class="relative overflow-hidden bg-blue-900 py-8 md:py-12">
     <!-- Éléments décoratifs animés -->
     <div class="absolute inset-0 opacity-10">
         <div class="absolute -top-24 -right-24 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-pulse"></div>
@@ -66,7 +66,7 @@
     <div class="max-w-3xl mx-auto">
         <!-- Formulaire de génération -->
         <div class="bg-white rounded-2xl md:rounded-3xl shadow-xl overflow-hidden">
-            <div class="bg-gradient-to-r from-green-500 to-teal-600 px-4 md:px-8 py-4 md:py-6">
+            <div class="bg-blue-900 px-4 md:px-8 py-4 md:py-6">
                 <div class="flex items-center">
                     <div class="w-12 h-12 md:w-14 md:h-14 bg-white/20 backdrop-blur-lg rounded-xl md:rounded-2xl flex items-center justify-center mr-4 md:mr-5 flex-shrink-0">
                         <svg class="w-6 h-6 md:w-7 md:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -206,7 +206,7 @@
                         </div>
 
                         <!-- Récapitulatif -->
-                        <div class="mt-6 md:mt-8 p-4 bg-gradient-to-r from-green-50 to-teal-50 rounded-xl md:rounded-2xl border border-green-200" id="recapSection" style="display: none;">
+                        <div class="mt-6 md:mt-8 p-4 bg-blue-900 rounded-xl md:rounded-2xl border border-green-200" id="recapSection" style="display: none;">
                             <h4 class="text-xs md:text-sm font-medium text-green-800 mb-3 flex items-center">
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -229,7 +229,7 @@
                                 Annuler
                             </a>
                             <button type="submit" 
-                                    class="w-full sm:w-auto px-6 py-2.5 md:py-3 bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl text-sm md:text-base">
+                                    class="w-full sm:w-auto px-6 py-2.5 md:py-3 bg-blue-900 hover:from-green-600 hover:to-teal-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl text-sm md:text-base">
                                 <svg class="w-5 h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
                                 </svg>
@@ -245,7 +245,7 @@
         <div class="mt-6 md:mt-8 bg-blue-50 rounded-xl md:rounded-2xl p-4 md:p-6 border border-blue-200">
             <div class="flex items-start">
                 <div class="flex-shrink-0">
-                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-6 h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                 </div>

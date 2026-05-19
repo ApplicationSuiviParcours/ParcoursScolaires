@@ -268,7 +268,7 @@
     <section id="hero-section" class="relative flex items-center min-h-screen pt-24 pb-16 overflow-hidden bg-primary">
         <div class="absolute top-0 left-0 w-full h-full pointer-events-none opacity-30">
             <div class="absolute bg-blue-500 rounded-full top-1/4 left-1/4 w-96 h-96 filter blur-3xl blob"></div>
-            <div class="absolute bg-purple-500 rounded-full bottom-1/4 right-1/4 w-96 h-96 filter blur-3xl blob"></div>
+            <div class="absolute bg-blue-800 rounded-full bottom-1/4 right-1/4 w-96 h-96 filter blur-3xl blob"></div>
         </div>
 
         <div class="container relative z-10 px-6 mx-auto">

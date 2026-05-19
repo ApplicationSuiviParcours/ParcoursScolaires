@@ -29,16 +29,16 @@
                 <span class="text-[10px] md:text-sm text-gray-500">Formulaire d'inscription</span>
             </div>
             <div class="w-full bg-gray-200 h-0.5">
-                <div class="bg-indigo-600 h-0.5 w-full"></div>
+                <div class="bg-blue-900 h-0.5 w-full"></div>
             </div>
         </div>
 
         <!-- Formulaire principal -->
         <div class="bg-white shadow-lg overflow-hidden border border-gray-200 rounded-lg md:rounded-xl">
             <!-- En-tête du formulaire -->
-            <div class="bg-gradient-to-r from-indigo-600 to-indigo-700 px-4 md:px-6 py-3 md:py-4">
+            <div class="bg-blue-900 px-4 md:px-6 py-3 md:py-4">
                 <div class="flex items-center">
-                    <div class="bg-indigo-500 p-1.5 md:p-2 rounded-lg">
+                    <div class="bg-blue-800 p-1.5 md:p-2 rounded-lg">
                         <svg class="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
                         </svg>
@@ -56,16 +56,16 @@
                     @csrf
 
                     <!-- Matricule -->
-                    <div class="bg-indigo-50 border border-indigo-200 p-3 md:p-4 rounded-lg">
+                    <div class="bg-blue-50 border border-indigo-200 p-3 md:p-4 rounded-lg">
                         <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-                            <div class="bg-indigo-100 p-2 rounded-lg self-start sm:self-center">
-                                <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"></path></svg>
+                            <div class="bg-blue-100 p-2 rounded-lg self-start sm:self-center">
+                                <svg class="w-5 h-5 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"></path></svg>
                             </div>
                             <div class="flex-1 w-full">
                                 <label class="block text-[10px] md:text-xs font-semibold text-indigo-800 uppercase tracking-wider mb-1">Matricule</label>
                                 <input type="text" name="matricule" id="matricule" value="{{ old('matricule', $matricule_genere) }}" readonly
                                        class="block w-full px-3 py-2 bg-white border border-indigo-300 text-indigo-900 font-mono text-xs md:text-sm cursor-not-allowed rounded-lg">
-                                <p class="mt-1 text-[10px] text-indigo-600 hidden sm:block">Format: {{ date('Y') }}[Lettre][Numéro] (ex: 2025D0001)</p>
+                                <p class="mt-1 text-[10px] text-blue-900 hidden sm:block">Format: {{ date('Y') }}[Lettre][Numéro] (ex: 2025D0001)</p>
                             </div>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                     <!-- Section Identité -->
                     <div>
                         <div class="flex items-center mb-3 pb-2 border-b border-gray-200">
-                            <div class="bg-indigo-600 w-1 h-5 md:h-6 mr-2 md:mr-3 rounded-full"></div>
+                            <div class="bg-blue-900 w-1 h-5 md:h-6 mr-2 md:mr-3 rounded-full"></div>
                             <h4 class="text-sm md:text-md font-semibold text-gray-800 uppercase tracking-wide">Identité</h4>
                         </div>
 
@@ -82,7 +82,7 @@
                             <div>
                                 <label for="nom" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Nom <span class="text-red-500">*</span></label>
                                 <input type="text" name="nom" id="nom" required placeholder="DIOP"
-                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-indigo-500 focus:ring-1 @error('nom') border-red-500 @enderror" value="{{ old('nom') }}">
+                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1 @error('nom') border-red-500 @enderror" value="{{ old('nom') }}">
                                 @error('nom')<p class="mt-1 text-[10px] text-red-600">{{ $message }}</p>@enderror
                             </div>
 
@@ -90,14 +90,14 @@
                             <div>
                                 <label for="prenom" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Prénom <span class="text-red-500">*</span></label>
                                 <input type="text" name="prenom" id="prenom" required placeholder="Mamadou"
-                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-indigo-500 focus:ring-1 @error('prenom') border-red-500 @enderror" value="{{ old('prenom') }}">
+                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1 @error('prenom') border-red-500 @enderror" value="{{ old('prenom') }}">
                                 @error('prenom')<p class="mt-1 text-[10px] text-red-600">{{ $message }}</p>@enderror
                             </div>
 
                             <!-- Genre -->
                             <div>
                                 <label for="genre" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Genre <span class="text-red-500">*</span></label>
-                                <select name="genre" id="genre" required class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-indigo-500 focus:ring-1 @error('genre') border-red-500 @enderror">
+                                <select name="genre" id="genre" required class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1 @error('genre') border-red-500 @enderror">
                                     <option value="" disabled selected>Sélectionner</option>
                                     <option value="m" {{ old('genre') == 'm' ? 'selected' : '' }}>Masculin</option>
                                     <option value="f" {{ old('genre') == 'f' ? 'selected' : '' }}>Féminin</option>
@@ -109,7 +109,7 @@
                             <div>
                                 <label for="date_naissance" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Date naiss. <span class="text-red-500">*</span></label>
                                 <input type="date" name="date_naissance" id="date_naissance" required
-                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-indigo-500 focus:ring-1 @error('date_naissance') border-red-500 @enderror" value="{{ old('date_naissance') }}">
+                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1 @error('date_naissance') border-red-500 @enderror" value="{{ old('date_naissance') }}">
                                 @error('date_naissance')<p class="mt-1 text-[10px] text-red-600">{{ $message }}</p>@enderror
                             </div>
                         </div>
@@ -124,7 +124,7 @@
                         <div>
                             <label for="lieu_naissance" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Lieu de naissance <span class="text-red-500">*</span></label>
                             <input type="text" name="lieu_naissance" id="lieu_naissance" required placeholder="Dakar"
-                                   class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-indigo-500 focus:ring-1 @error('lieu_naissance') border-red-500 @enderror" value="{{ old('lieu_naissance') }}">
+                                   class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1 @error('lieu_naissance') border-red-500 @enderror" value="{{ old('lieu_naissance') }}">
                             @error('lieu_naissance')<p class="mt-1 text-[10px] text-red-600">{{ $message }}</p>@enderror
                         </div>
                     </div>
@@ -132,19 +132,19 @@
                     <!-- Section Contact -->
                     <div>
                         <div class="flex items-center mb-3 pb-2 border-b border-gray-200">
-                            <div class="bg-indigo-500 w-1 h-5 md:h-6 mr-2 md:mr-3 rounded-full"></div>
+                            <div class="bg-blue-800 w-1 h-5 md:h-6 mr-2 md:mr-3 rounded-full"></div>
                             <h4 class="text-sm md:text-md font-semibold text-gray-800 uppercase tracking-wide">Coordonnées</h4>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                             <div>
                                 <label for="telephone" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Téléphone</label>
                                 <input type="tel" name="telephone" id="telephone" placeholder="77 123 45 67"
-                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-indigo-500 focus:ring-1" value="{{ old('telephone') }}">
+                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1" value="{{ old('telephone') }}">
                             </div>
                             <div>
                                 <label for="email" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Email</label>
                                 <input type="email" name="email" id="email" placeholder="eleve@exemple.com"
-                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-indigo-500 focus:ring-1" value="{{ old('email') }}">
+                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1" value="{{ old('email') }}">
                             </div>
                         </div>
                     </div>
@@ -158,7 +158,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                             <div>
                                 <label for="classe_inscription_id" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Classe</label>
-                                <select name="classe_inscription_id" id="classe_inscription_id" class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-indigo-500 focus:ring-1">
+                                <select name="classe_inscription_id" id="classe_inscription_id" class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1">
                                     <option value="">Sélectionner (optionnel)</option>
                                     @foreach($classes as $classe)
                                         <option value="{{ $classe->id }}" {{ old('classe_inscription_id') == $classe->id ? 'selected' : '' }}>{{ $classe->nom_complet }}</option>
@@ -189,7 +189,7 @@
                                 <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                             </div>
                             <div class="flex-1 w-full">
-                                <input type="file" name="photo" id="photo" accept="image/*" class="block w-full text-xs text-gray-500 file:mr-2 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                                <input type="file" name="photo" id="photo" accept="image/*" class="block w-full text-xs text-gray-500 file:mr-2 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100">
                                 <p class="mt-1 text-[10px] text-gray-500">Formats : JPEG, PNG (max. 2 Mo)</p>
                             </div>
                         </div>
@@ -204,22 +204,22 @@
                         <div>
                             <label for="adresse" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Adresse <span class="text-red-500">*</span></label>
                             <textarea name="adresse" id="adresse" rows="2" required placeholder="123 Rue Liberté, Dakar"
-                                      class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-indigo-500 focus:ring-1">{{ old('adresse') }}</textarea>
+                                      class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1">{{ old('adresse') }}</textarea>
                             @error('adresse')<p class="mt-1 text-[10px] text-red-600">{{ $message }}</p>@enderror
                         </div>
                     </div>
 
                     <!-- Information Compte utilisateur -->
-                    <div class="p-3 md:p-4 bg-indigo-50 border border-indigo-200 rounded-lg">
+                    <div class="p-3 md:p-4 bg-blue-50 border border-indigo-200 rounded-lg">
                         <div class="flex items-start">
-                            <div class="bg-indigo-100 p-1.5 rounded-full mr-3 mt-0.5">
-                                <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="bg-blue-100 p-1.5 rounded-full mr-3 mt-0.5">
+                                <svg class="w-4 h-4 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
                             </div>
                             <div>
                                 <h5 class="text-xs md:text-sm font-semibold text-indigo-900 mb-1">Compte utilisateur automatique</h5>
-                                <p class="text-[10px] md:text-xs text-indigo-700 leading-relaxed">
+                                <p class="text-[10px] md:text-xs text-blue-900 leading-relaxed">
                                     Un compte utilisateur sera <strong>automatiquement créé</strong> pour cet élève. 
                                     Le mot de passe par défaut est : <code class="bg-white px-1.5 py-0.5 rounded border border-indigo-200 font-bold">password</code>.
                                 </p>
@@ -234,7 +234,7 @@
                             Annuler
                         </a>
                         <button type="submit"
-                                class="w-full sm:w-auto px-4 md:px-6 py-2.5 md:py-3 bg-indigo-600 text-white hover:bg-indigo-700 text-xs md:text-sm font-medium rounded-lg shadow-sm">
+                                class="w-full sm:w-auto px-4 md:px-6 py-2.5 md:py-3 bg-blue-900 text-white hover:bg-blue-800 text-xs md:text-sm font-medium rounded-lg shadow-sm">
                             Enregistrer l'élève
                         </button>
                     </div>

@@ -3,7 +3,7 @@
 @section('title', 'Gestion des notes')
 
 @section('header')
-<div class="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 py-8 md:py-12">
+<div class="relative overflow-hidden bg-blue-900 py-8 md:py-12">
     <!-- Éléments décoratifs animés -->
     <div class="absolute inset-0 opacity-10">
         <div class="absolute -top-24 -right-24 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-pulse"></div>
@@ -106,7 +106,7 @@
                     <p class="text-xl md:text-3xl font-bold text-gray-800">{{ $stats['total'] }}</p>
                 </div>
                 <div class="bg-blue-100 rounded-xl p-2 md:p-3">
-                    <svg class="w-5 h-5 md:w-8 md:h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 md:w-8 md:h-8 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                     </svg>
                 </div>
@@ -160,12 +160,12 @@
     <div class="bg-white rounded-2xl shadow-lg p-4 md:p-6 mb-6 md:mb-8" x-data="{ filters: {{ request()->anyFilled(['annee_scolaire_id', 'classe_id', 'eleve_id', 'matiere_id', 'type_evaluation', 'note_min', 'note_max']) ? 'true' : 'false' }} }">
         <div class="flex items-center justify-between mb-4">
             <h2 class="text-base md:text-lg font-semibold text-gray-800 flex items-center">
-                <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 mr-2 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
                 </svg>
                 Filtres
             </h2>
-            <button @click="filters = !filters" class="text-blue-600 hover:text-blue-800 p-1">
+            <button @click="filters = !filters" class="text-blue-900 hover:text-blue-800 p-1">
                 <svg class="w-5 h-5 transition-transform duration-300" :class="{ 'rotate-180': filters }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
@@ -187,7 +187,7 @@
                            class="w-full pl-12 pr-4 py-2.5 md:py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300 text-sm">
                 </div>
                 <button type="submit" 
-                        class="w-full sm:w-auto px-6 py-2.5 md:py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 text-sm">
+                        class="w-full sm:w-auto px-6 py-2.5 md:py-3 bg-blue-900 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 text-sm">
                     Rechercher
                 </button>
             </div>
@@ -264,7 +264,7 @@
     <div class="bg-white rounded-2xl md:rounded-3xl shadow-xl overflow-hidden">
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gradient-to-r from-blue-50 to-indigo-50">
+                <thead class="bg-blue-900">
                     <tr>
                         <th class="px-3 md:px-6 py-3 md:py-4 text-left text-xs font-semibold text-blue-700 uppercase tracking-wider">Élève</th>
                         <th class="px-3 md:px-6 py-3 md:py-4 text-left text-xs font-semibold text-blue-700 uppercase tracking-wider">Matière</th>
@@ -280,7 +280,7 @@
                         <tr class="hover:bg-blue-50/50 transition-colors duration-200 group">
                             <td class="px-3 md:px-6 py-3 md:py-4">
                                 <div class="flex items-center">
-                                    <div class="flex-shrink-0 h-8 w-8 md:h-10 md:w-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg md:rounded-xl flex items-center justify-center text-white font-bold text-sm md:text-lg shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                    <div class="flex-shrink-0 h-8 w-8 md:h-10 md:w-10 bg-blue-900 rounded-lg md:rounded-xl flex items-center justify-center text-white font-bold text-sm md:text-lg shadow-lg group-hover:scale-110 transition-transform duration-300">
                                         {{ strtoupper(substr($note->eleve->prenom, 0, 1)) }}{{ strtoupper(substr($note->eleve->nom, 0, 1)) }}
                                     </div>
                                     <div class="ml-3 md:ml-4">
@@ -294,7 +294,7 @@
                                 </div>
                             </td>
                             <td class="px-3 md:px-6 py-3 md:py-4 whitespace-nowrap">
-                                <span class="px-2 md:px-3 py-0.5 md:py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded-full">
+                                <span class="px-2 md:px-3 py-0.5 md:py-1 bg-blue-100 text-blue-900 text-xs font-medium rounded-full">
                                     {{ $note->evaluation->matiere->nom ?? 'N/A' }}
                                 </span>
                             </td>
@@ -311,7 +311,7 @@
                             <td class="hidden lg:table-cell px-6 py-4">
                                 @php
                                     $appreciation = $note->observation ?? $note->appreciation_auto;
-                                    $appreciationClass = $note->note >= 16 ? 'text-green-600' : ($note->note >= 14 ? 'text-blue-600' : ($note->note >= 10 ? 'text-yellow-600' : 'text-red-600'));
+                                    $appreciationClass = $note->note >= 16 ? 'text-green-600' : ($note->note >= 14 ? 'text-blue-900' : ($note->note >= 10 ? 'text-yellow-600' : 'text-red-600'));
                                 @endphp
                                 <span class="text-sm {{ $appreciationClass }}">{{ $appreciation }}</span>
                             </td>
@@ -321,7 +321,7 @@
                             <td class="px-3 md:px-6 py-3 md:py-4 whitespace-nowrap">
                                 <div class="flex items-center justify-end gap-2 whitespace-nowrap">
                                     <a href="{{ route('admin.notes.show', $note) }}"
-                                       class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-blue-100 text-blue-600 hover:bg-blue-200 transition-all duration-200 hover:scale-110 flex-shrink-0"
+                                       class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-blue-100 text-blue-900 hover:bg-blue-200 transition-all duration-200 hover:scale-110 flex-shrink-0"
                                        title="Voir">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                                     </a>
@@ -354,7 +354,7 @@
                                     <p class="text-sm md:text-base text-gray-500 max-w-md mb-6 px-4">
                                         @if(request()->anyFilled(['annee_scolaire_id', 'classe_id', 'matiere_id', 'type_evaluation']))
                                             Aucun résultat ne correspond à vos critères.
-                                            <a href="{{ route('admin.notes.index') }}" class="text-blue-600 hover:text-blue-800 font-medium block mt-2">
+                                            <a href="{{ route('admin.notes.index') }}" class="text-blue-900 hover:text-blue-800 font-medium block mt-2">
                                                 Effacer les filtres
                                             </a>
                                         @else
@@ -363,7 +363,7 @@
                                     </p>
                                     @if(!request()->anyFilled(['annee_scolaire_id', 'classe_id', 'matiere_id', 'type_evaluation']))
                                         <a href="{{ route('admin.notes.create') }}" 
-                                           class="inline-flex items-center px-5 py-2.5 md:px-6 md:py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 text-sm md:text-base">
+                                           class="inline-flex items-center px-5 py-2.5 md:px-6 md:py-3 bg-yellow-500 text-blue-900 font-bold hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 text-sm md:text-base">
                                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                             </svg>
