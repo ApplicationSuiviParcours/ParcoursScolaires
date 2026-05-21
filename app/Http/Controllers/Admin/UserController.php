@@ -375,7 +375,7 @@ class UserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
-            'password' => ['nullable', 'confirmed', Password::defaults()],
+            // 'password' validation removed as admins can no longer modify passwords
             'roles' => ['required', 'array', 'min:1'],
             'roles.*' => ['exists:roles,id'],
             'is_active' => ['sometimes', 'boolean'],
@@ -397,10 +397,7 @@ class UserController extends Controller
             }
         }
 
-        if ($request->filled('password')) {
-            $data['password'] = Hash::make($request->password);
-        }
-
+        // Password updating logic removed
         if ($request->boolean('remove_photo') && $user->photo) {
             Storage::disk('public')->delete($user->photo);
             $data['photo'] = null;
