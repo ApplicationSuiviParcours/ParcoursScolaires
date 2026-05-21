@@ -370,9 +370,7 @@ class EleveController extends Controller
         }
 
         if ($request->filled('annee_scolaire_id')) {
-            $query->whereHas('evaluation', function($q) use ($request) {
-                $q->where('annee_scolaire_id', $request->annee_scolaire_id);
-            });
+            $query->where('annee_scolaire_id', $request->annee_scolaire_id);
         }
 
         $absences = $query->orderBy('date_absence', 'desc')
