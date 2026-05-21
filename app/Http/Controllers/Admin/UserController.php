@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Role;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -104,7 +105,6 @@ class UserController extends Controller
             $request->validate([
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'password' => ['required', 'confirmed', Password::defaults()],
                 'roles' => ['required', 'array', 'min:1'],
                 'roles.*' => ['exists:roles,id'],
                 'is_active' => ['sometimes', 'boolean'],
@@ -120,10 +120,13 @@ class UserController extends Controller
                 'profession' => ['nullable', 'string', 'max:255'],
             ]);
 
+            // Génération automatique d'un mot de passe sécurisé (jamais visible par l'admin)
+            $plainPassword = Str::password(length: 12, symbols: true, numbers: true, spaces: false);
+
             $data = [
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => Hash::make($request->password),
+                'password' => Hash::make($plainPassword),
                 'is_active' => $request->boolean('is_active', true),
             ];
 
@@ -168,7 +171,9 @@ class UserController extends Controller
 
             return redirect()
                 ->route('admin.users.index')
-                ->with('success', 'Utilisateur créé avec succès. ID: ' . $user->id);
+                ->with('success', 'Utilisateur créé avec succès.')
+                ->with('generated_password', $plainPassword)
+                ->with('new_user_email', $request->email);
 
         } catch (\Exception $e) {
             Log::error('Erreur création utilisateur: ' . $e->getMessage());

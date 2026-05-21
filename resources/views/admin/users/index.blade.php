@@ -27,6 +27,41 @@
                 </div>
             @endif
 
+            {{-- Affichage du mot de passe généré (UNE SEULE FOIS) --}}
+            @if(session('generated_password'))
+                <div id="password-alert" class="mb-4 bg-amber-50 border-2 border-amber-400 rounded-xl shadow-lg p-4 animate-fade-in-down" role="alert">
+                    <div class="flex items-start gap-3">
+                        <div class="flex-shrink-0 mt-0.5">
+                            <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-bold text-amber-800 text-sm">⚠️ Mot de passe généré automatiquement — À transmettre à l'utilisateur !</p>
+                            <p class="text-xs text-amber-700 mt-1">Compte : <strong>{{ session('new_user_email') }}</strong></p>
+                            <div class="flex items-center gap-3 mt-2">
+                                <div class="flex-1 bg-white border-2 border-amber-300 rounded-lg px-4 py-2 font-mono text-base font-bold text-gray-800 tracking-widest select-all" id="generated-pwd">
+                                    {{ session('generated_password') }}
+                                </div>
+                                <button onclick="copyPassword()" id="copy-btn"
+                                    class="px-3 py-2 bg-amber-500 hover:bg-amber-600 text-white text-xs font-medium rounded-lg transition-all duration-200 flex items-center gap-1.5 whitespace-nowrap">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                    </svg>
+                                    Copier
+                                </button>
+                            </div>
+                            <p class="text-xs text-amber-600 mt-2">🔒 Ce mot de passe ne sera plus affiché. Notez-le ou transmettez-le maintenant.</p>
+                        </div>
+                        <button onclick="document.getElementById('password-alert').remove()" class="text-amber-400 hover:text-amber-600 flex-shrink-0">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            @endif
+
             @if(session('error'))
                 <div class="mb-4 bg-red-100 border-l-4 border-red-500 text-red-700 px-3 sm:px-4 py-2 sm:py-3 rounded-lg shadow-md animate-fade-in-down" role="alert">
                     <div class="flex items-center">
@@ -734,7 +769,7 @@
         document.getElementById('modal-backdrop')?.addEventListener('click', closeDeleteModal);
         document.getElementById('toggle-modal-backdrop')?.addEventListener('click', closeToggleModal);
 
-        // Auto-hide des messages flash
+        // Auto-hide des messages flash (sauf l'alerte mot de passe)
         setTimeout(function() {
             document.querySelectorAll('.bg-green-100, .bg-red-100, .bg-yellow-100').forEach(msg => {
                 msg.style.transition = 'opacity 0.5s';
@@ -742,6 +777,34 @@
                 setTimeout(() => msg.remove(), 500);
             });
         }, 5000);
+
+        // Auto-hide de l'alerte mot de passe après 60 secondes
+        const pwdAlert = document.getElementById('password-alert');
+        if (pwdAlert) {
+            setTimeout(function() {
+                pwdAlert.style.transition = 'opacity 1s';
+                pwdAlert.style.opacity = '0';
+                setTimeout(() => pwdAlert.remove(), 1000);
+            }, 60000);
+        }
     });
+
+    // Copier le mot de passe dans le presse-papier
+    function copyPassword() {
+        const pwd = document.getElementById('generated-pwd');
+        const btn = document.getElementById('copy-btn');
+        if (pwd) {
+            navigator.clipboard.writeText(pwd.textContent.trim()).then(function() {
+                btn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Copié !';
+                btn.classList.add('bg-green-500');
+                btn.classList.remove('bg-amber-500', 'hover:bg-amber-600');
+                setTimeout(() => {
+                    btn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg> Copier';
+                    btn.classList.remove('bg-green-500');
+                    btn.classList.add('bg-amber-500', 'hover:bg-amber-600');
+                }, 2000);
+            });
+        }
+    }
 </script>
 @endpush

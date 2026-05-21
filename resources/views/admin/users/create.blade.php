@@ -121,44 +121,7 @@
                                 @enderror
                             </div>
 
-                            <!-- Mot de passe -->
-                            <div>
-                                <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-1.5">
-                                    <span class="flex items-center gap-1.5 sm:gap-2">
-                                        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                                        </svg>
-                                        Mot de passe <span class="text-red-500">*</span>
-                                    </span>
-                                </label>
-                                <input type="password" 
-                                       name="password" 
-                                       id="password" 
-                                       required
-                                       class="w-full px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 border-2 border-gray-200 rounded-lg sm:rounded-xl bg-gray-50 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-300 text-sm sm:text-base @error('password') border-red-500 @enderror"
-                                       placeholder="••••••••">
-                                @error('password')
-                                    <p class="text-red-500 text-[10px] sm:text-xs mt-1">{{ $message }}</p>
-                                @enderror
-                            </div>
-
-                            <!-- Confirmation mot de passe -->
-                            <div>
-                                <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-1.5">
-                                    <span class="flex items-center gap-1.5 sm:gap-2">
-                                        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-                                        </svg>
-                                        Confirmer le mot de passe <span class="text-red-500">*</span>
-                                    </span>
-                                </label>
-                                <input type="password" 
-                                       name="password_confirmation" 
-                                       id="password_confirmation" 
-                                       required
-                                       class="w-full px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 border-2 border-gray-200 rounded-lg sm:rounded-xl bg-gray-50 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-300 text-sm sm:text-base"
-                                       placeholder="••••••••">
-                            </div>
+                        {{-- Mot de passe auto-généré - pas de champ visible --}}
                         </div>
 
                         <!-- Rôles (multiples) - Responsive -->
@@ -244,12 +207,12 @@
                                 </svg>
                                 <div>
                                     <p class="text-xs sm:text-sm font-medium text-blue-800">Informations importantes</p>
-                                    <ul class="text-[10px] sm:text-xs text-blue-900 mt-1 space-y-0.5 list-disc list-inside">
-                                        <li>Le mot de passe doit contenir au moins 8 caractères</li>
-                                        <li>L'email doit être unique dans le système</li>
-                                        <li>Vous pourrez ajouter des informations supplémentaires après la création</li>
-                                        <li>Un email de bienvenue sera envoyé à l'utilisateur</li>
-                                    </ul>
+                                        <ul class="text-[10px] sm:text-xs text-blue-900 mt-1 space-y-0.5 list-disc list-inside">
+                                            <li>Un mot de passe sécurisé sera <strong>généré automatiquement</strong></li>
+                                            <li>Il vous sera affiché <strong>une seule fois</strong> après la création</li>
+                                            <li>Transmettez-le à l'utilisateur, il ne sera plus visible ensuite</li>
+                                            <li>L'utilisateur pourra le changer depuis son profil</li>
+                                        </ul>
                                 </div>
                             </div>
                         </div>
@@ -309,28 +272,7 @@
             });
         });
 
-        // Validation en temps réel du mot de passe
-        const password = document.getElementById('password');
-        const passwordConfirm = document.getElementById('password_confirmation');
-        
-        if (password && passwordConfirm) {
-            function checkPasswordMatch() {
-                if (password.value && passwordConfirm.value) {
-                    if (password.value === passwordConfirm.value) {
-                        passwordConfirm.classList.remove('border-red-500');
-                        passwordConfirm.classList.add('border-green-500');
-                    } else {
-                        passwordConfirm.classList.remove('border-green-500');
-                        passwordConfirm.classList.add('border-red-500');
-                    }
-                } else {
-                    passwordConfirm.classList.remove('border-red-500', 'border-green-500');
-                }
-            }
-            
-            password.addEventListener('keyup', checkPasswordMatch);
-            passwordConfirm.addEventListener('keyup', checkPasswordMatch);
-        }
+        // Validation en temps réel désactivée (mot de passe auto-généré)
     });
 </script>
 @endpush
