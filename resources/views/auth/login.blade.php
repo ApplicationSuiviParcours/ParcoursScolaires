@@ -38,7 +38,7 @@
                     autofocus
                     autocomplete="username"
                     class="pl-11 pr-4 w-full py-3 border-2 border-gray-200 rounded-xl text-gray-800 focus:border-green-500 focus:ring-4 focus:ring-green-100 transition-all outline-none bg-gray-50 hover:bg-white text-base font-semibold tracking-wide"
-                    placeholder="Ex: PAR-2024-001"
+                    placeholder="Ex: PAR2026X001"
                 >
             </div>
             <x-input-error :messages="$errors->get('credential')" class="mt-1" />
