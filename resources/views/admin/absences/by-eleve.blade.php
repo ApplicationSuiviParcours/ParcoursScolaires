@@ -104,7 +104,7 @@
 
     <!-- Filtre par année scolaire -->
     <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
-        <form method="GET" action="{{ route('admin.absences.by-eleve', $eleve) }}" class="flex flex-col md:flex-row gap-4 items-end">
+        <form method="GET" action="{{ route('admin.absences.byEleve', $eleve) }}" class="flex flex-col md:flex-row gap-4 items-end">
             <div class="flex-1">
                 <label class="block text-sm font-semibold text-gray-700 mb-2">Année scolaire</label>
                 <select name="annee_scolaire_id" class="w-full rounded-xl border-2 border-gray-200 focus:border-blue-900 focus:ring-2 focus:ring-purple-200 px-4 py-3">
