@@ -204,28 +204,24 @@ class NoteController extends Controller
         $periodes = ['Trimestre 1', 'Trimestre 2', 'Trimestre 3'];
         $matieres = Matiere::query()->orderBy('nom')->get();
         
-        $query = Note::query()->where('eleve_id', $eleve->id)
+        $query = Note::query()->where('notes.eleve_id', $eleve->id)
+            ->leftJoin('evaluations', 'notes.evaluation_id', '=', 'evaluations.id')
+            ->select('notes.*')
             ->with(['evaluation.matiere', 'evaluation.classe']);
         
         if ($anneeScolaireId) {
-            $query->whereHas('evaluation', function($q) use ($anneeScolaireId) {
-                $q->where('annee_scolaire_id', $anneeScolaireId);
-            });
+            $query->where('evaluations.annee_scolaire_id', $anneeScolaireId);
         }
         
         if ($periode) {
-            $query->whereHas('evaluation', function($q) use ($periode) {
-                $q->where('periode', $periode);
-            });
+            $query->where('evaluations.periode', $periode);
         }
         
         if ($matiereId) {
-            $query->whereHas('evaluation', function($q) use ($matiereId) {
-                $q->where('matiere_id', $matiereId);
-            });
+            $query->where('evaluations.matiere_id', $matiereId);
         }
         
-        $notes = $query->orderBy('evaluation.date_evaluation', 'desc')
+        $notes = $query->orderBy('evaluations.date_evaluation', 'desc')
                       ->get()
                       ->groupBy(function($note) {
                           return $note->evaluation->matiere->nom ?? 'Sans matière';
@@ -234,11 +230,11 @@ class NoteController extends Controller
         // Statistiques de l'élève
         $stats = [
             'total_notes' => $query->count(),
-            'moyenne_generale' => round($query->avg('note') ?? 0, 2),
-            'note_max' => round($query->max('note') ?? 0, 2),
-            'note_min' => round($query->min('note') ?? 0, 2),
-            'reussites' => (clone $query)->where('note', '>=', 10)->count(),
-            'echecs' => (clone $query)->where('note', '<', 10)->count(),
+            'moyenne_generale' => round($query->avg('notes.note') ?? 0, 2),
+            'note_max' => round($query->max('notes.note') ?? 0, 2),
+            'note_min' => round($query->min('notes.note') ?? 0, 2),
+            'reussites' => (clone $query)->where('notes.note', '>=', 10)->count(),
+            'echecs' => (clone $query)->where('notes.note', '<', 10)->count(),
         ];
 
         return view('admin.notes.by-eleve', compact(
@@ -458,7 +454,9 @@ class NoteController extends Controller
             });
         }
 
-        $notes = $query->orderBy('evaluation.date_evaluation', 'desc')->get();
+        $notes = $query->get()->sortByDesc(function($note) {
+            return $note->evaluation->date_evaluation ?? null;
+        })->values();
 
         return response()->json($notes);
     }
