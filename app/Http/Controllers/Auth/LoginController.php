@@ -40,6 +40,7 @@ class LoginController extends Controller
 
             if (Auth::attempt(['email' => $request->credential, 'password' => $request->password, 'is_active' => true], $request->boolean('remember'))) {
                 $request->session()->regenerate();
+                Auth::user()->update(['last_login_at' => now()]);
                 return redirect()->intended($this->redirectPath());
             }
 
@@ -98,6 +99,7 @@ class LoginController extends Controller
 
             Auth::login($user, $request->boolean('remember'));
             $request->session()->regenerate();
+            $user->update(['last_login_at' => now()]);
             return redirect()->intended($this->redirectPath());
         }
 

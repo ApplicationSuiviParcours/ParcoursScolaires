@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('header')
     <h2 class="font-semibold text-sm text-gray-800 leading-tight">
@@ -187,9 +187,9 @@
                             </td>
                             <td class="px-2 sm:px-3 py-2 sm:py-3 whitespace-nowrap text-xs sm:text-sm text-gray-900">
                                 @if($absence->heure_debut && $absence->heure_fin)
-                                    {{ substr($absence->heure_debut, 0, 5) }} - {{ substr($absence->heure_fin, 0, 5) }}
+                                    {{ \Carbon\Carbon::parse($absence->heure_debut)->format('H:i') }} - {{ \Carbon\Carbon::parse($absence->heure_fin)->format('H:i') }}
                                 @elseif($absence->heure_debut)
-                                    {{ substr($absence->heure_debut, 0, 5) }}
+                                    {{ \Carbon\Carbon::parse($absence->heure_debut)->format('H:i') }}
                                 @else
                                     Journée entière
                                 @endif
@@ -199,7 +199,7 @@
                             </td>
                             <td class="px-2 sm:px-3 py-2 sm:py-3 whitespace-nowrap">
                                 <div class="flex items-center gap-1">
-                                    @if($absence->justifie)
+                                    @if($absence->justifiee)
                                     <span class="px-2 py-0.5 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 whitespace-nowrap">
                                         Justifiée
                                     </span>
@@ -237,7 +237,7 @@
                                     </a>
 
                                     <!-- Justifier (si non justifiée) -->
-                                    @if(!$absence->justifie)
+                                    @if(!$absence->justifiee)
                                     <button onclick="ouvrirModalJustification({{ $absence->id }})" 
                                             class="text-yellow-600 hover:text-yellow-900 p-1" title="Justifier">
                                         <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

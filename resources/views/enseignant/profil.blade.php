@@ -10,13 +10,6 @@
 <div class="py-6 sm:py-12">
     <div class="px-4 mx-auto max-w-4xl sm:px-6 lg:px-8">
 
-        {{-- Notifications --}}
-        @if(session('success'))
-            <div class="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-xl">
-                {{ session('success') }}
-            </div>
-        @endif
-
         {{-- En-tête profil --}}
         <div class="relative overflow-hidden mb-8 bg-blue-900 rounded-3xl shadow-2xl">
             <div class="absolute inset-0 opacity-20">

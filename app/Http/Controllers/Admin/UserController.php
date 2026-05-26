@@ -108,6 +108,7 @@ class UserController extends Controller
                 'roles' => ['required', 'array', 'min:1'],
                 'roles.*' => ['exists:roles,id'],
                 'is_active' => ['sometimes', 'boolean'],
+                'email_verified' => ['sometimes', 'boolean'],
                 'photo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
                 
                 // Champs optionnels pour les profils
@@ -128,6 +129,7 @@ class UserController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($plainPassword),
                 'is_active' => $request->boolean('is_active', true),
+                'email_verified_at' => $request->boolean('email_verified') ? now() : null,
             ];
 
             // Déterminer le rôle principal pour la colonne 'role' (fallback BD)
@@ -379,6 +381,7 @@ class UserController extends Controller
             'roles' => ['required', 'array', 'min:1'],
             'roles.*' => ['exists:roles,id'],
             'is_active' => ['sometimes', 'boolean'],
+            'email_verified' => ['sometimes', 'boolean'],
             'photo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
             'remove_photo' => ['sometimes', 'boolean'],
         ]);
@@ -388,6 +391,12 @@ class UserController extends Controller
             'email' => $request->email,
             'is_active' => $request->boolean('is_active', true),
         ];
+
+        if ($request->boolean('email_verified')) {
+            $data['email_verified_at'] = $user->email_verified_at ?? now();
+        } else {
+            $data['email_verified_at'] = null;
+        }
 
         // Déterminer le rôle principal pour la colonne 'role' (fallback BD)
         if ($request->has('roles') && is_array($request->roles) && count($request->roles) > 0) {

@@ -114,13 +114,13 @@
                     <div class="p-4 rounded-lg bg-gray-50">
                         <p class="mb-2 text-sm font-medium text-gray-500">Heure de début</p>
                         <p class="text-xl font-semibold text-gray-900">
-                            {{ substr($absence->heure_debut, 0, 5) ?? '--:--' }}
+                            {{ $absence->heure_debut ? \Carbon\Carbon::parse($absence->heure_debut)->format('H:i') : '--:--' }}
                         </p>
                     </div>
                     <div class="p-4 rounded-lg bg-gray-50">
                         <p class="mb-2 text-sm font-medium text-gray-500">Heure de fin</p>
                         <p class="text-xl font-semibold text-gray-900">
-                            {{ substr($absence->heure_fin, 0, 5) ?? '--:--' }}
+                            {{ $absence->heure_fin ? \Carbon\Carbon::parse($absence->heure_fin)->format('H:i') : '--:--' }}
                         </p>
                     </div>
                 </div>

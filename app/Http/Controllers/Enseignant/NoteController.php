@@ -59,7 +59,7 @@ class NoteController extends Controller
         // Filtres
         if ($request->filled('classe')) {
             $elevesDeClasse = Inscription::query()->where('classe_id', $request->classe)
-                ->where('statut', 'actif')
+                ->whereIn('statut', ['inscrit', 'active', '1'])
                 ->pluck('eleve_id');
             $query->whereIn('eleve_id', $elevesDeClasse);
         }
@@ -162,7 +162,7 @@ class NoteController extends Controller
         // Vérifier que l'élève est dans la classe de l'évaluation
         $eleveDansClasse = Inscription::query()->where('eleve_id', $request->eleve_id)
             ->where('classe_id', $evaluation->classe_id)
-            ->where('statut', 'actif')
+            ->whereIn('statut', ['inscrit', 'active', '1'])
             ->exists();
 
         if (!$eleveDansClasse) {
@@ -322,7 +322,7 @@ class NoteController extends Controller
 
             $eleves = Eleve::query()->whereHas('inscriptions', function($q) use ($evaluation) {
                 $q->where('classe_id', $evaluation->classe_id)
-                  ->where('statut', 'actif');
+                  ->whereIn('statut', ['inscrit', 'active', '1']);
             })->select('id', 'nom', 'prenom', 'matricule')->get();
 
             // Exclure les élèves qui ont déjà une note pour cette évaluation
@@ -361,7 +361,7 @@ class NoteController extends Controller
         // Récupérer les élèves de la classe
         $eleves = Eleve::query()->whereHas('inscriptions', function($q) use ($evaluation) {
             $q->where('classe_id', $evaluation->classe_id)
-              ->where('statut', 'actif');
+              ->whereIn('statut', ['inscrit', 'active', '1']);
         })->orderBy('nom')->orderBy('prenom')->get();
 
         // Récupérer les notes existantes

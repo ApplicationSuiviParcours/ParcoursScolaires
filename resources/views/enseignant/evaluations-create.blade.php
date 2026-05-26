@@ -6,14 +6,7 @@
 <div class="py-6 sm:py-12">
     <div class="px-4 mx-auto max-w-3xl sm:px-6 lg:px-8">
 
-        @if(session('success'))
-            <div class="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-xl">{{ session('success') }}</div>
-        @endif
-        @if($errors->any())
-            <div class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-xl">
-                <ul class="list-disc list-inside">@foreach($errors->all() as $e)<li>{{ $e }}</li>@endforeach</ul>
-            </div>
-        @endif
+
 
         <div class="bg-white shadow-lg rounded-2xl overflow-hidden">
             <div class="p-6 bg-blue-900">

@@ -324,7 +324,7 @@
                                             <div class="text-left sm:text-right">
                                                 <span class="text-xs text-gray-500">Année</span>
                                                 <p class="text-xs sm:text-sm font-medium">
-                                                    {{ $assignation->anneeScolaire->libelle ?? 'N/A' }}</p>
+                                                    {{ $assignation->anneeScolaire->nom ?? 'N/A' }}</p>
                                             </div>
                                         </div>
                                     </div>

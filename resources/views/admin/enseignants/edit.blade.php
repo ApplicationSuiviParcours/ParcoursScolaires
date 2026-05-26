@@ -459,7 +459,7 @@
                                 <span class="text-sm font-semibold text-blue-900">{{ $assignation->matiere->nom ?? 'Matière' }}</span>
                                 <span class="text-xs px-2 py-1 bg-blue-100 text-indigo-800 rounded-full">{{ $assignation->classe->nom ?? 'Classe' }}</span>
                             </div>
-                            <p class="text-xs text-gray-500">Année scolaire: {{ $assignation->anneeScolaire->libelle ?? 'N/A' }}</p>
+                            <p class="text-xs text-gray-500">Année scolaire: {{ $assignation->anneeScolaire->nom ?? 'N/A' }}</p>
                         </div>
                     @endforeach
                 </div>

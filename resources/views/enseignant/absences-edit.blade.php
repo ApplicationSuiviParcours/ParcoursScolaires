@@ -106,7 +106,7 @@
                                     Heure de début <span class="text-red-500">*</span>
                                 </label>
                                 <input type="time" name="heure_debut"
-                                    value="{{ old('heure_debut', substr($absence->heure_debut, 0, 5)) }}"
+                                    value="{{ old('heure_debut', $absence->heure_debut ? \Carbon\Carbon::parse($absence->heure_debut)->format('H:i') : '') }}"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 @error('heure_debut') border-red-500 @enderror"
                                     required>
                                 @error('heure_debut')
@@ -119,7 +119,7 @@
                                     Heure de fin <span class="text-red-500">*</span>
                                 </label>
                                 <input type="time" name="heure_fin"
-                                    value="{{ old('heure_fin', substr($absence->heure_fin, 0, 5)) }}"
+                                    value="{{ old('heure_fin', $absence->heure_fin ? \Carbon\Carbon::parse($absence->heure_fin)->format('H:i') : '') }}"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 @error('heure_fin') border-red-500 @enderror"
                                     required>
                                 @error('heure_fin')

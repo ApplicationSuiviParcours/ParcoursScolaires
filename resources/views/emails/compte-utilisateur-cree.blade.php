@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Votre compte Scolaire Parcours</title>
+    <title>Votre compte GEST'PARC</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f4f8; color: #1e293b; }
         .wrapper { max-width: 600px; margin: 40px auto; background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 
         /* Header */
-        .header { background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%); padding: 40px 32px; text-align: center; }
-        .header .logo { font-size: 28px; font-weight: 800; color: #ffffff; letter-spacing: -0.5px; }
+        .header { background: linear-gradient(135deg, #1e3a8a 0%, #172554 100%); padding: 40px 32px; text-align: center; }
+        .header .logo-img { width: 60px; height: 60px; margin-bottom: 12px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); }
+        .header .logo { font-size: 32px; font-weight: 800; color: #ffffff; letter-spacing: 1px; }
         .header .logo span { color: #fbbf24; }
         .header .subtitle { color: #93c5fd; font-size: 14px; margin-top: 6px; }
 
@@ -34,7 +35,7 @@
 
         /* CTA Button */
         .cta-wrapper { text-align: center; margin-bottom: 28px; }
-        .cta-btn { display: inline-block; padding: 14px 36px; background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%); color: #ffffff; font-size: 15px; font-weight: 700; text-decoration: none; border-radius: 10px; letter-spacing: 0.3px; }
+        .cta-btn { display: inline-block; padding: 14px 36px; background: linear-gradient(135deg, #1e3a8a 0%, #172554 100%); color: #ffffff; font-size: 15px; font-weight: 700; text-decoration: none; border-radius: 10px; letter-spacing: 0.3px; box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3); }
 
         /* Warning */
         .warning-box { background: #fffbeb; border: 1px solid #fcd34d; border-radius: 10px; padding: 16px 20px; margin-bottom: 28px; display: flex; align-items: flex-start; gap: 12px; }
@@ -60,8 +61,9 @@
 
     {{-- Header --}}
     <div class="header">
-        <div class="logo">Scolaire<span>Parcours</span></div>
-        <div class="subtitle">Système de Gestion Scolaire</div>
+        <img src="{{ asset('image_icon/apple-icon.png') }}" alt="Logo" class="logo-img">
+        <div class="logo">GEST'<span>PARC</span></div>
+        <div class="subtitle">Suivi de parcours scolaire</div>
         <div class="role-badge">
             @if($role === 'eleve') 🎓 Élève
             @elseif($role === 'enseignant') 📚 Enseignant
@@ -75,7 +77,7 @@
     <div class="body">
         <div class="greeting">Bonjour, {{ $nomComplet }} !</div>
         <p class="intro">
-            Votre compte sur la plateforme <strong>Scolaire Parcours</strong> vient d'être créé par l'administration.
+            Votre compte sur la plateforme <strong>GEST'PARC</strong> vient d'être créé par l'administration.
             Vous trouverez ci-dessous vos identifiants de connexion. Veuillez les conserver précieusement.
         </p>
 
@@ -140,7 +142,7 @@
     <div class="footer">
         <p>
             Cet email a été envoyé automatiquement par la plateforme<br>
-            <span class="school-name">Scolaire Parcours</span> — Système de Gestion Scolaire<br>
+            <span class="school-name">GEST'PARC</span> — Système de Gestion Scolaire<br>
             © {{ date('Y') }} — Ne pas répondre à cet email.
         </p>
     </div>
