@@ -120,23 +120,23 @@
              TIMELINE DU PARCOURS
         ══════════════════════════════════════════════════ --}}
         <div class="bg-white shadow-xl rounded-3xl overflow-hidden border border-gray-100">
-            <div class="p-6 border-b border-gray-100 bg-gray-50/50 flex items-center justify-between">
-                <h3 class="text-xl font-bold text-gray-800 flex items-center">
-                    <svg class="w-6 h-6 mr-3 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="p-4 sm:p-6 border-b border-gray-100 bg-gray-50/50 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <h3 class="text-lg sm:text-xl font-bold text-gray-800 flex items-center">
+                    <svg class="w-6 h-6 mr-3 text-teal-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
                     Historique de scolarité — année par année
                 </h3>
-                <div class="flex gap-2">
-                    <a href="{{ route('parent.enfant.notes', $eleve->id) }}" class="px-4 py-2 text-sm font-semibold text-teal-600 bg-teal-50 rounded-xl hover:bg-teal-100 transition-colors">Notes</a>
-                    <a href="{{ route('parent.enfant.bulletin', $eleve->id) }}" class="px-4 py-2 text-sm font-semibold text-teal-600 bg-teal-50 rounded-xl hover:bg-teal-100 transition-colors">Bulletins</a>
+                <div class="flex gap-2 flex-shrink-0">
+                    <a href="{{ route('parent.enfant.notes', $eleve->id) }}" class="px-3 py-1.5 text-xs sm:text-sm font-semibold text-teal-600 bg-teal-50 rounded-xl hover:bg-teal-100 transition-colors">Notes</a>
+                    <a href="{{ route('parent.enfant.bulletin', $eleve->id) }}" class="px-3 py-1.5 text-xs sm:text-sm font-semibold text-teal-600 bg-teal-50 rounded-xl hover:bg-teal-100 transition-colors">Bulletins</a>
                 </div>
             </div>
 
-            <div class="p-8">
+            <div class="p-4 sm:p-8">
                 @if($historique->count() > 0)
                     <div class="relative">
-                        <div class="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-1 bg-blue-900 rounded-full opacity-20"></div>
+                        <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-1 bg-blue-900 rounded-full opacity-20"></div>
 
                         <div class="space-y-12">
                             @foreach($historique as $index => $item)
@@ -174,11 +174,11 @@
                                 @endphp
 
                                 <div class="relative flex flex-col md:flex-row items-start group">
-                                    <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-9 h-9 rounded-full bg-white border-4 border-teal-500 shadow-xl z-10 transition-all duration-300 group-hover:scale-110 group-hover:bg-teal-500 flex items-center justify-center mt-6">
+                                    <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-9 h-9 rounded-full bg-white border-4 border-teal-500 shadow-xl z-10 transition-all duration-300 group-hover:scale-110 group-hover:bg-teal-500 flex items-center justify-center mt-6">
                                         <span class="text-[9px] font-black text-teal-600 group-hover:text-white transition-colors">{{ substr($item['annee_scolaire']->nom, -4) }}</span>
                                     </div>
 
-                                    <div class="ml-14 md:ml-0 md:w-1/2 {{ $index % 2 == 0 ? 'md:pr-16' : 'md:pl-16 md:order-last' }}">
+                                    <div class="ml-14 md:ml-0 md:w-1/2 {{ $index % 2 == 0 ? 'md:pr-16' : 'md:pl-16 md:order-last' }} w-full">
                                         <div class="block p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-300 border-t-4 border-t-teal-500 group-hover:-translate-y-1">
 
                                             {{-- En-tête --}}
@@ -195,7 +195,7 @@
                                             <p class="text-gray-500 mt-1 text-sm font-medium">{{ $item['classe']->niveau }}</p>
 
                                             {{-- Grille Trimestre 1 / Trimestre 2 / Trimestre 3 --}}
-                                            <div class="mt-5 grid grid-cols-3 gap-3">
+                                            <div class="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-3">
                                                 @foreach([
                                                     ['libelle' => 'Trimestre 1', 'b' => $bulletinT1, 'ring' => 'teal'],
                                                     ['libelle' => 'Trimestre 2', 'b' => $bulletinT2, 'ring' => 'emerald'],
@@ -243,7 +243,7 @@
                                             @endif
 
                                             {{-- Boutons d'action --}}
-                                            <div class="mt-5 pt-4 border-t border-gray-100 grid grid-cols-3 gap-2">
+                                            <div class="mt-5 pt-4 border-t border-gray-100 flex flex-col sm:grid sm:grid-cols-3 gap-2">
                                                 <a href="{{ route('parent.enfant.bulletin', ['eleve' => $eleve->id, 'annee_scolaire_id' => $item['annee_scolaire']->id]) }}"
                                                    class="flex flex-col items-center p-2 rounded-xl bg-purple-50 text-blue-900 hover:bg-blue-100 transition-colors">
                                                     <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

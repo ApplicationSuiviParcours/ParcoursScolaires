@@ -111,7 +111,7 @@
                 @if($historique->count() > 0)
                     <div class="relative">
                         {{-- Ligne verticale centrale --}}
-                        <div class="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-1 bg-blue-900 rounded-full opacity-20"></div>
+                        <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-1 bg-blue-900 rounded-full opacity-20"></div>
 
                         <div class="space-y-14">
                             @foreach($historique as $index => $item)
@@ -151,7 +151,7 @@
 
                                 <div class="relative flex flex-col md:flex-row items-start group">
                                     {{-- Point de la timeline --}}
-                                    <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-9 h-9 rounded-full bg-white border-4 border-blue-900 shadow-xl z-10 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-800 flex items-center justify-center mt-6">
+                                    <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-9 h-9 rounded-full bg-white border-4 border-blue-900 shadow-xl z-10 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-800 flex items-center justify-center mt-6">
                                         <span class="text-[9px] font-black text-blue-900 group-hover:text-white transition-colors">{{ substr($item['annee_scolaire']->nom, -4) }}</span>
                                     </div>
 
@@ -175,7 +175,7 @@
                                             <p class="text-gray-500 mt-1 text-sm font-medium">{{ $item['classe']->niveau }}</p>
 
                                             {{-- Grille Trimestre 1 / Trimestre 2 / Trimestre 3 --}}
-                                            <div class="mt-5 grid grid-cols-3 gap-3">
+                                            <div class="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-3">
                                                 @foreach([
                                                     ['libelle' => 'Trimestre 1', 'b' => $bulletinT1, 'ring' => 'indigo'],
                                                     ['libelle' => 'Trimestre 2', 'b' => $bulletinT2, 'ring' => 'emerald'],
@@ -223,7 +223,7 @@
                                             @endif
 
                                             {{-- Boutons d'action --}}
-                                            <div class="mt-5 pt-4 border-t border-gray-100 grid grid-cols-3 gap-2">
+                                            <div class="mt-5 pt-4 border-t border-gray-100 flex flex-col sm:grid sm:grid-cols-3 gap-2">
                                                 <a href="{{ route('eleve.bulletin', ['annee_scolaire_id' => $item['annee_scolaire']->id]) }}"
                                                    class="flex flex-col items-center p-2 rounded-xl bg-purple-50 text-blue-900 hover:bg-blue-100 transition-colors">
                                                     <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

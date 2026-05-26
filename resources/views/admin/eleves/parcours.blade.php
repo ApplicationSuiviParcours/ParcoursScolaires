@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('header')
-    <div class="flex items-center justify-between">
-        <h2 class="text-xl font-semibold leading-tight text-gray-800">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <h2 class="text-lg sm:text-xl font-semibold leading-tight text-gray-800">
             {{ __('Parcours Académique de ') }} {{ $eleve->nom_complet }}
         </h2>
-        <a href="{{ route('admin.eleves.show', $eleve) }}" class="inline-flex items-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">
+        <a href="{{ route('admin.eleves.show', $eleve) }}" class="inline-flex items-center self-start px-3 py-2 sm:px-4 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
             </svg>
@@ -68,34 +68,33 @@
             </div>
         </div>
 
-        <!-- Timeline du Parcours -->
         <div class="bg-white shadow-xl rounded-3xl overflow-hidden border border-gray-100">
-            <div class="p-6 border-b border-gray-100 bg-gray-50/50 flex items-center justify-between">
-                <h3 class="text-xl font-bold text-gray-800 flex items-center">
-                    <svg class="w-6 h-6 mr-3 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="p-4 sm:p-6 border-b border-gray-100 bg-gray-50/50 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <h3 class="text-base sm:text-xl font-bold text-gray-800 flex items-center">
+                    <svg class="w-6 h-6 mr-3 text-blue-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                     Timeline de Progression Cycle (Primaire → Collège → Lycée)
                 </h3>
-                <div class="flex gap-2">
-                    <a href="{{ route('admin.eleves.exports.profil-pdf', $eleve) }}" class="inline-flex items-center px-3 py-1 bg-red-600 text-white rounded-lg text-xs font-bold hover:bg-red-700 transition-colors">
+                <div class="flex gap-2 flex-shrink-0">
+                    <a href="{{ route('admin.eleves.exports.profil-pdf', $eleve) }}" class="inline-flex items-center px-3 py-1.5 bg-red-600 text-white rounded-lg text-xs font-bold hover:bg-red-700 transition-colors">
                         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path></svg>
                         Exporter Parcours
                     </a>
                 </div>
             </div>
             
-            <div class="p-8 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px]">
+            <div class="p-4 sm:p-8 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px]">
                 @if($historique->count() > 0)
                     <div class="relative">
                         <!-- Ligne verticale de la timeline -->
-                        <div class="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-1 bg-blue-900 rounded-full opacity-20"></div>
+                        <div class="absolute left-8 md:left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-1 bg-blue-900 rounded-full opacity-20"></div>
                         
                         <div class="space-y-16">
                             @foreach($historique as $index => $item)
                                 <div class="relative flex flex-col md:flex-row items-center group">
                                     <!-- Point central avec année -->
-                                    <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 flex items-center justify-center w-12 h-12 rounded-full bg-white border-4 border-indigo-600 shadow-xl z-10 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-900 group-hover:text-white">
+                                    <div class="absolute left-8 md:left-1/2 transform -translate-x-1/2 flex items-center justify-center w-12 h-12 rounded-full bg-white border-4 border-indigo-600 shadow-xl z-10 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-900 group-hover:text-white">
                                         <span class="text-[10px] font-bold">{{ substr($item['annee_scolaire']->nom, -4) }}</span>
                                     </div>
                                     
@@ -167,7 +166,7 @@
                                             @endif
 
                                             <!-- Actions Admin pour cette année -->
-                                            <div class="mt-8 pt-6 border-t border-gray-100 flex flex-wrap gap-2 {{ $index % 2 == 0 ? 'md:justify-end' : 'md:justify-start' }}">
+                                            <div class="mt-8 pt-6 border-t border-gray-100 flex flex-col sm:flex-row flex-wrap gap-2 {{ $index % 2 == 0 ? 'md:justify-end' : 'md:justify-start' }}">
                                                 <a href="{{ route('admin.bulletins.index', ['eleve_id' => $eleve->id, 'annee_scolaire_id' => $item['annee_scolaire']->id]) }}" 
                                                    class="inline-flex items-center px-4 py-2 bg-blue-900 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-800 transition-all shadow-lg shadow-indigo-200">
                                                     Bulletins
