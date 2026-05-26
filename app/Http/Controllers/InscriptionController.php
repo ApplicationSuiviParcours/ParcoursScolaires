@@ -10,6 +10,9 @@ use App\Models\AnneeScolaire;
 use App\Models\User;
 use App\Models\ParentEleve;
 use App\Models\Reinscription;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use App\Mail\CompteUtilisateurCree;
 
 class InscriptionController extends Controller
 {
@@ -138,16 +141,31 @@ class InscriptionController extends Controller
                             $email = $eleve->matricule . '_' . rand(100, 999) . '@scolaireparcours.com';
                         }
 
+                        $motDePasse = Str::random(10);
+
                         $user = User::create([
-                            'name' => $eleve->prenom . ' ' . $eleve->nom,
-                            'email' => $email,
-                            'password' => \Illuminate\Support\Facades\Hash::make('password'), // Mot de passe par défaut
-                            'role' => 'eleve',
+                            'name'      => $eleve->prenom . ' ' . $eleve->nom,
+                            'email'     => $email,
+                            'password'  => \Illuminate\Support\Facades\Hash::make($motDePasse),
+                            'role'      => 'eleve',
                             'is_active' => true,
                         ]);
 
                         $user->assignRole('eleve');
                         $eleve->update(['user_id' => $user->id]);
+
+                        // Envoi de l'email avec les identifiants
+                        try {
+                            Mail::to($email)->send(new CompteUtilisateurCree(
+                                $eleve->prenom . ' ' . $eleve->nom,
+                                $email,
+                                $motDePasse,
+                                'eleve',
+                                $eleve->matricule
+                            ));
+                        } catch (\Exception $mailException) {
+                            \Log::warning('Email non envoyé pour ' . $email . ' : ' . $mailException->getMessage());
+                        }
                     }
 
                     // ✅ VÉRIFICATION D'UNICITÉ : L'élève est-il déjà inscrit cette année ?

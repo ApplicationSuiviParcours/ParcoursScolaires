@@ -16,6 +16,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use App\Mail\CompteUtilisateurCree;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ElevesExport;
@@ -242,17 +245,33 @@ class EleveAdminController extends Controller
                 $email = $eleve->matricule . '_' . rand(100, 999) . '@scolaireparcours.com';
             }
 
+            $motDePasse = Str::random(10);
+
             $user = User::create([
-                'name' => $eleve->prenom . ' ' . $eleve->nom,
-                'email' => $email,
-                'password' => Hash::make('password'), // Mot de passe par défaut
-                'role' => 'eleve',
+                'name'      => $eleve->prenom . ' ' . $eleve->nom,
+                'email'     => $email,
+                'password'  => Hash::make($motDePasse),
+                'role'      => 'eleve',
                 'is_active' => true,
             ]);
 
             $user->assignRole('eleve');
             $eleve->user_id = $user->id;
             $eleve->save();
+
+            // Envoi de l'email avec les identifiants
+            try {
+                Mail::to($email)->send(new CompteUtilisateurCree(
+                    $eleve->prenom . ' ' . $eleve->nom,
+                    $email,
+                    $motDePasse,
+                    'eleve',
+                    $eleve->matricule
+                ));
+            } catch (\Exception $mailException) {
+                // L'email n'est pas critique, on continue même en cas d'erreur
+                \Log::warning('Email non envoyé pour ' . $email . ' : ' . $mailException->getMessage());
+            }
 
             DB::commit();
 

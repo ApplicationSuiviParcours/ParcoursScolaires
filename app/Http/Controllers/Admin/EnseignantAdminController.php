@@ -9,6 +9,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use App\Mail\CompteUtilisateurCree;
 
 
 class EnseignantAdminController extends Controller
@@ -99,16 +102,31 @@ class EnseignantAdminController extends Controller
                     $email = strtolower($request->prenom . '.' . $request->nom . '_' . rand(100, 999) . '@enseignant.scolaireparcours.com');
                 }
 
+                $motDePasse = Str::random(10);
+
                 $user = User::create([
-                    'name' => $request->prenom . ' ' . $request->nom,
-                    'email' => $email,
-                    'password' => Hash::make('password'), // Mot de passe par défaut
-                    'role' => 'enseignant',
+                    'name'      => $request->prenom . ' ' . $request->nom,
+                    'email'     => $email,
+                    'password'  => Hash::make($motDePasse),
+                    'role'      => 'enseignant',
                     'is_active' => true,
                 ]);
 
                 $user->assignRole('enseignant');
                 $validated['user_id'] = $user->id;
+
+                // Envoi de l'email avec les identifiants
+                try {
+                    Mail::to($email)->send(new CompteUtilisateurCree(
+                        $request->prenom . ' ' . $request->nom,
+                        $email,
+                        $motDePasse,
+                        'enseignant',
+                        $validated['matricule']
+                    ));
+                } catch (\Exception $mailException) {
+                    \Log::warning('Email non envoyé pour ' . $email . ' : ' . $mailException->getMessage());
+                }
             }
 
             $enseignant = Enseignant::create($validated);

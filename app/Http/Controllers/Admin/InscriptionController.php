@@ -11,6 +11,9 @@ use App\Models\Reinscription;
 use App\Models\ParentEleve;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use App\Mail\CompteUtilisateurCree;
 
 class InscriptionController extends Controller
 {
@@ -116,15 +119,30 @@ class InscriptionController extends Controller
                     // Création du compte utilisateur automatique
                     $email = $validated['email'] ?? strtolower($matricule) . '@scolaireparcours.com';
                     
+                    $motDePasse = Str::random(10);
+
                     $user = \App\Models\User::create([
-                        'name' => $validated['prenom'] . ' ' . $validated['nom'],
-                        'email' => $email,
-                        'password' => \Illuminate\Support\Facades\Hash::make('password'), // Mot de passe par défaut
-                        'statut' => true,
+                        'name'     => $validated['prenom'] . ' ' . $validated['nom'],
+                        'email'    => $email,
+                        'password' => \Illuminate\Support\Facades\Hash::make($motDePasse),
+                        'statut'   => true,
                     ]);
 
                     // Attribuer le rôle élève
                     $user->assignRole('eleve');
+
+                    // Envoi de l'email avec les identifiants
+                    try {
+                        Mail::to($email)->send(new CompteUtilisateurCree(
+                            $validated['prenom'] . ' ' . $validated['nom'],
+                            $email,
+                            $motDePasse,
+                            'eleve',
+                            $matricule
+                        ));
+                    } catch (\Exception $mailException) {
+                        \Log::warning('Email non envoyé pour ' . $email . ' : ' . $mailException->getMessage());
+                    }
 
                     // Création de l'élève
                     $eleve = Eleve::create([

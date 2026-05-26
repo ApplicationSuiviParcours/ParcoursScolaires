@@ -11,6 +11,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use App\Mail\CompteUtilisateurCree;
 
 class ParentAdminController extends Controller
 {
@@ -114,17 +117,32 @@ class ParentAdminController extends Controller
             $email = strtolower($request->prenom . '.' . $request->nom . '_' . rand(100, 999) . '@parent.scolaireparcours.com');
         }
 
+        $motDePasse = Str::random(10);
+
         $user = User::create([
-            'name' => $request->prenom . ' ' . $request->nom,
-            'email' => $email,
-            'password' => Hash::make('password'), // Mot de passe par défaut
-            'role' => 'parent',
+            'name'      => $request->prenom . ' ' . $request->nom,
+            'email'     => $email,
+            'password'  => Hash::make($motDePasse),
+            'role'      => 'parent',
             'is_active' => true,
         ]);
 
         $user->assignRole('parent');
         $parent->user_id = $user->id;
         $parent->save();
+
+        // Envoi de l'email avec les identifiants
+        try {
+            Mail::to($email)->send(new CompteUtilisateurCree(
+                $request->prenom . ' ' . $request->nom,
+                $email,
+                $motDePasse,
+                'parent',
+                $parent->matricule ?? 'N/A'
+            ));
+        } catch (\Exception $mailException) {
+            \Log::warning('Email non envoyé pour ' . $email . ' : ' . $mailException->getMessage());
+        }
 
         // Création des relations avec les élèves
         if ($request->has('eleve_ids')) {
