@@ -147,11 +147,11 @@
                             <select class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 @error('type') border-red-500 ring-2 ring-red-200 @enderror" 
                                     id="type" name="type" required>
                                 <option value="">Sélectionner un type</option>
-                                <option value="devoir" {{ old('type') == 'devoir' ? 'selected' : '' }}>📝 Devoir</option>
-                                <option value="examen" {{ old('type') == 'examen' ? 'selected' : '' }}>📋 Examen</option>
-                                <option value="test" {{ old('type') == 'test' ? 'selected' : '' }}>✏️ Test</option>
-                                <option value="projet" {{ old('type') == 'projet' ? 'selected' : '' }}>🎯 Projet</option>
-                                <option value="autre" {{ old('type') == 'autre' ? 'selected' : '' }}>🔖 Autre</option>
+                                @foreach(App\Models\Evaluation::getTypesForAdmin() as $key => $label)
+                                    <option value="{{ $key }}" {{ old('type') == $key ? 'selected' : '' }}>
+                                        {{ App\Models\Evaluation::getTypeEmojis()[$key] ?? '' }} {{ $label }}
+                                    </option>
+                                @endforeach
                             </select>
                             @error('type')
                                 <p class="text-sm text-red-600">{{ $message }}</p>

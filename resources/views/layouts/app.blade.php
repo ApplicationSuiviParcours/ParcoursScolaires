@@ -200,7 +200,7 @@
 <body class="min-h-screen antialiased transition-colors duration-300 bg-gray-50 dark:bg-gray-900 overflow-x-hidden">
 
     <!-- Ajout de x-data pour gérer l'état de la sidebar globalement -->
-    <div class="flex min-h-screen overflow-x-hidden" x-data="{ sidebarOpen: false }" @resize.window="if (window.innerWidth >= 768) sidebarOpen = false">
+    <div class="flex min-h-screen overflow-x-hidden" x-data="{ sidebarOpen: false, confirmOpen: false }" @resize.window="if (window.innerWidth >= 768) sidebarOpen = false">
 
         <!-- Overlay pour mobile (fond assombri) -->
         <div x-show="sidebarOpen"
@@ -538,9 +538,9 @@
 
             <!-- Bouton de déconnexion -->
             <div class="relative z-10 p-3 sm:p-4 border-t border-white/20">
-                <form method="POST" action="{{ route('logout') }}">
+                <form id="logout-form" method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button type="submit" class="flex items-center w-full px-3 sm:px-4 py-2 sm:py-3 space-x-2 sm:space-x-3 text-white transition-all btn-ripple hover:bg-red-500/30 rounded-lg sm:rounded-xl group">
+                    <button type="button" @click="confirmOpen = true" class="flex items-center w-full px-3 sm:px-4 py-2 sm:py-3 space-x-2 sm:space-x-3 text-white transition-all btn-ripple hover:bg-red-500/30 rounded-lg sm:rounded-xl group">
                         <div class="flex items-center justify-center transition-all rounded-lg w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-white/10 group-hover:bg-red-500/40">
                             <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
                         </div>
@@ -781,7 +781,7 @@
                                     <div class="border-t border-gray-100 dark:border-gray-700 py-1">
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
-                                            <button type="submit" class="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors group">
+<button type="submit" onclick="return confirm('Êtes-vous sûr de vouloir vous déconnecter ?')" class="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors group">
                                                 <div class="w-7 h-7 rounded-lg bg-red-50 dark:bg-red-900/30 group-hover:bg-red-100 dark:group-hover:bg-red-900/50 flex items-center justify-center transition-colors flex-shrink-0">
                                                     <svg class="w-3.5 h-3.5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
                                                 </div>
@@ -861,6 +861,68 @@
                 </div>
             </footer>
         </main>
+
+        <!-- Modal confirmation déconnexion -->
+        <div x-show="confirmOpen" 
+             x-transition:enter="transition ease-out duration-350" 
+             x-transition:enter-start="opacity-0 scale-95" 
+             x-transition:enter-end="opacity-100 scale-100" 
+             x-transition:leave="transition ease-in duration-200" 
+             x-transition:leave-start="opacity-100 scale-100" 
+             x-transition:leave-end="opacity-0 scale-95" 
+             class="fixed inset-0 z-[1000] flex items-center justify-center p-4 sm:p-6" 
+             aria-modal="true" 
+             role="dialog"
+             style="display: none;">
+            
+            <!-- Backdrop avec flou d'arrière-plan -->
+            <div class="fixed inset-0 bg-gray-950/60 backdrop-blur-md transition-opacity" 
+                 x-transition:enter="transition ease-out duration-300"
+                 x-transition:enter-start="opacity-0"
+                 x-transition:enter-end="opacity-100"
+                 x-transition:leave="transition ease-in duration-200"
+                 x-transition:leave-start="opacity-100"
+                 x-transition:leave-end="opacity-0"
+                 @click="confirmOpen = false" 
+                 aria-hidden="true"></div>
+
+            <!-- Conteneur de la Modale -->
+            <div class="relative w-full max-w-md bg-white dark:bg-gray-900 rounded-2xl shadow-2xl overflow-hidden border border-gray-100 dark:border-gray-800 transform transition-all duration-300">
+                <!-- En-tête avec titre et icône -->
+                <div class="px-6 py-5 bg-gradient-to-r from-red-600 to-red-700 text-white flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="p-1.5 bg-white/10 rounded-lg">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-base font-bold tracking-wide">Confirmation de déconnexion</h3>
+                    </div>
+                    <button type="button" @click="confirmOpen = false" class="text-white/80 hover:text-white transition-colors focus:outline-none p-1 rounded-lg hover:bg-white/10">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+
+                <!-- Corps de la Modale -->
+                <div class="px-6 py-7">
+                    <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed font-medium">Voulez-vous vraiment vous déconnecter de votre compte ?</p>
+                </div>
+
+                <!-- Pied de page avec bouton Annuler et Déconnexion arrangés -->
+                <div class="px-6 py-4 bg-gray-50 dark:bg-gray-800/60 flex flex-col-reverse sm:flex-row items-center justify-end gap-3 border-t border-gray-200 dark:border-gray-800">
+                    <button type="button" 
+                            @click="confirmOpen = false" 
+                            class="w-full sm:w-auto inline-flex justify-center items-center px-5 py-2.5 text-sm font-semibold rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 active:bg-gray-100 dark:active:bg-gray-700 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-gray-300 dark:focus:ring-gray-600 cursor-pointer text-center">
+                        Annuler
+                    </button>
+                    <button type="button" 
+                            @click="document.getElementById('logout-form').submit();" 
+                            class="w-full sm:w-auto inline-flex justify-center items-center px-5 py-2.5 text-sm font-semibold rounded-xl bg-red-600 hover:bg-red-700 active:bg-red-800 text-white shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-red-500/40 cursor-pointer text-center">
+                        Déconnexion
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Scripts -->

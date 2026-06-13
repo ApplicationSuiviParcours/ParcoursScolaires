@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Modifier l\'évaluation')
 
@@ -84,11 +84,11 @@
                         <select class="form-select @error('type') is-invalid @enderror" 
                                 id="type" name="type" required>
                             <option value="">Sélectionner un type</option>
-                            <option value="devoir" {{ old('type', $evaluation->type) == 'devoir' ? 'selected' : '' }}>Devoir</option>
-                            <option value="examen" {{ old('type', $evaluation->type) == 'examen' ? 'selected' : '' }}>Examen</option>
-                            <option value="test" {{ old('type', $evaluation->type) == 'test' ? 'selected' : '' }}>Test</option>
-                            <option value="projet" {{ old('type', $evaluation->type) == 'projet' ? 'selected' : '' }}>Projet</option>
-                            <option value="autre" {{ old('type', $evaluation->type) == 'autre' ? 'selected' : '' }}>Autre</option>
+                            @foreach(App\Models\Evaluation::getTypesForAdmin() as $key => $label)
+                                <option value="{{ $key }}" {{ old('type', $evaluation->type) == $key ? 'selected' : '' }}>
+                                    {{ App\Models\Evaluation::getTypeEmojis()[$key] ?? '' }} {{ $label }}
+                                </option>
+                            @endforeach
                         </select>
                         @error('type')
                             <div class="invalid-feedback">{{ $message }}</div>

@@ -223,4 +223,61 @@ class Evaluation extends Model
         $notesReussites = $this->notes()->where('note', '>=', 10)->count(); // Changé de 'valeur' à 'note'
         return ($notesReussites / $totalNotes) * 100;
     }
+
+    /**
+     * Types d'évaluation autorisés pour les administrateurs
+     */
+    public static function getTypesForAdmin(): array
+    {
+        return [
+            'devoir' => 'Devoir',
+            'examen' => 'Examen',
+            'test' => 'Test',
+            'projet' => 'Projet',
+            'autre' => 'Autre',
+        ];
+    }
+
+    /**
+     * Types d'évaluation autorisés pour les enseignants
+     */
+    public static function getTypesForEnseignant(): array
+    {
+        return [
+            'devoir' => 'Devoir',
+            'examen' => 'Examen',
+            'interrogation' => 'Interrogation',
+            'projet' => 'Projet',
+        ];
+    }
+
+    /**
+     * Couleurs Tailwind associées à chaque type d'évaluation (pour les badges)
+     */
+    public static function getTypeColors(): array
+    {
+        return [
+            'devoir' => 'from-blue-100 to-blue-200 bg-blue-100 text-blue-800',
+            'examen' => 'from-red-100 to-red-200 bg-red-100 text-red-800',
+            'test' => 'from-green-100 to-green-200 bg-green-100 text-green-800',
+            'interrogation' => 'from-yellow-100 to-yellow-200 bg-yellow-100 text-yellow-800',
+            'projet' => 'from-purple-100 to-purple-200 bg-purple-100 text-purple-800',
+            'autre' => 'from-gray-100 to-gray-200 bg-gray-100 text-gray-800',
+        ];
+    }
+
+    /**
+     * Émojis associés à chaque type d'évaluation (pour l'affichage esthétique)
+     */
+    public static function getTypeEmojis(): array
+    {
+        return [
+            'devoir' => '📝',
+            'examen' => '📋',
+            'test' => '✏️',
+            'interrogation' => '❓',
+            'projet' => '🎯',
+            'autre' => '🔖',
+        ];
+    }
 }

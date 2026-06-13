@@ -259,11 +259,9 @@
                             <select class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
                                     id="type" name="type">
                                 <option value="">Tous les types</option>
-                                <option value="devoir" {{ ($type ?? '') == 'devoir' ? 'selected' : '' }}>Devoir</option>
-                                <option value="examen" {{ ($type ?? '') == 'examen' ? 'selected' : '' }}>Examen</option>
-                                <option value="test" {{ ($type ?? '') == 'test' ? 'selected' : '' }}>Test</option>
-                                <option value="projet" {{ ($type ?? '') == 'projet' ? 'selected' : '' }}>Projet</option>
-                                <option value="autre" {{ ($type ?? '') == 'autre' ? 'selected' : '' }}>Autre</option>
+                                @foreach(App\Models\Evaluation::getTypesForAdmin() as $key => $label)
+                                    <option value="{{ $key }}" {{ ($type ?? '') == $key ? 'selected' : '' }}>{{ $label }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -327,20 +325,13 @@
                                         @if($evaluation->description)
                                             <p class="text-xs text-gray-500 truncate max-w-xs">{{ Str::limit($evaluation->description, 30) }}</p>
                                         @endif
-                                    </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         @php
-                                            $typeColors = [
-                                                'devoir' => 'from-blue-100 to-blue-200 text-blue-800',
-                                                'examen' => 'from-red-100 to-red-200 text-red-800',
-                                                'test' => 'from-green-100 to-green-200 text-green-800',
-                                                'projet' => 'from-purple-100 to-purple-200 text-purple-800',
-                                                'autre' => 'from-gray-100 to-gray-200 text-gray-800',
-                                            ];
-                                            $colorClass = $typeColors[$evaluation->type] ?? 'from-gray-100 to-gray-200 text-gray-800';
+                                            $colorClass = App\Models\Evaluation::getTypeColors()[$evaluation->type] ?? 'from-gray-100 to-gray-200 text-gray-800 bg-gray-100';
+                                            $displayType = App\Models\Evaluation::getTypesForAdmin()[$evaluation->type] ?? App\Models\Evaluation::getTypesForEnseignant()[$evaluation->type] ?? $evaluation->type;
                                         @endphp
                                         <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-gradient-to-r {{ $colorClass }}">
-                                            {{ ucfirst($evaluation->type) }}
+                                            {{ ucfirst($displayType) }}
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-gray-700">{{ $evaluation->classe->nom_complet ?? '-' }}</td>
@@ -489,8 +480,12 @@
                                 <div>
                                     <span class="text-gray-500 text-xs uppercase tracking-wide">Type</span>
                                     <div class="mt-0.5">
+                                        @php
+                                            $colorClass = App\Models\Evaluation::getTypeColors()[$evaluation->type] ?? 'from-gray-100 to-gray-200 text-gray-800 bg-gray-100';
+                                            $displayType = App\Models\Evaluation::getTypesForAdmin()[$evaluation->type] ?? App\Models\Evaluation::getTypesForEnseignant()[$evaluation->type] ?? $evaluation->type;
+                                        @endphp
                                         <span class="px-2 py-0.5 inline-flex text-xs font-semibold rounded-full bg-gradient-to-r {{ $colorClass }}">
-                                            {{ ucfirst($evaluation->type) }}
+                                            {{ ucfirst($displayType) }}
                                         </span>
                                     </div>
                                 </div>
