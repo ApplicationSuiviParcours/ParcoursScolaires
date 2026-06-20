@@ -429,9 +429,9 @@
                                 <svg :class="{'rotate-180': open}" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                             </button>
                             <div x-show="open" x-transition class="pl-12 pr-4 py-2 space-y-1">
-                                <a href="{{ route('admin.eleves.index') }}" class="block py-1.5 text-xs sm:text-sm {{ request()->routeIs('admin.eleves.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Gestion Élèves</a>
-                                <a href="{{ route('admin.enseignants.index') }}" class="block py-1.5 text-xs sm:text-sm {{ request()->routeIs('admin.enseignants.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Gestion Enseignants</a>
-                                <a href="{{ route('admin.parents.index') }}" class="block py-1.5 text-xs sm:text-sm {{ request()->routeIs('admin.parents.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Gestion des Parents</a>
+                                <a href="{{ route('admin.eleves.index') }}" class="block py-1.5 text-xs sm:text-sm {{ request()->routeIs('admin.eleves.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Élèves</a>
+                                <a href="{{ route('admin.enseignants.index') }}" class="block py-1.5 text-xs sm:text-sm {{ request()->routeIs('admin.enseignants.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Enseignants</a>
+                                <a href="{{ route('admin.parents.index') }}" class="block py-1.5 text-xs sm:text-sm {{ request()->routeIs('admin.parents.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Parents</a>
                                 {{-- <a href="{{ route('admin.eleve-parents.index') }}" class="block py-1.5 text-xs sm:text-sm {{ request()->routeIs('admin.eleve-parents.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Liaison Élève-Parents</a> --}}
                             </div>
                         </div>

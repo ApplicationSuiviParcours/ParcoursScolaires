@@ -286,10 +286,10 @@
                     </div>
 
                     <div class="grid grid-cols-2 gap-6 mt-12 reveal sm:grid-cols-4">
-                        <div class="p-4 text-center bg-opacity-50 rounded-xl bg-card hover-scale"><div class="text-3xl font-extrabold gradient-text counter" data-target="500">0</div><div class="text-secondary">Établissements</div></div>
-                        <div class="p-4 text-center bg-opacity-50 rounded-xl bg-card hover-scale"><div class="text-3xl font-extrabold gradient-text counter" data-target="50000">0</div><div class="text-secondary">Élèves</div></div>
-                        <div class="p-4 text-center bg-opacity-50 rounded-xl bg-card hover-scale"><div class="text-3xl font-extrabold gradient-text counter" data-target="5000">0</div><div class="text-secondary">Enseignants</div></div>
-                        <div class="p-4 text-center bg-opacity-50 rounded-xl bg-card hover-scale"><div class="text-3xl font-extrabold gradient-text"><span class="counter" data-target="98">0</span>%</div><div class="text-secondary">Satisfaction</div></div>
+                        <div class="p-4 text-center bg-opacity-50 rounded-xl bg-card hover-scale"><div class="text-3xl font-extrabold gradient-text counter" data-target="{{ \App\Models\ParentEleve::count() }}">0</div><div class="text-secondary">Parents</div></div>
+                        <div class="p-4 text-center bg-opacity-50 rounded-xl bg-card hover-scale"><div class="text-3xl font-extrabold gradient-text counter" data-target="{{ \App\Models\Eleve::count() }}">0</div><div class="text-secondary">Élèves</div></div>
+                        <div class="p-4 text-center bg-opacity-50 rounded-xl bg-card hover-scale"><div class="text-3xl font-extrabold gradient-text counter" data-target="{{ \App\Models\Enseignant::count() }}">0</div><div class="text-secondary">Enseignants</div></div>
+                        <div class="p-4 text-center bg-opacity-50 rounded-xl bg-card hover-scale"><div class="text-3xl font-extrabold gradient-text"><span class="counter" data-target="{{ \App\Models\Note::count() > 0 ? round((\App\Models\Note::where('note', '>=', 10)->count() / \App\Models\Note::count()) * 100) : 98 }}">0</span>%</div><div class="text-secondary">Satisfaction</div></div>
                     </div>
                 </div>
 

@@ -104,12 +104,12 @@ Route::middleware(['auth', 'role:administrateur'])->group(function () {
     Route::get('/admin/matieres', [MatiereController::class, 'index'])->name('admin.matieres.index');
     Route::get('/admin/matieres/create', [MatiereController::class, 'create'])->name('admin.matieres.create');
     Route::post('/admin/matieres', [MatiereController::class, 'store'])->name('admin.matieres.store');
+    Route::get('/admin/matieres/export', [MatiereController::class, 'export'])->name('admin.matieres.export');
     Route::get('/admin/matieres/{matiere}', [MatiereController::class, 'show'])->name('admin.matieres.show');
     Route::get('/admin/matieres/{matiere}/edit', [MatiereController::class, 'edit'])->name('admin.matieres.edit');
     Route::put('/admin/matieres/{matiere}', [MatiereController::class, 'update'])->name('admin.matieres.update');
     Route::delete('/admin/matieres/{matiere}', [MatiereController::class, 'destroy'])->name('admin.matieres.destroy');
     Route::get('/admin/matieres/{matiere}/duplicate', [MatiereController::class, 'duplicate'])->name('admin.matieres.duplicate');
-    Route::get('/admin/matieres/export', [MatiereController::class, 'export'])->name('admin.matieres.export');
 
     // Inscriptions routes
     Route::get('/admin/inscriptions', [InscriptionController::class, 'index'])->name('admin.inscriptions.index');

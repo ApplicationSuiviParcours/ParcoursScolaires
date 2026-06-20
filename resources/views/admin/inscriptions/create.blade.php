@@ -177,22 +177,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="md:col-span-2 mt-4 p-4 bg-blue-50 border border-indigo-200 rounded-xl">
-                                            <div class="flex items-start">
-                                    <div class="bg-blue-100 p-2 rounded-lg mr-3 mt-0.5">
-                                        <svg class="w-5 h-5 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <h5 class="text-sm font-semibold text-indigo-900 mb-1">Compte utilisateur automatique</h5>
-                                        <p class="text-xs text-blue-900 leading-relaxed">
-                                            Un compte utilisateur sera <strong>automatiquement créé</strong> pour ce nouvel élève. 
-                                            Le mot de passe par défaut est : <code class="bg-white px-1.5 py-0.5 rounded border border-indigo-200 font-bold">password</code>.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                                        
                         </div>
                                         <div class="md:col-span-2 space-y-1">
                                             <label for="photo" class="block text-sm font-semibold text-gray-700">Photo de l'élève (Optionnel)</label>

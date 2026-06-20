@@ -335,23 +335,63 @@ class MatiereController extends Controller
     }
 
     /**
-     * Export des matières
+     * Export des matières en format CSV
      */
     public function export(Request $request)
     {
         try {
-            $matieres = Matiere::query()->orderBy('nom')->get();
+            $matieres = Matiere::query()
+                ->withCount(['classeMatieres', 'enseignantMatiereClasses', 'evaluations', 'absences'])
+                ->orderBy('nom')
+                ->get();
 
-            // Logique d'export (CSV, Excel, PDF)
-            // À implémenter selon les besoins
+            $filename = "matieres_export_" . date('Y-m-d_H-i-s') . ".csv";
+            $headers = [
+                "Content-type"        => "text/csv",
+                "Content-Disposition" => "attachment; filename=$filename",
+                "Pragma"              => "no-cache",
+                "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+                "Expires"             => "0"
+            ];
 
-            return redirect()
-                ->route('admin.matieres.index')
-                ->with('success', 'Export en cours de développement.');
+            $columns = [
+                'Code', 
+                'Nom', 
+                'Coefficient', 
+                'Description', 
+                'Nombre de classes', 
+                'Nombre d\'enseignants', 
+                'Nombre d\'évaluations', 
+                'Nombre d\'absences'
+            ];
+
+            $callback = function() use($matieres, $columns) {
+                $file = fopen('php://output', 'w');
+                // BOM UTF-8 pour Excel
+                fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
+                fputcsv($file, $columns, ';');
+
+                foreach ($matieres as $matiere) {
+                    fputcsv($file, [
+                        $matiere->code,
+                        $matiere->nom,
+                        $matiere->coefficient,
+                        $matiere->description,
+                        $matiere->classe_matieres_count,
+                        $matiere->enseignant_matiere_classes_count,
+                        $matiere->evaluations_count,
+                        $matiere->absences_count,
+                    ], ';');
+                }
+
+                fclose($file);
+            };
+
+            return response()->stream($callback, 200, $headers);
 
         } catch (\Exception $e) {
             return back()
-                ->with('error', 'Une erreur est survenue lors de l\'export.');
+                ->with('error', 'Une erreur est survenue lors de l\'export : ' . $e->getMessage());
         }
     }
 }

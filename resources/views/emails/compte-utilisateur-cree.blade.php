@@ -57,6 +57,9 @@
     </style>
 </head>
 <body>
+@php
+    $isPasswordless = in_array($role, ['eleve', 'enseignant', 'parent']);
+@endphp
 <div class="wrapper">
 
     {{-- Header --}}
@@ -64,6 +67,7 @@
         <img src="{{ asset('image_icon/apple-icon.png') }}" alt="Logo" class="logo-img">
         <div class="logo">GEST'<span>PARC</span></div>
         <div class="subtitle">Suivi de parcours scolaire</div>
+        @if(!$isPasswordless)
         <div class="role-badge">
             @if($role === 'eleve') 🎓 Élève
             @elseif($role === 'enseignant') 📚 Enseignant
@@ -71,6 +75,7 @@
             @else {{ ucfirst($role) }}
             @endif
         </div>
+        @endif
     </div>
 
     {{-- Body --}}
@@ -78,32 +83,54 @@
         <div class="greeting">Bonjour, {{ $nomComplet }} !</div>
         <p class="intro">
             Votre compte sur la plateforme <strong>GEST'PARC</strong> vient d'être créé par l'administration.
-            Vous trouverez ci-dessous vos identifiants de connexion. Veuillez les conserver précieusement.
+            @if($isPasswordless)
+                Veuillez trouver ci-dessous votre identifiant de connexion.
+            @else
+                Vous trouverez ci-dessous vos identifiants de connexion. Veuillez les conserver précieusement.
+            @endif
         </p>
 
         {{-- Credentials --}}
-        <div class="credentials-box">
-            <h3>🔐 Vos identifiants de connexion</h3>
-            <div class="cred-item">
-                <span class="cred-label">Matricule</span>
-                <span class="cred-value">{{ $matricule }}</span>
+        @if($isPasswordless)
+            <div class="credentials-box">
+                <h3>🔐 Votre identifiant de connexion</h3>
+                @if($role === 'parent')
+                    <div class="cred-item">
+                        <span class="cred-label">Identifiant</span>
+                        <span class="cred-value">{{ $email }}</span>
+                    </div>
+                @else
+                    <div class="cred-item">
+                        <span class="cred-label">Matricule</span>
+                        <span class="cred-value">{{ $matricule }}</span>
+                    </div>
+                @endif
             </div>
-            <div class="cred-item">
-                <span class="cred-label">Email</span>
-                <span class="cred-value">{{ $email }}</span>
+        @else
+            <div class="credentials-box">
+                <h3>🔐 Vos identifiants de connexion</h3>
+                <div class="cred-item">
+                    <span class="cred-label">Matricule</span>
+                    <span class="cred-value">{{ $matricule }}</span>
+                </div>
+                <div class="cred-item">
+                    <span class="cred-label">Email</span>
+                    <span class="cred-value">{{ $email }}</span>
+                </div>
+                <div class="cred-item">
+                    <span class="cred-label">Mot de passe</span>
+                    <span class="cred-value password">{{ $motDePasse }}</span>
+                </div>
             </div>
-            <div class="cred-item">
-                <span class="cred-label">Mot de passe</span>
-                <span class="cred-value password">{{ $motDePasse }}</span>
-            </div>
-        </div>
+        @endif
 
         {{-- Info grid --}}
-        <div class="info-grid">
+        <div class="info-grid" @if($isPasswordless) style="grid-template-columns: 1fr;" @endif>
             <div class="info-item">
                 <div class="info-item-label">Nom complet</div>
                 <div class="info-item-value">{{ $nomComplet }}</div>
             </div>
+            @if(!$isPasswordless)
             <div class="info-item">
                 <div class="info-item-label">Rôle</div>
                 <div class="info-item-value">
@@ -114,22 +141,37 @@
                     @endif
                 </div>
             </div>
+            @endif
         </div>
 
         {{-- CTA --}}
         <div class="cta-wrapper">
-            <a href="{{ url('/login') }}" class="cta-btn">Se connecter à la plateforme →</a>
+            @if($role === 'administrateur')
+                <a href="{{ url('/admin/login') }}" class="cta-btn">Se connecter à la plateforme →</a>
+            @else
+                <a href="{{ url('/login') }}" class="cta-btn">Se connecter à la plateforme →</a>
+            @endif
         </div>
 
         {{-- Warning --}}
-        <div class="warning-box">
-            <span class="warning-icon">⚠️</span>
-            <div class="warning-text">
-                <strong>Important :</strong> Pour la sécurité de votre compte, nous vous recommandons vivement de
-                <strong>changer votre mot de passe</strong> dès votre première connexion depuis les paramètres de votre profil.
-                Ne partagez jamais ce mot de passe avec qui que ce soit.
+        @if(!$isPasswordless)
+            <div class="warning-box">
+                <span class="warning-icon">⚠️</span>
+                <div class="warning-text">
+                    <strong>Important :</strong> Pour la sécurité de votre compte, nous vous recommandons vivement de
+                    <strong>changer votre mot de passe</strong> dès votre première connexion depuis les paramètres de votre profil.
+                    Ne partagez jamais ce mot de passe avec qui que ce soit.
+                </div>
             </div>
-        </div>
+        @else
+            <div class="warning-box" style="background: #f0fdf4; border: 1px solid #bbf7d0;">
+                <span class="warning-icon">💡</span>
+                <div class="warning-text" style="color: #166534;">
+                    <strong>Note :</strong> Aucun mot de passe n'est requis pour vous connecter. Il vous suffit de renseigner votre
+                    <strong>{{ $role === 'parent' ? 'adresse email' : 'numéro matricule' }}</strong> sur la page de connexion.
+                </div>
+            </div>
+        @endif
 
         <div class="divider"></div>
         <p style="font-size:13px; color:#64748b; line-height:1.7;">
