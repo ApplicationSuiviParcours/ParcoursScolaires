@@ -124,10 +124,10 @@ class ClasseController extends Controller
             'places_disponibles' => $placesDisponibles,
             'taux_occupation' => $tauxOccupation,
             'garcons' => $inscriptions->filter(function($inscription) {
-                return $inscription->eleve && $inscription->eleve->genre === 'M';
+                return $inscription->eleve && strtolower($inscription->eleve->genre) === 'm';
             })->count(),
             'filles' => $inscriptions->filter(function($inscription) {
-                return $inscription->eleve && $inscription->eleve->genre === 'F';
+                return $inscription->eleve && strtolower($inscription->eleve->genre) === 'f';
             })->count(),
         ];
         
@@ -385,8 +385,8 @@ class ClasseController extends Controller
         $tauxOccupation = $classe->capacite > 0 ? round(($totalEleves / $classe->capacite) * 100) : 0;
         
         // Compter par genre
-        $garcons = $eleves->where('genre', 'M')->count();
-        $filles = $eleves->where('genre', 'F')->count();
+        $garcons = $eleves->filter(fn($e) => strtolower($e->genre) === 'm')->count();
+        $filles = $eleves->filter(fn($e) => strtolower($e->genre) === 'f')->count();
         
         $stats = [
             'total_eleves' => $totalEleves,
@@ -425,8 +425,8 @@ class ClasseController extends Controller
 
         $stats = [
             'total' => $eleves->count(),
-            'garcons' => $eleves->where('genre', 'M')->count(),
-            'filles' => $eleves->where('genre', 'F')->count(),
+            'garcons' => $eleves->filter(fn($e) => strtolower($e->genre) === 'm')->count(),
+            'filles' => $eleves->filter(fn($e) => strtolower($e->genre) === 'f')->count(),
         ];
         
         $pdf = Pdf::loadView('admin.classes.exports.eleves-pdf', compact('classe', 'stats', 'eleves'));

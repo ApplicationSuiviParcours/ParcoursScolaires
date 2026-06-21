@@ -261,8 +261,8 @@
                                 </div>
                                 <select name="genre" id="genre" required
                                         class="block w-full pl-10 pr-10 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition-all duration-200 appearance-none bg-white @error('genre') border-red-400 @enderror">
-                                    <option value="m" {{ old('genre', $enseignant->genre) == 'm' ? 'selected' : '' }}>Masculin</option>
-                                    <option value="f" {{ old('genre', $enseignant->genre) == 'f' ? 'selected' : '' }}>Féminin</option>
+                                    <option value="m" {{ strtolower(old('genre', $enseignant->genre)) == 'm' ? 'selected' : '' }}>Masculin</option>
+                                    <option value="f" {{ strtolower(old('genre', $enseignant->genre)) == 'f' ? 'selected' : '' }}>Féminin</option>
                                 </select>
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                                     <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -329,6 +329,7 @@
                                 </div>
                                 <input type="tel" name="telephone" id="telephone" 
                                        value="{{ old('telephone', $enseignant->telephone) }}"
+                                       inputmode="numeric" pattern="[0-9\s\+\-]{6,20}"
                                        class="block w-full pl-10 pr-3 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition-all duration-200 @error('telephone') border-red-400 @enderror">
                             </div>
                             @error('telephone')

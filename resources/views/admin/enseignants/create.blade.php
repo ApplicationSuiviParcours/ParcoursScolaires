@@ -294,6 +294,7 @@
                                     </div>
                                     <input type="tel" name="telephone" id="telephone" value="{{ old('telephone') }}"
                                            placeholder="+221 77 123 45 67"
+                                           inputmode="numeric" pattern="[0-9\s\+\-]{6,20}"
                                            class="block w-full pl-10 pr-3 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition-all duration-200 @error('telephone') border-red-400 @enderror">
                                 </div>
                                 @error('telephone')

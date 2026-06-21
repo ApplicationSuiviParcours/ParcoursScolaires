@@ -145,7 +145,7 @@ class EleveAdminController extends Controller
             'lieu_naissance' => 'required|string|max:255',
             'genre' => 'required|in:m,f',
             'adresse' => 'required|string',
-            'telephone' => 'nullable|string|max:20',
+            'telephone' => ['nullable', 'regex:/^[0-9\s\+\-]{6,20}$/'],
             'email' => 'nullable|email|max:255|unique:eleves,email',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'classe_inscription_id' => 'nullable|exists:classes,id', // ✅ AJOUTÉ
@@ -260,23 +260,35 @@ class EleveAdminController extends Controller
             $eleve->save();
 
             // Envoi de l'email avec les identifiants
-            try {
-                Mail::to($email)->send(new CompteUtilisateurCree(
-                    $eleve->prenom . ' ' . $eleve->nom,
-                    $email,
-                    $motDePasse,
-                    'eleve',
-                    $eleve->matricule
-                ));
-            } catch (\Exception $mailException) {
-                // L'email n'est pas critique, on continue même en cas d'erreur
-                \Log::warning('Email non envoyé pour ' . $email . ' : ' . $mailException->getMessage());
+            // On n'envoie que si l'utilisateur a une vraie adresse email (pas une adresse fictive générée)
+            $aVraiEmail = $eleve->email
+                && !str_ends_with($email, '@scolaireparcours.com')
+                && !str_ends_with($email, '@eleve.local');
+
+            $messageEmail = '';
+            if ($aVraiEmail) {
+                try {
+                    Mail::to($email)->send(new CompteUtilisateurCree(
+                        $eleve->prenom . ' ' . $eleve->nom,
+                        $email,
+                        $motDePasse,
+                        'eleve',
+                        $eleve->matricule
+                    ));
+                    $messageEmail = ' Un email avec les identifiants a été envoyé à ' . $email . '.';
+                } catch (\Exception $mailException) {
+                    \Log::warning('Email non envoyé pour ' . $email . ' : ' . $mailException->getMessage());
+                    session()->flash('warning', '⚠️ Le compte a été créé mais l\'email n\'a pas pu être envoyé à ' . $email . '. Vérifiez la configuration SMTP ou l\'adresse email de l\'élève.');
+                }
+            } else {
+                \Log::info('Pas d\'email envoyé pour ' . $email . ' : adresse non renseignée ou fictive.');
+                session()->flash('warning', '⚠️ Aucun email n\'a été envoyé car cet élève n\'a pas d\'adresse email réelle. Pensez à renseigner son email dans son profil pour lui envoyer ses identifiants.');
             }
 
             DB::commit();
 
             return redirect()->route('admin.eleves.show', $eleve)
-                ->with('success', 'Élève créé avec succès. Matricule : ' . $eleve->matricule);
+                ->with('success', 'Élève créé avec succès. Matricule : ' . $eleve->matricule . $messageEmail);
 
         } catch (\Exception $e) {
             DB::rollBack();
@@ -359,7 +371,7 @@ class EleveAdminController extends Controller
             'lieu_naissance' => 'required|string|max:255',
             'genre' => 'required|in:m,f',
             'adresse' => 'required|string',
-            'telephone' => 'nullable|string|max:20',
+            'telephone' => ['nullable', 'regex:/^[0-9\s\+\-]{6,20}$/'],
             'email' => 'nullable|email|max:255|unique:eleves,email,' . $eleve->id,
             'statut' => 'nullable|boolean',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',

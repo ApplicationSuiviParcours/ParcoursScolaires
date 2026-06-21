@@ -224,8 +224,8 @@
                                                    transition-all duration-300 @error('genre') border-red-500 @enderror
                                                    appearance-none bg-white text-sm">
                                         <option value="">Sélectionnez le genre</option>
-                                        <option value="m" {{ old('genre', $parent->genre) == 'm' ? 'selected' : '' }}>Masculin</option>
-                                        <option value="f" {{ old('genre', $parent->genre) == 'f' ? 'selected' : '' }}>Féminin</option>
+                                        <option value="m" {{ strtolower(old('genre', $parent->genre)) == 'm' ? 'selected' : '' }}>Masculin</option>
+                                        <option value="f" {{ strtolower(old('genre', $parent->genre)) == 'f' ? 'selected' : '' }}>Féminin</option>
                                     </select>
                                     <div class="absolute inset-y-0 right-0 pr-3 sm:pr-4 flex items-center pointer-events-none">
                                         <svg class="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -431,6 +431,7 @@
                                     <input type="tel" name="telephone" id="telephone"
                                            value="{{ old('telephone', $parent->telephone) }}"
                                            placeholder="Numéro de téléphone" required
+                                           inputmode="numeric" pattern="[0-9\s\+\-]{6,20}"
                                            class="w-full pl-10 sm:pl-12 pr-4 py-2.5 sm:py-3 rounded-xl border-2 border-gray-200
                                                   focus:border-amber-500 focus:ring-2 focus:ring-amber-200
                                                   transition-all duration-300 @error('telephone') border-red-500 @enderror text-sm">

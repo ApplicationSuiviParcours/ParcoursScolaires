@@ -83,7 +83,7 @@ class ParentAdminController extends Controller
             'prenom' => 'required|string|max:255',
             'genre' => 'required|in:m,f',
             'profession' => 'nullable|string|max:255',
-            'telephone' => 'required|string|max:20',
+            'telephone' => ['required', 'regex:/^[0-9\s\+\-]{6,20}$/'],
             'email' => 'nullable|email|max:255|unique:parent_eleves,email',
             'adresse' => 'required|string|max:500',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -132,16 +132,27 @@ class ParentAdminController extends Controller
         $parent->save();
 
         // Envoi de l'email avec les identifiants
-        try {
-            Mail::to($email)->send(new CompteUtilisateurCree(
-                $request->prenom . ' ' . $request->nom,
-                $email,
-                $motDePasse,
-                'parent',
-                $parent->matricule ?? 'N/A'
-            ));
-        } catch (\Exception $mailException) {
-            \Log::warning('Email non envoyé pour ' . $email . ' : ' . $mailException->getMessage());
+        // On n'envoie que si le parent a une vraie adresse email (pas une adresse fictive générée)
+        $aVraiEmail = $request->email
+            && !str_ends_with($email, '@parent.scolaireparcours.com');
+
+        if ($aVraiEmail) {
+            try {
+                Mail::to($email)->send(new CompteUtilisateurCree(
+                    $request->prenom . ' ' . $request->nom,
+                    $email,
+                    $motDePasse,
+                    'parent',
+                    $parent->matricule ?? 'N/A'
+                ));
+                session()->flash('email_success', $email);
+            } catch (\Exception $mailException) {
+                \Log::warning('Email non envoyé pour ' . $email . ' : ' . $mailException->getMessage());
+                session()->flash('warning', '⚠️ Le compte a été créé mais l\'email n\'a pas pu être envoyé à ' . $email . '. Vérifiez la configuration SMTP ou l\'adresse email du parent.');
+            }
+        } else {
+            \Log::info('Pas d\'email envoyé pour ' . $email . ' : adresse non renseignée ou fictive.');
+            session()->flash('warning', '⚠️ Aucun email n\'a été envoyé car ce parent n\'a pas d\'adresse email réelle. Pensez à renseigner son email dans son profil pour lui envoyer ses identifiants.');
         }
 
         // Création des relations avec les élèves
@@ -217,7 +228,7 @@ class ParentAdminController extends Controller
             'prenom' => 'required|string|max:255',
             'genre' => 'required|in:m,f',
             'profession' => 'nullable|string|max:255',
-            'telephone' => 'required|string|max:20',
+            'telephone' => ['required', 'regex:/^[0-9\s\+\-]{6,20}$/'],
             'email' => 'nullable|email|max:255|unique:parent_eleves,email,' . $parent->id,
             'adresse' => 'required|string|max:500',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',

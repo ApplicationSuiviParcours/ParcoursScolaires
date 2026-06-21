@@ -63,7 +63,7 @@
                                 </div>
                                 <div class="flex flex-col sm:flex-row sm:justify-between">
                                     <span class="font-medium text-gray-600">Genre:</span>
-                                    <span class="text-gray-900 mt-0.5 sm:mt-0">{{ $inscription->eleve->genre == 'M' ? 'Masculin' : ($inscription->eleve->genre == 'F' ? 'Féminin' : 'N/A') }}</span>
+                                    <span class="text-gray-900 mt-0.5 sm:mt-0">{{ strtolower($inscription->eleve->genre) == 'm' ? 'Masculin' : (strtolower($inscription->eleve->genre) == 'f' ? 'Féminin' : 'N/A') }}</span>
                                 </div>
                                 <div class="flex flex-col sm:flex-row sm:justify-between">
                                     <span class="font-medium text-gray-600">Téléphone:</span>

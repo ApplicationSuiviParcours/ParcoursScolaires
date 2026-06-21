@@ -95,7 +95,7 @@ class InscriptionController extends Controller
                 'prenom' => 'required|string|max:255',
                 'date_naissance' => 'required|date',
                 'lieu_naissance' => 'required|string|max:255',
-                'genre' => 'required|in:M,F,Masculin,Féminin',
+                'genre' => 'required|in:m,f,M,F,Masculin,Féminin',
                 'adresse' => 'required|string|max:255',
                 'email' => 'nullable|email|unique:users,email|unique:eleves,email',
                 'parent_id' => 'nullable|exists:parent_eleves,id',
@@ -132,16 +132,26 @@ class InscriptionController extends Controller
                     $user->assignRole('eleve');
 
                     // Envoi de l'email avec les identifiants
-                    try {
-                        Mail::to($email)->send(new CompteUtilisateurCree(
-                            $validated['prenom'] . ' ' . $validated['nom'],
-                            $email,
-                            $motDePasse,
-                            'eleve',
-                            $matricule
-                        ));
-                    } catch (\Exception $mailException) {
-                        \Log::warning('Email non envoyé pour ' . $email . ' : ' . $mailException->getMessage());
+                    // On n'envoie que si l'élève a une vraie adresse email (pas une adresse fictive générée)
+                    $aVraiEmail = !empty($validated['email'])
+                        && !str_ends_with($email, '@scolaireparcours.com');
+
+                    if ($aVraiEmail) {
+                        try {
+                            Mail::to($email)->send(new CompteUtilisateurCree(
+                                $validated['prenom'] . ' ' . $validated['nom'],
+                                $email,
+                                $motDePasse,
+                                'eleve',
+                                $matricule
+                            ));
+                        } catch (\Exception $mailException) {
+                            \Log::warning('Email non envoyé pour ' . $email . ' : ' . $mailException->getMessage());
+                            session()->flash('warning', '⚠️ Le compte a été créé mais l\'email n\'a pas pu être envoyé à ' . $email . '. Vérifiez la configuration SMTP.');
+                        }
+                    } else {
+                        \Log::info('Pas d\'email envoyé pour ' . $email . ' : adresse non renseignée ou fictive.');
+                        session()->flash('warning', '⚠️ Aucun email n\'a été envoyé car cet élève n\'a pas d\'adresse email réelle. Pensez à la renseigner dans son profil.');
                     }
 
                     // Création de l'élève
@@ -152,7 +162,7 @@ class InscriptionController extends Controller
                         'matricule' => $matricule,
                         'date_naissance' => $validated['date_naissance'],
                         'lieu_naissance' => $validated['lieu_naissance'],
-                        'genre' => in_array($validated['genre'], ['M', 'Masculin']) ? 'M' : 'F',
+                        'genre' => in_array(strtolower($validated['genre']), ['m', 'masculin']) ? 'm' : 'f',
                         'adresse' => $validated['adresse'],
                         'email' => $email,
                         'date_inscription' => $validated['date_inscription'],

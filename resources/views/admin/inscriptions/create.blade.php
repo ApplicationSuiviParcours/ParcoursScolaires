@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('header')
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -153,8 +153,8 @@
                                         <div class="space-y-1">
                                             <label for="genre" class="block text-sm font-semibold text-gray-700">Genre <span class="text-red-500">*</span></label>
                                             <select name="genre" id="genre" class="new-student-required block w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" {{ old('is_new_eleve', request('is_new_eleve', '0')) == '1' ? 'required' : '' }}>
-                                                <option value="M" {{ old('genre') == 'M' ? 'selected' : '' }}>Masculin</option>
-                                                <option value="F" {{ old('genre') == 'F' ? 'selected' : '' }}>Féminin</option>
+                                                <option value="m" {{ strtolower(old('genre')) == 'm' ? 'selected' : '' }}>Masculin</option>
+                                                <option value="f" {{ strtolower(old('genre')) == 'f' ? 'selected' : '' }}>Féminin</option>
                                             </select>
                                         </div>
                                         <div class="space-y-1">

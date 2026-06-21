@@ -115,7 +115,7 @@ class UserController extends Controller
                 'date_naissance' => ['nullable', 'date'],
                 'lieu_naissance' => ['nullable', 'string', 'max:255'],
                 'genre' => ['nullable', 'in:m,f'],
-                'telephone' => ['nullable', 'string', 'max:20'],
+                'telephone' => ['nullable', 'regex:/^[0-9\s\+\-]{6,20}$/'],
                 'adresse' => ['nullable', 'string', 'max:500'],
                 'specialite' => ['nullable', 'string', 'max:255'],
                 'profession' => ['nullable', 'string', 'max:255'],

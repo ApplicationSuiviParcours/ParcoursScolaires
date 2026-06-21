@@ -93,7 +93,7 @@ class InscriptionController extends Controller
             'prenom' => 'required_if:is_new_eleve,1|nullable|string|max:255',
             'date_naissance' => 'required_if:is_new_eleve,1|nullable|date',
             'lieu_naissance' => 'required_if:is_new_eleve,1|nullable|string|max:255',
-            'genre' => 'required_if:is_new_eleve,1|nullable|in:M,F',
+            'genre' => 'required_if:is_new_eleve,1|nullable|in:m,f,M,F',
             'adresse' => 'required_if:is_new_eleve,1|nullable|string|max:255',
             'email' => 'nullable|email|max:255',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
@@ -155,16 +155,26 @@ class InscriptionController extends Controller
                         $eleve->update(['user_id' => $user->id]);
 
                         // Envoi de l'email avec les identifiants
-                        try {
-                            Mail::to($email)->send(new CompteUtilisateurCree(
-                                $eleve->prenom . ' ' . $eleve->nom,
-                                $email,
-                                $motDePasse,
-                                'eleve',
-                                $eleve->matricule
-                            ));
-                        } catch (\Exception $mailException) {
-                            \Log::warning('Email non envoyé pour ' . $email . ' : ' . $mailException->getMessage());
+                        // On n'envoie que si l'élève a une vraie adresse email (pas une adresse fictive générée)
+                        $aVraiEmail = $eleve->email
+                            && !str_ends_with($email, '@scolaireparcours.com');
+
+                        if ($aVraiEmail) {
+                            try {
+                                Mail::to($email)->send(new CompteUtilisateurCree(
+                                    $eleve->prenom . ' ' . $eleve->nom,
+                                    $email,
+                                    $motDePasse,
+                                    'eleve',
+                                    $eleve->matricule
+                                ));
+                            } catch (\Exception $mailException) {
+                                \Log::warning('Email non envoyé pour ' . $email . ' : ' . $mailException->getMessage());
+                                session()->flash('warning', '⚠️ Le compte a été créé mais l\'email n\'a pas pu être envoyé à ' . $email . '. Vérifiez la configuration SMTP.');
+                            }
+                        } else {
+                            \Log::info('Pas d\'email envoyé pour ' . $email . ' : adresse non renseignée ou fictive.');
+                            session()->flash('warning', '⚠️ Aucun email n\'a été envoyé car cet élève n\'a pas d\'adresse email réelle. Pensez à la renseigner dans son profil.');
                         }
                     }
 

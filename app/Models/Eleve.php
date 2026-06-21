@@ -495,4 +495,20 @@ class Eleve extends Model
         return 'https://ui-avatars.com/api/?name=' . urlencode($this->nom_complet) .
                '&color=7F9CF5&background=EBF4FF&bold=true&size=128&length=2';
     }
+
+    /**
+     * ✅ NOUVEAU: Accesseur pour le genre (toujours renvoyer en minuscule 'm' ou 'f')
+     */
+    public function getGenreAttribute($value): string
+    {
+        return strtolower($value ?? 'm');
+    }
+
+    /**
+     * ✅ NOUVEAU: Mutateur pour le genre (toujours sauvegarder en minuscule 'm' ou 'f')
+     */
+    public function setGenreAttribute($value)
+    {
+        $this->attributes['genre'] = strtolower(substr(trim($value), 0, 1));
+    }
 }

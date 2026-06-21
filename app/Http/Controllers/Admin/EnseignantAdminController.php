@@ -76,7 +76,7 @@ class EnseignantAdminController extends Controller
             'genre' => 'required|in:m,f',
             'date_naissance' => 'required|date',
             'lieu_naissance' => 'required|string|max:255',
-            'telephone' => 'nullable|string|max:20',
+            'telephone' => ['nullable', 'regex:/^[0-9\s\+\-]{6,20}$/'],
             'email' => 'nullable|email|max:255|unique:enseignants,email',
             'adresse' => 'required|string',
             'specialite' => 'nullable|string|max:255',
@@ -116,16 +116,28 @@ class EnseignantAdminController extends Controller
                 $validated['user_id'] = $user->id;
 
                 // Envoi de l'email avec les identifiants
-                try {
-                    Mail::to($email)->send(new CompteUtilisateurCree(
-                        $request->prenom . ' ' . $request->nom,
-                        $email,
-                        $motDePasse,
-                        'enseignant',
-                        $validated['matricule']
-                    ));
-                } catch (\Exception $mailException) {
-                    \Log::warning('Email non envoyé pour ' . $email . ' : ' . $mailException->getMessage());
+                // On n'envoie que si l'enseignant a une vraie adresse email (pas une adresse fictive générée)
+                $aVraiEmail = $request->email
+                    && !str_ends_with($email, '@enseignant.scolaireparcours.com');
+
+                $messageEmail = '';
+                if ($aVraiEmail) {
+                    try {
+                        Mail::to($email)->send(new CompteUtilisateurCree(
+                            $request->prenom . ' ' . $request->nom,
+                            $email,
+                            $motDePasse,
+                            'enseignant',
+                            $validated['matricule']
+                        ));
+                        $messageEmail = ' Un email avec les identifiants a été envoyé à ' . $email . '.';
+                    } catch (\Exception $mailException) {
+                        \Log::warning('Email non envoyé pour ' . $email . ' : ' . $mailException->getMessage());
+                        session()->flash('warning', '⚠️ Le compte a été créé mais l\'email n\'a pas pu être envoyé à ' . $email . '. Vérifiez la configuration SMTP ou l\'adresse email de l\'enseignant.');
+                    }
+                } else {
+                    \Log::info('Pas d\'email envoyé pour ' . $email . ' : adresse non renseignée ou fictive.');
+                    session()->flash('warning', '⚠️ Aucun email n\'a été envoyé car cet enseignant n\'a pas d\'adresse email réelle. Pensez à renseigner son email dans son profil pour lui envoyer ses identifiants.');
                 }
             }
 
@@ -173,7 +185,7 @@ class EnseignantAdminController extends Controller
             'genre' => 'required|in:m,f',
             'date_naissance' => 'required|date',
             'lieu_naissance' => 'required|string|max:255',
-            'telephone' => 'nullable|string|max:20',
+            'telephone' => ['nullable', 'regex:/^[0-9\s\+\-]{6,20}$/'],
             'email' => 'nullable|email|max:255|unique:enseignants,email,' . $enseignant->id,
             'adresse' => 'required|string',
             'specialite' => 'nullable|string|max:255',

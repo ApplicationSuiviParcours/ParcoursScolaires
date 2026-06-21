@@ -359,6 +359,7 @@
                                     </div>
                                     <input type="tel" name="telephone" id="telephone" value="{{ old('telephone') }}"
                                            placeholder="Numéro de téléphone" required
+                                           inputmode="numeric" pattern="[0-9\s\+\-]{6,20}"
                                            class="w-full pl-10 sm:pl-12 pr-4 py-2.5 sm:py-3 rounded-xl border-2 border-gray-200
                                                   focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200
                                                   transition-all duration-300 @error('telephone') border-red-500 @enderror text-sm">

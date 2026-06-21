@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('header')
     <h2 class="font-semibold text-base md:text-xl text-gray-800 leading-tight">
@@ -138,8 +138,9 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                             <div>
                                 <label for="telephone" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Téléphone</label>
-                                <input type="tel" name="telephone" id="telephone" placeholder="77 123 45 67"
-                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1" value="{{ old('telephone') }}">
+                                 <input type="tel" name="telephone" id="telephone" placeholder="77 123 45 67"
+                                        inputmode="numeric" pattern="[0-9\s\+\-]{6,20}"
+                                        class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1" value="{{ old('telephone') }}">
                             </div>
                             <div>
                                 <label for="email" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Email</label>
@@ -247,6 +248,14 @@
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Filtrage téléphone : chiffres, +, espaces, tirets uniquement
+    const telephoneInput = document.getElementById('telephone');
+    if (telephoneInput) {
+        telephoneInput.addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9+\s\-]/g, '');
+        });
+    }
+
     const photoInput = document.getElementById('photo');
     const photoPreview = document.getElementById('photo-preview');
 
