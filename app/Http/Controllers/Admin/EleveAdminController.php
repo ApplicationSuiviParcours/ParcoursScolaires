@@ -22,6 +22,7 @@ use App\Mail\CompteUtilisateurCree;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ElevesExport;
+use Illuminate\Support\Facades\Log;
 
 class EleveAdminController extends Controller
 {
@@ -137,7 +138,7 @@ class EleveAdminController extends Controller
      */
     public function store(Request $request)
     {
-        // ✅ CORRECTION: Ajout de 'classe_inscription_id' dans la validation
+        // ✅ EMAIL OBLIGATOIRE et UNIQUE dans eleves et users
         $request->validate([
             'nom' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
@@ -146,9 +147,9 @@ class EleveAdminController extends Controller
             'genre' => 'required|in:m,f',
             'adresse' => 'required|string',
             'telephone' => ['nullable', 'regex:/^[0-9\s\+\-]{6,20}$/'],
-            'email' => 'nullable|email|max:255|unique:eleves,email',
+            'email' => 'required|email|max:255|unique:eleves,email|unique:users,email',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'classe_inscription_id' => 'nullable|exists:classes,id', // ✅ AJOUTÉ
+            'classe_inscription_id' => 'nullable|exists:classes,id',
             'create_user' => 'nullable|boolean',
             'password' => 'nullable|required_if:create_user,1|string|min:6|confirmed',
         ], [
@@ -158,8 +159,9 @@ class EleveAdminController extends Controller
             'lieu_naissance.required' => 'Le lieu de naissance est obligatoire',
             'genre.required' => 'Le genre est obligatoire',
             'adresse.required' => 'L\'adresse est obligatoire',
+            'email.required' => 'L\'email est obligatoire pour la connexion',
             'email.email' => 'L\'email doit être une adresse valide',
-            'email.unique' => 'Cet email est déjà utilisé',
+            'email.unique' => 'Cet email est déjà utilisé par un autre élève ou utilisateur',
             'photo.image' => 'Le fichier doit être une image',
             'photo.mimes' => 'L\'image doit être au format jpeg, png, jpg ou gif',
             'photo.max' => 'L\'image ne doit pas dépasser 2 Mo',
@@ -176,7 +178,7 @@ class EleveAdminController extends Controller
             $data['date_inscription'] = now();
             $data['statut'] = true;
 
-            // ✅ CORRECTION: Génération correcte du matricule
+            // ✅ Génération correcte du matricule
             $anneeActuelle = date('Y');
             $premiereLettreNom = strtoupper(substr(trim($request->nom), 0, 1));
 
@@ -218,7 +220,7 @@ class EleveAdminController extends Controller
             // Création de l'élève
             $eleve = Eleve::create($data);
 
-            // ✅ AJOUT: Création d'une inscription si une classe est sélectionnée
+            // ✅ Création d'une inscription si une classe est sélectionnée
             if ($request->filled('classe_inscription_id')) {
                 $anneeScolaire = AnneeScolaire::where('active', true)->first();
                 if (!$anneeScolaire) {
@@ -237,19 +239,26 @@ class EleveAdminController extends Controller
                 }
             }
 
-            // ✅ AUTOMATIQUE: Création d'un compte utilisateur pour l'élève
-            $email = $eleve->email ?? $eleve->matricule . '@scolaireparcours.com';
+            // ✅ UTILISER L'EMAIL RÉEL SAISI PAR L'UTILISATEUR
+            $emailReel = $eleve->email; // Email saisi dans le formulaire
 
             // Vérifier si l'email existe déjà dans la table users
-            if (User::where('email', $email)->exists()) {
-                $email = $eleve->matricule . '_' . rand(100, 999) . '@scolaireparcours.com';
+            $emailFinal = $emailReel;
+            $counter = 1;
+            while (User::where('email', $emailFinal)->exists()) {
+                // Si l'email existe déjà, ajouter un suffixe
+                $parts = explode('@', $emailReel);
+                $emailFinal = $parts[0] . $counter . '@' . $parts[1];
+                $counter++;
             }
 
+            // Générer un mot de passe aléatoire
             $motDePasse = Str::random(10);
 
+            // Créer le compte utilisateur AVEC L'EMAIL RÉEL
             $user = User::create([
                 'name'      => $eleve->prenom . ' ' . $eleve->nom,
-                'email'     => $email,
+                'email'     => $emailFinal, // Email réel ou légèrement modifié si conflit
                 'password'  => Hash::make($motDePasse),
                 'role'      => 'eleve',
                 'is_active' => true,
@@ -259,30 +268,27 @@ class EleveAdminController extends Controller
             $eleve->user_id = $user->id;
             $eleve->save();
 
-            // Envoi de l'email avec les identifiants
-            // On n'envoie que si l'utilisateur a une vraie adresse email (pas une adresse fictive générée)
-            $aVraiEmail = $eleve->email
-                && !str_ends_with($email, '@scolaireparcours.com')
-                && !str_ends_with($email, '@eleve.local');
-
+            // ✅ ENVOI DE L'EMAIL À L'ADRESSE RÉELLE DE L'ÉLÈVE
             $messageEmail = '';
-            if ($aVraiEmail) {
-                try {
-                    Mail::to($email)->send(new CompteUtilisateurCree(
-                        $eleve->prenom . ' ' . $eleve->nom,
-                        $email,
-                        $motDePasse,
-                        'eleve',
-                        $eleve->matricule
-                    ));
-                    $messageEmail = ' Un email avec les identifiants a été envoyé à ' . $email . '.';
-                } catch (\Exception $mailException) {
-                    \Log::warning('Email non envoyé pour ' . $email . ' : ' . $mailException->getMessage());
-                    session()->flash('warning', '⚠️ Le compte a été créé mais l\'email n\'a pas pu être envoyé à ' . $email . '. Vérifiez la configuration SMTP ou l\'adresse email de l\'élève.');
-                }
-            } else {
-                \Log::info('Pas d\'email envoyé pour ' . $email . ' : adresse non renseignée ou fictive.');
-                session()->flash('warning', '⚠️ Aucun email n\'a été envoyé car cet élève n\'a pas d\'adresse email réelle. Pensez à renseigner son email dans son profil pour lui envoyer ses identifiants.');
+            try {
+                // Envoyer l'email à l'adresse réelle de l'élève
+                Mail::to($emailReel)->send(new CompteUtilisateurCree(
+                    $eleve->prenom . ' ' . $eleve->nom,
+                    $emailReel, // Email réel de l'élève
+                    $motDePasse,
+                    'eleve',
+                    $eleve->matricule
+                ));
+                
+                $messageEmail = ' ✅ Un email avec les identifiants a été envoyé à ' . $emailReel;
+                Log::info('Email envoyé avec succès à : ' . $emailReel);
+                
+            } catch (\Exception $mailException) {
+                // En cas d'erreur, on log mais on continue
+                Log::error('ERREUR ENVOI EMAIL : ' . $mailException->getMessage());
+                Log::error('Trace : ' . $mailException->getTraceAsString());
+                $messageEmail = ' ⚠️ Le compte a été créé mais l\'email n\'a pas pu être envoyé. Veuillez vérifier la configuration SMTP.';
+                session()->flash('warning', '⚠️ L\'email n\'a pas pu être envoyé à ' . $emailReel . '. Vérifiez la configuration SMTP.');
             }
 
             DB::commit();
@@ -292,6 +298,8 @@ class EleveAdminController extends Controller
 
         } catch (\Exception $e) {
             DB::rollBack();
+            Log::error('Erreur création élève : ' . $e->getMessage());
+            Log::error('Trace : ' . $e->getTraceAsString());
             return back()->withInput()
                 ->with('error', 'Une erreur est survenue lors de la création : ' . $e->getMessage());
         }
@@ -362,7 +370,7 @@ class EleveAdminController extends Controller
      */
     public function update(Request $request, Eleve $eleve)
     {
-        // ✅ CORRECTION: Ajout de 'nouvelle_classe_id' dans la validation
+        // ✅ EMAIL OBLIGATOIRE dans l'édition aussi
         $request->validate([
             'matricule' => 'required|string|unique:eleves,matricule,' . $eleve->id,
             'nom' => 'required|string|max:255',
@@ -372,12 +380,16 @@ class EleveAdminController extends Controller
             'genre' => 'required|in:m,f',
             'adresse' => 'required|string',
             'telephone' => ['nullable', 'regex:/^[0-9\s\+\-]{6,20}$/'],
-            'email' => 'nullable|email|max:255|unique:eleves,email,' . $eleve->id,
+            'email' => 'required|email|max:255|unique:eleves,email,' . $eleve->id . '|unique:users,email,' . ($eleve->user_id ?? 'NULL'),
             'statut' => 'nullable|boolean',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'nouvelle_classe_id' => 'nullable|exists:classes,id', // ✅ AJOUTÉ
+            'nouvelle_classe_id' => 'nullable|exists:classes,id',
             'update_user' => 'nullable|boolean',
             'password' => 'nullable|required_if:update_user,1|string|min:6|confirmed',
+        ], [
+            'email.required' => 'L\'email est obligatoire',
+            'email.email' => 'L\'email doit être une adresse valide',
+            'email.unique' => 'Cet email est déjà utilisé par un autre élève ou utilisateur',
         ]);
 
         DB::beginTransaction();
@@ -397,7 +409,7 @@ class EleveAdminController extends Controller
             // Mise à jour de l'élève
             $eleve->update($data);
 
-            // ✅ AJOUT: Création d'une nouvelle inscription si demandé
+            // ✅ Création d'une nouvelle inscription si demandé
             if ($request->filled('nouvelle_classe_id')) {
                 // Désactiver l'ancienne inscription active
                 Inscription::where('eleve_id', $eleve->id)
@@ -440,12 +452,10 @@ class EleveAdminController extends Controller
                 }
                 $eleve->user->name = $eleve->prenom . ' ' . $eleve->nom;
                 
-                // FIX: Utiliser save() avec vérification d'erreur pour éviter le duplicate
                 try {
                     $eleve->user->save();
                 } catch (\Illuminate\Database\QueryException $e) {
-                    // Si erreur de duplicate email, restaurer l'ancien email
-                    if ($e->errorInfo[1] == 1062) { // Code erreur MySQL pour duplicate entry
+                    if ($e->errorInfo[1] == 1062) {
                         session()->flash('warning', 'L\'email n\'a pas été modifié car il est déjà utilisé par un autre utilisateur.');
                     } else {
                         throw $e;
@@ -460,6 +470,7 @@ class EleveAdminController extends Controller
 
         } catch (\Exception $e) {
             DB::rollBack();
+            Log::error('Erreur mise à jour élève : ' . $e->getMessage());
             return back()->withInput()
                 ->with('error', 'Une erreur est survenue lors de la mise à jour : ' . $e->getMessage());
         }
@@ -499,6 +510,7 @@ class EleveAdminController extends Controller
 
         } catch (\Exception $e) {
             DB::rollBack();
+            Log::error('Erreur suppression élève : ' . $e->getMessage());
             return redirect()->route('admin.eleves.index')
                 ->with('error', 'Erreur lors de la suppression : ' . $e->getMessage());
         }
@@ -641,19 +653,24 @@ class EleveAdminController extends Controller
         ]);
 
         try {
-            // Générer l'email ou utiliser celui de l'élève
-            $email = $eleve->email ?? $eleve->matricule . '@eleve.local';
+            // Vérifier si l'élève a un email
+            if (empty($eleve->email)) {
+                return redirect()->back()
+                    ->with('error', 'Cet élève n\'a pas d\'email. Veuillez d\'abord renseigner son email.');
+            }
+
+            $email = $eleve->email;
 
             // Vérifier si l'email existe déjà dans la table users
             if (User::where('email', $email)->exists()) {
-                // Utiliser un email alternatif avec un suffixe numérique
                 $counter = 1;
-                $baseEmail = $eleve->matricule . '@eleve.local';
-                while (User::where('email', $baseEmail)->exists()) {
-                    $baseEmail = $eleve->matricule . $counter . '@eleve.local';
+                $baseEmail = $email;
+                while (User::where('email', $email)->exists()) {
+                    $parts = explode('@', $baseEmail);
+                    $email = $parts[0] . $counter . '@' . $parts[1];
                     $counter++;
                 }
-                $email = $baseEmail;
+                session()->flash('warning', 'L\'email ' . $baseEmail . ' est déjà utilisé. Un email alternatif a été généré : ' . $email);
             }
 
             $user = User::create([
@@ -661,15 +678,18 @@ class EleveAdminController extends Controller
                 'email' => $email,
                 'password' => Hash::make($request->password),
                 'role' => 'eleve',
+                'is_active' => true,
             ]);
 
+            $user->assignRole('eleve');
             $eleve->user_id = $user->id;
             $eleve->save();
 
             return redirect()->back()
-                ->with('success', 'Compte utilisateur créé avec succès.');
+                ->with('success', 'Compte utilisateur créé avec succès. Email : ' . $email);
 
         } catch (\Exception $e) {
+            Log::error('Erreur création compte utilisateur : ' . $e->getMessage());
             return redirect()->back()
                 ->with('error', 'Erreur lors de la création du compte : ' . $e->getMessage());
         }
@@ -693,10 +713,26 @@ class EleveAdminController extends Controller
             $eleve->user->password = Hash::make($request->password);
             $eleve->user->save();
 
+            // Envoyer un email avec le nouveau mot de passe
+            if (!empty($eleve->email)) {
+                try {
+                    Mail::to($eleve->email)->send(new CompteUtilisateurCree(
+                        $eleve->prenom . ' ' . $eleve->nom,
+                        $eleve->email,
+                        $request->password,
+                        'eleve',
+                        $eleve->matricule
+                    ));
+                } catch (\Exception $mailException) {
+                    Log::error('Erreur envoi email réinitialisation : ' . $mailException->getMessage());
+                }
+            }
+
             return redirect()->back()
-                ->with('success', 'Mot de passe réinitialisé avec succès.');
+                ->with('success', 'Mot de passe réinitialisé avec succès et envoyé par email.');
 
         } catch (\Exception $e) {
+            Log::error('Erreur réinitialisation mot de passe : ' . $e->getMessage());
             return redirect()->back()
                 ->with('error', 'Erreur lors de la réinitialisation : ' . $e->getMessage());
         }
@@ -721,8 +757,51 @@ class EleveAdminController extends Controller
                 ->with('success', 'Compte utilisateur supprimé avec succès.');
 
         } catch (\Exception $e) {
+            Log::error('Erreur suppression compte utilisateur : ' . $e->getMessage());
             return redirect()->back()
                 ->with('error', 'Erreur lors de la suppression : ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Renvoyer les identifiants par email à un élève
+     */
+    public function renvoyerIdentifiants(Eleve $eleve)
+    {
+        if (!$eleve->user) {
+            return redirect()->back()
+                ->with('error', 'Cet élève n\'a pas de compte utilisateur.');
+        }
+
+        if (empty($eleve->email) || !filter_var($eleve->email, FILTER_VALIDATE_EMAIL)) {
+            return redirect()->back()
+                ->with('error', 'L\'élève n\'a pas d\'email valide. Veuillez d\'abord renseigner son email.');
+        }
+
+        try {
+            // Générer un nouveau mot de passe
+            $nouveauMotDePasse = Str::random(10);
+            $eleve->user->password = Hash::make($nouveauMotDePasse);
+            $eleve->user->save();
+
+            // Envoyer l'email
+            Mail::to($eleve->email)->send(new CompteUtilisateurCree(
+                $eleve->prenom . ' ' . $eleve->nom,
+                $eleve->email,
+                $nouveauMotDePasse,
+                'eleve',
+                $eleve->matricule
+            ));
+
+            Log::info('Identifiants renvoyés à : ' . $eleve->email);
+
+            return redirect()->back()
+                ->with('success', 'Identifiants renvoyés avec succès à ' . $eleve->email);
+
+        } catch (\Exception $e) {
+            Log::error('Erreur renvoi identifiants : ' . $e->getMessage());
+            return redirect()->back()
+                ->with('error', 'Erreur lors du renvoi : ' . $e->getMessage());
         }
     }
 
@@ -852,6 +931,7 @@ class EleveAdminController extends Controller
             return $pdf->download($filename);
 
         } catch (\Exception $e) {
+            Log::error('Erreur export PDF : ' . $e->getMessage());
             return redirect()->back()->with('error', 'Erreur lors de l\'export PDF : ' . $e->getMessage());
         }
     }
@@ -861,7 +941,12 @@ class EleveAdminController extends Controller
      */
     public function exportExcel(Request $request)
     {
-        return Excel::download(new ElevesExport($request), 'eleves_' . date('Y-m-d') . '.xlsx');
+        try {
+            return Excel::download(new ElevesExport($request), 'eleves_' . date('Y-m-d') . '.xlsx');
+        } catch (\Exception $e) {
+            Log::error('Erreur export Excel : ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Erreur lors de l\'export Excel : ' . $e->getMessage());
+        }
     }
 
     /**
@@ -869,45 +954,51 @@ class EleveAdminController extends Controller
      */
     public function exportProfilPdf(Eleve $eleve)
     {
-        $eleve->load([
-            'inscriptions' => function($q) {
-                $q->with(['classe.anneeScolaire'])->latest();
-            },
-            'parents',
-            'absences' => function($q) {
-                $q->with(['matiere', 'anneeScolaire'])->latest();
-            },
-            'notes' => function($q) {
-                $q->with(['evaluation.matiere', 'evaluation.classe'])->latest();
-            },
-            'bulletins' => function($q) {
-                $q->with(['classe'])->latest();
-            },
-            'user',
-        ]);
+        try {
+            $eleve->load([
+                'inscriptions' => function($q) {
+                    $q->with(['classe.anneeScolaire'])->latest();
+                },
+                'parents',
+                'absences' => function($q) {
+                    $q->with(['matiere', 'anneeScolaire'])->latest();
+                },
+                'notes' => function($q) {
+                    $q->with(['evaluation.matiere', 'evaluation.classe'])->latest();
+                },
+                'bulletins' => function($q) {
+                    $q->with(['classe'])->latest();
+                },
+                'user',
+            ]);
 
-        // Récupérer la classe actuelle
-        $inscriptionActive = $eleve->inscriptions()->whereIn('statut', ['inscrit', 'active', '1', 1, true])->with('classe')->first();
-        $classeActuelle = $inscriptionActive?->classe;
+            // Récupérer la classe actuelle
+            $inscriptionActive = $eleve->inscriptions()->whereIn('statut', ['inscrit', 'active', '1', 1, true])->with('classe')->first();
+            $classeActuelle = $inscriptionActive?->classe;
 
-        // Statistiques de l'élève
-        $stats = [
-            'moyenne_generale' => $eleve->notes()->avg('note'),
-            'total_absences' => $eleve->absences()->count(),
-            'absences_justifiees' => $eleve->absences()->where('justifiee', true)->count(),
-            'absences_non_justifiees' => $eleve->absences()->where('justifiee', false)->count(),
-            'inscriptions_count' => $eleve->inscriptions()->count(),
-            'parents_count' => $eleve->parents()->count(),
-            'bulletins_count' => $eleve->bulletins()->count(),
-            'notes_count' => $eleve->notes()->count(),
-            'age' => $eleve->date_naissance->age,
-        ];
+            // Statistiques de l'élève
+            $stats = [
+                'moyenne_generale' => $eleve->notes()->avg('note'),
+                'total_absences' => $eleve->absences()->count(),
+                'absences_justifiees' => $eleve->absences()->where('justifiee', true)->count(),
+                'absences_non_justifiees' => $eleve->absences()->where('justifiee', false)->count(),
+                'inscriptions_count' => $eleve->inscriptions()->count(),
+                'parents_count' => $eleve->parents()->count(),
+                'bulletins_count' => $eleve->bulletins()->count(),
+                'notes_count' => $eleve->notes()->count(),
+                'age' => $eleve->date_naissance->age,
+            ];
 
-        $pdf = Pdf::loadView('admin.eleves.exports.profil-pdf', compact('eleve', 'stats', 'classeActuelle'));
+            $pdf = Pdf::loadView('admin.eleves.exports.profil-pdf', compact('eleve', 'stats', 'classeActuelle'));
 
-        $filename = 'profil_' . $eleve->nom . '_' . $eleve->prenom . '_' . date('Y-m-d') . '.pdf';
+            $filename = 'profil_' . $eleve->nom . '_' . $eleve->prenom . '_' . date('Y-m-d') . '.pdf';
 
-        return $pdf->download($filename);
+            return $pdf->download($filename);
+
+        } catch (\Exception $e) {
+            Log::error('Erreur export profil PDF : ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Erreur lors de l\'export : ' . $e->getMessage());
+        }
     }
 
     /**
@@ -915,27 +1006,90 @@ class EleveAdminController extends Controller
      */
     public function exportReleveNotesPdf(Eleve $eleve, Request $request)
     {
-        $periode = $request->get('periode', 'trimestre1');
+        try {
+            $periode = $request->get('periode', 'trimestre1');
 
-        $notes = $eleve->notes()
-            ->with(['evaluation.matiere', 'evaluation.classe'])
-            ->whereHas('evaluation', function($q) use ($periode) {
-                $q->where('periode', $periode);
-            })
-            ->get();
+            $notes = $eleve->notes()
+                ->with(['evaluation.matiere', 'evaluation.classe'])
+                ->whereHas('evaluation', function($q) use ($periode) {
+                    $q->where('periode', $periode);
+                })
+                ->get();
 
-        $moyenne = $notes->avg('note');
+            $moyenne = $notes->avg('note');
 
-        $stats = [
-            'moyenne' => $moyenne,
-            'total_notes' => $notes->count(),
-            'periode' => $periode,
-        ];
+            $stats = [
+                'moyenne' => $moyenne,
+                'total_notes' => $notes->count(),
+                'periode' => $periode,
+            ];
 
-        $pdf = Pdf::loadView('admin.eleves.exports.releve-notes-pdf', compact('eleve', 'notes', 'stats'));
+            $pdf = Pdf::loadView('admin.eleves.exports.releve-notes-pdf', compact('eleve', 'notes', 'stats'));
 
-        $filename = 'releve_notes_' . $eleve->nom . '_' . $eleve->prenom . '_' . $periode . '_' . date('Y-m-d') . '.pdf';
+            $filename = 'releve_notes_' . $eleve->nom . '_' . $eleve->prenom . '_' . $periode . '_' . date('Y-m-d') . '.pdf';
 
-        return $pdf->download($filename);
+            return $pdf->download($filename);
+
+        } catch (\Exception $e) {
+            Log::error('Erreur export relevé notes PDF : ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Erreur lors de l\'export : ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Exporter le certificat de réussite d'un élève (admin seulement)
+     */
+    public function exportCertificatPdf(Eleve $eleve, Request $request)
+    {
+        try {
+            $anneeScolaireId = $request->get('annee_scolaire_id');
+
+            if (!$anneeScolaireId) {
+                return redirect()->back()->with('error', 'Année scolaire non spécifiée.');
+            }
+
+            $anneeScolaire = AnneeScolaire::findOrFail($anneeScolaireId);
+
+            // Récupérer l'inscription de l'élève pour cette année scolaire
+            $inscription = Inscription::where('eleve_id', $eleve->id)
+                ->where('annee_scolaire_id', $anneeScolaire->id)
+                ->with('classe')
+                ->first();
+
+            if (!$inscription) {
+                return redirect()->back()
+                    ->with('error', 'Aucune inscription trouvée pour cet élève pour l\'année scolaire demandée.');
+            }
+
+            // Récupérer les bulletins de cette année scolaire
+            $bulletinsAnnee = $eleve->bulletins->where('annee_scolaire_id', $anneeScolaire->id);
+            $moyenneAnnee = $bulletinsAnnee->isNotEmpty() ? round($bulletinsAnnee->avg('moyenne_generale'), 2) : null;
+
+            if ($moyenneAnnee === null || $moyenneAnnee < 10) {
+                return redirect()->back()
+                    ->with('error', 'Le certificat de réussite n\'est pas disponible car la moyenne annuelle est insuffisante ou non calculée.');
+            }
+
+            // Calculer la mention
+            $mention = 'Passable';
+            if ($moyenneAnnee >= 16) {
+                $mention = 'Très Bien';
+            } elseif ($moyenneAnnee >= 14) {
+                $mention = 'Bien';
+            } elseif ($moyenneAnnee >= 12) {
+                $mention = 'Assez Bien';
+            }
+
+            $pdf = Pdf::loadView('eleve.exports.certificat-pdf', compact('eleve', 'anneeScolaire', 'inscription', 'moyenneAnnee', 'mention'));
+            $pdf->setPaper('A4', 'landscape');
+
+            $filename = 'certificat_reussite_' . $eleve->matricule . '_' . str_replace('/', '-', $anneeScolaire->nom) . '.pdf';
+
+            return $pdf->download($filename);
+
+        } catch (\Exception $e) {
+            Log::error('Erreur export certificat PDF admin : ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Erreur lors de l\'export du certificat : ' . $e->getMessage());
+        }
     }
 }

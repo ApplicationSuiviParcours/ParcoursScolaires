@@ -33,6 +33,17 @@
             </div>
         @endif
 
+        @if(session('warning'))
+            <div class="mb-3 md:mb-4 p-3 md:p-4 bg-yellow-50 border-l-4 border-yellow-500 text-yellow-700 rounded-r-lg shadow text-xs md:text-sm" role="alert">
+                <div class="flex items-center">
+                    <svg class="w-4 h-4 md:w-5 md:h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                    <p class="font-medium">{{ session('warning') }}</p>
+                </div>
+            </div>
+        @endif
+
         <!-- En-tête -->
         <div class="mb-4 md:mb-6">
             <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1 mb-2">
@@ -41,6 +52,23 @@
             </div>
             <div class="w-full bg-gray-200 h-0.5">
                 <div class="bg-blue-900 h-0.5 w-full"></div>
+            </div>
+        </div>
+
+        <!-- ✅ AJOUT : Message d'information important -->
+        <div class="mb-4 md:mb-6 p-3 md:p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <div class="flex items-start">
+                <svg class="w-5 h-5 text-blue-600 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <div class="text-xs md:text-sm text-blue-800">
+                    <p class="font-semibold mb-1">📧 Important concernant l'email :</p>
+                    <ul class="list-disc list-inside space-y-0.5 text-[10px] md:text-xs">
+                        <li>L'email est <strong>obligatoire</strong> pour la connexion à la plateforme</li>
+                        <li>Si vous modifiez l'email, le compte utilisateur sera mis à jour</li>
+                        <li>Utilisez une adresse email valide et accessible</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -98,7 +126,8 @@
                             <div class="flex-1 w-full">
                                 <label for="photo" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Nouvelle photo</label>
                                 <input type="file" name="photo" id="photo" accept="image/*"
-                                       class="block w-full text-xs text-gray-500 file:mr-2 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100">
+                                       class="block w-full text-xs text-gray-500 file:mr-2 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100 @error('photo') border-red-500 @enderror">
+                                @error('photo')<p class="mt-1 text-[10px] text-red-600">{{ $message }}</p>@enderror
                                 <p class="mt-1 text-[10px] text-gray-500">Formats : JPEG, PNG (max. 2 Mo)</p>
                             </div>
                         </div>
@@ -143,6 +172,7 @@
                                     <option value="m" {{ strtolower(old('genre', $eleve->genre)) == 'm' ? 'selected' : '' }}>Masculin</option>
                                     <option value="f" {{ strtolower(old('genre', $eleve->genre)) == 'f' ? 'selected' : '' }}>Féminin</option>
                                 </select>
+                                @error('genre')<p class="mt-1 text-[10px] text-red-600">{{ $message }}</p>@enderror
                             </div>
                         </div>
                     </div>
@@ -159,17 +189,19 @@
                                 <label for="date_naissance" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Date <span class="text-red-500">*</span></label>
                                 <input type="date" name="date_naissance" id="date_naissance" required
                                        class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1 @error('date_naissance') border-red-500 @enderror" value="{{ old('date_naissance', $eleve->date_naissance->format('Y-m-d')) }}">
+                                @error('date_naissance')<p class="mt-1 text-[10px] text-red-600">{{ $message }}</p>@enderror
                             </div>
 
                             <div>
                                 <label for="lieu_naissance" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Lieu <span class="text-red-500">*</span></label>
                                 <input type="text" name="lieu_naissance" id="lieu_naissance" required placeholder="Dakar"
                                        class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1 @error('lieu_naissance') border-red-500 @enderror" value="{{ old('lieu_naissance', $eleve->lieu_naissance) }}">
+                                @error('lieu_naissance')<p class="mt-1 text-[10px] text-red-600">{{ $message }}</p>@enderror
                             </div>
                         </div>
                     </div>
 
-                    <!-- Section Contact -->
+                    <!-- ✅ Section Contact CORRIGÉE -->
                     <div>
                         <div class="flex items-center mb-3 pb-2 border-b border-gray-200">
                             <div class="bg-blue-800 w-1 h-5 md:h-6 mr-2 md:mr-3 rounded-full"></div>
@@ -179,14 +211,18 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                             <div>
                                 <label for="telephone" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Téléphone</label>
-                                <input type="tel" name="telephone" id="telephone" placeholder="77 123 45 67"
+                                <input type="tel" name="telephone" id="telephone" placeholder="06 707 6854"
                                        inputmode="numeric" pattern="[0-9\s\+\-]{6,20}"
-                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1" value="{{ old('telephone', $eleve->telephone) }}">
+                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1 @error('telephone') border-red-500 @enderror" value="{{ old('telephone', $eleve->telephone) }}">
+                                @error('telephone')<p class="mt-1 text-[10px] text-red-600">{{ $message }}</p>@enderror
                             </div>
                             <div>
-                                <label for="email" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Email</label>
-                                <input type="email" name="email" id="email" placeholder="eleve@exemple.com"
-                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1" value="{{ old('email', $eleve->email) }}">
+                                <!-- ✅ AJOUT : required et astérisque -->
+                                <label for="email" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Email <span class="text-red-500">*</span></label>
+                                <input type="email" name="email" id="email" required placeholder="eleve@exemple.com"
+                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1 @error('email') border-red-500 @enderror" value="{{ old('email', $eleve->email) }}">
+                                @error('email')<p class="mt-1 text-[10px] text-red-600">{{ $message }}</p>@enderror
+                                <p class="mt-1 text-[10px] text-gray-500">📧 L'email sert pour la connexion et les communications</p>
                             </div>
                         </div>
                     </div>
@@ -230,12 +266,13 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                             <div>
                                 <label for="nouvelle_classe_id" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Nouvelle inscription</label>
-                                <select name="nouvelle_classe_id" id="nouvelle_classe_id" class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1">
+                                <select name="nouvelle_classe_id" id="nouvelle_classe_id" class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1 @error('nouvelle_classe_id') border-red-500 @enderror">
                                     <option value="">Inscrire dans une classe (optionnel)</option>
                                     @foreach($classes as $classe)
                                         <option value="{{ $classe->id }}" {{ old('nouvelle_classe_id') == $classe->id ? 'selected' : '' }}>{{ $classe->nom_complet }}</option>
                                     @endforeach
                                 </select>
+                                @error('nouvelle_classe_id')<p class="mt-1 text-[10px] text-red-600">{{ $message }}</p>@enderror
                             </div>
 
                             <!-- Statut -->
@@ -251,6 +288,7 @@
                                         <span class="ml-2 text-xs md:text-sm text-gray-700">Inactif</span>
                                     </label>
                                 </div>
+                                @error('statut')<p class="mt-1 text-[10px] text-red-600">{{ $message }}</p>@enderror
                             </div>
                         </div>
                     </div>
@@ -265,7 +303,8 @@
                         <div>
                             <label for="adresse" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Adresse <span class="text-red-500">*</span></label>
                             <textarea name="adresse" id="adresse" rows="2" required placeholder="123 Rue Liberté, Dakar"
-                                      class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1">{{ old('adresse', $eleve->adresse) }}</textarea>
+                                      class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1 @error('adresse') border-red-500 @enderror">{{ old('adresse', $eleve->adresse) }}</textarea>
+                            @error('adresse')<p class="mt-1 text-[10px] text-red-600">{{ $message }}</p>@enderror
                         </div>
                     </div>
 
@@ -288,7 +327,8 @@
                         <div id="password_fields" class="{{ old('update_user') ? '' : 'hidden' }} mt-3 space-y-3">
                             <div>
                                 <label for="password" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Nouveau mot de passe <span class="text-red-500">*</span></label>
-                                <input type="password" name="password" id="password" class="block w-full px-3 md:px-4 py-2 md:py-2.5 border rounded-lg text-xs md:text-sm">
+                                <input type="password" name="password" id="password" class="block w-full px-3 md:px-4 py-2 md:py-2.5 border rounded-lg text-xs md:text-sm @error('password') border-red-500 @enderror">
+                                @error('password')<p class="mt-1 text-[10px] text-red-600">{{ $message }}</p>@enderror
                             </div>
                             <div>
                                 <label for="password_confirmation" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Confirmer <span class="text-red-500">*</span></label>
@@ -305,7 +345,7 @@
                             Annuler
                         </a>
                         <button type="submit"
-                                class="w-full sm:w-auto px-4 md:px-6 py-2.5 md:py-3 bg-blue-900 text-white hover:bg-blue-800 text-xs md:text-sm font-medium rounded-lg shadow-sm">
+                                class="w-full sm:w-auto px-4 md:px-6 py-2.5 md:py-3 bg-blue-900 text-white hover:bg-blue-800 text-xs md:text-sm font-medium rounded-lg shadow-sm transition-colors">
                             Mettre à jour
                         </button>
                     </div>
@@ -339,15 +379,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const currentPreview = document.getElementById('photo-preview');
-                    if (currentPreview.tagName === 'IMG') {
+                    if (currentPreview && currentPreview.tagName === 'IMG') {
                         currentPreview.src = e.target.result;
                     } else {
                         const newImg = document.createElement('img');
                         newImg.src = e.target.result;
                         newImg.className = "w-16 h-16 md:w-24 md:h-24 rounded-lg object-cover border-2 border-indigo-200 shadow";
                         newImg.id = "photo-preview";
-                        photoContainer.innerHTML = '';
-                        photoContainer.appendChild(newImg);
+                        if (photoContainer) {
+                            photoContainer.innerHTML = '';
+                            photoContainer.appendChild(newImg);
+                        }
                     }
                 }
                 reader.readAsDataURL(file);

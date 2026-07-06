@@ -10,41 +10,46 @@ use App\Models\AnneeScolaire;
 
 class BulletinSeeder extends Seeder
 {
-    /**
-     * Exactly 10 bulletins
-     */
     public function run(): void
     {
-        $eleves = Eleve::take(10)->get();
-        $classes = Classe::take(10)->get();
+        $eleves = Eleve::all();
+        $classe = Classe::where('nom', 'CE1 A')->first();
         $annee = AnneeScolaire::where('active', true)->first();
 
-        if ($eleves->isEmpty() || $classes->isEmpty() || !$annee) {
-            $this->command->error('❌ Need eleves, classes, annee');
+        if ($eleves->isEmpty() || !$classe || !$annee) {
+            $this->command->error('❌ Élèves, classe CE1 A ou année scolaire manquante');
             return;
         }
 
-        $this->command->info('🔄 Creating exactly 10 bulletins...');
+        $this->command->info('🔄 Création des bulletins pour les 5 élèves de test (T1, T2, T3)...');
 
+        $periodes = ['Trimestre 1', 'Trimestre 2', 'Trimestre 3'];
         $created = 0;
-        foreach ($eleves as $index => $eleve) {
-            $classe = $classes[$index % $classes->count()];
-            
-            Bulletin::create([
-                'eleve_id' => $eleve->id,
-                'classe_id' => $classe->id,
-                'annee_scolaire_id' => $annee->id,
-                'periode' => ['Trimestre 1', 'Trimestre 2', 'Trimestre 3'][$index % 3],
-                'moyenne_generale' => rand(100, 160) / 10,
-                'appreciation_generale' => 'Bon travail global',
-                'rang' => rand(1, 10),
-                'date_bulletin' => now(),
-            ]);
 
-            $created++;
-            $this->command->line("✅ {$eleve->prenom} {$eleve->nom} ({$classe->nom_complet})");
+        foreach ($eleves as $eleve) {
+            foreach ($periodes as $periode) {
+                Bulletin::updateOrCreate(
+                    [
+                        'eleve_id' => $eleve->id,
+                        'classe_id' => $classe->id,
+                        'annee_scolaire_id' => $annee->id,
+                        'periode' => $periode,
+                    ],
+                    [
+                        'moyenne_generale' => 0.0, // Sera mis à jour par le NoteSeeder après calcul
+                        'moyenne_classe' => 0.0,   // Mis à jour après
+                        'rang' => null,            // Mis à jour après
+                        'effectif_classe' => $eleves->count(),
+                        'appreciation_generale' => 'Attente des notes...',
+                        'date_bulletin' => now(),
+                        'status' => 'publie',
+                    ]
+                );
+                $created++;
+            }
+            $this->command->line("✅ Bulletins Trimestres 1, 2, 3 créés pour {$eleve->prenom} {$eleve->nom}");
         }
 
-        $this->command->info("✅ Exactly {$created} bulletins created!");
+        $this->command->info("✅ {$created} bulletins initialisés !");
     }
 }

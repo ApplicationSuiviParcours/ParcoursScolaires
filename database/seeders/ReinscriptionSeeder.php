@@ -7,29 +7,25 @@ use App\Models\Reinscription;
 use App\Models\Eleve;
 use App\Models\Classe;
 use App\Models\AnneeScolaire;
-use Carbon\Carbon;
 
 class ReinscriptionSeeder extends Seeder
 {
-    /**
-     * Exactly 10 reinscriptions
-     */
     public function run(): void
     {
-        $eleves = Eleve::take(10)->get();
-        $classes = Classe::take(10)->get();
+        $eleves = Eleve::all();
+        $classes = Classe::all();
         $annee = AnneeScolaire::where('active', true)->first();
 
         if ($eleves->isEmpty() || $classes->isEmpty() || !$annee) {
-            $this->command->error('❌ Need eleves, classes, annee');
+            $this->command->error('❌ Élèves, classes ou année scolaire manquantes.');
             return;
         }
 
-        $this->command->info('🔄 Creating exactly 10 reinscriptions...');
+        $this->command->info('🔄 Création des réinscriptions pour les élèves...');
 
         $created = 0;
         foreach ($eleves as $index => $eleve) {
-            $classe = $classes[$index % $classes->count()];
+            $classe = $classes->get($index % $classes->count());
             
             Reinscription::create([
                 'eleve_id' => $eleve->id,
@@ -41,9 +37,9 @@ class ReinscriptionSeeder extends Seeder
             ]);
 
             $created++;
-            $this->command->line("✅ {$eleve->prenom} {$eleve->nom} → {$classe->nom_complet}");
+            $this->command->line("✅ Réinscription : {$eleve->prenom} {$eleve->nom} ↔ {$classe->nom}");
         }
 
-        $this->command->info("✅ Exactly {$created} reinscriptions created!");
+        $this->command->info("✅ {$created} réinscriptions créées !");
     }
 }

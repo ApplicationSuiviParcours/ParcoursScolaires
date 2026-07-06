@@ -9,25 +9,21 @@ use Illuminate\Support\Facades\DB;
 
 class EleveParentSeeder extends Seeder
 {
-    /**
-     * Exactly 10 eleve-parent associations
-     */
     public function run(): void
     {
-        $eleves = Eleve::take(10)->get();
-        $parents = ParentEleve::take(10)->get();
+        $eleves = Eleve::all();
+        $parents = ParentEleve::all();
 
         if ($eleves->isEmpty() || $parents->isEmpty()) {
-            $this->command->error('❌ Need 10 eleves and parents first');
+            $this->command->error('❌ Élèves ou parents manquants.');
             return;
         }
 
-        $this->command->info('🔄 Creating exactly 10 eleve-parent associations...');
+        $this->command->info('🔄 Création des liaisons parents-élèves...');
 
         $created = 0;
-        for ($i = 0; $i < 10; $i++) {
-            $eleve = $eleves[$i % 10];
-            $parent = $parents[$i % 10];
+        foreach ($eleves as $index => $eleve) {
+            $parent = $parents->get($index % $parents->count());
 
             DB::table('eleve_parents')->updateOrInsert(
                 [
@@ -35,16 +31,16 @@ class EleveParentSeeder extends Seeder
                     'parent_eleve_id' => $parent->id,
                 ],
                 [
-                    'lien_parental' => $parent->genre === 'F' ? 'Mère' : 'Père',
+                    'lien_parental' => $parent->genre === 'f' || $parent->genre === 'F' ? 'Mère' : 'Père',
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]
             );
 
             $created++;
-            $this->command->line("✅ {$eleve->prenom} {$eleve->nom} - {$parent->prenom} {$parent->nom}");
+            $this->command->line("✅ Liaison : {$eleve->prenom} {$eleve->nom} ↔ {$parent->prenom} {$parent->nom}");
         }
 
-        $this->command->info("✅ Exactly {$created} associations created!");
+        $this->command->info("✅ {$created} associations parents-élèves créées !");
     }
 }

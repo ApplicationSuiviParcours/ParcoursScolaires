@@ -9,48 +9,49 @@ use App\Models\AnneeScolaire;
 use App\Models\Inscription;
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Hash;
 
 class EleveSeeder extends Seeder
 {
     /**
-     * Exactly 10 élèves with Congolese names
-     * Link first 2 to UserSeeder eleves by email
+     * Exactly 5 élèves with Congolese names
      */
     private array $eleves = [
-        ['prenom' => 'Mouana', 'nom' => 'Pemba', 'genre' => 'M', 'email' => 'mouana@eleve.cg'],
-        ['prenom' => 'Koubemba', 'nom' => 'Ngoma', 'genre' => 'F', 'email' => 'koubemba@eleve.cg'],
-        ['prenom' => 'Serge', 'nom' => 'Mboundzika', 'genre' => 'M', 'email' => 'serge@eleve.cg'],
-        ['prenom' => 'Estelle', 'nom' => 'Ndinga', 'genre' => 'F', 'email' => 'estelle@eleve.cg'],
-        ['prenom' => 'Patrice', 'nom' => 'Bidimbé', 'genre' => 'M', 'email' => 'patrice@eleve.cg'],
-        ['prenom' => 'Martine', 'nom' => 'Kimbonda', 'genre' => 'F', 'email' => 'martine@eleve.cg'],
-        ['prenom' => 'Joël', 'nom' => 'Loubaki', 'genre' => 'M', 'email' => 'joel@eleve.cg'],
-        ['prenom' => 'Solange', 'nom' => 'Mboumba', 'genre' => 'F', 'email' => 'solange@eleve.cg'],
-        ['prenom' => 'Aristide', 'nom' => 'Itoua', 'genre' => 'M', 'email' => 'aristide@eleve.cg'],
-        ['prenom' => 'Thérèse', 'nom' => 'Moutou', 'genre' => 'F', 'email' => 'therese@eleve.cg'],
+        ['prenom' => 'Mouana', 'nom' => 'Pemba', 'genre' => 'm', 'email' => 'mouana@eleve.cg'],
+        ['prenom' => 'Koubemba', 'nom' => 'Ngoma', 'genre' => 'f', 'email' => 'koubemba@eleve.cg'],
+        ['prenom' => 'Serge', 'nom' => 'Mboundzika', 'genre' => 'm', 'email' => 'serge@eleve.cg'],
+        ['prenom' => 'Estelle', 'nom' => 'Ndinga', 'genre' => 'f', 'email' => 'estelle@eleve.cg'],
+        ['prenom' => 'Patrice', 'nom' => 'Bidimbé', 'genre' => 'm', 'email' => 'patrice@eleve.cg'],
     ];
 
-    private array $villes = ['Brazzaville', 'Pointe-Noire', 'Dollo', 'Owando', 'Mossendjo'];
+    private array $villes = ['Brazzaville', 'Pointe-Noire', 'Owando', 'Dolisie'];
 
     public function run(): void
     {
         $anneeScolaire = AnneeScolaire::where('active', true)->first();
+        if (!$anneeScolaire) {
+            $anneeScolaire = AnneeScolaire::first();
+        }
         $classes = Classe::all();
 
         if (!$anneeScolaire || $classes->isEmpty()) {
-            $this->command->error('❌ Missing AnneeScolaire or Classe');
+            $this->command->error('❌ Année scolaire ou classes manquantes');
             return;
         }
 
-        $this->command->info('🔄 Creating exactly 10 élèves...');
+        $this->command->info('🔄 Création de exactement 5 élèves...');
+
+        $classeTest = $classes->firstWhere('nom', 'CE1 A');
+        if (!$classeTest) {
+            $classeTest = $classes->first();
+        }
 
         $created = 0;
         foreach ($this->eleves as $data) {
-            $classe = $classes->random();
+            $classe = $classeTest;
             $user = User::where('email', $data['email'])->first();
 
             if (!$user) {
-                $this->command->warn("⚠️ No user for {$data['email']}, skipping...");
+                $this->command->warn("⚠️ Pas d'utilisateur trouvé pour {$data['email']}, saut de l'étape...");
                 continue;
             }
 
@@ -60,11 +61,11 @@ class EleveSeeder extends Seeder
                     'user_id' => $user->id,
                     'nom' => $data['nom'],
                     'prenom' => $data['prenom'],
-                    'matricule' => Eleve::genererMatricule($data['nom']),
-                    'date_naissance' => Carbon::now()->subYears(rand(10, 18)),
+                    'matricule' => $data['email'] === 'mouana@eleve.cg' ? 'PSE13/25/A3' : Eleve::genererMatricule($data['nom']),
+                    'date_naissance' => Carbon::now()->subYears(rand(6, 12)), // Âges école primaire
                     'lieu_naissance' => $this->villes[array_rand($this->villes)],
                     'genre' => $data['genre'],
-                    'adresse' => rand(1, 100) . ' Rue du 13 Août, ' . $this->villes[array_rand($this->villes)],
+                    'adresse' => rand(1, 100) . ' Rue de la Paix, ' . $this->villes[array_rand($this->villes)],
                     'telephone' => '+24206' . rand(1000000, 9999999),
                     'photo' => null,
                     'date_inscription' => $anneeScolaire->date_debut,
@@ -74,7 +75,7 @@ class EleveSeeder extends Seeder
 
             $user->assignRole('eleve');
 
-            // Create inscription
+            // Créer l'inscription active pour l'année en cours
             Inscription::updateOrCreate(
                 [
                     'eleve_id' => $eleve->id,
@@ -87,10 +88,26 @@ class EleveSeeder extends Seeder
                 ]
             );
 
+            // On ajoute aussi des inscriptions sur les années précédentes pour simuler le parcours complet
+            $anciennesAnnees = AnneeScolaire::where('id', '!=', $anneeScolaire->id)->get();
+            foreach ($anciennesAnnees as $aAnnee) {
+                Inscription::updateOrCreate(
+                    [
+                        'eleve_id' => $eleve->id,
+                        'annee_scolaire_id' => $aAnnee->id,
+                    ],
+                    [
+                        'classe_id' => $classes->where('id', '!=', $classe->id)->first()?->id ?? $classe->id,
+                        'date_inscription' => $aAnnee->date_debut,
+                        'statut' => false, // ancienne inscription
+                    ]
+                );
+            }
+
             $created++;
-            $this->command->line("✅ {$data['prenom']} {$data['nom']} in {$classe->nom_complet} [linked user]");
+            $this->command->line("✅ Élève : {$data['prenom']} {$data['nom']} inscrit en {$classe->nom}");
         }
 
-        $this->command->info("✅ Exactly {$created} élèves created!");
+        $this->command->info("✅ Exactement {$created} élèves créés !");
     }
 }

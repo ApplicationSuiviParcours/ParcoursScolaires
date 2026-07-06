@@ -31,7 +31,7 @@
                 </div>
             </div>
 
-            <!-- Messages flash -->
+            <!-- ✅ Messages flash améliorés -->
             @if(session('error'))
                 <div class="mb-6 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-r-lg shadow-md animate-slideDown" role="alert">
                     <div class="flex items-center">
@@ -54,13 +54,41 @@
                 </div>
             @endif
 
+            @if(session('warning'))
+                <div class="mb-6 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-r-lg shadow-md animate-slideDown" role="alert">
+                    <div class="flex items-center">
+                        <svg class="w-6 h-6 text-yellow-500 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                        </svg>
+                        <p class="text-sm font-medium">{{ session('warning') }}</p>
+                    </div>
+                </div>
+            @endif
+
+            <!-- ✅ AJOUT : Message d'information important -->
+            <div class="mb-6 bg-blue-50 border border-blue-200 rounded-xl p-4">
+                <div class="flex items-start">
+                    <svg class="w-5 h-5 text-blue-600 mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <div class="text-sm text-blue-800">
+                        <p class="font-semibold mb-1">📧 Important concernant l'email :</p>
+                        <ul class="list-disc list-inside space-y-0.5 text-xs">
+                            <li>L'email est <strong>obligatoire</strong> pour la connexion à la plateforme</li>
+                            <li>Les identifiants de connexion seront envoyés à cette adresse</li>
+                            <li>Utilisez une adresse email valide et accessible</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
             <!-- Formulaire principal -->
             <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
                 <!-- En-tête du formulaire -->
                 <div class="px-6 py-5 bg-gradient-to-r from-gray-50 to-white border-b border-gray-200">
                     <div class="flex items-center">
                         <div class="bg-blue-900 p-3 rounded-xl">
-                            <svg class="w-6 h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                             </svg>
                         </div>
@@ -93,7 +121,7 @@
                             <label class="block text-sm font-medium text-gray-700 mb-3">Photo de profil</label>
                             <div class="flex items-center space-x-6">
                                 <div class="flex-shrink-0">
-                                    <div class="w-20 h-20 rounded-xl bg-blue-900 flex items-center justify-center border-2 border-gray-300 overflow-hidden" id="photo-preview-container">
+                                    <div class="w-20 h-20 rounded-xl bg-blue-50 flex items-center justify-center border-2 border-gray-300 overflow-hidden" id="photo-preview-container">
                                         <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                         </svg>
@@ -101,7 +129,7 @@
                                 </div>
                                 <div class="flex-1">
                                     <input type="file" name="photo" id="photo" accept="image/*"
-                                           class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-colors">
+                                           class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-colors @error('photo') border-red-500 @enderror">
                                     <p class="mt-1 text-xs text-gray-500">Formats acceptés : JPEG, PNG, JPG, GIF (max. 2 Mo)</p>
                                     @error('photo')
                                         <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
@@ -110,68 +138,7 @@
                             </div>
                         </div>
 
-                        <!-- Section Utilisateur -->
-                        <div class="bg-blue-50 rounded-xl p-5 border border-blue-200">
-                            <div class="flex">
-                                <div class="flex-shrink-0">
-                                    <svg class="h-5 w-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
-                                </div>
-                                <div class="ml-3 flex-1">
-                                    <p class="text-sm text-blue-800">
-                                        Si vous ne sélectionnez pas d'utilisateur, un compte sera <strong>automatiquement créé</strong> pour cet enseignant avec le mot de passe par défaut : <code>password</code>.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Utilisateur -->
-                            <div class="md:col-span-2">
-                                <label for="user_id" class="block text-sm font-medium text-gray-700 mb-1">
-                                    Utilisateur (Optionnel)
-                                </label>
-                                <div class="relative group">
-                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <svg class="h-5 w-5 text-gray-400 group-focus-within:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                        </svg>
-                                    </div>
-                                    <select name="user_id" id="user_id"
-                                            class="block w-full pl-10 pr-10 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition-all duration-200 appearance-none bg-white @error('user_id') border-red-400 @enderror">
-                                        <option value="">Sélectionner un utilisateur</option>
-                                        @forelse($users as $user)
-                                            <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>
-                                                {{ $user->name }} ({{ $user->email }})
-                                            </option>
-                                        @empty
-                                            <option value="" disabled>Aucun utilisateur disponible</option>
-                                        @endforelse
-                                    </select>
-                                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-                                @error('user_id')
-                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                                @enderror
-
-                                @if($users->isEmpty())
-                                    <div class="mt-3">
-                                        <a href="{{ route('admin.users.create') }}" 
-                                           class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-sm">
-                                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                                            </svg>
-                                            Créer un nouvel utilisateur
-                                        </a>
-                                    </div>
-                                @endif
-                            </div>
-
                             <!-- Nom -->
                             <div>
                                 <label for="nom" class="block text-sm font-medium text-gray-700 mb-1">
@@ -184,7 +151,7 @@
                                         </svg>
                                     </div>
                                     <input type="text" name="nom" id="nom" value="{{ old('nom') }}" required
-                                           placeholder="Dupont"
+                                           placeholder="OKOMBI"
                                            class="block w-full pl-10 pr-3 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition-all duration-200 @error('nom') border-red-400 @enderror">
                                 </div>
                                 @error('nom')
@@ -204,7 +171,7 @@
                                         </svg>
                                     </div>
                                     <input type="text" name="prenom" id="prenom" value="{{ old('prenom') }}" required
-                                           placeholder="Jean"
+                                           placeholder="Fortune"
                                            class="block w-full pl-10 pr-3 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition-all duration-200 @error('prenom') border-red-400 @enderror">
                                 </div>
                                 @error('prenom')
@@ -273,7 +240,7 @@
                                         </svg>
                                     </div>
                                     <input type="text" name="lieu_naissance" id="lieu_naissance"
-                                           value="{{ old('lieu_naissance') }}" required placeholder="Paris"
+                                           value="{{ old('lieu_naissance') }}" required placeholder="BRAZZAVILLE"
                                            class="block w-full pl-10 pr-3 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition-all duration-200 @error('lieu_naissance') border-red-400 @enderror">
                                 </div>
                                 @error('lieu_naissance')
@@ -293,7 +260,7 @@
                                         </svg>
                                     </div>
                                     <input type="tel" name="telephone" id="telephone" value="{{ old('telephone') }}"
-                                           placeholder="+221 77 123 45 67"
+                                           placeholder="06 707 6854"
                                            inputmode="numeric" pattern="[0-9\s\+\-]{6,20}"
                                            class="block w-full pl-10 pr-3 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition-all duration-200 @error('telephone') border-red-400 @enderror">
                                 </div>
@@ -302,10 +269,10 @@
                                 @enderror
                             </div>
 
-                            <!-- Email -->
+                            <!-- ✅ Email CORRIGÉ : Obligatoire -->
                             <div>
                                 <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
-                                    Email
+                                    Email <span class="text-red-500">*</span>
                                 </label>
                                 <div class="relative group">
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -313,13 +280,14 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                                         </svg>
                                     </div>
-                                    <input type="email" name="email" id="email" value="{{ old('email') }}"
-                                           placeholder="jean.dupont@exemple.com"
+                                    <input type="email" name="email" id="email" value="{{ old('email') }}" required
+                                           placeholder="enseignant@exemple.com"
                                            class="block w-full pl-10 pr-3 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition-all duration-200 @error('email') border-red-400 @enderror">
                                 </div>
                                 @error('email')
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
+                                <p class="mt-1 text-xs text-gray-500">📧 L'email servira pour la connexion et l'envoi des identifiants</p>
                             </div>
 
                             <!-- Spécialité -->
@@ -391,6 +359,24 @@
                             </div>
                         </div>
 
+                        <!-- Information Compte utilisateur -->
+                        <div class="p-4 bg-blue-50 border border-indigo-200 rounded-xl">
+                            <div class="flex items-start">
+                                <div class="bg-blue-100 p-1.5 rounded-full mr-3 mt-0.5">
+                                    <svg class="w-5 h-5 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h5 class="text-sm font-semibold text-indigo-900 mb-1">Compte utilisateur automatique</h5>
+                                    <p class="text-xs text-blue-900 leading-relaxed">
+                                        Un compte utilisateur sera <strong>automatiquement créé</strong> pour cet enseignant avec l'email saisi ci-dessus.
+                                        Le mot de passe sera généré automatiquement et envoyé par email.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Boutons d'action -->
                         <div class="flex justify-end gap-3 pt-6 border-t border-gray-200">
                             <a href="{{ route('admin.enseignants.index') }}"
@@ -401,7 +387,7 @@
                                 Annuler
                             </a>
                             <button type="submit"
-                                    class="px-8 py-3 bg-blue-900 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 font-medium text-sm shadow-lg shadow-blue-200 flex items-center group">
+                                    class="px-8 py-3 bg-blue-900 text-white rounded-xl hover:bg-blue-800 transition-all duration-200 font-medium text-sm shadow-lg shadow-blue-200 flex items-center group">
                                 <svg class="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
                                 </svg>
@@ -413,7 +399,7 @@
             </div>
 
             <!-- Aide contextuelle -->
-            <div class="mt-6 bg-blue-900 rounded-xl p-5 border border-blue-100">
+            <div class="mt-6 bg-blue-50 rounded-xl p-5 border border-blue-100">
                 <div class="flex">
                     <div class="flex-shrink-0">
                         <div class="bg-blue-200 p-2 rounded-lg">
@@ -425,11 +411,7 @@
                     <div class="ml-4">
                         <h5 class="text-sm font-semibold text-blue-800 mb-1">Information importante</h5>
                         <p class="text-sm text-blue-700">
-                            L'enseignant sera automatiquement associé à un compte utilisateur. Assurez-vous que l'utilisateur sélectionné a bien les droits nécessaires. 
-                            Un matricule unique sera généré automatiquement au format <span class="font-mono bg-white px-1 py-0.5 rounded">ENS2026L0001</span>.
-                        </p>
-                        <p class="text-sm text-blue-700 mt-2">
-                            <span class="font-semibold">Note :</span> Les champs "Matricule" et "Âge" sont calculés automatiquement par le système.
+                            Un matricule unique sera généré automatiquement. L'enseignant recevra ses identifiants de connexion par email.
                         </p>
                     </div>
                 </div>
@@ -440,12 +422,10 @@
 
 @push('styles')
 <style>
-    /* Animations des barres de progression */
     .progress-bar {
         transition: width 1s ease-out;
     }
 
-    /* Animation d'apparition */
     @keyframes slideDown {
         from {
             transform: translateY(-10px);
@@ -461,164 +441,95 @@
         animation: slideDown 0.3s ease-out;
     }
 
-    /* Amélioration du focus */
     input:focus, select:focus, textarea:focus {
         outline: none;
     }
 
-    /* Style pour les placeholders */
     ::placeholder {
         color: #9ca3af;
         font-size: 0.875rem;
-    }
-
-    /* Animation pour le bouton */
-    .hover\:-translate-y-0\.5:hover {
-        transform: translateY(-2px);
     }
 </style>
 @endpush
 
 @push('scripts')
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Animation de la barre de progression
-        const progressBar = document.querySelector('.progress-bar');
-        if (progressBar) {
-            const width = progressBar.style.width;
-            progressBar.style.width = '0%';
-            setTimeout(() => {
-                progressBar.style.width = width;
-            }, 200);
-        }
+document.addEventListener('DOMContentLoaded', function() {
+    // Animation de la barre de progression
+    const progressBar = document.querySelector('.progress-bar');
+    if (progressBar) {
+        const width = progressBar.style.width;
+        progressBar.style.width = '0%';
+        setTimeout(() => {
+            progressBar.style.width = width;
+        }, 200);
+    }
 
-        // Validation du téléphone
-        const telephoneInput = document.getElementById('telephone');
-        if (telephoneInput) {
-            telephoneInput.addEventListener('input', function(e) {
-                this.value = this.value.replace(/[^0-9+]/g, '');
-            });
-        }
-
-        // Aperçu de la photo
-        const photoInput = document.getElementById('photo');
-        const previewContainer = document.getElementById('photo-preview-container');
-        
-        if (photoInput && previewContainer) {
-            photoInput.addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    // Vérification de la taille du fichier (2 Mo max)
-                    if (file.size > 2 * 1024 * 1024) {
-                        alert('Le fichier est trop volumineux. Taille maximale : 2 Mo');
-                        this.value = '';
-                        return;
-                    }
-                    
-                    // Vérification du type de fichier
-                    if (!file.type.match('image.*')) {
-                        alert('Veuillez sélectionner une image valide (JPEG, PNG, JPG, GIF)');
-                        this.value = '';
-                        return;
-                    }
-
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        previewContainer.innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover">`;
-                    }
-                    reader.readAsDataURL(file);
-                } else {
-                    previewContainer.innerHTML = `<svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                    </svg>`;
-                }
-            });
-        }
-
-        // Validation de l'email
-        const emailInput = document.getElementById('email');
-        if (emailInput) {
-            emailInput.addEventListener('blur', function() {
-                const email = this.value;
-                if (email && !email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-                    this.classList.add('border-red-400');
-                    // Créer un message d'erreur
-                    let errorMsg = this.parentElement.nextElementSibling;
-                    if (!errorMsg || !errorMsg.classList.contains('email-error')) {
-                        errorMsg = document.createElement('p');
-                        errorMsg.className = 'mt-1 text-sm text-red-600 email-error';
-                        errorMsg.textContent = 'Veuillez entrer une adresse email valide';
-                        this.parentElement.parentElement.appendChild(errorMsg);
-                    }
-                } else {
-                    this.classList.remove('border-red-400');
-                    const errorMsg = this.parentElement.parentElement.querySelector('.email-error');
-                    if (errorMsg) errorMsg.remove();
-                }
-            });
-        }
-
-        // Validation avant soumission
-        const form = document.querySelector('form');
-        if (form) {
-            form.addEventListener('submit', function(e) {
-                const requiredFields = document.querySelectorAll('[required]');
-                let isValid = true;
-                let firstInvalid = null;
-
-                requiredFields.forEach(field => {
-                    if (!field.value.trim()) {
-                        field.classList.add('border-red-400', 'bg-red-50');
-                        if (!firstInvalid) firstInvalid = field;
-                        isValid = false;
-                    } else {
-                        field.classList.remove('border-red-400', 'bg-red-50');
-                        field.classList.add('border-gray-200');
-                    }
-                });
-
-                // Validation supplémentaire pour l'email
-                const email = document.getElementById('email');
-                if (email && email.value && !email.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-                    email.classList.add('border-red-400');
-                    isValid = false;
-                    if (!firstInvalid) firstInvalid = email;
-                }
-
-                if (!isValid) {
-                    e.preventDefault();
-                    firstInvalid?.focus();
-                    
-                    // Notification toast
-                    const toast = document.createElement('div');
-                    toast.className = 'fixed top-4 right-4 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-lg shadow-lg z-50 animate-slideDown';
-                    toast.innerHTML = `
-                        <div class="flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            <span>Veuillez remplir tous les champs obligatoires correctement.</span>
-                        </div>
-                    `;
-                    document.body.appendChild(toast);
-                    
-                    setTimeout(() => {
-                        toast.remove();
-                    }, 3000);
-                }
-            });
-        }
-
-        // Animation des champs au focus
-        const inputs = document.querySelectorAll('input, select, textarea');
-        inputs.forEach(input => {
-            input.addEventListener('focus', function() {
-                this.closest('.group')?.classList.add('scale-[1.02]');
-            });
-            input.addEventListener('blur', function() {
-                this.closest('.group')?.classList.remove('scale-[1.02]');
-            });
+    // Validation du téléphone
+    const telephoneInput = document.getElementById('telephone');
+    if (telephoneInput) {
+        telephoneInput.addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9+\s\-]/g, '');
         });
-    });
+    }
+
+    // Aperçu de la photo
+    const photoInput = document.getElementById('photo');
+    const previewContainer = document.getElementById('photo-preview-container');
+    
+    if (photoInput && previewContainer) {
+        photoInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                if (file.size > 2 * 1024 * 1024) {
+                    alert('Le fichier est trop volumineux. Taille maximale : 2 Mo');
+                    this.value = '';
+                    return;
+                }
+                
+                if (!file.type.match('image.*')) {
+                    alert('Veuillez sélectionner une image valide (JPEG, PNG, JPG, GIF)');
+                    this.value = '';
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewContainer.innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover rounded-xl">`;
+                }
+                reader.readAsDataURL(file);
+            } else {
+                previewContainer.innerHTML = `<svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>`;
+            }
+        });
+    }
+
+    // Validation avant soumission
+    const form = document.querySelector('form');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            const requiredFields = document.querySelectorAll('[required]');
+            let isValid = true;
+            let firstInvalid = null;
+
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.classList.add('border-red-400', 'bg-red-50');
+                    if (!firstInvalid) firstInvalid = field;
+                    isValid = false;
+                } else {
+                    field.classList.remove('border-red-400', 'bg-red-50');
+                }
+            });
+
+            if (!isValid) {
+                e.preventDefault();
+                firstInvalid?.focus();
+            }
+        });
+    }
+});
 </script>
 @endpush

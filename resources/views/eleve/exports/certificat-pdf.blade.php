@@ -208,9 +208,9 @@
 
             <!-- En-tête de l'établissement -->
             <div class="header">
-                <div class="republique">République du Congo</div>
-                <div class="ministere">Ministère de l'Enseignement Primaire, Secondary et de l'Alphabétisation</div>
-                <div class="school-name">GROUPE SCOLAIRE LE MARIGOT V.F</div>
+                <div class="republique">République du Gabon</div>
+                <div class="ministere">Ministère de l'Éducation Nationale, de l'Instruction Civique et de la Formation Professionnelle </div>
+                <div class="school-name">ECOLE PRIVEE LAIQUE JEAN PIAGET</div>
                 <div class="school-tagline">Excellence - Discipline - Succès</div>
             </div>
 
@@ -222,7 +222,7 @@
 
             <!-- Corps du texte -->
             <div class="certify-text">
-                Le Conseil d'Administration et la Direction du Groupe Scolaire Le Marigot V.F,<br>
+                Le Conseil d'Administration et la Direction de l'École Privée Laïque Jean Piaget,<br>
                 certifient solennellement par la présente que l'élève :<br>
                 <div class="student-name">{{ $eleve->nom_complet }}</div><br>
                 Né(e) le <span class="highlight">{{ $eleve->date_naissance->format('d/m/Y') }}</span> à <span class="highlight">{{ $eleve->lieu_naissance }}</span>, titulaire du matricule <span class="highlight">{{ $eleve->matricule }}</span>,<br>
@@ -241,7 +241,6 @@
                     <td class="footer-cell">
                         <div class="signature-title">Le Secrétaire Général</div>
                         <div class="signature-line"></div>
-                        <div class="signature-name">Jean-Baptiste MPOUET</div>
                     </td>
                     <td class="footer-cell" style="vertical-align: middle;">
                         <!-- Médaille d'or vectorielle SVG haut de gamme -->
@@ -262,8 +261,8 @@
                             <polygon points="50,5 64,18 82,18 88,35 100,50 88,65 82,82 64,82 50,95 36,82 18,82 12,65 0,50 12,35 18,18 36,18" fill="#ca8a04" stroke="#854d0e" stroke-width="1" />
                             <circle cx="50" cy="50" r="35" fill="url(#goldGradient)" stroke="#ffffff" stroke-width="1.5" />
                             <circle cx="50" cy="50" r="31" fill="none" stroke="#854d0e" stroke-width="1" stroke-dasharray="2,2" />
-                            <text x="50" y="44" font-family="'Times New Roman', serif" font-size="7" font-weight="bold" fill="#ffffff" text-anchor="middle">LE MARIGOT</text>
-                            <text x="50" y="54" font-family="'Times New Roman', serif" font-size="8" font-weight="bold" fill="#ffffff" text-anchor="middle">V.F</text>
+                            <text x="50" y="44" font-family="'Times New Roman', serif" font-size="6" font-weight="bold" fill="#ffffff" text-anchor="middle">JEAN</text>
+                            <text x="50" y="54" font-family="'Times New Roman', serif" font-size="6" font-weight="bold" fill="#ffffff" text-anchor="middle">PIAGET</text>
                             <text x="50" y="64" font-family="'Times New Roman', serif" font-size="5" font-weight="bold" fill="#ffffff" text-anchor="middle">★ EXCELLENCE ★</text>
                         </svg>
                     </td>
@@ -272,7 +271,6 @@
                         <div class="signature-line"></div>
                         <div class="signature-name">
                             Fait à Brazzaville, le {{ date('d/m/Y') }}<br>
-                            Clément OKOMBI
                         </div>
                     </td>
                 </tr>
@@ -280,7 +278,7 @@
 
             <!-- Identifiant de vérification unique -->
             <div class="metadata">
-                Certificat de réussite Groupe Scolaire Le Marigot V.F généré officiellement le {{ date('d/m/Y H:i:s') }} | Code d'authenticité : {{ md5($eleve->matricule . $anneeScolaire->id) }}
+                Certificat de réussite École Privée Laïque Jean Piaget généré officiellement le {{ date('d/m/Y H:i:s') }} | Code d'authenticité : {{ md5($eleve->matricule . $anneeScolaire->id) }}
             </div>
         </div>
     </div>

@@ -72,7 +72,8 @@ class MatiereController extends Controller
     {
         $request->validate([
             'nom' => 'required|string|max:255',
-            'code' => 'required|string|max:50|unique:matieres,code|regex:/^[A-Z0-9]+$/',
+            // code n’est plus saisi manuellement
+            'code' => 'nullable|string|max:50|regex:/^[A-Z0-9]+$/',
             'description' => 'nullable|string|max:1000',
             'coefficient' => 'required|integer|min:1|max:10',
         ], [
@@ -81,12 +82,38 @@ class MatiereController extends Controller
         ]);
 
         try {
+            // Génération back-end sécurisée (évite la dépendance au JS)
+            $baseCode = strtoupper(
+                preg_replace('/[^A-Za-z0-9]/', '',
+                    iconv('UTF-8', 'ASCII//TRANSLIT', $request->nom)
+                )
+            );
+
+            $baseCode = substr($baseCode, 0, 10);
+            if ($baseCode === '') {
+                // fallback minimal
+                $baseCode = 'MAT';
+            }
+
+            $code = $baseCode;
+            $suffix = 2;
+            while (Matiere::query()->where('code', $code)->exists()) {
+                $maxBaseLen = max(0, 10 - (strlen((string)$suffix) + 1)); // + '_' 
+                $trimmedBase = substr($baseCode, 0, $maxBaseLen);
+                $code = $trimmedBase . '_' . $suffix;
+                if ($suffix > 9999) {
+                    throw new \Exception('Impossible de générer un code unique.');
+                }
+                $suffix++;
+            }
+
             $matiere = Matiere::create([
                 'nom' => $request->nom,
-                'code' => strtoupper($request->code),
+                'code' => $code,
                 'description' => $request->description,
                 'coefficient' => $request->coefficient,
             ]);
+
 
             return redirect()
                 ->route('admin.matieres.show', $matiere)

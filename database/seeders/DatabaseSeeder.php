@@ -42,11 +42,10 @@ class DatabaseSeeder extends Seeder
             ReinscriptionSeeder::class,
             EnseignantMatiereClasseSeeder::class,
             EvaluationSeeder::class,
+            BulletinSeeder::class,
             NoteSeeder::class,
             AbsenceSeeder::class,
-            BulletinSeeder::class,
             EmploiDuTempsSeeder::class,
-            EnsureUserDataSeeder::class,
         ]);
         // Supprimé : $this->call(UserSeeder::class) en double
     }

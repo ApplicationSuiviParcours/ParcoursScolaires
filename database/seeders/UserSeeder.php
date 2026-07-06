@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->command->info('🔄 Creating users (admin + linking for enseignants/eleves/parents)...');
+        $this->command->info('🔄 Création des utilisateurs (Administrateurs, 5 Enseignants, 5 Élèves, 5 Parents)...');
 
         // Admin
         $admin = User::create([
@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'role' => 'administrateur',
             'is_active' => true,
-            'photo' => 'https://i.pravatar.cc/150?u=admin',
+            'photo' => null,
         ]);
         $admin->assignRole('administrateur');
         $this->command->line('✅ Admin: admin@scolaire.cg / admin2024!');
@@ -37,17 +37,18 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'role' => 'administrateur',
             'is_active' => true,
-            'photo' => 'https://i.pravatar.cc/150?u=superadmin',
+            'photo' => null,
         ]);
         $superAdmin->assignRole('administrateur');
         $this->command->line('✅ Super Admin: superadmin@scolaire.cg / superadmin2024!');
 
-        // Users for EnseignantSeeder (All 10)
+        // Users for EnseignantSeeder (Exactly 5)
         $enseignantEmails = [
-            'ndinga@enseignant.cg', 'bidimbe@enseignant.cg', 'kimbonda@enseignant.cg',
-            'loubaki@enseignant.cg', 'pemba@enseignant.cg', 'ngoma@enseignant.cg',
-            'massoukou@enseignant.cg', 'ossibi@enseignant.cg', 'koumba@enseignant.cg',
-            'bissikabe@enseignant.cg'
+            'ndinga@enseignant.cg', 
+            'bidimbe@enseignant.cg', 
+            'kimbonda@enseignant.cg',
+            'loubaki@enseignant.cg', 
+            'pemba@enseignant.cg'
         ];
         foreach ($enseignantEmails as $email) {
             $name = ucwords(explode('@', $email)[0]);
@@ -59,14 +60,16 @@ class UserSeeder extends Seeder
                 'is_active' => true,
             ]);
             $user->assignRole('enseignant');
-            $this->command->line("✅ Enseignant: {$email}");
+            $this->command->line("✅ Enseignant User: {$email}");
         }
 
-        // Users for EleveSeeder (All 10)
+        // Users for EleveSeeder (Exactly 5)
         $eleveEmails = [
-            'mouana@eleve.cg', 'koubemba@eleve.cg', 'serge@eleve.cg', 'estelle@eleve.cg',
-            'patrice@eleve.cg', 'martine@eleve.cg', 'joel@eleve.cg', 'solange@eleve.cg',
-            'aristide@eleve.cg', 'therese@eleve.cg'
+            'mouana@eleve.cg', 
+            'koubemba@eleve.cg', 
+            'serge@eleve.cg', 
+            'estelle@eleve.cg',
+            'patrice@eleve.cg'
         ];
         foreach ($eleveEmails as $email) {
             $name = ucwords(explode('@', $email)[0]);
@@ -78,14 +81,16 @@ class UserSeeder extends Seeder
                 'is_active' => true,
             ]);
             $user->assignRole('eleve');
-            $this->command->line("✅ Eleve: {$email}");
+            $this->command->line("✅ Eleve User: {$email}");
         }
 
-        // Users for ParentEleveSeeder (All 10)
+        // Users for ParentEleveSeeder (Exactly 5)
         $parentEmails = [
-            'itoua@parent.cg', 'moutou@parent.cg', 'gombe@parent.cg', 'bissikabe@parent.cg',
-            'lekolo@parent.cg', 'moue@parent.cg', 'kimbonda@parent.cg', 'pemba@parent.cg',
-            'ngoma@parent.cg', 'estelle@parent.cg'
+            'itoua@parent.cg', 
+            'moutou@parent.cg', 
+            'gombe@parent.cg', 
+            'bissikabe@parent.cg',
+            'lekolo@parent.cg'
         ];
         foreach ($parentEmails as $email) {
             $name = ucwords(explode('@', $email)[0]);
@@ -97,9 +102,9 @@ class UserSeeder extends Seeder
                 'is_active' => true,
             ]);
             $user->assignRole('parent');
-            $this->command->line("✅ Parent: {$email}");
+            $this->command->line("✅ Parent User: {$email}");
         }
 
-        $this->command->info('✅ UserSeeder complete! All entities have user accounts with roles.');
+        $this->command->info('✅ UserSeeder complété !');
     }
 }

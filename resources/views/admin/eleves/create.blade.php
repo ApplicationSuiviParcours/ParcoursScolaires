@@ -22,6 +22,29 @@
             </div>
         @endif
 
+        <!-- ✅ AJOUT : Messages de succès ou warning -->
+        @if(session('success'))
+            <div class="mb-3 md:mb-4 p-3 md:p-4 bg-green-50 border-l-4 border-green-500 text-green-700 rounded-r-lg shadow text-xs md:text-sm" role="alert">
+                <div class="flex items-center">
+                    <svg class="w-4 h-4 md:w-5 md:h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <p class="font-medium">{{ session('success') }}</p>
+                </div>
+            </div>
+        @endif
+
+        @if(session('warning'))
+            <div class="mb-3 md:mb-4 p-3 md:p-4 bg-yellow-50 border-l-4 border-yellow-500 text-yellow-700 rounded-r-lg shadow text-xs md:text-sm" role="alert">
+                <div class="flex items-center">
+                    <svg class="w-4 h-4 md:w-5 md:h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                    <p class="font-medium">{{ session('warning') }}</p>
+                </div>
+            </div>
+        @endif
+
         <!-- En-tête avec progression -->
         <div class="mb-4 md:mb-6">
             <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1 mb-2">
@@ -30,6 +53,23 @@
             </div>
             <div class="w-full bg-gray-200 h-0.5">
                 <div class="bg-blue-900 h-0.5 w-full"></div>
+            </div>
+        </div>
+
+        <!-- ✅ AJOUT : Message d'information important -->
+        <div class="mb-4 md:mb-6 p-3 md:p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <div class="flex items-start">
+                <svg class="w-5 h-5 text-blue-600 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <div class="text-xs md:text-sm text-blue-800">
+                    <p class="font-semibold mb-1">📧 Important concernant l'email :</p>
+                    <ul class="list-disc list-inside space-y-0.5 text-[10px] md:text-xs">
+                        <li>L'email est <strong>obligatoire</strong> pour la connexion à la plateforme</li>
+                        <li>Les identifiants de connexion seront envoyés à cette adresse</li>
+                        <li>Utilisez une adresse email valide et accessible</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -129,7 +169,7 @@
                         </div>
                     </div>
 
-                    <!-- Section Contact -->
+                    <!-- ✅ Section Contact CORRIGÉE -->
                     <div>
                         <div class="flex items-center mb-3 pb-2 border-b border-gray-200">
                             <div class="bg-blue-800 w-1 h-5 md:h-6 mr-2 md:mr-3 rounded-full"></div>
@@ -138,14 +178,18 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                             <div>
                                 <label for="telephone" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Téléphone</label>
-                                 <input type="tel" name="telephone" id="telephone" placeholder="77 123 45 67"
-                                        inputmode="numeric" pattern="[0-9\s\+\-]{6,20}"
-                                        class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1" value="{{ old('telephone') }}">
+                                <input type="tel" name="telephone" id="telephone" placeholder="77 123 45 67"
+                                       inputmode="numeric" pattern="[0-9\s\+\-]{6,20}"
+                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1 @error('telephone') border-red-500 @enderror" value="{{ old('telephone') }}">
+                                @error('telephone')<p class="mt-1 text-[10px] text-red-600">{{ $message }}</p>@enderror
                             </div>
                             <div>
-                                <label for="email" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Email</label>
-                                <input type="email" name="email" id="email" placeholder="eleve@exemple.com"
-                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1" value="{{ old('email') }}">
+                                <!-- ✅ AJOUT : required et astérisque -->
+                                <label for="email" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Email <span class="text-red-500">*</span></label>
+                                <input type="email" name="email" id="email" required placeholder="eleve@exemple.com"
+                                       class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1 @error('email') border-red-500 @enderror" value="{{ old('email') }}">
+                                @error('email')<p class="mt-1 text-[10px] text-red-600">{{ $message }}</p>@enderror
+                                <p class="mt-1 text-[10px] text-gray-500">📧 L'email servira pour la connexion et l'envoi des identifiants</p>
                             </div>
                         </div>
                     </div>
@@ -159,12 +203,13 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                             <div>
                                 <label for="classe_inscription_id" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Classe</label>
-                                <select name="classe_inscription_id" id="classe_inscription_id" class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1">
+                                <select name="classe_inscription_id" id="classe_inscription_id" class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1 @error('classe_inscription_id') border-red-500 @enderror">
                                     <option value="">Sélectionner (optionnel)</option>
                                     @foreach($classes as $classe)
                                         <option value="{{ $classe->id }}" {{ old('classe_inscription_id') == $classe->id ? 'selected' : '' }}>{{ $classe->nom_complet }}</option>
                                     @endforeach
                                 </select>
+                                @error('classe_inscription_id')<p class="mt-1 text-[10px] text-red-600">{{ $message }}</p>@enderror
                             </div>
                             <div>
                                 <label class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Année scolaire</label>
@@ -173,7 +218,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Info Note -->
                         <div class="mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg text-[10px] md:text-xs text-blue-700">
                             <span class="font-semibold">Note :</span> Si vous sélectionnez une classe, une inscription sera créée automatiquement.
                         </div>
@@ -190,7 +234,9 @@
                                 <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                             </div>
                             <div class="flex-1 w-full">
-                                <input type="file" name="photo" id="photo" accept="image/*" class="block w-full text-xs text-gray-500 file:mr-2 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100">
+                                <input type="file" name="photo" id="photo" accept="image/*" 
+                                       class="block w-full text-xs text-gray-500 file:mr-2 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-900 hover:file:bg-blue-100 @error('photo') border-red-500 @enderror">
+                                @error('photo')<p class="mt-1 text-[10px] text-red-600">{{ $message }}</p>@enderror
                                 <p class="mt-1 text-[10px] text-gray-500">Formats : JPEG, PNG (max. 2 Mo)</p>
                             </div>
                         </div>
@@ -205,7 +251,7 @@
                         <div>
                             <label for="adresse" class="block text-[10px] md:text-xs font-semibold text-gray-600 uppercase mb-1">Adresse <span class="text-red-500">*</span></label>
                             <textarea name="adresse" id="adresse" rows="2" required placeholder="123 Rue Liberté, Dakar"
-                                      class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1">{{ old('adresse') }}</textarea>
+                                      class="block w-full px-3 md:px-4 py-2.5 md:py-3 border rounded-lg text-xs md:text-sm focus:border-blue-900 focus:ring-1 @error('adresse') border-red-500 @enderror">{{ old('adresse') }}</textarea>
                             @error('adresse')<p class="mt-1 text-[10px] text-red-600">{{ $message }}</p>@enderror
                         </div>
                     </div>
@@ -221,8 +267,8 @@
                             <div>
                                 <h5 class="text-xs md:text-sm font-semibold text-indigo-900 mb-1">Compte utilisateur automatique</h5>
                                 <p class="text-[10px] md:text-xs text-blue-900 leading-relaxed">
-                                    Un compte utilisateur sera <strong>automatiquement créé</strong> pour cet élève. 
-                                    Le mot de passe par défaut est : <code class="bg-white px-1.5 py-0.5 rounded border border-indigo-200 font-bold">password</code>.
+                                    Un compte utilisateur sera <strong>automatiquement créé</strong> pour cet élève avec l'email saisi ci-dessus.
+                                    Le mot de passe sera généré automatiquement et envoyé par email.
                                 </p>
                             </div>
                         </div>
@@ -235,7 +281,7 @@
                             Annuler
                         </a>
                         <button type="submit"
-                                class="w-full sm:w-auto px-4 md:px-6 py-2.5 md:py-3 bg-blue-900 text-white hover:bg-blue-800 text-xs md:text-sm font-medium rounded-lg shadow-sm">
+                                class="w-full sm:w-auto px-4 md:px-6 py-2.5 md:py-3 bg-blue-900 text-white hover:bg-blue-800 text-xs md:text-sm font-medium rounded-lg shadow-sm transition-colors">
                             Enregistrer l'élève
                         </button>
                     </div>
@@ -256,10 +302,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Photo Preview
     const photoInput = document.getElementById('photo');
     const photoPreview = document.getElementById('photo-preview');
 
-    // Photo Preview
     if (photoInput && photoPreview) {
         photoInput.addEventListener('change', function(e) {
             const file = e.target.files[0];

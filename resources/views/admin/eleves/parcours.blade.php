@@ -150,7 +150,7 @@
                                                 <div class="p-3 bg-gray-50 rounded-2xl border border-gray-100 text-center">
                                                     <span class="text-[10px] text-gray-500 block uppercase font-bold tracking-widest">Moy. An</span>
                                                     @php
-                                                        $moyenneAnnee = $bulletinsAnnee->avg('moyenne');
+                                                        $moyenneAnnee = $bulletinsAnnee->isNotEmpty() ? round($bulletinsAnnee->avg('moyenne_generale'), 2) : null;
                                                     @endphp
                                                     <span class="text-lg font-black {{ $moyenneAnnee >= 10 ? 'text-green-600' : 'text-amber-600' }}">
                                                         {{ $moyenneAnnee ? number_format($moyenneAnnee, 2) : '--' }}
@@ -179,6 +179,19 @@
                                                    class="inline-flex items-center px-4 py-2 bg-white border-2 border-gray-100 text-gray-700 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-gray-50 transition-all">
                                                     Absences
                                                 </a>
+                                                @php
+                                                    $bulletinsAnneeAdmin = $eleve->bulletins->where('annee_scolaire_id', $item['annee_scolaire']->id);
+                                                    $moyenneAnneeAdmin = $bulletinsAnneeAdmin->isNotEmpty() ? round($bulletinsAnneeAdmin->avg('moyenne_generale'), 2) : null;
+                                                @endphp
+                                                @if($moyenneAnneeAdmin !== null && $moyenneAnneeAdmin >= 10)
+                                                    <a href="{{ route('admin.eleves.certificat', ['eleve' => $eleve->id, 'annee_scolaire_id' => $item['annee_scolaire']->id]) }}"
+                                                       class="inline-flex items-center gap-1 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-xl text-[10px] font-black uppercase tracking-widest transition-all shadow-lg shadow-amber-200">
+                                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                                        </svg>
+                                                        🎓 Certificat
+                                                    </a>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

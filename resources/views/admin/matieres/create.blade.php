@@ -94,11 +94,13 @@
                     @csrf
 
                     <div class="space-y-5 md:space-y-6">
-                        <!-- Code -->
+                        <!-- Code (généré automatiquement) -->
+                        <input type="hidden" name="code" id="code">
+
                         <div class="group">
-                            <label for="code" class="block text-xs md:text-sm font-semibold text-gray-700 mb-2 group-hover:text-emerald-600 transition-colors duration-300">
-                                Code <span class="text-red-500">*</span>
-                                <span class="text-xs text-gray-500 ml-1 hidden sm:inline">(Lettres majuscules et chiffres uniquement)</span>
+                            <label class="block text-xs md:text-sm font-semibold text-gray-700 mb-2 group-hover:text-emerald-600 transition-colors duration-300">
+                                Code
+                                <span class="text-xs text-gray-500 ml-1 hidden sm:inline">(généré automatiquement)</span>
                             </label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -106,25 +108,12 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
                                     </svg>
                                 </div>
-                                <input type="text" 
-                                       name="code" 
-                                       id="code" 
-                                       value="{{ old('code') }}"
-                                       placeholder="Ex: MATH, FR, ANG..."
-                                       class="w-full pl-12 pr-4 py-2.5 md:py-3 rounded-xl border-2 border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition-all duration-300 @error('code') border-red-500 @enderror uppercase text-sm md:text-base"
-                                       required
-                                       maxlength="10">
-                                <div class="absolute inset-y-0 right-0 pr-4 flex items-center">
-                                    <span class="text-xs text-gray-400" id="codeLength">0/10</span>
+                                <div class="w-full pl-12 pr-4 py-2.5 md:py-3 rounded-xl border-2 border-gray-200 text-gray-600 bg-white/60" id="codePreview">
+                                    CODE
                                 </div>
                             </div>
-                            <div class="mt-1 flex items-center text-xs text-gray-500">
-                                <span id="codeStatus" class="flex items-center"></span>
-                            </div>
-                            @error('code')
-                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
                         </div>
+
 
                         <!-- Nom -->
                         <div class="group">
@@ -345,26 +334,38 @@
         field.addEventListener('change', updateProgressBar);
     });
 
-    // Gestion du code (majuscules automatiques)
+    // Génération automatique du code à partir du nom
     const codeInput = document.getElementById('code');
-    const codeLength = document.getElementById('codeLength');
-    const codeStatus = document.getElementById('codeStatus');
+    const codePreview = document.getElementById('codePreview');
+
+    function toCodeFromNom(nom) {
+        if (!nom) return '';
+        // slug-like en majuscules : lettres/chiffres uniquement
+        const base = nom
+            .toString()
+            .trim()
+            .toUpperCase()
+            .normalize('NFD')
+            .replace(/\p{Diacritic}/gu, '')
+            .replace(/[^A-Z0-9]/g, '');
+
+        // Limiter à 10 caractères (cohérent avec le modèle)
+        return base.substring(0, 10);
+    }
 
     if (codeInput) {
-        codeInput.addEventListener('input', function() {
-            this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
-            if (codeLength) codeLength.textContent = this.value.length + '/10';
-            
-            // Vérifier l'unicité du code (simulé)
-            if (this.value.length >= 2) {
-                if (codeStatus) codeStatus.innerHTML = '<span class="text-green-600"><svg class="w-3 h-3 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Code disponible</span>';
-            } else {
-                if (codeStatus) codeStatus.innerHTML = '';
-            }
-            updatePreview();
-            updateProgressBar();
-        });
+        const nomEl = document.getElementById('nom');
+        const updateCode = () => {
+            const nom = nomEl ? nomEl.value : '';
+            const generated = toCodeFromNom(nom);
+            codeInput.value = generated;
+            if (codePreview) codePreview.textContent = generated || 'CODE';
+        };
+
+        if (nomEl) nomEl.addEventListener('input', updateCode);
+        updateCode();
     }
+
 
     // Prévisualisation en temps réel
     function updatePreview() {

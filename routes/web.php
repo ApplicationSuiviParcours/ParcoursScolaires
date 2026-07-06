@@ -142,6 +142,7 @@ Route::middleware(['auth', 'role:administrateur'])->group(function () {
     Route::get('/admin/eleves/{eleve}/parcours', [EleveAdminController::class, 'parcours'])->name('admin.eleves.parcours');
     Route::get('/admin/eleves/{eleve}/profil-pdf', [EleveAdminController::class, 'exportProfilPdf'])->name('admin.eleves.exports.profil-pdf');
     Route::get('/admin/eleves/{eleve}/releve-notes-pdf', [EleveAdminController::class, 'exportReleveNotesPdf'])->name('admin.eleves.releve-notes-pdf');
+    Route::get('/admin/eleves/{eleve}/certificat', [EleveAdminController::class, 'exportCertificatPdf'])->name('admin.eleves.certificat');
 
     // Enseignants routes
     Route::get('/admin/enseignants', [EnseignantAdminController::class, 'index'])->name('admin.enseignants.index');
@@ -363,7 +364,7 @@ Route::middleware(['auth', 'role:eleve'])->group(function () {
     Route::get('/eleve/emploi-du-temps/export-pdf', [EleveController::class, 'exportEmploiDuTempsPdf'])->name('eleve.emploi-du-temps.exportPdf');
     Route::get('/eleve/emploi-du-temps/imprimer', [EleveController::class, 'imprimerEmploiDuTemps'])->name('eleve.emploi-du-temps.imprimer');
     Route::get('/eleve/mon-parcours', [EleveController::class, 'monParcours'])->name('eleve.parcours');
-    Route::get('/eleve/parcours/{annee_scolaire_id}/certificat', [EleveController::class, 'exportCertificatPdf'])->name('eleve.certificat');
+    // Route certificat supprimée : seul l'administrateur peut télécharger le certificat de réussite
 });
 
 // ============================================
