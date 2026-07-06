@@ -488,6 +488,13 @@
                                 <a href="{{ route('admin.notes.index') }}" class="block py-1.5 text-xs sm:text-sm {{ request()->routeIs('admin.notes.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Notes</a>
                                 <a href="{{ route('admin.bulletins.index') }}" class="block py-1.5 text-xs sm:text-sm {{ request()->routeIs('admin.bulletins.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Bulletins</a>
                                 <a href="{{ route('admin.absences.index') }}" class="block py-1.5 text-xs sm:text-sm {{ request()->routeIs('admin.absences.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Absences</a>
+
+                                <!-- Tableau d'honneur -->
+                                <a href="{{ route('admin.tableau_honneur.index') }}" class="block py-1.5 text-xs sm:text-sm {{ request()->routeIs('admin.tableau_honneur.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Tableau d'honneur</a>
+
+                                <!-- Présences rapides -->
+                                <a href="{{ route('admin.presences_rapides.create') }}" class="block py-1.5 text-xs sm:text-sm {{ request()->routeIs('admin.presences_rapides.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Présences</a>
+
                                 <a href="{{ route('admin.emploi_du_temps.index') }}" class="block py-1.5 text-xs sm:text-sm {{ request()->routeIs('admin.emploi_du_temps.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Emploi du temps</a>
                                 <a href="{{ route('admin.enseignant_matiere_classes.index') }}" class="block py-1.5 text-xs sm:text-sm {{ request()->routeIs('admin.enseignant_matiere_classes.*') ? 'text-white font-bold' : 'text-purple-200 hover:text-white' }}">Enseignants-Classes</a>
                             </div>

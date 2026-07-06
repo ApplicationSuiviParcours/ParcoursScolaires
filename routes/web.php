@@ -25,6 +25,9 @@ use App\Http\Controllers\Admin\EvaluationAdminController;
 use App\Http\Controllers\Admin\EnseignantMatiereClasseAdminController;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\Admin\TableauHonneurController;
+use App\Http\Controllers\Admin\PresenceRapideController;
+
 
 use Illuminate\Support\Facades\Auth;  // ← IMPORTANT
 use Illuminate\Support\Facades\Route;
@@ -205,6 +208,16 @@ Route::middleware(['auth', 'role:administrateur'])->group(function () {
 
     // Absences routes
     Route::get('/admin/absences', [AbsenceController::class, 'index'])->name('admin.absences.index');
+
+    // Tableau d’honneur (par période)
+    Route::get('/admin/tableau-honneur', [TableauHonneurController::class, 'index'])->name('admin.tableau_honneur.index');
+    Route::get('/admin/tableau-honneur/print', [TableauHonneurController::class, 'print'])->name('admin.tableau_honneur.print');
+
+    // Saisie rapide présences (absences cochées)
+    Route::get('/admin/presences-rapides', [PresenceRapideController::class, 'create'])->name('admin.presences_rapides.create');
+    Route::post('/admin/presences-rapides', [PresenceRapideController::class, 'store'])->name('admin.presences_rapides.store');
+    Route::get('/admin/presences-rapides/print', [PresenceRapideController::class, 'print'])->name('admin.presences_rapides.print');
+
     Route::get('/admin/absences/by-classe', [AbsenceController::class, 'byClasse'])->name('admin.absences.byClasse');
     Route::get('/admin/absences/eleve/{eleve}', [AbsenceController::class, 'byEleve'])->name('admin.absences.byEleve');
     Route::get('/admin/absence/create',[AbsenceController::class, 'create'] )->name('admin.absences.create');
@@ -289,10 +302,10 @@ Route::middleware(['auth', 'role:administrateur'])->group(function () {
     Route::delete('/admin/enseignant-matiere-classes/{enseignantMatiereClasse}', [EnseignantMatiereClasseAdminController::class, 'destroy'])->name('admin.enseignant_matiere_classes.destroy');
 });
 
-// ============================================
-// ROUTES ENSEIGNANT
-// ============================================
-Route::middleware(['auth', 'role:enseignant'])->prefix('enseignant')->name('enseignant.')->group(function () {
+    // ============================================
+    // ROUTES ENSEIGNANT
+    // ============================================
+    Route::middleware(['auth', 'role:enseignant'])->prefix('enseignant')->name('enseignant.')->group(function () {
 
     // Dashboard
     Route::get('/dashboard', [EnseignantController::class, 'dashboard'])->name('dashboard');

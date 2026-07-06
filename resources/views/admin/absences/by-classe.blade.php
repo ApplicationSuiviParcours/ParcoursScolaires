@@ -328,7 +328,7 @@
                                         </div>
                                     </td>
                                     <td class="px-3 md:px-6 py-3 md:py-4 text-center">
-                                        <a href="{{ route('admin.absences.by-eleve', $eleve) }}?annee_scolaire_id={{ $anneeScolaireId }}"
+<a href="{{ route('admin.absences.byEleve', $eleve) }}?annee_scolaire_id={{ $anneeScolaireId }}"
                                             class="inline-flex items-center px-2 py-1 md:px-3 md:py-2 bg-teal-100 text-teal-700 rounded-lg md:rounded-xl hover:bg-teal-600 hover:text-white transition-all duration-300 transform hover:scale-105 text-[10px] md:text-sm">
                                             <svg class="w-3 h-3 md:w-4 md:h-4 sm:mr-1" fill="none" stroke="currentColor"
                                                 viewBox="0 0 24 24">

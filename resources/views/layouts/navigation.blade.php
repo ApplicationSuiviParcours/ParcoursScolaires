@@ -44,7 +44,28 @@
                     </x-nav-link>
                     @endif
 
+                    @if(Auth::user()->isAdmin())
+                        <x-nav-link :href="route('admin.tableau_honneur.index')" :active="request()->routeIs('admin.tableau_honneur.*')" class="relative px-2 md:px-3 lg:px-4 py-2 rounded-lg transition-all duration-200">
+                            <div class="flex items-center space-x-1 sm:space-x-2">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 21h8M12 17V3m0 0l-4 4m4-4l4 4"/>
+                                </svg>
+                                <span class="text-xs sm:text-sm md:text-base">Tableau d’honneur</span>
+                            </div>
+                        </x-nav-link>
+
+                        <x-nav-link :href="route('admin.presences_rapides.create')" :active="request()->routeIs('admin.presences_rapides.*')" class="relative px-2 md:px-3 lg:px-4 py-2 rounded-lg transition-all duration-200">
+                            <div class="flex items-center space-x-1 sm:space-x-2">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3M5 10h14M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                                <span class="text-xs sm:text-sm md:text-base">Présences</span>
+                            </div>
+                        </x-nav-link>
+                    @endif
+
                     @if(Auth::user()->isEleve())
+
                     <x-nav-link :href="route('eleve.notes')" :active="request()->routeIs('eleve.notes*')" class="relative px-2 md:px-3 lg:px-4 py-2 rounded-lg transition-all duration-200">
                         <div class="flex items-center space-x-1 sm:space-x-2">
                             <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
