@@ -120,6 +120,7 @@ class PresenceRapideController extends Controller
             $heureFin = $validated['heure_fin'] ?? null;
             $motif = $validated['motif'] ?? null;
 
+            // Synchronisation explicite: on ne crée une absence que pour les élèves cochés
             $payloads = [];
             foreach ($eleveIdsAbsents as $eleveId) {
                 $payloads[] = [

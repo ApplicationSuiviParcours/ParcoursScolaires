@@ -152,8 +152,16 @@
                                             <div class="text-[10px] md:text-xs text-gray-500">{{ $eleve->matricule ?? 'N/A' }}</div>
                                         </td>
                                         <td class="px-3 md:px-6 py-3 md:py-4 text-center">
-                                            @php $checked = $absentsExistants->contains($eleve->id); @endphp
-                                            <input type="checkbox" name="eleve_ids_absents[]" value="{{ $eleve->id }}" {{ $checked ? 'checked' : '' }} class="w-5 h-5" />
+                                            @php
+                                                $isAbsent = $absentsExistants->contains($eleve->id);
+                                            @endphp
+
+                                            <label class="inline-flex items-center justify-center gap-2 cursor-pointer">
+                                                <input type="checkbox" name="eleve_ids_absents[]" value="{{ $eleve->id }}" {{ $isAbsent ? 'checked' : '' }} class="w-5 h-5" />
+                                                <span class="text-xs font-semibold text-gray-700">Absent</span>
+                                            </label>
+
+                                            <input type="hidden" name="eleve_ids_present[]" value="{{ $eleve->id }}" />
                                         </td>
                                     </tr>
                                 @empty

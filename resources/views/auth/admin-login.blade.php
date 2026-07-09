@@ -1,5 +1,10 @@
 <x-guest-layout>
-    <x-auth-session-status class="mb-3" :status="session('status')" />
+    {{-- Désactivation affichage session('status') pour éviter le message "statut" toujours visible --}}
+    @php($status = session('status'))
+    @if(!empty($status) && !is_array($status))
+        <x-auth-session-status class="mb-3" :status="$status" />
+    @endif
+
 
     <div class="mb-3 text-center">
         <div class="relative inline-flex items-center justify-center mb-2">
