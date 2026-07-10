@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Mail\CompteUtilisateurCree;
+use Illuminate\Support\Facades\Log;
 
 class ParentAdminController extends Controller
 {
@@ -147,11 +148,11 @@ class ParentAdminController extends Controller
                 ));
                 session()->flash('email_success', $email);
             } catch (\Exception $mailException) {
-                \Log::warning('Email non envoyé pour ' . $email . ' : ' . $mailException->getMessage());
+                Log::warning('Email non envoyé pour ' . $email . ' : ' . $mailException->getMessage());
                 session()->flash('warning', '⚠️ Le compte a été créé mais l\'email n\'a pas pu être envoyé à ' . $email . '. Vérifiez la configuration SMTP ou l\'adresse email du parent.');
             }
         } else {
-            \Log::info('Pas d\'email envoyé pour ' . $email . ' : adresse non renseignée ou fictive.');
+            Log::info('Pas d\'email envoyé pour ' . $email . ' : adresse non renseignée ou fictive.');
             session()->flash('warning', '⚠️ Aucun email n\'a été envoyé car ce parent n\'a pas d\'adresse email réelle. Pensez à renseigner son email dans son profil pour lui envoyer ses identifiants.');
         }
 
@@ -159,13 +160,24 @@ class ParentAdminController extends Controller
         if ($request->has('eleve_ids')) {
             foreach ($request->eleve_ids as $index => $eleveId) {
                 $lien = $request->liens_parentaux[$index] ?? 'parent';
-                
+
                 EleveParent::create([
                     'parent_eleve_id' => $parent->id,
                     'eleve_id' => $eleveId,
                     'lien_parental' => $lien,
                 ]);
             }
+        }
+
+        // Si on vient de la création d'un parent depuis la page d'inscription,
+        // on redirige vers la page d'inscription en pré-sélectionnant le parent.
+        $returnTo = $request->get('return_to');
+        if ($returnTo === 'inscriptions_create') {
+            return redirect()
+                ->route('admin.inscriptions.create', [
+                    'parent_created_id' => $parent->id,
+                ])
+                ->with('success', 'Parent créé avec succès.');
         }
 
         return redirect()

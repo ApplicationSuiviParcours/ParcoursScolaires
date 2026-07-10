@@ -62,9 +62,11 @@
                             @endif
 
                             <div class="space-y-6">
-                                <!-- Choix de l'élève (Existant ou Nouveau) -->
+                                <!-- Choix de l'élève (Existant ou Nouveau) + Nouvel Parent -->
                                 <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                                    <div class="flex items-center space-x-6">
+                                    <div class="flex items-start justify-between gap-4">
+                                        <div class="flex items-center space-x-6">
+
                                         <label class="inline-flex items-center cursor-pointer group">
                                             <input type="radio" name="is_new_eleve" value="0" class="form-radio h-5 w-5 text-green-600 border-gray-300 focus:ring-green-500" {{ old('is_new_eleve', request('is_new_eleve', '0')) == '0' ? 'checked' : '' }} onchange="toggleStudentType(false)">
                                             <span class="ml-2 text-gray-700 font-medium group-hover:text-green-600 transition-colors">Élève existant (Réinscription)</span>
@@ -72,6 +74,11 @@
                                         <label class="inline-flex items-center cursor-pointer group">
                                             <input type="radio" name="is_new_eleve" value="1" class="form-radio h-5 w-5 text-green-600 border-gray-300 focus:ring-green-500" {{ old('is_new_eleve', request('is_new_eleve', '0')) == '1' ? 'checked' : '' }} onchange="toggleStudentType(true)">
                                             <span class="ml-2 text-gray-700 font-medium group-hover:text-green-600 transition-colors">Nouvel élève (Inscription)</span>
+                                        </label>
+                                        <div class="h-6 w-px bg-gray-300" id="parent-divider"></div>
+                                        <label class="inline-flex items-center cursor-pointer group transition-opacity duration-200 opacity-50 cursor-not-allowed" id="new-parent-checkbox-container">
+                                            <input type="checkbox" name="is_new_parent" id="is_new_parent" value="1" disabled class="form-checkbox h-5 w-5 text-green-600 border-gray-300 focus:ring-green-500 rounded disabled:opacity-50" {{ old('is_new_parent') == '1' ? 'checked' : '' }} onchange="toggleParentType(this.checked)">
+                                            <span class="ml-2 text-gray-700 font-medium group-hover:text-green-600 transition-colors">Nouvel Parent</span>
                                         </label>
                                     </div>
                                 </div>
@@ -166,17 +173,7 @@
                                             <input type="email" name="email" id="email" value="{{ old('email') }}" class="block w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" placeholder="Laissez vide pour générer un email">
                                             <p class="text-xs text-gray-500 mt-1">Si vide, l'email sera : matricule@scolaireparcours.com</p>
                                         </div>
-                                        <div class="space-y-1">
-                                            <label for="parent_id" class="block text-sm font-semibold text-gray-700">Associer à un parent (Optionnel)</label>
-                                            <select name="parent_id" id="parent_id" class="block w-full py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
-                                                <option value="">-- Aucun parent pour le moment --</option>
-                                                @foreach($parents as $parent)
-                                                    <option value="{{ $parent->id }}" {{ old('parent_id') == $parent->id ? 'selected' : '' }}>
-                                                        {{ $parent->nom }} {{ $parent->prenom }} ({{ $parent->matricule ?? 'N/A' }})
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+
                                         
                         </div>
                                         <div class="md:col-span-2 space-y-1">
@@ -206,6 +203,81 @@
                                         </div>
                                     </div>
 
+                                    <!-- Section Parent (Dropdown Parent Existant et Création Parent) -->
+                                    <div class="lg:col-span-2 space-y-4 mb-6">
+                                        <div class="space-y-1" id="parent-dropdown-container">
+                                            <label for="parent_id" class="block text-sm font-semibold text-gray-700">Associer à un parent (Optionnel)</label>
+                                            <select name="parent_id" id="parent_id" class="block w-full py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                                                <option value="">-- Aucun parent pour le moment --</option>
+                                                @foreach($parents as $parent)
+                                                    @php($parentCreatedId = request('parent_created_id'))
+                                                    <option value="{{ $parent->id }}" {{ (old('parent_id') == $parent->id || (!old('parent_id') && $parentCreatedId == $parent->id)) ? 'selected' : '' }}>
+                                                        {{ $parent->nom }} {{ $parent->prenom }} ({{ $parent->matricule ?? 'N/A' }})
+                                                     </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <!-- Nouveau Parent -->
+                                        <div id="new-parent-fields" class="grid grid-cols-1 md:grid-cols-2 gap-6 {{ old('is_new_parent') == '1' ? '' : 'hidden' }} p-6 bg-blue-50/50 rounded-xl border border-blue-200">
+                                        <div class="md:col-span-2">
+                                            <h4 class="text-lg font-bold text-blue-900 mb-2 flex items-center border-b pb-2 border-blue-200">
+                                                <svg class="w-6 h-6 mr-2 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                                </svg>
+                                                CRÉATION DU PARENT (Nouvel Parent)
+                                            </h4>
+                                            <p class="text-xs text-blue-800">Remplissez les informations ci-dessous pour créer le parent et l'associer au nouvel élève.</p>
+                                        </div>
+                                        <div class="space-y-1">
+                                            <label for="parent_nom" class="block text-sm font-semibold text-gray-700">Nom du parent <span class="text-red-500">*</span></label>
+                                            <input type="text" name="parent_nom" id="parent_nom" value="{{ old('parent_nom') }}" class="new-parent-required block w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                                        </div>
+                                        <div class="space-y-1">
+                                            <label for="parent_prenom" class="block text-sm font-semibold text-gray-700">Prénom du parent <span class="text-red-500">*</span></label>
+                                            <input type="text" name="parent_prenom" id="parent_prenom" value="{{ old('parent_prenom') }}" class="new-parent-required block w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                                        </div>
+                                        <div class="space-y-1">
+                                            <label for="parent_genre" class="block text-sm font-semibold text-gray-700">Genre <span class="text-red-500">*</span></label>
+                                            <select name="parent_genre" id="parent_genre" class="new-parent-required block w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                                                <option value="m" {{ old('parent_genre') == 'm' ? 'selected' : '' }}>Masculin</option>
+                                                <option value="f" {{ old('parent_genre') == 'f' ? 'selected' : '' }}>Féminin</option>
+                                            </select>
+                                        </div>
+                                        <div class="space-y-1">
+                                            <label for="parent_telephone" class="block text-sm font-semibold text-gray-700">Téléphone <span class="text-red-500">*</span></label>
+                                            <input type="text" name="parent_telephone" id="parent_telephone" value="{{ old('parent_telephone') }}" class="new-parent-required block w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" placeholder="ex: +242 06 600 0000">
+                                        </div>
+                                        <div class="space-y-1">
+                                            <label for="parent_adresse" class="block text-sm font-semibold text-gray-700">Adresse <span class="text-red-500">*</span></label>
+                                            <input type="text" name="parent_adresse" id="parent_adresse" value="{{ old('parent_adresse') }}" class="new-parent-required block w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                                        </div>
+                                        <div class="space-y-1">
+                                            <label for="parent_email" class="block text-sm font-semibold text-gray-700">Email du parent (Optionnel)</label>
+                                            <input type="email" name="parent_email" id="parent_email" value="{{ old('parent_email') }}" class="block w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" placeholder="parent@exemple.com">
+                                        </div>
+                                        <div class="space-y-1">
+                                            <label for="parent_profession" class="block text-sm font-semibold text-gray-700">Profession (Optionnel)</label>
+                                            <input type="text" name="parent_profession" id="parent_profession" value="{{ old('parent_profession') }}" class="block w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                                        </div>
+                                        <div class="space-y-1">
+                                            <label for="parent_date_naissance" class="block text-sm font-semibold text-gray-700">Date de naissance (Optionnel)</label>
+                                            <input type="date" name="parent_date_naissance" id="parent_date_naissance" value="{{ old('parent_date_naissance') }}" class="block w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                                        </div>
+                                        <div class="space-y-1">
+                                            <label for="parent_lieu_naissance" class="block text-sm font-semibold text-gray-700">Lieu de naissance (Optionnel)</label>
+                                            <input type="text" name="parent_lieu_naissance" id="parent_lieu_naissance" value="{{ old('parent_lieu_naissance') }}" class="block w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                                        </div>
+                                        <div class="space-y-1 md:col-span-2">
+                                            <label for="parent_photo" class="block text-sm font-semibold text-gray-700">Photo du parent (Optionnel)</label>
+                                            <input type="file" name="parent_photo" id="parent_photo" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                                        </div>
+                                        <div class="space-y-1 md:col-span-2">
+                                            <label for="parent_notes" class="block text-sm font-semibold text-gray-700">Observations / Notes (Optionnel)</label>
+                                            <textarea name="parent_notes" id="parent_notes" rows="3" class="block w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">{{ old('parent_notes') }}</textarea>
+                                        </div>
+                                        </div>{{-- fin #new-parent-fields --}}
+                                    </div>{{-- fin section parent --}}
 
                                     <!-- Classe -->
                                     <div class="space-y-1">
@@ -471,8 +543,17 @@
                             </h4>
                         </div>
                         <div class="p-6">
+                            <div class="flex items-center justify-between space-x-4 mb-4">
+                                <h3 class="text-sm font-semibold text-green-800">Nouvel Parent</h3>
+                                <a href="{{ route('admin.parents.create', ['return_to' => 'inscriptions_create']) }}"
+                                    class="px-3 py-2 bg-white bg-opacity-20 text-white rounded-lg text-xs font-medium hover:bg-opacity-30 transition-colors">
+                                    Créer
+                                </a>
+                            </div>
+
                             <div class="space-y-4">
                                 <div class="flex items-start">
+
                                     <div class="flex-shrink-0">
                                         <svg class="h-5 w-5 text-green-600" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
@@ -534,23 +615,9 @@
                     </div>
 
                     <!-- Carte d'aide -->
-                    <div class="bg-blue-900 rounded-xl p-6 border border-green-200">
+                            <div class="bg-blue-900 rounded-xl p-6 border border-green-200">
                         <div class="flex items-start">
                             <div class="flex-shrink-0">
-                                <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
-                                    </path>
-                                </svg>
-                            </div>
-                            <div class="ml-3">
-                                <h3 class="text-sm font-semibold text-green-800">Besoin d'aide ?</h3>
-                                <p class="mt-2 text-sm text-green-700">
-                                    Vérifiez que l'élève n'est pas déjà inscrit et que la classe a des places disponibles.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -559,22 +626,60 @@
     @push('scripts')
         <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
         <script>
+            function toggleParentType(isNewParent) {
+                const newParentFields = document.getElementById('new-parent-fields');
+                const parentInputs = newParentFields.querySelectorAll('.new-parent-required');
+
+                if (isNewParent) {
+                    newParentFields.classList.remove('hidden');
+                    parentInputs.forEach(input => input.setAttribute('required', 'required'));
+                } else {
+                    newParentFields.classList.add('hidden');
+                    parentInputs.forEach(input => input.removeAttribute('required'));
+                }
+            }
+
             function toggleStudentType(isNew) {
                 const existingField = document.getElementById('existing-student-field');
                 const newFields = document.getElementById('new-student-fields');
                 const eleveSelect = document.getElementById('eleve_id');
                 const newInputs = newFields.querySelectorAll('.new-student-required');
 
+                const parentDivider = document.getElementById('parent-divider');
+                const newParentCheckboxContainer = document.getElementById('new-parent-checkbox-container');
+                const isNewParentCheckbox = document.getElementById('is_new_parent');
+
                 if (isNew) {
                     existingField.classList.add('hidden');
                     newFields.classList.remove('hidden');
                     eleveSelect.removeAttribute('required');
                     newInputs.forEach(input => input.setAttribute('required', 'required'));
+
+                    // Active checkbox Nouvel Parent
+                    if (newParentCheckboxContainer) {
+                        newParentCheckboxContainer.classList.remove('opacity-50', 'cursor-not-allowed');
+                    }
+                    if (isNewParentCheckbox) {
+                        isNewParentCheckbox.removeAttribute('disabled');
+                    }
+
+                    toggleParentType(isNewParentCheckbox ? isNewParentCheckbox.checked : false);
                 } else {
                     existingField.classList.remove('hidden');
                     newFields.classList.add('hidden');
                     eleveSelect.setAttribute('required', 'required');
                     newInputs.forEach(input => input.removeAttribute('required'));
+
+                    // Désactive checkbox Nouvel Parent et le décoche
+                    if (newParentCheckboxContainer) {
+                        newParentCheckboxContainer.classList.add('opacity-50', 'cursor-not-allowed');
+                    }
+                    if (isNewParentCheckbox) {
+                        isNewParentCheckbox.setAttribute('disabled', 'disabled');
+                        isNewParentCheckbox.checked = false;
+                    }
+
+                    toggleParentType(false);
                 }
                 
                 // Clear message since eligibility check might not apply the same way

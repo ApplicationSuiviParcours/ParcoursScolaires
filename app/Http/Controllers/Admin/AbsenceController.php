@@ -240,8 +240,9 @@ class AbsenceController extends Controller
             'justifiee' => 'sometimes|boolean',
         ]);
 
-        // Valeur par défaut pour justifiee
+        // Valeur par défaut pour justifiee et heure_debut (requis en BD)
         $validated['justifiee'] = $validated['justifiee'] ?? false;
+        $validated['heure_debut'] = $validated['heure_debut'] ?? '08:00';
 
         try {
             $absence = Absence::create($validated);

@@ -98,6 +98,19 @@ class InscriptionController extends Controller
             'email' => 'nullable|email|max:255',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'parent_id' => 'nullable|exists:parent_eleves,id',
+            // Validation pour le nouveau parent (Nouvel Parent)
+            'is_new_parent' => 'sometimes|boolean',
+            'parent_nom' => 'required_if:is_new_parent,1|nullable|string|max:255',
+            'parent_prenom' => 'required_if:is_new_parent,1|nullable|string|max:255',
+            'parent_genre' => 'required_if:is_new_parent,1|nullable|in:m,f',
+            'parent_telephone' => 'required_if:is_new_parent,1|nullable|string|max:20',
+            'parent_adresse' => 'required_if:is_new_parent,1|nullable|string|max:500',
+            'parent_email' => 'nullable|email|max:255|unique:parent_eleves,email',
+            'parent_profession' => 'nullable|string|max:255',
+            'parent_date_naissance' => 'nullable|date|before:today',
+            'parent_lieu_naissance' => 'nullable|string|max:255',
+            'parent_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'parent_notes' => 'nullable|string|max:1000',
         ]);
 
         try {
@@ -127,9 +140,75 @@ class InscriptionController extends Controller
                     $eleve = Eleve::create($eleveData);
                     $eleveId = $eleve->id;
 
+                    $parentId = $request->parent_id;
+
+                    // Si on demande la création d'un nouveau parent (Nouvel Parent)
+                    if ($request->is_new_parent == '1') {
+                        $parentData = [
+                            'nom' => $request->parent_nom,
+                            'prenom' => $request->parent_prenom,
+                            'genre' => $request->parent_genre,
+                            'telephone' => $request->parent_telephone,
+                            'adresse' => $request->parent_adresse,
+                            'profession' => $request->parent_profession,
+                            'email' => $request->parent_email,
+                            'date_naissance' => $request->parent_date_naissance,
+                            'lieu_naissance' => $request->parent_lieu_naissance,
+                            'notes' => $request->parent_notes,
+                            'statut' => true,
+                        ];
+
+                        // Gérer la photo du parent
+                        if ($request->hasFile('parent_photo')) {
+                            $path = $request->file('parent_photo')->store('parents/photos', 'public');
+                            $parentData['photo'] = $path;
+                        }
+
+                        $parent = ParentEleve::create($parentData);
+                        $parentId = $parent->id;
+
+                        // Créer un compte utilisateur pour le parent
+                        $parentEmail = $request->parent_email ?? strtolower($request->parent_prenom . '.' . $request->parent_nom . '@parent.scolaireparcours.com');
+                        if (User::where('email', $parentEmail)->exists()) {
+                            $parentEmail = strtolower($request->parent_prenom . '.' . $request->parent_nom . '_' . rand(100, 999) . '@parent.scolaireparcours.com');
+                        }
+
+                        $motDePasseParent = Str::random(10);
+                        $userParent = User::create([
+                            'name'      => $request->parent_prenom . ' ' . $request->parent_nom,
+                            'email'     => $parentEmail,
+                            'password'  => \Illuminate\Support\Facades\Hash::make($motDePasseParent),
+                            'role'      => 'parent',
+                            'is_active' => true,
+                        ]);
+
+                        $userParent->assignRole('parent');
+                        $parent->user_id = $userParent->id;
+                        $parent->save();
+
+                        // Envoi de l'email si email réel fourni
+                        $aVraiEmailParent = $request->parent_email 
+                            && !str_ends_with($parentEmail, '@parent.scolaireparcours.com');
+
+                        if ($aVraiEmailParent) {
+                            try {
+                                Mail::to($parentEmail)->send(new CompteUtilisateurCree(
+                                    $request->parent_prenom . ' ' . $request->parent_nom,
+                                    $parentEmail,
+                                    $motDePasseParent,
+                                    'parent',
+                                    $parent->matricule ?? 'N/A'
+                                ));
+                            } catch (\Exception $mailException) {
+                                \Log::warning('Email parent non envoyé pour ' . $parentEmail . ' : ' . $mailException->getMessage());
+                                session()->flash('warning', '⚠️ Le compte parent a été créé mais l\'email n\'a pas pu être envoyé à ' . $parentEmail . '. Vérifiez la configuration SMTP.');
+                            }
+                        }
+                    }
+
                     // Associer au parent si fourni
-                    if (!empty($request->parent_id)) {
-                        $eleve->parents()->attach($request->parent_id, ['lien_parental' => 'Parent']);
+                    if (!empty($parentId)) {
+                        $eleve->parents()->attach($parentId, ['lien_parental' => 'Parent']);
                     }
 
                     // ✅ AUTOMATIQUE: Créer un compte utilisateur pour le nouvel élève s'il n'en a pas
@@ -218,6 +297,15 @@ class InscriptionController extends Controller
                         ->with('success', 'Inscription créée avec succès. Compte utilisateur généré automatiquement.');
                 } else {
                     // C'est une réinscription
+                    $eleve = Eleve::findOrFail($eleveId);
+                    $parentId = $request->parent_id;
+
+                    // Associer au parent si fourni
+                    if (!empty($parentId)) {
+                        if (!$eleve->parents()->where('parent_eleve_id', $parentId)->exists()) {
+                            $eleve->parents()->attach($parentId, ['lien_parental' => 'Parent']);
+                        }
+                    }
                     
                     $targetAnnee = AnneeScolaire::findOrFail($request->annee_scolaire_id);
 

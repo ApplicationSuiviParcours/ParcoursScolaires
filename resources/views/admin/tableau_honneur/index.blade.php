@@ -163,7 +163,9 @@
                                 <th class="px-3 md:px-6 py-3 md:py-4 text-left text-[10px] md:text-xs font-medium text-gray-500 uppercase tracking-wider">Élève</th>
                                 <th class="px-3 md:px-6 py-3 md:py-4 text-left text-[10px] md:text-xs font-medium text-gray-500 uppercase tracking-wider">Moyenne</th>
                                 <th class="hidden sm:table-cell px-3 md:px-6 py-3 md:py-4 text-left text-[10px] md:text-xs font-medium text-gray-500 uppercase tracking-wider">Mention</th>
+                                <th class="px-3 md:px-6 py-3 md:py-4 text-right text-[10px] md:text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                             </tr>
+
                         </thead>
                         <tbody class="divide-y divide-gray-200">
                             @forelse($tableau as $b)
@@ -179,11 +181,26 @@
                                     <td class="hidden sm:table-cell px-3 md:px-6 py-3 md:py-4">
                                         <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">{{ $b->mention ?? '-' }}</span>
                                     </td>
+                                    <td class="px-3 md:px-6 py-3 md:py-4 text-right whitespace-nowrap">
+                                        <a href="{{ route('admin.eleves.certificat', ['eleve' => $b->eleve->id, 'annee_scolaire_id' => $anneeScolaireId]) }}"
+                                           target="_blank"
+                                           class="inline-flex items-center gap-1.5 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-xl transition-all duration-300">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+                                            </svg>
+                                            Imprimer
+                                        </a>
+                                    </td>
+
+
                                 </tr>
+
                             @empty
                                 <tr>
-                                    <td colspan="4" class="px-6 py-12 text-center text-sm text-gray-500">Aucun résultat pour cette sélection.</td>
+                                    <td colspan="5" class="px-6 py-12 text-center text-sm text-gray-500">Aucun résultat pour cette sélection.</td>
+
                                 </tr>
+
                             @endforelse
                         </tbody>
                     </table>

@@ -45,13 +45,17 @@
         </div>
 
         <div class="p-4 md:p-8">
-            <form method="GET" action="{{ route('admin.presences_rapides.create') }}" class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
+            <form method="GET" action="{{ route('admin.presences_rapides.create') }}" class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6" id="form-presences">
                 <div>
                     <label class="block text-xs md:text-sm font-semibold text-gray-700 mb-1 md:mb-2">Classe *</label>
-                    <select name="classe_id" class="w-full rounded-xl border-2 border-gray-200 px-4 py-2.5 md:py-3 text-sm" required>
+                    <select name="classe_id" id="classe-select" class="w-full rounded-xl border-2 border-gray-200 px-4 py-2.5 md:py-3 text-sm" required>
                         <option value="">Sélectionner</option>
                         @foreach($classes as $c)
-                            <option value="{{ $c->id }}" {{ $classeId == $c->id ? 'selected' : '' }}>{{ $c->nom_complet }}</option>
+                            <option value="{{ $c->id }}"
+                                    data-niveau="{{ $c->niveau }}"
+                                    {{ $classeId == $c->id ? 'selected' : '' }}>
+                                {{ $c->nom_complet }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -71,14 +75,25 @@
                     <input type="date" name="date" value="{{ $date }}" class="w-full rounded-xl border-2 border-gray-200 px-4 py-2.5 md:py-3 text-sm" required/>
                 </div>
 
-                <div>
-                    <label class="block text-xs md:text-sm font-semibold text-gray-700 mb-1 md:mb-2">Matière *</label>
-                    <select name="matiere_id" class="w-full rounded-xl border-2 border-gray-200 px-4 py-2.5 md:py-3 text-sm" required>
+                {{-- Matière : visible uniquement pour Collège/Lycée --}}
+                <div id="matiere-container">
+                    <label class="block text-xs md:text-sm font-semibold text-gray-700 mb-1 md:mb-2" id="matiere-label">Matière *</label>
+
+                    {{-- Select visible pour collège/lycée --}}
+                    <select name="matiere_id" id="matiere-select" class="w-full rounded-xl border-2 border-gray-200 px-4 py-2.5 md:py-3 text-sm">
                         <option value="">Sélectionner</option>
                         @foreach($matieres as $m)
                             <option value="{{ $m->id }}" {{ $matiereId == $m->id ? 'selected' : '' }}>{{ $m->nom }}</option>
                         @endforeach
                     </select>
+
+                    {{-- Message pour primaire --}}
+                    <div id="primaire-msg" class="hidden text-xs text-gray-400 italic mt-2 py-3">
+                        ☑ Niveau primaire — pas de matière requise
+                    </div>
+
+                    {{-- Input hidden pour primaire (envoie matiere_id vide) --}}
+                    <input type="hidden" id="matiere-hidden" name="matiere_id_primaire" value="" />
                 </div>
 
                 <div class="md:col-span-4">
@@ -95,17 +110,65 @@
                     <button type="submit" class="flex-1 px-6 py-2.5 md:py-3 bg-blue-900 hover:from-indigo-700 hover:to-violet-700 text-white font-semibold rounded-xl transition-all duration-300 text-sm">
                         Charger la liste
                     </button>
-                    @if($classeId && $anneeScolaireId && $matiereId)
+                    @if($classeId && $anneeScolaireId)
                         <a href="{{ route('admin.presences_rapides.print', request()->query()) }}" target="_blank" class="flex-1 px-6 py-2.5 md:py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-xl transition-all duration-300 text-sm text-center">
                             Imprimer la liste des présences
                         </a>
                     @endif
+
                 </div>
             </form>
+
+            <script>
+                (function () {
+                    const PRIMAIRE_REGEX = /^(CP|CE1|CE2|CM1|CM2)(\s+\S+)?$/i;
+
+                    const classeSelect  = document.getElementById('classe-select');
+                    const matiereSelect = document.getElementById('matiere-select');
+                    const primaireMsg   = document.getElementById('primaire-msg');
+                    const matiereLabel  = document.getElementById('matiere-label');
+
+                    function isPrimaire(niveau) {
+                        return niveau && PRIMAIRE_REGEX.test(niveau.trim());
+                    }
+
+                    function updateMatiereField() {
+                        const selected = classeSelect.options[classeSelect.selectedIndex];
+                        const niveau   = selected ? (selected.dataset.niveau || '') : '';
+
+                        if (isPrimaire(niveau)) {
+                            // Primaire : cacher le select matière, afficher message
+                            matiereSelect.classList.add('hidden');
+                            matiereSelect.removeAttribute('required');
+                            matiereSelect.value = '';
+                            primaireMsg.classList.remove('hidden');
+                            matiereLabel.textContent = 'Matière';
+                        } else if (classeSelect.value) {
+                            // Collège / Lycée : afficher le select matière, obligatoire
+                            matiereSelect.classList.remove('hidden');
+                            matiereSelect.setAttribute('required', 'required');
+                            primaireMsg.classList.add('hidden');
+                            matiereLabel.textContent = 'Matière *';
+                        } else {
+                            // Aucune classe sélectionnée
+                            matiereSelect.classList.remove('hidden');
+                            matiereSelect.removeAttribute('required');
+                            primaireMsg.classList.add('hidden');
+                            matiereLabel.textContent = 'Matière';
+                        }
+                    }
+
+                    classeSelect.addEventListener('change', updateMatiereField);
+
+                    // Appliquer au chargement de la page
+                    updateMatiereField();
+                })();
+            </script>
         </div>
     </div>
 
-    @if($classeId && $anneeScolaireId && $matiereId)
+    @if($classeId && $anneeScolaireId)
+
         <div class="bg-white rounded-2xl md:rounded-3xl shadow-xl overflow-hidden">
             <div class="px-4 md:px-8 py-4 md:py-5 bg-blue-900">
                 <div class="flex items-center justify-between">
@@ -178,11 +241,12 @@
                             Remarque : cette saisie enregistre uniquement les élèves cochés (absents). Les élèves non cochés sont considérés présents.
                         </div>
                         <div class="flex gap-3">
-                            @if($classeId && $anneeScolaireId && $matiereId)
+                            @if($classeId && $anneeScolaireId)
                                 <a href="{{ route('admin.presences_rapides.print', request()->query()) }}" target="_blank" class="px-6 py-2.5 md:py-3 bg-white border-2 border-gray-300 text-gray-700 font-semibold rounded-xl transition-all duration-300 text-sm text-center">
                                     Imprimer
                                 </a>
                             @endif
+
                             <button type="submit" class="px-6 py-2.5 md:py-3 bg-blue-900 hover:from-indigo-700 hover:to-violet-700 text-white font-semibold rounded-xl transition-all duration-300 text-sm">
                                 Enregistrer
                             </button>
